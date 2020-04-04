@@ -1,7 +1,7 @@
 
 {ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
  บ                                                                          บ
- บ    WDSibyl Runtime Library                                               บ
+ บ    WDSibyl TP70 Library                                                  บ
  บ                                                                          บ
  บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
  บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ

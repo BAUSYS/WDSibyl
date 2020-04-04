@@ -1,18 +1,16 @@
-Unit uStream;
 
-{
-ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
-บ                                                                           บ
-บ WDSibyl Runtime Library (RTL)                                             บ
-บ                                                                           บ
-บ Diese Unit verwaltet diverse Stream-Objekte                               บ
-บ                                                                           บ
-บ   Klassen: tStream, THandleStream, TFileStream, TMemoryStream             บ
-บ            tStdInStream, tStdOutStream, tStdErrStream                     บ
-บ                                                                           บ
-บ                                                                           บ
-ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
-}
+{ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+ บ                                                                          บ
+ บ    WDSibyl Runtime Library                                               บ
+ บ                                                                          บ
+ บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ                                                                          บ
+ บ    Klassen: tStream, THandleStream, TFileStream, TMemoryStream           บ
+ บ             tStdInStream, tStdOutStream, tStdErrStream                   บ
+ บ                                                                          บ
+ ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
+
+Unit uStream;
 
 Interface
 

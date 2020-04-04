@@ -1,9 +1,9 @@
-
 {ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
  บ                                                                          บ
- บ    Sibyl Component                                                       บ
+ บ    WDSibyl Component                                                     บ
  บ                                                                          บ
  บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
+ บ    Copyright (C) 2005..     Ing. Wolfgang Draxler, All rights reserved.  บ
  บ                                                                          บ
  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
 

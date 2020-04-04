@@ -1,6 +1,6 @@
 [Application Options OS/2]
 
-ApplicationIcon=P:\WDSIBYL\WDSIBYL\BIN\OS2\DEFAULT_OS2.ICO
+ApplicationIcon=P:\WDSibyl\Bin\OS2\DEFAULT_OS2.ICO
 
 [Application Options Win32]
 
@@ -23,12 +23,12 @@ File11=COLOR
 File12=USTREAM
 File13=ULIST
 File14=USTRING
-File15=USYSCLASS
+File15=PMSPL
 File16=BSEREGISTRY
 File17=INIFILES
-File18=PMSPL
-File19=PMWINX
-File20=USYSINFO
+File18=PMWINX
+File19=USYSINFO
+File20=USYSCLASS
 File21=DOS
 File22=CLASSES
 File23=PMBITMAP
@@ -69,14 +69,14 @@ File55=WRAPED
 
 CodeGeneration=
 Syntax=
-Optimize=OptimizeCommonSub,OptimizePeephole
+Optimize=OptimizeCommonSub
 RuntimeCheck=
 CondDefine=
 
 [Compiler Warnings]
 
 Warnings=W2,W3,W4,W5,W6,W7
-MaxWarnings=200
+MaxWarnings=300
 MaxErrors=10
 
 [Component Library OS/2]
@@ -110,21 +110,21 @@ SPCC_Exceptions=4194303
 
 [Directories OS/2]
 
-LastDir=P:\WDSIBYL\WDSIBYL\LIBRARY\SOURCE\RTL\WIN32
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Lib
+LastDir=P:\WDSIBYL\BIN\OS2
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
 LibSrcDir=
-IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Compnt
+IncSrcDir=P:\WDSibyl\Library\Source\SPCC;P:\WDSibyl\Library\Source\RTL\OS2;P:\WDSibyl\Library\Source\RTL;P:\WDSibyl\Library\Source\RC;P:\WDSibyl\Library\Source\TP70
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
 
-LastDir=P:\WDSIBYL\WDSIBYL\LIBRARY\SOURCE\RTL\WIN32
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Lib
+LastDir=
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
 LibSrcDir=
 IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Compnt
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
@@ -148,7 +148,7 @@ Find15=dialog
 [General]
 
 Version=Sibyl Project Ver2.05
-ProjectName=F:\SPRACHEN\PASCAL\WDSIBYL\Library\Source\MakeSPCC.spr
+ProjectName=P:\WDSibyl\Library\Source\MakeSPCC.spr
 ProjectType=NonVisual
 RunParameter=
 InActiveLanguages=
@@ -168,52 +168,73 @@ File4=.\SPCC\DOCKTOOL.PAS
 File0=.\MakeSPCC.PAS
 File0.Left=-1
 File0.Bottom=-1
-File0.Width=846
-File0.Height=597
-File0.Column=12
-File0.Line=7
+File0.Width=952
+File0.Height=604
+File0.Column=15
+File0.Line=6
 File1=.\SPCC\CLASSES.PAS
 File1.Left=-1
 File1.Bottom=-1
-File1.Width=846
-File1.Height=597
-File1.Column=74
-File1.Line=4645
+File1.Width=952
+File1.Height=604
+File1.Column=33
+File1.Line=29
 File2=.\SPCC\FORMS.PAS
 File2.Left=-1
 File2.Bottom=-1
-File2.Width=846
-File2.Height=597
+File2.Width=952
+File2.Height=604
 File2.Column=1
 File2.Line=5747
 File3=.\SPCC\MENUS.PAS
 File3.Left=-1
 File3.Bottom=-1
-File3.Width=846
-File3.Height=597
+File3.Width=952
+File3.Height=604
 File3.Column=1
 File3.Line=1
 File4=.\SPCC\CACHE.PAS
 File4.Left=-1
 File4.Bottom=-1
-File4.Width=846
-File4.Height=597
+File4.Width=952
+File4.Height=604
 File4.Column=1
 File4.Line=1
 File5=.\SPCC\DIALOGS.PAS
 File5.Left=-1
 File5.Bottom=-1
-File5.Width=846
-File5.Height=597
+File5.Width=952
+File5.Height=604
 File5.Column=1
 File5.Line=1
 File6=.\SPCC\WRAPED.PAS
 File6.Left=-1
 File6.Bottom=-1
-File6.Width=846
-File6.Height=597
-File6.Column=1
-File6.Line=18
+File6.Width=952
+File6.Height=604
+File6.Column=16
+File6.Line=152
+File7=.\SPCC\BUTTONS.PAS
+File7.Left=-1
+File7.Bottom=-1
+File7.Width=952
+File7.Height=604
+File7.Column=6
+File7.Line=17
+File8=.\RTL\OS2\BSEDOS.PAS
+File8.Left=-1
+File8.Bottom=-1
+File8.Width=952
+File8.Height=604
+File8.Column=54
+File8.Line=18
+File9=.\SPCC\COMCTRLS.PAS
+File9.Left=-1
+File9.Bottom=-1
+File9.Width=952
+File9.Height=604
+File9.Column=5
+File9.Line=1479
 
 [Linker Options]
 
@@ -265,12 +286,62 @@ MainFile0.File25=.\RC\SPCC.INC
 MainFile0.File26=.\SPCC\WRAPED.PAS
 MainFile0.File27=.\SPCC\uLanguage.pas
 MainFile0.File28=[Dependencies]
-MainFile0.Dependency0=.\SPCC\CLASSES.PAS
-MainFile0.Dependency1=.\SPCC\MENUS.PAS
-MainFile0.Dependency2=.\SPCC\FORMS.PAS
-MainFile0.Dependency3=.\SPCC\CACHE.PAS
-MainFile0.Dependency4=.\SPCC\DIALOGS.PAS
-MainFile0.Dependency5=.\SPCC\WRAPED.PAS
+MainFile0.Dependency0=.\RTL\SYSTEM.PAS
+MainFile0.Dependency1=.\RTL\OS2\OS2DEF.PAS
+MainFile0.Dependency2=.\RTL\OS2\PMWIN.PAS
+MainFile0.Dependency3=.\RTL\OS2\BSETIB.PAS
+MainFile0.Dependency4=.\RTL\OS2\BSEEXCPT.PAS
+MainFile0.Dependency5=.\RTL\OS2\BSEDOS.PAS
+MainFile0.Dependency6=.\RTL\OS2\BSEERR.PAS
+MainFile0.Dependency7=.\RTL\OS2\PMWP.PAS
+MainFile0.Dependency8=.\RTL\OS2\PMSHL.PAS
+MainFile0.Dependency9=.\RTL\SYSUTILS.PAS
+MainFile0.Dependency10=.\SPCC\MESSAGES.PAS
+MainFile0.Dependency11=.\RTL\COLOR.PAS
+MainFile0.Dependency12=.\RTL\USTREAM.PAS
+MainFile0.Dependency13=.\RTL\ULIST.PAS
+MainFile0.Dependency14=.\RTL\USTRING.PAS
+MainFile0.Dependency15=.\RTL\OS2\PMSPL.PAS
+MainFile0.Dependency16=.\RTL\OS2\BSEREGISTRY.PAS
+MainFile0.Dependency17=.\RTL\INIFILES.PAS
+MainFile0.Dependency18=.\RTL\PMWINX.PAS
+MainFile0.Dependency19=.\RTL\USYSINFO.PAS
+MainFile0.Dependency20=.\RTL\USYSCLASS.PAS
+MainFile0.Dependency21=.\TP70\DOS.PAS
+MainFile0.Dependency22=.\SPCC\CLASSES.PAS
+MainFile0.Dependency23=.\RTL\OS2\PMBITMAP.PAS
+MainFile0.Dependency24=.\RTL\OS2\PMGPI.PAS
+MainFile0.Dependency25=.\RTL\OS2\PMDEV.PAS
+MainFile0.Dependency26=.\RTL\OS2\PMSTDDLG.PAS
+MainFile0.Dependency27=.\RTL\OS2\PMHELP.PAS
+MainFile0.Dependency28=.\SPCC\CLIPBRD.PAS
+MainFile0.Dependency29=.\SPCC\UCONVERT.PAS
+MainFile0.Dependency30=.\SPCC\GRAPHICS.PAS
+MainFile0.Dependency31=.\SPCC\ULANGUAGE.PAS
+MainFile0.Dependency32=.\SPCC\MENUS.PAS
+MainFile0.Dependency33=.\SPCC\PRINTERS.PAS
+MainFile0.Dependency34=.\SPCC\FORMS.PAS
+MainFile0.Dependency35=.\SPCC\BUTTONS.PAS
+MainFile0.Dependency36=.\RTL\OS2\BSESUB.PAS
+MainFile0.Dependency37=.\RTL\OS2\BSEVIO.PAS
+MainFile0.Dependency38=.\RTL\OS2\BSEKBD.PAS
+MainFile0.Dependency39=.\TP70\CRT.PAS
+MainFile0.Dependency40=.\SPCC\CACHE.PAS
+MainFile0.Dependency41=.\SPCC\STDCTRLS.PAS
+MainFile0.Dependency42=.\SPCC\EXTCTRLS.PAS
+MainFile0.Dependency43=.\SPCC\COMCTRLS.PAS
+MainFile0.Dependency44=.\SPCC\FILECTRL.PAS
+MainFile0.Dependency45=.\SPCC\DIALOGS.PAS
+MainFile0.Dependency46=.\SPCC\DDEMAN.PAS
+MainFile0.Dependency47=.\SPCC\DOCKTOOL.PAS
+MainFile0.Dependency48=.\SPCC\EDITORS.PAS
+MainFile0.Dependency49=.\SPCC\MASK.PAS
+MainFile0.Dependency50=.\SPCC\GRIDS.PAS
+MainFile0.Dependency51=.\SPCC\OUTLINE.PAS
+MainFile0.Dependency52=.\SPCC\LISTVIEW.PAS
+MainFile0.Dependency53=.\SPCC\TABCTRLS.PAS
+MainFile0.Dependency54=.\SPCC\TOOLSAPI.PAS
+MainFile0.Dependency55=.\SPCC\WRAPED.PAS
 
 [Replace History]
 

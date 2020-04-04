@@ -1656,7 +1656,7 @@ Var  Src:TRect;
 {$ENDIF}
 
 Begin
-  Application.Logwriteln ('Bitmap.Draw auf Canvas '+tostr(longword(Canvas)));
+//  Application.Logwriteln ('Bitmap.Draw auf Canvas '+tostr(longword(Canvas)));
   If Empty Then Exit;
   {$IFDEF OS2}
   If Canvas.NonDisplayDevice Then
@@ -3023,7 +3023,8 @@ Var PBmf:^BITMAPFILEHEADER;
 Var BitmapInfo : tBitmapInfo;
 
 Begin
-  Application.LogWriteln('ReadStream');
+//  if Application<>nil then   // Ist wichtig, da Bitmap auch ohne Application aufgerufen wird
+//    Application.LogWriteln('ReadStream');  // z.b. in der IDE.
   FIsInvalid:=False; //reset flag !
   If Size>0
     Then
@@ -9343,8 +9344,8 @@ End.
                         and a lot of minor stuff fixed
   15-Sep-04  CW         Korrektur von Tfont.GetWidth.
   03-Okt-04  MV         Einbau von der tFont.CodePage
-  03-Nov-04  WD         Erg„nzung von tCanvas.Create, damit nicht nur tComponent-Klassen
-                        als Owner verwendet werden k”nnen. z.b. tPrinter
+  03-Nov-04  WD         Ergnzung von tCanvas.Create, damit nicht nur tComponent-Klassen
+                        als Owner verwendet werden knnen. z.b. tPrinter
   28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
   27-Nov-05  WD         Ermoeglichen, dass ein Icon auch in ein Bitmap geladen werden kann.
   18-Jan-06  WD         Procedure tCanvas.ChangeColor implemented
@@ -9361,5 +9362,6 @@ End.
   23-Jun-07  MV         Changes in TCanvas.Arc
   24-Jun-07  WD         TBitmap: Property BitmapMem und BitmapMemLength eingebaut.
   19-Jam-08  MV         Umbau von TBitmap.Draw
+  09-Mai-10  WD         TBitmap.ReadStream: Wegen der IDE check von der Variable "Application"
 }
 

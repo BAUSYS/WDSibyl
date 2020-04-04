@@ -515,6 +515,7 @@ var PCXHeader    : tPCXHeader;        // Den Header auf die Adresse vom Buffer l
   Var Cou     : LongWord;
       PCXByte : Byte;
       CouBuf  : LongInt; { Byte; }
+      dummy   : Byte;
 
   Begin
     Cou:=0;
@@ -527,10 +528,14 @@ var PCXHeader    : tPCXHeader;        // Den Header auf die Adresse vom Buffer l
               CouBuf:=Cou;
               Cou:=Cou + (PCXByte and $3F);
               iStream.ReadBuffer(PCXByte,1);
+              { RG 22.04.2015 CouBuf kann einen h”heren Wert als cPCXSizeBuffer }
+              { erreichen, was zu einem Absturz fhrt, hier nur prov Notl”sung }
+              if not (CouBuf > cPCXSizeBuffer) then  { Notl”sung }
               Repeat
                 PCXBuffer[Planes, CouBuf]:=PCXByte;
                 inc(CouBuf);
-              Until CouBuf=Cou;
+              //Until CouBuf=Cou;  { Original }
+              Until (CouBuf=Cou) or (CouBuf > cPCXSizeBuffer); { Notl”sung }
             End
           else      // Unkomprimiert
             Begin
@@ -974,4 +979,6 @@ End.
   01-Dec-05  WD         Einbau der Unit
   27-Dec-06  WD         Einbau vom dem PCX, GIF-Format und Strukturaenderung.
   10-Jun-07  WD         Weiter Strukturaenderungen
+
+  22.04.2015 RG         offen: Problem bei ReadPlanes
 }

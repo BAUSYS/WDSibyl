@@ -1,9 +1,10 @@
 
 {ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
  บ                                                                          บ
- บ    Sibyl Runtime Library for Win32                                       บ
+ บ    WDSibyl Runtime Library for Win32                                       บ
  บ                                                                          บ
  บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
+ บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
  บ                                                                          บ
  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
 
@@ -91,37 +92,35 @@ TYPE
 
     PINPUT_RECORD=^INPUT_RECORD;
     INPUT_RECORD=RECORD
-                       EventType:WORD;
-                       Event:RECORD
-                         CASE Integer OF
-                           1:(KeyEvent:KEY_EVENT_RECORD);
-                           2:(MouseEvent:MOUSE_EVENT_RECORD);
-                           3:(WindowBufferSizeEvent:WINDOW_BUFFER_SIZE_RECORD);
-                           4:(MenuEvent:MENU_EVENT_RECORD);
-                           5:(FocusEvent:FOCUS_EVENT_RECORD);
-                       END;
+                   EventType: Word;
+                   Reserved : Word;
+                   Event:RECORD
+                     CASE Integer OF
+                       1:(KeyEvent             : KEY_EVENT_RECORD);
+                       2:(MouseEvent           : MOUSE_EVENT_RECORD);
+                       3:(WindowBufferSizeEvent: WINDOW_BUFFER_SIZE_RECORD);
+                       4:(MenuEvent            : MENU_EVENT_RECORD);
+                       5:(FocusEvent           : FOCUS_EVENT_RECORD);
+                     END;
     END;
 
-CONST
-      KEY_EVENT                =$0001;
+CONST KEY_EVENT                =$0001;
       MOUSE_EVENT              =$0002;
       WINDOW_BUFFER_SIZE_EVENT =$0004;
       MENU_EVENT               =$0008;
       FOCUS_EVENT              =$0010;
 
-TYPE
-    PCHAR_INFO=^CHAR_INFO;
-    CHAR_INFO=RECORD
-                    Char:RECORD
-                       CASE Integer OF
-                           1:(UniCodeChar:WORD);
-                           2:(AsciiChar:CHAR);
-                    END;
-                    Attributes:WORD;
-    END;
+TYPE PCHAR_INFO=^CHAR_INFO;
+     CHAR_INFO=RECORD
+                 Char:RECORD
+                 CASE Integer OF
+                   1:(UniCodeChar:WORD);
+                   2:(AsciiChar:CHAR);
+                 END;
+                 Attributes:WORD;
+     END;
 
-CONST
-      FOREGROUND_BLUE      =$0001;
+CONST FOREGROUND_BLUE      =$0001;
       FOREGROUND_GREEN     =$0002;
       FOREGROUND_RED       =$0004;
       FOREGROUND_INTENSITY =$0008;
@@ -131,27 +130,24 @@ CONST
       BACKGROUND_INTENSITY =$0080;
 
 
-TYPE
-    PCONSOLE_SCREEN_BUFFER_INFO=^CONSOLE_SCREEN_BUFFER_INFO;
-    CONSOLE_SCREEN_BUFFER_INFO=RECORD
-                                     dwSize:COORD;
-                                     dwCursorPosition:COORD;
-                                     wAttributes:WORD;
-                                     srWindow:SMALL_RECT;
-                                     dwMaximumWindowSize:COORD;
-    END;
+TYPE PCONSOLE_SCREEN_BUFFER_INFO=^CONSOLE_SCREEN_BUFFER_INFO;
+     CONSOLE_SCREEN_BUFFER_INFO=RECORD
+                                  dwSize             : COORD;
+                                  dwCursorPosition   : COORD;
+                                  wAttributes        : WORD;
+                                  srWindow           : SMALL_RECT;
+                                  dwMaximumWindowSize: COORD;
+     END;
 
-    PCONSOLE_CURSOR_INFO=^CONSOLE_CURSOR_INFO;
-    CONSOLE_CURSOR_INFO=RECORD
-                              dwSize:LONGWORD;
-                              bVisible:BOOL;
-    END;
+     PCONSOLE_CURSOR_INFO=^CONSOLE_CURSOR_INFO;
+     CONSOLE_CURSOR_INFO=RECORD
+                           dwSize  : LONGWORD;
+                           bVisible: BOOL;
+     END;
 
-TYPE
-    PHANDLER_ROUTINE=FUNCTION(CtrlType:LONGWORD):BOOL;APIENTRY;
+TYPE PHANDLER_ROUTINE=FUNCTION(CtrlType:LONGWORD):BOOL;APIENTRY;
 
-CONST
-      CTRL_C_EVENT        =0;
+CONST CTRL_C_EVENT        =0;
       CTRL_BREAK_EVENT    =1;
       CTRL_CLOSE_EVENT    =2;
       CTRL_LOGOFF_EVENT   =5;
@@ -165,7 +161,6 @@ CONST
 
       ENABLE_PROCESSED_OUTPUT    =$0001;
       ENABLE_WRAP_AT_EOL_OUTPUT  =$0002;
-
 
 IMPORTS
 
@@ -285,3 +280,7 @@ IMPLEMENTATION
 
 BEGIN
 END.
+
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  18-Sep-10  WD         Typ INPUT_RECORD: Variable "reserved" eingebaut.
+}

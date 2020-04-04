@@ -9,6 +9,7 @@ POINTER SQLWait  ..\..\..\bmp\wdsibyl\os2\sqlwait.ptr
 POINTER Cross    ..\..\..\bmp\wdsibyl\os2\cross.ptr
 POINTER APPStart ..\..\..\bmp\wdsibyl\os2\appstart.ptr
 POINTER UpArrow  ..\..\..\bmp\wdsibyl\os2\uparrow.ptr
+POINTER Hand     ..\..\..\bmp\wdsibyl\os2\hand.ptr
 {$ENDIF}
 
 {$IFDEF Win32}
@@ -22,3 +23,7 @@ POINTER SQLWait  ..\..\..\bmp\WDSibyl\win32\sqlwait.cur
 POINTER Cross    ..\..\..\bmp\WDSibyl\win32\cross.cur
 POINTER Drag     ..\..\..\bmp\WDSibyl\win32\drag.cur
 {$ENDIF}
+
+{ -- date -- -- from -- -- changes ----------------------------------------------
+
+}

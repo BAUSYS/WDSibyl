@@ -117,11 +117,11 @@ type tShortMonthNames= Array[0..MaxMonths-1] of tStr3;
 }
 
 Type
-  trSystem  = (OS2, Win32, Unknown);
-  trPlatform= (OS2Ver20, OS2Ver30, OS2Ver40, OS2Ver45, eComStation,
-               Win95, Win98, WinME,
-               WinNT3, WinNT4, Win2000, WinXP, WinVista,
-               OSUnknown);
+  trSystem  = (SysOS2, SysWin32, SysUnknown);
+  trPlatform= (pfOS2Ver20, pfOS2Ver30, pfOS2Ver40, pfOS2Ver45, pfEComStation,
+               pfWin95, pfWin98, pfWinME,
+               pfWinNT3, pfWinNT4, pfWin2000, pfWinXP, pfWinVista, pfWin7,
+               pfUnknown);
   trRunUnder= (ruSystem, ruOdin, ruWine);
 
   trPC = Record
@@ -309,8 +309,8 @@ Type
     Private
       Function GetDir           : tFilename;
       Function GetDirBin        : tFileName;
+      Function GetDirBMP        : tFileName;
       Function GetInstalled     : Boolean;
-      Function GetSibylINIFile  : tFileName;
       Function GetWDSibylINIFile: tFileName;
     Public
       Function GetToolInfo(iName : String;
@@ -321,7 +321,7 @@ Type
       Property Installed     : Boolean   Read getInstalled;
       Property Dir           : tFilename Read getDir;
       Property DirBin        : tFileName Read GetDirBin;
-      Property SibylINIFile  : tFileName Read getSibylINIFile;
+      Property DirBMP        : tFileName Read GetDirBMP;
       Property WDSibylINIFile: tFileName Read getWDSibylINIFile;
   end;
 
@@ -396,6 +396,70 @@ Var goSysInfo : tcSysInfo;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
+บ Operating System - Ini-Sections                                           บ
+บ                                                                           บ
+ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+}
+
+Const cOSINIAppl_WDSibyl       = 'WDSibyl';
+      cOSINISec_InstallDir     = 'InstallDir';
+      cOSINISec_Version        = 'Version';
+      cOSINISec_WDSibylIniFile = 'WDSibylIniFile';
+
+{
+ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+บ                                                                           บ
+บ WDSibyl-INI-Sections (Application)                                        บ
+บ                                                                           บ
+ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+}
+
+Const cWDSibylINISec_General                  = 'General';
+      cWDSibylINISec_Directories              = 'Directories';
+      cWDSibylINISec_ColorTable               = 'Color Table';
+      cWDSibylINISec_Fonts                    = 'Fonts';
+      cWDSibylINISec_ProjectHistory           = 'Project History';
+      cWDSibylINISec_FindInFiles              = 'Find In Files';
+      cWDSibylINISec_StaticToolbars           = 'Static Toolbars';
+      cWDSibylINISec_CodeInsight              = 'Code Insight';
+      cWDSibylINISec_FormDesigner             = 'Form Designer';
+      cWDSibylINISec_SourceCodeGeneration     = 'Source Code Generation';
+      cWDSibylINISec_EditorOptions            = 'Editor Options';
+      cWDSibylINISec_FindReplaceStructure     = 'Find Replace Structure';
+      cWDSibylINISec_Auto                     = 'Auto';
+      cWDSibylINISec_Tools                    = 'Tools';
+      cWDSibylINISec_Macros                   = 'Macros';
+      cWDSibylINISec_Speedbar                 = 'Speedbar';
+      cWDSibylINISec_Compiler                 = 'Compiler';
+
+// Windows
+      cWDSibylINISec_MainForm                 = 'MainForm';
+      cWDSibylINISec_CodeEditor               = 'Code Editor';
+      cWDSibylINISec_ObjectInspector          = 'Object Inspector';
+      cWDSibylINISec_ObjectBrowser            = 'Object Browser';
+      cWDSibylINISec_ComponentList            = 'Component List';
+      cWDSibylINISec_MacroList                = 'Macro List';
+      cWDSibylINISec_ClipboardHistory         = 'Clipboard History';
+      cWDSibylINISec_CPUWindow                = 'CPU Window';
+      cWDSibylINISec_ProjectManager           = 'Project Manager';
+
+// Standard
+      cWDSibylINISec_OS2StndCompilerOptions   = 'OS2 Standard Compiler Options';
+      cWDSibylINISec_OS2StndCompilerWarnings  = 'OS2 Standard Compiler Warnings';
+      cWDSibylINISec_OS2StndDebugerOptions    = 'OS2 Standard Debugger Options';
+      cWDSibylINISec_OS2StndDirectories       = 'OS2 Standard Directories';
+      cWDSibylINISec_OS2StndLinkOptions       = 'OS2 Standard Linker Options';
+      cWDSibylINISec_OS2StndMemorySize        = 'OS2 Standard Memory Sizes';
+      cWDSibylINISec_Win32StndCompilerOptions = 'Win32 Standard Compiler Options';
+      cWDSibylINISec_Win32StndCompilerWarnings= 'Win32 Standard Compiler Warnings';
+      cWDSibylINISec_Win32StndDebugerOptions  = 'Win32 Standard Debugger Options';
+      cWDSibylINISec_Win32StndDirectories     = 'Win32 Standard Directories';
+      cWDSibylINISec_Win32StndLinkOptions     = 'Win32 Standard Linker Options';
+      cWDSibylINISec_Win32StndMemorySize      = 'Win32 Standard Memory Sizes';
+
+{
+ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+บ                                                                           บ
 บ Extensions (Lower Case)                                                   บ
 บ                                                                           บ
 ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
@@ -412,8 +476,9 @@ Const
   EXT_LC_XML             = '.xml';
 
 { Datenbanken }
-  EXT_LC_DBF             = '.dbf'; // dBaseIII-Datei
-  EXT_LC_DBT             = '.dbt'; // dBaseIII-Memo-Datei
+  EXT_LC_DBF             = '.dbf'; // dBase-Datei
+  EXT_LC_DBT             = '.dbt'; // dBase-Memo-Datei
+  EXT_LC_MDX             = '.mdx'; // dBase-MulitIndex-Datei
   EXT_LC_SQL             = '.sql'; // SQL-Format
 
 { Staroffice }
@@ -507,6 +572,7 @@ Const
 { Datenbanken }
   EXT_UC_DBF             = '.DBF';
   EXT_UC_DBT             = '.DBT';
+  EXT_UC_MDX             = '.MDX';
   EXT_UC_SQL             = '.SQL'; // SQL-Format
 
 { Staroffice }
@@ -610,6 +676,7 @@ Const
 { Datenbanken }
   ALL_FILES_LC_DBF             = '*' + EXT_LC_DBF;
   ALL_FILES_LC_DBT             = '*' + EXT_LC_DBT;
+  ALL_FILES_LC_MDX             = '*' + EXT_LC_MDX;
   ALL_FILES_LC_SQL             = '*' + EXT_LC_SQL;
 
 { Staroffice }
@@ -698,6 +765,7 @@ Const
 { Datenbanken }
   ALL_FILES_UC_DBF             = '*' + EXT_UC_DBF;
   ALL_FILES_UC_DBT             = '*' + EXT_UC_DBT;
+  ALL_FILES_UX_MDX             = '*' + EXT_UC_MDX;
   ALL_FILES_UC_SQL             = '*' + EXT_UC_SQL;
 
 { Staroffice }
@@ -768,13 +836,9 @@ Const
   ALL_FILES_UC_WDBTable        = '*' + EXT_UC_WDBTable;
   ALL_FILES_UC_CZTList         = '*' + EXT_UC_CZTList;
 
-
 Implementation
 
 Uses IniFiles, SysUtils, PMWinX;
-
-Const cWDSibyl       = 'WDSibyl';
-      cIDWDSibylPath = 'Path';
 
 // -------------------------------------------------------------------------------------------
 
@@ -808,17 +872,22 @@ Begin
   fOSCmd := GetEnv('COMSPEC');
   fName  := UpperCase(GetEnv('OS'));
   if fName = '' then fName:='OS/2';
-  fSystem  := OS2;
-  fPlatform:=OSUnknown;
+  fSystem  :=SysOS2;
+  fPlatform:=pfUnknown;
   fRunUnder:=ruSystem;
-  DosQuerySysInfo(QSV_VERSION_MAJOR,QSV_VERSION_MAJOR,fVersion_Major,4);
-  DosQuerySysInfo(QSV_VERSION_MINOR,QSV_VERSION_MINOR,fVersion_Minor,4);
-  If fVersion_Major = 20 Then
-    Case fVersion_Minor Of
-      0,10,11: fPlatform := OS2Ver20;
-      30:      fPlatform := OS2Ver30;
-      40:      fPlatform := OS2Ver40;
-      45:      fPlatform := OS2Ver45;
+  if fName = 'ECS' then
+    fPlatform := pfEComStation
+  else
+    Begin
+      DosQuerySysInfo(QSV_VERSION_MAJOR,QSV_VERSION_MAJOR,fVersion_Major,4);
+      DosQuerySysInfo(QSV_VERSION_MINOR,QSV_VERSION_MINOR,fVersion_Minor,4);
+      If fVersion_Major = 20 Then
+        Case fVersion_Minor Of
+          0,10,11: fPlatform := pfOS2Ver20;
+          30:      fPlatform := pfOS2Ver30;
+          40:      fPlatform := pfOS2Ver40;
+          45:      fPlatform := pfOS2Ver45;
+        End;
     End;
   fBuild:=0;
 {$ENDIF}
@@ -828,53 +897,56 @@ Begin
   fVersion_Major:=WinOSInfo.dwMajorVersion;
   fVersion_Minor:=WinOSInfo.dwMinorVersion;
   fBuild := WinOSInfo.dwBuildNumber;
-  fSystem:=Win32;
-  fPlatform:=OSUnknown;
+  fSystem:=SysWin32;
+  fPlatform:=pfUnknown;
   fRunUnder:=ruSystem;
   case WinOSInfo.dwPlatformId of
     1 : begin  { Win32-Schiene }
           case WinOSInfo.dwMinorVersion of
-            0 : fPlatform:=Win95;
-           10 : fPlatform:=Win98;
+            0 : fPlatform:=pfWin95;
+           10 : fPlatform:=pfWin98;
            90 : if (WinOSInfo.dwBuildNumber = 73010104)
-                  then fPlatform:=WinME;
+                  then fPlatform:=pfWinME;
           end;
         end;
     2 : Begin  { Win32-NT-Schiene }
           case WinOSInfo.dwMajorVersion of
-            3 : fPlatform:=WinNT3;
-            4 : fPlatform:=WinNT4;
+            3 : fPlatform:=pfWinNT3;
+            4 : fPlatform:=pfWinNT4;
             5 : case WinOSInfo.dwMinorVersion of
                   0 : Begin
-                        fPlatform:=Win2000;
+                        fPlatform:=pfWin2000;
                         if (GetEnv('OS2_SHELL')<>'') and (GetEnv('RunWorkPlace')<>'') then
                           fRunUnder:=ruOdin;
                       End;
-                  1 : fPlatform:=WinXP;
+                  1 : fPlatform:=pfWinXP;
                 end;
-            6 : fPlatform:=WinVista;
+            6 : case WinOSInfo.dwMinorVersion of
+                  0 : fPlatform:=pfWinVista;
+                  1 : fPlatform:=pfWin7;
+                End;
           end;
         End;
   End;
 
   fName :='Windows ';
   case fPlatform of
-    Win95   : fName := fName + '95';
-    Win98   : fName := fName + '98';
-    WinME   : fName := fName + 'ME';
-    WinNT3  : fName := fName + 'NT Ver 3';
-    WinNT4  : fName := fName + 'NT Ver 4';
-    Win2000 : fName := fName + '2000';
-    WinXP   : fName := fName + 'XP';
-    WinVista: fName := fName + 'Vista';
-
+    pfWin95   : fName := fName + '95';
+    pfWin98   : fName := fName + '98';
+    pfWinME   : fName := fName + 'ME';
+    pfWinNT3  : fName := fName + 'NT Ver 3';
+    pfWinNT4  : fName := fName + 'NT Ver 4';
+    pfWin2000 : fName := fName + '2000';
+    pfWinXP   : fName := fName + 'XP';
+    pfWinVista: fName := fName + 'Vista';
+    pfWin7    : fName := fName + '7';
   end;
 
 // Command-Shell herausfinden
   fOSCmd := GetEnv('COMSPEC');
   if fOSCmd='' then
     Begin
-      if fPlatform in [Win95, Win98, WinME]
+      if fPlatform in [pfWin95, pfWin98, pfWinME]
         then fOSCmd := goSysInfo.Folders.OSDevice + 'command.com'
         else fOSCmd := goSysInfo.Folders.SystemPath + 'cmd.exe';
     End;
@@ -1205,6 +1277,7 @@ begin
   FreeMem(FSQb,BufLen);
 {$ENDIF}
 {$IFDEF Win32}
+  Result:=0;
 {$ENDIF}
 end;
 
@@ -1213,7 +1286,9 @@ end;
 
 Function tcSysAppInfo.getDefaultBrowser : tFileName;
 
+{$IFDEF OS2}
 Var OutBuf: cstring;
+{$ENDIF}
 
 Begin
 {$IFDEF OS2}
@@ -1229,8 +1304,10 @@ End;
 
 Function tcSysAppInfo.getOdinPEExe : tFilename;
 
+{$IFDEF OS2}
 var Registry : tcRegistry;
     Path     : tFileName;
+{$ENDIF}
 
 Begin
 {$IFDEF OS2}
@@ -1334,12 +1411,12 @@ Begin
   try
 {$IFDEF OS2}
     UserIni.Create(goSysInfo.UserINI);
-    Result:=UserIni.ReadString(cWDSibyl, cIDWDSibylPath,'');
+    Result:=UserIni.ReadString(cOSINIAppl_WDSibyl, cOSINISec_InstallDir,'');
     UserIni.Destroy;
 {$ENDIF}
 {$IFDEF Win32}
-    Registry.Create(taeKEY_LOCAL_MACHINE, 'SOFTWARE\WDSibyl');
-    Result:=Registry.ReadString('',cIDWDSibylPath,'');
+    Registry.Create(taeKEY_LOCAL_MACHINE, 'SOFTWARE\'+cOSINIAppl_WDSibyl);
+    Result:=Registry.ReadString('',cOSINIAppl_WDSibyl,'');
     Registry.Destroy;
 {$ENDIF}
     if (Result<>'') and (Result[Length(Result)]<>'\') then
@@ -1353,6 +1430,14 @@ Function tcWDSibylInfo.GetInstalled: Boolean;
 
 Begin
   Result:=GetDir<>'';
+End;
+
+Function tcWDSibylInfo.GetDirBMP : tFileName;
+
+Begin
+  Result:='';
+  if GetInstalled=false then exit;
+  Result:=GetDir+'BMP\';
 End;
 
 Function tcWDSibylInfo.GetDirBin : tFileName;
@@ -1369,30 +1454,39 @@ Begin
 {$ENDIF}
 End;
 
-Function tcWDSibylInfo.GetSibylINIFile : tFileName;
-
-Begin
-  if GetInstalled=false
-    then Result:=''
-    else Result:=GetDirBin+'Sibyl'+Ext_UC_INI;
-End;
-
 Function tcWDSibylInfo.GetWDSibylINIFile : tFileName;
 
+{$IFDEF OS2}
+var UserIni : tIniFile;
+{$ENDIF}
+{$IFDEF Win32}
+var Registry : tcRegistry;
+{$ENDIF}
+
 Begin
   if GetInstalled=false
     then Result:=''
-    else Result:=GetDirBin+'WDSibyl'+Ext_UC_INI;
+    else
+      begin
+{$IFDEF OS2}
+       UserIni.Create(goSysInfo.UserINI);
+       Result:=UserIni.ReadString(cOSINIAppl_WDSibyl, cOSINISec_WDSibylIniFile, '');
+       UserIni.Destroy;
+{$ENDIF}
+{$IFDEF Win32}
+       Registry.Create(taeKEY_LOCAL_MACHINE, 'SOFTWARE\'+cOSINIAppl_WDSibyl);
+       Result:=Registry.ReadString('',cOSINISec_WDSibylIniFile,'');
+       Registry.Destroy;
+{$ENDIF}
+     end;
 End;
-
-Const WDSibylSecTools = 'Tools';
 
 Function tcWDSibylInfo.GetToolInfo(iName : String;
            var iToolNr   : LongInt;
            var iFileName : tFileName; var iFileParameter : String) : Boolean;
 
 var f,s: String;
-    ini: TAsciiIniFile;
+    ini: TIniFile;
 
 Begin
   Result:=false;
@@ -1402,19 +1496,19 @@ Begin
   if GetInstalled=false then exit;
 
   try
-    ini.Create(GetSibylINIFile);
+    ini.Create(GetWDSibylINIFile);
     For iToolNr := 0 to MaxInt do
       Begin
         f := 'Tool' + tostr(iToolNr);
-        s := ini.ReadString(WDSibylSecTools,f+'.Name','?');
+        s := ini.ReadString(cWDSibylINISec_Tools,f+'.Name','?');
         if s = '?'
           then break {keine weiteren Eintrge mehr vorhanden}
         else if s=iName
           then
             Begin
               Result:=true;
-              iFileName     := ini.ReadString(WDSibylSecTools,f+'.Program','');
-              iFileParameter:= ini.ReadString(WDSibylSecTools,f+'.Parameter','');
+              iFileName     := ini.ReadString(cWDSibylINISec_Tools,f+'.Program','');
+              iFileParameter:= ini.ReadString(cWDSibylINISec_Tools,f+'.Parameter','');
             End;
       End;
     ini.destroy;
@@ -1426,16 +1520,16 @@ Function tcWDSibylInfo.ModifyToolInfo(iToolNr : LongInt;
            iName : String; iPrgFileName : TFileName; iPrgFileParam: String) : Boolean;
 
 var f  : String;
-    ini: TAsciiIniFile;
+    ini: TIniFile;
 
 Begin
   Result:=false;
   try
-    ini.Create(GetSibylINIFile);
+    ini.Create(GetWDSibylINIFile);
     f := 'Tool' + tostr(iToolNr);
-    ini.WriteString(WDSibylSecTools,f+'.Name',     iName);
-    ini.WriteString(WDSibylSecTools,f+'.Program',  iPrgFileName);
-    ini.WriteString(WDSibylSecTools,f+'.Parameter',iPrgFileParam);
+    ini.WriteString(cWDSibylINISec_Tools,f+'.Name',     iName);
+    ini.WriteString(cWDSibylINISec_Tools,f+'.Program',  iPrgFileName);
+    ini.WriteString(cWDSibylINISec_Tools,f+'.Parameter',iPrgFileParam);
     ini.destroy;
   except
   end;
@@ -1505,7 +1599,7 @@ Begin
 { CID herausfinden }
   fCID:=0;
   if (ApplicationType=cApplicationType_GUI) and
-     (fOS.Platform in [OS2Ver40, OS2Ver45]) then
+     (fOS.Platform in [pfOS2Ver40, pfOS2Ver45]) then
     try
       fCID:=gpmWinX.GetUserDefaultLCID
     except
@@ -1763,4 +1857,9 @@ End.
   11-Jun-08  WD         Die Extension von Grossbuchstaben auf Kleinbuchstaben
   09-Sep-08  WD         Extension: SQL eingebaut.
   31-Mar-09  RG         Funktion: TickCount
+  01-Mai-10  WD         Konstanten: EXT_LC_MDX, EXT_UC_MDX, ALL_FILES_LC_MDX, ALL_FILES_UC_MDX
+  03-Mai-10  WD         Einbau von der Windows-Vesion 7.
+  09-Mai-10  WD         tcWDSibylInfo: GetDirBMP (inkl. Property);
+     Nov-11? WD?        Typen trSystem umbenannt (alt zB OS2 neu SysOS2...)
+                        Typen trPlatform umbenannt (alt zB OS2Ver20 neu pfOS2Ver20...)
 }

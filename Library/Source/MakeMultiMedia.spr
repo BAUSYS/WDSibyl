@@ -4,7 +4,7 @@ ApplicationIcon=
 
 [Application Options OS/2]
 
-ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_os2.ico
+ApplicationIcon=P:\WDSibyl\Bin\OS2\DEFAULT_OS2.ICO
 
 [Application Options Win32]
 
@@ -13,68 +13,70 @@ ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_win32.ico
 [Browser Files]
 
 File0=SYSTEM
-File1=OPENGL
-File2=WINNT
-File3=WINDEF
-File4=WINBASE
-File5=WINUSER
-File6=MMSYSTEM
-File7=SYSUTILS
-File8=MESSAGES
-File9=COLOR
+File1=OS2DEF
+File2=BSETIB
+File3=BSEEXCPT
+File4=BSEDOS
+File5=BSEERR
+File6=PMWIN
+File7=PMWP
+File8=PMSHL
+File9=SYSUTILS
 File10=USTREAM
 File11=ULIST
 File12=USTRING
-File13=USYSCLASS
-File14=DOS
-File15=UEXTENSION
-File16=WINADVAPI
-File17=INIFILES
-File18=CLASSES
-File19=WINGDI
-File20=COMMCTRL
-File21=CLIPBRD
-File22=UCONVERT
-File23=GRAPHICS
-File24=MENUS
-File25=UDATETIME
-File26=ULOG
-File27=PMWINX
-File28=USYSINFO
-File29=WINSPOOL
-File30=PRINTERS
-File31=FORMS
-File32=BUTTONS
-File33=STDCTRLS
-File34=COMMDLG
-File35=EXTCTRLS
-File36=COMCTRLS
-File37=FILECTRL
-File38=DIALOGS
-File39=MMEDIA
-File40=UDART
-File41=UCDDEVICE
-File42=UVIDEODEVICE
-File43=UAUDIODEVICE
-File44=UMEDIAPLAYER
+File13=PMSPL
+File14=BSEREGISTRY
+File15=INIFILES
+File16=PMWINX
+File17=USYSINFO
+File18=USYSCLASS
+File19=COLOR
+File20=DOS
+File21=CLASSES
+File22=PMBITMAP
+File23=PMGPI
+File24=PMDEV
+File25=PMSTDDLG
+File26=PMHELP
+File27=MESSAGES
+File28=CLIPBRD
+File29=UCONVERT
+File30=GRAPHICS
+File31=ULANGUAGE
+File32=MENUS
+File33=PRINTERS
+File34=FORMS
+File35=BUTTONS
+File36=STDCTRLS
+File37=EXTCTRLS
+File38=COMCTRLS
+File39=FILECTRL
+File40=DIALOGS
+File41=MMEDIA
+File42=UMMDEVICES
+File43=UMEDIAPLAYER
+File44=OPENGL
+File45=MMIO
+File46=UDART
 
 [Compiler Options]
 
 CodeGeneration=
 Syntax=
-Optimize=OptimizeCommonSub,OptimizePeephole
+Optimize=OptimizeCommonSub
 RuntimeCheck=
 CondDefine=
 
 [Compiler Warnings]
 
 Warnings=W2,W3,W4,W5,W6,W7
-MaxWarnings=200
+MaxWarnings=300
 MaxErrors=10
 
 [Component Library OS/2]
 
-CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\CompLib.dll
+CompLibName=..\..\.\Bin\OS2\CompLib.dll
 
 [Component Library Win32]
 
@@ -112,21 +114,21 @@ CompInstallDir=
 
 [Directories OS/2]
 
-LastDir=
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Lib
+LastDir=P:\WDSIBYL\BIN\OS2
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
 LibSrcDir=
-IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Compnt
+IncSrcDir=P:\WDSibyl\Library\Source\SPCC;P:\WDSibyl\Library\Source\RTL;P:\WDSibyl\Library\Source\RTL\OS2;P:\WDSibyl\Library\Source\RC;P:\WDSibyl\Library\Source\TP70;P:\WDSibyl\Library\Source\Multimedia
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
 
 LastDir=
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Lib
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
 LibSrcDir=
 IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Compnt
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
@@ -149,7 +151,7 @@ Find14=status
 [General]
 
 Version=Sibyl Project Ver2.05
-ProjectName=P:\WDSibyl\WDSibyl\Library\Source\MakeMultiMedia.spr
+ProjectName=P:\WDSibyl\Library\Source\MakeMultiMedia.spr
 ProjectType=NonVisual
 RunParameter=
 InActiveLanguages=
@@ -165,52 +167,52 @@ File0=.\MULTIMEDIA\OPENGL.PAS
 File0=.\MakeMultiMedia.PAS
 File0.Left=-1
 File0.Bottom=-1
-File0.Width=855
-File0.Height=531
-File0.Column=63
-File0.Line=14
+File0.Width=952
+File0.Height=604
+File0.Column=15
+File0.Line=11
 File1=.\MULTIMEDIA\MMEDIA.PAS
 File1.Left=-1
 File1.Bottom=-1
-File1.Width=855
-File1.Height=531
-File1.Column=25
-File1.Line=1583
+File1.Width=952
+File1.Height=604
+File1.Column=1
+File1.Line=1
 File2=.\Multimedia\uMediaPlayer.pas
 File2.Left=-1
 File2.Bottom=-1
-File2.Width=855
-File2.Height=531
-File2.Column=6
-File2.Line=5
-File3=.\Multimedia\uCDDevice.pas
+File2.Width=952
+File2.Height=604
+File2.Column=20
+File2.Line=189
+File3=.\MULTIMEDIA\uDart.pas
 File3.Left=-1
 File3.Bottom=-1
-File3.Width=855
-File3.Height=531
-File3.Column=2
-File3.Line=270
-File4=.\MULTIMEDIA\uVideoDevice.pas
+File3.Width=952
+File3.Height=604
+File3.Column=1
+File3.Line=1
+File4=.\SPCC\CLASSES.PAS
 File4.Left=-1
 File4.Bottom=-1
-File4.Width=855
-File4.Height=531
-File4.Column=22
-File4.Line=771
-File5=.\Multimedia\uAudioDevice.pas
+File4.Width=952
+File4.Height=604
+File4.Column=18
+File4.Line=21
+File5=.\RTL\SysUtils.pas
 File5.Left=-1
 File5.Bottom=-1
-File5.Width=855
-File5.Height=531
-File5.Column=3
-File5.Line=89
-File6=.\MULTIMEDIA\uDart.pas
+File5.Width=952
+File5.Height=604
+File5.Column=17
+File5.Line=44
+File6=.\SPCC\COMCTRLS.PAS
 File6.Left=-1
 File6.Bottom=-1
-File6.Width=855
-File6.Height=531
-File6.Column=58
-File6.Line=378
+File6.Width=952
+File6.Height=604
+File6.Column=15
+File6.Line=1484
 
 [Linker Options]
 
@@ -231,7 +233,7 @@ Stack=256
 Primary=.\MakeMultiMedia.PAS
 MainFile0=.\MakeMultiMedia.PAS
 MainFile0.Ext=.EXE
-MainFile0.Checksum=11776
+MainFile0.Checksum=12288
 MainFile0.Expanded=False
 MainFile0.File0=.\Multimedia\uMediaPlayer.pas
 MainFile0.File1=.\Multimedia\uCDDevice.pas
@@ -240,13 +242,53 @@ MainFile0.File3=.\MULTIMEDIA\OPENGL.PAS
 MainFile0.File4=.\MULTIMEDIA\uVideoDevice.pas
 MainFile0.File5=.\Multimedia\uAudioDevice.pas
 MainFile0.File6=[Dependencies]
-MainFile0.Dependency0=.\MULTIMEDIA\OPENGL.PAS
-MainFile0.Dependency1=.\MULTIMEDIA\MMEDIA.PAS
-MainFile0.Dependency2=.\MULTIMEDIA\UDART.PAS
-MainFile0.Dependency3=.\MULTIMEDIA\UCDDEVICE.PAS
-MainFile0.Dependency4=.\MULTIMEDIA\UVIDEODEVICE.PAS
-MainFile0.Dependency5=.\MULTIMEDIA\UAUDIODEVICE.PAS
-MainFile0.Dependency6=.\MULTIMEDIA\UMEDIAPLAYER.PAS
+MainFile0.Dependency0=.\RTL\SYSTEM.PAS
+MainFile0.Dependency1=.\RTL\OS2\OS2DEF.PAS
+MainFile0.Dependency2=.\RTL\OS2\BSETIB.PAS
+MainFile0.Dependency3=.\RTL\OS2\BSEEXCPT.PAS
+MainFile0.Dependency4=.\RTL\OS2\BSEDOS.PAS
+MainFile0.Dependency5=.\RTL\OS2\BSEERR.PAS
+MainFile0.Dependency6=.\RTL\OS2\PMWIN.PAS
+MainFile0.Dependency7=.\RTL\OS2\PMWP.PAS
+MainFile0.Dependency8=.\RTL\OS2\PMSHL.PAS
+MainFile0.Dependency9=.\RTL\SYSUTILS.PAS
+MainFile0.Dependency10=.\RTL\USTREAM.PAS
+MainFile0.Dependency11=.\RTL\ULIST.PAS
+MainFile0.Dependency12=.\RTL\USTRING.PAS
+MainFile0.Dependency13=.\RTL\OS2\PMSPL.PAS
+MainFile0.Dependency14=.\RTL\OS2\BSEREGISTRY.PAS
+MainFile0.Dependency15=.\RTL\INIFILES.PAS
+MainFile0.Dependency16=.\RTL\PMWINX.PAS
+MainFile0.Dependency17=.\RTL\USYSINFO.PAS
+MainFile0.Dependency18=.\RTL\USYSCLASS.PAS
+MainFile0.Dependency19=.\RTL\COLOR.PAS
+MainFile0.Dependency20=.\TP70\DOS.PAS
+MainFile0.Dependency21=.\SPCC\CLASSES.PAS
+MainFile0.Dependency22=.\RTL\OS2\PMBITMAP.PAS
+MainFile0.Dependency23=.\RTL\OS2\PMGPI.PAS
+MainFile0.Dependency24=.\RTL\OS2\PMDEV.PAS
+MainFile0.Dependency25=.\RTL\OS2\PMSTDDLG.PAS
+MainFile0.Dependency26=.\RTL\OS2\PMHELP.PAS
+MainFile0.Dependency27=.\SPCC\MESSAGES.PAS
+MainFile0.Dependency28=.\SPCC\CLIPBRD.PAS
+MainFile0.Dependency29=.\SPCC\UCONVERT.PAS
+MainFile0.Dependency30=.\SPCC\GRAPHICS.PAS
+MainFile0.Dependency31=.\SPCC\ULANGUAGE.PAS
+MainFile0.Dependency32=.\SPCC\MENUS.PAS
+MainFile0.Dependency33=.\SPCC\PRINTERS.PAS
+MainFile0.Dependency34=.\SPCC\FORMS.PAS
+MainFile0.Dependency35=.\SPCC\BUTTONS.PAS
+MainFile0.Dependency36=.\SPCC\STDCTRLS.PAS
+MainFile0.Dependency37=.\SPCC\EXTCTRLS.PAS
+MainFile0.Dependency38=.\SPCC\COMCTRLS.PAS
+MainFile0.Dependency39=.\SPCC\FILECTRL.PAS
+MainFile0.Dependency40=.\SPCC\DIALOGS.PAS
+MainFile0.Dependency41=.\Multimedia\MMEDIA.PAS
+MainFile0.Dependency42=.\Multimedia\UMMDEVICES.PAS
+MainFile0.Dependency43=.\Multimedia\UMEDIAPLAYER.PAS
+MainFile0.Dependency44=.\Multimedia\OPENGL.PAS
+MainFile0.Dependency45=.\RTL\OS2\MMIO.PAS
+MainFile0.Dependency46=.\Multimedia\UDART.PAS
 
 [Repository]
 

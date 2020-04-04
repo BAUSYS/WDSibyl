@@ -4,7 +4,7 @@ ApplicationIcon=
 
 [Application Options OS/2]
 
-ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_os2.ico
+ApplicationIcon=P:\WDSibyl\Bin\OS2\DEFAULT_OS2.ICO
 
 [Application Options Win32]
 
@@ -29,9 +29,9 @@ File13=CRT
 File14=USTREAM
 File15=ULIST
 File16=USTRING
-File17=USYSCLASS
-File18=BSEREGISTRY
-File19=INIFILES
+File17=BSEREGISTRY
+File18=INIFILES
+File19=USYSCLASS
 File20=PMSPL
 File21=PMWINX
 File22=USYSINFO
@@ -47,7 +47,7 @@ File29=FASTCRT
 
 CodeGeneration=
 Syntax=
-Optimize=OptimizeCommonSub,OptimizePeephole
+Optimize=OptimizeCommonSub
 RuntimeCheck=
 CondDefine=
 
@@ -88,21 +88,21 @@ SPCC_Exceptions=4194303
 
 [Directories OS/2]
 
-LastDir=P:\WDSIBYL\WDSIBYL\LIBRARY\SOURCE\RTL\WIN32
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Lib
+LastDir=P:\WDSIBYL\BIN\OS2
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
 LibSrcDir=
-IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Compnt
+IncSrcDir=P:\WDSibyl\Library\Source\RTL\OS2;P:\WDSibyl\Library\Source\RTL;P:\WDSibyl\Library\Source\RC;P:\WDSibyl\Library\Source\TP70
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
 
 LastDir=
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Lib
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
 LibSrcDir=
 IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Compnt
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
@@ -126,7 +126,7 @@ Find15=uses
 [General]
 
 Version=Sibyl Project Ver2.05
-ProjectName=F:\SPRACHEN\PASCAL\WDSIBYL\Library\Source\MakeTP70.spr
+ProjectName=P:\WDSibyl\Library\Source\MakeTP70.spr
 ProjectType=NonVisual
 RunParameter=
 InActiveLanguages=
@@ -144,31 +144,31 @@ File2=.\TP70\WINCRT.PAS
 File0=.\MakeTP70.PAS
 File0.Left=-1
 File0.Bottom=-1
-File0.Width=846
-File0.Height=597
-File0.Column=19
-File0.Line=5
+File0.Width=952
+File0.Height=604
+File0.Column=34
+File0.Line=9
 File1=.\TP70\CRT.PAS
 File1.Left=-1
 File1.Bottom=-1
-File1.Width=846
-File1.Height=597
-File1.Column=20
-File1.Line=255
+File1.Width=952
+File1.Height=604
+File1.Column=64
+File1.Line=71
 File2=.\TP70\fastcrt.pas
 File2.Left=-1
 File2.Bottom=-1
-File2.Width=846
-File2.Height=597
+File2.Width=952
+File2.Height=604
 File2.Column=26
 File2.Line=667
 File3=.\TP70\PRINTER.PAS
 File3.Left=-1
 File3.Bottom=-1
-File3.Width=846
-File3.Height=597
-File3.Column=1
-File3.Line=1
+File3.Width=952
+File3.Height=604
+File3.Column=22
+File3.Line=6
 
 [Linker Options]
 
@@ -198,9 +198,36 @@ MainFile0.File3=.\TP70\WINCRT.PAS
 MainFile0.File4=.\TP70\WINGRAPH.PAS
 MainFile0.File5=.\TP70\fastcrt.pas
 MainFile0.File6=[Dependencies]
-MainFile0.Dependency0=.\TP70\CRT.PAS
-MainFile0.Dependency1=.\TP70\PRINTER.PAS
-MainFile0.Dependency2=.\TP70\fastcrt.pas
+MainFile0.Dependency0=.\RTL\SYSTEM.PAS
+MainFile0.Dependency1=.\RTL\OS2\OS2DEF.PAS
+MainFile0.Dependency2=.\RTL\OS2\PMWIN.PAS
+MainFile0.Dependency3=.\RTL\OS2\BSESUB.PAS
+MainFile0.Dependency4=.\RTL\OS2\BSEVIO.PAS
+MainFile0.Dependency5=.\RTL\OS2\BSEKBD.PAS
+MainFile0.Dependency6=.\RTL\OS2\BSETIB.PAS
+MainFile0.Dependency7=.\RTL\OS2\BSEEXCPT.PAS
+MainFile0.Dependency8=.\RTL\OS2\BSEDOS.PAS
+MainFile0.Dependency9=.\RTL\OS2\BSEERR.PAS
+MainFile0.Dependency10=.\RTL\OS2\PMWP.PAS
+MainFile0.Dependency11=.\RTL\OS2\PMSHL.PAS
+MainFile0.Dependency12=.\RTL\SYSUTILS.PAS
+MainFile0.Dependency13=.\TP70\CRT.PAS
+MainFile0.Dependency14=.\RTL\USTREAM.PAS
+MainFile0.Dependency15=.\RTL\ULIST.PAS
+MainFile0.Dependency16=.\RTL\USTRING.PAS
+MainFile0.Dependency17=.\RTL\OS2\BSEREGISTRY.PAS
+MainFile0.Dependency18=.\RTL\INIFILES.PAS
+MainFile0.Dependency19=.\RTL\USYSCLASS.PAS
+MainFile0.Dependency20=.\RTL\OS2\PMSPL.PAS
+MainFile0.Dependency21=.\RTL\PMWINX.PAS
+MainFile0.Dependency22=.\RTL\USYSINFO.PAS
+MainFile0.Dependency23=.\TP70\DOS.PAS
+MainFile0.Dependency24=.\TP70\PRINTER.PAS
+MainFile0.Dependency25=.\RTL\COLOR.PAS
+MainFile0.Dependency26=.\RTL\OS2\PMBITMAP.PAS
+MainFile0.Dependency27=.\RTL\OS2\PMGPI.PAS
+MainFile0.Dependency28=.\TP70\WINCRT.PAS
+MainFile0.Dependency29=.\TP70\FASTCRT.PAS
 
 [Repository]
 

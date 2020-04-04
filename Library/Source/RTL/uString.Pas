@@ -1,6 +1,6 @@
 {ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
  บ                                                                          บ
- บ    WDSibyl Runtime Library for OS/2                                      บ
+ บ    WDSibyl Runtime Library                                               บ
  บ                                                                          บ
  บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
  บ                                                                          บ
@@ -200,7 +200,7 @@ Type
        Property Strings[Index: LongInt]: String Read Get Write Put; Default;
        Property StringsTab[Index: LongInt; TabPos: LongInt]: String Read GetTab;
        Property Text         : AnsiString Read GetTextStr    Write SetTextStr;
-       Property TabSeperato  : Char       Read fTabSeperator Write fTabSeperator;
+       Property TabSeperator : Char       Read fTabSeperator Write fTabSeperator;
        Property MaxLength    : Integer    Read GetMaxLength;
        Property MinLength    : Integer    Read GetMinLength;
   End;
@@ -392,7 +392,7 @@ Function FillString(Anzahl : Byte; Zeichen : Char) : String;
 Function iif(iBool : Boolean; iTrueValue, iFalseValue : String) : String;
 { Liefert den Wert iTrueValue wenn iBool "true" ist, ansonsten iFalseValue. }
 
-Function PosN(CONST substr, s:STRING; p : Byte) : Byte;
+Function PosN(CONST substr, s : STRING; p : Integer) : Integer;
 { Sucht nach p-ten String "substr" im String "s" }
 
 Function LastPos(iCh : Char; iStr : string) : Byte;
@@ -655,26 +655,26 @@ End;
 ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
 }
 
-Function PosN(CONST substr, s:STRING; p : Byte) : Byte;
+Function PosN(CONST substr, s : STRING; p : Integer) : Integer;
 
 var po, cou : LongInt;
     str     : String;
 
 Begin
-  result:=0;
-  if p=0 then exit;
-  str:=s;
-  cou:=1;
-  while cou<p do
+  result := 0;
+  if p = 0 then exit;
+  str := s;
+  cou := 1;
+  while cou <= p do  // RG alt: while cou<p do , neu: while cou<=p do
     Begin
-      po:=pos(substr, str);
-      if po=0 then
+      po := pos(substr, str);
+      if po = 0 then
         Begin
-          result:=0;
+          result := 0;
           exit;
         End;
-      str:=copy(str,po+1,255);
-      result:=Result+po;
+      str := copy(str,po+1,255);
+      result := Result + po;
       inc(cou);
     End;
 End;
@@ -2098,4 +2098,6 @@ End.
   16-Feb-08  WD         Die Klassen TAnsiStringList, TAnsiStringValue erstellt.
   10-Apr-08  WD         Typ: pAnsiStringValue und pStringValue
   09-Okt-08  WD         Funktion AnsiTrimLeft, AnsiTrimRight und AnsiTrim eingebaut.
+  21-Jul-09  RG         Tippfehler: TabSeperato auf TabSeperatoe gendert.
+  24-Apr-18  RG         Fehler in PosN() bereinigt
 }

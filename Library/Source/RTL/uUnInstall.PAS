@@ -1,3 +1,11 @@
+{ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+ บ                                                                          บ
+ บ    WDSibyl Runtime Library                                               บ
+ บ                                                                          บ
+ บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ                                                                          บ
+ ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
+
 {***********************************
  uUnInstall.pas
  WDSibyl unit for uninstall functions
@@ -57,7 +65,7 @@ end;
 ***********************************}
 Function GetHexString(sVal: String): String;
 var
-  sHex,sFill: String;
+  sHex: String;
 Begin
   sHex := '00000000' + IntToHex(strtoint(sVal),4);
   sHex := copy(sHex,length(sHex)-7,8);

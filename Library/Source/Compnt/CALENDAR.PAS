@@ -1,9 +1,10 @@
 
 {ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
  บ                                                                          บ
- บ    Sibyl Component                                                       บ
+ บ    WDSibyl Component                                                     บ
  บ                                                                          บ
  บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
+ บ    Copyright (C) 2005..     Ing. Wolfgang Draxler, All rights reserved.  บ
  บ                                                                          บ
  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
 
@@ -83,26 +84,34 @@ Type
 
   tEditDate=Class(TControl)
   Private
-    fcbDay  : tComboBox;
-    fcbMonth: tComboBox;
-    fcbYear : tComboBox;
-    fYearMin: LongInt;
-    fYearMax: LongInt;
-    fTabStop: Boolean;
+    fcbDay    : tComboBox;
+    fcbMonth  : tComboBox;
+    fcbYear   : tComboBox;
+    fYearMin  : LongInt;
+    fYearMax  : LongInt;
+    fTabStop  : Boolean;
+    fReadOnly : Boolean;  //RG 10.06.2017
 
     Procedure FillYear;
     Procedure SetYearMin(iYearMin : LongInt);
     Procedure SetYearMax(iYearMax : LongInt);
     Procedure SetDate(iDate : tDateTime);
+    Procedure SetYear(iYear : LongInt);       //RG 10.06.2017
+    Procedure SetMonth(iMonth : LongInt);     //RG 10.06.2017
+    Procedure SetDay(iDay : LongInt);         //RG 10.06.2017
     Procedure SetTabStop(iTabStop : Boolean);
-    Function GetDate : tDateTime;
-    Function GetMonth : Byte;
+    Function  GetDate : tDateTime;
+    Function  GetYear : LongInt;              //RG 10.06.2017
+    Function  GetMonth : LongInt; {alt: Byte} //RG 10.06.2017
+    Function  GetDay : LongInt;               //RG 10.06.2017
 
     Procedure evDayOnExit(iSender: TObject);
     Procedure evDayOnPresskey(iSender: TObject; var ikey: Char);
     Procedure evMonthOnExit(iSender: TObject);
     Procedure evMonthOnPresskey(iSender: TObject; var ikey: Char);
     Procedure evYearOnExit(iSender: TObject);
+
+    Procedure SetReadOnly(Value:Boolean);     //RG 10.06.2017
 
   Protected
     Procedure SetupComponent; Override;
@@ -115,6 +124,11 @@ Type
     Procedure ResetComponent; Override;
 
     Property Date : tDateTime Read getDate Write SetDate;
+    Property Year:LongInt read GetYear write SetYear;     //RG 10.06.2017
+    Property Month:LongInt read GetMonth write SetMonth;  //RG 10.06.2017
+    Property Day:LongInt read GetDay write SetDay;        //RG 10.06.2017
+
+    Property ReadOnly : Boolean Read fReadOnly Write SetReadOnly; //RG 10.06.2017
 
   Published
     Property Align;
@@ -311,9 +325,7 @@ End;
 // ------------------------------------------------------------------------------------
 
 Procedure tEditDate.SetDate(iDate : tDateTime);
-
 var Year, Month, Day : Word;
-
 Begin
   DecodeDate(iDate, Year, Month, Day);
   if Day<10
@@ -323,23 +335,63 @@ Begin
   fcbYear.Text:=tostr(Year);
 End;
 
-Function tEditDate.GetMonth : Byte;
+Procedure tEditDate.SetYear(iYear : LongInt);     //RG 10.06.2017
+Begin
+  fcbYear.Text := tostr(iYear);
+End;
 
+Procedure tEditDate.SetMonth(iMonth : LongInt);   //RG 10.06.2017
+Begin
+  fcbMonth.Text := cDaysPerMonth[iMonth].ShortnameGR;
+End;
+
+Procedure tEditDate.SetDay(iDay : LongInt);       //RG 10.06.2017
+Begin
+  if iDay < 10
+  then fcbDay.Text := '0' + tostr(iDay)
+  else fcbDay.Text := tostr(iDay);
+End;
+
+Function tEditDate.GetYear : LongInt; //RG 10.06.2017
+Begin
+  Result := StrToInt(fcbYear.Text)
+End;
+
+Function tEditDate.GetMonth : LongInt; {alt: Byte} //RG 10.06.2017
 Begin
   Result:=MonthToNumber(fcbMonth.Text);
 End;
 
-Function tEditDate.GetDate : tDateTime;
+Function tEditDate.GetDay : LongInt; //RG 10.06.2017
+Begin
+  Result := StrToInt(fcbDay.Text);
+End;
 
+Function tEditDate.GetDate : tDateTime;
 Begin
   Result:=EncodeDate(StrToInt(fcbYear.Text),
-                     getMonth,
+                     GetMonth,
                      StrToInt(fcbDay.Text));
   SetDate(Result);
 End;
 
-Procedure tEditDate.SetTabStop(iTabStop : Boolean);
+Procedure tEditDate.SetReadOnly(Value:Boolean); //RG 10.06.2017
+{ mit csDropDownList ist nur eine Auswahl m”glich }
+begin
+  if Value = true
+  then begin
+         fcbDay.Style := csDropDownList;
+         fcbMonth.Style := csDropDownList;
+         fcbYear.Style := csDropDownList;
+       end
+  else begin
+         fcbDay.Style := csDropDown;
+         fcbMonth.Style := csDropDown;
+         fcbYear.Style := csDropDown;
+       end;
+end;
 
+Procedure tEditDate.SetTabStop(iTabStop : Boolean);
 Begin
   fTabStop := iTabStop;
   if fcbDay<>nil then
@@ -351,7 +403,6 @@ Begin
 End;
 
 Procedure tEditDate.SetYearMin(iYearMin : LongInt);
-
 Begin
   if iYearMin < 0 then iYearMin:=0;
   if iYearMin > MaxYear then iYearMin:=MaxYear;
@@ -361,7 +412,6 @@ Begin
 End;
 
 Procedure tEditDate.SetYearMax(iYearMax : LongInt);
-
 Begin
   if iYearMax < fYearMin then iYearMax:=fYearMin;
   if iYearMax > MaxYear then iYearMax:=MaxYear;
@@ -370,9 +420,7 @@ Begin
 End;
 
 Procedure tEditDate.FillYear;
-
 var cou : LongWord;
-
 Begin
   fcbYear.Items.Clear;
   for cou:=fYearMin to fYearMax do
@@ -380,17 +428,13 @@ Begin
 End;
 
 Procedure tEditDate.evYearOnExit(iSender: TObject);
-
 var Value : LongInt;
-
 Begin
   Value:=StrToInt(fcbYear.Text);
 End;
 
 Procedure tEditDate.evDayOnExit(iSender: TObject);
-
 var Day : LongInt;
-
 Begin
   day:=StrToInt(fcbDay.Text);
   if (day<1) or (day>31) then
@@ -398,7 +442,6 @@ Begin
 End;
 
 Procedure tEditDate.evDayOnPresskey(iSender: TObject; var ikey: Char);
-
 Begin
   if iKey in ['0'..'9'] then exit;
   if iKey='.' then fcbMonth.Focus;
@@ -406,9 +449,7 @@ Begin
 End;
 
 Procedure tEditDate.evMonthOnExit(iSender: TObject);
-
 var Month : LongInt;
-
 Begin
   Month:=getMonth;
   if Month in [1..12]
@@ -417,7 +458,6 @@ Begin
 End;
 
 Procedure tEditDate.evMonthOnPresskey(iSender: TObject; var ikey: Char);
-
 Begin
   if iKey='.' then
     Begin
@@ -428,7 +468,6 @@ Begin
 End;
 
 Procedure tEditDate.SetupShow;
-
 Begin
   inherited SetupShow;
   setTabStop(true);   {inherited tabstop); }
@@ -440,15 +479,12 @@ Begin
 
   fcbYear.DropDownCount:=6;
   fcbYear.Hint:=inherited Hint;
-
 End;
 
 Procedure tEditDate.Resize;
-
 {$IFDEF OS2}
 Var FW : LongInt;
 {$ENDIF}
-
 Begin
   inherited Resize;
 { Unter OS/2 die Groeแe berechnen.
@@ -471,23 +507,19 @@ Begin
 End;
 
 Procedure tEditDate.FontChange;
-
 Begin
   inherited FontChange;
   Resize;
 End;
 
 Procedure TEditDate.ResetComponent;
-
 Begin
   inherited ResetComponent;
   setDate(now);
 End;
 
 Procedure tEditDate.SetupComponent;
-
 var cou    : LongWord;
-
 Begin                                  
   Inherited SetupComponent;
 
@@ -500,8 +532,9 @@ Begin
   Inherited TabStop := false;   { Damit kann das Controlselber nicht angesprungen werden }
 {  Inherited TabStop := true; }
 
-  fYearMin:=1998;
-  fYearMax:=2010;
+  fYearMin := 1998;
+  fYearMax := 2010;
+  fReadOnly := false; //RG 10.06.2017
 
   fcbDay:=InsertComboBox(Self, 0, 0, 30, Height, csDropDown);
   fcbDay.Name         := 'cbDay';
@@ -567,4 +600,6 @@ End.
   08-Sep-04  WD         Von uEditDate die Klasse "tEditDate" uebernommen
   02-Apr-05  WD         Diverse Korrektueren von der Klasse "tEditDate"
   28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  10-Jun-17  RG         tEditDate: Properties mit Year, Month und Day erweitert.
+                                   Property ReadOnly definiert
 }

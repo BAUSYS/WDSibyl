@@ -437,14 +437,15 @@ type tOkCancelButtonKind = (okcHorizontal, okcVertical);
 Type
   tOKCancelButton=Class(TControl)
     Private
-      fBtnOK        : tBitBtn;
-      fBtnCancel    : tBitBtn;
-      fBtnHelp      : tBitBtn;
-      fKind         : tOkCancelButtonKind;
-      fOnOKClick    : TNotifyEvent;
-      fOnCancelClick: TNotifyEvent;
-      fOnHelpClick  : TNotifyEvent;
-      fTabStop      : Boolean;
+      fBtnOK         : tBitBtn;
+      fBtnCancel     : tBitBtn;
+      fBtnHelp       : tBitBtn;
+      fKind          : tOkCancelButtonKind;
+      fOnOKClick     : TNotifyEvent;
+      fOnCancelClick : TNotifyEvent;
+      fOnHelpClick   : TNotifyEvent;
+      fTabStop       : Boolean;
+      fShowHelpButton: Boolean;
 
       Procedure SetOBCKind(iKind : tOkCancelButtonKind);
       Procedure SetOBCFont(iFont : tFont);
@@ -452,12 +453,11 @@ Type
       Procedure SetOkModalResult(iModalResult : tCommand);
       Function  GetOkModalResult : tCommand;
       Function  GetOBCFont : tFont;
+      Procedure SetShowHelpButton(iValue : Boolean);
 
       Procedure OCBOnOKClick(Sender : tObject);
       Procedure OCBOnCancelClick(Sender : tObject);
       Procedure OCBOnHelpClick(Sender : tObject);
-
-
     Protected
       Procedure SetupComponent; Override;
       Procedure Resize; Override;
@@ -465,29 +465,31 @@ Type
       Destructor Destroy; Override;
     Published
       Property Align;
-      Property Kind         : tOkCancelButtonKind   Read fKind            Write SetOBCKind;
-      Property Font         : tFont                 Read GetOBCFont       Write SetOBCFont;
-      Property TabStop      : Boolean               Read fTabStop         Write SetTabStop;
+      Property Kind          : tOkCancelButtonKind Read fKind            Write SetOBCKind;
+      Property Font          : tFont               Read GetOBCFont       Write SetOBCFont;
+      Property TabStop       : Boolean             Read fTabStop         Write SetTabStop;
       Property TabOrder;
-      Property OkModalResult: TCommand              Read GetOkModalResult Write SetOkModalResult;
+      Property OkModalResult:  TCommand            Read GetOkModalResult Write SetOkModalResult;
+      Property ShowHelpButton: Boolean             Read fShowHelpButton  Write SetShowHelpButton;
 
-      Property OnOKClick    : TNotifyEvent          Read FOnOKClick       Write fOnOKClick;
-      Property OnCancelClick: TNotifyEvent          Read FOnCancelClick   Write fOnCancelClick;
-      Property OnHelpClick  : TNotifyEvent          Read FOnHelpClick     Write fOnHelpClick;
+      Property OnOKClick    : TNotifyEvent         Read FOnOKClick       Write fOnOKClick;
+      Property OnCancelClick: TNotifyEvent         Read FOnCancelClick   Write fOnCancelClick;
+      Property OnHelpClick  : TNotifyEvent         Read FOnHelpClick     Write fOnHelpClick;
   End;
 
 Function InsertShape(parent:TControl;Left,Bottom,Width,Height:LongInt):TShape;
 Function InsertImage(parent:TControl;Left,Bottom,Width,Height:LongInt;BitmapId:LongWord):TImage;
 Function InsertImageName(parent:TControl;Left,Bottom,Width,Height:LongInt;Const BitmapId:String):TImage;
+Function InsertApplicationIcon(Parent:TControl;Left,Bottom,Width,Height:LongInt) : tImage;
 Function InsertBevel(parent:TControl;Left,Bottom,Width,Height:LongInt;
-           Shape:TBevelShape;Style:TBevelStyle):TBevel;
+                     Shape:TBevelShape;Style:TBevelStyle):TBevel;
 Function InsertPanel(parent:TControl;Left,Bottom,Width,Height:LongInt;
-           BevelInner:TPanelBevel;BevelOuter:TPanelBevel;BevelWidth:LongInt;
-           Caption:String):TPanel;
+                     BevelInner:TPanelBevel;BevelOuter:TPanelBevel;BevelWidth:LongInt;
+                     Caption:String):TPanel;
 Function InsertRadioGroup(parent:TControl;Left,Bottom,Width,Height:LongInt;
-           Caption:String):TRadioGroup;
+                          Caption:String):TRadioGroup;
 Function InsertCheckGroup(parent:TControl;Left,Bottom,Width,Height:LongInt;
-           Caption:String):TCheckGroup;
+                          Caption:String):TCheckGroup;
 
 
 Function InsertOKCancelButton(parent      : TControl;
@@ -496,47 +498,56 @@ Implementation
 
 Function InsertShape(parent:TControl;Left,Bottom,Width,Height:LongInt):TShape;
 Begin
-     Result.Create(parent);
-     Result.SetWindowPos(Left,Bottom,Width,Height);
-     Result.parent := parent;
+  Result.Create(parent);
+  Result.SetWindowPos(Left,Bottom,Width,Height);
+  Result.parent := parent;
 End;
 
 
 Function InsertImage(Parent:TControl;Left,Bottom,Width,Height:LongInt;
-  BitmapId:LongWord):TImage;
+                     BitmapId:LongWord):TImage;
 Var  Bitmap:TBitmap;
+
 Begin
-     Result.Create(parent);
-     Result.SetWindowPos(Left,Bottom,Width,Height);
-     Bitmap.Create;
-     Bitmap.LoadFromResourceId(BitmapId);
-     Result.Picture.Graphic:=Bitmap;
-     Bitmap.Destroy; {#}
-     Result.Parent := Parent;
+  Result.Create(parent);
+  Result.SetWindowPos(Left,Bottom,Width,Height);
+  Bitmap.Create;
+  Bitmap.LoadFromResourceId(BitmapId);
+  Result.Picture.Graphic:=Bitmap;
+  Bitmap.Destroy; {#}
+  Result.Parent := Parent;
 End;
 
 Function InsertImageName(Parent:TControl;Left,Bottom,Width,Height:LongInt;
-  Const BitmapId:String):TImage;
+                         Const BitmapId:String):TImage;
 Var  Bitmap:TBitmap;
 Begin
-     Result.Create(parent);
-     Result.SetWindowPos(Left,Bottom,Width,Height);
-     Bitmap.Create;
-     Bitmap.LoadFromResourceName(BitmapId);
-     Result.Picture.Graphic:=Bitmap;
-     Bitmap.Destroy; {#}
-     Result.Parent := Parent;
+  Result.Create(parent);
+  Result.SetWindowPos(Left,Bottom,Width,Height);
+  Bitmap.Create;
+  Bitmap.LoadFromResourceName(BitmapId);
+  Result.Picture.Graphic:=Bitmap;
+  Bitmap.Destroy; {#}
+  Result.Parent := Parent;
 End;
 
+Function InsertApplicationIcon(Parent:TControl;Left,Bottom,Width,Height:LongInt) : tImage;
+
+Begin
+  Result.Create(Parent);
+  Result.SetWindowPos(Left,Bottom,Width,Height);
+  Result.Picture.Graphic:=Application.Icon;
+  Result.Parent := Parent;
+End;
 
 Function InsertBevel(parent:TControl;Left,Bottom,Width,Height:LongInt;
-  Shape:TBevelShape;Style:TBevelStyle):TBevel;
+                     Shape:TBevelShape;Style:TBevelStyle):TBevel;
 Begin
-     Result.Create(parent);
-     Result.Shape := Shape;
-     Result.Style := Style;
-     Result.SetWindowPos(Left,Bottom,Width,Height);
-     Result.parent := parent;
+  Result.Create(parent);
+  Result.Shape := Shape;
+  Result.Style := Style;
+  Result.SetWindowPos(Left,Bottom,Width,Height);
+  Result.parent := parent;
 End;
 
 
@@ -2060,6 +2071,13 @@ Begin
   Result:=fbtnOk.ModalResult
 End;
 
+Procedure tOKCancelButton.SetShowHelpButton(iValue : Boolean);
+
+Begin
+  fShowHelpButton:=iValue;
+  fBtnHelp.Visible:=iValue;
+End;
+
 Procedure tOKCancelButton.Resize;
 
 Var OKPoint    : tPoint;
@@ -2106,6 +2124,7 @@ Begin
   Height:=cHorzHeight;
   ParentPenColor:= True;
   ParentColor:= True;
+  fShowHelpButton:=true;
   Inherited TabStop := false;   { Damit kann das Controlselber nicht angesprungen werden }
 
   fBtnOK:= InsertBitBtn(Self, 0,   0, cVertWidth, cHorzHeight,  bkOK,
@@ -2162,4 +2181,5 @@ End.
   17-Sep-08  WD         tImage: Property "SetTransparentColor" eingebaut.
   20-Sep-08  WD         tOKCancelButton: Property "OkModalResult" eingebaut.
   17-Mar-09  WD         TCheckGroup: Eingebaut.
+  04-Apr-10  WD         Neue Funktion: InsertApplicationIcon
 }

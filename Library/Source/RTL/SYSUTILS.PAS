@@ -1,7 +1,7 @@
 
 {ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
  บ                                                                          บ
- บ    WDSibyl Portable Component Classes                                    บ
+ บ    WDSibyl Runtime Library                                               บ
  บ                                                                          บ
  บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
  บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
@@ -1014,7 +1014,7 @@ Function FileSearch(Const Name : String; DirList: AnsiString): tFileName;
 { GetTempFileName - Generate a Tempfilename }
 Function GetTempFileName:tFileName;
 
-{ Deltree: Delete a directory-path; src from Toolbox }
+{ Deltree: L”scht alle Dateien und Verzeichnisse }
 Procedure DelTree(Const PathName : tFileName);
 
 { AddPathSeparator: Add the Path-Separator, if is necessary }
@@ -2960,21 +2960,20 @@ Begin
   Else FileExists := False;
 End;
 
-Function PathExists(PathName: tFileName): Boolean;
-
-Var SearchRec: TSearchRec;
-
-Begin
-  PathName:=DeleteLastPathSeparator(PathName);
-  If (FindFirst(PathName, faDirectory or faMustDirectory, SearchRec) = 0)
-    Then
-      Begin
-        Result:= True;
-        FindClose(SearchRec);
-      End
-    Else Result := False;
-End;
-
+function PathExists(PathName: tFileName) : Boolean;
+var SearchRec : TSearchRec;
+begin
+  PathName := DeleteLastPathSeparator(PathName);
+  { es gibt auch SubDirs mit Archive-Bit, bisher nur bei JFS gesehen  }
+  { es gibt auch SubDirs mit Hidden-Bit und SysFile-Bit, z.B. C:\Nowhere }
+  { RG 07-Jan-11 }
+  if SysUtils.FindFirst(PathName,faDirectory or faMustDirectory or faArchive or faHidden or faSysFile,SearchRec) = 0
+  then begin
+         Result := True;
+         SysUtils.FindClose(SearchRec);
+       end
+  else Result := False;
+end;
 
 {Martin lf}
 function ExtendedOfLongword (lw : longword) : extended;
@@ -3524,31 +3523,27 @@ Begin
   Result := dir + S;
 End;
 
-Procedure DelTree(Const PathName : tFileName);
-
+procedure DelTree(Const PathName : tFileName); //RG 05-Jan-11 alle SubDirs inkl. Files l”schen
 var FileSearch : tSearchRec;
-    inResult   : LongInt;
-
-Begin
-  if PathExists(PathName) then
-    Begin
-      inResult:=FindFirst(PathName+PathSeparator+'*.*', faAnyFile, FileSearch);
-      while inResult=0 do
-        Begin
-          if (FileSearch.Attr and faDirectory) = faDirectory
-            then
-              Begin
-                if FileSearch.Name[1]<>'.' then
-                  Deltree(PathName+PathSeparator+FileSearch.Name);
-              End
-            else
-              DeleteFile(PathName+PathSeparator+FileSearch.Name);
-          inResult:=FindNext(FileSearch);
-        end;
-      FindClose(FileSearch);
-      RmDir(PathName);
-    End;
-End;
+begin
+  if not PathExists(PathName) then Exit;
+  if SysUtils.FindFirst(PathName+PathSeparator+'*.*',faAnyFile or faDirectory,FileSearch) = 0
+  then begin
+         repeat
+           if (FileSearch.Attr and faDirectory) <> 0
+           then begin
+                  if (FileSearch.Name <> '.') and (FileSearch.Name <> '..')
+                  then DelTree(PathName+PathSeparator+FileSearch.Name)
+                end
+           else begin
+                  FileSetAttr(PathName+PathSeparator+FileSearch.Name,faArchive);
+                  DeleteFile(PathName+PathSeparator+FileSearch.Name);
+                end;
+         until SysUtils.FindNext(FileSearch) <> 0;
+         SysUtils.FindClose(FileSearch);
+       end;
+  RmDir(PathName);
+end;
 
 Function AddPathSeparator(Const PathName : tFileName) : tFileName;
 
@@ -3842,16 +3837,14 @@ Begin
 End;
 
 Function StrALCopy(Dest: PChar; Const Source: AnsiString; MaxLen: Cardinal): PChar;
-
 Var I,L,M : LongWord;
-
 Begin
   L:=length(Source);
   M:=MaxLen;
   if L<M then M:=L;
   for I:=1 to M do
     Dest^[I-1]:=Source[I];
-  Dest[I]:=#00;
+  Dest[I-1]:=#00;  {RG 22-Dez-2018  alt und falsch: Dest[I]:=#00}
   Result:=Dest;
 End;
 
@@ -3886,6 +3879,35 @@ Begin
   End;
 End;
 
+function StrComp(Str1, Str2: PChar): Integer; // 09-May-19   RG
+begin
+  Result := 0;
+  If Str1 = nil
+  then begin
+         if Str2 = nil then Exit;
+         Result := -1;
+         exit;
+       end;
+  If Str2 = nil
+  then begin
+         Result:=1;
+         exit;
+       end;
+  while (Result = 0) and (Str1^ <> #0) and (Str2^ <> #0) do
+  begin
+    Result := Ord(Str1^[0]) - Ord(Str2^[0]); // must be replaced by ansi characters
+    Inc(Str1);
+    Inc(Str2);
+  end;
+  if (Result = 0) and (Str1^ <> Str2^)
+  then begin // loop ended because exactly one has #0
+         if Str1^ = #0
+         then Result := -1 // shorter string is smaller
+         else Result := 1;
+       end;
+end;
+
+(* 09-May-19   RG
 Function StrComp(Str1, Str2: PChar): Integer;
 Begin
   Asm
@@ -3898,6 +3920,7 @@ Begin
     MOV        Result, EAX
   End;
 End;
+*)
 
 Function StrLComp(Str1, Str2: PChar; MaxLen: Cardinal): Integer;
 Begin
@@ -6326,4 +6349,8 @@ End.
   12-Aug-08   WD        Funktion: ExtractFileDrive eingebaut.
   17-Jan-09   WD        Funktion: StrACopy, StrALCopy eingebaut.
   20-Apr-09   PE        Konstante fanormal von $0080 auf $0000 geaendert.
+  05-Jan-11   RG        DelTree korrigiert, frher wurden lediglich leere Verzeichnisse gel”scht
+  07-Jan-11   RG        PathExists korrigiert, SubDir kann in OS2 auch Attribut faArchive besitzen
+  22-Dez-18   RG        Fehler in StrALCopy behoben
+  09-May-19   RG        StrComp ersetzt, funktionierte nicht richtig
 }

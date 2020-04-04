@@ -1,7 +1,7 @@
 
 {ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
  บ                                                                          บ
- บ    Sibyl Portable Component Classes                                      บ
+ บ    WDSibyl Portable Component Classes                                    บ
  บ                                                                          บ
  บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
  บ                                                                          บ
@@ -54,7 +54,8 @@ Uses WinUser;
 //uses martinheap;
 
 Uses Dos,SysUtils,Messages,Classes,Graphics,Menus,Forms,StdCtrls,extctrls,Dialogs,
-     ClipBrd, Color, uList, uStream, uString, uSysinfo;
+     ClipBrd {$ifndef laz}, Color, uList, uStream, uString, uSysinfo{$endif};
+
 
 Const
   //   NormalChars : Set Of Char = ['0'..'9','A'..'Z','a'..'z','_',
@@ -177,6 +178,7 @@ Const
 
      kbCtrlOC            = kbPreCtrlO + kb_Char + kbC;
      kbCtrlOK            = kbPreCtrlO + kb_Char + kbK;
+     kbCtrlOL            = kbPreCtrlO + kb_Char + kbL;
      kbCtrlOU            = kbPreCtrlO + kb_Char + kbU;
      kbCtrlK0            = kbPreCtrlK + kb_Char + kb0;
      kbCtrlK9            = kbPreCtrlK + kb_Char + kb9;
@@ -479,11 +481,12 @@ Type
          {Insert/Delete Lines}
          Function _InsertLine(pl:PLine):PLine; virtual;
          Function _DeleteLine(pl:PLine):PLine; virtual;
+         {Martin} function DeleteIndention (var Str : string; Pl : pLine) : byte; virtual;
 
 
          IndentRect: TRect;
          {Martin} RealCharEvent : boolean;
-         Procedure SetupComponent;Override;
+         procedure SetupComponent; override;
          Procedure SetupShow;Override;
          Function CloseQuery:Boolean;Override;
          {Martin}Function FileCloseQuery : boolean; virtual;
@@ -624,7 +627,6 @@ Type
       Public
          PROCEDURE editorgetmem (VAR p:POINTER;size:LONGWORD);{fr die Benutzung von auแen}
          PROCEDURE editorfreemem (p:POINTER;size:LONGWORD); {fr die Benutzung von auแen}
-         //Constructor Create(AOwner:TComponent);Override;
 
 
       Public
@@ -671,7 +673,7 @@ Type
          Function GetTextAfterWord(P:TEditorPos):String;
          Function GetPartialText(p1,p2:TEditorPos;Var P:Pointer; Var len:LongInt):Boolean;
          Function GetText(Var P:Pointer; Var len:LongInt; Selected:Boolean):Boolean;Virtual;
-         Procedure InsertText(P:Pointer; len:LongInt); virtual;
+         Procedure InsertText(P:Pointer; len:LongInt; marknew : boolean); virtual;
          Function FindTextPos(Find:String; direct:TFindDirection; Origin:TFindOrigin;
                                Scope:TFindScope; opt:TFindOptions; Var pt:TEditorPos):Boolean;
          Function FindText({Martin2}(*Const*) Find:String; direct:TFindDirection; Origin:TFindOrigin;
@@ -679,8 +681,8 @@ Type
          Function ReplaceText({Martin2}(*Const*) Find,replace:String; direct:TFindDirection;
                               Origin:TFindOrigin;Scope:TFindScope;opt:TFindOptions;
                               Confirm:Boolean;replaceall:Boolean):Boolean; virtual;
-         Procedure Undo;
-         Procedure Redo;
+         Procedure Undo; virtual;
+         Procedure Redo; virtual;
          Procedure ClearUndo;
          Procedure ClearRedo;
          Procedure CutToClipBoard;Virtual;
@@ -721,6 +723,7 @@ Type
          {Clipboard}
          Function _SetClipBoardText(P:Pointer; len:LongInt):Boolean;virtual;
          Function _GetClipBoardText(Var P:Pointer; Var len:LongInt):Boolean;virtual;
+         procedure SearchTerminal0 (Clip : Pointer; var len : longint);
       Published
          Property KeystrokeMap:TKeystrokeMap Read FKeyMap Write SetKeyMap;
          Property EditOptions:TEditOpt Read FEditOpt Write SetEditOpt;
@@ -1635,6 +1638,11 @@ Begin
      if (not RunInAnsi) and LoadSaveAsAnsi then ConvertToOEM(PCharArray(P),len);
      if RunInAnsi and (not LoadSaveAsAnsi) then ConvertToAnsi(PCharArray(P),len);
 End;
+
+function tEditor.DeleteIndention (var Str : string; Pl : pLine) : byte;
+  begin
+    result := 0;
+  end;
 
 
 {Copy All To A Text block With the Length len; return True If successful}
@@ -2960,18 +2968,16 @@ Begin
 End;
 
 
-Function TEditor._GetClipBoardText(Var P:Pointer; Var len:LongInt):Boolean;
-Var  clip:Pointer;
-Begin
-     Result := False;
-     If Clipboard.Open(Handle) Then
-     Begin
-          clip := Pointer(Clipboard.GetAsHandle(cfText));
-          If clip = Nil Then
-          Begin
-               Clipboard.Close;
-               Exit;
-          End;
+procedure tEditor.SearchTerminal0 (Clip : Pointer; var len : longint);
+  begin
+    {$ifdef noasm}
+    len := 0;
+    if Clip = nil then exit;
+    while PChar(Clip)^ <> #0 do begin
+      inc (Clip);
+      inc (len);
+    end;
+    {$else}
           Asm   {Search terminal #0}
              CLD
              MOV ECX,0
@@ -2984,6 +2990,22 @@ Begin
              MOV EDI,len
              MOV [EDI],ECX
           End;
+    {$endif}
+  end;
+
+Function TEditor._GetClipBoardText(Var P:Pointer; Var len:LongInt):Boolean;
+Var  clip:Pointer;
+Begin
+     Result := False;
+     If Clipboard.Open(Handle) Then
+     Begin
+          clip := Pointer(Clipboard.GetAsHandle(cfText));
+          If clip = Nil Then
+          Begin
+               Clipboard.Close;
+               Exit;
+          End;
+          SearchTerminal0 (Clip, len);
 
           If len > 1 Then
           Begin
@@ -3495,8 +3517,8 @@ Begin
        kbCtrlUU            : ClearAllBookMarks;                              {*}
        kbAltBkSp,kbCtrlBkSp: Undo;{Martin0308}
        kbAltShiftBkSp,kbCtrlShiftBkSp : Redo;
-       kbAltCLeft          : cmICBMoveLeft;
-       kbAltCRight         : cmICBMoveRight;
+       //kbAltCLeft          : cmICBMoveLeft; {abgeschaltet wegen Alt-254}
+       //kbAltCRight         : cmICBMoveRight;
        kbTab               : cmTabulator;
        kbShiftTab          : cmPrevTabulator;
        kbDel               : cmDeleteChar;
@@ -4849,22 +4871,22 @@ L:
      If Not iew Then
      Begin
           y1 := FScrCursor.Y;
-          y2 := FScrCursor.Y;
-          _ICBTestIEW(y1,y2);   {Extended Selection}
-          InvalidateEditor(y1,y2)
-     End
-     Else InvalidateEditor(0,0);
+         y2 := FScrCursor.Y;
+         _ICBTestIEW(y1,y2);   {Extended Selection}
+         InvalidateEditor(y1,y2)
+    End
+    Else InvalidateEditor(0,0);
 End;
 
 
 Procedure TEditor.cmICBExtWordLeft;
 Var  iew:Boolean;
-     ScrY:Integer;
-     y1,y2:Integer;
+    ScrY:Integer;
+    y1,y2:Integer;
 Label L;
 Begin
-     (*Undo*)
-     If LastUndoGroup <> ugCursorMove Then _StoreUndoCursor(FUndoList);
+    (*Undo*)
+    If LastUndoGroup <> ugCursorMove Then _StoreUndoCursor(FUndoList);
      LastUndoGroup := ugCursorMove;
      (*Undo*)
      iew := _ICBExtSetICB;
@@ -5322,7 +5344,7 @@ Begin
             corr := 0
           else
             corr := 1;
-          InsertText(P,len-corr);  {without terminal #0}
+          InsertText(P,len-corr, MarkInsertedText);  {without terminal #0}
           FreeMem(P,len);
      End;
 End;
@@ -5415,6 +5437,7 @@ Begin
                FActLine := ICB.Last.Line;
                If ICB.First.Line = ICB.Last.Line
                Then ICB.Last.X := ICB.Last.X - Length(laststr);
+               DeleteIndention (icbstr, ICB.First.Line);
                If Not _InsertString(ICB.Last.X,laststr) Then Beep(1000,10);
                _WriteWorkLine;
                ICB.First.X := Cur.X;
@@ -5425,6 +5448,7 @@ Begin
                _DeleteString(ICB.Last.X,Length(laststr));
                _WriteWorkLine;
                FActLine := ICB.First.Line;
+               DeleteIndention (icbstr, ICB.Last.Line);
                If Not _InsertString(ICB.First.X,laststr) Then Beep(1000,10);
                _WriteWorkLine;
                If ICB.First.Line = ICB.Last.Line
@@ -5437,6 +5461,7 @@ Begin
                Begin
                     Licb := ICB.Last.X-ICB.First.X;
                     icbstr := _ReadString(ICB.First.Line,ICB.First.X,Licb);
+                    DeleteIndention (icbstr, ICB.First.Line);
                     If Not _InsertString(Cur.X,icbstr) Then Beep(1000,10);
                     _ICBClearMark;
                     _WriteWorkLine;
@@ -5451,8 +5476,14 @@ Begin
                Else
                Begin
                     laststr := _ReadString(Cur.Line,Cur.X,-1);
+                    DeleteIndention (laststr, Cur.Line);
+
                     B := _ReadString(ICB.Last.Line,ICB.Last.X,-1);
+                    DeleteIndention (B, ICB.Last.Line);
+
                     icb1 := _ReadString(ICB.First.Line,ICB.First.X,-1);
+                    DeleteIndention (icb1, ICB.First.Line);
+
                     _ReadWorkLine;
                     SetLength(FWorkLine,Cur.X-1);
                     _WriteString(Cur.X,icb1);
@@ -6561,7 +6592,7 @@ Begin
      Begin
           If _ICBOverwrite Then _ICBDeleteICB;
 
-          InsertText(P,len-1);    {without terminal #0}
+          InsertText(P,len-1, MarkInsertedText);    {without terminal #0}
           FreeMem(P,len);
      End;
 End;
@@ -6580,7 +6611,7 @@ Begin
      Begin
           If _ICBOverwrite Then _ICBDeleteICB;
 
-          InsertText(P,len-1);    {without terminal #0}
+          InsertText(P,len-1, MarkInsertedText);    {without terminal #0}
           FreeMem(P,len);
      End;
 End;
@@ -7200,13 +7231,12 @@ Begin
 End;
 
 
-Procedure TEditor.SetupComponent;
+procedure tEditor.SetupComponent;
   var
     Ch, LoCh, UpCh : char;
     Ansi : boolean;
 Begin
-     Inherited SetupComponent;
-
+     inherited SetupComponent;
      FHeapgroupID := GetNewHeapgroupID;
 
      DBCSStatusLine := True;
@@ -7319,10 +7349,9 @@ Begin
 End;
 
 
-Procedure TEditor.SetupShow;
-Begin
-     Inherited SetupShow;
-
+procedure tEditor.SetupShow;
+  begin
+     inherited SetupShow;
      FBottomScrollBar := HorzScrollBar;
      FRightScrollBar := VertScrollBar;
 
@@ -7331,8 +7360,7 @@ Begin
      CursorShape := FCursorShape;
      FEventsCounter := FSaveEvents;
      {Martin0505}MouseX := 0; MouseY := 0;
-End;
-
+  end;
 
 // OEM <-> Ansi Conversion  ///////////////////////////////////////////
 
@@ -8356,7 +8384,7 @@ Begin
 End;
 
 
-Procedure TEditor.InsertText(P:Pointer; len:LongInt);
+Procedure TEditor.InsertText(P:Pointer; len:LongInt; marknew : boolean);
 Var  ActLineNext:PLine;
      Pos:TEditorPos;
      tlx:TLineX;
@@ -8370,7 +8398,7 @@ Begin
        ActLineNext := FActLine^.Next;
        (*Undo*)
 
-       tlx := _InsertText(P,len, MarkInsertedText{Martin0106});
+       tlx := _InsertText(P,len, marknew{Martin0106});
 
        (*Undo*)
        _UpdateLastUndoEvent(FUndoList,_PLine2Index(ActLineNext));
@@ -9372,13 +9400,13 @@ Begin
             {drop filename without directory name}
             FSplit(FName,dir,Name,ext); Name := Name + ext;
             If _ICBOverwrite Then _ICBDeleteICB;
-            InsertText(pointer(longword(@Name)+1),length(Name));    {without terminal #0}
+            InsertText(pointer(longword(@Name)+1),length(Name), MarkInsertedText);    {without terminal #0}
           End;
         end
         else if ExtDDO.DragOperation = doLink then begin
           If length(FName) > 0 then begin
             If _ICBOverwrite Then _ICBDeleteICB;
-            InsertText(pointer(longword(@FName)+1),length(FName));    {without terminal #0}
+            InsertText(pointer(longword(@FName)+1),length(FName), MarkInsertedText);    {without terminal #0}
           End;
         end
         else
@@ -9391,14 +9419,6 @@ Begin
 End;
 
 {Heap Memory functionality 2/07}
-
-/*
-Constructor TEditor.Create(AOwner:TComponent);
-  begin
-    inherited Create (AOwner);
-    //FHeapgroupID := GetNewHeapgroupID; -> komischer Absturz bei Constructor Create, verschoben nach SetupComponent
-  end;
-*/
 
 {protected}
 PROCEDURE tEditor.getmem (VAR p:POINTER;size:LONGWORD);

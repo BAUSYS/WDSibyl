@@ -1,0 +1,34 @@
+Stadardeinstellung:
+
+Gemeinsame TeilausdrÅcke:	on
+Peephole Optimierung:		on
+Ausgabe Verzeichnis: 		P:\WDSIBYL\OS\OS2\Output
+Unit Verzeichnisse:		P:\WDSIBYL\OS\OS2\Lib
+Komponenten Verzeichnisse:	P:\WDSIBYL\OS\OS2\Compnt
+Debug-Informationen erzeugen:	on
+Lokale Symbole einbeziehen:	on
+Schnelles Auswerten:		off
+AnsiString ZÑhler anzeigen:	on
+
+neu:
+Quellen-Verzeichnisse:		P:\WDSibyl\Library\Source\RTL\OS2
+				P:\WDSibyl\Library\Source\RC
+				P:\WDSibyl\Library\Source\RTL
+
+Reienfolge:
+
+  MakeRC
+  MakeRTL                    
+  MakeTP7           
+  MakeSPCC
+  MakeDB                  
+  MakeCompnt    
+  MakeRest        
+  MakeDialog
+
+  MakeRT        ??       
+  MakeIDE	??
+
+  MakeMultiMedia
+  MakeInternet
+

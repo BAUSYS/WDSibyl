@@ -1,23 +1,25 @@
-Unit uSysClass;
+{ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+ บ                                                                          บ
+ บ    WDSibyl Runtime Library                                               บ
+ บ                                                                          บ
+ บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ                                                                          บ
+ บ    Diese Unit behinaltet diverse Systemklassen                           บ
+ บ                                                                          บ
+ บ    Classes: tcSemaphor, tcEventSemaphor, tcMutexSemaphor,                บ
+ บ             tcMuxWaitSemaphor                                            บ
+ บ             tcQueue, tcQueueString,                                      บ
+ บ             tcPipeServer, tcPipeClient,                                  บ
+ บ             tcNamedPipeServer, tcNamePipeClient,                         บ
+ บ             tcJoystick, tcUSB  (only OS/2)                               บ
+ บ             tcWinFunc (only Windows)                                     บ
+ บ             tcLog, tcDLL, tcFileSearch, tcExec                           บ
+ บ             tcPortIO                                                     บ
+ บ                                                                          บ
+ ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
 
-{
-ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
-บ                                                                           บ
-บ WDSibyl Runtime Library (RTL)                                             บ
-บ                                                                           บ
-บ Diese Unit behinaltet diverse Systemklassen                               บ
-บ                                                                           บ
-บ Klassen: tcSemaphor, tcEventSemaphor, tcMutexSemaphor, tcMuxWaitSemaphor  บ
-บ          tcQueue, tcQueueString,                                          บ
-บ          tcPipeServer, tcPipeClient,                                      บ
-บ          tcNamedPipeServer, tcNamedPipeClient,                            บ
-บ          tcJoystick, tcUSB  (only OS/2)                                   บ
-บ          tcWinFunc (only Windows)                                         บ
-บ          tcLog, tcDLL, tcFileSearch, tcExec                               บ
-บ          tcPortIO                                                         บ
-บ                                                                           บ
-ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
-}
+
+Unit uSysClass;
 
 Interface
 
@@ -340,14 +342,16 @@ Type
 
   tcNamedPipeServer = Class(tcPipeServer)
     private
-      fPipeName     : String;
-      fInstanceCount: Byte;       // Bei 0..unlimitierte Instancen
-      fAccess       : tNamedPipeAccess;
-      fReadModeType : tNamedPipeModeType;
-      fWriteModeType: tNamedPipeModeType;
-      fInherit      : Boolean;
-      fWriteBehind  : Boolean;
-      fSemaphor     : tcEventSemaphor;
+      fPipeName        : String;
+      fInstanceCount   : Byte;       // Bei 0..unlimitierte Instancen
+      fAccess          : tNamedPipeAccess;
+      fReadModeType    : tNamedPipeModeType;
+      fWriteModeType   : tNamedPipeModeType;
+      fInherit         : Boolean;
+      fWriteBehind     : Boolean;
+      fReConnAfterRead : Boolean;
+      fUseSemaphor     : Boolean;
+      fSemaphor        : tcEventSemaphor;
 
       Function getSemStatus : tNamedPipeSemStatus;
     protected
@@ -358,19 +362,22 @@ Type
       Procedure SendBufferOut; Override;
       Procedure Resume; virtual;   // Starten des Servers
       Procedure Suspend; virtual;  // Beenden des Servers
+      Procedure ReConnected;       // Server von der Pipe trennen und wieder verbinden
 
       constructor Create(iPipeName : String; iLenBufferIn, iLenBufferOut : LongInt); virtual;
       destructor Destroy; Override;
 
-      property PipeName     : String             Read fPipeName;
-      property LenBufferOut : LongInt            Read fLenBufferOut;
-      property InstanceCount: Byte               Read fInstanceCount Write fInstanceCount;
-      property ReadModeType : tNamedPipeModeType Read fReadModeType  Write fReadModeType;
-      property WriteModeType: tNamedPipeModeType Read fWriteModeType Write fWriteModeType;
-      property Access       : tNamedPipeAccess   Read fAccess;
-      property Inherit      : Boolean            Read fInherit       Write fInherit;
-      property WriteBehind  : Boolean            Read fWriteBehind   Write fWriteBehind;
-      property SemStatus    : tNamedPipeSemStatus read getSemStatus;
+      property PipeName        : String             Read fPipeName;
+      property LenBufferOut    : LongInt            Read fLenBufferOut;
+      property InstanceCount   : Byte               Read fInstanceCount Write fInstanceCount;
+      property ReadModeType    : tNamedPipeModeType Read fReadModeType  Write fReadModeType;
+      property WriteModeType   : tNamedPipeModeType Read fWriteModeType Write fWriteModeType;
+      property Access          : tNamedPipeAccess   Read fAccess;
+      property Inherit         : Boolean            Read fInherit       Write fInherit;
+      property WriteBehind     : Boolean            Read fWriteBehind   Write fWriteBehind;
+      property SemStatus       : tNamedPipeSemStatus read getSemStatus;
+      property ReConnAfterRead : Boolean             Read fReConnAfterRead Write fReConnAfterRead;
+      property UseSemaphor     : Boolean             Read fUseSemaphor     Write fUseSemaphor;
   End;
 
   tcAnonymousPipeServer = Class(tcPipeServer)
@@ -445,6 +452,29 @@ type
       Property LastError   : LongWord      Read fLastError;
   End;
 */
+
+type
+  tcPortIO = Class
+    Private
+      fIoDriverHandle: LongWord;
+      fIOAction      : LongWord;
+
+      function GetByte(iPortAdress: Word): Byte;
+      procedure SetByte(iPortAdress:Word; Value: Byte);
+      function GetWord(iPortAdress: Word): Word;
+      procedure SetWord(iPortAdress:Word; Value: Word);
+
+    Public
+      Constructor Create;
+      Destructor Destroy; Override;
+
+      property IODriverHandle : LongWord      read fIoDriverHandle;
+      property IOByte[PortAdress: Word]: Byte read GetByte write SetByte; default;
+      property IOWord[PortAdress: Word]: Word read GetWord write SetWord;
+
+  End;
+
+
 
 { ----------------------------------------------------------------------------- }
 
@@ -841,30 +871,6 @@ Const ERR_EXEC_CANNOT_RETRIEVE_PID     = 1; // 'Can''t retrieve process-id';
 
 { ----------------------------------------------------------------------------- }
 
-type
-  tcPortIO = Class
-    Private
-      fIoDriverHandle: LongWord;
-      fIOAction      : LongWord;
-
-      function GetByte(iPortAdress: Word): Byte;
-      procedure SetByte(iPortAdress:Word; Value: Byte);
-      function GetWord(iPortAdress: Word): Word;
-      procedure SetWord(iPortAdress:Word; Value: Word);
-
-    Public
-      Constructor Create;
-      Destructor Destroy; Override;
-
-      property IODriverHandle : LongWord      read fIoDriverHandle;
-      property IOByte[PortAdress: Word]: Byte read GetByte write SetByte; default;
-      property IOWord[PortAdress: Word]: Word read GetWord write SetWord;
-
-  End;
-
-
-{ ----------------------------------------------------------------------------- }
-
 Implementation
 
 Uses uSysInfo, IniFiles;
@@ -939,7 +945,9 @@ End;
 
 Function tcDLL.GetFileName : tFileName;
 
+  {$IFDEF OS2}
 Var FileName : CSTRING;
+  {$ENDIF}
 
 Begin
   {$IFDEF OS2}
@@ -1218,13 +1226,13 @@ End;
 
 Procedure tcEventSemaphor.CreateHandle;
 
-Var cs:CString;
 {$IFDEF OS2}
+Var cs:CString;
     flAttr:LongWord;
     rc    : APIRET;
 {$ENDIF}
 {$IFDEF WIN32}
-    cName:PChar;
+var cName:PChar;
 {$ENDIF}
 
 Begin
@@ -1309,7 +1317,7 @@ End;
 
 Function tcEventSemaphor.Request(TimeOut:LongInt): Boolean;
 Begin
-  WaitFor(TimeOut);
+  result:=WaitFor(TimeOut);
 End;
 
 Function tcEventSemaphor.WaitFor(TimeOut: LongInt): Boolean;
@@ -1416,8 +1424,8 @@ End;
 
 Constructor tcMuxWaitSemaphor.Create(Const iName:String; iShared: Boolean; iFlag : tMuxWaitSemaphorFlag);
 
-Var cs:CString;
 {$IFDEF OS2}
+Var cs:CString;
     flAttr:LongWord;
     rc    : APIRET;
 {$ENDIF}
@@ -1976,7 +1984,6 @@ Begin
 //      fBufferOutSem.Create(false, '');
       fBufferOut.Create;
     End;
-
   inherited Create(iCreateSuspended);
 End;
 
@@ -1991,7 +1998,6 @@ Begin
     fBufferIn.Destroy;
   if fLenBufferOut>0 then
     fBufferOut.Destroy;
-
 End;
 
 {
@@ -2008,73 +2014,111 @@ Procedure tcNamedPipeServer.PipeExecute;
 
 Var BytesRead   : LongWord;
     BufferInTemp: pByteArray;
-    cou : LongWord;
 {$IFDEF OS2}
-var rc          : APIRET;
+var rc    : APIRET;
+    ReConn: Boolean;
+{$ENDIF}
+{$IFDEF Win32}
+var rc    : Boolean;
 {$ENDIF}
 
 Begin
 // Connection aufbauen
-  cou:=0;
   if fLenBufferIn>0 then
     GetMem(BufferInTemp, fLenBufferIn);
 
+{$IFDEF OS2}
+  rc:=DosConnectNPipe(fHandle);
   While (not fTerminated) do
     Begin
-{$IFDEF OS2}
+      ReConn:=false;
 // Verbinden des Servers mit der Pipe
-      inc(cou);
       if ApplicationType=cApplicationType_GUI then  // WPS-Messages verarbeiten
         ProcessMsgs;
-      rc:=DosConnectNPipe(fHandle);
-      Repeat
+
 // Warten bis ein Client in die Pipe schreibt. Dazu wird der Semaphor
 // verwendet. Dieser wird vom Betriebsystem automatisch gesetzt.
-        if fLenBufferIn>0 then
-          Begin
-            fSemaphor.Waitfor(100);
+      if (fLenBufferIn>0) then
+        begin
+          if (fUseSemaphor) and (fSemaphor.Waitfor(100)) then
             fSemaphor.Reset;
 
 // Daten einlesen
-            rc:=DosRead(fHandle, BufferInTemp^, fLenBufferIn, BytesRead);
-            if BytesRead<>0 then
-              Begin
-                fBufferIn.Clear;
-                fBufferIn.Write(BufferInTemp^, BytesRead);
-                fBufferIn.Seek(soFromBeginning,0);
+          rc:=DosRead(fHandle, BufferInTemp^, fLenBufferIn, BytesRead);
+          if BytesRead<>0 then
+            Begin
+              ReConn:=true;
+              fBufferIn.Clear;
+              fBufferIn.Write(BufferInTemp^, BytesRead);
+              fBufferIn.Seek(soFromBeginning,0);
 
 // Event-Procedure ausfuehren
-                if fOnPipeIn<>nil then fOnPipeIn(Self, 0);
-              End;
-          End;
+              if fOnPipeIn<>nil then fOnPipeIn(Self, 0);
+            End;
+        End;
+
 // Den ausgehenden DatenBuffer in die Pipeschreiben
-        if (fLenBufferOut > 0) and
-           (fSendBufferOut=true) and
-           (fBufferOut.Size > 0) then
-          Begin
-            fSendBufferOut:=true;
-            fBufferOut.Seek(soFromBeginning,0);
-            FileWrite(fHandle, fBufferOut.Memory^[0], fBufferOut.Size);
-            fSendBufferOut:=false;
-          End;
+      if (fLenBufferOut > 0) and
+         (fSendBufferOut=true) and
+         (fBufferOut.Size > 0) then
+        Begin
+          ReConn:=true;
+          fSendBufferOut:=true;
+          fBufferOut.Seek(soFromBeginning,0);
+          FileWrite(fHandle, fBufferOut.Memory^[0], fBufferOut.Size);
+          fSendBufferOut:=false;
+        End;
+
+// Server von der Pipe loesen und auf urspr. Zustand zuruecksetzen
+      if (fReConnAfterRead) and (ReConn) then
+        ReConnected;
 
 // Damit die anderen Prozesse auch dran kommen
-        DosSleep(0);
-      Until (fTerminated) or (BytesRead=0);
-// Pipe wieder schliessen.
-      rc:=DosDisConnectNPipe(fHandle);
-
-{$ENDIF}
+      if fUseSemaphor
+        then DosSleep(0)
+        else DosSleep(10);
     End;
+{$ENDIF}
 
+{$IFDEF Win32}
+  if ConnectNamedPipe(fHandle, nil) then
+    writeln('not okay')
+  else 
+    writeln('okay');
+
+      rc:=Readfile(fHandle, BufferInTemp^, fLenBufferIn, BytesRead, nil);
+      if (rc) and (BytesRead<>0) then
+        Begin
+                fBufferIn.Clear;
+                fBufferIn.Write(BufferInTemp^, BytesRead);
+          fBufferIn.Seek(soFromBeginning,0);
+        End;    
+      writeln('tcNamedPipeServer.PipeExecute');
+      sleep(100);
+{$ENDIF}
 // Thread beenden
-  Close;
+  Close;  // Die Verbindung beenden und die Pipe schliessen.
 
 // Speicher wieder freigeben
   if fLenBufferIn>0 then
     FreeMem(BufferInTemp, fLenBufferIn);
 
   ReturnValue:=0;
+End;
+
+
+Procedure tcNamedPipeServer.ReConnected;
+
+{$IFDEF OS2}
+var rc    : APIRET;
+    ReConn: Boolean;
+{$ENDIF}
+
+Begin
+{$IFDEF OS2}
+  rc:=DosDisConnectNPipe(fHandle);
+  rc:=DosConnectNPipe(fHandle);
+{$ENDIF}
 End;
 
 Procedure tcNamedPipeServer.SendBufferOut;
@@ -2098,15 +2142,19 @@ var CreateOpenMode: LongWord;
     CreatePipeMode: LongWord;
     rc            : APIRET;
 {$ENDIF}
+{$IFDEF Win32}
+var CreateOpenMode: LongWord;
+    CreatePipeMode: LongWord;
+    InstanceCount : LongWord;
+//    lpSecurityAttributes:SECURITY_ATTRIBUTE
+{$ENDIF}
 
 Begin
 // Wenn notwendig die Pipe erstellen
   if fHandle=0 then
     Begin    // Pipe neu erstellen
-      cPipeName:=fPipeName;
-
 {$IFDEF OS2}
-
+      cPipeName:=fPipeName;
 // Berechnung von CreateOpenMode
       case fAccess of
         tNamedPipeAccessOutBound: CreateOpenMode:=NP_ACCESS_OUTBOUND;
@@ -2126,7 +2174,6 @@ Begin
       if fInstanceCount=0
         then CreatePipeMode:=CreatePipeMode or NP_UNLIMITED_INSTANCES
         else CreatePipeMode:=CreatePipeMode or fInstanceCount;
-
 
       case fReadModeType of
         tNamedPipeModeTypeByte   : CreatePipeMode:=CreatePipeMode or NP_READMODE_BYTE;
@@ -2148,7 +2195,7 @@ Begin
         End;
 
 // Pipe und Semaphor verbinden.
-      if fInstanceCount=0 then
+      if (fUseSemaphor) and (fInstanceCount=0) then
         Begin // Es gibt keine limitierung der Instancen.
           fSemaphor.Create(true, '');
           rc:=DosSetNPipeSem(fHandle, fSemaphor.Handle, 0);
@@ -2165,6 +2212,41 @@ Begin
           Close;
           exit;
         End;
+{$ENDIF}
+{$IFDEF Win32}
+      if (fPipeName[1]='\') and (fPipeName[2]='\')
+        then cPipeName:=fPipeName
+        else cPipeName:='\\.'+fPipeName+'_1';
+      case fAccess of
+        tNamedPipeAccessOutBound: CreateOpenMode:=PIPE_ACCESS_OUTBOUND;
+        tNamedPipeAccessInBound : CreateOpenMode:=PIPE_ACCESS_INBOUND;
+        tNamedPipeAccessDuplex  : CreateOpenMode:=PIPE_ACCESS_DUPLEX;
+      end;
+
+      CreatePipeMode:=PIPE_NOWAIT;
+      if fInstanceCount=0
+        then InstanceCount:=PIPE_UNLIMITED_INSTANCES
+        else InstanceCount:=fInstanceCount;
+
+      case fReadModeType of
+        tNamedPipeModeTypeByte   : CreatePipeMode:=CreatePipeMode or PIPE_READMODE_BYTE;
+        tNamedPipeModeTypeMessage: CreatePipeMode:=CreatePipeMode or PIPE_READMODE_MESSAGE;
+      End;
+
+      case fWriteModeType of
+        tNamedPipeModeTypeByte   : CreatePipeMode:=CreatePipeMode or PIPE_TYPE_BYTE;
+        tNamedPipeModeTypeMessage: CreatePipeMode:=CreatePipeMode or PIPE_TYPE_MESSAGE;
+      End;     
+      
+      fHandle:=CreateNamedPipe(cPipeName, CreateOpenMode, CreatePipeMode, 
+                               InstanceCount,
+                               fLenBufferOut, fLenBufferIn, 500,
+                               nil); 
+      if fHandle = INVALID_HANDLE_VALUE then
+        Begin
+          Close;
+          exit;
+        End;                               
 {$ENDIF}
     End;
 
@@ -2192,6 +2274,13 @@ Begin
   rc:=DosDisConnectNPipe(fHandle);
   rc:=DosClose(fHandle);
 {$ENDIF}
+{$IFDEF Win32}
+  Writeln('tcNamedPipeServer.Close');
+  FlushFileBuffers(fHandle); 
+  DisconnectNamedPipe(fHandle); 
+  CloseHandle(fHandle);
+  Writeln('tcNamedPipeServer.Closed');
+{$ENDIF}
   fHandle:=0;
 End;
 
@@ -2204,6 +2293,7 @@ var SemState  : PIPESEMSTATE;
 Begin
   Result:=tNamedPipeSemStatusNull;
   {$IFDEF OS2}
+  if fUseSemaphor=false then exit;
   bsedos.DosQueryNPipeSemState(fSemaphor.Handle, SemState, sizeof(PIPESEMSTATE));
   case SemState.fStatus of
     NPSS_EOI   : Result:=tNamedPipeSemStatusEoi;
@@ -2231,6 +2321,7 @@ Begin
   fWriteModeType:=tNamedPipeModeTypeByte;
   fInherit      :=true;
   fWriteBehind  :=true;
+  fReConnAfterRead:=true;
   fSemaphor:=nil;
   if iLenBufferIn=0 then
     if iLenBufferOut=0 then
@@ -2250,12 +2341,10 @@ Destructor tcNamedPipeServer.Destroy;
 Begin
   Close;
   inherited Destroy;
-
 //  rc:=WaitFor;
   if fSemaphor<>nil then
     fSemaphor.Destroy;
   fSemaphor:=nil;
-
 End;
 
 {
@@ -2270,11 +2359,11 @@ End;
 
 Procedure tcAnonymousPipeServer.PipeExecute;
 
-Var BytesRead   : LongWord;
-    BufferInTemp: pByteArray;
-    cou : LongWord;
+Var BufferInTemp: pByteArray;
 {$IFDEF OS2}
-var rc          : APIRET;
+var BytesRead: LongWord;
+    rc       : APIRET;
+    cou      : LongWord;
 {$ENDIF}
 
 Begin
@@ -2404,7 +2493,7 @@ End;
 บ                                                                           บ
 บ WDSibyl Runtime Library (RTL)                                             บ
 บ                                                                           บ
-บ This section: tcNamedPipeClient Class Implementation                      บ
+บ This section: tcNamePipeClient Class Implementation                       บ
 บ                                                                           บ
 ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
 }
@@ -3380,24 +3469,6 @@ Begin
         inh :=SSF_INHERTOPT_SHELL;
       End;
 
-// PipeServer angegeben  --> StdIn/Stdout/StdErr umlenken
-  if fPipeServer<>nil then
-    Begin
-      SaveStdIn:=-1;
-      SaveStdOut:=-1;
-      SaveStdErr:=-1;
-      rc:=DosDupHandle(0, SaveStdIn);
-      rc:=DosDupHandle(1, SaveStdOut);
-      rc:=DosDupHandle(2, SaveStdErr);
-      NewStdHandle:=0;
-      rc:=DosDupHandle(fPipeServer.HandleIn,NewStdHandle);
-      NewStdHandle :=1;
-      rc:=DosDupHandle(fPipeServer.HandleOut,NewStdHandle);
-      NewStdHandle :=2;
-      rc:=DosDupHandle(fPipeServer.HandleOut,NewStdHandle);
-    End;
-
-
 // Aufruf des Programmes
   IF fExecViaSession THEN
     BEGIN
@@ -3433,8 +3504,8 @@ Begin
       aStartData.PgmTitle     := @cTitle;
       aStartData.PgmName      := @cPrg;
       aStartData.PgmInputs    := cpParam;
-      aStartData.Environment  := nil; // @pib^.pib_pchenv; //  NIL;
-      aStartData.InheritOpt   := inh;         // SSF_INHERTOPT_PARENT; --> Pipe m”glich
+      aStartData.Environment  := NIL;
+      aStartData.InheritOpt   := inh;
       aStartData.SessionType  := SSF_TYPE_DEFAULT;
       aStartData.IconFile     := NIL;
       aStartData.PgmHandle    := 0;
@@ -3568,6 +3639,22 @@ Begin
     END
   ELSE  // fExecViaSession=false
     BEGIN
+      if fPipeServer<>nil then
+        Begin  // PipeServer angegeben  --> StdIn/Stdout/StdErr umlenken
+          SaveStdIn:=-1;
+          SaveStdOut:=-1;
+          SaveStdErr:=-1;
+          rc:=DosDupHandle(0, SaveStdIn);
+          rc:=DosDupHandle(1, SaveStdOut);
+          rc:=DosDupHandle(2, SaveStdErr);
+          NewStdHandle:=0;
+          rc:=DosDupHandle(fPipeServer.HandleIn,NewStdHandle);
+          NewStdHandle :=1;
+          rc:=DosDupHandle(fPipeServer.HandleOut,NewStdHandle);
+          NewStdHandle :=2;
+          rc:=DosDupHandle(fPipeServer.HandleOut,NewStdHandle);
+        End;
+
       // Programm starten
       fLastExecResult:=0;
       IF fAsynchEXEC THEN
@@ -3582,21 +3669,21 @@ Begin
           Freemem(cpParam1,LenParam+1);
         END;
       fSessionID:=fLastExecResult;
-    END;
 
-// StdIn/Out/Err wieder korrigieren
-  if fPipeServer<>nil then
-    Begin
-      NewStdHandle :=0;
-      rc:=DosDupHandle(SaveStdIn,NewStdHandle);
-      rc:=DosClose(SaveStdIn);
-      NewStdHandle :=1;
-      rc:=DosDupHandle(SaveStdOut,NewStdHandle);
-      rc:=DosClose(SaveStdOut);
-      NewStdHandle :=1;
-      rc:=DosDupHandle(SaveStdErr,NewStdHandle);
-      rc:=DosClose(SaveStdErr);
-    End;
+      // StdIn/Out/Err wieder korrigieren
+      if fPipeServer<>nil then
+        Begin
+          NewStdHandle :=0;
+          rc:=DosDupHandle(SaveStdIn,NewStdHandle);
+          rc:=DosClose(SaveStdIn);
+          NewStdHandle :=1;
+          rc:=DosDupHandle(SaveStdOut,NewStdHandle);
+          rc:=DosClose(SaveStdOut);
+          NewStdHandle :=1;
+          rc:=DosDupHandle(SaveStdErr,NewStdHandle);
+          rc:=DosClose(SaveStdErr);
+        End;
+    END;
 
 // Parameter-C-String wieder entfernen;
   FreeMem(cpParam, LenParam);
@@ -3623,7 +3710,7 @@ Var aStartData  : StartupInfo;
     prg         : String;        // Programname
     cPrg        : cString;
     cTitle      : cString;       // Title from the program
-
+    Filename    : tFileName;
 
     Parameter   : AnsiString;
     LenParam    : LongWord;
@@ -3631,7 +3718,9 @@ Var aStartData  : StartupInfo;
     cpParam     : PChar;
     cpPrgParam  : PChar;
 
+{$IFDEF OS2}
     c : cstring;
+{$ENDIF}
 
 Begin
   Result    :=0;
@@ -3648,10 +3737,11 @@ Begin
   if (fUrlSupport) and (getProgramFromUrl(fFileName, prg))
     then
       Begin
-        LenParam:=Length(fFileName)+LenParam+1;
+        FileName:='"'+fFileName+'"';            
+        LenParam:=Length(FileName)+LenParam+1;
         GetMem(cpParam, LenParam);
-        strPCopy(cpParam,fFileName+' ');
-        StrACopy(@cpParam^[Length(fFileName)+1], Parameter);
+        strPCopy(cpParam,FileName+' ');
+        StrACopy(@cpParam^[Length(FileName)+1], Parameter);
       End
     else
       Begin
@@ -4002,4 +4092,6 @@ End.
   25-Feb-09  WD         Umbau der Klasse tcPipeServer, tcPipeClient, tcCriticalSection usw.
   31-Mar-09  WD         tcExec: Einbau der Pipe
   06-Apr-09  WD         tcPort: Klasse eingebaut
+  10-Feb-10  WD         tcNamedPipeServer: fr Windows eingebaut.
+  11-Feb-10  WD         tcNamedPipeServer: OS/2: neuen Properties und Procedure
 }

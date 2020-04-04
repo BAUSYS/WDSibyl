@@ -6,11 +6,9 @@
  บ                                                                          บ
  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
 
-Unit BseRegistry;
+Unit BSEREGISTRY;
 
 Interface
-
-Uses uSysClass;
 
 type PFILETIME=^FILETIME;
      FILETIME=RECORD
@@ -72,6 +70,14 @@ Function RegEnumKeyEx(ihKey, iIndex : LongWord;
                  iReserved : LongWord;
                  var iClass : CString; var iLenClass : LongWord;
                  var iLastWriteTime : PFILETIME) : LongWord;
+
+//RG 08-Jun-2010 --------------------------
+Function RegEnumValue(ihKey, iIndex : LongWord;
+                 var iName : CString; var iLenName : LongWord;
+                 iReserved : LongWord;
+                 var iType : LongWord;
+                 var iData {LPBYTE}; var iLenData : LongWord) : LongWord;
+
 Function RegQueryInfoKey(ihKey: LongWord;
                  var iClass : CString; var iLenClass : LongWord;
                  var iReserved,
@@ -80,17 +86,20 @@ Function RegQueryInfoKey(ihKey: LongWord;
                  var iLastWriteTime : PFILETIME) : LongWord;
 Function RegQueryValueEx(ihKey : LongWord; iValueName : cString;
                          iReserved : LongWord;
-                         iType : LongWord;
-                         var iDat  : cString;
+                         var iType : LongWord;  //RG 08-Jun-2010
+                         var iDat  {: cString}; //RG 08-Jun-2010
                          var iLen  : LongWord) : LongWord;
-Function RegSetValueEx(ihKey : LongWord; iValueName : cString;
-                         iReserved : LongWord; iType : LongWord;
-                         var iDat : cString; iLen : LongWord) : LongWord;
+Function RegSetValueEx(ihKey : LongWord;
+                       iValueName : cString;
+                       iReserved : LongWord;
+                       iType : LongWord;
+                       var iDat {: cString};    //RG 08-Jun-2010
+                       iLen : LongWord) : LongWord;
 Function RegDeleteValue(ihKey : LongWord; iValueName : cString) : LongWord;
 
 Implementation
 
-Uses BseERR;
+Uses BseERR, uSysClass;
 
 type tBSERegistryFunc = record
        RegOpenKeyEx   : Function(ihKey : LongWord; var iValueName : cString;
@@ -107,6 +116,14 @@ type tBSERegistryFunc = record
                            iReserved : LongWord;
                            var iClass : CString; var iLenClass : LongWord;
                            var iLastWriteTime : PFILETIME) : LongWord; APIENTRY;
+
+       //RG 08-Jun-2010 --------------------------
+       RegEnumValue   : Function(ihKey, iIndex : LongWord;
+                          var iName : CString; var iLenName : LongWord;
+                          iReserved : LongWord;
+                          var iType : LongWord;
+                          var iData {LPBYTE}; var iLenData : LongWord) : LongWord; APIENTRY;
+
        RegQueryInfoKey: Function(ihKey: LongWord;
                            var iClass : CString; var iLenClass : LongWord;
                            var iReserved,
@@ -116,12 +133,14 @@ type tBSERegistryFunc = record
 
        RegQueryValueEx: Function(ihKey : LongWord; iValueName : cString;
                            iReserved : LongWord;
-                           iType : LongWord;
-                           var iDat  : cString;
+                           var iType : LongWord;  //RG 08-Jun-2010
+                           var iDat  {: cString}; //RG 08-Jun-2010
                            var iLen  : LongWord) : LongWord; APIENTRY;
        RegSetValueEx  : Function(ihKey : LongWord; iValueName : cString;
-                           iReserved : LongWord; iType : LongWord;
-                           var iDat : cString; iLen : LongWord) : LongWord; APIENTRY;
+                           iReserved : LongWord;
+                           iType : LongWord;
+                           var iDat {: cString}; //RG 08-Jun-2010
+                           iLen : LongWord) : LongWord; APIENTRY;
        RegDeleteValue : Function(ihKey : LongWord; iValueName : cString) : LongWord; APIENTRY;
   end;
 
@@ -195,6 +214,19 @@ Begin
                     iClass, iLenClass, iLastWriteTime);
 End;
 
+//RG 03.05.2010 --------------------------
+Function RegEnumValue(ihKey, iIndex : LongWord;
+                 var iName : CString; var iLenName : LongWord;
+                 iReserved : LongWord;
+                 var iType : LongWord;
+                 var iData {LPBYTE}; var iLenData : LongWord) : LongWord;
+begin
+  if @BSERegistry.Func.RegEnumValue=nil
+    then Result:=ERROR_INVALID_FUNCTION
+    else Result:=BSERegistry.Func.RegEnumValue(ihKey, iIndex, iName, iLenName, iReserved,
+                 iType, iData, iLenData);
+end;
+
 Function RegQueryInfoKey(ihKey: LongWord;
                  var iClass : CString; var iLenClass : LongWord;
                  var iReserved,
@@ -213,8 +245,8 @@ End;
 
 Function RegQueryValueEx(ihKey : LongWord; iValueName : cString;
                          iReserved : LongWord;
-                         iType : LongWord;
-                         var iDat  : cString;
+                         var iType : LongWord;  //RG 08-Jun-2010
+                         var iDat  {: cString}; //RG 08-Jun-2010
                          var iLen  : LongWord) : LongWord;
 
 Begin
@@ -225,9 +257,10 @@ Begin
 End;
 
 Function RegSetValueEx(ihKey : LongWord; iValueName : cString;
-                         iReserved : LongWord; iType : LongWord;
-                         var iDat : cString; iLen : LongWord) : LongWord;
-
+                         iReserved : LongWord;
+                         iType : LongWord;
+                         var iDat {: cString}; //RG 08-Jun-2010
+                         iLen : LongWord) : LongWord;
 Begin
   if @BSERegistry.Func.RegSetValueEx=nil
     then Result:=ERROR_INVALID_FUNCTION
@@ -265,6 +298,7 @@ Begin
       fBSERegistryFunc.RegCreateKeyEx :=pointer(GetProcAddress('RegCreateKeyExA'));
       fBSERegistryFunc.RegDeleteKey   :=pointer(GetProcAddress('RegDeleteKeyA'));
       fBSERegistryFunc.RegEnumKeyEx   :=pointer(GetProcAddress('RegEnumKeyExA'));
+      fBSERegistryFunc.RegEnumValue   :=pointer(GetProcAddress('RegEnumValueA')); //RG 08-Jun-2010
       fBSERegistryFunc.RegQueryInfoKey:=pointer(GetProcAddress('RegQueryInfoKeyA'));
       fBSERegistryFunc.RegQueryValueEx:=pointer(GetProcAddress('RegQueryValueExA'));
       fBSERegistryFunc.RegSetValueEx  :=pointer(GetProcAddress('RegSetValueExA'));
@@ -285,5 +319,10 @@ End.
 { -- date -- -- from -- -- changes ----------------------------------------------
   16-Apr-06  WD         Schreibe- und Loeschfunktionen eingebaut
   14-Mar-07  WD         Die Unit in eine Klasse konvertiert.
+  08-Jun-10  RG         RegEnumValue eingebaut
+                        RegQueryValueEx: "var iDat;" anstatt "var iDat:cString;"
+                                         "var iType:LongWord" anstatt "iType:LongWord" (Rckgabe)
+                        RegSetValueEx:   "var iDat;" anstatt "var iDat:cString;"
+
 }
 

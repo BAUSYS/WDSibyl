@@ -9,7 +9,7 @@
  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
 
 
-Unit Grids;      
+Unit newGrids;
                            
 Interface         
                             
@@ -28,32 +28,32 @@ Uses Dos,Color,Classes,Forms,Graphics,Buttons,StdCtrls,Dialogs,Mask,
 
 Type
     {$M+}
-    TGridOptions=Set Of (goBorder,goRowSizing,goColSizing,goEditing,
+    newTGridOptions=Set Of (goBorder,goRowSizing,goColSizing,goEditing,
                          goAlwaysShowEditor,goShowSelection,goAlwaysShowSelection,
                          goMouseSelect);
 
-    TSelectCell=Procedure(Sender:TObject;Col,Row:LongInt) Of Object;
+    newTSelectCell=Procedure(Sender:TObject;Col,Row:LongInt) Of Object;
     {$M-}
 
-    PGridWidthArray=^TGridWidthArray;
-    TGridWidthArray=Array[0..$0FFFFFFF] Of LongInt;
+    newPGridWidthArray=^newTGridWidthArray;
+    newTGridWidthArray=Array[0..$0FFFFFFF] Of LongInt;
 
 
-    TGridDrawState=Set Of (gdSelected,gdFocused,gdFixed);
+    newTGridDrawState=Set Of (gdSelected,gdFocused,gdFixed);
 
-    TGridCoord=Record
+    newTGridCoord=Record
                     X:LongInt;
                     Y:LongInt;
     End;
 
-    TGridRect=Record
+    newTGridRect=Record
        Case Integer Of
          0:(Left, Top, Right, Bottom:LongInt);
-         1:(TopLeft, BottomRight:TGridCoord);
+         1:(TopLeft, BottomRight:newTGridCoord);
     End;
 
     {custom Grid}
-    TGrid=Class(TControl)
+    newTGrid=Class(TControl)
       Private
          FUpdateLocked:Boolean;
          FFixedColor:TColor;
@@ -63,19 +63,19 @@ Type
          FDefaultRowHeight:LongInt;
          FColCount:LongInt;
          FRowCount:LongInt;
-         FColWidths:PGridWidthArray;
-         FRowHeights:PGridWidthArray;
+         FColWidths:newPGridWidthArray;
+         FRowHeights:newPGridWidthArray;
          FColList:TList;  {List Of TColEntry}
          FScrollBars:TScrollStyle;
          FSizeCol:LongInt;
          FSizeRow:LongInt;
          FSizeShape:TCursor;
          FSizeStartX,FSizeStartY,FSizeX,FSizeY:LongInt;
-         FOptions:TGridOptions;
+         FOptions:newTGridOptions;
          FEntryColor:TColor;
          FGridUpdateLocked:Boolean;
          FSelectCol,FSelectRow:LongInt;
-         FOnSelectCell:TSelectCell;
+         FOnSelectCell:newTSelectCell;
          FVertScrollBar:TScrollBar;
          FHorzScrollBar:TScrollBar;
          fDblClickSizing : Boolean;
@@ -96,7 +96,7 @@ Type
          Procedure CreateVScrollBar;
          Procedure UpdateScrollBars;
          Function GetSizeItem(Const pt:TPoint;Var Col,Row:LongInt):TCursor;
-         Procedure SetOptions(NewOptions:TGridOptions);
+         Procedure SetOptions(NewOptions:newTGridOptions);
          Procedure SetEntryColor(NewColor:TColor);
          Procedure SetColWidth(Col:LongInt;NewWidth:LongInt);
          Function GetColWidth(Col:LongInt):LongInt;
@@ -113,9 +113,9 @@ Type
          Function GetGridHeight:LongInt;
          Procedure SetCol(NewValue:LongInt);
          Procedure SetRow(NewValue:LongInt);
-         Procedure SetCellColors(Col,Row:LongInt;AState:TGridDrawState);
-         Function GetSelection:TGridRect;
-         Procedure SetSelection(NewValue:TGridRect);
+         Procedure SetCellColors(Col,Row:LongInt;AState:newTGridDrawState);
+         Function GetSelection:newTGridRect;
+         Procedure SetSelection(NewValue:newTGridRect);
          Function ScrollHorzTrack(ScrollBar:TScrollBar;NewPosition:LongInt):LongInt;
          Function ScrollVertTrack(ScrollBar:TScrollBar;NewPosition:LongInt):LongInt;
          Procedure SetScrollBar(ScrollBar:TScrollBar;NewValue:LongInt);Virtual;
@@ -134,8 +134,8 @@ Type
          Function CellRect(Col,Row:LongInt):TRect;
          Function SelectCell(Col,Row:LongInt):Boolean;Virtual;
          Procedure UpdateGridContents(NewCols,NewRows:LongInt);Virtual;
-         Procedure DrawCell(Col,Row:LongInt;rec:TRect;AState:TGridDrawState);Virtual;
-         Procedure SetupCellColors(Col,Row:LongInt;AState:TGridDrawState;Var background,ForeGround:TColor);Virtual;
+         Procedure DrawCell(Col,Row:LongInt;rec:TRect;AState:newTGridDrawState);Virtual;
+         Procedure SetupCellColors(Col,Row:LongInt;AState:newTGridDrawState;Var background,ForeGround:TColor);Virtual;
          Procedure RowHeightChanged(Row:LongInt);Virtual;
          Procedure ColWidthChanged(Col:LongInt);Virtual;
          Procedure MouseDblClickSizing(Col:LongInt);Virtual;
@@ -154,7 +154,7 @@ Type
          Property GridUpdateLocked:Boolean Read FGridUpdateLocked Write SetUpdateLocked;
          Property Col:LongInt Read FSelectCol Write SetCol;
          Property Row:LongInt Read FSelectRow Write SetRow;
-         Property Selection:TGridRect Read GetSelection Write SetSelection;
+         Property Selection:newTGridRect Read GetSelection Write SetSelection;
          Property VisibleRowCount:LongInt Read GetVisibleRowCount;
          Property VisibleColCount:LongInt Read GetVisibleColCount;
          Property TopRow:LongInt Read FUpScrolled Write SetTopRow;
@@ -169,13 +169,13 @@ Type
          Property ColCount:LongInt Read FColCount Write SetColCount;
          Property RowCount:LongInt Read FRowCount Write SetRowCount;
          Property ScrollBars:TScrollStyle Read FScrollBars Write SetScrollBars;
-         Property Options:TGridOptions Read FOptions Write SetOptions;
+         Property Options:newTGridOptions Read FOptions Write SetOptions;
          Property EntryColor:TColor Read FEntryColor Write SetEntryColor;
          Property VertScrollBar:TScrollBar Read FVertScrollBar;
          Property HorzScrollBar:TScrollBar Read FHorzScrollBar;
          property GridLineWidth: Longint read FGridLineWidth write SetGridLineWidth default 1; //RG April-2011
 
-         Property OnSelectCell:TSelectCell Read FOnSelectCell Write FOnSelectCell;
+         Property OnSelectCell:newTSelectCell Read FOnSelectCell Write FOnSelectCell;
          Property OnClick;
          property OnExit;     //RG
          Property OnKeyPress; //RG
@@ -184,25 +184,25 @@ Type
     End;
 
 
-    TStringGridData=Class
+    newTStringGridData=Class
          Data:PString;
     End;
 
-    TStringGrid=Class;
+    newTStringGrid=Class;
 
     {$M+}
-    TGetCellEvent=Procedure(Grid:TStringGrid;Col,Row:LongInt;Var Result:String) Of Object;
-    TSetCellEvent=Procedure(Grid:TStringGrid;Col,Row:LongInt;Var NewContent:String) Of Object;
-    TCanEditEvent=Procedure(Grid:TStringGrid;Col,Row:LongInt;Var AllowEdit:Boolean) Of Object;
+    newTGetCellEvent=Procedure(Grid:newTStringGrid;Col,Row:LongInt;Var Result:String) Of Object;
+    newTSetCellEvent=Procedure(Grid:newTStringGrid;Col,Row:LongInt;Var NewContent:String) Of Object;
+    newTCanEditEvent=Procedure(Grid:newTStringGrid;Col,Row:LongInt;Var AllowEdit:Boolean) Of Object;
     {$M-}
 
-    TInplaceEdit=Class
+    newTInplaceEdit=Class
         Private
             Procedure SetInternalText(Const NewValue:String);
             Function GetInternalControl:TControl;
-            Constructor Create(Grid:TGrid;Col,Row:LongInt);Virtual;
+            Constructor Create(Grid:newTGrid;Col,Row:LongInt);Virtual;
         Private
-            FGrid:TGrid;
+            FGrid:newTGrid;
             FCol,FRow:LongInt;
         Protected
             Function GetText:String;Virtual;Abstract;
@@ -212,40 +212,40 @@ Type
             Procedure Show;Virtual;Abstract;
             Procedure Hide;Virtual;Abstract;
         Public
-            Procedure SetupEdit(Grid:TGrid);Virtual;Abstract;
+            Procedure SetupEdit(Grid:newTGrid);Virtual;Abstract;
             Destructor Destroy;Virtual;
         Public
             Property Text:String read GetText write SetInternalText;
             Property Control:TControl read GetInternalControl;
-            Property Grid:TGrid read FGrid;
+            Property Grid:newTGrid read FGrid;
             Property Col:LongInt read FCol;
             Property Row:LongInt read FRow;
     End;
-    TInplaceEditClass=Class Of TInplaceEdit;
+    newTInplaceEditClass=Class Of newTInplaceEdit;
 
     {$M+}
-    TOnShowEditor=Function(Sender:TGrid;Col,Row:LongInt):TInplaceEditClass Of Object;
+    newTOnShowEditor=Function(Sender:newTGrid;Col,Row:LongInt):newTInplaceEditClass Of Object;
 
-    TGetEditEvent=Procedure(Sender:TObject;ACol,ARow:Longint;Var Value:String) Of Object;
-    TSetEditEvent=Procedure(Sender:TObject;ACol,ARow:Longint;Const Value:String) Of Object;
-    TDrawCellEvent=Procedure(Sender:TObject;ACol,ARow:LongInt;
-                             rc:TRect;State:TGridDrawState) Of Object;
+    newTGetEditEvent=Procedure(Sender:TObject;ACol,ARow:Longint;Var Value:String) Of Object;
+    newTSetEditEvent=Procedure(Sender:TObject;ACol,ARow:Longint;Const Value:String) Of Object;
+    newTDrawCellEvent=Procedure(Sender:TObject;ACol,ARow:LongInt;
+                             rc:TRect;State:newTGridDrawState) Of Object;
     {$M-}
 
-    TStringGrid=Class(TGrid)
+    newTStringGrid=Class(newTGrid)
       Private
-         FEdit:TInplaceEdit;
+         FEdit:newTInplaceEdit;
          FColumns:TList;
-         FOnGetCell:TGetCellEvent;
-         FOnSetCell:TSetCellEvent;
-         FOnCanEdit:TCanEditEvent;
-         FOnDrawCell:TDrawCellEvent;
+         FOnGetCell:newTGetCellEvent;
+         FOnSetCell:newTSetCellEvent;
+         FOnCanEdit:newTCanEditEvent;
+         FOnDrawCell:newTDrawCellEvent;
          FEditorMode:Boolean;
          FAlignment:TAlignment; //En
-         FOnShowEditor:TOnShowEditor;
-         FOnGetEditMask:TGetEditEvent;
-         FOnGetEditText:TGetEditEvent;
-         FOnSetEditText:TSetEditEvent;
+         FOnShowEditor:newTOnShowEditor;
+         FOnGetEditMask:newTGetEditEvent;
+         FOnGetEditText:newTGetEditEvent;
+         FOnSetEditText:newTSetEditEvent;
          Procedure EvEntryKillFocus(Sender:TObject);
          Procedure ShowEntry(S:String);
          Procedure ClearFocus;Override;
@@ -255,14 +255,14 @@ Type
       Protected
          Function GetCell(Col,Row:LongInt):String;Virtual;
          Procedure SetCell(Col,Row:LongInt;Const NewContent:String);Virtual;
-         Procedure DrawCell(Col,Row:LongInt;rec:TRect;AState:TGridDrawState);Override;
-         Procedure SetupCellDrawing(Col,Row:LongInt;AState:TGridDrawState;
+         Procedure DrawCell(Col,Row:LongInt;rec:TRect;AState:newTGridDrawState);Override;
+         Procedure SetupCellDrawing(Col,Row:LongInt;AState:newTGridDrawState;
                                     Var Alignment:TAlignment;Var Font:TFont);Virtual;
          Function SelectCell(Col,Row:LongInt):Boolean;Override;
          Procedure CharEvent(Var key:Char;RepeatCount:Byte);Override;
          Procedure ScanEvent(Var KeyCode:TKeyCode;RepeatCount:Byte);Override;
          Procedure Resize;Override;
-         Function ShowEditor(Col,Row:LongInt):TInplaceEditClass;Virtual;
+         Function ShowEditor(Col,Row:LongInt):newTInplaceEditClass;Virtual;
          Procedure MouseDblClickSizing(Col:LongInt);Override;
          Procedure SetupComponent;Override; //En
       Public
@@ -275,7 +275,7 @@ Type
          Property YAlign;
          Property YStretch;
          Property EditorMode:Boolean Read FEditorMode Write SetEditorMode;
-         Property InplaceEdit:TInplaceEdit read FEdit;
+         Property InplaceEdit:newTInplaceEdit read FEdit;
       Published
          Property Align;
          Property Alignment:TAlignment READ FAlignment Write FAlignment; //En
@@ -306,7 +306,7 @@ Type
          Property ZOrder;
 
          Property OnCanDrag;
-         Property OnCanEdit:TCanEditEvent Read FOnCanEdit Write FOnCanEdit;
+         Property OnCanEdit:newTCanEditEvent Read FOnCanEdit Write FOnCanEdit;
          Property OnCommand;
          Property OnDragDrop;
          Property OnDragOver;
@@ -314,8 +314,8 @@ Type
          Property OnEnter;
          Property OnExit;
          Property OnFontChange;
-         Property OnGetCell:TGetCellEvent Read FOnGetCell Write FOnGetCell;
-         Property OnSetCell:TSetCellEvent Read FOnSetCell Write FOnSetCell;
+         Property OnGetCell:newTGetCellEvent Read FOnGetCell Write FOnGetCell;
+         Property OnSetCell:newTSetCellEvent Read FOnSetCell Write FOnSetCell;
          Property OnKeyPress;
          Property OnMouseClick;
          Property OnMouseDblClick;
@@ -327,23 +327,23 @@ Type
          Property OnSelectCell;
          Property OnSetupShow;
          Property OnStartDrag;
-         Property OnDrawCell:TDrawCellEvent Read FOnDrawCell Write FOnDrawCell;
-         Property OnShowEditor:TOnShowEditor read FOnShowEditor write FOnShowEditor;
-         Property OnGetEditMask:TGetEditEvent read FOnGetEditMask write FOnGetEditMask;
-         Property OnGetEditText:TGetEditEvent read FOnGetEditText write FOnGetEditText;
-         Property OnSetEditText:TSetEditEvent read FOnSetEditText write FOnSetEditText;
+         Property OnDrawCell:newTDrawCellEvent Read FOnDrawCell Write FOnDrawCell;
+         Property OnShowEditor:newTOnShowEditor read FOnShowEditor write FOnShowEditor;
+         Property OnGetEditMask:newTGetEditEvent read FOnGetEditMask write FOnGetEditMask;
+         Property OnGetEditText:newTGetEditEvent read FOnGetEditText write FOnGetEditText;
+         Property OnSetEditText:newTSetEditEvent read FOnSetEditText write FOnSetEditText;
     End;
 
     {$M+}
-    TOpenEditorEvent=Procedure(Sender:TObject;ACol,ARow:LongInt) Of Object;
+    newTOpenEditorEvent=Procedure(Sender:TObject;ACol,ARow:LongInt) Of Object;
     {$M-}
 
-    TDrawGrid=Class(TGrid)
+    newTDrawGrid=Class(newTGrid)
       Private
-         FOnDrawCell:TDrawCellEvent;
+         FOnDrawCell:newTDrawCellEvent;
          FDefaultDrawing:Boolean;
          FEditorMode:Boolean;
-         FOnOpenEditor:TOpenEditorEvent;
+         FOnOpenEditor:newTOpenEditorEvent;
          FOnCloseEditor:TNotifyEvent;
       Private
          Procedure SetDefaultDrawing(NewValue:Boolean);
@@ -352,12 +352,12 @@ Type
          Procedure HideEditor;
       Protected
          Procedure SetupComponent;Override;
-         Procedure DrawCell(Col,Row:LongInt;rec:TRect;AState:TGridDrawState);Override;
+         Procedure DrawCell(Col,Row:LongInt;rec:TRect;AState:newTGridDrawState);Override;
          Function SelectCell(Col,Row:LongInt):Boolean;Override;
          Procedure CloseEditor;Virtual;
          Procedure OpenEditor(Col,Row:LongInt);Virtual;
       Public
-         Procedure SetupCellColors(Col,Row:LongInt;AState:TGridDrawState;Var background,ForeGround:TColor);Override;
+         Procedure SetupCellColors(Col,Row:LongInt;AState:newTGridDrawState;Var background,ForeGround:TColor);Override;
          Procedure MouseToCell(X,Y:LongInt;Var ACol,ARow:LongInt);
       Public
          Property EditorMode:Boolean Read FEditorMode Write SetEditorMode;
@@ -376,8 +376,8 @@ Type
 
          Property OnSelectCell;
          Property OnClick;           { OnClick:TNotifyEvent Read FOnClick Write FOnClick; }
-         Property OnDrawCell:TDrawCellEvent Read FOnDrawCell Write FOnDrawCell;
-         Property OnOpenEditor:TOpenEditorEvent Read FOnOpenEditor Write FOnOpenEditor;
+         Property OnDrawCell:newTDrawCellEvent Read FOnDrawCell Write FOnDrawCell;
+         Property OnOpenEditor:newTOpenEditorEvent Read FOnOpenEditor Write FOnOpenEditor;
          Property OnCloseEditor:TNotifyEvent Read FOnCloseEditor Write FOnCloseEditor;
          Property DefaultDrawing:Boolean Read FDefaultDrawing Write SetDefaultDrawing;
          property OnExit; //RG       { OnExit:TNotifyEvent Read FOnExit Write FOnExit; }
@@ -385,11 +385,21 @@ Type
          Property OnKeyPress; //RG   { OnKeyPress:TKeyPressEvent Read FOnKeyPress Write FOnKeyPress; }
     End;
 
-Function InsertStringGrid(parent:TControl;Left,Bottom,Width,Height:LongInt) : tStringGrid;
+Function newInsertStringGrid(parent:TControl;Left,Bottom,Width,Height:LongInt) : newTStringGrid;
+
+
+//*** roga
+{Zu exportierende Komponenten definieren}
+{Sie k”nnen eine Seite der Komponentenpalette und eine Bitmapdatei fr die Komponente angeben}
+Exports
+  newTDrawGrid,'BAUSYS','',
+  newTStringGrid,'BAUSYS','';
+//*** roga
+
 
 Implementation
 
-Function InsertStringGrid(parent:TControl;Left,Bottom,Width,Height:LongInt) : tStringGrid;
+Function newInsertStringGrid(parent:TControl;Left,Bottom,Width,Height:LongInt) : newTStringGrid;
 
 Begin
  Result.Create(parent);
@@ -407,7 +417,7 @@ End;
 ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
 }
 
-Constructor TInplaceEdit.Create(Grid:TGrid;Col,Row:LongInt);
+Constructor newTInplaceEdit.Create(Grid:newTGrid;Col,Row:LongInt);
 Begin
      Inherited Create;
      FGrid:=Grid;
@@ -416,18 +426,18 @@ Begin
      SetupEdit(Grid);
 End;
 
-Destructor TInplaceEdit.Destroy;
+Destructor newTInplaceEdit.Destroy;
 Begin
     FGrid:=Nil;
     Inherited Destroy;
 End;
 
-Procedure TInplaceEdit.SetInternalText(Const NewValue:String);
+Procedure newTInplaceEdit.SetInternalText(Const NewValue:String);
 Begin
      SetText(NewValue);
 End;
 
-Function TInplaceEdit.GetInternalControl:TControl;
+Function newTInplaceEdit.GetInternalControl:TControl;
 Begin
      Result:=GetControl;
 End;
@@ -444,7 +454,7 @@ End;
 
 
 Type
-  TDefaultEdit=Class(TInplaceEdit)
+  TDefaultEdit=Class(newTInplaceEdit)
         Protected
             FEdit:TEdit;
             FEditMask:String;
@@ -453,7 +463,7 @@ Type
             Function GetControl:TComponent;Override;
             Procedure SetText(Const NewValue:String);Override;
             Procedure SetWindowPos(X,Y,W,H:LongInt);Override;
-            Procedure SetupEdit(Grid:TGrid);Override;
+            Procedure SetupEdit(Grid:newTGrid);Override;
             Destructor Destroy;Override;
             Procedure Show;Override;
             Procedure Hide;Override;
@@ -479,11 +489,11 @@ Begin
      FEdit.SetWindowPos(X,Y,W,H);
 End;
 
-Procedure TDefaultEdit.SetupEdit(Grid:TGrid);
+Procedure TDefaultEdit.SetupEdit(Grid:newTGrid);
 Var EditMask:String;
 Begin
      EditMask:='';
-     If TStringGrid(Grid).OnGetEditMask<>Nil Then TStringGrid(Grid).OnGetEditMask(Self,Col,Row,EditMask);
+     If newTStringGrid(Grid).OnGetEditMask<>Nil Then newTStringGrid(Grid).OnGetEditMask(Self,Col,Row,EditMask);
 
      If FEdit=Nil Then
      Begin
@@ -536,19 +546,19 @@ End;
 ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
 }
 
-Procedure TGrid.BeginUpdate;
+Procedure newTGrid.BeginUpdate;
 Begin
   FUpdateLocked:=True;
 End;
 
-Procedure TGrid.EndUpdate;
+Procedure newTGrid.EndUpdate;
 Begin
   FUpdateLocked:=False;
   UpdateScrollBars;
   Invalidate;
 End;
 
-Procedure TGrid.ClearFocus;
+Procedure newTGrid.ClearFocus;
 Var rc:TRect;
 Begin
      If ((FSelectCol>=0)And(FSelectRow>=0)) Then
@@ -561,7 +571,7 @@ Begin
      End;
 End;
 
-Procedure TGrid.KillFocus;
+Procedure newTGrid.KillFocus;
 Var rc:TRect;
 Begin
      If ((FSelectCol>=0)And(FSelectRow>=0)) Then
@@ -573,7 +583,7 @@ Begin
      Inherited KillFocus;
 End;
 
-Procedure TGrid.SetFocus;
+Procedure newTGrid.SetFocus;
 Var rc:TRect;
 Begin
      If ((FSelectCol>=0)And(FSelectRow>=0)) Then
@@ -586,7 +596,7 @@ Begin
 End;
 
 
-Procedure TGrid.ReadSCUResource(Const ResName:TResourceName;Var Data;DataLen:LongInt);
+Procedure newTGrid.ReadSCUResource(Const ResName:TResourceName;Var Data;DataLen:LongInt);
 Type PGridSizes=^TGridSizes;
      TGridSizes=Record
          EntryType:Byte;
@@ -613,7 +623,7 @@ Begin
 End;
 
 
-Function TGrid.WriteSCUResource(Stream:TResourceStream):Boolean;
+Function newTGrid.WriteSCUResource(Stream:TResourceStream):Boolean;
 Const
      ColEntry:Byte=1;
      RowEntry:Byte=0;
@@ -652,7 +662,7 @@ Begin
      MemStream.Destroy;
 End;
 
-Procedure TGrid.SetColWidth(Col:LongInt;NewWidth:LongInt);
+Procedure newTGrid.SetColWidth(Col:LongInt;NewWidth:LongInt);
 Begin
      If ((Col<0)Or(Col>=FColCount)) Then Exit;
      If NewWidth<=0 Then NewWidth:=FDefaultColWidth;
@@ -662,14 +672,14 @@ Begin
      If Not FUpdateLocked Then Invalidate;
 End;
 
-Function TGrid.GetColWidth(Col:LongInt):LongInt;
+Function newTGrid.GetColWidth(Col:LongInt):LongInt;
 Begin
      Result:=0;
      If ((Col<0)Or(Col>=FColCount)) Then Exit;
      Result:=FColWidths^[Col];
 End;
 
-Procedure TGrid.SetRowHeight(Row:LongInt;NewHeight:LongInt);
+Procedure newTGrid.SetRowHeight(Row:LongInt;NewHeight:LongInt);
 Begin
      If ((Row<0)Or(Row>=FRowCount)) Then Exit;
      If NewHeight<=0 Then NewHeight:=FDefaultRowHeight;
@@ -679,27 +689,27 @@ Begin
      If Not FUpdateLocked Then Invalidate;
 End;
 
-Function TGrid.GetRowHeight(Row:LongInt):LongInt;
+Function newTGrid.GetRowHeight(Row:LongInt):LongInt;
 Begin
      Result:=0;
      If ((Row<0)Or(Row>=FRowCount)) Then Exit;
      Result:=FRowHeights^[Row];
 End;
 
-Procedure TGrid.SetEntryColor(NewColor:TColor);
+Procedure newTGrid.SetEntryColor(NewColor:TColor);
 Begin
      FEntryColor:=NewColor;
      //ClearFocus;
      If Not FUpdateLocked Then Invalidate;
 End;
 
-Procedure TGrid.SetFixedColor(NewColor:TColor);
+Procedure newTGrid.SetFixedColor(NewColor:TColor);
 Begin
      FFixedColor:=NewColor;
      If Not FUpdateLocked Then Invalidate;
 End;
 
-Procedure TGrid.SetFixedRows(NewRows:LongInt);
+Procedure newTGrid.SetFixedRows(NewRows:LongInt);
 Begin
      If ((NewRows<0)Or(NewRows>=FRowCount)) Then Exit;
      FFixedRows:=NewRows;
@@ -709,7 +719,7 @@ Begin
      If Not FUpdateLocked Then Invalidate;
 End;
 
-Procedure TGrid.SetFixedCols(NewCols:LongInt);
+Procedure newTGrid.SetFixedCols(NewCols:LongInt);
 Begin
      If ((NewCols<0)Or(NewCols>=FColCount)) Then Exit;
      FFixedCols:=NewCols;
@@ -719,7 +729,7 @@ Begin
      If Not FUpdateLocked Then Invalidate;
 End;
 
-Procedure TGrid.SetDefaultColWidth(NewWidth:LongInt);
+Procedure newTGrid.SetDefaultColWidth(NewWidth:LongInt);
 Var T:LongInt;
     P:Pointer;
 Begin
@@ -738,13 +748,13 @@ Begin
      If Not FUpdateLocked Then Invalidate;
 End;
 
-Procedure TGrid.SetOptions(NewOptions:TGridOptions);
+Procedure newTGrid.SetOptions(NewOptions:newTGridOptions);
 Begin
   FOptions:=NewOptions;
   If Not FUpdateLocked Then Invalidate;
 End;
 
-Procedure TGrid.SetDefaultRowHeight(NewHeight:LongInt);
+Procedure newTGrid.SetDefaultRowHeight(NewHeight:LongInt);
 Var T:LongInt;
     P:Pointer;
 Begin
@@ -763,7 +773,7 @@ Begin
      If Not FUpdateLocked Then Invalidate;
 End;
 
-Procedure TGrid.SetColCount(NewCount:LongInt);
+Procedure newTGrid.SetColCount(NewCount:LongInt);
 Begin
      If ((NewCount<1)Or(NewCount<FFixedCols)) Then Exit;
      If NewCount=FColCount Then Exit;
@@ -774,7 +784,7 @@ Begin
      UpdateGridContents(NewCount,FRowCount);
 End;
 
-Procedure TGrid.SetRowCount(NewCount:LongInt);
+Procedure newTGrid.SetRowCount(NewCount:LongInt);
 Begin
      If ((NewCount<1)Or(NewCount<FFixedRows)) Then Exit;
      If NewCount=FRowCount Then Exit;
@@ -785,7 +795,7 @@ Begin
      UpdateGridContents(FColCount,NewCount);
 End;
 
-Procedure TGrid.UpdateScrollBars;
+Procedure newTGrid.UpdateScrollBars;
 Var MaxWidth,MaxHeight:LongInt;
     viewarea:LongInt;
 Begin
@@ -850,14 +860,14 @@ End;
 
 
 
-Procedure TGrid.Show;
+Procedure newTGrid.Show;
 Begin
      Inherited Show;
 
      UpdateScrollBars;
 End;
 
-Procedure TGrid.Resize;
+Procedure newTGrid.Resize;
 Begin
   Inherited Resize;
 
@@ -884,7 +894,7 @@ Begin
 End;
 
 
-Procedure TGrid.CreateHScrollBar;
+Procedure newTGrid.CreateHScrollBar;
 Begin
      If FHorzScrollBar<>Nil Then Exit;
 
@@ -901,7 +911,7 @@ Begin
 End;
 
 
-Procedure TGrid.CreateVScrollBar;
+Procedure newTGrid.CreateVScrollBar;
 Begin
      If FVertScrollBar<>Nil Then Exit;
 
@@ -919,7 +929,7 @@ Begin
 End;
 
 
-Procedure TGrid.SetScrollBars(NewValue:TScrollStyle);
+Procedure newTGrid.SetScrollBars(NewValue:TScrollStyle);
 Begin
      FScrollBars:=NewValue;
      Case NewValue Of
@@ -973,7 +983,7 @@ Begin
      UpdateScrollBars;
 End;
 
-procedure TGrid.SetGridLineWidth(Value: LongInt); //RG April-2011
+procedure newTGrid.SetGridLineWidth(Value: LongInt); //RG April-2011
 begin
   if FGridLineWidth <> Value then
   begin
@@ -983,7 +993,7 @@ begin
 end;
 
 {$HINTS OFF}
-Procedure TGrid.SetupCellColors(Col,Row:LongInt;AState:TGridDrawState;Var background,ForeGround:TColor);
+Procedure newTGrid.SetupCellColors(Col,Row:LongInt;AState:newTGridDrawState;Var background,ForeGround:TColor);
 Begin
      ForeGround:=PenColor;
 
@@ -1018,7 +1028,7 @@ Begin
 End;
 {$HINTS ON}
 
-Procedure TGrid.SetCellColors(Col,Row:LongInt;AState:TGridDrawState);
+Procedure newTGrid.SetCellColors(Col,Row:LongInt;AState:newTGridDrawState);
 Var back,Fore:TColor;
 Begin
      SetupCellColors(Col,Row,AState,back,Fore);
@@ -1027,7 +1037,7 @@ Begin
 End;
 
 {$HINTS OFF}
-Procedure TGrid.DrawCell(Col,Row:LongInt;rec:TRect;AState:TGridDrawState);
+Procedure newTGrid.DrawCell(Col,Row:LongInt;rec:TRect;AState:newTGridDrawState);
 Var rc:TRect;
 Begin
      If Canvas=Nil Then Exit;
@@ -1072,7 +1082,7 @@ Begin
 End;
 {$HINTS ON}
 
-Procedure TGrid.Redraw(Const rec:TRect);
+Procedure newTGrid.Redraw(Const rec:TRect);
 Var T,t1:LongInt;
     X,Y:LongInt;
     RowHeight:LongInt;
@@ -1081,7 +1091,7 @@ Var T,t1:LongInt;
     MaxWidth,MaxHeight:LongInt;
     LeftCount,UpCount:LongInt;
     DrawIt:Boolean;
-    AState:TGridDrawState;
+    AState:newTGridDrawState;
 Label Ende;
 Begin
      If Canvas=Nil Then Exit;
@@ -1296,7 +1306,7 @@ Ende:
      End;
 End;
 
-Procedure TGrid.UpdateGridContents(NewCols,NewRows:LongInt);
+Procedure newTGrid.UpdateGridContents(NewCols,NewRows:LongInt);
 Var T:LongInt;
     P:Pointer;
     Def:LongInt;
@@ -1394,7 +1404,7 @@ Begin
      UpdateScrollBars;
 End;
 
-Destructor TGrid.Destroy;
+Destructor newTGrid.Destroy;
 Begin
      ScrollBars:=ssNone;    {Destroy the ScrollBars}
 
@@ -1406,7 +1416,7 @@ Begin
      Inherited Destroy;
 End;
 
-Procedure TGrid.SetupComponent;
+Procedure newTGrid.SetupComponent;
 Begin
      Inherited SetupComponent;
 
@@ -1434,14 +1444,14 @@ Begin
      If not Designed Then Include(ComponentState,csAcceptsControls);
 End;
 
-Procedure TGrid.SetScrollBar(ScrollBar:TScrollBar;NewValue:LongInt);
+Procedure newTGrid.SetScrollBar(ScrollBar:TScrollBar;NewValue:LongInt);
 Begin
      ScrollBar.Position:=NewValue;
      //ClearFocus;
      If Not FUpdateLocked Then Invalidate;
 End;
 
-Procedure TGrid.SetTopRow(NewValue:LongInt);
+Procedure newTGrid.SetTopRow(NewValue:LongInt);
 Var  t,i:Longint;
 Begin
      If NewValue > RowCount-FixedRows-1 Then NewValue := RowCount-FixedRows;
@@ -1458,7 +1468,7 @@ Begin
      Invalidate
 End;
 
-Procedure TGrid.SetLeftCol(NewValue:LongInt);
+Procedure newTGrid.SetLeftCol(NewValue:LongInt);
 Var  t,i:Longint;
 Begin
      If NewValue > ColCount-FixedCols-1 Then NewValue := ColCount-FixedCols;
@@ -1475,7 +1485,7 @@ Begin
      Invalidate
 End;
 
-Procedure TGrid.Scroll(ScrollBar:TScrollBar;ScrollCode:TScrollCode;Var ScrollPos:LongInt);
+Procedure newTGrid.Scroll(ScrollBar:TScrollBar;ScrollCode:TScrollCode;Var ScrollPos:LongInt);
 Begin
      Case ScrollCode Of
          scLineUp:       ScrollPos:=ScrollVertTrack(ScrollBar,FUpExtent-FRowHeights^[FFixedRows+FUpScrolled]);
@@ -1495,7 +1505,7 @@ Begin
      Invalidate;
 End;
 
-Procedure TGrid.GetGridExtent(Var CX,CY:LongInt);
+Procedure newTGrid.GetGridExtent(Var CX,CY:LongInt);
 Var T:LongInt;
 Begin
      CX:=0;
@@ -1504,7 +1514,7 @@ Begin
      For T:=0 To FRowCount-1 Do Inc(CY,FRowHeights^[T]);
 End;
 
-Function TGrid.GetVisibleRowCount:LongInt;
+Function newTGrid.GetVisibleRowCount:LongInt;
 Var T,H,MinHeight:LongInt;
 Begin
      Result:=0;
@@ -1529,7 +1539,7 @@ Begin
      End;
 End;
 
-Function TGrid.GetVisibleColCount:LongInt;
+Function newTGrid.GetVisibleColCount:LongInt;
 Var T,W,MaxWidth:LongInt;
 Begin
      Result:=0;
@@ -1554,14 +1564,14 @@ Begin
      End;
 End;
 
-Function TGrid.GetGridWidth:LongInt;
+Function newTGrid.GetGridWidth:LongInt;
 Var T:LongInt;
 Begin
      Result:=0;
      For T:=0 To FColCount-1 Do Inc(Result,FColWidths^[T]);
 End;
 
-Function TGrid.GetGridHeight:LongInt;
+Function newTGrid.GetGridHeight:LongInt;
 Var T:LongInt;
 Begin
      Result:=0;
@@ -1569,7 +1579,7 @@ Begin
 End;
 
 {$HINTS OFF}
-Function TGrid.ScrollHorzTrack(ScrollBar:TScrollBar;NewPosition:LongInt):LongInt;
+Function newTGrid.ScrollHorzTrack(ScrollBar:TScrollBar;NewPosition:LongInt):LongInt;
 Var MaxWidth,MaxHeight,Value:LongInt;
     T:LongInt;
 Begin
@@ -1592,7 +1602,7 @@ Begin
      Result:=FLeftExtent;
 End;
 
-Function TGrid.ScrollVertTrack(ScrollBar:TScrollBar;NewPosition:LongInt):LongInt;
+Function newTGrid.ScrollVertTrack(ScrollBar:TScrollBar;NewPosition:LongInt):LongInt;
 Var MaxWidth,MaxHeight,Value:LongInt;
     T:LongInt;
 Begin
@@ -1616,7 +1626,7 @@ Begin
 End;
 {$HINTS ON}
 
-Function TGrid.CellRect(Col,Row:LongInt):TRect;
+Function newTGrid.CellRect(Col,Row:LongInt):TRect;
 Var X,Y:LongInt;
     LeftCount,UpCount:LongInt;
     T,t1:LongInt;
@@ -1671,7 +1681,7 @@ Begin
 End;
 
 
-Function TGrid.GetSizeItem(Const pt:TPoint;Var Col,Row:LongInt):TCursor;
+Function newTGrid.GetSizeItem(Const pt:TPoint;Var Col,Row:LongInt):TCursor;
 Var T,t1:LongInt;
     LeftCount,UpCount:LongInt;
     DrawIt:Boolean;
@@ -1761,7 +1771,7 @@ End;
 
 
 {$HINTS OFF}
-Procedure TGrid.MouseMove(ShiftState:TShiftState;X,Y:LongInt);
+Procedure newTGrid.MouseMove(ShiftState:TShiftState;X,Y:LongInt);
 Var Row:LongInt;
     Col:LongInt;
     Shape:TCursor;
@@ -1809,15 +1819,15 @@ Begin
   If Shape<>crDefault Then LastMsg.Handled:=True; {dont pass To Form Editor}
 End;
 
-Procedure TGrid.RowHeightChanged(Row:LongInt);
+Procedure newTGrid.RowHeightChanged(Row:LongInt);
 Begin
 End;
 
-Procedure TGrid.ColWidthChanged(Col:LongInt);
+Procedure newTGrid.ColWidthChanged(Col:LongInt);
 Begin
 End;
 
-Procedure TGrid.MouseDown(Button:TMouseButton;ShiftState:TShiftState;X,Y:LongInt);
+Procedure newTGrid.MouseDown(Button:TMouseButton;ShiftState:TShiftState;X,Y:LongInt);
 
 Var  Row:LongInt;
      Col:LongInt;
@@ -1870,7 +1880,7 @@ Begin
     End;
 End;
 
-Procedure TGrid.MouseUp(Button:TMouseButton;ShiftState:TShiftState;X,Y:LongInt);
+Procedure newTGrid.MouseUp(Button:TMouseButton;ShiftState:TShiftState;X,Y:LongInt);
 Var T:LongInt;
     Col:LongInt;
     Row:LongInt;
@@ -1922,8 +1932,7 @@ Begin
     End;
 End;
 
-Procedure TGrid.MouseDblClick(Button:TMouseButton;ShiftState:TShiftState;X,Y:LonGInT);
-
+Procedure newTGrid.MouseDblClick(Button:TMouseButton;ShiftState:TShiftState;X,Y:LonGInT);
 Begin
   Inherited MouseDblClick(Button,ShiftState,X,Y);
   If Button <> mbLeft Then Exit;
@@ -1934,12 +1943,11 @@ Begin
 End;
 
 
-Procedure TGrid.MouseDblClickSizing(Col:LongInt);
-
+Procedure newTGrid.MouseDblClickSizing(Col:LongInt);
 Begin
 End;
 
-Function TGrid.GetSelection:TGridRect;
+Function newTGrid.GetSelection:newTGridRect;
 Begin
      Result.Left:=Col;
      Result.Top:=Row;
@@ -1949,13 +1957,13 @@ Begin
      Result.Bottom:=Result.Top;
 End;
 
-Procedure TGrid.SetSelection(NewValue:TGridRect);
+Procedure newTGrid.SetSelection(NewValue:newTGridRect);
 Begin
      //we only Do support Single Selection For now...
      SelectCell(NewValue.Left,NewValue.Top);
 End;
 
-Function TGrid.SelectCell(Col,Row:LongInt):Boolean;
+Function newTGrid.SelectCell(Col,Row:LongInt):Boolean;
 Var rc:TRect;
     T:LongInt;
     Count:LongInt;
@@ -2099,14 +2107,14 @@ Begin
      Else Update;
 End;
 
-Procedure TGrid.SetUpdateLocked(NewValue:Boolean);
+Procedure newTGrid.SetUpdateLocked(NewValue:Boolean);
 Begin
      If NewValue=FGridUpdateLocked Then Exit;
      FGridUpdateLocked:=NewValue;
      If Not FGridUpdateLocked Then If Handle<>0 Then Invalidate;
 End;
 
-Procedure TGrid.SetCol(NewValue:LongInt);
+Procedure newTGrid.SetCol(NewValue:LongInt);
 Begin
      If ((NewValue>=0)And(NewValue<FColCount)And(NewValue<>FSelectCol)) Then
      Begin
@@ -2119,7 +2127,7 @@ Begin
      End;
 End;
 
-Procedure TGrid.SetRow(NewValue:LongInt);
+Procedure newTGrid.SetRow(NewValue:LongInt);
 Begin
      If ((NewValue>=0)And(NewValue<FRowCount)And(NewValue<>FSelectRow)) Then
      Begin
@@ -2132,7 +2140,7 @@ Begin
      End;
 End;
 
-Procedure TGrid.ScanEvent(Var KeyCode:TKeyCode;RepeatCount:Byte);
+Procedure newTGrid.ScanEvent(Var KeyCode:TKeyCode;RepeatCount:Byte);
 Var Visible:LongInt;
 Begin
      If ((FSelectCol>=0)And(FSelectRow>=0)) Then
@@ -2173,7 +2181,7 @@ End;
 }
 
 //added En
-Procedure TStringGrid.SetupComponent;
+Procedure newTStringGrid.SetupComponent;
 Begin
      Inherited SetupComponent;
 
@@ -2181,7 +2189,7 @@ Begin
      FOnDrawCell := NIL
 End;
 
-Function TStringGrid.IndexOf(Const iSt : String; iCol, iRow : LongInt) : tPoint;
+Function newTStringGrid.IndexOf(Const iSt : String; iCol, iRow : LongInt) : tPoint;
 
 Var StCol, StRow,
     EnCol, EnRow : LongInt;
@@ -2240,7 +2248,7 @@ Gefunden:
 
 End;
 
-Procedure TStringGrid.SetupCellDrawing(Col,Row:LongInt;AState:TGridDrawState;
+Procedure newTStringGrid.SetupCellDrawing(Col,Row:LongInt;AState:newTGridDrawState;
                                        Var Alignment:TAlignment;Var Font:TFont);
 Begin
 //     Alignment:=taLeftJustify;
@@ -2249,7 +2257,7 @@ Begin
 End;
 
 
-Procedure TStringGrid.DrawCell(Col,Row:LongInt;rec:TRect;AState:TGridDrawState);
+Procedure newTStringGrid.DrawCell(Col,Row:LongInt;rec:TRect;AState:newTGridDrawState);
 Var
     X,Y:LongInt;
     S:String;
@@ -2301,14 +2309,14 @@ Begin
 End;
 
 {$HINTS OFF}
-Procedure TStringGrid.EvEntryKillFocus(Sender:TObject);
+Procedure newTStringGrid.EvEntryKillFocus(Sender:TObject);
 Begin
      ClearFocus;
 End;
 {$HINTS ON}
 
 
-Function TStringGrid.SelectCell(Col,Row:LongInt):Boolean;
+Function newTStringGrid.SelectCell(Col,Row:LongInt):Boolean;
 Var rc:TRect;
     Ok:Boolean;
 Label L;
@@ -2363,7 +2371,7 @@ L:
      End;
 End;
 
-Procedure TStringGrid.SetCell(Col,Row:LongInt;Const NewContent:String);
+Procedure newTStringGrid.SetCell(Col,Row:LongInt;Const NewContent:String);
 Var Rows:TList;
     ps:PString;
     T:LongInt;
@@ -2404,7 +2412,7 @@ Begin
      invalidate
 End;
 
-Function TStringGrid.GetCell(Col,Row:LongInt):String;
+Function newTStringGrid.GetCell(Col,Row:LongInt):String;
 Var Rows:TList;
     ps:PString;
 Begin
@@ -2429,7 +2437,7 @@ Begin
      If OnGetCell<>Nil Then OnGetCell(Self,Col,Row,Result);
 End;
 
-Destructor TStringGrid.Destroy;
+Destructor newTStringGrid.Destroy;
 Var T,t1:LongInt;
     Rows:TList;
     ps:PString;
@@ -2459,7 +2467,7 @@ Begin
      Inherited Destroy;
 End;
 
-Procedure TStringGrid.ClearFocus;
+Procedure newTStringGrid.ClearFocus;
 Var rc:TRect;
 {    S:String; }
 Begin
@@ -2491,12 +2499,12 @@ Begin
      Inherited ClearFocus;
 End;
 
-Procedure TStringGrid.ShowEntry(S:String);
+Procedure newTStringGrid.ShowEntry(S:String);
 Var rc:TRect;
     W,H:LongInt;
     back,Fore:TColor;
     Control:TControl;
-    FEditClass:TInplaceEditClass;
+    FEditClass:newTInplaceEditClass;
 Begin
      rc:=GridRects[FSelectCol,FSelectRow];
      Inc(rc.Left);
@@ -2548,7 +2556,7 @@ Begin
      FEdit.Show;
 End;
 
-Function TStringGrid.ShowEditor(Col,Row:LongInt):TInplaceEditClass;
+Function newTStringGrid.ShowEditor(Col,Row:LongInt):newTInplaceEditClass;
 Begin
      If @FOnShowEditor<>Nil Then
        Result:=FOnShowEditor(Self,FSelectCol,FSelectRow)
@@ -2557,7 +2565,7 @@ Begin
 End;
 
 
-Procedure TStringGrid.MouseDblClickSizing(Col:LongInt);
+Procedure newTStringGrid.MouseDblClickSizing(Col:LongInt);
 
 Var r, m, i: LongInt;
     w,h    : LongInt;
@@ -2580,7 +2588,7 @@ Begin
   ColWidths[Col]:=w+10;
 End;
 
-Procedure TStringGrid.ShowEditorIntern;
+Procedure newTStringGrid.ShowEditorIntern;
 Var rc:TRect;
 Begin
   If ((FSelectCol<0)Or(FSelectRow<0)Or(((FEdit<>Nil)And(FEdit.Control.Visible)))) Then Exit;
@@ -2591,7 +2599,7 @@ Begin
 End;
 
 
-Procedure TStringGrid.HideEditorIntern;
+Procedure newTStringGrid.HideEditorIntern;
 Var  rc:TRect;
      SelCol,SelRow:LongInt;
      Error:Boolean;
@@ -2624,7 +2632,7 @@ Begin
           FEdit.Hide;
           FEdit.Destroy;
           FEdit:=Nil;
-          TGrid.SelectCell(SelCol,SelRow); //Selection erneuern
+          newTGrid.SelectCell(SelCol,SelRow); //Selection erneuern
           rc:=GridRects[FSelectCol,FSelectRow];
           CaptureFocus;
           InvalidateRect(rc);
@@ -2634,7 +2642,7 @@ Begin
      Else If FEdit<>Nil Then FEdit.Hide;
 End;
 
-Procedure TStringGrid.CharEvent(Var key:Char;RepeatCount:Byte);
+Procedure newTStringGrid.CharEvent(Var key:Char;RepeatCount:Byte);
 Var rc:TRect;
     S:String;
     Ok:Boolean;
@@ -2657,7 +2665,7 @@ Begin
      Inherited CharEvent(key,RepeatCount);
 End;
 
-Procedure TStringGrid.ScanEvent(Var KeyCode:TKeyCode;RepeatCount:Byte);
+Procedure newTStringGrid.ScanEvent(Var KeyCode:TKeyCode;RepeatCount:Byte);
 Var
     Ok:Boolean;
 Begin
@@ -2687,7 +2695,7 @@ Begin
 End;
 
 
-Procedure TStringGrid.Resize;
+Procedure newTStringGrid.Resize;
 Var rc:TRect;
     W,H:LongInt;
 Begin
@@ -2709,7 +2717,7 @@ Begin
      End;
 End;
 
-Procedure TStringGrid.SetEditorMode(NewValue:Boolean);
+Procedure newTStringGrid.SetEditorMode(NewValue:Boolean);
 Begin
      If NewValue Then ShowEditorIntern
      Else HideEditorIntern;
@@ -2726,37 +2734,37 @@ End;
 }
 
 
-Procedure TDrawGrid.SetupComponent;
+Procedure newTDrawGrid.SetupComponent;
 Begin
      Inherited SetupComponent;
 
      FDefaultDrawing:=True;
 End;
 
-Procedure TDrawGrid.MouseToCell(X,Y:LongInt;Var ACol,ARow:LongInt);
+Procedure newTDrawGrid.MouseToCell(X,Y:LongInt;Var ACol,ARow:LongInt);
 Begin
      GetSizeItem(Point(X,Y),ACol,ARow);
 End;
 
-Procedure TDrawGrid.SetDefaultDrawing(NewValue:Boolean);
+Procedure newTDrawGrid.SetDefaultDrawing(NewValue:Boolean);
 Begin
      FDefaultDrawing:=NewValue;
      Refresh;
 End;
 
-Procedure TDrawGrid.DrawCell(Col,Row:LongInt;rec:TRect;AState:TGridDrawState);
+Procedure newTDrawGrid.DrawCell(Col,Row:LongInt;rec:TRect;AState:newTGridDrawState);
 Begin
      If ((DefaultDrawing)Or(Designed)) Then Inherited DrawCell(Col,Row,rec,AState);
      If FOnDrawCell<>Nil Then FOnDrawCell(Self,Col,Row,rec,AState);
 End;
 
-Procedure TDrawGrid.SetEditorMode(NewValue:Boolean);
+Procedure newTDrawGrid.SetEditorMode(NewValue:Boolean);
 Begin
      If NewValue Then ShowEditor
      Else HideEditor;
 End;
 
-Procedure TDrawGrid.ShowEditor;
+Procedure newTDrawGrid.ShowEditor;
 Begin
      If ((FSelectCol>=0)And(FSelectRow>=0)And(FOptions*[goEditing]<>[])) Then
      Begin
@@ -2765,29 +2773,29 @@ Begin
      End;
 End;
 
-Procedure TDrawGrid.HideEditor;
+Procedure newTDrawGrid.HideEditor;
 Begin
      If Not FEditorMode Then Exit;
      FEditorMode:=False;
      CloseEditor;
 End;
 
-Procedure TDrawGrid.OpenEditor(Col,Row:LongInt);
+Procedure newTDrawGrid.OpenEditor(Col,Row:LongInt);
 Begin
      If FOnOpenEditor<>Nil Then FOnOpenEditor(Self,Col,Row);
 End;
 
-Procedure TDrawGrid.CloseEditor;
+Procedure newTDrawGrid.CloseEditor;
 Begin
      If FOnCloseEditor<>Nil Then FOnCloseEditor(Self);
 End;
 
-Procedure TDrawGrid.SetupCellColors(Col,Row:LongInt;AState:TGridDrawState;Var background,ForeGround:TColor);
+Procedure newTDrawGrid.SetupCellColors(Col,Row:LongInt;AState:newTGridDrawState;Var background,ForeGround:TColor);
 Begin
      Inherited SetupCellColors(Col,Row,AState,background,ForeGround);
 End;
 
-Function TDrawGrid.SelectCell(Col,Row:LongInt):Boolean;
+Function newTDrawGrid.SelectCell(Col,Row:LongInt):Boolean;
 Var rc:TRect;
 Label L;
 Begin
@@ -2819,8 +2827,17 @@ L:
      End;
 End;
 
+(*
 Begin
 End.
+*)
+
+
+Initialization
+  {Klassen registrieren}
+  RegisterClasses([newTDrawGrid,newTStringGrid]); //roga
+End.
+
 
 { -- date -- -- from -- -- changes ----------------------------------------------
   27-Sep-02   WD        Ausbau der LINUX-Teile
@@ -2833,3 +2850,5 @@ End.
   01-Apr-09   PE        tStringGrid: Einbau von DrawCellEvent
   19-Apr-11   RG        TDrawGrid: Einbau von OnExit, OnKeyPress
 }
+
+

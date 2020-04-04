@@ -1065,93 +1065,93 @@ End;
 
 Procedure TBitBtn.SetupComponent;
 Begin
-     Inherited SetupComponent;
+  Inherited SetupComponent;
 
-     Caption := Name;
-     Height := 30;
-     Width := 100;
-     PenColor := clBtnText;
-     color := clBtnFace;
-     Ownerdraw := True;
-     FBitmap := Nil;
-     FDown := False;
-     FSpaceDown := False;
-     FLayout := blGlyphLeft;
-     FMargin := -1;
-     FSpacing := 4;
-     FKind := bkCustom;
-     InRedraw := False;
-     FNumGlyphs:=1;
+  Caption := Name;
+  Height := 30;
+  Width := 100;
+  PenColor := clBtnText;
+  color := clBtnFace;
+  Ownerdraw := True;
+  FBitmap := Nil;
+  FDown := False;
+  FSpaceDown := False;
+  FLayout := blGlyphLeft;
+  FMargin := -1;
+  FSpacing := 4;
+  FKind := bkCustom;
+  InRedraw := False;
+  FNumGlyphs:=1;
 End;
 
 
 Procedure TBitBtn.SetNumGlyphs(NewValue:TNumGlyphs);
 Begin
-     If NewValue<0 Then NewValue:=1
-     Else If NewValue>4 Then NewValue:=4;
-     If NewValue=FNumGlyphs Then exit;
-     FNumGlyphs:=NewValue;
-     Arrange;
-     Invalidate;
+  If NewValue<0 Then NewValue:=1
+  Else If NewValue>4 Then NewValue:=4;
+  If NewValue=FNumGlyphs Then exit;
+  FNumGlyphs:=NewValue;
+  Arrange;
+  Invalidate;
 End;
 
 
 Procedure TBitBtn.GetClassData(Var ClassData:TClassData);
 Begin
-     {$IFDEF OS2}
-     Inherited GetClassData(ClassData);
-     {$ENDIF}
-     {$IFDEF Win32}
-     TControl.GetClassData(ClassData);   {no WC_BUTTON !}
-     {$ENDIF}
+  {$IFDEF OS2}
+  Inherited GetClassData(ClassData);
+  {$ENDIF}
+  {$IFDEF Win32}
+  TControl.GetClassData(ClassData);   {no WC_BUTTON !}
+  {$ENDIF}
 End;
 
 
 Procedure TBitBtn.CreateParams(Var Params:TCreateParams);
 Begin
-     TControl.CreateParams(Params);
+  TControl.CreateParams(Params);
 
-     {$IFDEF OS2}
-     Params.Style := Params.Style Or BS_USERBUTTON;
-     {$ENDIF}
+  {$IFDEF OS2}
+  Params.Style := Params.Style Or BS_USERBUTTON;
+  {$ENDIF}
 End;
 
 
 Procedure TBitBtn.SetupShow;
 Begin
-     Inherited SetupShow;
+  Inherited SetupShow;
 
-     Arrange;
-     {force To send the Window Message}
-     If FDown Then
-     Begin
-          FDown := False;   {dont ignore SetDown}
-          SetDown(True);
-     End;
+  Arrange;
+  {force To send the Window Message}
+  If FDown Then
+  Begin
+       FDown := False;   {dont ignore SetDown}
+       SetDown(True);
+  End;
 End;
 
 
 Destructor TBitBtn.Destroy;
 Begin
-     If FBitmap <> Nil Then FBitmap.Destroy;
-     FBitmap := Nil;
+  If FBitmap <> Nil Then FBitmap.Destroy;
+  FBitmap := Nil;
 
-     Inherited Destroy;
+  Inherited Destroy;
 End;
 
 
 Procedure TBitBtn.RealignControls;
 Begin
-     Arrange;
-     Invalidate;
+  Arrange;
+  Invalidate;
 End;
 
 
 Procedure TBitBtn.FontChange;
 Begin
-     RealignControls;
+  RealignControls;
 
-     Inherited FontChange;
+  Inherited FontChange;
 End;
 
 
@@ -1159,43 +1159,43 @@ End;
 Procedure TBitBtn.WMKeyDown(Var Msg:TMessage);
 Var  KeyCode:LongInt;
 Begin
-     Inherited;
+  Inherited;
 
-     Msg.Handled := True;
-     If IsControlLocked(Self) Then Exit;
+  Msg.Handled := True;
+  If IsControlLocked(Self) Then Exit;
 
-     KeyCode := Msg.Param1;
-     If KeyCode = VK_SPACE Then
-       If Not FSpaceDown Then
-     Begin
-          FSpaceDown := True;
-          MouseDown(mbLeft,[],0,0);
-     End;
+  KeyCode := Msg.Param1;
+  If KeyCode = VK_SPACE Then
+    If Not FSpaceDown Then
+  Begin
+       FSpaceDown := True;
+       MouseDown(mbLeft,[],0,0);
+  End;
 End;
 
 
 Procedure TBitBtn.WMKeyUp(Var Msg:TMessage);
 Var  KeyCode:LongInt;
 Begin
-     Inherited;
+  Inherited;
 
-     Msg.Handled := True;
-     If IsControlLocked(Self) Then Exit;
+  Msg.Handled := True;
+  If IsControlLocked(Self) Then Exit;
 
-     KeyCode := Msg.Param1;
-     If KeyCode = VK_SPACE Then
-       If FSpaceDown Then
-     Begin
-          FSpaceDown := False;
-          MouseUp(mbLeft,[],0,0);
-     End;
+  KeyCode := Msg.Param1;
+  If KeyCode = VK_SPACE Then
+    If FSpaceDown Then
+  Begin
+       FSpaceDown := False;
+       MouseUp(mbLeft,[],0,0);
+  End;
 
-     If KeyCode = VK_ESCAPE Then
-       If FSpaceDown Then
-     Begin
-          FSpaceDown := False;
-          MouseUp(mbLeft,[],-1,-1);  {no Click}
-     End;
+  If KeyCode = VK_ESCAPE Then
+    If FSpaceDown Then
+  Begin
+       FSpaceDown := False;
+       MouseUp(mbLeft,[],-1,-1);  {no Click}
+  End;
 End;
 {$ENDIF}
 
@@ -1204,281 +1204,282 @@ End;
 Procedure TBitBtn.ParentNotification(Var Msg:TMessage);
 Var  pUserBtn:PUSERBUTTON;
 Begin
-     TControl.ParentNotification(Msg);
+  TControl.ParentNotification(Msg);
 
-     If Designed Then Exit;
+  If Designed Then Exit;
 
-     Case Msg.Param1Hi Of
-       BN_CLICKED:
-       Begin
-            {OS2: Param2 Contains the Handle, If the Message was WM_CONTROL
-                  To avoid duplicate Click only Use the WM_COMMAND event}
-            If Msg.Param2 <> 0 Then Exit;
-            Click;
-       End;
-       BN_PAINT:
-       Begin
-            pUserBtn := Pointer(Msg.Param2);
-            FDefault := (pUserBtn^.fsState And BDS_DEFAULT) <> 0;
-            Paint(ClientRect);
-       End;
-     End;
-     Msg.Handled := True;
-     Msg.Result := 0;
+  Case Msg.Param1Hi Of
+    BN_CLICKED:
+    Begin
+         {OS2: Param2 Contains the Handle, If the Message was WM_CONTROL
+               To avoid duplicate Click only Use the WM_COMMAND event}
+         If Msg.Param2 <> 0 Then Exit;
+         Click;
+    End;
+    BN_PAINT:
+    Begin
+         pUserBtn := Pointer(Msg.Param2);
+         FDefault := (pUserBtn^.fsState And BDS_DEFAULT) <> 0;
+         Paint(ClientRect);
+    End;
+  End;
+  Msg.Handled := True;
+  Msg.Result := 0;
 End;
 {$ENDIF}
 
 Procedure TBitBtn.Arrange;
 Var  space:LongInt;
-     rc1:TRect;
-     S,S1,S2:String;
-     P:Integer;
-     FBmp:TBitmap;
-     CX,CY:LongInt;
+  rc1:TRect;
+  S,S1,S2:String;
+  P:Integer;
+  FBmp:TBitmap;
+  CX,CY:LongInt;
 Begin
-     If Canvas = Nil Then Exit;
-     rc1 := ClientRect;
-     Inc(rc1.Right);
-     Inc(rc1.Top);
-     {Size Of the Output String}
-     S := Caption;
-     P := Pos(StandardMnemoChar,S);
-     IsMnemo := (P > 0) And (P < Length(S));
-     If IsMnemo Then
-     Begin
-          s1 := S;
-          {Draw normal portion}
-          s2 := Copy(s1,1,P-1);
-          Delete(s1,1,P);   {incl. mnemo}
-          Canvas.GetTextExtent(s2,CX,CY);
-          txt.Width:=CX;
-          txt.Height:=CY;
+  If Canvas = Nil Then Exit;
+  rc1 := ClientRect;
+  Inc(rc1.Right);
+  Inc(rc1.Top);
+  {Size Of the Output String}
+  S := Caption;
+  P := Pos(StandardMnemoChar,S);
+  IsMnemo := (P > 0) And (P < Length(S));
+  If IsMnemo Then
+  Begin
+       s1 := S;
+       {Draw normal portion}
+       s2 := Copy(s1,1,P-1);
+       Delete(s1,1,P);   {incl. mnemo}
+       Canvas.GetTextExtent(s2,CX,CY);
+       txt.Width:=CX;
+       txt.Height:=CY;
 
-          {Draw underlines portion}
-          s2 := Copy(s1,1,1);    {mnemo char}
-          Delete(s1,1,1);
-          Canvas.GetTextExtent(s2,CX,CY);
-          inc(txt.Width,CX);
-          If CY>txt.Height Then txt.Height:=CY;
+       {Draw underlines portion}
+       s2 := Copy(s1,1,1);    {mnemo char}
+       Delete(s1,1,1);
+       Canvas.GetTextExtent(s2,CX,CY);
+       inc(txt.Width,CX);
+       If CY>txt.Height Then txt.Height:=CY;
 
-          {Draw rest portion}
-          s2 := s1;
-          Canvas.GetTextExtent(s2,CX,CY);
-          inc(txt.Width,CX);
-          If CY>txt.Height Then txt.Height:=CY;
+       {Draw rest portion}
+       s2 := s1;
+       Canvas.GetTextExtent(s2,CX,CY);
+       inc(txt.Width,CX);
+       If CY>txt.Height Then txt.Height:=CY;
 
-          Delete(S,P,1); {Delete mnemo}
-     End
-     Else Canvas.GetTextExtent(S,txt.Width,txt.Height);
-     IsTxt := S <> '';
+       Delete(S,P,1); {Delete mnemo}
+  End
+  Else Canvas.GetTextExtent(S,txt.Width,txt.Height);
+  IsTxt := S <> '';
 
-     If FKind = bkCustom Then FBmp := FBitmap
-     Else FBmp := GetStdBtnBitmap(FKind);
+  If FKind = bkCustom Then FBmp := FBitmap
+  Else FBmp := GetStdBtnBitmap(FKind);
 
-     IsBmp := False;
-     bmp.Width := 0;
-     bmp.Height := 0;
-     If ShowBitBtnGlyph Or (ClassType <> TBitBtn) Or Designed Then
-       If FBmp <> Nil Then
-         If Not FBmp.Empty Then
+  IsBmp := False;
+  bmp.Width := 0;
+  bmp.Height := 0;
+  If ShowBitBtnGlyph Or (ClassType <> TBitBtn) Or Designed Then
+    If FBmp <> Nil Then
+      If Not FBmp.Empty Then
+      Begin
+           IsBmp := True;
+           bmp.Width := FBmp.Width Div NumGlyphs;
+           bmp.Height := FBmp.Height;
+      End;
+
+  If IsBmp And IsTxt Then space := FSpacing
+  Else space := 0;
+
+  If IsBmp Or IsTxt Then
+  Case FLayout Of
+    blGlyphLeft:
+    Begin
+         {determine full Size}
+         Int.Width := bmp.Width + space + txt.Width;
+
+         If bmp.Height > txt.Height Then Int.Height := bmp.Height
+         Else Int.Height := txt.Height;
+
+         Int.Bottom := ((rc1.Top - rc1.Bottom) - Int.Height) Div 2;
+
+         If FMargin >= 0 Then Int.Left := FMargin
+         Else Int.Left := ((rc1.Right - rc1.Left) - Int.Width) Div 2;
+
+         If IsBmp Then
          Begin
-              IsBmp := True;
-              bmp.Width := FBmp.Width Div NumGlyphs;
-              bmp.Height := FBmp.Height;
+              bmp.Left := Int.Left;
+              bmp.Bottom := Int.Bottom;
+              If bmp.Height < txt.Height
+              Then Inc(bmp.Bottom, (txt.Height - bmp.Height) Div 2);
          End;
+         If IsTxt Then
+         Begin
+              txt.Left := Int.Left + bmp.Width + space;
+              txt.Bottom := Int.Bottom;
+              If txt.Height < bmp.Height
+              Then Inc(txt.Bottom, (bmp.Height - txt.Height) Div 2);
+         End;
+    End;
+    blGlyphRight:
+    Begin
+         {determine full Size}
+         Int.Width := bmp.Width + space + txt.Width;
 
-     If IsBmp And IsTxt Then space := FSpacing
-     Else space := 0;
+         If bmp.Height > txt.Height Then Int.Height := bmp.Height
+         Else Int.Height := txt.Height;
 
-     If IsBmp Or IsTxt Then
-     Case FLayout Of
-       blGlyphLeft:
-       Begin
-            {determine full Size}
-            Int.Width := bmp.Width + space + txt.Width;
+         Int.Bottom := ((rc1.Top - rc1.Bottom) - Int.Height) Div 2;
 
-            If bmp.Height > txt.Height Then Int.Height := bmp.Height
-            Else Int.Height := txt.Height;
+         If FMargin >= 0 Then Int.Left := rc1.Right - Int.Width - FMargin
+         Else Int.Left := ((rc1.Right - rc1.Left) - Int.Width) Div 2;
 
-            Int.Bottom := ((rc1.Top - rc1.Bottom) - Int.Height) Div 2;
+         If IsTxt Then
+         Begin
+              txt.Left := Int.Left;
+              txt.Bottom := Int.Bottom;
+              If txt.Height < bmp.Height
+              Then Inc(txt.Bottom, (bmp.Height - txt.Height) Div 2);
+         End;
+         If IsBmp Then
+         Begin
+              bmp.Left := Int.Left + txt.Width + space;
+              bmp.Bottom := Int.Bottom;
+              If bmp.Height < txt.Height
+              Then Inc(bmp.Bottom, (txt.Height - bmp.Height) Div 2);
+         End;
+    End;
+    blGlyphTop:
+    Begin
+         {determine full Size}
+         Int.Height := bmp.Height + space + txt.Height;
 
-            If FMargin >= 0 Then Int.Left := FMargin
-            Else Int.Left := ((rc1.Right - rc1.Left) - Int.Width) Div 2;
+         If bmp.Width > txt.Width Then Int.Width := bmp.Width
+         Else Int.Width := txt.Width;
 
-            If IsBmp Then
-            Begin
-                 bmp.Left := Int.Left;
-                 bmp.Bottom := Int.Bottom;
-                 If bmp.Height < txt.Height
-                 Then Inc(bmp.Bottom, (txt.Height - bmp.Height) Div 2);
-            End;
-            If IsTxt Then
-            Begin
-                 txt.Left := Int.Left + bmp.Width + space;
-                 txt.Bottom := Int.Bottom;
-                 If txt.Height < bmp.Height
-                 Then Inc(txt.Bottom, (bmp.Height - txt.Height) Div 2);
-            End;
-       End;
-       blGlyphRight:
-       Begin
-            {determine full Size}
-            Int.Width := bmp.Width + space + txt.Width;
+         Int.Left := ((rc1.Right - rc1.Left) - Int.Width) Div 2;
 
-            If bmp.Height > txt.Height Then Int.Height := bmp.Height
-            Else Int.Height := txt.Height;
+         If FMargin >= 0 Then Int.Bottom := rc1.Top - Int.Height - FMargin
+         Else Int.Bottom := ((rc1.Top - rc1.Bottom) - Int.Height) Div 2;
 
-            Int.Bottom := ((rc1.Top - rc1.Bottom) - Int.Height) Div 2;
+         If IsTxt Then
+         Begin
+              txt.Left := Int.Left;
+              txt.Bottom := Int.Bottom;
+              If txt.Width < bmp.Width
+              Then Inc(txt.Left, (bmp.Width - txt.Width) Div 2);
+         End;
+         If IsBmp Then
+         Begin
+              bmp.Left := Int.Left;
+              bmp.Bottom := Int.Bottom + txt.Height + space;
+              If bmp.Width < txt.Width
+              Then Inc(bmp.Left, (txt.Width - bmp.Width) Div 2);
+         End;
+    End;
+    blGlyphBottom:
+    Begin
+         {determine full Size}
+         Int.Height := bmp.Height + space + txt.Height;
 
-            If FMargin >= 0 Then Int.Left := rc1.Right - Int.Width - FMargin
-            Else Int.Left := ((rc1.Right - rc1.Left) - Int.Width) Div 2;
+         If bmp.Width > txt.Width Then Int.Width := bmp.Width
+         Else Int.Width := txt.Width;
 
-            If IsTxt Then
-            Begin
-                 txt.Left := Int.Left;
-                 txt.Bottom := Int.Bottom;
-                 If txt.Height < bmp.Height
-                 Then Inc(txt.Bottom, (bmp.Height - txt.Height) Div 2);
-            End;
-            If IsBmp Then
-            Begin
-                 bmp.Left := Int.Left + txt.Width + space;
-                 bmp.Bottom := Int.Bottom;
-                 If bmp.Height < txt.Height
-                 Then Inc(bmp.Bottom, (txt.Height - bmp.Height) Div 2);
-            End;
-       End;
-       blGlyphTop:
-       Begin
-            {determine full Size}
-            Int.Height := bmp.Height + space + txt.Height;
+         Int.Left := ((rc1.Right - rc1.Left) - Int.Width) Div 2;
 
-            If bmp.Width > txt.Width Then Int.Width := bmp.Width
-            Else Int.Width := txt.Width;
+         If FMargin >= 0 Then Int.Bottom := FMargin
+         Else Int.Bottom := ((rc1.Top - rc1.Bottom) - Int.Height) Div 2;
 
-            Int.Left := ((rc1.Right - rc1.Left) - Int.Width) Div 2;
-
-            If FMargin >= 0 Then Int.Bottom := rc1.Top - Int.Height - FMargin
-            Else Int.Bottom := ((rc1.Top - rc1.Bottom) - Int.Height) Div 2;
-
-            If IsTxt Then
-            Begin
-                 txt.Left := Int.Left;
-                 txt.Bottom := Int.Bottom;
-                 If txt.Width < bmp.Width
-                 Then Inc(txt.Left, (bmp.Width - txt.Width) Div 2);
-            End;
-            If IsBmp Then
-            Begin
-                 bmp.Left := Int.Left;
-                 bmp.Bottom := Int.Bottom + txt.Height + space;
-                 If bmp.Width < txt.Width
-                 Then Inc(bmp.Left, (txt.Width - bmp.Width) Div 2);
-            End;
-       End;
-       blGlyphBottom:
-       Begin
-            {determine full Size}
-            Int.Height := bmp.Height + space + txt.Height;
-
-            If bmp.Width > txt.Width Then Int.Width := bmp.Width
-            Else Int.Width := txt.Width;
-
-            Int.Left := ((rc1.Right - rc1.Left) - Int.Width) Div 2;
-
-            If FMargin >= 0 Then Int.Bottom := FMargin
-            Else Int.Bottom := ((rc1.Top - rc1.Bottom) - Int.Height) Div 2;
-
-            If IsBmp Then
-            Begin
-                 bmp.Left := Int.Left;
-                 bmp.Bottom := Int.Bottom;
-                 If bmp.Width < txt.Width
-                 Then Inc(bmp.Left, (txt.Width - bmp.Width) Div 2);
-            End;
-            If IsTxt Then
-            Begin
-                 txt.Left := Int.Left;
-                 txt.Bottom := Int.Bottom + bmp.Height + space;
-                 If txt.Width < bmp.Width
-                 Then Inc(txt.Left, (bmp.Width - txt.Width) Div 2);
-            End;
-       End;
-     End;
+         If IsBmp Then
+         Begin
+              bmp.Left := Int.Left;
+              bmp.Bottom := Int.Bottom;
+              If bmp.Width < txt.Width
+              Then Inc(bmp.Left, (txt.Width - bmp.Width) Div 2);
+         End;
+         If IsTxt Then
+         Begin
+              txt.Left := Int.Left;
+              txt.Bottom := Int.Bottom + bmp.Height + space;
+              If txt.Width < bmp.Width
+              Then Inc(txt.Left, (bmp.Width - txt.Width) Div 2);
+         End;
+    End;
+  End;
 End;
 
 
 Procedure TBitBtn.Redraw(Const rec:TRect);
 Begin
-     If Canvas = Nil Then Exit;
-     If InRedraw Then Exit;
-     InRedraw := True; {MnemoString causes recursive Redraw}
+  If Canvas = Nil Then Exit;
+  If InRedraw Then Exit;
+  InRedraw := True; {MnemoString causes recursive Redraw}
 
-     If Canvas.ClipRect <> rec Then Canvas.ClipRect := rec; {manual call}
+  If Canvas.ClipRect <> rec Then Canvas.ClipRect := rec; {manual call}
 
-     DrawFrame(Down);
+  DrawFrame(Down);
 
-     If IsTxt Then DrawText(Caption,Down);
+  If IsTxt Then DrawText(Caption,Down);
 
-     If IsBmp Then
-     Begin
-          If FKind = bkCustom Then DrawBitmap(Glyph,Down)
-          Else DrawBitmap(GetStdBtnBitmap(FKind),Down);
-     End;
+  If IsBmp Then
+    Begin
+      If FKind = bkCustom
+        Then DrawBitmap(Glyph,Down)
+        Else DrawBitmap(GetStdBtnBitmap(FKind),Down);
+    End;
 
-     Inherited Redraw(rec);
+  Inherited Redraw(rec);
 
-     Canvas.DeleteClipRegion;
-     InRedraw := False;
+  Canvas.DeleteClipRegion;
+  InRedraw := False;
 End;
 
 
 Procedure TBitBtn.DrawFrame(Down:Boolean);
 Var  rc1:TRect;
 Begin
-     rc1 := ClientRect;
-     DrawButtonFrame(Self,rc1,Down,Default,HasFocus And Enabled);
-     Canvas.ClipRect := IntersectRect(Canvas.ClipRect,rc1);
+  rc1 := ClientRect;
+  DrawButtonFrame(Self,rc1,Down,Default,HasFocus And Enabled);
+  Canvas.ClipRect := IntersectRect(Canvas.ClipRect,rc1);
 End;
 
 
 Procedure TBitBtn.DrawText(Const Value:String;Down:Boolean);
 Var  rc1:TRect;
 Begin
-     Canvas.Brush.Color := Color;
+  Canvas.Brush.Color := Color;
 
-     rc1.Left := txt.Left;
-     rc1.Bottom := txt.Bottom;
-     If Down Then
-     Begin
-          Inc(rc1.Left);
-          Dec(rc1.Bottom);
-     End;
+  rc1.Left := txt.Left;
+  rc1.Bottom := txt.Bottom;
+  If Down Then
+  Begin
+       Inc(rc1.Left);
+       Dec(rc1.Bottom);
+  End;
 
-     rc1.Right := rc1.Left + txt.Width -1;
-     Canvas.Brush.Mode:=bmOpaque;
-     rc1.Top := rc1.Bottom + txt.Height -1;
-     If not Enabled Then
-     Begin
-          inc(rc1.Left);
-          dec(rc1.Bottom);
-          Canvas.Pen.Color:=clWhite;
-          If IsMnemo Then Canvas.MnemoTextOut(rc1.Left,rc1.Bottom, Value)
-          Else Canvas.TextOut(rc1.Left,rc1.Bottom, Value);
-          Canvas.Pen.Color:=clDkGray;
-          dec(rc1.Left);
-          inc(rc1.Bottom);
-     End
-     Else Canvas.Pen.Color:=PenColor;
-     If IsMnemo Then Canvas.MnemoTextOut(rc1.Left,rc1.Bottom, Value)
-     Else Canvas.TextOut(rc1.Left,rc1.Bottom, Value);
-     Canvas.Brush.Mode:=bmOpaque;
-     If not Enabled Then
-     Begin
-          inc(rc1.Right);
-          dec(rc1.Bottom);
-     End;
-     Canvas.ExcludeClipRect(rc1);
+  rc1.Right := rc1.Left + txt.Width -1;
+  Canvas.Brush.Mode:=bmOpaque;
+  rc1.Top := rc1.Bottom + txt.Height -1;
+  If not Enabled Then
+  Begin
+       inc(rc1.Left);
+       dec(rc1.Bottom);
+       Canvas.Pen.Color:=clWhite;
+       If IsMnemo Then Canvas.MnemoTextOut(rc1.Left,rc1.Bottom, Value)
+       Else Canvas.TextOut(rc1.Left,rc1.Bottom, Value);
+       Canvas.Pen.Color:=clDkGray;
+       dec(rc1.Left);
+       inc(rc1.Bottom);
+  End
+  Else Canvas.Pen.Color:=PenColor;
+  If IsMnemo Then Canvas.MnemoTextOut(rc1.Left,rc1.Bottom, Value)
+  Else Canvas.TextOut(rc1.Left,rc1.Bottom, Value);
+  Canvas.Brush.Mode:=bmOpaque;
+  If not Enabled Then
+  Begin
+       inc(rc1.Right);
+       dec(rc1.Bottom);
+  End;
+  Canvas.ExcludeClipRect(rc1);
 End;
 
 
@@ -1545,65 +1546,64 @@ End;
 
 Procedure TBitBtn.SetDefault(Value:Boolean);
 Begin
-     Inherited SetDefault(Value);
-
-     Paint(ClientRect);
+  Inherited SetDefault(Value);
+  Paint(ClientRect);
 End;
 
 
 Function TBitBtn.GetDown:Boolean;
 Begin
-     Result := FDown;
-     {$IFDEF OS2}
-     If Handle <> 0 Then Result := Boolean(WinSendMsg(Handle,BM_QUERYHILITE,0,0));
-     {$ENDIF}
+  Result := FDown;
+  {$IFDEF OS2}
+  If Handle <> 0 Then Result := Boolean(WinSendMsg(Handle,BM_QUERYHILITE,0,0));
+  {$ENDIF}
 End;
 
 
 Procedure TBitBtn.SetDown(Value:Boolean);
 Begin
-     If FDown = Value Then Exit;
-     FDown := Value;
-     {$IFDEF OS2}
-     If Handle <> 0 Then WinSendMsg(Handle,BM_SETHILITE,LongWord(FDown),0);
-     {$ENDIF}
-     {$IFDEF Win32}
-     Paint(ClientRect);
-     {$ENDIF}
+  If FDown = Value Then Exit;
+  FDown := Value;
+  {$IFDEF OS2}
+  If Handle <> 0 Then WinSendMsg(Handle,BM_SETHILITE,LongWord(FDown),0);
+  {$ENDIF}
+  {$IFDEF Win32}
+  Paint(ClientRect);
+  {$ENDIF}
 End;
 
 
 Procedure TBitBtn.SetLayout(Value:TButtonLayout);
 Begin
-     If FLayout <> Value Then
-     Begin
-          FLayout := Value;
-          Arrange;
-          Invalidate;
-     End;
+  If FLayout <> Value Then
+  Begin
+       FLayout := Value;
+       Arrange;
+       Invalidate;
+  End;
 End;
 
 
 Procedure TBitBtn.SetMargin(Value:LongInt);
 Begin
-     If FMargin <> Value Then
-     Begin
-          FMargin := Value;
-          Arrange;
-          Invalidate;
-     End;
+  If FMargin <> Value Then
+  Begin
+       FMargin := Value;
+       Arrange;
+       Invalidate;
+  End;
 End;
 
 
 Procedure TBitBtn.SetSpacing(Value:LongInt);
 Begin
-     If FSpacing <> Value Then
-       If FSpacing >= 0 Then
-       Begin
-            FSpacing := Value;
-            Arrange;
-            Invalidate;
-       End;
+  If FSpacing <> Value Then
+    If FSpacing >= 0 Then
+    Begin
+         FSpacing := Value;
+         Arrange;
+         Invalidate;
+    End;
 End;
 
 
@@ -1637,52 +1637,52 @@ End;
 Procedure TBitBtn.SetGlyph(NewBitmap:TBitmap);
 Var  OldBitmap:TBitmap;
 Begin
-     OldBitmap := FBitmap;
+  OldBitmap := FBitmap;
 
-     {Create internal Copy}
-     If NewBitmap <> Nil Then FBitmap := NewBitmap.Copy
-     Else FBitmap := Nil;
+  {Create internal Copy}
+  If NewBitmap <> Nil Then FBitmap := NewBitmap.Copy
+  Else FBitmap := Nil;
 
-     If FBitmap <> Nil Then Include(FBitmap.ComponentState, csDetail);
+  If FBitmap <> Nil Then Include(FBitmap.ComponentState, csDetail);
 
-     If OldBitmap <> Nil Then
-       If OldBitmap <> NewBitmap Then OldBitmap.Destroy;
+  If OldBitmap <> Nil Then
+    If OldBitmap <> NewBitmap Then OldBitmap.Destroy;
 
-     Kind := bkCustom; {!}
+  Kind := bkCustom; {!}
 
-     Arrange;
-     Invalidate;
+  Arrange;
+  Invalidate;
 End;
 
 
 Function TBitBtn.GetGlyph:TBitmap;
 Begin
-     If FBitmap = Nil Then
-     Begin
-          FBitmap.Create;
-          Include(FBitmap.ComponentState, csDetail);
-     End;
-     Result := FBitmap;
+  If FBitmap = Nil Then
+  Begin
+       FBitmap.Create;
+       Include(FBitmap.ComponentState, csDetail);
+  End;
+  Result := FBitmap;
 End;
 
 
 {$HINTS OFF}
 Procedure TBitBtn.MouseDown(Button:TMouseButton;ShiftState:TShiftState;X,Y:LongInt);
 Begin
-     Inherited MouseDown(Button,ShiftState,X,Y);
+  Inherited MouseDown(Button,ShiftState,X,Y);
 
-     {$IFDEF Win32}
-     If Self Is TSpeedButton Then exit;
-     If Button = mbLeft Then
-     Begin
-          Focus;
-          FDown := True;
-          Default := True;
-          Paint(ClientRect);
-          FDragging := True;
-          MouseCapture := True;
-     End;
-     {$ENDIF}
+  {$IFDEF Win32}
+  If Self Is TSpeedButton Then exit;
+  If Button = mbLeft Then
+  Begin
+       Focus;
+       FDown := True;
+       Default := True;
+       Paint(ClientRect);
+       FDragging := True;
+       MouseCapture := True;
+  End;
+  {$ENDIF}
 End;
 
 
@@ -1691,103 +1691,103 @@ Procedure TBitBtn.MouseMove(ShiftState:TShiftState;X,Y:LongInt);
 Var  NewDown:Boolean;
 {$ENDIF}
 Begin
-     Inherited MouseMove(ShiftState,X,Y);
+  Inherited MouseMove(ShiftState,X,Y);
 
-     {$IFDEF Win32}
-     If Self Is TSpeedButton Then exit;
-     If Not FDragging Then Exit;
-     NewDown := PointInRect(Point(X,Y),ClientRect);
+  {$IFDEF Win32}
+  If Self Is TSpeedButton Then exit;
+  If Not FDragging Then Exit;
+  NewDown := PointInRect(Point(X,Y),ClientRect);
 
-     If NewDown <> FDown Then
-     Begin
-          FDown := NewDown;
-          Paint(ClientRect);
-     End;
-     {$ENDIF}
+  If NewDown <> FDown Then
+  Begin
+       FDown := NewDown;
+       Paint(ClientRect);
+  End;
+  {$ENDIF}
 End;
 
 
 Procedure TBitBtn.MouseUp(Button:TMouseButton;ShiftState:TShiftState;X,Y:LongInt);
 Begin
-     Inherited MouseUp(Button,ShiftState,X,Y);
+  Inherited MouseUp(Button,ShiftState,X,Y);
 
-     {$IFDEF Win32}
-     If Self Is TSpeedButton Then exit;
-     If Button = mbLeft Then
-     Begin
-          If Not FDragging Then Exit;
-          FDragging := False;
-          FDown := False;
-          Paint(ClientRect);
-          MouseCapture := False;
-          If PointInRect(Point(X,Y),ClientRect) Then Click;
-     End;
-     {$ENDIF}
+  {$IFDEF Win32}
+  If Self Is TSpeedButton Then exit;
+  If Button = mbLeft Then
+  Begin
+       If Not FDragging Then Exit;
+       FDragging := False;
+       FDown := False;
+       Paint(ClientRect);
+       MouseCapture := False;
+       If PointInRect(Point(X,Y),ClientRect) Then Click;
+  End;
+  {$ENDIF}
 End;
 
 
 Procedure TBitBtn.MouseDblClick(Button:TMouseButton;ShiftState:TShiftState;X,Y:LongInt);
 Begin
-     Inherited MouseDblClick(Button,ShiftState,X,Y);
+  Inherited MouseDblClick(Button,ShiftState,X,Y);
 
-     {$IFDEF Win32}
-     If Button = mbLeft Then
-     Begin
-          MouseDown(Button,ShiftState,X,Y);
-     End;
-     {$ENDIF}
+  {$IFDEF Win32}
+  If Button = mbLeft Then
+  Begin
+       MouseDown(Button,ShiftState,X,Y);
+  End;
+  {$ENDIF}
 End;
 
 
 Procedure TBitBtn.CMTextChanged(Var Msg:TMessage);
 Begin
-     Arrange;
-     Invalidate;
+  Arrange;
+  Invalidate;
 End;
 {$HINTS ON}
 
 
 Procedure TBitBtn.ReadSCUResource(Const ResName:TResourceName;Var Data;DataLen:LongInt);
 Begin
-     If ResName = rnGlyph Then
-     Begin
-          If DataLen <> 0 Then Glyph.ReadSCUResource(rnBitmap,Data,DataLen);
-     End
-     Else Inherited ReadSCUResource(ResName,Data,DataLen);
+  If ResName = rnGlyph Then
+  Begin
+       If DataLen <> 0 Then Glyph.ReadSCUResource(rnBitmap,Data,DataLen);
+  End
+  Else Inherited ReadSCUResource(ResName,Data,DataLen);
 End;
 
 
 Function TBitBtn.WriteSCUResource(Stream:TResourceStream):Boolean;
 Begin
-     Result := Inherited WriteSCUResource(Stream);
-     If Not Result Then Exit;
+  Result := Inherited WriteSCUResource(Stream);
+  If Not Result Then Exit;
 
-     If (FBitmap <> Nil) And (ComponentState * [csDetail] = [])
-     Then Result := FBitmap.WriteSCUResourceName(Stream,rnGlyph);
+  If (FBitmap <> Nil) And (ComponentState * [csDetail] = [])
+  Then Result := FBitmap.WriteSCUResourceName(Stream,rnGlyph);
 End;
 
 
 Procedure TBitBtn.Click;
 Var  Control:TControl;
 Begin
-     Case FKind Of {they have Not A modal Result automatically}
-       bkClose:
-       Begin
-            If (Form <> Nil) And Not Designed Then Form.Close
-            Else Inherited Click;
-       End;
-       bkHelp:
-       Begin
-            Control := Self;
-            While (Control <> Nil) And (Control.HelpContext = 0)
-               Do Control := Control.parent;
+  Case FKind Of {they have Not A modal Result automatically}
+    bkClose:
+    Begin
+         If (Form <> Nil) And Not Designed Then Form.Close
+         Else Inherited Click;
+    End;
+    bkHelp:
+    Begin
+         Control := Self;
+         While (Control <> Nil) And (Control.HelpContext = 0)
+            Do Control := Control.parent;
 
-            If Control <> Nil Then
-              Application.HHelpContext(Control.HelpContext, Control.HelpContextString)  // Martin
-            Else Inherited Click;
-       End;
-       Else Inherited Click;
-     End;
+         If Control <> Nil Then
+           Application.HHelpContext(Control.HelpContext, Control.HelpContextString)  // Martin
+         Else Inherited Click;
+    End;
+    Else Inherited Click;
+  End;
 End;
 
 

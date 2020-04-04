@@ -323,24 +323,22 @@ TYPE
 
 TYPE TPropertyScope=Byte;
 
-CONST
-     PropScope_Published  = 8;
-     PropScope_Stored     = 16;
+CONST PropScope_Published  = 8;
+      PropScope_Stored     = 16;
 
 TYPE TPropertyTypeInfo=RECORD
-                             Typ:TPropertyType;
-                             Size:LONGWORD;
-                             PropInfo:Pointer;
-                             NameTable:Pointer;
-                             TypeInfo:Pointer;
-                             Scope:TPropertyScope;
-                             Read:TPropertyReadWriteRecord;
-                             Write:TPropertyReadWriteRecord;
+                         Typ      : TPropertyType;
+                         Size     : LONGWORD;
+                         PropInfo : Pointer;
+                         NameTable: Pointer;
+                         TypeInfo : Pointer;
+                         Scope    : TPropertyScope;
+                         Read     : TPropertyReadWriteRecord;
+                         Write    : TPropertyReadWriteRecord;
                        END;
 
 {Property enumeration}
-TYPE
-    TPropertyEnumProc=PROCEDURE(CONST PropertyName:PString;CONST Info:TPropertyTypeInfo);
+TYPE TPropertyEnumProc=PROCEDURE(CONST PropertyName:PString;CONST Info:TPropertyTypeInfo);
 
 TYPE
     TObject = CLASS;
@@ -4871,13 +4869,13 @@ END;
 
 PROCEDURE Beep(Freq,duration:LONGWORD);
 BEGIN
-     ASM
-         PUSH DWORD PTR duration
-         PUSH DWORD PTR freq
-         MOV AL,2
-         CALLDLL DOSCALLS,286  //DosBeep
-         ADD ESP,8
-     END;
+  ASM
+    PUSH DWORD PTR duration
+    PUSH DWORD PTR freq
+    MOV AL,2
+    CALLDLL DOSCALLS,286  //DosBeep
+    ADD ESP,8
+  END;
 END;
 {$ENDIF}
 
@@ -4972,7 +4970,7 @@ VAR
 PROCEDURE NewExceptionFilter(ExcptInfo:PExcptInfo);
 VAR Dummy:PExcptInfo;
 BEGIN
-     exit;
+//     exit;
      ExcptInfo^.Next:=NIL;
      ExcptInfo^.ExcptObject:=NIL;
      ASM
@@ -5163,12 +5161,12 @@ END;
 {$HINTS ON}
 
 IMPORTS
-     PROCEDURE RaiseExceptionAPI(dwExceptionCode,dwExceptionFlags:LONGWORD;
+  PROCEDURE RaiseExceptionAPI(dwExceptionCode,dwExceptionFlags:LONGWORD;
                               nNumberOfArguments:LONGWORD;VAR lpArguments);
                   APIENTRY;  'KERNEL32' name 'RaiseException';
-    FUNCTION MessageBox(ahwnd:LONGWORD;CONST lpText,lpCaption:CSTRING;
+  FUNCTION MessageBox(ahwnd:LONGWORD;CONST lpText,lpCaption:CSTRING;
                         uType:LONGWORD):LONGWORD;
-               APIENTRY; 'USER32' name 'MessageBoxA';
+                  APIENTRY; 'USER32' name 'MessageBoxA';
 END;
 
 {$HINTS OFF}
@@ -5245,7 +5243,9 @@ BEGIN
      ExcptAddr:=POINTER(Adress);
 
      dummy:=ExcptList;
-     IF dummy<>NIL THEN WHILE dummy^.Next<>NIL DO dummy:=dummy^.Next;
+     IF dummy<>NIL THEN
+       WHILE dummy^.Next<>NIL DO
+         dummy:=dummy^.Next;
      Found:=NIL;
      WHILE dummy<>NIL DO
      BEGIN
@@ -5307,11 +5307,11 @@ END;
 
 PROCEDURE Beep(Freq,duration:LONGWORD);
 BEGIN
-     ASM
-         PUSH DWORD PTR duration
-         PUSH DWORD PTR freq
-         CALLDLL KERNEL32,'Beep'
-     END;
+  ASM
+    PUSH DWORD PTR duration
+    PUSH DWORD PTR freq
+    CALLDLL KERNEL32,'Beep'
+  END;
 END;
 {$ENDIF}
 
@@ -6861,6 +6861,7 @@ BEGIN
           s:=Path;
           delete(s,1,3);
           IF s='' THEN exit;
+          if s[Length(s)] = '\' then dec(s[0]);  //RG 08-Dez-10
           c:=s;
           goto doit;
      END;
@@ -8380,6 +8381,7 @@ BEGIN
 
      IF fi^.Handle=$ffffffff THEN
      BEGIN
+         s := '';  //RG 15-Mai-19
          InOutRes:=6; {Invalid handle}
          IF RaiseIOError THEN InOutError(InOutRes,Adr)
          ELSE exit;
@@ -9311,7 +9313,7 @@ END;
 
 PROCEDURE WriteLine;
 BEGIN
-     ScreenInOut.WriteLF;
+  ScreenInOut.WriteLF;
 END;
 
 PROCEDURE ReadLine;
@@ -9397,12 +9399,12 @@ END;
 {Constructor for all classes}
 CONSTRUCTOR TObject.Create;
 BEGIN
-     {
-     p:=POINTER(SELF);
-     inc(p,4);
-     fillchar(p^,4,0);
-     }
-     {InitInstance(POINTER(SELF));} {Memory is always initialized with zero}
+  {
+  p:=POINTER(SELF);
+  inc(p,4);
+  fillchar(p^,4,0);
+  }
+  {InitInstance(POINTER(SELF));} {Memory is always initialized with zero}
 END;
 
 {Destructor for all classes}
@@ -9722,7 +9724,7 @@ END;
 {Frees an instance of a class}
 PROCEDURE TObject.Free;
 BEGIN
-     IF POINTER(SELF)<>NIL THEN Self.Destroy;
+  IF POINTER(SELF)<>NIL THEN Self.Destroy;
 END;
 
 {frees an Instance of a class}
@@ -12610,8 +12612,8 @@ END;
 
 {$IFDEF OS2}
 IMPORTS
-       FUNCTION DosExit(action,result:LONGWORD):LONGWORD;
-                    APIENTRY;             'DOSCALLS' index 234;
+  FUNCTION DosExit(action,result:LONGWORD):LONGWORD;
+               APIENTRY;             'DOSCALLS' index 234;
 END;
 {$ENDIF}
 
@@ -12645,7 +12647,6 @@ BEGIN
        AppHandleIntern:=0;
   END;
   {$ENDIF}
-
   SysExit;
 END;
 
@@ -12726,7 +12727,6 @@ PROCEDURE Halt(Code:LONGWORD);
 BEGIN
   CleanUp;
   ExitCode:=Code;
-
   ASM
 !exloop:
     PUSHL *!raddr                     //Return adress for ExitProc
@@ -12748,7 +12748,7 @@ PROCEDURE HaltIntern(Code:LONGWORD);
 VAR
    cs:CSTRING;
    cTitle:CSTRING;
-BEGIN                  
+BEGIN
   ExitCode:=Code;
   IF ExitCode<>0 THEN
     BEGIN
@@ -16843,12 +16843,14 @@ BEGIN
   MinStack:=(ESPA-StackSize)+16384;
 
   {$IFDEF OS2}
-  IF DLLModule<>0 THEN ExitProc:=@ExitAllDLL
-  ELSE ExitProc:=@ExitAll;
+  IF DLLModule<>0
+    THEN ExitProc:=@ExitAllDLL
+    ELSE ExitProc:=@ExitAll;
   {$ENDIF}
   {$IFDEF Win32}
-  IF ModuleCount<>0 THEN ExitProc:=@ExitAllDLL
-  ELSE ExitProc:=@ExitAll;
+  IF ModuleCount<>0
+    THEN ExitProc:=@ExitAllDLL
+    ELSE ExitProc:=@ExitAll;
   ArgStart:=GetCommandLine;
   DllModule:=GetModuleHandle(NIL);
   {$ENDIF}
@@ -17624,12 +17626,12 @@ END;
 
 FUNCTION IsConsole:BOOLEAN;
 BEGIN
-     result:=ApplicationType<>cApplicationType_GUI;
+  result:=ApplicationType<>cApplicationType_GUI;
 END;
 
 FUNCTION IsLibrary:BOOLEAN;
 BEGIN
-     result:=DllModule<>0;
+  result:=DllModule<>0;
 END;
 
 
@@ -17726,5 +17728,8 @@ END.
   24-Feb-09  PE         Floating-Point-Routinen vereinfacht und korrigiert (sinh und tanh),
                         Exception-Handling fÅr OS/2 aktiviert.
   22-Mar-09  PE         Controlword les- und setzbar, lokale Speicherung des CW
+  03-Mai-10  WD         NewExceptionFilter: Den Befehl "Exit" entfernt (gleich am Anfang).
+  08-Dez-10  RG         ChDir verbessert; z.B. ChDir('C:\var\') funktioniert auch
+  15-Mai-19  RG         TextRead: RÅckgabestring leer fals Lesen nicht mîglich
 }
 

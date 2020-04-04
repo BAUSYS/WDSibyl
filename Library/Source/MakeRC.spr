@@ -4,7 +4,7 @@ ApplicationIcon=
 
 [Application Options OS/2]
 
-ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\DEFAULT_OS2.ICO
+ApplicationIcon=P:\WDSibyl\Bin\OS2\DEFAULT_OS2.ICO
 
 [Application Options Win32]
 
@@ -13,27 +13,12 @@ ApplicationIcon=P:\WDSIBYL\WDSIBYL\BIN\OS2\DEFAULT_Win32.ICO
 [Browser Files]
 
 File0=SYSTEM
-File1=TABCTRLS.srw
-File2=SPIN.srw
-File3=SEVEN.srw
-File4=MMEDIA.srw
-File5=LED.srw
-File6=GLYPHBTN.srw
-File7=EDITLIST.srw
-File8=DIROUTLN.srw
-File9=DBCTRLS.srw
-File10=COOLBAR.srw
-File11=CHECKLB.srw
-File12=BUTTONS.srw
-File13=GERMAN.srw
-File14=ENGLISH.srw
-File15=CURS_W32.srw
 
 [Compiler Options]
 
 CodeGeneration=
 Syntax=
-Optimize=OptimizeCommonSub,OptimizePeephole
+Optimize=OptimizeCommonSub
 RuntimeCheck=
 CondDefine=
 
@@ -45,7 +30,7 @@ MaxErrors=10
 
 [Component Library OS/2]
 
-CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\CompLib.dll
+CompLibName=..\..\.\Bin\OS2\CompLib.dll
 
 [Component Library Win32]
 
@@ -83,21 +68,21 @@ CompInstallDir=
 
 [Directories OS/2]
 
-LastDir=
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Lib
+LastDir=P:\WDSibyl\IDE\Source
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
 LibSrcDir=
-IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Compnt
+IncSrcDir=P:\WDSibyl\Library\Source\RTL;P:\WDSibyl\Library\Source\RC;P:\WDSibyl\IDE\Source
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
 
 LastDir=
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Lib
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
 LibSrcDir=
 IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Compnt
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
@@ -121,7 +106,7 @@ Find15=usser
 [General]
 
 Version=Sibyl Project Ver2.05
-ProjectName=P:\WDSibyl\WDSibyl\Library\Source\MakeRC.spr
+ProjectName=P:\WDSibyl\Library\Source\MakeRC.spr
 ProjectType=NonVisual
 RunParameter=
 InActiveLanguages=
@@ -134,32 +119,37 @@ File0=.\RC\Language.RC
 File1=.\RC\DBCTRLS.RC
 File2=.\RC\COOLBAR.RC
 File3=.\RC\CHECKLB.RC
-File4=.\RC\CURS_W32.RC
-File5=.\RC\CURS_OS2.RC
 
 [Last Open Files]
 
 File0=.\MakeRC.PAS
 File0.Left=-1
 File0.Bottom=-1
-File0.Width=855
-File0.Height=478
-File0.Column=12
-File0.Line=4
+File0.Width=952
+File0.Height=604
+File0.Column=11
+File0.Line=13
 File1=.\RC\BUTTONS.RC
 File1.Left=-1
 File1.Bottom=-1
-File1.Width=855
-File1.Height=478
+File1.Width=952
+File1.Height=604
 File1.Column=13
 File1.Line=13
 File2=.\RC\SPCC.INC
 File2.Left=-1
 File2.Bottom=-1
-File2.Width=855
-File2.Height=478
-File2.Column=16
-File2.Line=12
+File2.Width=952
+File2.Height=604
+File2.Column=1
+File2.Line=355
+File3=..\..\.\IDE\Source\WDSIBYL.RC
+File3.Left=-1
+File3.Bottom=-1
+File3.Width=952
+File3.Height=604
+File3.Column=100
+File3.Line=381
 
 [Linker Options]
 
@@ -177,7 +167,7 @@ Stack=256
 
 [Project Files]
 
-Primary=.\MakeRC.PAS
+Primary=
 MainFile0=.\MakeRC.PAS
 MainFile0.Ext=.EXE
 MainFile0.Checksum=0
@@ -199,6 +189,21 @@ MainFile0.File13=.\RC\SPCC.INC
 MainFile0.File14=.\RC\CURS_OS2.RC
 MainFile0.File15=.\RC\CURS_W32.RC
 MainFile0.File16=[Dependencies]
+MainFile0.Dependency0=.\RTL\SYSTEM.PAS
+MainFile0.Dependency1=.\RC\TABCTRLS.RC
+MainFile0.Dependency2=.\RC\SPIN.RC
+MainFile0.Dependency3=.\RC\SEVEN.RC
+MainFile0.Dependency4=.\RC\MMEDIA.RC
+MainFile0.Dependency5=.\RC\LED.RC
+MainFile0.Dependency6=.\RC\GLYPHBTN.RC
+MainFile0.Dependency7=.\RC\EDITLIST.RC
+MainFile0.Dependency8=.\RC\DIROUTLN.RC
+MainFile0.Dependency9=.\RC\DBCTRLS.RC
+MainFile0.Dependency10=.\RC\COOLBAR.RC
+MainFile0.Dependency11=.\RC\CHECKLB.RC
+MainFile0.Dependency12=.\RC\BUTTONS.RC
+MainFile0.Dependency13=.\RC\LANGUAGE.RC
+MainFile0.Dependency14=.\RC\CURS_OS2.RC
 
 [Replace History]
 

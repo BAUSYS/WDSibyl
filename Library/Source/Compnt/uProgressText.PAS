@@ -1,3 +1,11 @@
+{ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+ บ                                                                          บ
+ บ    WDSibyl Component                                                     บ
+ บ                                                                          บ
+ บ    Copyright (C) 2005..     Ing. Wolfgang Draxler, All rights reserved.  บ
+ บ                                                                          บ
+ ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
+
 Unit uProgressText;
 
 {
@@ -149,8 +157,7 @@ procedure tTProgressText.Redraw (Const rec : tRect);
      If Canvas = Nil Then Exit;
      Inherited Redraw(rec);
 
-     if (goSysInfo.OS.Platform = OS2Ver20) or
-        (goSysInfo.OS.Platform = OS2Ver30)
+     if (goSysInfo.OS.System = SysOS2) // Platform in [pfOS2Ver20, pfOS2Ver30, ])
        then
          Begin
            DarkColor := clWindowFrame;
@@ -231,5 +238,6 @@ Initialization
 End.
 
 { -- date -- -- from -- -- changes ----------------------------------------------
-  09-Aug-04  MV         OEM to ANSI conversion for Windows added
+  09-Aug-04    MV       OEM to ANSI conversion for Windows added
+     Nov-11?   WD?      gendert auf: goSysInfo.OS.System = SysOS2
 }

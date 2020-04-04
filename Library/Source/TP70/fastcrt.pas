@@ -1,16 +1,15 @@
+
+{ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+ บ                                                                          บ
+ บ    WDSibyl TP70 Library                                                  บ
+ บ                                                                          บ
+ บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
+ บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ                                                                          บ
+ ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
+
+
 UNIT fastcrt;
-
-{***************************************************************************
- *  Speed-Pascal/2 V 2.0                                                   *
- *                                                                         *
- *  CRT Standard Unit                                                      *
- *                                                                         *
- *  (C) 1995 SpeedSoft. All rights reserved.                               *
- *                                                                         *
- *  Note: Some constants/variables moved to SYSTEM                         *
- *                                                                         *
- ***************************************************************************}
-
 
 {
   by: Martin Vieregg www.hypermake.de

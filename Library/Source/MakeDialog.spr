@@ -4,7 +4,7 @@ ApplicationIcon=
 
 [Application Options OS/2]
 
-ApplicationIcon=
+ApplicationIcon=P:\WDSibyl\Bin\OS2\DEFAULT_OS2.ICO
 
 [Application Options Win32]
 
@@ -67,9 +67,9 @@ File51=TOOLSAPI
 
 [Compiler Options]
 
-CodeGeneration=ASMSource
+CodeGeneration=
 Syntax=
-Optimize=OptimizeCommonSub,OptimizePeephole
+Optimize=OptimizeCommonSub
 RuntimeCheck=
 CondDefine=
 
@@ -81,7 +81,7 @@ MaxErrors=10
 
 [Component Library OS/2]
 
-CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\CompLib.dll
+CompLibName=..\..\.\Bin\OS2\CompLib.dll
 
 [Component Library Win32]
 
@@ -110,21 +110,21 @@ SPCC_Exceptions=4194303
 
 [Directories OS/2]
 
-LastDir=
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Lib
+LastDir=P:\WDSIBYL\BIN\OS2
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
 LibSrcDir=
-IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Compnt
+IncSrcDir=P:\WDSibyl\Library\Source\SPCC;P:\WDSibyl\Library\Source\RTL\OS2;P:\WDSibyl\Library\Source\RTL;P:\WDSibyl\Library\Source\TP70;P:\WDSibyl\Library\Source\RC
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
 
 LastDir=
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Lib
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
 LibSrcDir=
 IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Compnt
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
@@ -148,7 +148,7 @@ Find15=cmopen
 [General]
 
 Version=Sibyl Project Ver2.05
-ProjectName=P:\WDSibyl\WDSibyl\Library\Source\MakeDialog.spr
+ProjectName=P:\WDSibyl\Library\Source\MakeDialog.spr
 ProjectType=NonVisual
 RunParameter=
 InActiveLanguages=
@@ -160,10 +160,24 @@ Platform=OS/2
 File0=.\MakeDialog.PAS
 File0.Left=-1
 File0.Bottom=-1
-File0.Width=839
-File0.Height=626
-File0.Column=21
-File0.Line=5
+File0.Width=952
+File0.Height=604
+File0.Column=20
+File0.Line=11
+File1=.\SPCC\DIALOGS.PAS
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=952
+File1.Height=604
+File1.Column=17
+File1.Line=23
+File2=.\RTL\OS2\BSEDOS.PAS
+File2.Left=-1
+File2.Bottom=-1
+File2.Width=952
+File2.Height=604
+File2.Column=18
+File2.Line=17
 
 [Linker Options]
 
@@ -184,10 +198,51 @@ Stack=256
 Primary=
 MainFile0=.\MakeDialog.PAS
 MainFile0.Ext=.EXE
-MainFile0.Checksum=11264
+MainFile0.Checksum=10752
 MainFile0.Expanded=False
 MainFile0.File0=.\Dialog\DIALOGS.PAS
 MainFile0.File1=[Dependencies]
+MainFile0.Dependency0=.\RTL\SYSTEM.PAS
+MainFile0.Dependency1=.\RTL\OS2\OS2DEF.PAS
+MainFile0.Dependency2=.\RTL\OS2\BSETIB.PAS
+MainFile0.Dependency3=.\RTL\OS2\BSEEXCPT.PAS
+MainFile0.Dependency4=.\RTL\OS2\BSEDOS.PAS
+MainFile0.Dependency5=.\RTL\OS2\BSEERR.PAS
+MainFile0.Dependency6=.\RTL\OS2\PMWIN.PAS
+MainFile0.Dependency7=.\RTL\OS2\PMBITMAP.PAS
+MainFile0.Dependency8=.\RTL\OS2\PMGPI.PAS
+MainFile0.Dependency9=.\RTL\OS2\PMSTDDLG.PAS
+MainFile0.Dependency10=.\RTL\OS2\PMWP.PAS
+MainFile0.Dependency11=.\RTL\OS2\PMSHL.PAS
+MainFile0.Dependency12=.\RTL\SYSUTILS.PAS
+MainFile0.Dependency13=.\RTL\USTREAM.PAS
+MainFile0.Dependency14=.\RTL\ULIST.PAS
+MainFile0.Dependency15=.\RTL\USTRING.PAS
+MainFile0.Dependency16=.\RTL\OS2\BSEREGISTRY.PAS
+MainFile0.Dependency17=.\RTL\INIFILES.PAS
+MainFile0.Dependency18=.\RTL\USYSCLASS.PAS
+MainFile0.Dependency19=.\RTL\OS2\PMSPL.PAS
+MainFile0.Dependency20=.\RTL\PMWINX.PAS
+MainFile0.Dependency21=.\RTL\USYSINFO.PAS
+MainFile0.Dependency22=.\TP70\DOS.PAS
+MainFile0.Dependency23=.\RTL\COLOR.PAS
+MainFile0.Dependency24=.\SPCC\CLASSES.PAS
+MainFile0.Dependency25=.\SPCC\MESSAGES.PAS
+MainFile0.Dependency26=.\RTL\OS2\PMDEV.PAS
+MainFile0.Dependency27=.\RTL\OS2\PMHELP.PAS
+MainFile0.Dependency28=.\SPCC\CLIPBRD.PAS
+MainFile0.Dependency29=.\SPCC\UCONVERT.PAS
+MainFile0.Dependency30=.\SPCC\ULANGUAGE.PAS
+MainFile0.Dependency31=.\SPCC\MENUS.PAS
+MainFile0.Dependency32=.\SPCC\PRINTERS.PAS
+MainFile0.Dependency33=.\SPCC\FORMS.PAS
+MainFile0.Dependency34=.\SPCC\GRAPHICS.PAS
+MainFile0.Dependency35=.\SPCC\BUTTONS.PAS
+MainFile0.Dependency36=.\SPCC\STDCTRLS.PAS
+MainFile0.Dependency37=.\SPCC\EXTCTRLS.PAS
+MainFile0.Dependency38=.\SPCC\COMCTRLS.PAS
+MainFile0.Dependency39=.\SPCC\FILECTRL.PAS
+MainFile0.Dependency40=.\SPCC\DIALOGS.PAS
 
 [Replace History]
 

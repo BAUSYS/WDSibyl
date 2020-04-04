@@ -1,9 +1,10 @@
 
 {ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
  บ                                                                          บ
- บ    Sibyl Component                                                       บ
+ บ    WDSibyl Internet Component Classes                                    บ
  บ                                                                          บ
  บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
+ บ    Copyright (C) 2005..     Ing. Wolfgang Draxler, All rights reserved.  บ
  บ                                                                          บ
  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
    
@@ -20,7 +21,7 @@ Uses Os2Def,BseDos,PmWin;
 Uses WinDef,WinBase,WinUser;
 {$ENDIF}
 
-Uses SysUtils,Classes,Forms,Dialogs,
+Uses SysUtils,Classes,Forms,Dialogs,StdCtrls,
      uString, uStream;
 
 Const
@@ -536,12 +537,43 @@ Type
                               Var Buf;BufLen:LongWord);
   End;
 
+  tLabelLink = Class(tLabel)
+    Private
+      fUrl : String;
+      Property OnClick;
+
+      Procedure evOnClick(Sender: TObject);
+    Protected
+      Procedure SetupComponent;Override;
+    Published
+      Property URL : String Read fUrl Write fUrl;
+  end;
+
+  Function InsertLabelLink(iParent:TControl;iLeft,iBottom,iWidth,iHeight:LongInt;
+                           iURL:String):TLabelLInk;
+
+
 Implementation
+
+Uses uSysClass, Color, Graphics;
+
+
+Function InsertLabelLink(iParent:TControl;iLeft,iBottom,iWidth,iHeight:LongInt;
+                         iURL:String):TLabelLink;
+
+Begin
+  Result.Create(iParent);
+  Result.SetWindowPos(iLeft,iBottom,iWidth,iHeight);
+  Result.Caption := iURL;
+  Result.AutoSize:= False;  {!}
+  Result.parent  := iParent;
+  Result.Url     := iURL;
+End;
 
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Internet Classes                                                  บ
 บ                                                                           บ
 บ This section: THTTPBrowser Class Implementation                           บ
 บ                                                                           บ
@@ -1548,7 +1580,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Internet Classes                                                  บ
 บ                                                                           บ
 บ This section: TFTP Class Implementation                                   บ
 บ                                                                           บ
@@ -2088,7 +2120,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Internet Classes                                                  บ
 บ                                                                           บ
 บ This section: TTCP Class Implementation                                   บ
 บ                                                                           บ
@@ -2609,7 +2641,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Internet Classes                                                  บ
 บ                                                                           บ
 บ This section: TUDP Class Implementation                                   บ
 บ                                                                           บ
@@ -2688,11 +2720,45 @@ Begin
           FErrorCode:=Fsock_errno;
           TCPError(FErrorCode);
      End;
-
 End;
 
+{
+ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+บ                                                                           บ
+บ WDSibyl Internet Classes                                                  บ
+บ                                                                           บ
+บ This section: tLabelLink Class Implementation                             บ
+บ                                                                           บ
+ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+}
+
+Procedure tLabelLink.evOnClick(Sender: TObject);
+
+Var ExecBrowser: tcExec;
+
+Begin
+  if fUrl='' then exit;
+  ExecBrowser.Create(fUrl);
+  ExecBrowser.ExecViaSession:=true;
+  ExecBrowser.AsynchExec:=true;
+  ExecBrowser.URLSupport:=true;
+  ExecBrowser.StartProgram;
+  ExecBrowser.Destroy;
+End;
+
+Procedure tLabelLink.SetupComponent;
+
+Begin
+  inherited SetupComponent;
+  fUrl:='http://www.';
+  Caption:=fUrl;
+  PenColor:=clBlue;
+  OnClick:=evOnClick;
+End;
+
+
 Initialization
-   RegisterClasses([THTTPBrowser,TFTP,TUDP,TTCP]);
+  RegisterClasses([THTTPBrowser,TFTP,TUDP,TTCP, tLabelLink]);
 End.
 
 { -- date --  -- from -- -- changes ----------------------------------------------
@@ -2700,4 +2766,6 @@ End.
                          CSTRING[...STRING] waren falsch bersetzt. Jeweils -1
                          eingefgt.
   01-Feb-07   WD         Umbau von der Funktion tFTP.GetRemoteDir
+  29-Mar-10   WD         Einbau von tLabelLink
+
 }

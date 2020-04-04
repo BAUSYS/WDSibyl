@@ -1,10 +1,16 @@
+
+{ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+ บ                                                                          บ
+ บ    WDSibyl Runtime Library for OS/2                                      บ
+ บ                                                                          บ
+ บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
+ บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ                                                                          บ
+ ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
+
 UNIT Process;
 
 {**************************************************************************
- *                 General Unit for Speed-Pascal/2                        *
- *                                                                        *
- *                                                                        *
- * Copyright (C) 1995..96 SpeedSoft                                       *
  *                                                                        *
  * Basic objects for process and thread handling                          *
  *                                                                        *

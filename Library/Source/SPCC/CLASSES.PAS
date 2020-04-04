@@ -333,6 +333,15 @@ Const
     variable For Objects. Some Classes allow the specification
     Of Objects To be notified Of changes. }
 
+// Allgemeine INI-Sections
+Var AppIniFile : tIniFile;
+
+Const INI_Sec_Program  = 'Program';
+      INI_Sec_FormInfo = 'FormInfo';
+
+Const INI_Idnt_ProgramRegName= 'RegName';
+      INI_Idnt_ProgramRegCode= 'RegCode';
+
 // Konstanten fuer die Methoden WriteInfoToINI und ReadInfoFromINI;
 Const TagINI_End           = '];';
       TagINI_Control       = '[tControl=';
@@ -806,13 +815,6 @@ Function ClassPropertyEditorAvailable(ClassName:String):Boolean;
 Procedure AddDesignerPopupEvent(AString:TStringList;Caption:String;Id:LongInt);
 
 Function InDesigner:Boolean;
-
-// Allgemeine INI-Sections
-Var AppIniFile : tIniFile;
-
-Const
-   INI_Sec_Program  = 'Program';
-   INI_Sec_FormInfo = 'FormInfo';
 
 Implementation
 
@@ -1308,7 +1310,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: Some useful functions                                       บ
 บ                                                                           บ
@@ -1469,7 +1471,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: SCU File format types And records                           บ
 บ                                                                           บ
@@ -1645,7 +1647,7 @@ Type
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TPersistent Class Implementation                            บ
 บ                                                                           บ
@@ -1675,7 +1677,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TComponent Class Implementation                             บ
 บ                                                                           บ
@@ -3191,7 +3193,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: General functions Implementation                            บ
 บ                                                                           บ
@@ -4856,7 +4858,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TStringItem Class Implementation                            บ
 บ                                                                           บ
@@ -4891,7 +4893,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TBits Class Implementation                                  บ
 บ                                                                           บ
@@ -4966,7 +4968,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TPropertyEditClassDialog Class Implementation               บ
 บ                                                                           บ
@@ -5260,7 +5262,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TCollectionItem Class Implementation                        บ
 บ                                                                           บ
@@ -5315,7 +5317,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TCollection Class Implementation                            บ
 บ                                                                           บ
@@ -5469,6 +5471,6 @@ End.
   09-Mar-06  WD         Paramstr(0) durch goSysInfo ersetzt.
   02-Dez-06  WD         Entfernen der Variable "InsideLanguageDesigner"
   01-Jan-08  WD         GetTempFileName ist jetzt in SysUtil gewandert.
-  15-Mar.08  MV         Const-Teil: kbCtrlBkSp: OS/2 liefert hier immer eine gedrckte Alt Taste
+  15-Mar-08  MV         Const-Teil: kbCtrlBkSp: OS/2 liefert hier immer eine gedrckte Alt Taste
 }
 

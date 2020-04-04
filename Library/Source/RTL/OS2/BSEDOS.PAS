@@ -9,7 +9,7 @@
  藩様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様夕}
 
 
-UNIT BseDos;
+UNIT BSEDOS;
 
 {****************************************************************************
  *                                                                          *
@@ -942,55 +942,74 @@ TYPE
                 END;
 
 CONST
-         QUE_FIFO              =0;
-         QUE_LIFO              =1;
-         QUE_PRIORITY          =2;
-         QUE_NOCONVERT_ADDRESS =0;
-         QUE_CONVERT_ADDRESS   =4;
+      QUE_FIFO                  = 0;
+      QUE_LIFO                  = 1;
+      QUE_PRIORITY              = 2;
+      QUE_NOCONVERT_ADDRESS     = 0;
+      QUE_CONVERT_ADDRESS       = 4;
 
    { definitions for DosSearchPath control word }
-CONST
-      DSP_IMPLIEDCUR          =1; { current dir will be searched first }
-      DSP_PATHREF             =2; { from env.variable }
-      DSP_IGNORENETERR        =4; { ignore net errs & continue search }
+      DSP_IMPLIEDCUR            = 1; { current dir will be searched first }
+      DSP_PATHREF               = 2; { from env.variable }
+      DSP_IGNORENETERR          = 4; { ignore net errs & continue search }
+
+   { definitions for Dos32QueryHeaderInfo }
+      QHINF_EXEINFO             = 1; { NE exeinfo. }
+      QHINF_READRSRCTBL         = 2; { Reads from the resource table. }
+      QHINF_READFILE            = 3; { Reads from the executable file. }
+      QHINF_LIBPATHLENGTH       = 4; { Gets the libpath length. }
+      QHINF_LIBPATH             = 5; { Gets the entire libpath. }
+      QHINF_FIXENTRY            = 6; { NE only }
+      QHINF_STE                 = 7; { NE only }
+      QHINF_MAPSEL              = 8; { NE only }
 
    { indices for DosQuerySysInfo }
-      QSV_MAX_PATH_LENGTH     =1;
-      Q_MAX_PATH_LENGTH       =QSV_MAX_PATH_LENGTH;
-      QSV_MAX_TEXT_SESSIONS   =2;
-      QSV_MAX_PM_SESSIONS     =3;
-      QSV_MAX_VDM_SESSIONS    =4;
-      QSV_BOOT_DRIVE          =5;       { 1=A, 2=B, etc. }
-      QSV_DYN_PRI_VARIATION   =6;       { 0=Absolute, 1=Dynamic }
-      QSV_MAX_WAIT            =7;       { seconds }
-      QSV_MIN_SLICE           =8;       { milli seconds }
-      QSV_MAX_SLICE           =9;       { milli seconds }
-      QSV_PAGE_SIZE           =10;
-      QSV_VERSION_MAJOR       =11;
-      QSV_VERSION_MINOR       =12;
-      QSV_VERSION_REVISION    =13;      { Revision letter }
-      QSV_MS_COUNT            =14;      { Free running millisecond counter }
-      QSV_TIME_LOW            =15;      { Low dword of time in seconds }
-      QSV_TIME_HIGH           =16;      { High dword of time in seconds }
-      QSV_TOTPHYSMEM          =17;      { Physical memory on system }
-      QSV_TOTRESMEM           =18;      { Resident memory on system }
-      QSV_TOTAVAILMEM         =19;      { Available memory for all processes }
-      QSV_MAXPRMEM            =20;      { Avail private mem for calling proc }
-      QSV_MAXSHMEM            =21;      { Avail shared mem for calling proc }
-      QSV_TIMER_INTERVAL      =22;      { Timer interval in tenths of ms }
-      QSV_MAX_COMP_LENGTH     =23;      { max len of one component in a name }
-      QSV_MAX                 =QSV_MAX_COMP_LENGTH;
+      QSV_MAX_PATH_LENGTH       = 1;
+      Q_MAX_PATH_LENGTH         = QSV_MAX_PATH_LENGTH;
+      QSV_MAX_TEXT_SESSIONS     = 2;
+      QSV_MAX_PM_SESSIONS       = 3;
+      QSV_MAX_VDM_SESSIONS      = 4;
+      QSV_BOOT_DRIVE            = 5;       { 1=A, 2=B, etc. }
+      QSV_DYN_PRI_VARIATION     = 6;       { 0=Absolute, 1=Dynamic }
+      QSV_MAX_WAIT              = 7;       { seconds }
+      QSV_MIN_SLICE             = 8;       { milli seconds }
+      QSV_MAX_SLICE             = 9;       { milli seconds }
+      QSV_PAGE_SIZE             = 10;
+      QSV_VERSION_MAJOR         = 11;
+      QSV_VERSION_MINOR         = 12;
+      QSV_VERSION_REVISION      = 13;      { Revision letter }
+      QSV_MS_COUNT              = 14;      { Free running millisecond counter }
+      QSV_TIME_LOW              = 15;      { Low dword of time in seconds }
+      QSV_TIME_HIGH             = 16;      { High dword of time in seconds }
+      QSV_TOTPHYSMEM            = 17;      { Physical memory on system }
+      QSV_TOTRESMEM             = 18;      { Resident memory on system }
+      QSV_TOTAVAILMEM           = 19;      { Available memory for all processes }
+      QSV_MAXPRMEM              = 20;      { Avail private mem for calling proc }
+      QSV_MAXSHMEM              = 21;      { Avail shared mem for calling proc }
+      QSV_TIMER_INTERVAL        = 22;      { Timer interval in tenths of ms }
+      QSV_MAX_COMP_LENGTH       = 23;      { max len of one component in a name }
+      { ab Warp: }
+      QSV_FOREGROUND_FS_SESSION = 24;      { Session ID of the current foreground full screen session.}
+                                           { (any PM, VIO or Win-DOS session would be ID = 1) }
+      QSV_FOREGROUND_PROCESS    = 25;      { Process ID of the current foreground process. }
+      QSV_NUMPROCESSORS         = 26;      { Number of processors in the computer. }
+      QSV_MAXHPRMEM             = 27;
+      QSV_MAXHSHMEM             = 28;
+      QSV_MAXPROCESSES          = 29;
+      QSV_VIRTUALADDRESSLIMIT   = 30;
+      QSV_INT10ENABLED          = 31;
+      QSV_MAX                   = QSV_INT10ENABLED;
 
    { definitions for DosError - combine with | }
-      FERR_DISABLEHARDERR     =$00000000;     { disable hard error popups }
-      FERR_ENABLEHARDERR      =$00000001;     { enable hard error popups }
-      FERR_ENABLEEXCEPTION    =$00000000;     { enable exception popups }
-      FERR_DISABLEEXCEPTION   =$00000002;     { disable exception popups }
+      FERR_DISABLEHARDERR       = $00000000;     { disable hard error popups }
+      FERR_ENABLEHARDERR        = $00000001;     { enable hard error popups }
+      FERR_ENABLEEXCEPTION      = $00000000;     { enable exception popups }
+      FERR_DISABLEEXCEPTION     = $00000002;     { disable exception popups }
 
    { definitions for DosQueryRASInfo Index }
-      SIS_MMIOADDR            =0;
-      SIS_MEC_TABLE           =1;
-      SIS_SYS_LOG             =2;
+      SIS_MMIOADDR              = 0;
+      SIS_MEC_TABLE             = 1;
+      SIS_SYS_LOG               = 2;
 
 {** Session manager support }
 TYPE
@@ -1806,6 +1825,8 @@ FUNCTION DosShutdown(ulReserved:ULONG):APIRET;
                     APIENTRY;             'DOSCALLS' index 415;
 // 416     Dos32ICacheModule
 // 417     Dos32ReplaceModule
+FUNCTION DosReplaceModule(pszModName,pszReplaceWith,pszBackupName:cString): APIRET;
+                    APIENTRY;             'DOSCALLS' index 417;
 FUNCTION DosAcknowledgeSignalException(ulSignalNum:ULONG):APIRET;
                     APIENTRY;             'DOSCALLS' index 418;
 // 419     Dos32TIB
@@ -1975,7 +1996,11 @@ FUNCTION DosQueryResourceSize(hmod:HMODULE;idt,idn:ULONG;
 // 579     T32INITIALIZEPORTHOLE,      HT32_STARTUP
 // 580     Dos32InitializePorthole,
 // 581     T32QUERYHEADERINFO,         HT32_CLEANUP
-// 582     Dos32QueryHeaderInfo
+FUNCTION Dos32QueryHeaderInfo(hmod : HMODULE;
+                              ulIndex : ULONG;
+                              var pvBuffer;
+                              cbBuffer : ULONG;
+                              ulSubFunction : ULONG) : ULONG; APIENTRY; 'DOSCALLS' index 582; {584}
 // 583     DosInitializePorthole
 // 584     DosQueryHeaderInfo
 // 585     T32QUERYPROCTYPE,            _Dos32IMonRead
@@ -2589,4 +2614,7 @@ END.
   19-Nov-07  WD         Flag OBJ_ANY eingebaut.
   22-Aug-07  WD         DosSearchPath: Umbau auf AnsiString
   15-Jun-08  WD         Funktion DosQueryExtLIBPATH und DosSetExtLIBPATH eingebaut.
+  27-Aug-10  RG         indices for DosQuerySysInfo erweitert
+  29-Nov-10  RG         Funktion Dos32QueryHeaderInfo inkl. Definitionen eingebaut
+  08-Nov-18  RG         Funktion DosReplaceModule eingebaut
 }

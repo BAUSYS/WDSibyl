@@ -1,14 +1,13 @@
-
 {…ÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕª
  ∫                                                                          ∫
- ∫    Sibyl Portable Component Classes                                      ∫
+ ∫    WDSibyl Runtime Library                                               ∫
  ∫                                                                          ∫
  ∫    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    ∫
+ ∫    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.∫
  ∫                                                                          ∫
  »ÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕº}
 
-
-Unit IniFiles;
+Unit INIFILES;
 
 Interface
 
@@ -60,7 +59,7 @@ Type
     Function ReadLongWord(Const section, Ident: String; Default: LongWord): LongWord; Virtual;
     Function ReadBool(Const section, Ident: String; Default: Boolean): Boolean; Virtual;
     Procedure ReadSection(Const section: String; AStrings: TStrings); Virtual;
-   {Procedure ReadSections(AStrings: TStrings); fehlt noch}
+    Procedure ReadSections(AStrings: TStrings); Virtual; {fehlt noch}
     Procedure ReadSectionValues(Const section: String; AStrings: TStrings); Virtual;
     Procedure ReadStrings(Const section, Ident: String; AStrings : tStrings);
     Function ReadMemoryStream(Const section, Ident: String; Stream : tMemoryStream) : Boolean; Virtual;
@@ -75,7 +74,7 @@ Type
     Procedure WriteMemoryStream(Const section, Ident: String; Stream : tMemoryStream); Virtual;
 
     Property FileName: String Read GetFileName;
-  End;
+  End; {TBaseIniFile}
 
 {Martin0208}
 {
@@ -147,12 +146,12 @@ Code example:
     procedure rwDouble (var Value : double; Const Ident: String; Default: double); Virtual;
 
     {properties}
-    property IniMode : tIniMode          read fIniMode write SetIniMode;
-    property HasChanged : boolean     read fHasChanged;
-    property rwSection : String           Read frwSection Write frwSection;
+    property IniMode : tIniMode        read fIniMode write SetIniMode;
+    property HasChanged : boolean      read fHasChanged;
+    property rwSection : String        Read frwSection Write frwSection;
     property rwWriteDefaults : Boolean Read frwWriteDefaults Write frwWriteDefaults;
 
-  end;
+  end; {TIniFile}
 
 Type
   {$HINTS OFF}
@@ -189,7 +188,7 @@ Type
     Function ReadLongWord(Const section, Ident: String; Default: LongWord): LongWord; Override;
     Function ReadBool(Const section, Ident: String; Default: Boolean): Boolean; Override;
     Procedure ReadSection(Const section: String; AStrings: TStrings); Override;
-    Procedure ReadSections(AStrings: TStrings);
+    Procedure ReadSections(AStrings: TStrings); Override;
     Procedure ReadSectionValues(Const section: String; AStrings: TStrings); Override;
     Procedure Refresh;
     Procedure WriteString(Const section, Ident, Value: String); Override;
@@ -202,7 +201,7 @@ Type
     Property IdentSort  : Boolean Read fIdentSort Write fIdentSort;
     property Codepage : tCodepage Read fCodepage;
 
-  End;
+  End; {TAsciiIniFile}
   {$HINTS ON}
 
 
@@ -217,6 +216,9 @@ type
       fHKey   : LongWord;
 
       Function ChkStandard(Ident : String) : cString;
+      function IsRelative(key : String) : Boolean; //RG 07-Jun-2010
+      procedure GetKeyNames(AStrings: tStrings);   //RG 07-Jun-2010
+      Procedure GetValueNames(AStrings: tStrings); //RG 07-Jun-2010
 
     Public
       Constructor Create(Const iRegTyp : taRegTyp; Const iKeyStr: String);Virtual;
@@ -230,11 +232,12 @@ type
       Function ReadLongWord(Const section, Ident: String; Default: LongWord): LongWord; Override;
       Function ReadBool(Const section, Ident: String; Default: Boolean): Boolean; Override;
       Procedure ReadSection(Const section: String; AStrings: TStrings); Override;
-     {Procedure ReadSections(AStrings: TStrings); fehlt noch}
-      Procedure ReadSectionValues(Const section: String; AStrings: TStrings); Override;
+      Procedure ReadSections(AStrings: TStrings); Override; //RG 08-Jun-2010
+      Procedure ReadSectionValues(Const section: String; AStrings: TStrings); Override; //RG 08-Jun-2010
       Procedure ReadStrings(Const section, Ident: String; AStrings : tStrings);
       Procedure WriteString(Const section, Ident, Value: String); Override;
       Procedure WriteInteger(Const section, Ident: String; Value: LongInt); Override;
+      Procedure WriteLongWord(Const section, Ident: String; Value: LongWord); Override; //RG 08-Jun-2010
       Procedure WriteBool(Const section, Ident: String; Value: Boolean); Override;
       Procedure WriteStrings(Const section, Ident: String; AStrings : tStrings);
 
@@ -242,12 +245,12 @@ type
       Property KeyStr   : String   Read fKeyStr;
       Property Regtyp   : taRegTyp Read fRegTyp;
       Property hKey     : LongWord Read fHKey;
-  End;
+  End; {tcRegistry}
 
 Implementation
 
 {$IFDEF OS2}
-Uses BseRegistry;
+Uses BseRegistry, BSEErr;
 {$ENDIF}
 {$IFDEF Win32}
 Uses WinADVAPI;
@@ -332,17 +335,19 @@ End;
 }
 
 Function tcRegistry.ChkStandard(Ident : String) : cString;
-
 Begin
   if UpperCase(Ident)=gRegStandard
     then Result:=''
     else Result:=Ident;
 End;
 
+function tcRegistry.IsRelative(key : String) : Boolean;
+begin
+  Result := not ((key <> '') and (key[1] = '\'));
+end;
+
 Procedure tcRegistry.Erase(Const section, Ident: String);
-
 Var cIdent : cString;
-
 Begin
   if fhKey=0 then exit;
   cIdent:=Ident;
@@ -350,154 +355,327 @@ Begin
 End;
 
 Function tcRegistry.CreateSection(Const section: String) : tcRegistry;
-
+{ Erstellt einen neue Sektion im aktuellen Abschnitt der INI-Datei }
+{ und gibt den Zeiger (oder Nil) zurÅck (analog TRegistry.CreateKey in Delphi) }
 Var cSection : cString;
     cClass   : cString;
     RegResult: LongWord;
-    rv       : LongWord;
-
 Begin
   Result:=nil;
   if fhKey=0 then exit;
   cSection:=Section;
   cClass  :='REG_SZ';
-  if RegCreateKeyEx(fhKey, cSection, 0, cClass, 0, KEY_ALL_ACCESS, NIL,
-                    RegResult, 0) = 0 then
-    Result.Create(fRegTyp,KeyStr+'\'+Section);
+  if RegCreateKeyEx(fhKey, cSection, 0, cClass, 0, KEY_ALL_ACCESS, NIL, RegResult, 0) = 0
+  then begin
+         if not IsRelative(Section)
+         then Result.Create(fRegTyp,KeyStr+Section)
+         else Result.Create(fRegTyp,KeyStr+'\'+Section);
+       end;
 End;
 
 Procedure tcRegistry.EraseSection(Const section: String);
+{ lîscht eine Sektion aus dem aktuellen Abschnitt heraus in einer INI-Datei }
+  {$IFDEF WIN32}
+    Procedure DelKey(S1: string);
+    var cSection: cString;
+    begin
+      Fillchar(cSection,255,#0);
+      cSection:=S1;
+      RegDeleteKey(fhKey, cSection);   // Beeinflusst die Variablen
+    End;
+  {$ENDIF}
 
-  Procedure DelKey(S1: string);
-
-  var cSection: cString;
-
-  begin
-    Fillchar(cSection,255,#0);
-    cSection:=S1;
-    RegDeleteKey(fhKey, cSection);   // Beeinflusst die Variablen
-  End;
-
-Var S       : String;
-    p       : Byte;
+Var {$IFDEF OS2}
+      cSection : cString;
+    {$ENDIF}
+    {$IFDEF WIN32}
+      S : String;
+      p : Byte;
+    {$ENDIF}
 
 Begin
   if fhKey=0 then exit;
-
-// WinXP schafft es nicht mehrere Verzeichnisse gleichzeitig zu loeschen.
-  S:=Section;
-  delkey(s);
-  p:=LastPos('\',S);
-  while p<>0 do
-    Begin
-      S[0]:=chr(ord(p-1));
-      p:=LastPos('\',s);
-      delkey(s);
-    end;
+  {$IFDEF OS2}
+     { unter OS2 wird nach dem Aufruf von RegDeleteKey die Variable cSection nicht verÑndert }
+     { auch funktioniert es, wenn z.B. Section='test\test1\test2' ist >>> test2 wird gelîscht }
+     if IsRelative(section)
+     then cSection := section
+     else cSection := copy(section,2,255);
+     RegDeleteKey(fhKey, cSection);
+  {$ENDIF}
+  {$IFDEF WIN32}
+    // WinXP schafft es nicht mehrere Verzeichnisse gleichzeitig zu loeschen.
+    S:=Section;
+    delkey(s);
+    p:=LastPos('\',S);
+    while p<>0 do
+      Begin
+        S[0]:=chr(ord(p-1));
+        p:=LastPos('\',s);
+        delkey(s);
+      end;
+  {$ENDIF}
 End;
 
 Function tcRegistry.ReadData(Const section, Ident: String; Var pBuffer; Var Len : LongWord) : Boolean;
-
 Begin
-  Len:=0;
-  Result:=false;
+  Len:=0;         //ups
+  Result:=false;  //ups
 End;
 
 Function tcRegistry.ReadString(Const Section, Ident, Default: String): String;
-
 Var cIdent : cString;
+    iType  : LongWord; { iTyp=1 (REG_SZ) : string, iTyp=3 (REG_BINARY) : binary, iTyp=4 (REG_DWORD) : dWord }
     cValue : cString;
     len    : LongWord;
-
 Begin
   if fhKey=0 then exit;
   cIdent:=ChkStandard(Ident);
-  Len:=255;
-  if RegQueryValueEx(fhkey, cIdent, 0, 0, cValue, Len) <> 0
+  iType := REG_NONE; {0}
+  Len   := 255;
+  if RegQueryValueEx(fhkey, cIdent, 0, iType, cValue, Len) <> 0
     then Result:=Default
-    else Result:=cValue;
+    else Result:=cValue; //beim Typ dword (REG_DWORD) kommt ein Leerstring (4 Leerzeichen) zurÅck
 End;
-
+          
 Function tcRegistry.ReadInteger(Const section, Ident: String; Default: LongInt): LongInt;
 
+{$IFDEF OS2}
+Var LValue : Longword;
+{$ENDIF}
+
 Begin
-  Result:=StrToInt(ReadString(Section, Ident, tostr(Default)));
+  if fhKey=0 then exit;
+  {$IFDEF OS2}  //RG 07-Jun-2010
+    Result := Default;
+    { lesen als String (REG_SZ) oder Longword (REG_DWORD) }
+    LValue := ReadLongWord(section, Ident, Default);
+    if LValue <= MAXLONGINT  // <= 2147483647 ?
+    then Result := LValue;
+  {$ENDIF}
+  {$IFDEF Win32}
+    Result:=StrToInt(ReadString(Section, Ident, tostr(Default)));
+  {$ENDIF}
 End;
 
 Function tcRegistry.ReadLongWord(Const section, Ident: String; Default: LongWord): LongWord;
 
+{$IFDEF OS2}
+Var cIdent : cString;
+    iType  : LongWord; { iTyp=1 (REG_SZ) : string, iTyp=3 (REG_BINARY) : binary, iTyp=4 (REG_DWORD) : dWord }
+    cValue : cString;
+    len    : LongWord;
+    s      : String;
+    Wert   : Double; //Extended mag der Debugger nicht
+{$ENDIF}
+
 Begin
-  Result:=0;
+  if fhKey=0 then exit;
+  {$IFDEF OS2} //RG 07-Jun-2010
+    Result := 0;
+    cIdent := Ident;
+    iType  := REG_NONE; {0}
+    Len    := 255;
+    RegQueryValueEx(fhkey, cIdent, 0, iType, cValue, Len);
+    case iType of
+      REG_SZ    : try
+                    { mîgliches Problem : StrToInt funktioniert einwandfrei nur
+                      bis zu einer Grîsse von MAXLONGWORD, also 4294967295 }
+                    s := ReadString(Section, Ident, tostr(Default));
+                    Wert := StrToFloat(s);
+                    if (Wert > 4294967295.0) or (Wert < 0) //(Wert > MAXLONGWORD) funktioniert nicht
+                    then Result := Default
+                    else Result := StrToInt(s);
+                  except
+                    Result := Default;
+                  end;
+      REG_DWORD : begin
+                    { Len wurde zuvor auf 4 gesetzt }
+                    if RegQueryValueEx(fhkey, cIdent, 0, iType, Result, Len) <> 0
+                    then Result := Default;
+                  end;
+    end; {case}
+  {$ENDIF}
+  {$IFDEF Win32}
+    //noch nicht implementiert/getestet
+  {$ENDIF}
 End;
 
 Function tcRegistry.ReadBool(Const section, Ident: String; Default: Boolean): Boolean;
-
-Begin
+var L : LongInt;
+Begin //RG 07-Jun-2010
+  if Default then L := 1 else L := 0;
+  Result := (ReadInteger(Section, Ident, L) <> 0);
 End;
 
-Procedure tcRegistry.ReadSection(Const section: String; AStrings: TStrings);
+procedure tcRegistry.GetKeyNames(AStrings: tStrings); //RG 07-Jun-2010
+{ Liest alle Abschnitts-Namen im aktuellen Abschnitt aus einer INI-Datei }
 
+{$IFDEF OS2}
 var cou     : LongInt;
     cName   : cString;
     LenName : LongWord;
     cClass  : cString;
     LenClass: LongWord;
     LastWriteTime: PFILETIME;
-    Reserved,
-    SubKeys, MaxSubKeyLen, MaxClassLen,
-    Values, MaxValueNameLen, MaxValueLen,
-    SecurityDescriptor : LongWord;
+    Reserved,SubKeys,
+    MaxSubKeyLen, MaxClassLen,
+    Values, MaxValueNameLen,
+    MaxValueLen, SecurityDescriptor : LongWord;
+    Res      : LongWord;
+{$ENDIF}
 
-Begin
-  if fhKey=0 then exit;
+begin
   AStrings.Clear;
-  if RegQueryInfoKey(fhKey, cClass, LenClass,
+  {$IFDEF OS2}  //RG 07-Jun-2010
+     if RegQueryInfoKey(fhKey, cClass, LenClass,
           Reserved, SubKeys, MaxSubKeyLen, MaxClassLen,
           Values, MaxValueNameLen, MaxValueLen,
           SecurityDescriptor,
-          LastWriteTime)<>0
+          LastWriteTime) <> 0
     then exit;
-//  if Values=0 then exit;
-  for cou:=0 to Values-1 do
-    Begin
-      LenName :=255;
-      LenClass:=255;
-      RegEnumKeyEx(fhKey, cou, cName, LenName, $0, cClass, LenClass, LastWriteTime);
-//      if RegEnumKeyEx(fhKey, cou, cName, LenName, $0, cClass, LenClass, LastWriteTime)<>0
-//        then exit;
-      AStrings.Add(cName);
-    End;
+    for cou := 0 to SubKeys-1 do
+    begin
+      LenName := 255; //MaxSubKeyLen+1;
+      Res     := RegEnumKeyEx(fhKey, cou, cName, LenName, $0, cClass, LenClass, LastWriteTime);
+      if ((Res = NO_ERROR) or (Res = ERROR_MORE_DATA)) and (LenName > 0)
+      then AStrings.Add(cName);
+    end;
+  {$ENDIF}
+  {$IFDEF Win32}
+    //
+  {$ENDIF}
+end;
 
-//  if SubKeys=0 then exit;
-  for cou:=0 to SubKeys-1 do
-    Begin
-      LenName :=255;
-      LenClass:=255;
-      RegEnumKeyEx(fhKey, cou, cName, LenName, $0, cClass, LenClass, LastWriteTime);
-//      if RegEnumKeyEx(fhKey, cou, cName, LenName, $0, cClass, LenClass, LastWriteTime)<>0
-//        then exit;
-      AStrings.Add(cName);
-    End;
-End;
+procedure tcRegistry.GetValueNames(AStrings: tStrings); //RG 07-Jun-2010
+{ liest alle SchlÅssel-Namen des aktuellen Abschnitts aus einer INI-Datei }
 
-Procedure tcRegistry.ReadSectionValues(Const section: String; AStrings: TStrings);
+{$IFDEF OS2}
+var cou     : LongInt;
+    cName   : cString;
+    LenName : LongWord;
+    cClass  : cString;
+    LenClass: LongWord;
+    LastWriteTime: PFILETIME;
+    Reserved,SubKeys,
+    MaxSubKeyLen, MaxClassLen,
+    Values, MaxValueNameLen,
+    MaxValueLen, SecurityDescriptor : LongWord;
+    iType    : LongWord; { iTyp=1 (REG_SZ) : string, iTyp=3 (REG_BINARY) : binary, iTyp=4 (REG_DWORD) : dWord }
+    iData    : Char;
+    iLenData : LongWord;
+    Res      : LongWord;
+{$ENDIF}
 
 Begin
+  AStrings.Clear;
+  {$IFDEF OS2}  //RG 07-Jun-2010
+     if RegQueryInfoKey(fhKey, cClass, LenClass,
+          Reserved, SubKeys, MaxSubKeyLen, MaxClassLen,
+          Values, MaxValueNameLen, MaxValueLen,
+          SecurityDescriptor,
+          LastWriteTime) <> 0
+    then exit;
+    for cou := 0 to Values-1 do
+    begin
+      LenName := 255; {MaxValueLen+1}
+      Res     := RegEnumValue(fhKey,cou,cName,LenName,$0{Nil},iType{Nil},iData{Nil},iLenData{Nil});
+      { iTyp=1 (REG_SZ) : string, iTyp=3 (REG_BINARY) : binary, iTyp=4 (REG_DWORD) : dWord }
+      if ((Res = NO_ERROR) or (Res = ERROR_MORE_DATA)) and (LenName > 0)
+      then AStrings.Add(cName);
+    end;
+  {$ENDIF}
+  {$IFDEF Win32}
+    //
+  {$ENDIF}
+end;
+
+Procedure tcRegistry.ReadSection(Const section: String; AStrings: TStrings);
+{ Liest alle SchlÅssel-Namen des aktuellen Abschnitts aus einer INI-Datei }
+{$IFDEF WIN32}
+  var cou     : LongInt;
+      cName   : cString;
+      LenName : LongWord;
+      cClass  : cString;
+      LenClass: LongWord;
+      LastWriteTime: PFILETIME;
+      Reserved,
+      SubKeys, MaxSubKeyLen, MaxClassLen,
+      Values, MaxValueNameLen, MaxValueLen,
+      SecurityDescriptor : LongWord;
+{$ENDIF}
+Begin
+  {$IFDEF OS2} //RG 08-Jun-2010
+    GetValueNames(AStrings); //AStrings lîschen und neu abfÅllen
+  {$ENDIF}
+
+  {$IFDEF WIN32} //ups???????????
+    if fhKey=0 then exit;
+    AStrings.Clear;
+    if RegQueryInfoKey(fhKey, cClass, LenClass,
+            Reserved, SubKeys, MaxSubKeyLen, MaxClassLen,
+            Values, MaxValueNameLen, MaxValueLen,
+            SecurityDescriptor,
+            LastWriteTime)<>0
+      then exit;
+  //  if Values=0 then exit;
+    for cou:=0 to Values-1 do
+      Begin
+        LenName :=255;
+        LenClass:=255;
+        RegEnumKeyEx(fhKey, cou, cName, LenName, $0, cClass, LenClass, LastWriteTime);
+  //      if RegEnumKeyEx(fhKey, cou, cName, LenName, $0, cClass, LenClass, LastWriteTime)<>0
+  //        then exit;
+        AStrings.Add(cName);
+      End;
+
+  //  if SubKeys=0 then exit;
+    for cou:=0 to SubKeys-1 do
+      Begin
+        LenName :=255;
+        LenClass:=255;
+        RegEnumKeyEx(fhKey, cou, cName, LenName, $0, cClass, LenClass, LastWriteTime);
+  //      if RegEnumKeyEx(fhKey, cou, cName, LenName, $0, cClass, LenClass, LastWriteTime)<>0
+  //        then exit;
+        AStrings.Add(cName);
+      End;
+   {$ENDIF}
+End;
+
+Procedure tcRegistry.ReadSections(AStrings: TStrings);
+{ Liest alle Abschnitts-Namen im aktuellen Abschnitt aus einer INI-Datei }
+begin
+  {$IFDEF OS2} //RG 08-Jun-2010
+    GetKeyNames(AStrings); //AStrings lîschen und neu abfÅllen
+  {$ENDIF}
+end;
+
+Procedure tcRegistry.ReadSectionValues(Const section: String; AStrings: TStrings);
+{ Liest alle SchlÅssel-Namen und Werte des aktuellen Abschnitts aus einer INI-Datei.}
+
+{$IFDEF OS2}
+var i : LongInt;
+{$ENDIF}
+
+Begin
+  {$IFDEF OS2} //RG 08-Jun-2010
+    GetValueNames(AStrings); //AStrings lîschen und neu abfÅllen
+    for i := 0 to AStrings.Count-1 do
+    AStrings[i] := AStrings[i]+'='+ReadString('',AStrings[i],'');
+  {$ENDIF}
 End;
 
 Procedure tcRegistry.ReadStrings(Const section, Ident: String; AStrings : tStrings);
-
-Begin
-End;
+begin
+  //
+end;
 
 Procedure tcRegistry.WriteString(Const section, Ident, Value: String);
-
 Var cIdent : cString;
     cValue : cString;
     len    : LongWord;
-
 Begin
-  if fhKey=0 then exit;
+  if (fhKey=0) or (Length(Ident)=0) then exit;
   cIdent:=ChkStandard(Ident);
   cValue:=Value;
   Len:=255;
@@ -506,30 +684,52 @@ Begin
 End;
 
 Procedure tcRegistry.WriteInteger(Const section, Ident: String; Value: LongInt);
-
 Begin
+  WriteString(section,Ident,IntToStr(Value)); //RG 07-Jun-2010
 End;
+
+Procedure tcRegistry.WriteLongWord(Const section, Ident: String; Value: LongWord); //RG 07-Jun-2010
+
+{$IFDEF OS2}
+Var cIdent : cString;
+    Len    : LongWord;
+{$ENDIF}
+
+begin
+  if fhKey = 0 then exit;
+  {$IFDEF OS2}
+    cIdent := Ident;
+    Len := 4;
+    if RegSetValueEx(fhKey, cIdent, 0, REG_DWORD, Value, Len) <> 0
+    then Error(LoadNLSStr(SWriteError)+'.');
+  {$ENDIF}
+  {$IFDEF Win32}
+    //
+  {$ENDIF}
+end;
 
 Procedure tcRegistry.WriteBool(Const section, Ident: String; Value: Boolean);
-
-Begin
-End;
+var c : Char;
+begin //RG 07-Jun-2010
+  if Value then c := '1' else c := '0';
+  WriteString(section, Ident, c);
+end;
 
 Procedure tcRegistry.WriteStrings(Const section, Ident: String; AStrings : tStrings);
-
-Begin
-End;       
+begin
+  //
+end;
 
 Constructor tcRegistry.Create(Const iRegTyp : taRegTyp; Const iKeyStr: String);
-
 var hKey   : LongWord;
     cKeyStr: cString;
     rv     : LongWord;
-
 Begin
-  if fKeyStr[1]='\'
-    then fKeyStr:= copy(iKeyStr,2,255)
-    else fKeyStr:= iKeyStr;
+  //if fKeyStr[1]='\' //ups!!
+  if not IsRelative(iKeyStr)
+  then fKeyStr:= copy(iKeyStr,2,255)
+  else fKeyStr:= iKeyStr;
+
   fRegTyp := iRegTyp;
 
   case fRegTyp of
@@ -539,16 +739,16 @@ Begin
     taeKEY_USERS        : hkey := HKEY_USERS;
   end;
   cKeyStr := fKeyStr;
-  rv:=RegOpenKeyEx(hKey, cKeyStr, 0, KEY_ALL_ACCESS, fhkey);
-  if rv <> 0 then
-    Begin
-      fHKey:=0;
-      Error(LoadNLSStr(SCannotOpenIniFile)+'. RegOpenKeyEx='+toStr(rv));
-    End;
+  rv := RegOpenKeyEx(hKey, cKeyStr, 0, KEY_ALL_ACCESS, fhkey);
+  if rv <> 0
+  then begin
+         { sofern der SchlÅssel noch nicht existiert, wird 2 zurÅckgegeben }
+         fHKey:=0;
+         Error(LoadNLSStr(SCannotOpenIniFile)+'. RegOpenKeyEx='+toStr(rv));
+       end;
 End;
 
 Destructor tcRegistry.Destroy;
-
 Begin
   if fHKey<>0 then RegCloseKey(fhKey);
 End;
@@ -565,7 +765,7 @@ Constructor TBaseIniFile.Create(Const FileName: String);
 Begin
   {$IFDEF OS2}
   FHandle := PrfOpenProfile(AppHandle, FileName);
-  If FHandle = NULLHANDLE Then Error(LoadNLSStr(SCannotOpenIniFile)+'.');
+  If FHandle = NULLHANDLE Then Error(LoadNLSStr(SCannotOpenIniFile)+'('+FileName+').'); //RG 16-Jan-14
   {$ENDIF}
   FFileName := NewStr(FileName);
 End;
@@ -709,9 +909,7 @@ Begin
 End;
 
 Function TBaseIniFile.ReadLongWord(Const section, Ident: String; Default: LongWord): LongWord;
-
 Var Len : LongWord;
-
 Begin
   if (ReadData(Section, Ident, Result, Len)=false) or
      (len<>SizeOf(Longword)) then
@@ -768,7 +966,14 @@ Begin
   End;
 End;
 
+Procedure TBaseIniFile.ReadSections(AStrings: TStrings);
+{ Liest alle Abschnitts-Namen aus einer INI-Datei.}
+Begin
+  //
+End;
+
 Procedure TBaseIniFile.ReadSectionValues(Const section: String; AStrings: TStrings);
+{ Liest alle SchlÅssel-Namen und Werte des gewÑhlten Abschnitts aus einer INI-Datei.}
 Var
   Temp: TIniSection;
   I: LongInt;
@@ -789,10 +994,13 @@ Procedure TBaseIniFile.ReadStrings(Const section, Ident: String; AStrings : tStr
 
 Var Anz   : LongInt;
     Cou   : LongInt;
+
+{$IFDEF OS2}
     Size  : LongWord;
     Pos   : PChar;
     Buffer: PChar;
     item  : String;
+{$ENDIF}
 
 Begin
   AStrings.Clear;
@@ -824,11 +1032,8 @@ Begin
 End;
 
 Function TBaseIniFile.ReadMemoryStream(Const section, Ident: String; Stream : tMemoryStream) : Boolean;
-
 Var ms1, ms2: LongWord;
     mm : PByteArray;
-    po : LongInt;
-
 Begin
   Result:=false;
   if GetDataSize(Section, Ident, ms1) = false then exit;
@@ -842,7 +1047,6 @@ Begin
 End;
 
 Procedure TBaseIniFile.WriteData(Const section, Ident : String; Var pBuffer; Len : LongWord);
-
 Begin
   {$IFDEF OS2}
   PrfWriteProfileData(FHandle, section, Ident, pBuffer, Len);
@@ -869,10 +1073,13 @@ Begin
 End;
 
 Procedure TBaseIniFile.WriteStringRaw(Const section, Ident, Value: String);
-Var
-  CSection, CIdent, CValue: cstring[256];
-  ValueArr: Array[1..256] of Char;
-  i: Integer;
+
+Var CSection, CIdent, CValue: cstring[256];
+    {$IFDEF OS2}
+    ValueArr: Array[1..256] of Char;
+    i       : Integer;
+    {$ENDIF}
+
 Begin
   CSection := section;
   CIdent := Ident;
@@ -889,15 +1096,12 @@ Begin
   {$ENDIF}
 End;
 
-
-
 Procedure TBaseIniFile.WriteInteger(Const section, Ident: String; Value: LongInt);
 Begin
   WriteString(section, Ident, IntToStr(Value));
 End;
 
 Procedure TBaseIniFile.WriteLongWord(Const section, Ident: String; Value: LongWord);
-
 Begin
   WriteData(Section, Ident, Value, SizeOf(LongWord));
 End;
@@ -911,9 +1115,7 @@ Begin
 End;
 
 Procedure TBaseIniFile.WriteStrings(Const section, Ident: String; AStrings : tStrings);
-
 var Cou : LongInt;
-
 Begin
   //EraseSection(section); {Martin0208: ist quatsch!!!! Sonst funktioniert tAsciiIniFile nicht}
   WriteInteger(section, Ident+'_Anz', AStrings.Count);
@@ -922,9 +1124,7 @@ Begin
 End;
 
 Procedure TBaseIniFile.WriteMemoryStream(Const section, Ident: String; Stream : tMemoryStream);
-
 Var Mm : PByteArray;
-
 Begin
   mm:=Stream.Memory;
   WriteData(Section, Ident, mm^, Stream.Size);
@@ -1256,7 +1456,8 @@ Begin
         System.Erase(Source);
         {$I+}
       End
-      Else Error(LoadNLSStr(SCannotOpenIniFile)+'.')
+      //Else Error(LoadNLSStr(SCannotOpenIniFile)+'.')
+      else Error(LoadNLSStr(SCannotOpenIniFile)+' ('+FileName+').'); //RG 02-Nov-16
     End;
   End;
 End;
@@ -1374,7 +1575,6 @@ Begin
 End;
 
 Function TAsciiIniFile.ReadData(Const section, Ident: String; Var pBuffer; Var Len : LongWord) : Boolean;
-
 Begin
   Len:=0;
   Result:=false;
@@ -1394,7 +1594,6 @@ Begin
 End;
 
 Function TAsciiIniFile.ReadLongWord(Const section, Ident: String; Default: LongWord): LongWord;
-
 Begin
   Result:=0;
 End;
@@ -1420,6 +1619,7 @@ Begin
 End;
 
 Procedure TAsciiIniFile.ReadSections(AStrings: TStrings);
+{ Liest alle Abschnitts-Namen aus einer INI-Datei im Ascii-Format.}
 Var
   N: LongInt;
 Begin
@@ -1427,6 +1627,7 @@ Begin
 End;
 
 Procedure TAsciiIniFile.ReadSectionValues(Const section: String; AStrings: TStrings);
+{ Liest alle SchlÅssel-Namen und Werte des gewÑhlten Abschnitts aus einer INI-Datei im Ascii-Format.}
 Var
   N: LongInt;
 Begin
@@ -1504,6 +1705,7 @@ End.
 
   To-Do: - Eventuell ReadData / WriteData einbauen
          - Eventuell ReadSectionNames einbauen = ReadSections
+
          - wenn String -> cstring Fehler In SP/2 behoben,
            Workaround entfernen.
 
@@ -1522,4 +1724,19 @@ End.
   17-Mar-08  MV         tAsciiIniFile.CreateCP: new parameter AnsiCodepage (false = IBM Codepage
                         which was the only behaviour before and is still the tAsciiIniFileCreate behaviour)
    7-May-08  MV         rwWriteDefaults = false malfunction fixed
+  03-Jun-10  RG         neu (OS2):      tcRegistry.GetValueNames
+                                        tcRegistry.GetKeyNames
+                                        tcRegistry.WriteLongWord
+                        Code OS2/Win32: tcRegistry.ReadBool
+                                        tcRegistry.WriteInteger
+                                        tcRegistry.WriteBool
+                        Code OS2:       tcRegistry.ReadLongWord
+                                        tcRegistry.ReadInteger
+                                        tcRegistry.ReadSections
+                                        tcRegistry.ReadSectionValues
+                        Fehler in tcRegistry.EraseSection unter OS2 behoben
+  07-Jun-10  RG         Fehler in tcRegistry.Create behoben
+  16-Jan-14  RG         Fehlermedung 'Ini-File kann nicht geîffnet werden' ergÑnzt mit FileName
+  02-Nov-16  RG         Fehlermedung 'Ini-File kann nicht geîffnet werden' ergÑnzt mit FileName
+
 }

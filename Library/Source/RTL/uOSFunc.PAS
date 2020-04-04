@@ -1,24 +1,16 @@
-{ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
- บ                                                                          บ
- บ    WDSibyl Runtime Library                                               บ
- บ                                                                          บ
- บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
- บ                                                                          บ
- ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
-
-
-Unit uSysFunc;
+Unit uOSFunc;
 
 Interface
 
-Uses uSysClass;
+Uses SysUtils, IniFiles;
 
-Function DLLExists(Const iDLLFileName: tFileName): Boolean;
-// DLLExists - Indicates whether A DLL-File exists Or Not.
+{$IFDEF OS2}
+Uses PMWin,PMWP;
+{$ENDIF}
 
-Procedure SysAsynchSleep(iMS : LongWord; iEventSemaphor : tcEventSemaphor);
-// Wartet asynchron die in der "iMS"-Variable zeit (in Millisekunden).
-// Nach dem Ablauf dieser Zeit wird der angegebene Semaphor gesetzt.
+{$IFDEF Win32}
+Uses WinDef, WinUser, WinShell;
+{$ENDIF}
 
 Function GetAssociation(FileType : String) : tFileName;
 // Windows: Ermittelt zu einen Dateityp das zugeordnete Programm
@@ -32,53 +24,7 @@ Procedure DelAssociation(FileType : String);
 Function OpenObject(Filename : string) : boolean;
 // Oeffnet ein Objekt
 
-
 Implementation
-
-Uses SysUtils, IniFiles;
-
-{$IFDEF OS2}
-Uses Os2Def, BseDos, PMWin,PMWP;
-{$ENDIF}
-
-{$IFDEF Win32}
-Uses WinDef, WinUser, WinShell;
-{$ENDIF}
-
-
-{ ----------------------------------------------------------------------------- }
-
-Function DLLExists(Const iDLLFileName: tFileName): Boolean;
-
-var DLL : tcDLL;
-
-Begin
-  try
-    DLL.Create(iDLLFileName);
-    Result:=DLL.Handle<>0;
-    DLL.Destroy;
-  except
-    Result:=false;
-  end;
-End;
-
-{ ----------------------------------------------------------------------------- }
-
-Procedure SysAsynchSleep(iMS : LongWord; iEventSemaphor : tcEventSemaphor);
-
-{$IFDEF OS2}
-var rc   : APIRet;
-    Timer: HTimer;
-{$ENDIF}
-
-
-Begin
-  if iEventSemaphor=nil then exit;
-{$IFDEF OS2}
-  rc:=DosAsyncTimer(iMS, iEventSemaphor.Handle, Timer);
-{$ENDIF}
-End;
-
 
 Const cRegSoftwareClasses = 'Software\Classes';
       cShellOpenCmd       = '\shell\open\command';
@@ -87,6 +33,7 @@ Function GetAssociation(FileType : String) : tFileName;
 
 var Reg : tcRegistry;
     FN  : String;
+    p   : Byte;
 
 Begin
   result:='';
@@ -168,11 +115,13 @@ begin
   {$endif}
 end;
 
+
+
 Initialization
 End.
 
 { -- date -- -- from -- -- changes ----------------------------------------------
   22-Apr-06  WD         Unit in das Projekt eingebaut
   09-Apr-07  MV/WD      Funktion OpenObject eingebaut
-  02-Feb-09  WD         Unit uSysFunc erzeugt und die Funktionen aus uOSFunc uebernommen
+
 }

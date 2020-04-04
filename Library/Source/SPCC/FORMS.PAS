@@ -1,4 +1,3 @@
-
 {ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
  บ                                                                          บ
  บ    WDSibyl Portable Component Classes                                    บ
@@ -54,7 +53,7 @@ Type
 
 Const
 {$IFDEF OS2}
-    ListCursorsPtCount = 6;
+    ListCursorsPtCount = 7;
 {$ENDIF}
 {$IFDEF Win32}
     ListCursorsPtCount = 1;
@@ -1552,6 +1551,7 @@ type
     TExceptionEvent=Procedure(Sender:TObject;E:Exception) Of Object;
     THelpEvent=Procedure(context:THelpContext;Var Result:Boolean) Of Object;
     TShowHintEvent=Procedure(Var HintStr:String;Var CanShow:Boolean;Var HintInfo:THintInfo) Of object;
+    TCheckDemoEvent=Procedure(Sender:TObject;Var iProgramDemo : Boolean) of Object;
 {$M-}
 
 {$M+}
@@ -1617,23 +1617,28 @@ Type
          fLanguageFile           : tLanguageFile;
          FFormInfoINI            : tFormInfoINI;
          FProgramName            : String;
+         fProgramLongName        : String;
          FProgramPath            : tFileName;
          FProgramVersion         : Word;
          FProgramSubVersion      : Word;
          FProgramDate            : TDateTime;
          FProgramIniFile         : TIniFile;
+         fProgramRegName         : String;
+         fProgramRegCode         : String;
+         fProgramDemo            : Boolean;
          fParameter              : tStringList;
          fLog                    : tcLog;
          fStartFromIDE           : Boolean;      // =true; Programm wurde von der IDE gestartet.
          fDestroyFormInOldMethode: Boolean;
 
-         FOnHint:TNotifyEvent;
-         FOnIdle:TIdleEvent;
-         FOnMessage:TMessageEvent;          
-         FOnMsgEvent:TMessageEvent;
-         FOnException:TExceptionEvent;
-         FOnHelp:THelpEvent;
-         FOnShowHint:TShowHintEvent;
+         FOnHint        :TNotifyEvent;
+         FOnIdle        :TIdleEvent;
+         FOnMessage     :TMessageEvent;
+         FOnMsgEvent    :TMessageEvent;
+         FOnException   :TExceptionEvent;
+         FOnHelp        :THelpEvent;
+         FOnShowHint    :TShowHintEvent;
+         fOnCheckDemo   :TCheckDemoEvent;
       Private
          Function GetHelpFile:String;
          Procedure SetHelpFile(NewName:String);
@@ -1653,6 +1658,8 @@ Type
 //         Function GetFormInfo(Const FormName: String): TFormInfo;
 //         Procedure SetFormInfo(Const FormName: String; Const FormInfo : TFormInfo);
          Procedure SetProgramIniFile(Const iIniFile :  TIniFile);
+         Procedure SetProgramRegName(Const iRegName : String);
+         Procedure SetProgramRegCode(Const iRegCode : String);
       Protected
          Procedure SetupComponent;Override;
       Public
@@ -1683,12 +1690,14 @@ Type
          Function GetMenuItem(Command:TCommand):TMenuItem;
 
          Function GetProgramVersionString : String;
+         Function GetProgramFormCaption(iText : String) : String;
+
       Public
          Property Language : tLanguage Read fLanguage Write SetLanguage;
          Property MainForm:TForm Read FMainForm;
          {Martin}
-           Property HelpHTMLhelp : boolean read FHelpHTMLhelp write FHelpHTMLHelp;
-           Property HtmlHelpIntroPage : string read FHtmlHelpIntroPage write FHtmlHelpIntroPage;
+         Property HelpHTMLhelp : boolean read FHelpHTMLhelp write FHelpHTMLHelp;
+         Property HtmlHelpIntroPage : string read FHtmlHelpIntroPage write FHtmlHelpIntroPage;
          Property HelpFile:String Read GetHelpFile Write SetHelpFile;
          Property HelpWindowTitle:String Read GetHelpWindowTitle Write SetHelpWindowTitle;
          Property HelpWindow:HWindow Read FHelpWindow;
@@ -1710,24 +1719,29 @@ Type
          Property Parameter              : tStringList   Read fParameter;
          Property Log                    : tcLog         Read fLog;
          Property LanguageFile           : tLanguageFile Read fLanguageFile;
-         Property ProgramPath            : tFileName     Read FProgramPath Write FProgramPath;
-         Property ProgramName            : String        Read FProgramName Write FProgramName;
+         Property ProgramPath            : tFileName     Read FProgramPath     Write FProgramPath;
+         Property ProgramName            : String        Read FProgramName     Write FProgramName;
+         Property ProgramLongName        : String        Read fProgramLongName Write fProgramLongName;
          Property ProgramAlreadyRunning  : Boolean       Read GetProgramAlreadyRunning;
          Property ProgramVersion         : Word          Read FProgramVersion Write FProgramVersion;
          Property ProgramSubVersion      : Word          Read FProgramSubVersion Write FProgramSubVersion;
          Property ProgramDate            : TDateTime     Read FProgramDate Write FProgramDate;
          Property ProgramIniFile         : TIniFile      Read FProgramIniFile Write SetProgramIniFile;
+         Property ProgramRegName         : String        Read fProgramRegName Write SetProgramRegName;
+         Property ProgramRegCode         : String        Read fProgramRegCode Write SetProgramRegCode;
+         Property ProgramDemo            : Boolean       Read fProgramDemo Write fProgramDemo;
          Property FormInfoINI            : tFormInfoINI  Read FFormInfoINI Write FFormInfoINI;
          Property StartFromIDE           : Boolean       Read fStartFromIDE;
          Property DestroyFormInOldMethode: Boolean       Read fDestroyFormInOldMethode Write fDestroyFormInOldMethode;
 
-         Property OnHint:TNotifyEvent Read FOnHint Write FOnHint;
-         Property OnIdle:TIdleEvent Read FOnIdle Write FOnIdle;
-         Property OnMessage:TMessageEvent Read FOnMessage Write FOnMessage;
-         Property OnMsgEvent:TMessageEvent read FOnMsgEvent Write FOnMsgEvent;
+         Property OnHint:TNotifyEvent         Read FOnHint      Write FOnHint;
+         Property OnIdle:TIdleEvent           Read FOnIdle      Write FOnIdle;
+         Property OnMessage:TMessageEvent     Read FOnMessage   Write FOnMessage;
+         Property OnMsgEvent:TMessageEvent    Read FOnMsgEvent  Write FOnMsgEvent;
          Property OnException:TExceptionEvent Read FOnException Write FOnException;
-         Property OnHelp:THelpEvent Read FOnHelp Write FOnHelp;
-         Property OnShowHint:TShowHintEvent Read FOnShowHint Write FOnShowHint;
+         Property OnHelp:THelpEvent           Read FOnHelp      Write FOnHelp;
+         Property OnShowHint:TShowHintEvent   Read FOnShowHint  Write FOnShowHint;
+         Property OnCheckDemo:TCheckDemoEvent Read fOnCheckDemo Write fOnCheckDemo;
     End;
     {$HINTS ON}
 
@@ -2159,12 +2173,12 @@ Begin
   Try
      {$IFDEF OS2}
      P := Pointer(WinQueryWindowULong(ahwnd,QWP_PFNWP));
-     If P <> @SubclassedWndProc Then Exit; //no Sibyl Window
+     If P <> @SubclassedWndProc Then Exit; //no WDSibyl Window
      Result := Pointer(WinQueryWindowULong(ahwnd,QWL_USER));
      {$ENDIF}
      {$IFDEF Win32}
      P := Pointer(GetWindowLong(ahwnd,GWL_WNDPROC));
-     If P <> @SubclassedWndProc Then Exit; //no Sibyl Window
+     If P <> @SubclassedWndProc Then Exit; //no WDSibyl Window
      Result := Pointer(GetWindowLong(ahwnd,GWL_USERDATA));
      {$ENDIF}
      If Not (Result Is TControl) Then Result := Nil;
@@ -2227,7 +2241,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TLastMsg Class Implementation                               บ
 บ                                                                           บ
@@ -2270,7 +2284,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TTimer Class Implementation                                 บ
 บ                                                                           บ
@@ -2397,7 +2411,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TCaret Class Implementation                                 บ
 บ                                                                           บ
@@ -2521,7 +2535,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TForm Class Implementation                                  บ
 บ                                                                           บ
@@ -3010,9 +3024,9 @@ Begin
           If otherfocuswin <> 0 Then
           Begin
                newfocuscontrol := HandleToControl(otherfocuswin);
-               If newfocuscontrol <> Nil Then          {a Sibyl control}
+               If newfocuscontrol <> Nil Then          {a WDSibyl control}
                  If newfocuscontrol.Form <> Self 
-                 Then newfocuscontrol := Nil;          {other Sibyl form - must deactivate}
+                 Then newfocuscontrol := Nil;          {other WDSibyl form - must deactivate}
           End
           Else newfocuscontrol := Nil;
 
@@ -4188,10 +4202,10 @@ End;
 
 Procedure TForm.CreateUniqueWindowId(AChild:TControl);
 Begin
-     If AChild <> Nil Then
+   If AChild <> Nil Then
      Begin
-          AChild.FWindowId := FInternalWindowIdCount;
-          Inc(FInternalWindowIdCount);
+        AChild.FWindowId := FInternalWindowIdCount;
+        Inc(FInternalWindowIdCount);
      End;
 End;
 
@@ -4200,18 +4214,18 @@ Procedure TForm.CreateControls;
 Var  AForm:TForm;
      I:LongInt;
 Begin
-     If Not FInitControls Then Exit;
+  If Not FInitControls Then Exit;
 
-     Inherited CreateControls;
+  Inherited CreateControls;
 
-     If FMainMenu <> Nil Then
-       If FFrame <> Nil Then TMenu(FMainMenu).Show;
+  If FMainMenu <> Nil Then
+    If FFrame <> Nil Then TMenu(FMainMenu).Show;
 
-     For I := 0 To MDIChildCount-1 Do
-     Begin
-          AForm := MDIChildren[I];
-          AForm.CreateWnd;
-          If AForm.FVisible Or AForm.Designed Then AForm.Show;
+  For I := 0 To MDIChildCount-1 Do
+    Begin
+       AForm := MDIChildren[I];
+       AForm.CreateWnd;
+       If AForm.FVisible Or AForm.Designed Then AForm.Show;
      End;
 End;
 
@@ -5544,7 +5558,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TApplication Class Implementation                           บ
 บ                                                                           บ
@@ -5565,10 +5579,10 @@ End;
 
 Constructor TApplication.Create;
 
-Var INILanguage  : String;
+Var INILanguage: String;
     PrmLanguage: String;
-    Cou          : LongWord;
-    PrinterName  : String;
+    Cou        : LongWord;
+    PrinterName: String;
 
 // Analyse Standardparameter
 var strParam: tStr20;
@@ -5597,6 +5611,9 @@ Begin
   FProgramVersion:=1;
   FProgramSubVersion:=0;
   FProgramDate:=date;
+
+// DmeoVerison
+  fProgramDemo := false;
 
 { FormPosaition Speicherung setzen }
   fFormInfoINI:=fiSaveLoadINI;
@@ -5652,10 +5669,8 @@ Begin
   if MakeIniFile then
     Begin
       try
-        FNExe:=FProgramPath+FProgramName;
-        if UpperCase(FProgramName)='SIBYL'
-          then FProgramIniFile.Create(FNExe+EXT_UC_INI +'_WD')  { Sibyl verwendet eine intern ASCII-INI-Datei }
-          else FProgramIniFile.Create(FNExe+EXT_UC_INI);
+        FNExe:=FProgramPath+fProgramName;     // 
+        FProgramIniFile.Create(FNExe+EXT_UC_INI);
         AppIniFile:=fProgramIniFile;  // Definiert in Classes
         LogWriteln('ProgramIniFile: ' + fProgramIniFile.Filename);
       except
@@ -5671,7 +5686,7 @@ Begin
       fProgramIniFile := nil;
     End;
 
-// Printer ermitteln      
+// Printer ermitteln
   try
     if Printer=nil
       then LogWriteln('Printer: <Variable=nil>')
@@ -5718,15 +5733,22 @@ Begin
         fLanguageFile:=nil;
       End;
 
+  if (FProgramIniFile <> nil) then
+    begin
 // Nachschauen ob das Programm von der IDE aufgerufen worden ist.
-  if (fStartFromIDE) and (FProgramIniFile <> nil) then
-    Begin
+     if (fStartFromIDE) then
+       Begin
 // Loeschen der Formpositionen --> Uebernehmen der Daten aus den Resourcen.
-      LogWriteln('EraseSection: ' + INI_Sec_FormInfo);
-      try
-        FProgramIniFile.EraseSection(INI_Sec_FormInfo);
-      except
-      end;
+         LogWriteln('EraseSection: ' + INI_Sec_FormInfo);
+         try
+           FProgramIniFile.EraseSection(INI_Sec_FormInfo);
+         except
+         end;
+       End;
+
+// Demoversion
+      fProgramRegName:=FProgramIniFile.ReadString(INI_Sec_Program,INI_Idnt_ProgramRegName,'');
+      fProgramRegCode:=FProgramIniFile.ReadString(INI_Sec_Program,INI_Idnt_ProgramRegCode,'');
     End;
 
   LogWriteln('Call Create');
@@ -5740,6 +5762,7 @@ Begin
   if flog<>nil then flog.Writeln(iText);
 End;
 
+
 Function TApplication.GetProgramVersionString : String;
 { Darstellen der Version in Stringformat}
 
@@ -5748,6 +5771,16 @@ Begin
     then Result := '0' + toStr(fProgramSubVersion)
     else Result := toStr(fProgramSubVersion);
   Result:=toStr(fProgramVersion) + '.' + Result;
+End;
+
+Function TApplication.GetProgramFormCaption(iText : String) : String;
+
+Begin
+  Result:=fProgramLongName + ' V' + GetProgramVersionString;
+  if Application.ProgramDemo then
+    Result:=Result+' / Demo';
+  if iText<>'' then
+    Result:=Result+' - ['+iText+']';
 End;
 
 Function TApplication.GetProgramAlreadyRunning : Boolean;
@@ -5949,6 +5982,11 @@ Var i:LongInt;
 
 Label again;
 Begin
+
+// Checken ob es eine Demo-Version handelt.
+  if fOnCheckDemo<>nil then
+    fOnCheckDemo(Self, fProgramDemo);
+
   {Martin (Idea of Aaron Lawrence) }
   {$ifdef os2}
   DosErrorAPI( FERR_DISABLEHARDERR );
@@ -6584,14 +6622,14 @@ Begin
      FHintWindow.Canvas.GetTextExtent(BubbleText,BubbleSizeX,BubbleSizeY);
      inc(BubbleSizeX,6);
      inc(BubbleSizeY,4);
-     BubbleSizeX:=0;
-     BubbleSizeY:=0;
+     BubbleSizeX:=0; //definitive Lage und Gr”sse wird in THintWindow.ActivateHint() ermittelt
+     BubbleSizeY:=0; //definitive Lage und Gr”sse wird in THintWindow.ActivateHint() ermittelt
 
-     {Position der Bubble anpassen}
+     { Ausgangs-Position der Bubble anpassen }
      HintRect.Left := MousePos.X;
      If FHintOrigin = hiBottom
-       Then HintRect.Bottom := MousePos.Y - 15 - BubbleSizeY
-       Else HintRect.Bottom := MousePos.Y;
+       Then HintRect.Bottom := MousePos.Y - 15   //RG alt: MousePos.Y - 15 - BubbleSizeY
+       Else HintRect.Bottom := MousePos.Y + 4;   //RG nicht auf dem Cursor daher +4
 
      HintInfo.HintControl := FHintControl;
      HintInfo.HintPos := Point(HintRect.Left,HintRect.Bottom);
@@ -6608,10 +6646,10 @@ Begin
      FHintWindow.Color := HintInfo.HintColor;
      FHintWindow.PenColor := HintInfo.HintPenColor;
 
-     HintRect.Left := HintInfo.HintPos.X;
+     HintRect.Left   := HintInfo.HintPos.X;
      HintRect.Bottom := HintInfo.HintPos.Y;
-     HintRect.Right:= 0; // HintRect.Left + BubbleSizeX;
-     HintRect.Top := 0; // HintRect.Bottom + BubbleSizeY;
+     HintRect.Right  := 0; // alt: HintRect.Left + BubbleSizeX;   neu: siehe THintWindow.ActivateHint
+     HintRect.Top    := 0; // alt: HintRect.Bottom + BubbleSizeY; neu: siehe THintWindow.ActivateHint
 
      //hier evtl. Word Wrap
      If HintInfo.HintMaxWidth < BubbleSizeX Then
@@ -6714,10 +6752,27 @@ Begin
   AppIniFile:=fProgramIniFile;
 End;
 
+Procedure TApplication.SetProgramRegName(Const iRegName : String);
+
+begin
+  fProgramRegName:=iRegName;
+  if FProgramIniFile=nil then exit;
+  FProgramIniFile.WriteString(INI_Sec_Program,INI_Idnt_ProgramRegName,fProgramRegName);
+End;
+
+
+Procedure TApplication.SetProgramRegCode(Const iRegCode : String);
+
+begin
+  fProgramRegCode:=iRegCode;
+  if FProgramIniFile=nil then exit;
+  FProgramIniFile.WriteString(INI_Sec_Program,INI_Idnt_ProgramRegCode,fProgramRegCode);
+End;
+
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: THintWindow Class Implementation                            บ
 บ                                                                           บ
@@ -6779,16 +6834,19 @@ Begin
   Inherited Redraw(rec);
 
   Canvas.Brush.Mode:=bmTransparent;
-  h:=Canvas.TextHeight(Caption);
-  cntText:=fHintText.Count-1;
-  y:=2+(CntText*h);
-  for cou:=0 to CntText do
-    Begin
-      Canvas.TextOut(3,y,fHintText[cou]);
-      dec(y,h);
-    End;
 
-//  Canvas.TextOut(3,2, Caption);
+  if fHintText <> nil  //RG 26.10.2010
+  then begin
+         h := Canvas.TextHeight(Caption);
+         cntText := fHintText.Count-1;
+         y := 2+(CntText*h);
+         for cou := 0 to CntText do
+         begin
+           Canvas.TextOut(3,y,fHintText[cou]);
+           dec(y,h);
+         end;
+       end
+  else Canvas.TextOut(3,2,Caption);
 
   Canvas.Brush.Mode:=bmOpaque;
 
@@ -6801,32 +6859,62 @@ End;
 Procedure THintWindow.ActivateHint(Rect:TRect; Const AHint:String);
 
 var CntText : LongInt;
-    h,w     : LongInt;
+    h,w,i   : LongInt;
 
-Begin
+Begin //RG 26.10.2010 total bereinigt
   Caption := AHint;
-  if fHintText=nil then
-    fHintText.Create;
-  fHintText.Clear;
-  CntText:=SplitAll(AHint, #13, fHintText);
+
+  if pos(#13,AHint) > 0
+  then begin
+         if fHintText=nil then fHintText.Create;
+         fHintText.Clear;
+         CntText := SplitAll(AHint,#13,fHintText);  // >1 = mehrzeiliger Text
+       end
+  else CntText := 1;
 
   WindowRect := Rect;
 
   If Rect.Left + Width > Screen.Width Then Rect.Left := Screen.Width - Width;
   If Rect.Left < 0 Then Rect.Left := 0;
-  If Rect.Bottom + Height > Screen.Height Then Rect.Bottom := Screen.Height - HeIght;
+  If Rect.Bottom + Height > Screen.Height Then Rect.Bottom := Screen.Height - Height;
   If Rect.Bottom < 0 Then Rect.Bottom := 0;
 
-  if (Rect.Right=0) and (Rect.Top=0) then
-    Begin
-      w:=7;
-      if Canvas=nil
-        then h:=16
-        else h:=Canvas.TextHeight(AHint);
-      Height:=3+(CntText*h);
-      Width:=6+(fHintText.MaxLength*w);
-    End;
+  if (Rect.Right=0) and (Rect.Top=0)
+  then begin
+         if Canvas = nil
+         then h := 16
+         else h := Canvas.TextHeight(AHint);
+         Height:=3+(CntText*h);
 
+         If Application.HintOrigin = hiBottom
+         then begin
+                Rect.Bottom := Rect.Bottom - Height;
+                If Rect.Bottom < 0 Then Rect.Bottom := 4;
+              end
+         else begin
+                Rect.Bottom := Rect.Bottom + 4;
+                if Rect.Bottom + Height > Screen.Height
+                then Rect.Bottom := Screen.Height-Height-4;
+              end;
+
+         w := 7;
+         if CntText = 1
+         then begin // 1 Zeile
+                if Canvas = nil
+                then Width := 6+(Length(AHint)*w)
+                else Width := 6+(Canvas.TextWidth(AHint));
+              end
+         else begin // >1 Zeile
+                if Canvas = nil
+                then Width := 6+(fHintText.MaxLength*w) //wenn's viele breite Buchstaben hat ist Width zu klein
+                else begin                              //und bei schmalen zu gross
+                       Width := 0;
+                       for i := 0 to fHintText.Count-1 do
+                       if 6+(Canvas.TextWidth(fHintText[i])) > Width
+                       then Width := 6+(Canvas.TextWidth(fHintText[i]));
+                     end;
+              end;
+       end;
   SetWindowPos(Rect.Left, Rect.Bottom, Width, Height);
   Show;
 End;
@@ -6961,7 +7049,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TScreen Class Implementation                                บ
 บ                                                                           บ
@@ -7839,6 +7927,7 @@ Begin
      fCursorPointer[4].LoadFromResourceName('SQLWait');
      fCursorPointer[5].LoadFromResourceName('APPStart');
      fCursorPointer[6].LoadFromResourceName('Help');
+     fCursorPointer[7].LoadFromResourceName('Hand');
 
 // Vom OS/2-System
      InsertCursor(crDefault,WinQuerySysPointer(HWND_DESKTOP,SPTR_ARROW,False));
@@ -7866,7 +7955,8 @@ Begin
      InsertCursor(crSizeSE,WinQuerySysPointer(HWND_DESKTOP,SPTR_SIZENWSE,False));
      InsertCursor(crSizeNE,WinQuerySysPointer(HWND_DESKTOP,SPTR_SIZENESW,False));
      InsertCursor(crSizeSW,WinQuerySysPointer(HWND_DESKTOP,SPTR_SIZENESW,False));
-     InsertCursor(crHand,WinQuerySysPointer(HWND_DESKTOP,SPTR_ARROW,False));
+     InsertCursor(crHand,fCursorPointer[7].Handle);
+//     InsertCursor(crHand,WinQuerySysPointer(HWND_DESKTOP,SPTR_ARROW,False));
      {$ENDIF}
 
      {$IFDEF Win32}
@@ -8055,7 +8145,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: General functions Implementation                            บ
 บ                                                                           บ
@@ -8454,7 +8544,7 @@ Begin
      Begin
        {$IFDEF OS2}
        Case goSysInfo.OS.Platform Of
-              OS2Ver20, OS2Ver30: {WARP}
+              pfOS2Ver20, pfOS2Ver30: {WARP}
          Begin
 Warp:
            {typecast To have access To BackColor}
@@ -8485,7 +8575,7 @@ Warp:
            Canvas.Pixels[rc1.Right+offs,rc1.Bottom-offs]:=Canvas.Pen.color;
            Canvas.Pixels[rc1.Right+offs,rc1.Top+offs]:=Canvas.Pen.color;
          End;
-       OS2Ver40, OS2Ver45: {MERLIN}
+       pfOS2Ver40, pfOS2Ver45, pfEComStation: {MERLIN}
          Begin
            {typecast To have access To BackColor}
            If Control.Parent <> Nil
@@ -8555,7 +8645,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TFrameControl Class Implementation                          บ
 บ                                                                           บ
@@ -9545,7 +9635,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TSizeBorder Class Implementation                            บ
 บ                                                                           บ
@@ -9762,7 +9852,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TToolbar Class Implementation                               บ
 บ                                                                           บ
@@ -9772,159 +9862,162 @@ End;
 
 Procedure TToolbar.Hide;
 Begin
-     Inherited Hide;
-     If (Owner Is TForm) Then TForm(Owner).AlignToolBars;
+  Inherited Hide;
+  If (Owner Is TForm) Then TForm(Owner).AlignToolBars;
 End;
 
 
 Procedure TToolbar.Show;
 Begin
-     If Not FVisible Then
-     Begin
-         Inherited Show;
-         If (Owner Is TForm) Then TForm(Owner).AlignToolBars;
-     End
-     Else Inherited Show;
+  If Not FVisible Then
+  Begin
+      Inherited Show;
+      If (Owner Is TForm) Then TForm(Owner).AlignToolBars;
+  End
+  Else Inherited Show;
 End;
 
 Procedure TToolbar.EnableCommands(Cmds:Array Of TCommand);
 Var  T,t1:LongInt;
      Control:TControl;
 Begin
-     For T:=0 To ControlCount-1 Do
-     Begin
-          Control:=Controls[T];
-          If Control.FCommand<>0 Then
-          Begin
-               For t1:=Low(Cmds) To High(Cmds) Do
-                 If Control.FCommand=Cmds[t1] Then
-                 Begin
-                      Control.Enabled:=True;
-                      break;
-                 End;
-          End;
-     End;
+  For T:=0 To ControlCount-1 Do
+  Begin
+       Control:=Controls[T];
+       If Control.FCommand<>0 Then
+       Begin
+            For t1:=Low(Cmds) To High(Cmds) Do
+              If Control.FCommand=Cmds[t1] Then
+              Begin
+                   Control.Enabled:=True;
+                   break;
+              End;
+       End;
+  End;
 End;
 
 Procedure TToolbar.DisableCommands(Cmds:Array Of TCommand);
 Var  T,t1:LongInt;
      Control:TControl;
 Begin
-     For T:=0 To ControlCount-1 Do
-     Begin
-          Control:=Controls[T];
-          If Control.FCommand<>0 Then
-          Begin
-               For t1:=Low(Cmds) To High(Cmds) Do
-                 If Control.FCommand=Cmds[t1] Then
-                 Begin
-                      Control.Enabled:=False;
-                      break;
-                 End;
-          End;
-     End;
+  For T:=0 To ControlCount-1 Do
+  Begin
+       Control:=Controls[T];
+       If Control.FCommand<>0 Then
+       Begin
+            For t1:=Low(Cmds) To High(Cmds) Do
+              If Control.FCommand=Cmds[t1] Then
+              Begin
+                   Control.Enabled:=False;
+                   break;
+              End;
+       End;
+  End;
 End;
 
 Procedure TToolbar.SetupComponent;
 Begin
-     Inherited SetupComponent;
+  Inherited SetupComponent;
 
-     FHeight:=50;
-     FWidth:=50;
-     color:=clLtGray;
-     FParentPenColor:=True;
-     ParentColor:=False;
-     CursorTabStop:=False;
-     TabStop:=False;
-     FAlignment:=tbTop;
-     FBevelStyle:=tbRaised;
-     Include(ComponentState, csAcceptsControls);
-     FSizeable:=False;
-     FIsToolBar:=True;
-     FOrder:=-1;
-     SizeBorderCtrl:=Nil;
+  FHeight:=50;
+  FWidth:=50;
+  color:=clLtGray;
+  FParentPenColor:=True;
+  ParentColor:=False;
+  CursorTabStop:=False;
+  TabStop:=False;
+  FAlignment:=tbTop;
+  FBevelStyle:=tbRaised;
+  Include(ComponentState, csAcceptsControls);
+  FSizeable:=False;
+  FIsToolBar:=True;
+  FOrder:=-1;
+  SizeBorderCtrl:=Nil;
 End;
 
 
 Procedure TToolbar.CreateWnd;
 Begin
-     SetOrder(FOrder);
+  SetOrder(FOrder);
 
-     If FParent Is TForm Then FParent := FParent.FFrame;  {Frame}
-     Inherited CreateWnd;
-     FParent := TControl(Owner);         {Form}
+  If FParent Is TForm Then FParent := FParent.FFrame;  {Frame}
+  Inherited CreateWnd;
+  FParent := TControl(Owner);         {Form}
 End;
 
 
 Procedure TToolbar.SetupShow;
 Var  rc:TRect;
 Begin
-     rc := Parent.GetClientRect;
-     Case FAlignment Of
-         tbTop:
-         Begin
-              FLeft := 0;
-              {$IFDEF OS2}
-              FBottom := rc.Top-FHeight+1;
-              {$ENDIF}
-              {$IFDEF Win32}
-              FBottom := 0;
-              {$ENDIF}
-              FWidth := rc.Right-rc.Left+1;
-         End;
-         tbBottom:
-         Begin
-              FLeft := 0;
-              {$IFDEF OS2}
-              FBottom := 0;
-              {$ENDIF}
-              {$IFDEF Win32}
-              FBottom := rc.Top-rc.Bottom+1;
-              {$ENDIF}
-              FWidth := rc.Right-rc.Left+1;
-         End;
-         tbLeft:
-         Begin
-              FBottom := 0;
-              FLeft := rc.Left-FWidth;
-              FHeight := rc.Top-rc.Bottom+1;
-         End;
-         tbRight:
-         Begin
-              FBottom := 0;
-              FLeft := rc.Right+1;
-              FHeight := rc.Top-rc.Bottom+1;
-         End;
-     End; {Case}
+  rc := Parent.GetClientRect;
+  Case FAlignment Of
+    tbTop:
+      Begin
+        FLeft := 0;
+        {$IFDEF OS2}
+        FBottom := rc.Top-FHeight+1;
+        {$ENDIF}
+        {$IFDEF Win32}
+        FBottom := 0;
+        {$ENDIF}
+        FWidth := rc.Right-rc.Left+1;
+      End;
+    tbBottom:
+      Begin
+        FLeft := 0;
+        {$IFDEF OS2}
+        FBottom := 0;
+        {$ENDIF}
+        {$IFDEF Win32}
+        FBottom := rc.Top-rc.Bottom+1;
+        {$ENDIF}
+        FWidth := rc.Right-rc.Left+1;
+      End;
+    tbLeft:
+      Begin
+        FBottom := 0;
+        FLeft := rc.Left-FWidth;
+        FHeight := rc.Top-rc.Bottom+1;
+      End;
+    tbRight:
+      Begin
+        FBottom := 0;
+        FLeft := rc.Right+1;
+        FHeight := rc.Top-rc.Bottom+1;
+      End;
+  End; {Case}
 End;
 
 
 Procedure TToolbar.Redraw(Const rec:TRect);
 Var  rc:TRect;
 Begin
-     If FCanvas = Nil Then Exit;
-     FCanvas.FillRect(rec,color);
+  If FCanvas = Nil Then Exit;
+  FCanvas.FillRect(rec,color);
 
-     If FBevelStyle <> tbNone Then
-     Begin
-          rc := GetClientRect;
-          If FBevelStyle = tbRaised Then FCanvas.ShadowedBorder(rc,clWhite,clDkGray)
-          Else FCanvas.ShadowedBorder(rc,clDkGray,clWhite);
-     End;
+  If FBevelStyle <> tbNone Then
+    Begin
+      rc := GetClientRect;
+      If FBevelStyle = tbRaised
+        Then FCanvas.ShadowedBorder(rc,clWhite,clDkGray)
+        Else FCanvas.ShadowedBorder(rc,clDkGray,clWhite);
+    End;
 End;
 
 
 Procedure TToolbar.SetSize(NewSize:LongInt);
 Begin
-     If FAlignment In [tbTop,tbBottom] Then Height := NewSize
-     Else Width := NewSize;
+  If FAlignment In [tbTop,tbBottom]
+    Then Height := NewSize
+    Else Width := NewSize;
 End;
 
 
 Function TToolbar.GetSize:LongInt;
 Begin
-     If FAlignment In [tbTop,tbBottom] Then Result := Height
-     Else Result := Width;
+  If FAlignment In [tbTop,tbBottom]
+    Then Result := Height
+    Else Result := Width;
 End;
 
 
@@ -9947,19 +10040,19 @@ Begin
      {Move the Toolbar To the End Of the Controls List
       To guarantee To correct SCU order}
      If ListFind(Own.FControls, Self) >= 0 Then
-     Begin
-          ListRemove(Own.FControls, Self);
-          ListAdd(Own.FControls, Self);
-     End;
+       Begin
+         ListRemove(Own.FControls, Self);
+         ListAdd(Own.FControls, Self);
+       End;
 
      FAlignment := NewAlign;
 
      {Update the sizeborder}
      If SizeBorderCtrl <> Nil Then
      Case FAlignment Of
-       tbLeft: SizeBorderCtrl.BorderAlign := baRight;
+       tbLeft:  SizeBorderCtrl.BorderAlign := baRight;
        tbRight: SizeBorderCtrl.BorderAlign := baLeft;
-       tbTop: SizeBorderCtrl.BorderAlign := baBottom;
+       tbTop:   SizeBorderCtrl.BorderAlign := baBottom;
        tbBottom:SizeBorderCtrl.BorderAlign := baTop;
      End;
 
@@ -9975,52 +10068,50 @@ Var  Own:TForm;
      AToolbar:TToolbar;
      I:LongInt;
 Begin
-     FOrder := Value;
-     If FOrder < 0 Then Exit; {auto Append}
+  FOrder := Value;
+  If FOrder < 0 Then Exit; {auto Append}
 
-     Own := TForm(Owner);
-     If Not (Own Is TForm) Then Exit;
+  Own := TForm(Owner);
+  If Not (Own Is TForm) Then Exit;
 
-     List := Own.FToolBarLists[FAlignment];
+  List := Own.FToolBarLists[FAlignment];
 
-     If ListFind(List, Self) < 0 Then Exit;  {noch nicht In der Liste}
-     If List.Count = 1 Then Exit;            {nur Self In Liste}
+  If ListFind(List, Self) < 0 Then Exit;  {noch nicht In der Liste}
+  If List.Count = 1 Then Exit;            {nur Self In Liste}
 
-     ListRemove(List, Self);
-     If FOrder > List.Count Then FOrder := List.Count;
-     ListInsert(List, FOrder, Self);
+  ListRemove(List, Self);
+  If FOrder > List.Count Then FOrder := List.Count;
+  ListInsert(List, FOrder, Self);
 
-     {reorder the Own.Controls List}
-     For I := 0 To List.Count-1 Do
-     Begin
-          AToolbar := TToolbar(List.Items[I]);
-          If ListFind(Own.FControls, AToolbar) >= 0 Then
-          Begin
-               ListRemove(Own.FControls, AToolbar);
-               ListAdd(Own.FControls, AToolbar);
-          End;
-     End;
+  {reorder the Own.Controls List}
+  For I := 0 To List.Count-1 Do
+  Begin
+       AToolbar := TToolbar(List.Items[I]);
+       If ListFind(Own.FControls, AToolbar) >= 0 Then
+       Begin
+            ListRemove(Own.FControls, AToolbar);
+            ListAdd(Own.FControls, AToolbar);
+       End;
+  End;
 
-     Own.AlignToolBars;
+  Own.AlignToolBars;
 End;
 
 
 Function TToolbar.GetOrder:LongInt;
 Var  Own:TForm;
 Begin
-     Own := TForm(Owner);
-     If Own Is TForm Then
-     Begin
-          Result := ListFind(Own.FToolBarLists[FAlignment], Self);
-     End
-     Else Result := -1;
+  Own := TForm(Owner);
+  If Own Is TForm
+    Then Result := ListFind(Own.FToolBarLists[FAlignment], Self)
+    Else Result := -1;
 End;
 
 
 Procedure TToolbar.SetBevelStyle(NewStyle:TToolBarBevel);
 Begin
-     FBevelStyle := NewStyle;
-     If Handle <> 0 Then Invalidate;
+  FBevelStyle := NewStyle;
+  If Handle <> 0 Then Invalidate;
 End;
 
 
@@ -10032,57 +10123,57 @@ Var  Own:TForm;
      MaxLeft,MaxRight:LongInt;
 Label ex;
 Begin
-     Own := TForm(Owner);
-     If Not (Own Is TForm) Then Exit;
+  Own := TForm(Owner);
+  If Not (Own Is TForm) Then Exit;
 
-     Case Alignment Of
-        tbLeft:
-        Begin
-             MaxLeft:=0;
-             List:=Own.FToolBarLists[tbLeft];
-             If List<>Nil Then For T:=0 To List.Count-1 Do
-             Begin
-                  Toolbar:=TToolbar(List[T]);
-                  If Toolbar.FVisible Then Inc(MaxLeft,Toolbar.Size);
-             End;
-             Result:=-MaxLeft;
-             If List<>Nil Then For T:=0 To List.Count-1 Do
-             Begin
-                  Toolbar:=TToolbar(List[T]);
-                  If Toolbar=Self Then Goto ex;
-                  If Toolbar.FVisible Then Inc(Result,Toolbar.Size);
-             End;
-        End;
-        tbRight:
-        Begin
-             MaxRight:=0;
-             List:=Own.FToolBarLists[tbRight];
-             If List<>Nil Then For T:=0 To List.Count-1 Do
-             Begin
-                  Toolbar:=TToolbar(List[T]);
-                  If Toolbar.FVisible Then Inc(MaxRight,Toolbar.Size);
-             End;
-             Result:=Own.GetClientWidth+MaxRight;
-             If List<>Nil Then For T:=0 To List.Count-1 Do
-             Begin
-                  Toolbar:=TToolbar(List[T]);
-                  If Toolbar.FVisible Then Dec(Result,Toolbar.Size);
-                  If Toolbar=Self Then Goto ex;
-             End;
-        End;
-        tbBottom,tbTop:
-        Begin
-             Result:=0;
-             List:=Own.FToolBarLists[tbLeft];
-             If List<>Nil Then For T:=0 To List.Count-1 Do
-             Begin
-                  Toolbar:=TToolbar(List[T]);
-                  If Toolbar.FVisible Then Dec(Result,Toolbar.Size);
-             End;
-        End;
-     End;
+  Case Alignment Of
+     tbLeft:
+       Begin
+         MaxLeft:=0;
+         List:=Own.FToolBarLists[tbLeft];
+         If List<>Nil Then For T:=0 To List.Count-1 Do
+           Begin
+             Toolbar:=TToolbar(List[T]);
+             If Toolbar.FVisible Then Inc(MaxLeft,Toolbar.Size);
+           End;
+         Result:=-MaxLeft;
+         If List<>Nil Then For T:=0 To List.Count-1 Do
+           Begin
+             Toolbar:=TToolbar(List[T]);
+             If Toolbar=Self Then Goto ex;
+             If Toolbar.FVisible Then Inc(Result,Toolbar.Size);
+           End;
+       End;
+     tbRight:
+       Begin
+         MaxRight:=0;
+         List:=Own.FToolBarLists[tbRight];
+         If List<>Nil Then For T:=0 To List.Count-1 Do
+           Begin
+             Toolbar:=TToolbar(List[T]);
+             If Toolbar.FVisible Then Inc(MaxRight,Toolbar.Size);
+           End;
+         Result:=Own.GetClientWidth+MaxRight;
+         If List<>Nil Then For T:=0 To List.Count-1 Do
+           Begin
+             Toolbar:=TToolbar(List[T]);
+             If Toolbar.FVisible Then Dec(Result,Toolbar.Size);
+             If Toolbar=Self Then Goto ex;
+           End;
+       End;
+     tbBottom,tbTop:
+       Begin
+         Result:=0;
+         List:=Own.FToolBarLists[tbLeft];
+         If List<>Nil Then For T:=0 To List.Count-1 Do
+           Begin
+             Toolbar:=TToolbar(List[T]);
+             If Toolbar.FVisible Then Dec(Result,Toolbar.Size);
+           End;
+       End;
+  End;
 ex:
-     FLeft := Result;
+  FLeft := Result;
 End;
 
 
@@ -10093,36 +10184,36 @@ Var  Own:TForm;
      Toolbar:TToolbar;
 Label ex;
 Begin
-     Own := TForm(Owner);
-     If Not (Own Is TForm) Then Exit;
+  Own := TForm(Owner);
+  If Not (Own Is TForm) Then Exit;
 
-     Case Alignment Of
-        tbLeft,tbRight:Result:=0;
-        tbBottom:
-        Begin
-             Result:=0;
-             List:=Own.FToolBarLists[tbBottom];
-             If List<>Nil Then For T:=List.Count-1 Downto 0 Do
-             Begin
-                  Toolbar:=TToolbar(List[T]);
-                  If Toolbar.FVisible Then Dec(Result,Toolbar.Size);
-                  If Toolbar=Self Then Goto ex;;
-             End;
-        End;
-        tbTop:
-        Begin
-             Result := Own.GetClientHeight;
-             List:=Own.FToolBarLists[tbTop];
-             If List<>Nil Then For T:=List.Count-1 Downto 0 Do
-             Begin
-                  Toolbar:=TToolbar(List[T]);
-                  If Toolbar=Self Then Goto ex;
-                  If Toolbar.FVisible Then Inc(Result,Toolbar.Size);
-             End;
-        End;
-     End;
+  Case Alignment Of
+     tbLeft,tbRight:Result:=0;
+     tbBottom:
+       Begin
+         Result:=0;
+         List:=Own.FToolBarLists[tbBottom];
+         If List<>Nil Then For T:=List.Count-1 Downto 0 Do
+           Begin
+             Toolbar:=TToolbar(List[T]);
+             If Toolbar.FVisible Then Dec(Result,Toolbar.Size);
+             If Toolbar=Self Then Goto ex;;
+           End;
+       End;
+     tbTop:
+       Begin
+         Result := Own.GetClientHeight;
+         List:=Own.FToolBarLists[tbTop];
+         If List<>Nil Then For T:=List.Count-1 Downto 0 Do
+           Begin
+             Toolbar:=TToolbar(List[T]);
+             If Toolbar=Self Then Goto ex;
+             If Toolbar.FVisible Then Inc(Result,Toolbar.Size);
+           End;
+       End;
+  End;
 ex:
-     FBottom := Result;
+  FBottom := Result;
 End;
 
 
@@ -10146,73 +10237,74 @@ End;
 Procedure TToolbar.SetWindowPos(NewLeft,NewBottom,NewWidth,NewHeight:LongInt);
 Var  Own:TForm;
 Begin
-     Own := TForm(Owner);
-     If Not (Own Is TForm) Then Exit;
+  Own := TForm(Owner);
+  If Not (Own Is TForm) Then Exit;
 
-     If Alignment In [tbLeft,tbRight] Then FWidth := NewWidth
-     Else FHeight := NewHeight;
+  If Alignment In [tbLeft,tbRight]
+    Then FWidth := NewWidth
+    Else FHeight := NewHeight;
 
-     If DesignerState * [dsNoRealSizing] <> [] Then Exit;
-     Own.AlignToolBars;
+  If DesignerState * [dsNoRealSizing] <> [] Then Exit;
+  Own.AlignToolBars;
 
-     Resize; {because Of no WMSize}
+  Resize; {because Of no WMSize}
 End;
 {$HINTS ON}
 
 
 Procedure TToolbar.SetSizeable(Value:Boolean);
 Begin
-     If Value = FSizeable Then Exit;
+  If Value = FSizeable Then Exit;
 
-     FSizeable := Value;
-     If FSizeable Then
-     Begin
-          SizeBorderCtrl.Create(Self);
-          Include(SizeBorderCtrl.ComponentState,csDetail);
-          SizeBorderCtrl.OnSizing := EvBorderSizing;
-          SizeBorderCtrl.OnSized := EvBorderSized;
-          InsertControl(SizeBorderCtrl);
+  FSizeable := Value;
+  If FSizeable Then
+    Begin
+      SizeBorderCtrl.Create(Self);
+      Include(SizeBorderCtrl.ComponentState,csDetail);
+      SizeBorderCtrl.OnSizing := EvBorderSizing;
+      SizeBorderCtrl.OnSized := EvBorderSized;
+      InsertControl(SizeBorderCtrl);
 
-          Case FAlignment Of
-            tbLeft: SizeBorderCtrl.BorderAlign := baRight;
-            tbRight: SizeBorderCtrl.BorderAlign := baLeft;
-            tbTop: SizeBorderCtrl.BorderAlign := baBottom;
-            tbBottom: SizeBorderCtrl.BorderAlign := baTop;
-          End;
-     End
-     Else
-     Begin
-          SizeBorderCtrl.Destroy;
-          SizeBorderCtrl := Nil;
-     End;
+      Case FAlignment Of
+        tbLeft: SizeBorderCtrl.BorderAlign := baRight;
+        tbRight: SizeBorderCtrl.BorderAlign := baLeft;
+        tbTop: SizeBorderCtrl.BorderAlign := baBottom;
+        tbBottom: SizeBorderCtrl.BorderAlign := baTop;
+      End;
+    End
+  Else
+    Begin
+      SizeBorderCtrl.Destroy;
+      SizeBorderCtrl := Nil;
+    End;
 End;
 
 
 {$HINTS OFF}
 Procedure TToolbar.EvBorderSizing(Sender:TObject;Var SizeDelta:LongInt);
 Begin
-     Case FAlignment Of
-       tbLeft:
-       Begin
-            If Size + SizeDelta < 5 Then SizeDelta := 5 - Size;
-            If SizeDelta > FForm.ClientWidth Then SizeDelta := FForm.ClientWidth;
-       End;
-       tbBottom:
-       Begin
-            If Size + SizeDelta < 5 Then SizeDelta := 5 - Size;
-            If SizeDelta > FForm.ClientHeight Then SizeDelta := FForm.ClientHeight;
-       End;
-       tbRight:
-       Begin
-            If Size - SizeDelta < 5 Then SizeDelta := Size - 5;
-            If -SizeDelta > FForm.ClientWidth Then SizeDelta := -FForm.ClientWidth;
-       End;
-       tbTop:
-       Begin
-            If Size - SizeDelta < 5 Then SizeDelta := Size - 5;
-            If -SizeDelta > FForm.ClientHeight Then SizeDelta := -FForm.ClientHeight;
-       End;
-     End;
+  Case FAlignment Of
+    tbLeft:
+      Begin
+        If Size + SizeDelta < 5 Then SizeDelta := 5 - Size;
+        If SizeDelta > FForm.ClientWidth Then SizeDelta := FForm.ClientWidth;
+      End;
+    tbBottom:
+      Begin
+        If Size + SizeDelta < 5 Then SizeDelta := 5 - Size;
+        If SizeDelta > FForm.ClientHeight Then SizeDelta := FForm.ClientHeight;
+      End;
+    tbRight:
+      Begin
+        If Size - SizeDelta < 5 Then SizeDelta := Size - 5;
+        If -SizeDelta > FForm.ClientWidth Then SizeDelta := -FForm.ClientWidth;
+      End;
+    tbTop:
+      Begin
+        If Size - SizeDelta < 5 Then SizeDelta := Size - 5;
+        If -SizeDelta > FForm.ClientHeight Then SizeDelta := -FForm.ClientHeight;
+      End;
+  End;
 End;
 {$HINTS ON}
 
@@ -10220,39 +10312,39 @@ End;
 {$HINTS OFF}
 Procedure TToolbar.EvBorderSized(Sender:TObject;Var SizeDelta:LongInt);
 Begin
-     Case FAlignment Of
-       tbLeft:
-       Begin
-            If Size + SizeDelta < 5 Then SizeDelta := 5 - Size;
-            If SizeDelta > FForm.ClientWidth Then SizeDelta := FForm.ClientWidth;
-            Size := Size + SizeDelta;
-       End;
-       tbBottom:
-       Begin
-            If Size + SizeDelta < 5 Then SizeDelta := 5 - Size;
-            If SizeDelta > FForm.ClientHeight Then SizeDelta := FForm.ClientHeight;
-            Size := Size + SizeDelta;
-       End;
-       tbRight:
-       Begin
-            If Size - SizeDelta < 5 Then SizeDelta := Size - 5;
-            If -SizeDelta > FForm.ClientWidth Then SizeDelta := -FForm.ClientWidth;
-            Size := Size - SizeDelta;
-       End;
-       tbTop:
-       Begin
-            If Size - SizeDelta < 5 Then SizeDelta := Size - 5;
-            If -SizeDelta > FForm.ClientHeight Then SizeDelta := -FForm.ClientHeight;
-            Size := Size - SizeDelta;
-       End;
-     End;
+  Case FAlignment Of
+    tbLeft:
+      Begin
+        If Size + SizeDelta < 5 Then SizeDelta := 5 - Size;
+        If SizeDelta > FForm.ClientWidth Then SizeDelta := FForm.ClientWidth;
+        Size := Size + SizeDelta;
+      End;
+    tbBottom:
+      Begin
+        If Size + SizeDelta < 5 Then SizeDelta := 5 - Size;
+        If SizeDelta > FForm.ClientHeight Then SizeDelta := FForm.ClientHeight;
+        Size := Size + SizeDelta;
+      End;
+    tbRight:
+      Begin
+        If Size - SizeDelta < 5 Then SizeDelta := Size - 5;
+        If -SizeDelta > FForm.ClientWidth Then SizeDelta := -FForm.ClientWidth;
+        Size := Size - SizeDelta;
+      End;
+    tbTop:
+      Begin
+        If Size - SizeDelta < 5 Then SizeDelta := Size - 5;
+        If -SizeDelta > FForm.ClientHeight Then SizeDelta := -FForm.ClientHeight;
+        Size := Size - SizeDelta;
+      End;
+  End;
 End;
 {$HINTS ON}
 
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TSizeConstraints Class Implementation                       บ
 บ                                                                           บ
@@ -10305,7 +10397,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TControl Class Implementation                               บ
 บ                                                                           บ
@@ -11820,22 +11912,22 @@ End;
 Procedure TControl.Hide;
 Var  WHandle:LongWord;
 Begin
-     If Not Designed Then FVisible := False;
-     If Handle = 0 Then Exit;
+  If Not Designed Then FVisible := False;
+  If Handle = 0 Then Exit;
 
-
-     If FFrame <> Nil Then WHandle := FFrame.Handle
-     Else WHandle := Handle;
-     If WHandle=0 Then exit;
+  If FFrame <> Nil 
+    Then WHandle := FFrame.Handle
+    Else WHandle := Handle;
+  If WHandle=0 Then exit;
      
-     If FOnHide <> Nil Then FOnHide(Self);
+  If FOnHide <> Nil Then FOnHide(Self);
      
-     {$IFDEF OS2}
-     WinShowWindow(WHandle,False);
-     {$ENDIF}
-     {$IFDEF Win32}
-     ShowWindow(WHandle,SW_HIDE);
-     {$ENDIF}
+  {$IFDEF OS2}
+  WinShowWindow(WHandle,False);
+  {$ENDIF}
+  {$IFDEF Win32}
+  ShowWindow(WHandle,SW_HIDE);
+  {$ENDIF}
 End;
 
 
@@ -12269,26 +12361,26 @@ End;
 Procedure TControl.DestroyWnd;
 Var h:LongInt;
 Begin
-     AssignStr(FCaption, Caption);
-     If Handle <> 0 Then
-     Begin
-          h:=Handle;
-          FHandle:=0;
-          {$IFDEF OS2}
-          WinDestroyWindow(h);
-          {$ENDIF}
-          {$IFDEF Win32}
-          DestroyWindow(h);
-          {$ENDIF}
-     End;
+  AssignStr(FCaption, Caption);
+  If Handle <> 0 Then
+    Begin
+      h:=Handle;
+      FHandle:=0;
+      {$IFDEF OS2}
+      WinDestroyWindow(h);
+      {$ENDIF}
+      {$IFDEF Win32}
+      if WinUser.IsWindowVisible(h) then // Checken ob das Control noch existiert
+        DestroyWindow(h);                // Wenn ja, dann Control zerst”ren
+     {$ENDIF}
+    End;
 
-     If FFrame <> Nil Then FFrame.DestroyWnd; //client first !!
-
-     FInitControls := True;       {For [re]CreateWnd}
-     FLeft := Left;               {Get Value from Frame}
-     FBottom := Bottom;
-     FWidth := Width;
-     FHeight := Height;
+  If FFrame <> Nil Then FFrame.DestroyWnd; //client first !!
+  FInitControls := True;       {For [re]CreateWnd}
+  FLeft := Left;               {Get Value from Frame}
+  FBottom := Bottom;
+  FWidth := Width;
+  FHeight := Height;
 End;
 
 
@@ -12298,28 +12390,28 @@ Var  I:LongInt;
      Control:TControl;
 
 Begin
-     If FHandle = 0 Then Exit;
+  If FHandle = 0 Then Exit;
 
-     Include(ControlState,csWindowDestroying);
+  Include(ControlState,csWindowDestroying);
 
-     If Self Is TForm Then
-     Begin
-          If DDEMan_CloseClientLinks <> Nil Then DDEMan_CloseClientLinks(TForm(Self));
-     End;
+  If Self Is TForm Then
+    Begin
+      If DDEMan_CloseClientLinks <> Nil Then DDEMan_CloseClientLinks(TForm(Self));
+    End;
 
-     DisposeWnd;
+  DisposeWnd;
 
-     For I := 0 To ControlCount-1 Do     {WinControls}
-     Begin
-          Control := Controls[I];
-          Control.DestroyHandle;
-     End;
+  For I := 0 To ControlCount-1 Do     {WinControls}
+    Begin
+      Control := Controls[I];
+      Control.DestroyHandle;
+    End;
 
-     DestroyWnd;
+  DestroyWnd;
 
-     If Self Is TForm Then Screen.Update;
+  If Self Is TForm Then Screen.Update;
 
-     Exclude(ControlState,csWindowDestroying);
+  Exclude(ControlState,csWindowDestroying);
 End;
 
 
@@ -12877,13 +12969,13 @@ End;
 
 Procedure TControl.KillFocus;
 Begin
-     If OnExit <> Nil Then OnExit(Self);
+  If OnExit <> Nil Then OnExit(Self);
 End;
 
 
 Procedure TControl.SetFocus;
 Begin
-     If OnEnter <> Nil Then OnEnter(Self);
+  If OnEnter <> Nil Then OnEnter(Self);
 End;
 
 
@@ -13438,7 +13530,7 @@ Var WinDragDropData: TDragDropData;
 
 Function GetDragControl(Const pt:TPoint):TControl;
 // Liefert von der aktuellen Mouse-Position (bezogen auf den Bildschirm)
-// das Sibyl-Objekt zurueck. Wenn das Ergebnis NIL ist dann wurde kein Sibyl-
+// das WDSibyl-Objekt zurueck. Wenn das Ergebnis NIL ist dann wurde kein WDSibyl-
 // Objekt gefunden.
 
 Var Win:HWND;
@@ -13449,7 +13541,7 @@ Begin
   If Win<>0 Then
     Begin
       P:=Pointer(GetWindowLong(Win,GWL_WNDPROC));
-      If P<>@SubclassedWndProc Then Exit; //no Sibyl Window
+      If P<>@SubclassedWndProc Then Exit; //no WDSibyl Window
       Result:=Pointer(GetWindowLong(Win,GWL_USERDATA));
     End;
 End;
@@ -16860,7 +16952,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TScrollBar Class Implementation                             บ
 บ                                                                           บ
@@ -17076,7 +17168,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TControlScrollBar Class Implementation                      บ
 บ                                                                           บ
@@ -17094,7 +17186,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TScrollingWinControl Class Implementation                   บ
 บ                                                                           บ
@@ -17676,7 +17768,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TScrollBox Class Implementation                             บ
 บ                                                                           บ
@@ -18010,8 +18102,8 @@ End.
   21-Okt-03  WD         Funktionen tControl.SetEnabled und tControl.GetEnabled von Private auf Protected umgestellt
   26-Dez-03  WD         Korrektur von der Funktion "DrawSystemBorder"
   08-Aug-04  MV         Microsoft HTML-Help
-                        Unterdrcken der OS/2-Fehlermeldung "Laufwerk nicht bereit"
-                        und eine Menge kleine Dinge, die sich ber Jahre angesammelt haben
+                        Unterdrcken der OS/2-Fehlermeldung "Laufwerk nicht bereit"
+                        und eine Menge kleine Dinge, die sich ber Jahre angesammelt haben
   21-Aug-04  WD         Drag&Drop und CreateCursor korrigiert.
   31-Aug-04  WD         TScreen.GetFontFromPointSize: Bessere Ermittlung von lfHeight und lfWidth unter Windows
   15-Sep-04  CW         TframeControl.CreateWnd: Korrekte Anzeige der Form-Caption bei Sonderzeichen
@@ -18021,9 +18113,9 @@ End.
   04-Okt-04  MV         Einbau der Property tScreen.SystemFontCount
   08-Nov-04  WD         Einbau der Funktion tForm.PrintForm;
   14-Nov-04  WD         Umbau der Logik fuer die Positionspeichern dem Forms. Jetzt auch
-                        abhngig von Application.FormPositionINI. default: fpSaveLoadINI
+                        abhngig von Application.FormPositionINI. default: fpSaveLoadINI
   05-Dez-04  WD         Durch den neuen RC-Compiler: Rueckbau von Curs_OS2.RC und Curs_W32.RC auf Cursors.RC
-  07-Feb-05  WD         Aendern der Applikations-INI-Datei: FormPosition -> FormInfo. Dadurch k”nnen
+  07-Feb-05  WD         Aendern der Applikations-INI-Datei: FormPosition -> FormInfo. Dadurch knnen
                         mehrere Attribute gespeichert werden. (z.b. FormPosition, Schriftart usw.)
   23-Mai-05  MV/WD      BeginDrag ab nun als "virtual" definiert
   22-Jun-05  WD         Wenn keine INI-Datei existiert, dann soll die Fonts von der IDE verwendet werden.
@@ -18055,7 +18147,7 @@ End.
   03-Okt-06  KF         Einbau von der Variable: MakeIniFile
   06-Nov-06  WD         TApplication.DeleteMenuItem: Check auf FMenuItemList=nil
   21-Mar-07  MV         TSystemOpenDialog.Execute:Boolean: OFN_FILEMUSTEXIST ausgebaut
-  21-Apr-07  WD, MV     Die neue Heap-Verwaltung von Martin V fr die IDE eingebaut.
+  21-Apr-07  WD, MV     Die neue Heap-Verwaltung von Martin V fr die IDE eingebaut.
   23-Apr-07  WD         TApplication.Create: So umgebaut, dass es auch den Parameter "-LOG=" versteht
   16-Jul-07  WD         THintWindow.Redraw: Umbau der Hints, damit mehrer Zeile ausgegeben werden kann.
   01-Sep-07  WD         tSizeBorder: BorderAlign "baVerticalSizing" eingebaut.
@@ -18063,7 +18155,13 @@ End.
   15-Mar-08  MV         ReadInfoFromINI: Kl. korrektur bzgl. bsDialog;
   15-Mar-08  MV         TControl.WMChar: umgebaut
   15-Mar-08  MV         Initialization: Auskommentieren von OemToAnsiTable[#21] := #167;
-  15-Mar-08  MV         TScreen.MapPoints und TControl.MapPoints: Umrechnung fr Windows eingebaut.
+  15-Mar-08  MV         TScreen.MapPoints und TControl.MapPoints: Umrechnung fr Windows eingebaut.
   03-Jun-08  WD         Property Locked und IsModal eingebaut bzw. erweitert.
+  23-Mar-10  WD         tApplication: Einbau von fProgramDemo, fProgramRegCode
+  31-Mar-10  WD         Cursor: Neue Hand-Cursor.
+  30-Apr-10  WD         tApplication: Neue Variable fProgramLongName
+  03-Mai-10  WD         TControl.DestroyWnd: Ueberpruefen ob das Control in Windows noch existiert.
+  26-Oct-10  RG         Lage und Gr”sse von Hint bereinigt (THintWindow.ActivateHint)
+  Nov 2011?  WD?        gendert auf: pfOS2Ver20, pfOS2Ver30, pfOS2Ver40, pfOS2Ver45
+                        erweitert: pfEComStation
 }
-

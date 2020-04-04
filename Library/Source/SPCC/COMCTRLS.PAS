@@ -4390,34 +4390,35 @@ Var
     End;
   End;
 
-Var
-  I, C: LongInt;
-  s:string;
+Var i,C : LongInt;
+    s   : string;
+
 Begin
+  if Items.Count = 0 then Exit; //nichts zu tun
 
   strings.Create;
-  For I:=0 to Items.Count-1 do
+  For i := 0 to Items.Count-1 do
   Begin
     // Save the selected flag to be restored later.
-    If Selected[I] then
-      strings.AddObject('T'+Items[I],Items.Objects[I])
+    If Selected[i] then
+      strings.AddObject('T'+Items[i],Items.Objects[i])
     Else
-      strings.AddObject('F'+Items[I],Items.Objects[I]);
+      strings.AddObject('F'+Items[i],Items.Objects[i]);
   End;
   C := strings.Count;
-  For I := C Shr 1 DownTo 1 Do Reheap(I, C);
-  For I := C DownTo 2 Do
+  For i := C Shr 1 DownTo 1 Do Reheap(i, C);
+  For i := C DownTo 2 Do
   Begin
-    Exchange(0, I - 1);
-    Reheap(1, I - 1);
+    Exchange(0,i-1);
+    Reheap(1,i-1);
   End;
   Items.Clear;
-  For I:=0 to strings.Count-1 do
+  For i := 0 to strings.Count-1 do
   Begin
-    s:=strings[I];
+    s:=strings[i];
     Delete(s,1,1);
-    Items.AddObject(s,strings.Objects[I]);
-    Selected[I]:=(strings[I][1]='T');
+    Items.AddObject(s,strings.Objects[i]);
+    Selected[i]:=(strings[i][1]='T');
   End;
   strings.Free;
 End;
@@ -4494,6 +4495,7 @@ Begin
       End;
   dec(Rec.Top);
   rec.Right:=Width;
+
   rec.Left:=0;
   Canvas.FillRect(Rec,Canvas.Brush.Color);
   Canvas.Brush.Mode := bmTransparent;
@@ -4543,6 +4545,14 @@ Begin
       rec1.left:=sections.Items[i-1].Left - scPos;
       rec1.right:=sections.Items[i-1].Right - scPos;
 
+      {optisches Problem rechts vom vert.Scrollbalken korrigieren}  //RG 10-Nov-10
+      if rec1.right > rec.Right
+      then rec1.right := rec.Right-2;
+
+      {optisches Problem am linken Rand korrigieren}  //RG 10-Nov-10
+      if rec1.left < rec.left+2
+      then rec1.left := rec.left+2;
+
       If (i=1) And (bmp<>Nil)
         then
           Begin
@@ -4551,6 +4561,8 @@ Begin
           End
         Else
           Canvas.GetTextExtent(s1,cx1,cy1);
+
+      {linker Rand}
       If sections[i-1].Alignment=taRightJustify
         then
           Begin
@@ -4559,14 +4571,19 @@ Begin
         Else
           Begin
             If sections[i-1].Alignment=taLeftJustify
-              then x:=sections[i-1].Left+2
+              then x:=sections[i-1].Left+3 //RG 10-Nov-10 , alt=+2 , neu=+3 optisch leicht besser
               Else x:=(sections[i-1].Left+sections[i-1].Right-cx1)/2+2;
           End;
-      y1 := y + ((cy - cy1) Div 2);
+
+
+      {vertikale Lage des Textes}
+      y1 := y + ((cy - cy1) Div 2) + 1; //RG 10-Nov-10 , +1 = optisch besser, "g" wird unten nicht abgeschnitten
+
       If y1 < Rec.Bottom Then y1 := Rec.Bottom;
       If (i=1) And (bmp<>Nil)
         then Canvas.Draw(x - scPos,y1,bmp)
         Else Canvas.TextRect(rec1,x - scPos,y1,s1);
+
       i := i + 1;
     End;
 {$IFDEF Win32}
@@ -4575,6 +4592,7 @@ Begin
 // Bei Win98 tritt dieser Fehler nicht auf.
   syssleep(10);
 {$ENDIf}
+
 End;
 
 Function TMultiColumnListBox.GetSepChar:string;
@@ -5148,4 +5166,5 @@ End.
   16-Jan-07  MV         TMultiColumnListBox.DrawItem: Kleiner Fix bei dem Bitmaps
   22-Apr-07  RG, WD     Komponente tGauge eingebaut.
   12-Mai-09  PE         TGauge.PaintAsText: Positionsangabe fÅr Windows korregiert.
+  19-Nov-10  RG         TMultiColumnListBox.DrawItem : optische Verbesserungen
 }

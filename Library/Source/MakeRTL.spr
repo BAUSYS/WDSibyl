@@ -1,6 +1,6 @@
 [Application Options OS/2]
 
-ApplicationIcon=P:\WDSIBYL\WDSIBYL\BIN\OS2\DEFAULT_OS2.ICO
+ApplicationIcon=P:\WDSibyl\Bin\OS2\DEFAULT_OS2.ICO
 
 [Application Options Win32]
 
@@ -15,49 +15,48 @@ File3=BSETIB
 File4=BSEEXCPT
 File5=BSEDOS
 File6=BSEERR
-File7=BSEREGISTRY
-File8=BSESUB
-File9=BSEMOU
-File10=BSEKBD
-File11=BSEVIO
-File12=BSEKBDVIO32
-File13=DIVE
-File14=INTERNET
-File15=PMBITMAP
-File16=PMWIN
-File17=MMIO
-File18=PMDEV
-File19=PMERR
-File20=PMGPI
-File21=PMHELP
-File22=PMSHL
-File23=PMSPL
-File24=PMSTDDLG
-File25=PMWP
-File26=SYSUTILS
-File27=PMWSOCK
-File28=SERIALIO
-File29=SOCKAPI
-File30=PROCESS
-File31=USTREAM
-File32=ULIST
-File33=USTRING
-File34=USYSCLASS
-File35=PMWINX
-File36=REXXSAA
-File37=UEXTENSION
-File38=INIFILES
+File7=PMWIN
+File8=PMWP
+File9=PMSHL
+File10=SYSUTILS
+File11=USTREAM
+File12=ULIST
+File13=USTRING
+File14=PMSPL
+File15=INIFILES
+File16=PMWINX
+File17=USYSINFO
+File18=USYSCLASS
+File19=BSEREGISTRY
+File20=BSESUB
+File21=BSEMOU
+File22=BSEKBD
+File23=BSEVIO
+File24=BSEKBDVIO32
+File25=DIVE
+File26=INTERNET
+File27=PMBITMAP
+File28=MMIO
+File29=PMDEV
+File30=PMERR
+File31=PMGPI
+File32=PMHELP
+File33=PMSTDDLG
+File34=PMWSOCK
+File35=SOM
+File36=SOCKAPI
+File37=PROCESS
+File38=REXXSAA
 File39=COLOR
-File40=UOSFUNC
-File41=USYSINFO
-File42=UDATETIME
-File43=ULOG
+File40=USYSFUNC
+File41=UDATETIME
+File42=UUNINSTALL
 
 [Compiler Options]
 
 CodeGeneration=
 Syntax=
-Optimize=OptimizeCommonSub,OptimizePeephole
+Optimize=OptimizeCommonSub
 RuntimeCheck=
 CondDefine=
 
@@ -69,7 +68,7 @@ MaxErrors=10
 
 [Component Library OS/2]
 
-CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\CompLib.dll
+CompLibName=..\..\.\Bin\OS2\CompLib.dll
 
 [Component Library Win32]
 
@@ -98,21 +97,21 @@ SPCC_Exceptions=4194303
 
 [Directories OS/2]
 
-LastDir=
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Lib
+LastDir=P:\WDSIBYL\BIN\OS2
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
 LibSrcDir=
-IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Compnt
+IncSrcDir=P:\WDSibyl\Library\Source\RTL\OS2;P:\WDSibyl\Library\Source\RC;P:\WDSibyl\Library\Source\RTL
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
 
 LastDir=
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Lib
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
 LibSrcDir=
 IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Compnt
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
@@ -136,7 +135,7 @@ Find15='ru'
 [General]
 
 Version=Sibyl Project Ver2.05
-ProjectName=P:\WDSibyl\WDSibyl\Library\Source\MakeRTL.spr
+ProjectName=P:\WDSibyl\Library\Source\MakeRTL.spr
 ProjectType=NonVisual
 RunParameter=
 InActiveLanguages=
@@ -157,45 +156,38 @@ File5=.\RTL\Win32\WINSPOOL.PAS
 File0=.\MakeRTL.PAS
 File0.Left=-1
 File0.Bottom=-1
-File0.Width=759
-File0.Height=478
-File0.Column=48
-File0.Line=58
-File1=.\RTL\SYSTEM.PAS
+File0.Width=952
+File0.Height=604
+File0.Column=6
+File0.Line=19
+File1=.\RTL\system.pas
 File1.Left=-1
 File1.Bottom=-1
-File1.Width=759
-File1.Height=478
+File1.Width=952
+File1.Height=604
 File1.Column=56
 File1.Line=17708
 File2=.\RTL\uSysInfo.PAS
 File2.Left=-1
 File2.Bottom=-1
-File2.Width=759
-File2.Height=478
+File2.Width=952
+File2.Height=604
 File2.Column=1
 File2.Line=1
-File3=.\RTL\uExtension.pas
+File3=.\RTL\SysUtils.pas
 File3.Left=-1
 File3.Bottom=-1
-File3.Width=759
-File3.Height=478
-File3.Column=3
-File3.Line=21
-File4=.\RTL\SYSUTILS.PAS
+File3.Width=952
+File3.Height=604
+File3.Column=16
+File3.Line=995
+File4=.\RTL\uSysClass.pas
 File4.Left=-1
 File4.Bottom=-1
-File4.Width=759
-File4.Height=478
+File4.Width=952
+File4.Height=604
 File4.Column=16
-File4.Line=995
-File5=.\RTL\uSysClass.pas
-File5.Left=-1
-File5.Bottom=-1
-File5.Width=759
-File5.Height=478
-File5.Column=20
-File5.Line=530
+File4.Line=34
 
 [Linker Options]
 
@@ -216,7 +208,7 @@ Stack=256
 Primary=.\MakeRTL.PAS
 MainFile0=.\MakeRTL.PAS
 MainFile0.Ext=.EXE
-MainFile0.Checksum=11520
+MainFile0.Checksum=11264
 MainFile0.Expanded=False
 MainFile0.File0=.\RTL\OS2\BSEDEV.PAS
 MainFile0.File1=.\RTL\OS2\BSEDOS.PAS
@@ -285,43 +277,42 @@ MainFile0.Dependency3=.\RTL\OS2\BSETIB.PAS
 MainFile0.Dependency4=.\RTL\OS2\BSEEXCPT.PAS
 MainFile0.Dependency5=.\RTL\OS2\BSEDOS.PAS
 MainFile0.Dependency6=.\RTL\OS2\BSEERR.PAS
-MainFile0.Dependency7=.\RTL\OS2\BSEREGISTRY.PAS
-MainFile0.Dependency8=.\RTL\OS2\BSESUB.PAS
-MainFile0.Dependency9=.\RTL\OS2\BSEMOU.PAS
-MainFile0.Dependency10=.\RTL\OS2\BSEKBD.PAS
-MainFile0.Dependency11=.\RTL\OS2\BSEVIO.PAS
-MainFile0.Dependency12=.\RTL\OS2\BSEKBDVIO32.PAS
-MainFile0.Dependency13=.\RTL\OS2\DIVE.PAS
-MainFile0.Dependency14=.\RTL\OS2\INTERNET.PAS
-MainFile0.Dependency15=.\RTL\OS2\PMBITMAP.PAS
-MainFile0.Dependency16=.\RTL\OS2\PMWIN.PAS
-MainFile0.Dependency17=.\RTL\OS2\MMIO.PAS
-MainFile0.Dependency18=.\RTL\OS2\PMDEV.PAS
-MainFile0.Dependency19=.\RTL\OS2\PMERR.PAS
-MainFile0.Dependency20=.\RTL\OS2\PMGPI.PAS
-MainFile0.Dependency21=.\RTL\OS2\PMHELP.PAS
-MainFile0.Dependency22=.\RTL\OS2\PMSHL.PAS
-MainFile0.Dependency23=.\RTL\OS2\PMSPL.PAS
-MainFile0.Dependency24=.\RTL\OS2\PMSTDDLG.PAS
-MainFile0.Dependency25=.\RTL\OS2\PMWP.PAS
-MainFile0.Dependency26=.\RTL\SYSUTILS.PAS
-MainFile0.Dependency27=.\RTL\OS2\PMWSOCK.PAS
-MainFile0.Dependency28=.\RTL\OS2\SERIALIO.PAS
-MainFile0.Dependency29=.\RTL\OS2\SOCKAPI.PAS
-MainFile0.Dependency30=.\RTL\OS2\PROCESS.PAS
-MainFile0.Dependency31=.\RTL\USTREAM.PAS
-MainFile0.Dependency32=.\RTL\ULIST.PAS
-MainFile0.Dependency33=.\RTL\USTRING.PAS
-MainFile0.Dependency34=.\RTL\USYSCLASS.PAS
-MainFile0.Dependency35=.\RTL\PMWINX.PAS
-MainFile0.Dependency36=.\RTL\REXXSAA.PAS
-MainFile0.Dependency37=.\RTL\UEXTENSION.PAS
-MainFile0.Dependency38=.\RTL\INIFILES.PAS
+MainFile0.Dependency7=.\RTL\OS2\PMWIN.PAS
+MainFile0.Dependency8=.\RTL\OS2\PMWP.PAS
+MainFile0.Dependency9=.\RTL\OS2\PMSHL.PAS
+MainFile0.Dependency10=.\RTL\SYSUTILS.PAS
+MainFile0.Dependency11=.\RTL\USTREAM.PAS
+MainFile0.Dependency12=.\RTL\ULIST.PAS
+MainFile0.Dependency13=.\RTL\USTRING.PAS
+MainFile0.Dependency14=.\RTL\OS2\PMSPL.PAS
+MainFile0.Dependency15=.\RTL\INIFILES.PAS
+MainFile0.Dependency16=.\RTL\PMWINX.PAS
+MainFile0.Dependency17=.\RTL\USYSINFO.PAS
+MainFile0.Dependency18=.\RTL\USYSCLASS.PAS
+MainFile0.Dependency19=.\RTL\OS2\BSEREGISTRY.PAS
+MainFile0.Dependency20=.\RTL\OS2\BSESUB.PAS
+MainFile0.Dependency21=.\RTL\OS2\BSEMOU.PAS
+MainFile0.Dependency22=.\RTL\OS2\BSEKBD.PAS
+MainFile0.Dependency23=.\RTL\OS2\BSEVIO.PAS
+MainFile0.Dependency24=.\RTL\OS2\BSEKBDVIO32.PAS
+MainFile0.Dependency25=.\RTL\OS2\DIVE.PAS
+MainFile0.Dependency26=.\RTL\OS2\INTERNET.PAS
+MainFile0.Dependency27=.\RTL\OS2\PMBITMAP.PAS
+MainFile0.Dependency28=.\RTL\OS2\MMIO.PAS
+MainFile0.Dependency29=.\RTL\OS2\PMDEV.PAS
+MainFile0.Dependency30=.\RTL\OS2\PMERR.PAS
+MainFile0.Dependency31=.\RTL\OS2\PMGPI.PAS
+MainFile0.Dependency32=.\RTL\OS2\PMHELP.PAS
+MainFile0.Dependency33=.\RTL\OS2\PMSTDDLG.PAS
+MainFile0.Dependency34=.\RTL\OS2\PMWSOCK.PAS
+MainFile0.Dependency35=.\RTL\OS2\SOM.PAS
+MainFile0.Dependency36=.\RTL\OS2\SOCKAPI.PAS
+MainFile0.Dependency37=.\RTL\OS2\PROCESS.PAS
+MainFile0.Dependency38=.\RTL\REXXSAA.PAS
 MainFile0.Dependency39=.\RTL\COLOR.PAS
-MainFile0.Dependency40=.\RTL\UOSFUNC.PAS
-MainFile0.Dependency41=.\RTL\USYSINFO.PAS
-MainFile0.Dependency42=.\RTL\UDATETIME.PAS
-MainFile0.Dependency43=.\RTL\ULOG.PAS
+MainFile0.Dependency40=.\RTL\USYSFUNC.PAS
+MainFile0.Dependency41=.\RTL\UDATETIME.PAS
+MainFile0.Dependency42=.\RTL\UUNINSTALL.PAS
 
 [Replace History]
 

@@ -1,3 +1,12 @@
+
+{ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+ บ                                                                          บ
+ บ    WDSibyl Runtime Library                                               บ
+ บ                                                                          บ
+ บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ                                                                          บ
+ ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
+
 Unit uList;
 
 Interface
@@ -1002,7 +1011,6 @@ Constructor tArrayPointer.Create;
 
 Begin
   inherited Create;
-{  Writeln('ArrayPointer'); }
   fRowList.Create;
   fRowList.OnFreeItem:=@RowListFreeItem;
   Clear;
@@ -1014,7 +1022,6 @@ Begin
   Clear;
   fRowList.Destroy;
   inherited Destroy;
-{  Writeln('ArrayPointer: Destroy'); }
 End;
 
 

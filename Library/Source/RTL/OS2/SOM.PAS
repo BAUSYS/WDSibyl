@@ -1,3 +1,12 @@
+
+{ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+ บ                                                                          บ
+ บ    WDSibyl Runtime Library for OS/2                                      บ
+ บ                                                                          บ
+ บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ                                                                          บ
+ ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
+
 {
     Copyright (c) 1994-1996 by International Business Machines Corporation
     Copyright (c) 1997 Antony T Curtis.

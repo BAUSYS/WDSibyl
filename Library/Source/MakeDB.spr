@@ -8,7 +8,7 @@ ApplicationIcon=
 
 [Application Options OS/2]
 
-ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_os2.ico
+ApplicationIcon=P:\WDSibyl\Bin\OS2\DEFAULT_OS2.ICO
 
 [Application Options Win32]
 
@@ -23,64 +23,63 @@ File3=BSEEXCPT
 File4=BSEDOS
 File5=BSEERR
 File6=PMWIN
-File7=PMSHL
-File8=SYSUTILS
-File9=USTREAM
-File10=ULIST
-File11=USTRING
-File12=USYSCLASS
-File13=COLOR
-File14=DOS
-File15=UEXTENSION
-File16=BSEREGISTRY
-File17=INIFILES
-File18=CLASSES
-File19=PMBITMAP
-File20=PMGPI
-File21=PMDEV
-File22=PMSTDDLG
-File23=PMHELP
-File24=MESSAGES
-File25=CLIPBRD
-File26=UCONVERT
-File27=GRAPHICS
-File28=MENUS
-File29=UDATETIME
-File30=ULOG
-File31=PMWINX
-File32=PMSPL
-File33=USYSINFO
-File34=PRINTERS
-File35=FORMS
-File36=BUTTONS
-File37=STDCTRLS
-File38=EXTCTRLS
-File39=COMCTRLS
-File40=FILECTRL
-File41=DIALOGS
-File42=MASK
-File43=GRIDS
-File44=UTABLE
-File45=UMYSQLDLL
-File46=UMYSQL
-File47=UDBMYSQL
-File48=UMYSQLDLG
-File49=DBLAYER
-File50=DBBASE
-File51=DBCTRLS
+File7=PMWP
+File8=PMSHL
+File9=SYSUTILS
+File10=USTREAM
+File11=ULIST
+File12=USTRING
+File13=PMSPL
+File14=BSEREGISTRY
+File15=INIFILES
+File16=PMWINX
+File17=USYSINFO
+File18=USYSCLASS
+File19=COLOR
+File20=DOS
+File21=CLASSES
+File22=PMBITMAP
+File23=PMGPI
+File24=PMDEV
+File25=PMSTDDLG
+File26=PMHELP
+File27=MESSAGES
+File28=CLIPBRD
+File29=UCONVERT
+File30=GRAPHICS
+File31=ULANGUAGE
+File32=MENUS
+File33=PRINTERS
+File34=FORMS
+File35=BUTTONS
+File36=STDCTRLS
+File37=EXTCTRLS
+File38=COMCTRLS
+File39=FILECTRL
+File40=DIALOGS
+File41=MASK
+File42=GRIDS
+File43=UTABLE
+File44=UMYSQLDLL
+File45=UMYSQL
+File46=UDBMYSQL
+File47=UMYSQLDLG
+File48=DBLAYER
+File49=DBBASE
+File50=DBCTRLS
 
 [Compiler Options]
 
 CodeGeneration=
 Syntax=
-Optimize=OptimizeCommonSub,OptimizePeephole
+Optimize=OptimizeCommonSub
 RuntimeCheck=
 CondDefine=
 
 [Compiler Warnings]
 
 Warnings=W2,W3,W4,W5,W6,W7
-MaxWarnings=200
+MaxWarnings=300
 MaxErrors=10
 
 [Component Library]
@@ -93,7 +92,7 @@ CompLibName=
 
 [Component Library OS/2]
 
-CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\CompLib.dll
+CompLibName=..\..\.\Bin\OS2\CompLib.dll
 
 [Component Library Win32]
 
@@ -131,21 +130,21 @@ CompInstallDir=
 
 [Directories OS/2]
 
-LastDir=
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Lib
+LastDir=P:\WDSIBYL\BIN\OS2
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
 LibSrcDir=
-IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Compnt
+IncSrcDir=P:\WDSibyl\Library\Source\SPCC;P:\WDSibyl\Library\Source\RTL;P:\WDSibyl\Library\Source\RTL\OS2;P:\WDSibyl\Library\Source\RC;P:\WDSibyl\Library\Source\TP70;P:\WDSibyl\Library\Source\DB\mySQL;P:\WDSibyl\Library\Source\DB
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
 
 LastDir=
-OutDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Output
-LibDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Lib
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
 LibSrcDir=
 IncSrcDir=
-CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Compnt
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
@@ -169,7 +168,7 @@ Find15=tStrings
 [General]
 
 Version=Sibyl Project Ver2.05
-ProjectName=P:\WDSibyl\WDSibyl\Library\Source\MakeDB.spr
+ProjectName=P:\WDSibyl\Library\Source\MakeDB.spr
 ProjectType=NonVisual
 RunParameter=
 InActiveLanguages=
@@ -178,41 +177,56 @@ Platform=OS/2
 
 [Last Closed Files]
 
-File0=.\DB\DBBASE.PAS
-File1=.\DB\mySQL\uDBMySQL.pas
-File2=.\DB\mySQL\umySQL.pas
-File3=.\DB\DBLAYER.PAS
+File0=.\SPCC\COMCTRLS.PAS
+File1=.\DB\DBBASE.PAS
+File2=.\DB\mySQL\uDBMySQL.pas
+File3=.\DB\mySQL\umySQL.pas
+File4=.\DB\DBLAYER.PAS
 
 [Last Open Files]
 
 File0=.\MakeDB.PAS
 File0.Left=-1
 File0.Bottom=-1
-File0.Width=797
-File0.Height=507
-File0.Column=25
-File0.Line=6
+File0.Width=952
+File0.Height=604
+File0.Column=42
+File0.Line=8
 File1=.\DB\uTable.pas
 File1.Left=-1
 File1.Bottom=-1
-File1.Width=797
-File1.Height=507
-File1.Column=46
-File1.Line=150
+File1.Width=952
+File1.Height=604
+File1.Column=6
+File1.Line=5
 File2=.\DB\mySQL\umySQLDlg.pas
 File2.Left=-1
 File2.Bottom=-1
-File2.Width=797
-File2.Height=507
+File2.Width=952
+File2.Height=604
 File2.Column=58
 File2.Line=252
 File3=.\DB\MYSQL\umySQLDll.pas
 File3.Left=-1
 File3.Bottom=-1
-File3.Width=797
-File3.Height=507
+File3.Width=952
+File3.Height=604
 File3.Column=1
 File3.Line=1
+File4=.\SPCC\CLASSES.PAS
+File4.Left=-1
+File4.Bottom=-1
+File4.Width=952
+File4.Height=604
+File4.Column=8
+File4.Line=20
+File5=.\RTL\SysUtils.pas
+File5.Left=-1
+File5.Bottom=-1
+File5.Width=952
+File5.Height=604
+File5.Column=6
+File5.Line=39
 
 [Linker Options]
 
@@ -233,7 +247,7 @@ Stack=256
 Primary=.\MakeDB.PAS
 MainFile0=.\MakeDB.PAS
 MainFile0.Ext=.EXE
-MainFile0.Checksum=13568
+MainFile0.Checksum=13312
 MainFile0.Expanded=True
 MainFile0.File0=.\DB\mySQL\uDBMySQL.pas
 MainFile0.File1=.\DB\mySQL\umySQL.pas
@@ -244,11 +258,57 @@ MainFile0.File5=.\DB\DBBASE.PAS
 MainFile0.File6=.\DB\DBCTRLS.PAS
 MainFile0.File7=.\DB\DBLAYER.PAS
 MainFile0.File8=[Dependencies]
-MainFile0.Dependency0=.\DB\UTABLE.PAS
-MainFile0.Dependency1=.\DB\mySQL\umySQLDlg.pas
-MainFile0.Dependency2=.\DB\DBLAYER.PAS
-MainFile0.Dependency3=.\DB\DBBASE.PAS
-MainFile0.Dependency4=.\DB\DBCTRLS.PAS
+MainFile0.Dependency0=.\RTL\SYSTEM.PAS
+MainFile0.Dependency1=.\RTL\OS2\OS2DEF.PAS
+MainFile0.Dependency2=.\RTL\OS2\BSETIB.PAS
+MainFile0.Dependency3=.\RTL\OS2\BSEEXCPT.PAS
+MainFile0.Dependency4=.\RTL\OS2\BSEDOS.PAS
+MainFile0.Dependency5=.\RTL\OS2\BSEERR.PAS
+MainFile0.Dependency6=.\RTL\OS2\PMWIN.PAS
+MainFile0.Dependency7=.\RTL\OS2\PMWP.PAS
+MainFile0.Dependency8=.\RTL\OS2\PMSHL.PAS
+MainFile0.Dependency9=.\RTL\SYSUTILS.PAS
+MainFile0.Dependency10=.\RTL\USTREAM.PAS
+MainFile0.Dependency11=.\RTL\ULIST.PAS
+MainFile0.Dependency12=.\RTL\USTRING.PAS
+MainFile0.Dependency13=.\RTL\OS2\PMSPL.PAS
+MainFile0.Dependency14=.\RTL\OS2\BSEREGISTRY.PAS
+MainFile0.Dependency15=.\RTL\INIFILES.PAS
+MainFile0.Dependency16=.\RTL\PMWINX.PAS
+MainFile0.Dependency17=.\RTL\USYSINFO.PAS
+MainFile0.Dependency18=.\RTL\USYSCLASS.PAS
+MainFile0.Dependency19=.\RTL\COLOR.PAS
+MainFile0.Dependency20=.\TP70\DOS.PAS
+MainFile0.Dependency21=.\SPCC\CLASSES.PAS
+MainFile0.Dependency22=.\RTL\OS2\PMBITMAP.PAS
+MainFile0.Dependency23=.\RTL\OS2\PMGPI.PAS
+MainFile0.Dependency24=.\RTL\OS2\PMDEV.PAS
+MainFile0.Dependency25=.\RTL\OS2\PMSTDDLG.PAS
+MainFile0.Dependency26=.\RTL\OS2\PMHELP.PAS
+MainFile0.Dependency27=.\SPCC\MESSAGES.PAS
+MainFile0.Dependency28=.\SPCC\CLIPBRD.PAS
+MainFile0.Dependency29=.\SPCC\UCONVERT.PAS
+MainFile0.Dependency30=.\SPCC\GRAPHICS.PAS
+MainFile0.Dependency31=.\SPCC\ULANGUAGE.PAS
+MainFile0.Dependency32=.\SPCC\MENUS.PAS
+MainFile0.Dependency33=.\SPCC\PRINTERS.PAS
+MainFile0.Dependency34=.\SPCC\FORMS.PAS
+MainFile0.Dependency35=.\SPCC\BUTTONS.PAS
+MainFile0.Dependency36=.\SPCC\STDCTRLS.PAS
+MainFile0.Dependency37=.\SPCC\EXTCTRLS.PAS
+MainFile0.Dependency38=.\SPCC\COMCTRLS.PAS
+MainFile0.Dependency39=.\SPCC\FILECTRL.PAS
+MainFile0.Dependency40=.\SPCC\DIALOGS.PAS
+MainFile0.Dependency41=.\SPCC\MASK.PAS
+MainFile0.Dependency42=.\SPCC\GRIDS.PAS
+MainFile0.Dependency43=.\DB\UTABLE.PAS
+MainFile0.Dependency44=.\DB\mySQL\UMYSQLDLL.PAS
+MainFile0.Dependency45=.\DB\mySQL\UMYSQL.PAS
+MainFile0.Dependency46=.\DB\mySQL\UDBMYSQL.PAS
+MainFile0.Dependency47=.\DB\mySQL\UMYSQLDLG.PAS
+MainFile0.Dependency48=.\DB\DBLAYER.PAS
+MainFile0.Dependency49=.\DB\DBBASE.PAS
+MainFile0.Dependency50=.\DB\DBCTRLS.PAS
 
 [Replace History]
 

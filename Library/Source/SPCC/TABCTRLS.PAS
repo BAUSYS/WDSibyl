@@ -1,9 +1,10 @@
 
 {ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
  บ                                                                          บ
- บ    Sibyl Portable Component Classes                                      บ
+ บ    WDSibyl Portable Component Classes                                    บ
  บ                                                                          บ
  บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
+ บ    Copyright (C) 2005..     Ing. Wolfgang Draxler, All rights reserved.  บ
  บ                                                                          บ
  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
 
@@ -306,6 +307,7 @@ Type
          FTabSet:TTabSet;
          FNotebook:TNoteBook;
          FPageHint:TLabel;
+         FPageCountText:String; {RG 07-Dec-2018}
          FPageCount:TLabel;
          FEdge:TImage;
          FAutoPopup:Boolean;
@@ -375,6 +377,7 @@ Type
          Property ShowPageHint:Boolean Read FShowPageHint Write SetShowPageHint;
          Property RectangleTabs:Boolean Read FRectangleTabs Write SetRectangleTabs;
          Property PageHint:String Read GetPageHint Write SetPageHint;
+         Property PageCountText:String Read FPageCountText Write FPageCountText; {RG 07-Dec-2018}
          Property PageRect:TRect Read GetPageRect;
          Property XAlign;
          Property XStretch;
@@ -382,8 +385,6 @@ Type
          Property YStretch;
          {Martin0407}property Tabset : tTabset Read fTabset;
       Published
-
-
          Property ActivePage:String Read GetActivePage Write SetActivePage; stored False;
          Property Align;
          Property AutoPopup:Boolean Read FAutoPopup Write FAutoPopup;
@@ -2337,6 +2338,7 @@ Begin
      Height := 200;
      Color := clDlgWindow;
      TabStop := False;
+     FPageCountText := 'Page %s of %s'; {RG 07-Dec-2018}
      
      FTabSet := TNotebookTabSet.Create(Self);
      TNotebookTabSet(FTabSet).TabbedNotebook := Self;
@@ -2446,7 +2448,8 @@ Begin
     End;
 
   If Canvas <> Nil
-    Then PageCountIndent := Canvas.TextWidth('Page 9 of 9')
+    //Then PageCountIndent := Canvas.TextWidth('Page 9 of 9') {RG 07-Dec-2018}
+    Then PageCountIndent := Canvas.TextWidth(FPageCountText)  {'Page %s of %s'}
     Else PageCountIndent := 100;
 
   If FPageCount <> Nil then
@@ -2529,7 +2532,8 @@ End;
 
 
 Procedure TTabbedNotebook.SetPageIndex(Value:LongInt);
-Var  page:TPage;
+Var  page : TPage;
+     TabIndex : LongInt;
 Begin
      IgnoreTabClick := True;   {ignore the event handler}
      If ComponentState * [csReading] <> [] Then
@@ -2542,9 +2546,21 @@ Begin
           If Page.Enabled Then FNotebook.PageIndex := Value;
      End;
      IgnoreTabClick := False;
+
+     {RG-Aug-10 Zusatzcode von Martin bereinigt. Neu: Vergleich mit TabIndex anstatt PageIndex}
+     {Value kann/darf nat. gr”sser sein als fTabset.LastIndex >> bei zustzlichen Subindexes}
+     if Value < FNotebook.Pages.Count
+     then begin
+            TabIndex := Page2Tab(Value);
+            if TabIndex < fTabset.FirstIndex
+            then fTabset.FirstIndex := TabIndex
+            else if TabIndex > fTabset.LastIndex
+                 then fTabset.FirstIndex := fTabset.FirstIndex + TabIndex - fTabset.LastIndex;
+          end;
+
      {Martin0407: additional code to make sure that the tab of the current page is part of the shown tabs}
-     if Value < fTabset.FirstIndex then fTabset.FirstIndex := Value
-     else if Value > fTabset.LastIndex then fTabset.FirstIndex := fTabset.FirstIndex + Value - fTabset.LastIndex;
+     //if Value < fTabset.FirstIndex then fTabset.FirstIndex := Value
+     //else if Value > fTabset.LastIndex then fTabset.FirstIndex := fTabset.FirstIndex + Value - fTabset.LastIndex;
 End;
 
 
@@ -2877,8 +2893,13 @@ Begin
                If (page.SubIndex > 0) Or (page.SubCount > 0) Then
                Begin
                     LastMainPage := TPage(FNotebook.Pages.Objects[FNotebook.PageIndex-page.SubIndex]);
-                    S := 'Page ' + tostr(page.SubIndex+1) + ' of ' +
-                                   tostr(LastMainPage.SubCount+1);
+                    {RG 07-12-2018}
+                    //S := 'Page ' + tostr(page.SubIndex+1) + ' of ' +
+                    //               tostr(LastMainPage.SubCount+1);
+                    S := FPageCountText; {'Page %s of %s'}
+                    S := ReplaceStr(S,'%s',tostr(page.SubIndex+1));
+                    S := ReplaceStr(S,'%s',tostr(LastMainPage.SubCount+1));
+
                     FPageCount.Text := S;
                     FPageCount.Visible := True;
                End
@@ -3063,8 +3084,13 @@ Begin
                     If page.SubIndex > 0 Then
                     Begin
                          SubEntry.Create(PagesPopup);
-                         SubEntry.Caption := 'Page ' + tostr(page.SubIndex+1)
-                                    + ' of ' + tostr(LastMainPage.SubCount+1);
+                         {RG 07-Dec-2018}
+                         //SubEntry.Caption := 'Page ' + tostr(page.SubIndex+1)
+                         //           + ' of ' + tostr(LastMainPage.SubCount+1);
+                         SubEntry.Caption := FPageCountText; {'Page %s of %s'}
+                         SubEntry.Caption := ReplaceStr(SubEntry.Caption,'%s',tostr(page.SubIndex+1));
+                         SubEntry.Caption := ReplaceStr(SubEntry.Caption,'%s',tostr(LastMainPage.SubCount+1));
+
                          SubEntry.Command := PopupCmdBase + I;
                          SubEntry.OnClick := EvPopupClicked;
                          entry.Add(SubEntry);
@@ -3080,8 +3106,13 @@ Begin
                          If page.SubCount > 0 Then
                          Begin
                               SubEntry.Create(PagesPopup);
-                              SubEntry.Caption := 'Page ' + tostr(page.SubIndex+1)
-                                    + ' of ' + tostr(LastMainPage.SubCount+1);
+                              {RG 07-Dec-2018}
+                              //SubEntry.Caption := 'Page ' + tostr(page.SubIndex+1)
+                              //      + ' of ' + tostr(LastMainPage.SubCount+1);
+                              SubEntry.Caption := FPageCountText; {'Page %s of %s'}
+                              SubEntry.Caption := ReplaceStr(SubEntry.Caption,'%s',tostr(page.SubIndex+1));
+                              SubEntry.Caption := ReplaceStr(SubEntry.Caption,'%s',tostr(LastMainPage.SubCount+1));
+
                               SubEntry.Command := PopupCmdBase + I;
                               SubEntry.OnClick := EvPopupClicked;
                               entry.Add(SubEntry);
@@ -3276,9 +3307,11 @@ End.
 
 
 { -- date -- -- from -- -- changes ----------------------------------------------
-  26-Sep-02  WD         Ausbau der LINUX-Teile
-  21-Okt-03  WD         Korrektur bei dem Property "Enabled". Falsche Darstellung unter Windows
-  15-sep-04  CW/WD      TTabbedNotebook.Resize: Aufruf aller Seiten-Resizes-Funktionen
-  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
-  30-Apr-07  MV         make sure that the TabbedNotebook tab is shown if a page is selected by TabbedNotebook.PageIndex := X;
+  26-Sep-2002  WD         Ausbau der LINUX-Teile
+  21-Okt-2003  WD         Korrektur bei dem Property "Enabled". Falsche Darstellung unter Windows
+  15-sep-2004  CW/WD      TTabbedNotebook.Resize: Aufruf aller Seiten-Resizes-Funktionen
+  28-Aug-2005  WD         Variablen die nicht verwendet werden entfernt.
+  30-Apr-2007  MV         make sure that the TabbedNotebook tab is shown if a page is selected by TabbedNotebook.PageIndex := X;
+  30-Aug-2010  RG         Fehlerhafte Berechnung fr die Anzeige des akt TabIndexes in SetPageIndex() bereinigt
+  07-Dec-2018  RG         TabbedNotebook.PageText eingefhrt um auch das bersetzen zu erm”glichen
 }

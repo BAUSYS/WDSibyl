@@ -1,3 +1,11 @@
+{ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+ บ                                                                          บ
+ บ    WDSibyl Component                                                     บ
+ บ                                                                          บ
+ บ    Copyright (C) 2005..     Ing. Wolfgang Draxler, All rights reserved.  บ
+ บ                                                                          บ
+ ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
+
 UNIT uPorts;
 
 { Original Komponente Serial.pas / tSerialPort von Hr. Willem Clements.

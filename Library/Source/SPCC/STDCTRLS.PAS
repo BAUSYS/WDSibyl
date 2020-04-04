@@ -659,6 +659,7 @@ Type
         Procedure ItemFocus(Index:LongInt);Virtual;
         Procedure ItemSelect(Index:LongInt);Virtual;
         Procedure UpdateListBoxPos(Var aLeft,aBottom,aWidth,aHeight:LongInt);Virtual;
+        Procedure ScanEvent(Var KeyCode:TKeyCode;RepeatCount:Byte);Override; //RG
 
         Property AlternateButton:Boolean Read FAlternate Write SetAlternate;
       Public
@@ -1004,7 +1005,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TComboBox Class Implementation                              บ
 บ                                                                           บ
@@ -2133,10 +2134,26 @@ Begin
 End;
 {$ENDIF}
 
+Procedure TComboBox.ScanEvent(Var KeyCode:TKeyCode;RepeatCount:Byte);  //RG
+
+Begin
+  If Enabled then
+    Case KeyCode Of
+      {$ifdef os2}
+      kbEnter,
+      {$endif}
+      kbCR: Begin
+              Parent.ScanEvent(KeyCode,RepeatCount);
+              KeyCode := kbNull
+            End;
+    End;
+  inherited ScanEvent(KeyCode, RepeatCount);
+End;
+
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TEdit Class Implementation                                  บ
 บ                                                                           บ
@@ -2316,7 +2333,7 @@ Begin
           {$ifdef os2}
           kbEnter,
           {$endif}
-          kbCR,
+          //kbCR,     //RG 04-Jan-11
           kbCUp,
           kbCDown : BEGIN
                          Parent.ScanEvent(KeyCode,RepeatCount);
@@ -2330,16 +2347,14 @@ Begin
 
           kbCRight: {extension}
                     Begin
-                      If NOT FReadOnly AND (Length(TextExtension) > 0)
-And (SelStart = Length(Text)) Then
+                      If NOT FReadOnly AND (Length(TextExtension) > 0) And (SelStart = Length(Text)) Then
                         Begin
                           ext := TextExtension;
                           Text := Text + ext[1];
                           Delete(ext,1,1);
                           TextExtension := ext;
                         End;
-                      IF (Length(TextExtension)=0) AND (SelStart =
-Length(TEXT)) THEN
+                      IF (Length(TextExtension)=0) AND (SelStart = Length(TEXT)) THEN
                       BEGIN
                         Parent.ScanEvent(KeyCode,RepeatCount);
                         KeyCode := kbNull
@@ -2738,7 +2753,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TListBox Class Implementation                               บ
 บ                                                                           บ
@@ -2872,7 +2887,7 @@ Begin
      CS := S;
      If Listbox.FSorted Then Sort := LIT_SORTASCENDING
      Else Sort := LIT_END;
-     Result := WinSendMsg(Listbox.Handle,LM_INSERTITEM,Sort,LongWord(@CS));
+     Result := WinSendMsg(Listbox.Handle,LM_INSERTITEM,Sort,LongWord(@CS)); //max 32766 danach -3
      {$ENDIF}
      {$IFDEF Win32}
      CS := S;
@@ -3147,7 +3162,7 @@ End;
 
 Destructor TListBox.Destroy;
 Begin
-  fTabList.Create;
+  fTabList.Destroy;  //RG
   fTabList:=nil;
   FItems.Destroy;
   FItems := Nil;
@@ -4069,7 +4084,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TGroupBox Class Implementation                              บ
 บ                                                                           บ
@@ -4126,8 +4141,8 @@ Begin
      End;
 
      Case goSysInfo.OS.Platform Of
-       Win95, Win98, WinME, WinNT3, WinNT4, Win2000, WinXP,
-       OS2Ver40, OS2Ver45, eComstation:    { Linux, }
+       pfWin95, pfWin98, pfWinME, pfWinNT3, pfWinNT4, pfWin2000, pfWinXP, pfWin7,
+       pfOS2Ver40, pfOS2Ver45, pfeComstation:    { Linux, }
        Begin
             DarkColor := clDkGray;
             LightColor := clWhite;
@@ -4201,7 +4216,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TLabel Class Implementation                                 บ
 บ                                                                           บ
@@ -4538,7 +4553,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TValueSet Class Implementation                              บ
 บ                                                                           บ
@@ -5515,7 +5530,7 @@ End;
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
-บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ WDSibyl Portable Component Classes (SPCC)                                 บ
 บ                                                                           บ
 บ This section: TMemo Class Implementation                                  บ
 บ                                                                           บ
@@ -6251,4 +6266,10 @@ End.
   10-Mar-08   MV         TComboListShowButton.MouseDown: Funktion ueberarbeitet.
   08-Mar-09   PE         TListBox: AutoSroll implementiert, Zeichenkonvertierung unter Win32 abgeschaltet
   04-Mai-09   PE         TEdit.ScanEvent: Weiterreichen, der Keycodes nach oben.
+  07-Dec-10   RG         Korrektur in TListBox.Destroy
+  04-Jan-11   RG         TEdit.ScanEvent: bei kbCR wird wieder nach oben weitergeben 
+                         (nicht mehr KeyCode:=kbNull)
+     Nov-11?  WD?        pfOS2Ver40, pfOS2Ver45, pfWin95, pfWin98, pfWinME, 
+                         pfWinNT3, pfWinNT4, pfWin2000, pfWinXP, pfeComstation... neu: pfWin7
+     Nov-11?  WD?        TComboBox neu: Procedure ScanEvent 
 }
