@@ -21,9 +21,9 @@ File9=SYSUTILS
 File10=USTREAM
 File11=ULIST
 File12=USTRING
-File13=USYSCLASS
-File14=BSEREGISTRY
-File15=INIFILES
+File13=BSEREGISTRY
+File14=INIFILES
+File15=USYSCLASS
 File16=PMSPL
 File17=PMWINX
 File18=USYSINFO
@@ -56,7 +56,7 @@ MaxErrors=10
 
 [Component Library OS/2]
 
-CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\COMPLIB.dll
+CompLibName=..\..\.\Bin\OS2\CompLib.dll
 
 [Component Library Win32]
 
@@ -88,89 +88,90 @@ SPCC_Exceptions=4194303
 
 [Directories OS/2]
 
-LastDir=P:\
-OutDir=P:\WDSibyl\WDSibyl\Compiler\Output\OS2
-LibDir=P:\WDSibyl\WDSibyl\Library\Output\OS2
-LibSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
+LastDir=P:\WDSIBYL\COMPILER\SOURCE\SHARE
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
+LibSrcDir=
 IncSrcDir=
-CompInstallDir=
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
 
-LastDir=P:\WDSIBYL\WDSIBYL\TEST
-OutDir=P:\WDSibyl\WDSibyl\Compiler\Output\Win32
-LibDir=P:\WDSibyl\WDSibyl\Output\Win32
-LibSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
+LastDir=
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
+LibSrcDir=
 IncSrcDir=
-CompInstallDir=
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
-Find0=Settings.Language.
-Find1=SetLanguage
-Find2=MaxTransTable
-Find3=ScanLink
-Find4=scan
-Find5=scanllink
-Find6=&bslash
-Find7=Unit
-Find8=CheckLink
-Find9=ll_l
-Find10=t1
-Find11=checklink
-Find12=checklinl
-Find13='{'
-Find14=output
-Find15=link
+Find0=:fn
+Find1=.FN
+Find2=//RG
+Find3=Paramlist
+Find4=TITLE
+Find5=CompStatusMsg
+Find6=Message
+Find7=.DLIST
+Find8=DLIST
+Find9=HC_LEFTMARGIN
+Find10=HC_DDESC
+Find11=:dl
+Find12=8-Apr-2018
+Find13=8-Apr_2018
+Find14=HC_DLIST
+Find15=break=
 
 [General]
 
 Version=Sibyl Project Ver2.05
-ProjectName=P:\WDSibyl\WDSibyl\Compiler\Source\WDHLPC10.SPR
+ProjectName=P:\WDSibyl\Compiler\Source\WDHLPC10.SPR
 ProjectType=NonVisual
-RunParameter=P:\WDSibyl\WDSibyl\Test\Compiler\File1.SHS P:\WDSibyl\WDSibyl\Test\Compiler -os2 -L=DE,EN,NL -P
+RunParameter=P:\Projekte\BS_TXT2SHS\shs\os2api_DE.shs -L=DE
 InActiveLanguages=
 CurrentLanguage=
 Platform=OS/2
 
 [Last Closed Files]
 
-File0=.\Share\uFunc.pas
-File1=.\Share\SPC_DATA.PAS
-File2=.\HLP\WDHLPD10\WDHLPD10.PAS
-File3=..\..\.\LIBRARY\SOURCE\RTL\uList.PAS
-File4=..\..\.\LIBRARY\SOURCE\RTL\SYSTEM.PAS
+File0=..\..\..\.\PROJEKTE\BS_TXT2SHS\SHS\os2api_DE.shs
+File1=..\..\..\.\PROJEKTE\BS_TXT2SHS\IPFC\OS2API_DE.IPF
+File2=..\..\.\Library\Source\RTL\system.pas
+File3=..\..\..\.\PROJEKTE\BS_TXT2SHS\SHS\OS2API_DE.IPF
+File4=..\..\.\Library\Source\RTL\uString.Pas
+File5=.\Share\uFunc.pas
 
 [Last Open Files]
 
 File0=.\HLP\WDHLPC10\WDHLPC10.PAS
 File0.Left=-1
 File0.Bottom=-1
-File0.Width=829
-File0.Height=566
-File0.Column=9
-File0.Line=87
+File0.Width=844
+File0.Height=608
+File0.Column=1
+File0.Line=1
 File1=.\HLP\WDHLPD10\uHLPComp.pas
 File1.Left=-1
 File1.Bottom=-1
-File1.Width=829
-File1.Height=566
+File1.Width=844
+File1.Height=608
 File1.Column=1
-File1.Line=919
+File1.Line=123
 File2=.\HLP\WDHLPD10\uHlpDef.pas
 File2.Left=-1
 File2.Bottom=-1
-File2.Width=829
-File2.Height=566
-File2.Column=62
-File2.Line=26
-File3=..\..\.\Library\Source\RTL\uString.Pas
+File2.Width=844
+File2.Height=608
+File2.Column=1
+File2.Line=1
+File3=.\Share\uHlpTopics.PAS
 File3.Left=-1
 File3.Bottom=-1
-File3.Width=829
-File3.Height=566
-File3.Column=30
-File3.Line=13
+File3.Width=844
+File3.Height=608
+File3.Column=61
+File3.Line=59
 
 [Linker Options]
 
@@ -199,12 +200,11 @@ MainFile0.File2=.\HLP\WDHLPD10\uHLPComp.pas
 MainFile0.File3=.\HLP\WDHLPD10\uHlpDef.pas
 MainFile0.File4=.\Share\uHlpTopics.PAS
 MainFile0.File5=[Dependencies]
-MainFile0.Dependency0=..\..\.\Library\Source\RTL\uString.Pas
-MainFile0.Dependency1=.\Share\SPC_DATA.PAS
-MainFile0.Dependency2=.\Share\UFUNC.PAS
-MainFile0.Dependency3=.\HLP\WDHLPD10\uHlpDef.pas
-MainFile0.Dependency4=.\Share\UHLPTOPICS.PAS
-MainFile0.Dependency5=.\HLP\WDHLPD10\uHLPComp.pas
+MainFile0.Dependency0=.\SHARE\SPC_DATA.PAS
+MainFile0.Dependency1=.\SHARE\UFUNC.PAS
+MainFile0.Dependency2=.\HLP\WDHLPD10\uHlpDef.pas
+MainFile0.Dependency3=.\SHARE\UHLPTOPICS.PAS
+MainFile0.Dependency4=.\HLP\WDHLPD10\uHLPComp.pas
 
 [Repository]
 

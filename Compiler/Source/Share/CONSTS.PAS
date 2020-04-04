@@ -62,7 +62,7 @@ USES Forms,Graphics, Messages, Menus, uSysClass,
 // Konstanten fuer die Version
 Const WDSibyl_AppName     = 'WDSibyl';
       WDSibyl_Version     = 3;
-      WDSibyl_SubVersion  = 13;
+      WDSibyl_SubVersion  = 14;
       WDSibyl_HomepageLink= 'http://www.wdsibyl.org';
       WDSibyl_Contact     = 'Name:  Ing. Wolfgang Draxler'+ #13#10+
                             'E-Mail:WDSibyl@wdsibyl.org'+ #13#10+
@@ -749,5 +749,5 @@ END.
   11-Apt-08  WD         Menue: von "Alt+BkSp" auf "Ctrl+BkSp" und von "Shift+Ctrl+BkSp" auf
                         "Shift+Ctrl+BkSp" geaendert
   12-Mar-09  WD         Verwendung der neuen tcNamedPipeServer-Klasse
-
+  30-Jul-17  RG		WDSibyl_SubVersion von 13 auf 14
 }

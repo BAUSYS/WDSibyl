@@ -288,6 +288,18 @@ BEGIN
          goto found;
        End;
 
+     if s='.LEFTMARGIN' then
+       Begin
+         command:=HC_LEFTMARGIN;
+         goto found;
+       End;
+
+     if s='.RIGHTMARGIN' then
+       Begin
+         command:=HC_RIGHTMARGIN;
+         goto found;
+       End;
+
      exit;
 found:
      delete(Line,1,length(s));
@@ -720,8 +732,10 @@ BEGIN
 
             HC_TITLE:
               BEGIN
-                if Paramlist.Find('T',Index) then  {ignore not .title}
-                  WriteLine(':title.'+Para1);
+                { etwas sonderbare Anweisung. FÅhrt dazu, dass .TITLE
+                  ignoriert wird, daher eliminiert //RG }
+                //if Paramlist.Find('T',Index) then  {ignore not .title}
+                WriteLine(':title.'+Para1);
               END;
 
             HC_BOLD:
@@ -763,7 +777,9 @@ BEGIN
               END;
             HC_DLIST:
               BEGIN
-                WriteLine(':dl break=all tsize=3'+Para1+'.');
+                { fix verdrahtete Anweisung eliminiert }
+                //WriteLine(':dl break=all tsize=3'+Para1+'.');
+                WriteLine(':dl '+Para1+'.');  //RG 28-Apr-2018
               END;
             HC_EDLIST:
               BEGIN
@@ -777,7 +793,6 @@ BEGIN
               BEGIN
                 WriteLine(':dd.'+Para1);
               END;
-
             HC_LISTITEM:
               BEGIN
                 WriteLine(':li.'+Para1);
@@ -786,7 +801,14 @@ BEGIN
               BEGIN
                 WriteLine(':artwork runin name='#39+Para1+#39'.');
               END;
-
+            HC_LEFTMARGIN:
+              BEGIN
+                WriteLine(':lm margin='+Para1+'.');
+              END;
+            HC_RIGHTMARGIN:
+              BEGIN
+                WriteLine(':rm margin='+Para1+'.');
+              END;
 
 { Diverse Sets }
             HC_SET_INCFILENAME:
@@ -805,7 +827,6 @@ BEGIN
                   End;
                 Writeln('Language:', para1,',',Settings.CurrentLngInd);
               End;
-
 
 
             ELSE
@@ -1146,4 +1167,7 @@ end.
   11-Apr-2005 WD       Design-Aufbereitung der Include-Datei
   23-Dez-2005 WD       Sprache: NiederlÑndisch hinzugefÅgt
   28-Feb-2008 WD       Topic UNDERLINE und BOLD_UNDERLINE eingebaut
+  28-Apr-2018 RG       Fehler bei der Umsetzung von .DLIST behoben
+                       LEFTMARGIN und RIGHTMARGIN eingebaut
+                       TITLE funktioniert wieder
 }

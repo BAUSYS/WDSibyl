@@ -156,18 +156,18 @@ Begin
   Ch:=getNextToken(Token);
   if Token='DOSOS2' then
     Begin
-      fSourceForOS:=OS2;
+      fSourceForOS:=SysOS2;                           //RG 30-Jul-2017
       exit;
     end;
 
-  fSourceForOS:=OS2;
+  fSourceForOS:=SysOS2;                               //RG 30-Jul-2017
   fSourceForBool:=true;
 
 // Herausfinden welches Betriebsystem bei ifdef angegeben worden ist
   While (Token<>cSystem[ord(fSourceForOS)]) and
-        (fSourceForOS<>Unknown) do
+        (fSourceForOS<>SysUnknown) do                 //RG 30-Jul-2017
    inc(fSourceForOS);
-  if fSourceForOS=Unknown then
+  if fSourceForOS=SysUnknown then                     //RG 30-Jul-2017
     SendError(cErrUnknownOS, Token);
 End;
 
@@ -497,4 +497,5 @@ End.
   24-Jul-2004 WD       Erstellung der Unit
   16-Jul-2006 WD       Diverse Aenderungen fuer GenHelp ein- bzw. umgebaut.
   18-Sep-2006 WD       Den Punkt (ausser Zahlen) auch als Trennzeichen verwenden.
+  30-Jul-2017 RG       OS2 durch SysOS2 und Unknown durch SysUnknown ersetzt       
 }
