@@ -67,7 +67,7 @@ MaxErrors=10
 
 [Component Library OS/2]
 
-CompLibName=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\CompLib.dll
+CompLibName=P:\WDSibyl\Bin\OS2\CompLib.dll
 
 [Component Library Win32]
 
@@ -97,21 +97,21 @@ SPCC_Exceptions=4194303
 
 [Directories OS/2]
 
-LastDir=P:\WDSIBYL\WDSIBYL\TOOLS\SOURCE
-OutDir=P:\WDSibyl\WDSibyl\Tools\Output\OS2;V:\SharedFolder\WDSibyl\Install
-LibDir=P:\WDSibyl\WDSibyl\Library\Output\OS2;P:\WDSIBYL\WDSIBYL\Compiler\Output\OS2
+LastDir=
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
 LibSrcDir=
 IncSrcDir=
-CompInstallDir=P:\WDSibyl\WDSibyl\Output\OS2
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
 
-LastDir=P:\WDSibyl\WDSibyl\Tools\Source\WDSibylSort
-OutDir=P:\WDSibyl\WDSibyl\Tools\Output\Win32;V:\SharedFolder\WDSibyl\Install;G:\STAROFFICE\HOMEPAGE\WDSIBYL\INSTALL\DATEIEN
-LibDir=F:\SPRACHEN\PASCAL\WDSIBYL\OS\Win32\LIB;P:\WDSIBYL\WDSIBYL\Compiler\Output\Win32
+LastDir=
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
 LibSrcDir=
 IncSrcDir=
-CompInstallDir=P:\WDSibyl\WDSibyl\Output\Win32
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [General]
 

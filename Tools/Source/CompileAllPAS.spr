@@ -79,7 +79,7 @@ CompLibName=
 
 [Component Library OS/2]
 
-CompLibName=
+CompLibName=P:\WDSibyl\Bin\OS2\CompLib.dll
 
 [Component Library Win32]
 
@@ -108,21 +108,21 @@ SPCC_Exceptions=4194303
 
 [Directories OS/2]
 
-LastDir=V:\TEMP\WDSIBYL\TOOLS\OUTPUT\OS2
-OutDir=P:\WDSibyl\WDSibyl\Tools\Output\OS2;V:\Temp\WDSibyl\Tools\Output\OS2
-LibDir=P:\WDSIBYL\WDSIBYL\COMPILER\Output\OS2;P:\WDSIBYL\WDSIBYL\Library\Output\OS2
+LastDir=
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
 LibSrcDir=
-IncSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
-CompInstallDir=
+IncSrcDir=
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
 
-LastDir=V:\TEMP\WDSIBYL\TOOLS\OUTPUT\OS2
-OutDir=P:\WDSibyl\WDSibyl\Tools\Output\Win32;V:\SharedFolder\WDSibyl\Install
-LibDir=P:\WDSIBYL\WDSIBYL\COMPILER\Output\Win32;P:\WDSIBYL\WDSIBYL\Library\Output\Win32
+LastDir=
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
 LibSrcDir=
-IncSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
-CompInstallDir=
+IncSrcDir=
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
