@@ -411,7 +411,8 @@ FUNCTION TIIDEToolServices.CreateModule(CONST ModuleName:STRING;Source,
               //??????????????????????????????????????? aus Form erzeugen !!
               Editor.Invalidate;
          END
-         ELSE Editor.InsertText(Init.Memory,Init.Size);
+         //ELSE Editor.InsertText(Init.Memory,Init.Size); //20.6.2011  roga
+         ELSE Editor.InsertText(Init.Memory,Init.Size,false); //20.6.2011  roga
          result:=FileName;
     END;
 

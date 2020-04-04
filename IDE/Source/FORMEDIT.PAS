@@ -1238,6 +1238,7 @@ VAR  Entry:TMenuItem;
      AStrings:TStringList;
      NotifyEntry:TDesignerNotifyItem;
 BEGIN
+     //Application.LogWriteln('formedit.pas: TFormEditor.ShowContextMenu');  //RG
      IF FormEditPopup = NIL THEN
      BEGIN
           Exclude(ComponentState, csDesigning);      {!!!}

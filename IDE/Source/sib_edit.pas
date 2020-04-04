@@ -2529,8 +2529,10 @@ VAR Entry  : TMenuItem;
     TopEdit:TSibEditor;
 
 BEGIN
+  //Application.LogWriteln('//RG sib_edit.pas: TCodeEditor.ShowContextMenu');  //RG
   IF EditorPopup = NIL THEN
     BEGIN
+      //Application.LogWriteln('//RG sib_edit.pas: TCodeEditor.ShowContextMenu (EditorPopup = NIL)');  //RG
       EditorPopup.Create(SELF);
 
       Entry.Create(EditorPopup);
@@ -8508,4 +8510,5 @@ END.
                         deaktiviert.
   19-Nov-06  WD         ReOpenFile in das Popup-Menue eingebaut.
   28-Apr-08  WD         TSibEditor.GenerateProgramFrame: ApplicationName usw. eingebaut.
+     Aug-17  RG
 }

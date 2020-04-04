@@ -736,7 +736,7 @@ VAR t:LONGINT;
     s:STRING;
     p,p1,pParent:^LONGINT;
 BEGIN
-//  Application.LogWriteln('SetInspectorDataList');
+  //Application.LogWriteln('inspect.pas: SetInspectorDataList');  //RG
   IF InstanceList.Count<2 THEN
   BEGIN
        IF InstanceList.Count=0 THEN SetInspectorData(NIL)
@@ -780,7 +780,6 @@ BEGIN
   inc(p1,16);   //onto ClassName
   System.Move(p1^,s,(p1^ AND 255)+1);  //Class Name
   AssignStr(AClassName,s);
-
 
   //Alle Properties in Properties.Interior und Events.Interior eintragen
   EnumAllProperties(Component,FALSE,TRUE);
@@ -833,6 +832,7 @@ PROCEDURE TInspector.SetupSetInspectorData(Instance:TComponent;MultipleEntries:B
 VAR Form:TForm;
     s:STRING;
 BEGIN
+     //Application.LogWriteln('inspect.pas: SetupSetInspectorData');  //RG
      {Bestimme Form}
      Form := TForm(Instance);
      IF Form <> NIL THEN
@@ -850,6 +850,7 @@ BEGIN
           s := Instance.TypeName;
           IF s = '' THEN s := Instance.ClassName;
           ComboBox.Caption := Instance.Name +':'+ s;
+          //Application.LogWriteln('s='+s);  //RG
      END
      ELSE ComboBox.Caption := '';
 
@@ -868,6 +869,7 @@ VAR
    s:STRING;
 BEGIN
 //  Application.LogWriteln('SetInspectorData');
+  //Application.LogWriteln('inspect.pas: SetInspectorData');  //RG
   IF FInspectorUpdateLocked THEN exit;
 
   WriteBackProperties;
@@ -5315,4 +5317,5 @@ END.
 { -- date -- -- from -- -- changes ----------------------------------------------
   05-Jul-04  WD         Umbau der MultiMedia-Komponenten
   17-Mar-09  WD         Einbau der Komponente "tCheckGroup"
+  04-Aug-17  RG
 }

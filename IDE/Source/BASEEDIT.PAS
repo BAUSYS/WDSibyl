@@ -60,8 +60,8 @@ INTERFACE
 // WDSibyl.RC muss da geladen werden, denn sonst koennen die Resourcen im
 // Initialisierungsteil nicht geladen werden
 
-{$R WDSIBYL}       
-                        
+{$R WDSIBYL}
+
 {$IFDEF OS2}              
 USES Os2Def,BseDos;
 {$ENDIF}

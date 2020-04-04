@@ -660,9 +660,6 @@ END;
 
 
 PROCEDURE StopCompiler;
-
-var pt: Pointer;
-
 BEGIN
   IF not CompilerActive THEN exit;
   SetCompilerStatusMessage('Send-StopCompiler ('+tohex(longWord(CurCompiler.Func.BreakCompiler)),'',errNone,0,0);
@@ -1817,7 +1814,7 @@ NoCompile:
         OdinPEExe:=ReplaceStr(OdinPEExe, 'PE.EXE','PEC.EXE');
 
       if (Project.Settings.Platform = pf_Win32) and
-         (goSysInfo.OS.System=OS2) and
+         (goSysInfo.OS.System=SysOS2) and // RG Platform in [pfOS2Ver20, pfOS2Ver30, ])
          (OdinPEExe<>'')
         then
           Begin
@@ -1961,4 +1958,6 @@ END.
                         dann soll das Programm Åber Odin gestartet werden
   18-Mai-06  WD         Umbauten fuer die Windows-Version
   09-Mar-06  WD         Auslagern von diversen Logs in die DLL.
+  30-Jul-17  RG         goSysInfo.OS.System=SysOS2 anstatt =OS2
+			'pt' is declared but never used in StopCompiler ()
 }
