@@ -2,7 +2,10 @@ Library CompLib;
 
 {$m 65535,4194304}
 
-Uses Classes, Forms;
+Uses
+  Classes, Forms;
+Uses
+  MYDRAWGRID;
 
 Exports
   SetupCompLib name 'SETUPCOMPLIB',
@@ -14,4 +17,5 @@ Exports
   GetExperts name 'GETEXPERTS';
 
 Begin
+  RegisterClasses([TMYDRAWGRID]); 
 End.
