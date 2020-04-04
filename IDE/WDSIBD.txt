@@ -1,0 +1,14 @@
+Gemeinsame TeilausdrÅcke	on
+Peephole Optimierung		on
+GUI
+EXE Pack 2
+Heap	8192
+Stack	256
+starten von VDM			on
+Debugger 'schnelles Auswerten'	on
+
+Ausgabe 				P:\WDSIBYL\OS\OS2\Output
+Unit					P:\WDSIBYL\OS\OS2\Lib
+Quellen-Verzeichnisse			P:\WDSibyl\Compiler\Source\Share\SPC_DATA.PAS
+Komponenten				P:\WDSIBYL\OS\OS2\Compnt
+

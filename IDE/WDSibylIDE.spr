@@ -4,11 +4,11 @@ ApplicationIcon=
 
 [Application Options OS/2]
 
-ApplicationIcon=P:\WDSibyl\WDSibyl\Bmp\WDSibyl\OS2\SIBYL.ICO
+ApplicationIcon=P:\WDSibyl\Bin\OS2\DEFAULT_OS2.ICO
 
 [Application Options Win32]
 
-ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_win32.ico
+ApplicationIcon=P:\WDSibyl\Bin\OS2\DEFAULT_Win32.ICO
 
 [Browser Files]
 
@@ -126,8 +126,8 @@ File108=BROWSER
 
 CodeGeneration=ASMSource
 Syntax=
-Optimize=OptimizeCommonSub,OptimizePeephole
-RuntimeCheck=
+Optimize=
+RuntimeCheck=InOut,Overflow,Stack,Range
 CondDefine=
 
 [Compiler Warnings]
@@ -138,7 +138,7 @@ MaxErrors=10
 
 [Component Library OS/2]
 
-CompLibName=
+CompLibName=..\.\Bin\OS2\CompLib.dll
 
 [Component Library Win32]
 
@@ -155,7 +155,7 @@ SPCC_Exceptions=0
 
 DebugInfo=
 Dbg_Options=0
-RTL_Exceptions=0
+RTL_Exceptions=33554432
 SPCC_Exceptions=0
 
 [Debugger Options Win32]
@@ -176,45 +176,45 @@ CompInstallDir=
 
 [Directories OS/2]
 
-LastDir=P:\WDSIBYL\WDSIBYL\IDE\SOURCE
-OutDir=P:\WDSibyl\WDSibyl\IDE\Output\OS2;P:\WDSibyl\WDSibyl\BIN\OS2
-LibDir=P:\WDSibyl\WDSibyl\Library\Output\OS2;P:\WDSibyl\WDSibyl\Compiler\Output\OS2
+LastDir=P:\WDSibyl\IDE\Source
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\Projekte\WDSIBYL\Lib
 LibSrcDir=
-IncSrcDir=P:\WDSIBYL\WDSIBYL\Compiler\Source\Share
-CompInstallDir=
+IncSrcDir=P:\WDSibyl\Compiler\Source\Share
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
 
-LastDir=P:\WDSIBYL\WDSIBYL\IDE\SOURCE
-OutDir=P:\WDSibyl\WDSibyl\IDE\Output\Win32;V:\SharedFolder\WDSibyl\Install
-LibDir=P:\WDSibyl\WDSibyl\Library\Output\Win32;P:\WDSibyl\WDSibyl\Compiler\Output\Win32
+LastDir=
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
 LibSrcDir=
-IncSrcDir=P:\WDSIBYL\WDSIBYL\Compiler\Source\Share
-CompInstallDir=
+IncSrcDir=
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
-Find0=hilfe
-Find1=TRadioGroup
-Find2=DefaultPropsCount
-Find3=tGauge
-Find4=tUserPasswordDialog
-Find5=EvPipeIn
-Find6=TBaseEditor
-Find7=runin
-Find8=TSibEditor
-Find9=PipeServer
-Find10=ALL_UC_FILES_
-Find11=ext_pascal
-Find12=wdsibyl_
-Find13=TScrollCode
-Find14=FirstY
-Find15=EditorSample
+Find0=TGotoLineDialog.SetupComponent
+Find1=SELF
+Find2=.Focus
+Find3=GotoLineDialog
+Find4=GotoLine
+Find5=Goto
+Find6=cmGotoLine
+Find7=Line
+Find8=Gehe zu
+Find9=InsertText
+Find10=hilfe
+Find11=TRadioGroup
+Find12=DefaultPropsCount
+Find13=tGauge
+Find14=tUserPasswordDialog
+Find15=EvPipeIn
 
 [General]
 
 Version=Sibyl Project Ver2.05
-ProjectName=P:\WDSibyl\WDSibyl\IDE\WDSibylIDE.spr
+ProjectName=P:\WDSibyl\IDE\WDSibylIDE.spr
 ProjectType=NonVisual
 RunParameter=-log -nopipe
 InActiveLanguages=
@@ -234,31 +234,59 @@ File4=.\Source\FORMEDIT.PAS
 File0=.\Source\WDSibyl.pas
 File0.Left=-1
 File0.Bottom=-1
-File0.Width=772
-File0.Height=474
+File0.Width=952
+File0.Height=604
 File0.Column=18
-File0.Line=208
+File0.Line=2175
 File1=.\Source\NAVIGATE.PAS
 File1.Left=-1
 File1.Bottom=-1
-File1.Width=854
-File1.Height=488
-File1.Column=50
-File1.Line=765
+File1.Width=952
+File1.Height=604
+File1.Column=12
+File1.Line=35
 File2=.\Source\INSPECT.PAS
 File2.Left=-1
 File2.Bottom=-1
-File2.Width=854
-File2.Height=488
-File2.Column=17
-File2.Line=5306
+File2.Width=952
+File2.Height=604
+File2.Column=1
+File2.Line=49
 File3=..\.\Compiler\Source\Share\CONSTS.PAS
 File3.Left=-1
 File3.Bottom=-1
-File3.Width=772
-File3.Height=474
-File3.Column=35
-File3.Line=12
+File3.Width=952
+File3.Height=604
+File3.Column=1
+File3.Line=52
+File4=.\SOURCE\BASEEDIT.PAS
+File4.Left=-1
+File4.Bottom=-1
+File4.Width=952
+File4.Height=604
+File4.Column=29
+File4.Line=219
+File5=.\SOURCE\IDETOOLS.PAS
+File5.Left=-1
+File5.Bottom=-1
+File5.Width=952
+File5.Height=604
+File5.Column=1
+File5.Line=1
+File6=.\Source\SIB_PRJ.PAS
+File6.Left=-1
+File6.Bottom=-1
+File6.Width=952
+File6.Height=604
+File6.Column=35
+File6.Line=3409
+File7=.\Source\SIB_DLG.PAS
+File7.Left=-1
+File7.Bottom=-1
+File7.Width=952
+File7.Height=604
+File7.Column=60
+File7.Line=8831
 
 [Linker Options]
 
@@ -340,23 +368,25 @@ MainFile0.Dependency24=.\Source\FORMEDIT.PAS
 MainFile0.Dependency25=.\Source\SIB_DLG.PAS
 MainFile0.Dependency26=.\Source\SIB_LANG.PAS
 MainFile0.Dependency27=.\Source\BROWSER.PAS
+MainFile0.Dependency28=.\Source\SIB_ENG.RC
 
 [Replace History]
 
-Replace0=EXT_UC_WDSibyl_
-Replace1=ALL_FILES_UC_
-Replace2=CreatePipe
-Replace3=ß
-Replace4=ä
-Replace5=ü
-Replace6=ö
-Replace7=Ä
-Replace8=Ö
-Replace9=SetMouseHintNLS
-Replace10=.HCTX hctx
-Replace11=.HCTX
-Replace12=/* .HCTX hctx
-Replace13=.HCTX  hctx
+Replace0=Memo_ClamAV_Thread
+Replace1=EXT_UC_WDSibyl_
+Replace2=ALL_FILES_UC_
+Replace3=CreatePipe
+Replace4=ß
+Replace5=ä
+Replace6=ü
+Replace7=ö
+Replace8=Ä
+Replace9=Ö
+Replace10=SetMouseHintNLS
+Replace11=.HCTX hctx
+Replace12=.HCTX
+Replace13=/* .HCTX hctx
+Replace14=.HCTX  hctx
 
 [Repository]
 

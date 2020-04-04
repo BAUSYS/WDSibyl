@@ -4,11 +4,11 @@ ApplicationIcon=
 
 [Application Options OS/2]
 
-ApplicationIcon=P:\WDSibyl\WDSibyl\Bmp\WDSibyl\OS2\SIBYL.ICO
+ApplicationIcon=P:\WDSibyl\Bin\OS2\DEFAULT_OS2.ICO
 
 [Application Options Win32]
 
-ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_win32.ico
+ApplicationIcon=P:\WDSibyl\Bin\OS2\DEFAULT_Win32.ICO
 
 [Browser Files]
 
@@ -30,7 +30,7 @@ MaxErrors=10
 
 [Component Library OS/2]
 
-CompLibName=
+CompLibName=..\.\Bin\OS2\CompLib.dll
 
 [Component Library Win32]
 
@@ -68,21 +68,21 @@ CompInstallDir=
 
 [Directories OS/2]
 
-LastDir=P:\WDSIBYL\WDSIBYL\IDE\SOURCE\RC
-OutDir=P:\WDSibyl\WDSibyl\IDE\Output\OS2;P:\WDSibyl\WDSibyl\BIN\OS2
-LibDir=P:\WDSibyl\WDSibyl\Library\Output\OS2;P:\WDSibyl\WDSibyl\Compiler\Output\OS2
+LastDir=P:\WDSIBYL\BIN\OS2
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
 LibSrcDir=
-IncSrcDir=P:\WDSIBYL\WDSIBYL\Compiler\Source\Share
-CompInstallDir=
+IncSrcDir=
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
 
-LastDir=P:\WDSIBYL\WDSIBYL\IDE\SOURCE\RC
-OutDir=P:\WDSibyl\WDSibyl\IDE\Output\Win32;V:\SharedFolder\WDSibyl\Install
-LibDir=P:\WDSibyl\WDSibyl\Library\Output\Win32;P:\WDSibyl\WDSibyl\Compiler\Output\Win32
+LastDir=
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
 LibSrcDir=
-IncSrcDir=P:\WDSIBYL\WDSIBYL\Compiler\Source\Share
-CompInstallDir=
+IncSrcDir=
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
@@ -100,64 +100,12 @@ Find9=SiBitmapFiles
 [General]
 
 Version=Sibyl Project Ver2.05
-ProjectName=P:\WDSibyl\WDSibyl\IDE\WDSibylRC.spr
+ProjectName=P:\WDSibyl\IDE\WDSibylRC.spr
 ProjectType=NonVisual
 RunParameter=
 InActiveLanguages=
 CurrentLanguage=Default
 Platform=OS/2
-
-[Last Open Files]
-
-File0=.\Source\RC\WDSibylRC.PAS
-File0.Left=-1
-File0.Bottom=-1
-File0.Width=879
-File0.Height=545
-File0.Column=38
-File0.Line=6
-File1=.\SOURCE\RC\WDSIBYL.RC
-File1.Left=-1
-File1.Bottom=-1
-File1.Width=879
-File1.Height=545
-File1.Column=1
-File1.Line=402
-File2=.\SOURCE\RC\SIB_GER.RC
-File2.Left=-1
-File2.Bottom=-1
-File2.Width=879
-File2.Height=545
-File2.Column=25
-File2.Line=888
-File3=.\SOURCE\RC\SIB_ENG.RC
-File3.Left=-1
-File3.Bottom=-1
-File3.Width=879
-File3.Height=545
-File3.Column=27
-File3.Line=891
-File4=.\SOURCE\RC\SIB_DUT.RC
-File4.Left=-1
-File4.Bottom=-1
-File4.Width=879
-File4.Height=545
-File4.Column=47
-File4.Line=890
-File5=.\SOURCE\RC\SIB_ITL.RC
-File5.Left=-1
-File5.Bottom=-1
-File5.Width=879
-File5.Height=545
-File5.Column=1
-File5.Line=892
-File6=.\SOURCE\RC\SIB_RUS.RC
-File6.Left=-1
-File6.Bottom=-1
-File6.Width=879
-File6.Height=545
-File6.Column=25
-File6.Line=890
 
 [Linker Options]
 

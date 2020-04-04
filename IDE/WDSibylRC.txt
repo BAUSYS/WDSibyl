@@ -1,0 +1,13 @@
+Assemblerquellentext		on
+Gemeinsame TeilausdrÅcke	on
+Peephole Optimierung		on
+GUI
+EXE Pack 2
+Heap	8192
+Stack	256
+starten von VDM			on
+Debugger (alle Optionen)	on
+
+Ausgabe 				P:\WDSIBYL\OS\OS2\Output
+Unit					P:\WDSIBYL\OS\OS2\Lib
+Komponenten				P:\WDSIBYL\OS\OS2\Compnt
