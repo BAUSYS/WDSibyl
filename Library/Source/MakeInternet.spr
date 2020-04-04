@@ -1,0 +1,215 @@
+[Application Options Linux]
+
+ApplicationIcon=
+
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_win32.ico
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=BSETIB
+File3=BSEEXCPT
+File4=BSEDOS
+File5=PMWIN
+File6=BSEERR
+File7=PMSHL
+File8=SYSUTILS
+File9=USTREAM
+File10=ULIST
+File11=USTRING
+File12=USYSCLASS
+File13=COLOR
+File14=DOS
+File15=UEXTENSION
+File16=BSEREGISTRY
+File17=INIFILES
+File18=CLASSES
+File19=PMBITMAP
+File20=PMGPI
+File21=PMDEV
+File22=PMSTDDLG
+File23=PMHELP
+File24=MESSAGES
+File25=CLIPBRD
+File26=UCONVERT
+File27=GRAPHICS
+File28=MENUS
+File29=UDATETIME
+File30=ULOG
+File31=PMWINX
+File32=PMSPL
+File33=USYSINFO
+File34=PRINTERS
+File35=FORMS
+File36=BUTTONS
+File37=STDCTRLS
+File38=EXTCTRLS
+File39=COMCTRLS
+File40=FILECTRL
+File41=DIALOGS
+File42=INET
+File43=SYNCCOMP
+File44=SCKTCOMP
+File45=UEMAILCLIENT
+
+[Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\CompLib.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=
+OutDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Output
+LibDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Compnt
+
+[Directories Win32]
+
+LastDir=
+OutDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Output
+LibDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Compnt
+
+[Find History]
+
+Find0=Ifdef
+Find1=.srf
+Find2=inet
+Find3=ThreadProc
+Find4=sqleninfo
+Find5=sqledinfo
+Find6=EXCEPTION_DEBUG_INFO
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Library\Source\MakeInternet.spr
+ProjectType=NonVisual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Closed Files]
+
+File0=.\COMPNT\CHECKLB.PAS
+File1=.\COMPNT\BMPLIST.PAS
+File2=.\Compnt\SYNCCOMP.PAS
+File3=.\COMPNT\COOLBAR.PAS
+
+[Last Open Files]
+
+File0=.\MakeInternet.PAS
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=839
+File0.Height=626
+File0.Column=18
+File0.Line=4
+File1=.\Internet\INET.PAS
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=839
+File1.Height=626
+File1.Column=30
+File1.Line=262
+File2=.\Internet\uEMailClient.PAS
+File2.Left=-1
+File2.Bottom=-1
+File2.Width=839
+File2.Height=626
+File2.Column=1
+File2.Line=286
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=GUI
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\MakeInternet.PAS
+MainFile0=.\MakeInternet.PAS
+MainFile0.Ext=.EXE
+MainFile0.Checksum=12032
+MainFile0.Expanded=False
+MainFile0.File0=.\Internet\INET.PAS
+MainFile0.File1=.\Internet\uEMailClient.PAS
+MainFile0.File2=[Dependencies]
+MainFile0.Dependency0=.\Internet\INET.PAS
+MainFile0.Dependency1=.\Internet\uEMailClient.PAS
+
+[Replace History]
+
+Replace0=tSMTPClient
+Replace1=tPOP3Client
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+

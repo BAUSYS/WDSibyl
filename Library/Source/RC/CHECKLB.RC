@@ -1,0 +1,3 @@
+BITMAP BmpLBChecked   ..\..\..\bmp\Compnt\lb_check.bmp
+BITMAP BmpLBUnChecked ..\..\..\bmp\Compnt\lb_unchk.bmp
+BITMAP BmpLB3State    ..\..\..\bmp\Compnt\lb_3stat.bmp

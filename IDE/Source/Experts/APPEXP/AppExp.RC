@@ -1,0 +1,18 @@
+BITMAP EXPTDEMO_New     ..\..\..\..\BMP\WDSIBYL\Speedbar\FileNew.BMP
+BITMAP EXPTDEMO_Open    ..\..\..\..\BMP\WDSIBYL\Speedbar\FileOpen.BMP
+BITMAP EXPTDEMO_Save    ..\..\..\..\BMP\WDSIBYL\Speedbar\FileSave.BMP
+BITMAP EXPTDEMO_SaveAs  ..\..\..\..\BMP\WDSIBYL\Speedbar\FileSvAs.BMP
+
+BITMAP EXPTDEMO_Cut     ..\..\..\..\BMP\WDSIBYL\Speedbar\Cut.BMP
+BITMAP EXPTDEMO_Copy    ..\..\..\..\BMP\WDSIBYL\Speedbar\Copy.BMP
+BITMAP EXPTDEMO_Paste   ..\..\..\..\BMP\WDSIBYL\Speedbar\Paste.BMP
+BITMAP EXPTDEMO_Undo    ..\..\..\..\BMP\WDSIBYL\Speedbar\Undo.BMP
+BITMAP EXPTDEMO_Redo    ..\..\..\..\BMP\WDSIBYL\Speedbar\Redo.BMP
+
+BITMAP EXPTDEMO_Tile    ..\..\..\..\Bmp\Compnt\Tile.BMP
+BITMAP EXPTDEMO_Cascade ..\..\..\..\BMP\WDSIBYL\Speedbar\Cascade.BMP
+
+BITMAP EXPTDEMO_Help    ..\..\..\..\BMP\WDSIBYL\Speedbar\Help.BMP
+
+BITMAP SpeedSoft_AppExp AppExp.BMP
+

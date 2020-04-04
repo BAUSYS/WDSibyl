@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="http://svn.netlabs.org/repos/wdsibyl"
+   revision="35"
+   url="http://svn.netlabs.org/repos/wdsibyl/trunk/WDSibyl/Bmp/WDSibyl/OS2"
+   last-author="wolfgangd"
+   uuid="cbb429e8-791c-0410-88e6-dcdaa12b25c3"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name=""
+   kind="dir"
+   committed-rev="5"/>
+<entry
+   checksum="cb393f195160398642011d1119343e25"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-01-30T19:05:52.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="APPSTART.PTR"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="cb393f195160398642011d1119343e25"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2003-07-05T08:56:24.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="AppStart.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="12a4ff0ca748fcc39711008353485b10"
+   revision="49"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2006-11-21T21:46:46.000000Z"
+   committed-date="2007-01-12T00:18:57.308000Z"
+   name="CPUWIN.ICO"
+   kind="file"
+   committed-rev="49"/>
+<entry
+   checksum="316d26e724632adc317c65a002150f06"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2003-07-05T08:56:24.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="CROSS.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="316d26e724632adc317c65a002150f06"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-01-30T16:54:04.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="CROSS.PTR"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="aa232164affc13c7fea0d6252ff72dbe"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-08-04T08:56:26.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="DBEXPLOR.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="df306d3a83ab58c0ac22d0e6509888e6"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1998-05-16T13:08:36.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="DEFAULT.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="75f8d26af62834feed23ed31198c5e60"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1995-06-22T10:00:00.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="DOCU.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   revision="49"
+   checksum="96ac0d72e43e05ddc47cee60784ec22e"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2006-11-21T21:12:08.000000Z"
+   committed-date="2007-01-12T00:18:57.308000Z"
+   name="EDIT.ICO"
+   kind="file"
+   committed-rev="49"/>
+<entry
+   checksum="889455e4bf2821b4482b069cd48f73d3"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-08-04T08:57:08.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="HCOMP.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="7e7cea77c7f7cc8a26f9b480a10e5fcc"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2003-07-05T08:56:24.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="HELP.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="7e7cea77c7f7cc8a26f9b480a10e5fcc"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-01-31T01:29:22.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="HELP.PTR"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="91e73589058d589b636a290fdc81f6f6"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2003-07-05T08:56:24.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="HSPLIT.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="91e73589058d589b636a290fdc81f6f6"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-01-30T17:17:38.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="HSPLIT.PTR"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   revision="49"
+   checksum="8ae5bc294a7d32725d659803d533ba2a"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2006-11-21T21:07:48.000000Z"
+   committed-date="2007-01-12T00:18:57.308000Z"
+   name="ICEDIT.ICO"
+   kind="file"
+   committed-rev="49"/>
+<entry
+   checksum="c4e06d8f1371a668327382e3955294ff"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2003-07-05T08:56:24.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="INSERT.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="c4e06d8f1371a668327382e3955294ff"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-01-31T11:24:24.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="INSERT.PTR"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="6fe07822004c24ed3d5dc1b577656b8a"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1995-12-05T20:31:40.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="INSPECT.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="4c83aaef0905493e06721a0932af4fa7"
+   revision="49"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2006-11-21T21:31:20.000000Z"
+   committed-date="2007-01-12T00:18:57.308000Z"
+   name="ISPECTOR.ICO"
+   kind="file"
+   committed-rev="49"/>
+<entry
+   checksum="9094173b43f4235c772d5a73bae649dd"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2003-07-05T08:56:24.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="MULTISEL.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="9094173b43f4235c772d5a73bae649dd"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-01-31T11:20:36.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="MULTISEL.PTR"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="95513db89ee401b8d5e2978777d3338a"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-08-04T08:58:26.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="NLSMGR.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="1aefb5b65f0988af3e4d92a3828cd0ae"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2003-07-05T08:56:24.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="PASTE.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="1aefb5b65f0988af3e4d92a3828cd0ae"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1996-03-22T16:22:12.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="PASTE.PTR"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="63fa9dc192fe2afb11c2a39a5ec03c55"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-08-04T08:58:48.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="RCOMP.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="63fa9dc192fe2afb11c2a39a5ec03c55"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-08-04T08:58:48.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="RCOMP25.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="6fe07822004c24ed3d5dc1b577656b8a"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1995-12-05T20:31:40.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="SIBYL.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="63fa9dc192fe2afb11c2a39a5ec03c55"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-08-04T08:58:48.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="SPC25.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="86d2a7b6d9049fca1fe4bc450a0103c3"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2003-07-05T08:56:24.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="SQLWAIT.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="86d2a7b6d9049fca1fe4bc450a0103c3"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-01-30T19:08:54.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="SQLWAIT.PTR"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="34dd8d5ef93cb4a27ca4cf695b228cfb"
+   revision="54"
+   last-author="wolfgangd"
+   prop-time="2007-03-08T22:43:56.000000Z"
+   text-time="2007-02-04T23:01:44.000000Z"
+   committed-date="2007-03-08T22:46:26.436000Z"
+   name="Template.ico"
+   kind="file"
+   committed-rev="54"/>
+<entry
+   checksum="33068a50c77735654c343f4288c07347"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2003-07-05T08:56:24.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="UPARROW.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="33068a50c77735654c343f4288c07347"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-01-30T17:11:36.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="UPARROW.PTR"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="76c2aff3b18c8291b0dd5e4c051ff752"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2003-07-05T08:56:24.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="VSPLIT.ICO"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   checksum="76c2aff3b18c8291b0dd5e4c051ff752"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="1997-01-30T17:19:52.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   name="VSPLIT.PTR"
+   kind="file"
+   committed-rev="5"/>
+<entry
+   revision="47"
+   checksum="aa0bac68de45bc9535ca1abfeddd2194"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:18.000000Z"
+   text-time="2006-11-08T21:10:56.000000Z"
+   committed-date="2006-11-10T19:47:35.133000Z"
+   name="WATCH.ICO"
+   kind="file"
+   committed-rev="47"/>
+</wc-entries>

@@ -1,0 +1,12 @@
+
+BITMAP StdBmpDBFirst   ..\..\..\bmp\Compnt\dbfirst.bmp
+BITMAP StdBmpDBPrior   ..\..\..\bmp\Compnt\dbprior.bmp
+BITMAP StdBmpDBNext    ..\..\..\bmp\Compnt\dbnext.bmp
+BITMAP StdBmpDBLast    ..\..\..\bmp\Compnt\dblast.bmp
+BITMAP StdBmpDBInsert  ..\..\..\bmp\Compnt\dbinsert.bmp
+BITMAP StdBmpDBDelete  ..\..\..\bmp\Compnt\dbdelete.bmp
+BITMAP StdBmpDBEdit    ..\..\..\bmp\Compnt\dbedit.bmp
+BITMAP StdBmpDBPost    ..\..\..\bmp\Compnt\dbpost.bmp
+BITMAP StdBmpDBCancel  ..\..\..\bmp\Compnt\dbcancel.bmp
+BITMAP StdBmpDBRefresh ..\..\..\bmp\Compnt\dbrefrsh.bmp
+

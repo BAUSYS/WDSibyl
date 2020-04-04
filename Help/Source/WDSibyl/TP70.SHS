@@ -1,0 +1,1448 @@
+.TOPIC 2 Unit CRT/WinCrt
+
+.HIGH Die Unit CRT/WinCrt
+
+Die Unit CRT/WinCrt beinhaltet Prozeduren und Funktionen zur Steuerung von Textausgaben
+in ein Text-Fenster.
+
+Prozeduren und Funktionen der Unit CRT/WinCrt:
+
+.FIG
+  {ClrEol}
+  {ClrScr}
+  {Delay}
+  {DelLine}
+  {GotoXY}
+  {HighVideo}
+  {InsLine}
+  {KeyPressed}
+  {LowVideo}
+  {NormVideo}
+  {ReadKey}
+  {TextBackGround}
+  {TextColor}
+  {TextMode}
+  {WhereX}
+  {WhereY}
+  {Window}
+.EFIG
+
+.TOPIC 3 ClrEol
+
+.HIGH ClrEol (Prozedur)  {Unit CRT/WinCrt}
+
+Lîscht alle Zeichen ab dem Cursor bis zum Zeilenende. 
+
+Deklaration: 
+
+    PROCEDURE ClrEol;
+
+
+Die gelîschten Zeichen werden mit der aktuellen Hintergrundfarbe dargestellt. 
+
+Die Position des Cursors bleibt dabei unverÑndert. 
+
+.FIG
+Siehe auch:
+           {ClrScr}
+           {TextBackground}
+.EFIG
+
+.TOPIC 3 ClrScr
+
+.High ClrScr (Prozedur)  {Unit CRT/WinCrt}
+
+Lîscht den Textbildschirm. 
+
+Deklaration: 
+
+    PROCEDURE ClrScr;
+
+
+ClrScr lîscht den Bildschirm des PM-Textfensters und positioniert den Textcursor in
+der 1. Spalte und 1. Zeile des Bildschirms.
+
+.FIG
+Siehe auch:
+           {GotoXY}
+.EFIG
+
+.TOPIC 3 Delay
+
+.HIGH Delay (Prozedur)  {Unit CRT/WinCrt}
+
+Unterbricht den laufenden Thread fÅr ein bestimmtes Zeitintervall. 
+
+Deklaration: 
+
+    PROCEDURE Delay(ms:LongWord);
+
+
+Unterbricht den laufenden Thread fÅr die spezifizierte Anzahl von ms. Der Thread wird
+nach dieser Zeit automatisch fortgesetzt.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt, andernfalls
+enthÑlt sie den Fehlerwert.
+
+.TOPIC 3 DelLine
+
+.HIGH DelLine (Prozedur)  Unit CRT
+
+Entfernt eine Zeile vom Bildschirm.
+
+Deklaration: 
+
+    PROCEDURE DelLine;
+
+
+Lîscht die Zeile in der sich der Cursor befindet und rollt dabei alle nachfolgenden Zeilen um eine Position nach oben. 
+
+Die unterste Zeile wird mit Leerzeichen in der Hintergundfarbe aufgefÅllt. 
+
+
+Beispiel: 
+.XMP
+    USES Crt;
+
+    BEGIN
+         Writeln('Zeile1');
+         Writeln('Diese Zeile verschwindet');
+         Writeln('Zeile3');
+         GotoXY(1,WhereY-2);
+         REPEAT UNTIL KeyPressed;
+         DelLine;
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {InsLine}
+           {Window}
+.EFIG
+
+.TOPIC 3 GotoXY
+
+.HIGH GotoXY (Prozedur)  {Unit CRT/WinCrt}
+
+Setzt den Textcursor.
+
+Deklaration: 
+
+    PROCEDURE GotoXY(x,y:Byte);
+
+
+GotoXY setzt den Textcursor an die durch x und y bezeichneten Koordinaten. 
+
+X darf im Bereich von 1..80 liegen, y im Bereich von 1..25. 
+
+.FIG
+Siehe auch:
+           {ClrScr}
+.EFIG
+
+.TOPIC 3 HighVideo
+
+.HIGH HighVideo (Prozedur)  {Unit CRT/WinCrt}
+
+Setzt hohe IntensitÑt fÅr die Bildschirmausgabe. 
+
+Deklaration: 
+
+    PROCEDURE HighVideo;
+
+
+Maskiert das hîchstwertige Bit der aktuellen Vordergrundfarbe mit 1. 
+
+Das hat zur Folge, das die Auswahl der Farben 0..7 effektiv die Farben 8..15 benutzt. 
+
+Beispiel:
+.XMP
+    USES Crt;
+
+    BEGIN
+         TextColor(Green);
+         Writeln('Green');
+         HighVideo;
+         Writeln('LightGreen');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {LowVideo}
+           {NormVideo}
+           {TextBackground}
+           {TextColor}
+.EFIG
+
+.TOPIC 3 InsLine
+
+.HIGH InsLine (Prozedur)  {Unit CRT/WinCrt}
+
+FÅgt eine leere Zeile ein. 
+
+Deklaration: 
+
+    PROCEDURE InsLine;
+
+
+Alle Zeichen zwischen der Cursorposition und unterem Fensterrand werden um eine Zeile nach unten verschoben. Die unterste Zeile verschwindet dabei vom Bildschirm. 
+
+Die Position des Cursors im Bildschirm bleibt unverÑndert. 
+
+
+Beispiel: 
+.XMP
+    USES Crt;
+
+    BEGIN
+         Writeln('Zeile1');
+         Writeln('Ab dieser Zeile wird verschoben');
+         Writeln('Zeile3');
+         GotoXY(1,WhereY-2);
+         REPEAT UNTIL KeyPressed;
+         InsLine;
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {DelLine}
+           {Window}
+.EFIG
+
+.TOPIC 3 KeyPressed
+
+.HIGH KeyPressed (Funktion)  {Unit CRT/WinCrt}
+
+PrÅft ob ein Zeichen bereitsteht. 
+
+Deklaration: 
+
+    FUNCTION KeyPressed:Boolean;
+
+
+KeyPressed prÅft ob der Tastaturpuffer ein Zeichen enthÑlt und liefert in diesem Fall TRUE an den Aufrufer zurÅck. Befindet sich kein Zeichen im Tastaturpuffer liefert KeyPressed FALSE. Das Zeichen wird nicht aus dem Tastaturpuffer entfernt, steht also fÅ
+r nachfolgende Leseoperationen bereit.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von KeyPressed *)
+    PROGRAM Read_it;
+    USES Crt;
+    VAR ch:Char;
+    BEGIN
+         Writeln('Hallo!');
+         (* Warten auf Tastendruck *)
+         REPEAT UNTIL Keypressed;
+         (* Taste einlesen *)
+         ch:=ReadKey;
+         Writeln('TschÅ·');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {ReadKey}
+.EFIG
+
+.TOPIC 3 LowVideo
+
+.HIGH LowVideo (Prozedur)  {Unit CRT/WinCrt}
+
+Setzt niedrige IntensitÑt fÅr die Bildschirmausgabe. 
+
+Deklaration: 
+
+    PROCEDURE LowVideo;
+
+
+Maskiert das hîchstwertige Bit der aktuellen Vordergrundfarbe mit 0. 
+
+Das hat zur Folge, das die Auswahl der Farben 8..15 effektiv die Farben 0..7 benutzt. 
+
+
+Beispiel: 
+.XMP
+    USES Crt;
+
+    BEGIN
+         TextColor(LightGreen);
+         Writeln('LightGreen');
+         LowVideo;
+         Writeln('Green');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {HighVideo}
+           {NormVideo}
+           {TextBackground}
+           {TextColor}
+.EFIG
+
+.TOPIC 3 NormVideo
+
+.HIGH NormVideo (Prozedur)  {Unit CRT/WinCrt}
+
+Setzt die Einstellungen der Farben fÅr die Bildschirmausgabe auf die Startwerte zurÅck. 
+
+Deklaration: 
+
+    PROCEDURE NormVideo;
+
+Beispiel:
+.XMP
+    USES Crt;
+
+    BEGIN
+         TextColor(LightGreen+Blink);
+         Textbackground(Red);
+         Writeln('LightGreen');
+         NormVideo;
+         Writeln('Wieder Normal');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {HighVideo}
+           {LowVideo}
+           {TextBackground}
+           {TextColor}
+.EFIG
+
+.TOPIC 3 ReadKey
+
+.HIGH ReadKey (Funktion)  Unit CRT
+
+Liest ein Zeichen von der Tastatur. 
+
+Deklaration: 
+
+    FUNCTION ReadKey:Char;
+
+
+ReadKey liest ein Zeichen von der Tastatur ein und liefert dieses Zeichen an den Aufrufer zurÅck. Steht kein Zeichen bereit kehrt ReadKey erst zum Aufrufer zurÅck wenn der Anwender eine Taste betÑtigt. Im Multitaskingbetrieb kommt diese Wartezeit anderen 
+Tasks zugute. Das Zeichen wird nicht auf den Bildschirm ausgegeben. 
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von ReadKey *)
+    PROGRAM Read_it;
+    USES Crt;
+    VAR ch:Char;
+    BEGIN
+         Writeln('Hallo!');
+         (* Warten auf Tastendruck und einlesen *)
+         ch:=ReadKey;
+         Writeln('TschÅ·');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {KeyPressed}
+.EFIG
+
+.TOPIC 3 TextBackGround
+
+.HIGH TextBackground (Prozedur)  {Unit CRT/WinCrt}
+
+Setzt aktuelle Hintergrundfarbe. 
+
+Deklaration: 
+
+    PROCEDURE TextBackground(Farbe:Byte);
+
+
+TextBackground setzt die Hintergrundfarbe fÅr nachfolgende Textausgaben. 
+
+.FIG
+Siehe auch:
+           {TextColor}
+.EFIG
+
+.TOPIC 3 TextColor
+
+.HIGH TextColor (Prozedur)  {Unit CRT/WinCrt}
+
+Setzt aktuelle Zeichenfarbe. 
+
+Deklaration: 
+
+    PROCEDURE TextColor(Farbe:Byte);
+
+TextColor setzt die Zeichenfarbe fÅr nachfolgende Textausgaben. 
+
+.FIG
+Siehe auch:
+           {TextBackground}
+.EFIG
+
+.TOPIC 3 TextMode
+
+.HIGH TextMode (Prozedur)  {Unit CRT/WinCrt}
+
+Setzt einen TextModus. 
+
+Deklaration: 
+
+    PROCEDURE TextMode(Mode:Integer);
+
+
+Das Textfenster wird auf die volle Grî·e gesetzt und gelîscht. 
+
+TextAttr wird mit den Standardfarben (Hellgrau auf Schwarz) initialisiert. 
+
+Beim Aufruf dieser Prozedur werden die aktuellen Einstellungen des Textmodus in der
+globalen Variable LastMode gespeichert und kînnen spÑter wieder durch den Aufruf von
+TextMode(LastMode) zurÅckgesetzt werden.
+
+Folgende Konstanten kînnen als Parameter Åbergeben werden:
+.ULIST
+.LISTITEM BW40      (40x25 B/W)
+.LISTITEM CO40      (40x25 Color)
+.LISTITEM BW80      (80x25 B/W)
+.LISTITEM CO80      (80x25 Color)
+.LISTITEM Mono      (80x25 B/W  MDA)
+.LISTITEM Font8x8   (43 oder 50 Zeilen)
+.EULIST
+
+.TOPIC 3 WhereX
+
+.HIGH WhereX (Funktion)  {Unit CRT/WinCrt}
+
+X-Koordinate des Cursors ermitteln. 
+
+Deklaration: 
+
+    FUNCTION WhereX:Byte;
+
+
+WhereX liefert die momentane X-Position (Spalte) des Cursors an den Aufrufer zurÅck. 
+
+.FIG
+Siehe auch:
+           {WhereY}
+.EFIG
+
+.TOPIC 3 WhereY
+
+.HIGH WhereY (Funktion)  {Unit CRT/WinCrt}
+
+Y-Koordinate des Cursors ermitteln. 
+
+Deklaration: 
+
+    FUNCTION WhereY:Byte;
+
+
+WhereY liefert die momentane Y-Position (Zeile) des Cursors an den Aufrufer zurÅck. 
+
+.FIG
+Siehe auch:
+           {WhereX}
+.EFIG
+
+.TOPIC 3 Window
+
+.HIGH Window (Prozedur)  {Unit CRT/WinCrt}
+
+Es wird ein Teil des Bildschirms als Textfenster definiert. 
+
+Deklaration: 
+
+    PROCEDURE Window(X1,Y1,X2,Y2:Byte);
+
+
+Dabei ist X1,Y1 die linke obere Ecke und X2,Y2 die rechte untere Ecke des Fensters
+relativ zum Bildschirm bzw. relativ zum TextMode-Fenster.
+
+Die meisten der Prozeduren in der {Unit CRT/WinCrt} arbeiten relativ zum aktuellen Fenster.
+Dabei hat die linke obere Ecke des Fensters immer die Koordinaten (1,1).
+
+.FIG
+Siehe auch:
+           {ClrEol}
+           {ClrScr}
+           {DelLine}
+           {GotoXY}
+           {WhereX}
+           {WhereY}
+.EFIG
+
+.TOPIC 2 Unit DOS
+
+.HIGH Die Unit DOS
+
+Die Unit DOS beinhaltet Funktionen und Prozeduren zum Zugriff auf das Dateisystem und
+Systemvariablen sowie Funktionen und Prozeduren zum Starten und Beenden von Prozessen.
+
+Prozeduren und Funktionen der Unit DOS:
+
+.FIG
+  {CompareFileTimes}
+  {DiskFree}
+  {DiskSize}
+  {DosExitCode}
+  {DosVersion}
+  {EnvCount}
+  {EnvStr}
+  {Exec}
+  {FExpand}
+  {FindClose}
+  {FindFirst}
+  {FindNext}
+  {Flush}
+  {FSearch}
+  {FSplit}
+  {GetDate}
+  {GetEnv}
+  {GetFAttr}
+  {GetFTime}
+  {GetFTime2}
+  {GetTime}
+  {GetVerify}
+  {KillProcess}
+  {KillThread}
+  {PackTime}
+  {ProcessActive}
+  {ResumeThread}
+  {SetDate}
+  {SetFAttr}
+  {SetFTime}
+  {SetFTime2}
+  {SetTime}
+  {SetVerify}
+  {StartThread}
+  {SuspendThread}
+  {SwapVectors}
+  {UnpackTime}
+.EFIG
+
+.TOPIC 3 CompareFileTimes
+
+.HIGH CompareFileTimes (Funktion)  {Unit DOS}
+
+Vergleicht die Dateizeiten von zwei Dateien. 
+
+Deklaration: 
+
+    FUNCTION CompareFileTimes(First,Second:String):Byte;
+
+Die Argumente sind die Namen der beiden Dateien. 
+
+Folgende RÅckgabewerte sind definiert: 
+
+.ULIST
+.LISTITEM F_EQUAL
+
+Beide Dateien haben die gleiche Dateizeit.
+
+.LISTITEM F_FIRST_GREATER
+
+Die Datei First ist neuer.
+
+.LISTITEM  F_SECOND_GREATER
+
+Die Datei Second ist neuer.
+
+.LISTITEM  F_ERROR
+
+Es ist ein Fehler aufgetreten.
+.EULIST
+
+.TOPIC 3 DiskFree
+
+.HIGH DiskFree (Funktion)  {Unit DOS}
+
+Ermittelt freien Speicherplatz auf DatentrÑger. 
+
+Deklaration: 
+
+    FUNCTION DiskFree(Drive: Byte): LongWord;
+
+
+Diskfree ermittelt den aktuell freien Speicherplatz auf dem durch Drive spezifiertem
+DatentrÑger.
+
+.FIG
+Dabei bedeutet: 
+      Drive=0 - aktuelles LW 
+      Drive=1 - Laufwerk A 
+      Drive=2 - Laufwerk B 
+      Drive=3 - Laufwerk C usw.
+.EFIG
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt, andernfalls
+enthÑlt sie den Fehlerwert.
+
+.FIG
+Siehe auch:
+           {DiskSize}
+.EFIG
+
+.TOPIC 3 DiskSize
+
+.HIGH DiskSize (Funktion)  {Unit DOS}
+
+Ermittelt Speicherplatz auf DatentrÑger. 
+
+Deklaration: 
+
+    FUNCTION DiskSize(Drive: Byte): LongWord;
+
+
+Diskfree ermittelt den maximalen Speicherplatz auf dem durch Drive spezifiertem DatentrÑger. 
+
+.FIG
+Dabei bedeutet: 
+      Drive=0 - aktuelles LW 
+      Drive=1 - Laufwerk A
+      Drive=2 - Laufwerk B 
+      Drive=3 - Laufwerk C usw.
+.EFIG
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt, andernfalls enthÑlt sie den Fehlerwert. 
+
+.FIG
+Siehe auch:
+           {DiskFree}
+.EFIG
+
+.TOPIC 3 DosExitCode
+
+.HIGH DosExitCode (Funktion)  {Unit DOS}
+
+Holt den Returncode eines mit {Exec} gestarteten Programmes.
+
+Deklaration: 
+
+    FUNCTION DosExitCode(Id:LongWord):LongWord;
+
+
+Die Åbergebene Id entspricht dem RÅckgabewert der Funktion {Exec}.
+
+Programme welche Åber eine Session gestartet wurden liefern KEINEN Resultcode! FÅr mehr
+Informationen siehe {Exec}.
+
+.FIG
+Siehe auch:
+           Exec
+.EFIG
+
+.TOPIC 3 DosVersion
+
+.HIGH DosVersion (Funktion)  {Unit DOS}
+
+Ermittelt die aktive OS/2-Versionsnummer. 
+
+Deklaration: 
+
+    FUNCTION DosVersion: LongWord;
+
+
+DosVersion liefert die Versionsnummer von OS/2 zurÅck, dessen Bytes voneinander getrennt
+interpretiert werden mÅssen.
+
+Das hîherwertige Byte des RÅckgabewertes (Lo-Word) enthÑlt die Neben-Versionsnummer, das
+niederwertige Byte die Haupt-Versionsnummer.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt, andernfalls
+enthÑlt sie den Fehlerwert.
+
+.TOPIC 3 EnvCount
+
+.HIGH EnvCount (Funktion)  {Unit DOS}
+
+Liefert die Anzahl der EintrÑge in der Environment-Tabelle zurÅck. 
+
+Deklaration: 
+
+    FUNCTION EnvCount:LongInt;
+
+.FIG
+Siehe auch:
+           {EnvStr}
+           {GetEnv}
+.EFIG
+
+.TOPIC 3 EnvStr
+
+.HIGH EnvStr (Funktion)  {Unit DOS}
+
+Liefert einen Eintrag aus der Environment-Tabelle. 
+
+Deklaration: 
+
+    FUNCTION EnvStr(Index:LongInt):String;
+
+
+Index gibt die Nummer des Eintrags an, der zurÅckgeliefert werden soll. 
+
+Ist Index nicht im Bereich von (0 < Index <= EnvCount) dann liefert die Funktion einen
+Leerstring zurÅck.
+
+.FIG
+Siehe auch:
+           {GetEnv}
+           {EnvCount}
+.EFIG
+
+.TOPIC 3 Exec
+
+.HIGH Exec (Funktion)  {Unit DOS}
+
+FÅhrt ein Subprogramm aus. 
+
+Deklaration: 
+
+    FUNCTION Exec(Const Path:PathStr;CmdLine:String):LongWord;
+
+
+FÅhrt das in Path angegebene Programm mit den in CmdLine enthaltenen Parametern aus. 
+
+Die Wirkung dieser Funktion hÑngt von den Werten der globalen Variablem ExecViaSession (BOOLEAN) und AsynchExec (BOOLEAN) ab. Da OS/2 ein Multitaskingsystem ist musste hier eine Unterscheidung getroffen werden. 
+
+EXEC liefert als RÅckgabewert einen Identifikator welcher als Parameter fÅr einen Aufruf von DosExitCode benutzt werden kann. 
+
+.XMP
+ExecViaSession  AsynchExec    Wirkung von EXEC
+---------------------------------------------------------------------
+
+  TRUE            TRUE        Dies ist die Default Einstellung.
+                              EXEC startet eine neue Session und
+                              ruft das Åbergebene Programm auf.
+                              Auf diese Weise kînnen auch Programme
+                              gestartet werden die einen anderen Typ
+                              als das aktuelle Programm haben (z.B.
+                              kann eine Textmode Applikation ein PM
+                              Programm starten).
+                              Programme welche auf diese Weise gestartet
+                              werden liefern KEINEN Returncode.
+                              Ein Aufruf von DosExitCode wartet lediglich
+                              bis die Session beendet wurde und setzt
+                              DosExitCode auf 0.
+
+  FALSE           FALSE       Dies ist die BP7 kompatible Einstellung.
+                              EXEC startet einen neuen Prozess und
+                              ruft das Åbergebene Programm auf.
+                              Der aufrufende Prozess wird solange gestoppt
+                              bis das aufgerufene Programm beendet ist.
+                              Auf diese Weise kînnen KEINE Programme
+                              gestartet werden die einen anderen Typ
+                              als das aktuelle Programm haben (z.B.
+                              kann eine Textmode Applikation kein PM
+                              Programm starten).
+                              Programme welche auf diese Weise gestartet
+                              werden liefern den ReturnCode nach
+                              einem Aufruf von DosExitCode.
+                              Ein Aufruf von DosExitCode wartet lediglich
+                              bis die Session beendet wurde und setzt
+                              DosExitCode auf 0.
+.EXMP
+
+
+Andere Einstellungen fÅr ExecViaSession und AsynchExec sind mîglich, aber in der Regel nicht sinnvoll. 
+
+.FIG
+Siehe auch:
+           {DosExitCode}
+           {ProcessActive}
+           {KillProcess}
+.EFIG
+
+.TOPIC 3 FExpand
+
+.HIGH FExpand (Funktion)  {Unit DOS}
+
+Erweitert einen oder mehrere Dateinamen. 
+
+Deklaration: 
+
+    FUNCTION FExpand(Path:PathStr):PathStr;
+
+
+Das Argument wird um den aktuellen Suchpfad erweitert.
+
+Der Funktion kînnen auch mehrere, durch Semikolon getrennte unvollstÑndige Dateinamen Åbergeben werden. 
+
+.FIG
+Siehe auch:
+           {FindFirst}
+           {FindNext}
+           {FSplit}
+.EFIG
+
+.TOPIC 3 FindClose
+
+.HIGH FindClose (Prozedur)  {Unit DOS}
+
+Beendet die Suche nach einer Datei. 
+
+Deklaration: 
+
+    PROCEDURE FindClose(Var F:SearchRec);
+
+Wird die Suche nach Dateien mittels FindFirst und FindNext nicht bis zum Ende durchgefÅhrt, wird das Handle fÅr die Suchanfrage nicht automatisch wieder freigegeben. 
+
+Durch den Aufruf von FindClose kann das jedoch manuell erfolgen. 
+
+.FIG
+Siehe auch:
+           {FindFirst}
+           {FindNext}
+.EFIG
+
+
+.TOPIC 3 FindFirst
+
+.HIGH FindFirst (Funktion)  {Unit DOS}
+
+Sucht nach dem ersten Autreten einer Datei. 
+
+Deklaration: 
+
+    FUNCTION FindFirst(Path:PathStr; Attr:LongWord;
+                       Var F:TSearchRec):LongInt;
+
+
+FindFirst sucht nach einer Datei. Path gibt den zu suchenden Dateinamen an und kann
+auch Wildcards (z.B.: *.*) enthalten.
+
+Wenn Path nur einen Dateinamen angibt, benutzt FindFirst das momentan gesetzte
+Verzeichnis. Attr legt die Attribute des zu suchenden Dateieintrags fest.
+
+Ist die Suche erfolgreich kann mittels FindNext ein weiteres Vorkommen der Datei(en)
+ermittelt werden.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+
+.FIG
+Siehe auch:
+           {FindNext}
+           {FindClose}
+.EFIG
+
+.TOPIC 3 FindNext
+
+.HIGH FindNext (Funktion)  {Unit DOS}
+
+Sucht nach weiterem Vorkommen einer Datei. 
+
+Deklaration: 
+
+    FUNCTION FindNext(Var F:TSearchRec):LongInt;
+
+
+FindNext setzt eine mittels FindFirst begonnene Suche fort. 
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+
+Siehe auch:
+           {FindFirst}
+           {FindClose}
+
+.TOPIC 3 Flush
+
+.HIGH Flush (Prozedur)  {Unit DOS}
+
+Diese Prozedur hat unter WDSibyl bzw. Speed-Pascal/2 keine FunktionalitÑt.
+
+Sie existiert nur aus KompatibilitÑtsgrÅnden.
+
+.TOPIC 3 FSearch
+
+.HIGH FSearch (Funktion)  {Unit DOS}
+
+Sucht eine Datei in einer Verzeichnisliste. 
+
+Deklaration: 
+
+    FUNCTION FSearch(Path:PathStr; DirList:String): PathStr;
+
+
+FSearch sucht die als Path angegebene Datei in den als DirList angegebenen
+Verzeichnissen. DirList mu· eine Folge von Verzeichnisnamen enthalten, die
+untereinander durch Semikolons voneinander getrennt sind.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+.TOPIC 3 FSplit
+
+.HIGH FSplit (Funktion)  {Unit DOS}
+
+Zerlegt einen Dateinamen in seine Komponenten. 
+
+Deklaration: 
+
+    FUNCTION FSplit(Const Path:PathStr; Var Dir:DirStr;
+                    Var Name:NameStr; Var Ext:ExtStr):LongInt;
+
+
+Fsplit zerlegt den als Path Åbergebenen Dateinamen in seine Komponenten (Directory,
+Name, Extension).
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion ist 0. 
+
+.TOPIC 3 GetDate
+
+.HIGH GetDate (Funktion)  {Unit DOS}
+
+Ermittelt das aktuelle Systemdatum. 
+
+Deklaration: 
+
+    FUNCTION GetDate(Var Year,Month,Day,DayOfWeek: Word):LongInt;
+
+
+GetDate liest das aktuelle Systemdatum und ÅbertrÑgt es in die Åbergebenen Variablen.
+Die zurÅckgelieferten Werte fÅr Year liegen von 1980..2099, fÅr Month von 1..12, fÅr
+Day von 1..31 und fÅr DayofWeek (Wochentag) von 0..6.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {SetDate}
+.EFIG
+
+.TOPIC 3 GetEnv
+
+.HIGH GetEnv (Funktion)  {Unit DOS}
+
+Liest einen Environment-Eintrag. 
+
+Deklaration: 
+
+    FUNCTION GetEnv(Const EnvVar: String):String;
+
+
+GetEnv liefert den Wert der angegebenen Environment- Variable. Dieser Namen kann in
+Gro·- oder Kleinbuchstaben angegeben werden. Das '=' Zeichen darf jedoch nicht
+enthalten sein ! Ist die entsprechende Environment-Variable nicht definiert, liefert
+GetEnv einen Leerstring zurÅck.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+.TOPIC 3 GetFAttr
+
+.HIGH GetFAttr (Funktion)  {Unit DOS}
+
+Ermittelt die Attribute einer Datei. 
+
+Deklaration: 
+
+    FUNCTION GetFAttr(Var F; Var Attr:LongWord):LongInt;
+
+
+F steht fÅr eine Datei-Variable, welche zuvor mittels Assign definiert worden sein mu·
+und nicht geîffnet sein darf.
+
+Der zurÅckgelieferte Wert Attr enthÑlt bitweise die Attribute dieser Datei. Der Test
+dieser Bits kann Åber die in der DOS-Unit definierten Bitkonstanten erfolgen.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {SetFAttr}
+.EFIG
+
+
+.TOPIC 3 GetFTime
+
+.HIGH GetFTime (Funktion)  {Unit DOS}
+
+Ermittelt die Dateizeit einer Datei. 
+
+Deklaration: 
+
+    FUNCTION GetFTime(Var F; Var Time:LongInt):LongInt;
+
+
+F steht fÅr eine Datei-Variable, welche zuvor mittels Assign definiert worden sein und
+geîffnet sein mu·.
+
+Der zurÅckgelieferte Wert im gepackten Format enthÑlt die Dateizeit dieser Datei. Er
+kann mittels {UnpackTime} interpretiert werden.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {SetFTime}
+           {GetFTime2}
+           {UnpackTime}
+.EFIG
+
+.TOPIC 3 GetFTime2
+
+.HIGH GetFTime2 (Funktion)  {Unit DOS}
+
+Ermittelt die Dateizeit einer Datei. 
+
+Deklaration: 
+
+    FUNCTION GetFTime2(Var F; Var year,month,day,hours,
+                                  minutes,twosec: Word):LongInt;
+
+
+F steht fÅr eine Datei-Variable, welche zuvor mittels Assign definiert worden sein und
+geîffnet sein mu·.
+
+Die zurÅckgelieferten Werte enthalten die Dateizeit dieser Datei. 
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {SetFTime2}
+           {GetFTime}
+.EFIG
+
+.TOPIC 3 GetTime
+
+.HIGH GetTime (Funktion)  {Unit DOS}
+
+Ermittelt die aktuelle Systemzeit. 
+
+Deklaration: 
+
+    FUNCTION GetTime(Var Hour,Minute,Second,Sec100: Word):LongInt;
+
+
+GetTime ermittelt die aktuelle Systemzeit und ÅbertrÑgt sie in die Åbergebenen
+Variablen. Die zurÅckgeliefertene Werte fÅr Hour liegen von 0..23, fÅr Minute und
+Second von 0..59 und fÅr Sec100 (hundertstel Sekunden) von 0..99.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {SetTime}
+.EFIG
+
+.TOPIC 3 GetVerify
+
+.HIGH GetVerify (Funktion)  {Unit DOS}
+
+Ermittelt Status des DOS Verify-Flags. 
+
+Deklaration: 
+
+    FUNCTION GetVerify(Var Verify: Boolean):LongInt;
+
+GetVerify liest das OS/2 Verify-Flag und ÅbertrÑgt es in die Variable Verify. Ist der
+zurÅckgelieferte Wert Verify TRUE prÅft OS/2 geschriebene Diskettensektoren noch
+einmal auf Fehler, ansonsten nicht.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {SetVerify}
+.EFIG
+
+.TOPIC 3 KillProcess
+
+.HIGH KillProcess (Funktion)  {Unit DOS}
+
+Beendet den angegebenen Proze·. 
+
+Deklaration: 
+
+    FUNCTION KillProcess(pid:LongWord):LongInt;
+
+
+KillProcess beendet den durch pid bezeichneten Proze·. Ein Proze· kann z.B. mittels
+Exec gestartet werden.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {Exec}
+           {ProcessActive}
+.EFIG
+
+.TOPIC 3 KillThread
+
+.HIGH KillThread (Funktion)  {Unit DOS}
+
+Beendet einen Thread. 
+
+Deklaration: 
+
+    FUNCTION KillThread(Tid:LongWord):LongInt;
+
+
+KillThread beendet den mit Tid bezeichneten Thread. 
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt, andernfalls enthÑlt sie den Fehlerwert. 
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {StartThread}
+           {ResumeThread}
+           {SuspendThread}
+.EFIG
+
+.TOPIC 3 PackTime
+
+.HIGH PackTime (Prozedur)  {Unit DOS}
+
+Wandelt Zeitangaben in das interne Format. 
+
+Deklaration: 
+
+    PROCEDURE PackTime(Var T:DateTime; Var Time:Longint);
+
+
+Wandelt Zeitangaben im Format DateTime in einen LongInt (internes Format).
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+.FIG
+Siehe auch:
+           {UnPackTime}
+.EFIG
+
+
+.TOPIC 3 ProcessActive
+
+.HIGH ProcessActive (Funktion)  {Unit DOS}
+
+Ermittelt ob der angegeben Proze· noch arbeitet. 
+
+Deklaration: 
+
+    FUNCTION ProcessActive(Pid:LongWord):Boolean;
+
+
+ProcessActive ermittelt ob der durch Pid bezeichnete Proze· noch aktiv ist. Ist der Proze· bereits beendet liefert ProcessActive FALSE zurÅck. 
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt, andernfalls enthÑlt sie den Fehlerwert. 
+
+.FIG
+Siehe auch:
+           {Exec}
+           {KillProcess}
+.EFIG
+
+.TOPIC 3 ResumeThread
+
+.HIGH ResumeThread (Funktion)  {Unit DOS}
+
+Setzt einen mittels SuspendThread angehaltenen Thread fort. 
+
+Deklaration: 
+
+    FUNCTION ResumeThread(Tid:LongWord):LongInt;
+
+
+ResumeThread setzt den Thread der mittels des Handles Tid bezeichnet wird fort. Der
+Thread mu· zuvor mittels {SuspendThread} angehalten worden sein.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+
+Siehe auch:
+           {StartThread}
+           {SuspendThread}
+           {KillThread}
+
+.TOPIC 3 SetDate
+
+.HIGH SetDate (Funktion)  {Unit DOS}
+
+Setzt das aktuelle Systemdatum. 
+
+Deklaration: 
+
+    FUNCTION SetDate(Year,Month,Day,DayOfWeek:Word):LongInt;
+
+
+SetDate Ñndert das aktuelle Systemdatum entsprechend den Åbergebenen Parametern.
+GÅltige Werte fÅr Year liegen von 1980..2099, fÅr Month von 1..12, fÅr Day von 1..31
+und fÅr DayOfWeek von 0..6. Bei ungÅltigen Werten wird kein neues Datum gesetzt.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {GetDate}
+.EFIG
+
+.TOPIC 3 SetFAttr
+
+.HIGH SetFAttr (Funktion)  {Unit DOS}
+
+éndert die Attribute einer Datei. 
+
+Deklaration: 
+
+    FUNCTION SetFAttr(Var F; Attr:LongWord):LongInt;
+
+
+F steht fÅr eine Datei-Variable, welche zuvor mittels Assign definiert worden sein
+mu· und nicht geîffnet sein darf.
+
+Der Åbergebene Wert Attr enthÑlt bitweise die neuen Attribute dieser Datei.
+Das éndern dieser Bits kann Åber die in der DOS-Unit definierten Bitkonstanten erfolgen.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {GetFAttr}
+.EFIG
+
+.TOPIC 3 SetFTime
+
+.HIGH SetFTime (Funktion)  {Unit DOS}
+
+éndert die Dateizeit einer Datei. 
+
+Deklaration: 
+
+    FUNCTION SetFTime(Var F; Time:LongInt):LongInt;
+
+
+F steht fÅr eine Datei-Variable, welche zuvor mittels Assign definiert worden sein mu·
+und geîffnet sein mu·.
+
+Der Åbergebene Wert enthÑlt die neue Dateizeit dieser Datei im gepackten Format. 
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {GetFTime}
+           {SetFTime2}
+           {PackTime}
+.EFIG
+
+.TOPIC 3 SetFTime2
+
+.HIGH SetFTime2 (Funktion)  {Unit DOS}
+
+éndert die Dateizeit einer Datei. 
+
+Deklaration: 
+
+    FUNCTION SetFTime2(Var F; year,month,day,hours,
+                              minutes,twosec:Word):LongInt;
+
+
+F steht fÅr eine Datei-Variable, welche zuvor mittels Assign definiert worden sein mu·
+und geîffnet sein mu·.
+
+Die Åbergebenen Werte enthalten die neue Dateizeit dieser Datei. 
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {GetFTime2}
+           {SetFTime}
+.EFIG
+
+.TOPIC 3 SetTime
+
+.HIGH SetTime (Funktion)  {Unit DOS}
+
+Setzt die aktuelle Systemzeit. 
+
+Deklaration: 
+
+    FUNCTION SetTime(Hour,Minute,Second,Sec100:Word):LongInt;
+
+
+SetTime Ñndert die aktuelle Systemzeit entsprechend den Åbergebenen Parametern.
+GÅltige Werte fÅr Hour liegen von 0..23, fÅr Minute und Second von 0..59 und fÅr
+Sec100 (hundertstel Sekunden) von 0..99. Wenn einer der Parameter au·erhalb dieser
+Grenzen liegt, wird keine neue Systemzeit gesetzt.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {GetTime}
+.EFIG
+
+
+.TOPIC 3 SetVerify
+
+.HIGH SetVerify (Funktion)  {Unit DOS}
+
+Setzt das OS/2 Verify-Flag. 
+
+Deklaration: 
+
+    FUNCTION SetVerify(Verify:Boolean):LongInt;
+
+
+SetVerify setzt das OS/2 Verify-Flag. Ist der Parameter Verify TRUE prÅft OS/2
+geschriebene Diskettensektoren noch einmal auf Fehler.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {GetVerify}
+.EFIG
+
+.TOPIC 3 StartThread
+
+.HIGH  StartThread (Funktion)  {Unit DOS}
+
+Erzeugt einen neuen Thread. 
+
+Deklaration: 
+
+    FUNCTION StartThread(ThreadAddr:Pointer;
+                         StackSize:LongWord;
+                         Params:Pointer;
+                         Var Tid:LongWord):LongInt;
+
+
+Erzeugt einen neuen Thread. ThreadAddr bezeichnet die Adresse der Prozedur an der der
+Thread beginnt. StackSize ist die Grî·e des Stacks fÅr den Thread in Byte und
+sollte nicht kleiner als 8192 Byte sein.
+
+Diese Funktion liefert in der Variablen Tid ein Handle auf den Thread zurÅck mit
+welchem dieser weiter bearbeitet werden kann.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {KillThread}
+           {SuspendThread}
+           {ResumeThread}
+.EFIG
+
+
+.TOPIC 3 SuspendThread
+
+.HIGH SuspendThread (Funktion) {Unit DOS}
+
+HÑlt den angegebenen Thread an. 
+
+Deklaration: 
+
+    FUNCTION SuspendThread(Tid:LongWord):LongInt;
+
+
+SuspendThread hÑlt den Thread der mittels des Handles Tid angegeben wird an. Der
+Thread wird hierbei NICHT beendet sondern an der derzeitigen Stelle angehalten. Die
+Arbeit des Threads kann mittels ResumeThread fortgesetzt werden.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+Der RÅckgabewert der Funktion entspricht dem Wert von DosError. 
+
+.FIG
+Siehe auch:
+           {StartThread}
+           {ResumeThread}
+           {KillThread}
+.EFIG
+
+.TOPIC 3 SwapVectors
+
+.HIGH SwapVectors (Prozedur)  {Unit DOS}
+
+Diese Prozedur hat unter WDSibyl bzw. Speed-Pascal/2 keine FunktionalitÑt.
+
+Sie existiert nur aus KompatibilitÑtsgrÅnden. 
+
+
+.TOPIC 3 UnpackTime
+
+.HIGH UnpackTime (Prozedur)  {Unit DOS}
+
+Wandelt Zeitangaben vom internen Format um. 
+
+Deklaration: 
+
+    PROCEDURE UnpackTime(Time:LongInt; Var DT:DateTime);
+
+
+UnpackTime wandelt Zeitangaben vom internen LongInt-Format in einen Record des Typs
+DateTime.
+
+Ist diese Funktion erfolgreich, so wird die Variable DosError auf 0 gesetzt,
+andernfalls enthÑlt sie den Fehlerwert.
+
+.FIG
+Siehe auch:
+           {PackTime}
+.EFIG

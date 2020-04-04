@@ -1,0 +1,150 @@
+TColorWheel and TValueBar components
+for SpeedSoft Sibyl
+
+Written by Aaron Lawrence (aaronl@clear.net.nz)
+
+Summary
+-------
+
+This package contains two Sibyl components that you can use in
+your projects. They are designed to work together to allow a
+user to pick a color from the full available range. They work
+in any color depth (they look better at 16 bit or 24 bit of course).
+
+They are similar to the mixed color picker built into OS/2 Warp 4,
+but these ones can be used in your programs.
+
+The color wheel lets you pick a hue ( e.g. red, blue...) and a
+saturation ( how strong the color is, e.g. pale, vivid ).
+The value bar then lets you pick the value ( brightness ) of the
+color.
+
+These three selections go together to provide you with a normal
+Sibyl TColor (RGB).
+
+License
+-------
+
+These components are freeware, but comments would be appreciated!
+I make no warranty as to the safe operation of these components... etc.
+
+You may modify the source code and use it in your own projects.
+
+What you need
+-------------
+
+You should have these files:
+
+ColorMapping.pas
+ColorWheel.pas
+ColorWheel.bmp
+ValueBar.bmp
+
+Installation
+------------
+
+Load the two files (ColorMapping.pas and ColorWheel.pas) into
+Sibyl, and compile them (ColorMapping first) with Project - Compile.
+
+Then, use Component - Install Component
+Select ColorWheel.SPU (which you just produced by compiling ColorWheel.pas)
+
+Click the >> button to add both components.
+
+Click OK.
+
+Notes:
+- If you have a project open, Sibyl may ask if you want to save it,
+  since it needs to close the project to install the components.
+
+- If you're reinstalling these components, Sibyl will say an Error for
+  each one, but will reinstall them anyway :-|
+
+The components should now appear under the User tab.
+
+Using the components
+--------------------
+
+Normally, you use both a color wheel and a value bar.
+
+1. Put a color wheel on your form.
+
+2. Put a value bar on your form beside the wheel.
+
+3. Set the ColorWheel's ValueBar property to the ValueBar
+   you just put on the form.
+
+The two components are now linked together. When a selection is
+made in the color wheel the value bar will update to show the range
+for that selection.
+
+(Note: you won't see the colours til you run the program)
+
+Reading and setting the color
+-----------------------------
+
+To set the color being displayed, use the SetSelectedColor method
+of the color wheel.
+
+To read the color selected, read the SelectedColor property
+of the Value Bar.
+
+If you want to know when the user picks a color, you
+can use the OnChange event in the ValueBar.
+
+That's about all you *need* to know. The rest is some optional properties.
+
+Other properties - TColorWheel
+------------------------------
+
+Color - same as usual, the background color.
+CursorSize - size of the cross hair
+MarginWidth - the width of the blank area around the wheel.
+              This is used to draw the cursor on and for
+              easy selection of edge colors.
+WhiteAreaPercentage - the percentage of the radius from the centre,
+                      that is held to pure white. This makes it possible
+                      to easily select white. ( 0 - 50 )
+Hue, Saturation: the current hue and saturation. (read only)
+
+Notes: if the margins are wider than the control you will see nothing
+if the cursor is too big it will just 'clip' to the edge of the control.
+You can use this effect to get full cross hairs by making the CursorSize large
+
+Other properties - TValueBar
+----------------------------
+
+Color - same as usual, the background color.
+CursorHeight - height of the selection cursor.
+MarginWidth - the width of the blank area around the bar.
+Value - the currently selected value 0 .. 1 where 1 is brightest
+        and 0 is black
+Dither - if set to false only solid colours will be displayed (default)
+         if you set this to true the value bar will use patterns to
+         display intermediate colours
+
+         This also affects the colours you can select.
+
+SetHS - this method sets the hue and saturation. Normally it's
+        called by the colorwheel component.
+
+Problems/limitations
+--------------------
+
+Sadly, the color wheel is quite slow to draw, although since
+it doesn't get redrawn very often this doesn't matter so much. Moving
+the cursor around is fast.
+
+I can't get Sibyl's bitmap creation & drawing to work properly, so I don't
+have any means to fix this (it's limited by the speed OS/2 draws a pixel).
+
+The value bar is fast enough.
+
+The look of these controls could be enhanced further but that would mainly
+be luxury - they look pretty cool anyway! (IMHO)
+
+If you have any ideas or comments (especially nice ones) feel free to mail me.
+aaronl@clear.net.nz
+or
+aaronl@pec.co.nz (may change soon)
+

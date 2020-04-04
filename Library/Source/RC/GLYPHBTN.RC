@@ -1,0 +1,2 @@
+BITMAP TOnOffSwitch_On ..\..\..\bmp\Compnt\swOn.BMP
+BITMAP TOnOffSwitch_Off ..\..\..\bmp\Compnt\swOff.BMP

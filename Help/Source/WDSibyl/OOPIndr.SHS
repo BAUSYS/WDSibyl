@@ -1,0 +1,3231 @@
+.TOPIC 1 WDSibyl OOP EinfÅhrung
+
+.HIGH EinfÅhrung in die Objektorientierte Programmierung
+
+.BOLD Einleitung
+
+.ULIST
+.LISTITEM Was ist objektorientierte Programmierung?
+.LISTITEM An wen wendet sich diese EinfÅhrung?
+.LISTITEM Was erwartet Sie?
+.LISTITEM Welche Voraussetzungen sollten Sie mitbringen?
+.LISTITEM Das Spiel der Kînige
+.LISTITEM Die Regeln in KÅrze
+.EULIST
+
+.BOLD Klassen
+
+.ULIST
+.LISTITEM Ein Einfacher Datentyp fÅr Schachfiguren
+.LISTITEM Zwai sorten von Figuren
+.LISTITEM Vererbung
+.EULIST
+
+.BOLD Methoden
+
+.ULIST
+.LISTITEM Prozeduren und Funktionen als Elemente einer Klasse
+.LISTITEM GÅltigkeitsbereich und aufruf von Methoden
+.LISTITEM öberschreiben von Methoden
+.LISTITEM Methoden als mittel zur Kapselung
+.LISTITEM Inherited - Methoden des Vorfahren benutzen
+.LISTITEM Aktive Objekte sind intelligente Objekte
+.EULIST
+
+.BOLD Schutzmechanismen
+
+.ULIST
+.LISTITEM Public
+.LISTITEM Private
+.LISTITEM Protected
+.LISTITEM Published
+.EULIST
+
+.BOLD Instanzen
+
+.ULIST
+.LISTITEM Der dynamische Charakter von Objekten
+.LISTITEM Konstruktoren
+.LISTITEM Destruktoren
+.EULIST
+
+.BOLD Zuweisungen
+
+.ULIST
+.LISTITEM Typwandlungen
+.LISTITEM Der Operator IS
+.LISTITEM Der Operator AS
+.EULIST
+
+.BOLD Methodenzuteilung zur Laufzeit
+
+.ULIST
+.LISTITEM Virtuelle Methoden
+.LISTITEM Dynamische Methoden
+.LISTITEM Abstrakte Methoden
+.EULIST
+
+.BOLD Eigenschaften
+
+.ULIST
+.LISTITEM Einfache Eigenschaften
+.LISTITEM Indizierte Eingeschaften
+.EULIST
+
+.BOLD Klassenreferenztypen
+
+.ULIST
+.LISTITEM TypprÅfungen
+.LISTITEM Klassenmethoden
+.EULIST
+
+.TOPIC 2 Kapitel 1 - Einleitung
+.HIGH Kapitel 1 - Einleitung
+
+.BOLD Was ist objektorientierte Programmierung?
+
+Innerhalb der letzten zehn Jahre hat es auf dem Gebiet der Softwareentwicklung
+eine kleine Revolution gegeben: Die objektorientierte Programmierung, kurz OOP.
+Sie sorgt fÅr eine wesentlich stÑrkere Strukturierung und Modularisierung
+als es bei traditioneller Programmierung Åblich und mîglich ist. Sie propagiert eine
+natÅrliche Einheit von Daten und Code, zusammengefa·t unter dem Begriff eines
+Objekts. Sie stellt dem Programmierer einen Mechanismus zur VerfÅgung, der dafÅr
+sorgt, da· er das Rad nicht immer wieder aufs neue erfindet, sondern stattdessen
+auf BewÑhrtes zurÅckgreifen kann und nur wirklich Neues auch neu implementieren mu·.
+
+Dabei ist das Konzept der OOP gar nicht so neu, wie man vielleicht vermutet. In
+der Tat existiert mit Smalltalk schon seit den siebziger Jahren eine
+objektorientierte Sprache, die sich allerdings nie ganz vom Vorurteil der
+SchwerfÑlligkeit lîsen konnte. In den achtziger Jahren haben Konzepte der OOP Einzug
+in die meisten wichtigen Programmiersprachen gehalten, unter anderem Pascal und
+C. Das liegt nicht zuletzt daran, da· die OOP ein hervorragender Weg ist, der
+stetig wachsenden KomplexitÑt moderner Softwaresysteme zu begegnen.
+
+FÅr Sie als Software-Entwickler ist es wichtig, in mîglichst kurzer Zeit eine
+stabile Anwendung zu programmieren. Die OOP unterstÅtzt Sie dabei, indem sie
+Ihnen folgende drei Mechanismen zur VerfÅgung stellt:
+
+.ULIST
+.LISTITEM Kapselung
+
+Die eingangs erwÑhnte Einheit von Daten und Code nennt man
+Kapselung. Wesentliches Ziel der Kapselung ist es, die Implementierung eines
+Datentyps zu verdecken. Stattdessen werden Schnittstellen, sogenannte Methoden
+definiert, mit denen man auf dem Datentyp operiert. Da die interne Realisierung
+dem Anwender [siehe Fu·note] des Datentyps unbekannt ist, kann der Entwickler
+[siehe Fu·note] sie jederzeit Ñndern, solange er die Schnittstellen konstant
+hÑlt. Stellen Sie sich einen Datentyp fÅr eine Adre·liste vor, den Sie anfangs
+als Array implementiert haben, was sich aber spÑter als zu klein erwiesen hat.
+Eine Umstellung auf, zum Beispiel, eine verkettete Liste wÅrde normalerweise
+zur Folge haben, da· der Anwender Ihres Datentyps sein gesamtes Programm Ñndern
+mu·. Durch Ausnutzung der Kapselung beschrÑnkt sich der énderungsaufwand
+aber auf das Innenleben des Datentyps. Sie mÅssen nur die neue Implementierung
+an die bestehenden Schnittstellen anpassen. Der Anwender wird im besten Fall
+nur bemerken, da· die Liste nun eine grî·ere KapazitÑt hat. Weitere Arbeit ergibt
+sich fÅr ihn nicht.
+
+[die Fu·note zum Kapselungsabschnitt: ]
+
+Wir werden in dieser EinfÅhrung sehr oft auf den Standpunkt des Entwicklers
+und den des Anwenders hinweisen. Damit sind nicht Entwickler und Anwender eines
+Programms gemeint, sondern stets Entwickler und Anwender eines Datentyps. Der
+Anwender benutzt einen Datentyp des Entwicklers entweder direkt,
+oder er definiert mit den Mitteln der OOP einen Nachkommen dieses Typs.
+Insbesondere ist es natÅrlich mîglich, da· Entwickler und Anwender ein und
+dieselbe Person sind, nÑmlich Sie, verehrter Leser.
+
+[Fu·note Ende]
+
+.LISTITEM Vererbung
+
+Sie entspricht im wesentlichen dem Vererbungskonzept, das man aus der Natur kennt.
+Ein Datentyp, den Sie definieren, kann Nachkomme eines anderen, bereits bestehenden
+Datentyps sein. Dadurch erbt er automatisch alle Eigenschaften seines Vorfahren.
+ZusÑtzlich kînnen Sie beliebig viele Neuerungen definieren, die den Nachkommen
+von seinem Vorfahren unterscheiden. Wenn Sie ein wenig Arbeit darin investieren,
+sich die Beziehungen zwischen Ihren Datentypen zu Åberlegen, ergibt sich mit
+der Zeit eine ausgeklÅgelte Hierarchie, die einem Artenstammbaum aus der Biologie
+Ñhnelt. Jeder Datentyp hat dabei immer genau einen direkten Vorfahren, kann aber
+beliebig viele Nachkommen haben. Die Vererbung sorgt dafÅr, da· Ihr Code einen
+hîheren Grad an Wiederver wertbarkeit erhÑlt. Bevor Sie einen Datentyp von Grund
+auf neu entwickeln, sollten Sie sich Åberlegen, ob sich nicht ein bereits
+bestehender Typ einen Teil der gewÅnschten FunktionalitÑt besitzt und sich
+dadurch als Vorfahre anbietet. Da es fÅr den Vererbungsmechanismus nicht wichtig
+ist, da· Sie den Quellcode des Vorfahren besitzen, kînnen Sie sogar Nachkommen
+von Datentypen entwickeln, die Sie in Form einer fertig compilierten Bibliothek
+erworben haben!
+
+.LISTITEM Polymorphie
+
+Die Polymorphie ist sozusagen das I-TÅpfelchen der OOP. Ihr Grundgedanke besteht
+darin, da· jedes einzelne einer Reihe von verwandten Objekten eine Routine fÅr
+einen bestimmten Zweck auf eine spezielle Weise implementiert. Dadurch wird jedes
+Objekt zu einem Spezialisten auf seinem Gebiet. Nehmen Sie zum Beispiel die
+graphische OberflÑche Ihres Computers: Stellen Sie sich jedes des einzelnen
+Bildschirmelemente als ein Objekt vor, das bestens darÅber Bescheid wei·, wie es
+sich selbst auf dem Monitor darzustellen hat. Dann brauchen Sie jedem
+Objekt zur Laufzeit nur das Kommando zu geben, da· es sich neu zeichnen
+soll, und es wird das richtige tun. Ein Fenster zeichnet sich als Fenster, ein
+Schalter als Schalter und so weiter. Wie Sie sich vielleicht vorstellen kînnen
+oder aus eigener Erfahrung wissen, ist dies mit den Mitteln traditioneller
+Programmierung nur mit gro·en Aufwand zu erreichen, zumal Sie ja wÑhrend der
+Entwicklung des Programms noch gar nicht absehen kînnen, wieviele Bildschirmelemente
+welcher Art sich zur Laufzeit auf dem Bildschirm befinden werden.
+.EULIST
+
+
+Auch wenn Sie es vielleicht jetzt noch nicht unbedingt einsehen kînnen, macht der
+objektorientierte Ansatz gerade die Programmierung graphischer Anwendungen zu
+einem Kinderspiel. Der sonst Åbliche Verwaltungsaufwand fÅr Fenster und MenÅs wird
+Ihnen abgeno mmen, und Sie kînnen sich auf die wirkliche FunktionalitÑt Ihrer
+Software konzentrieren. Weitere Vorteile der OOP liegen in der schon erwÑhnten
+hîheren Wiederverwertbarkeit und besseren Wartbarkeit Ihres Codes. Die OOP
+unterstÅtzt Sie dabei, Software ingenieurmÑ·ig zu entwickeln. Dabei verlangt
+Sie Ihnen eine gewisse Disziplin ab, stellenweise auch eine Aufgabe gewohnter
+Prinzipien. Aber Sie werden schnell sehen, da· die Vorteile Åberwiegen, und
+schon nach kurzer Zeit werden Sie sich fragen, wie Sie jemals nicht-objektorientiert
+programmieren konnten.
+
+.BOLD An wen wendet sich diese EinfÅhrung?
+
+Die EinfÅhrung will Ihnen einen leichten und - hoffentlich - verstÑndlichen
+öberblick Åber die grundsÑtzlichen Begriffe und Arbeitsweisen der OOP mit
+WDSibyl-Pascal bieten. Die EinfÅhrung wendet sich an Leser, die bereits
+mit den GrundzÅgen der Programmierung in Pascal vertraut sind, aber noch
+keine oder nur sehr wenig Erfahrung mit OOP haben. Sie sollten dieses Kapitel
+auch dann lesen, wenn Sie bereits mit einer anderen objektorientierten
+Sprache gearbeitet haben und einen Einblick in die Mîglichkeiten von
+WDSibyl-Pascal auf diesem Gebiet gewinnen wollen.
+
+Nicht zuletzt sollten Umsteiger der Version 1.0 von Speed-Pascal sich die Zeit
+nehmen, diese EinfÅhrung zu studieren. In der vorliegenden Version von
+WDSibyl-Pascal kommt ein neues Objektmodell zum Einsatz, das um ein Vielfaches
+leistungsfÑhiger und komfortabler als das alte Modell ist. Dieses neue
+Modell ist die Basis unserer systemÅbergreifenden Klassenbibliothek und unserer
+visuellen Entwicklungsumgebung WDSybil. Wenn Sie also graphische Anwendungen
+entwickeln wollen, dann sollten Sie die Mechanismen kennen, die einer
+typischen WDSibyl-Pascal-Anwendung zugrunde liegen. Zwar wird das alte
+Objektmodell der Version 1.0 weiterhin unterstÅtzt, aber wenn Sie nicht gerade
+darauf angewiesen sind, bestehende Anwendungen zu portieren, dann sollten Sie
+dem neuen Modell den Vorzug geben. Wir gehen davon aus, da· Sie, wenn Sie das
+alte Modell benutzen mîchten, sich auch bereits damit auskennen. Deshalb wird
+es in dieser EinfÅhrung keine weitere ErwÑhnung finden.
+
+.BOLD Was erwartet Sie?
+
+Wir wollen versuchen, Ihnen in logisch aufeinander aufbauenden Schritten die OOP
+und die damit verbundene Denkweise nahezubringen. Dazu bauen wir nach und nach
+ein kleines Programm auf und erweitern es in jedem Abschnitt ein wenig. Zu jedem
+Abschnitt existiert auch ein vollstÑndiger Quellcode, der Ihre bis dato erlangten
+Kenntnisse exakt widerspiegelt. Diesen Quellcode kînnen Sie compilieren,
+analysieren und zur Basis von Experimenten machen (was wir Ihnen nur empfehlen
+kînnen). Sie finden die einzelnen Dateien im Verzeichnis CHESS. Au·erdem existiert
+ein Projekt gleichen Namens, das alle Quellcodes bereits enthÑlt.
+
+Die Beispiele werden Ihnen vielleicht teilweise nicht besonders lebensnah
+erscheinen, und Sie haben recht damit. Wir wollen es vermeiden, Sie mit unnîtig
+viel Ballast zu konfrontieren, der mehr verwirrt als er Ihnen beim VerstÑndnis
+hilft. Dennoch kînnen Sie an den Beispielen alle wichtigen objektorientierten
+Mîglichkeiten erlernen, die Speed-Pascal Ihnen bietet. Damit ein Bezug zur
+RealitÑt geschaffen wird, werden wir Sie manchmal darauf hinweisen, wozu ein
+bestimmter Mechanismus in einer grî·eren Anwendung benutzt werden kann.
+Oft werden wir einen Bezug zu graphischen OberflÑchen herstellen,denn - wir
+erwÑhnten es bereits - die WDSibyl-Pascal-Bibliothek zur Entwicklung solcher
+Anwendungen ist durch und durch objektorientiert.
+
+.BOLD Welche Vorrausetzungen sollten Sie mitbringen?
+
+Wie bereits im letzten Abschnitt angesprochen, sind die Beispiele einfach
+gehalten. Wir greifen auf keinerlei graphische Mîglichkeiten zurÅck, sondern
+beschrÑnken uns stattdessen auf Programme im Textmodus. Dennoch ist dieses
+Kapitel nicht das richtige fÅr Sie, wenn Sie ein absoluter Neuling sind,
+was Programmierung mit WDSibyl-Pascal angeht.
+
+Sie sollten bereits wissen wie Sie...
+
+.ULIST
+.LISTITEM ...die Speed-Pascal-IDE bedienen. Sie sollten in der Lage sein, Programme
+zu laden, zu bearbeiten, zu speichern und zu compilieren.
+
+.LISTITEM ...einfache strukturierte Programme in Speed-Pascal erstellen.
+Insbesondere sollten Sie mit den wichtigsten Kontrollstrukturen sowie der
+Definition eigener Prozeduren und Funktionen vertraut sein. Sie sollten wissen,
+wie Sie ihren Quellcode in module, sogenannte Units, aufteilen.
+
+.LISTITEM ...eigene strukturierte Datentypen, inbesondere Arrays und Records,
+definieren und anwenden.
+
+.LISTITEM ...die elementaren Befehle zur Ein-/Ausgabe benutzen, die von den
+Units /System/ und /WinCrt/ zur VerfÅgung gestellt werden. Insbesondere sind
+das /WriteLn/, /GotoXY/, /ReadKey/ und die Benutzung von verschiedenen Farben
+mit /TextColor/ und /Tex und/.
+
+.LISTITEM ...Zeiger einsetzen. Obwohl Sie bei der Benutzung von Objekten selten
+darauf angewiesen sind, mit Zeigern zu operieren oder selbst Speicher anzufordern,
+ist ein grundsÑtzliches VerstÑndnis von Zeigern und Speicherverwaltung hilfreich.
+.EULIST
+
+Au·erdem sollten Sie unbedingt einen Nachmittag Zeit mitbringen. Eine Kanne Tee
+oder Kaffee kann sicherlich nicht schaden, die Motivation eine Weile aufrecht zu
+erhalten.
+
+Wenn Sie glauben, da· Sie eine dieser Voraussetzungen nicht erfÅllen, dann
+sollten Sie sich zuerst eines der einfÅhrenden Kapitel in WDSibyl-Pascal
+anschauen oder sogar eines der einschlÑgigen BÅcher zur Programmiersprache
+Pascal. Wenn Sie sich durch die ob igen Anforderungen gut beschrieben
+fÅhlen, dann ist es jetzt an der Zeit, mit unserem Beispiel zu beginnen.
+
+.BOLD Das Spiel der Kînige
+
+Wir werden in den folgenden Abschnitten ein Schachspiel programmieren.
+Erschrecken Sie nicht, wenn Schach nicht gerade zu Ihren Lieblingsspielen gehîrt.
+Es ist weder Voraussetzung noch Ziel der EinfÅhrung, da· Sie sich mit Schach
+auskennen. In der Tat ist der Autor dieses Textes ein Ñu·erst miserabler
+Schachspieler. Wir haben Schach deshalb gewÑhlt, weil es mit seinen insgesamt
+sechs verschiedenen Figuren begrenzt ist, was den Aufwand angeht (wir alle wissen,
+da· die KomplexitÑt des eigentlichen Spiels si ch in ganz anderen
+Dimensionen bewegt). Au·erdem bestehen zwischen den Figuren gewisse
+Verwandtschaftsbeziehungen, die sich zur Veranschaulichung objektorientierter
+Programmierung eignen. Nicht zuletzt ist es einfacher, ein paar Schachfiguren auf
+dem Bildschirm darzustellen, als direkt mit verschiedenen Fenstertypen
+aufzuwarten. Schlie·lich wollen wir unser Beispiel ja nicht unnîtig kompliziert
+gestalten. Wir haben auch in keiner Weise vor, ein selbstÑndig spielendes
+Schachprogramm zu entwickeln. Die FunktionalitÑt unseres Beispiels soll
+sich auf folgendes beschrÑnken:
+
+.ULIST
+.LISTITEM Das Programm soll ein Schachbrett mitsamt der Figuren darstellen kînnen.
+
+.LISTITEM Einzelne Figuren sollen bewegt und gegnerische Figuren sollen
+geschlagen werden kînnen.
+
+.LISTITEM Es soll geprÅft werden kînnen, ob ein eingegebener Zug legal ist
+oder nicht.
+
+.LISTITEM Es soll fÅr zwei menschliche Spieler ansatzweise mîglich sein, mit diesem
+Programm eine Partie Schach zu spielen.
+.EULIST
+
+FÅr diejenigen, die von Schach keinerlei Ahnung haben, folgt nun eine Kurzfassung
+der Regeln, die bei unserem Schachprogramm zum Einsatz kommen werden.
+
+.BOLD Die Regeln in KÅrze
+
+Schach ist ein Strategiespiel fÅr zwei Personen. Es wird auf einem acht mal acht
+Felder gro·en Spielfeld gespielt, dessen Felder abwechselnd schwarz und wei·
+gefÑrbt sind. Die einzelnen Zeilen des Spielbretts sind mit den Buchstaben
+'A' bis 'H' bezeichnet, die Spalten mit den Ziffern 1 bis 8. Der Name jedes
+einzelnen Feldes ergibt sich aus der Kombination von Buchstabe und Zahl. Sotragen
+zum Beispiel die Felder einer der beiden Diagonalen die Namen A1, B2, C3, usw.
+bis H8. Zu Beginn des Spiels werden auf dem Spielbrett 16 schwarze und
+16 wei·e Spielfiguren aufgestellt. Ein Spieler fÅhrt die wei·en Figuren, der
+andere die schwarzen. Die Spieler ziehen abwechselnd. Ein Zug endet entweder auf
+einem leeren Feld oder auf dem Feld einer gegnerischen Figur, wod urch diese
+geschlagen und vom Spielfeld genommen wird. Es ist normalerweise nicht mîglich,
+bei einem Zug andere Figuren zu Åberspringen. Folgende Arten von Figuren kommen
+im Spiel vor (in Klammern jeweils die englische Bezeichnung):
+
+.ULIST
+.LISTITEM  Turm (Rook)
+
+Jeder Spieler hat zu Beginn zwei TÅrme, die in den Ecken des Spielfeldes postiert
+werden. Ein Turm kann beliebig weit in entweder horizontaler oder vertikaler Richtung ziehen.
+
+.LISTITEM Springer (Knight)
+
+Jeder Spieler hat zu Beginn zwei Springer, die unmittelbar neben den TÅrmen
+plaziert werden. Ein Springer kann entweder zwei Felder in horizontaler Richtung
+und eines in vertikaler Richtung oder aber zwei in vertikaler und erizontaler
+Richtung ziehen. Der Springer ist die einzige Figur, die bei einem Zug andere
+Figuren Åberspringen darf.
+
+.LISTITEM LÑufer (Bishop)
+
+Jeder Spieler hat zu Beginn zwei LÑufer, die unmittelbar neben den Springern
+plaziert werden. LÑufer kînnen sich beliebig weit in einer der Diagonalen
+bewegen.
+
+.LISTITEM Dame (Queen)
+
+Die stÑrkste Figur im Spiel. Jeder Spieler hat zu Beginn eine davon. Sie kann
+sich beliebig weit in horizontaler, vertikaler oder diagonaler Richtung bewegen.
+
+.LISTITEM Kînig (King)
+
+Jeder Spieler hat einen Kînig. Er wird zusammen mit der Dame in der Mitte der
+Ñu·ersten Spielfeldreihe plaziert. Der Kînig ist die wichtigste Figur im Spiel.
+Wenn der Kînig unmittelbar von einer andere Figur bedroht wird, steht er Schach.
+Sein Besitzer ist dann gezwungen, ihn auf ein Feld zu bewegen, auf dem er
+nicht bedroht ist. Er kann auch eine andere Figur so ziehen, da· sie den Kînig
+schÅtzt. Existiert keine Mîglichkeit mehr, ihn aus dem Schach zu befreien, ist
+der Kînig Matt und das Spiel verloren. Der Kînig kann sich ein Feld in eine
+beliebige Richtung bewegen. ZusÑtzlich kann er einen besonderen Zug namens
+Rochade ausfÅhren. Er rÅckt dazu unmittelbar neben einen der TÅrme des Spielers,
+und dieser Turm rÅckt neben die ursprÅnglic he Position des Kînigs. Voraussetzung
+dafÅr ist, da· sowohl Kînig als auch Turm wÑhrend der Partie noch nicht bewegt
+wurden. Au·erdem mu· das Spielfeld zwischen den beiden frei sein.
+
+(Unser Schachprogramm wird kein Matt erkennen. Stattdessen kann der Kînig
+geschlagne werden. Au·erdem kann man sich freiwillif ins schach begeben. ]
+
+.LISTITEM  Bauer (Pawn)
+
+Jeder Spieler hat zu Beginn acht Bauern, die die zweite Reihe des Feldes
+ausfÅllen. Sie kînnen entweder ein Feld vorwÑrts (in Richtung der gegnerischen
+Seite des Spielfeldes) ziehen oder ein Feld diagonal vorwÑrts, wenn sie dadurc
+gnerische Figur schlagen. Wenn ein Bauer zum ersten Mal bewegt wird, darf er auch
+zwei Felder vorwÑrts ziehen. Ein Bauer, der das ganze Spielfeld durchquert hat,
+verwandelt sich in eine beliebige andere Figur au·er einem Kînig,
+Åblicherweise in eine Dame
+.EULIST
+
+[An dieser Stelle wÑre eine Grafik eines Schachbretts mit der Startaufstellung
+der Figuren toll.]
+
+Das sind die Regeln, die innerhalb dieses Kapitels zum Einsatz kommen.
+Schachspieler werden sich an dieser Stelle (und vermutlich nicht zum letzten Mal)
+die Haare raufen angesichts der Ignoranz, mit der das kînigliche Spiel hier
+behandelt wird. Aber das s oll uns nicht weiter stîren. Wir beginnen
+stattdessen damit, einen ersten Datentyp zur Darstellung unserer Figuren
+zu entwickeln.
+
+.TOPIC 2 Kapitel 2 - Klassen
+.HIGH Kapitel 2 - Klassen
+
+.BOLD Ein einfacher Datentyp fpr Schachfiguren
+
+Wie uns die Kurzfassung der Regeln gezeigt hat, gibt es sechs verschiedene Arten
+von Schachfiguren in zwei verschiedenen Farben. Jede Figur kann sich zudem auf
+einem von acht mal acht Feldern befinden. Damit bietet sich zum Beispiel die
+folgende Implementierung der Figuren mit Hilfe von Records an:
+
+[chess01.pas]
+.XMP
+type
+  TPosition = record
+    X: Integer;
+    Y: Integer;
+  end;
+
+  TName = (King, Queen, Knight, Bishop, Rook, Pawn);
+
+  TColor = (Black, White);
+
+  TPiece = record
+    Name:     TName;
+    Position: TPosition;
+    Color:   TColor;
+  end;
+.EXMP
+
+Falls Sie sich Åber das 'T' vor jedem der Typbezeichner wundern: Es ist in
+WDSibyl-Pascal Åblich, wenn auch nicht zwingend vorgeschrieben, jeden
+Typbezeichner mit einem 'T' einzuleiten. Dadurch sind Typen leichter als solche
+erkennbar. Es gibt noch weitere syntaktische Konventionen, auf die wir Sie bei
+Bedarf hinweisen werden. Doch nun zurÅck zu unserem Datentypen. Er enthÑlt, wie
+wir sehen, ein Feld /Name/ fÅr die Art der Figur, ein Feld /Position/ fÅr den
+momentanen Standort und ein Feld /Color/, das uns Aufschlu· Åber seinen
+Besitzer gibt. FÅr eine Position haben wir einen eigenen Datentypen /TPosition/,
+der ein Zeichen und ein Byte aufnehmen kann. Wir legen fest, da· /X/ die
+horizontale Position der Figur enthalten soll und /Y/ die vertikale. Beide dÅrfen im
+Bereich von 1 bis 8 liegen. Folgendes Beispiel weist einer Position das Feld B5 zu.
+
+.XMP
+var MyPosition: TPosition;
+
+begin
+  MyPosition.X := 2; // Spalte: B
+  MyPosition.Y := 5; // Zeile:  5
+end.
+.EXMP
+
+Eine der grundsÑtzlichen Aufgaben unseres Programms sollte es sicherlich sein,
+einen Zug daraufhin zu prÅfen, ob er prinzipiell fÅr eine Figur durchfÅhrbar
+ist. Wir wollen also wissen, ob sich eine Figur von ihrem momentanen Feld auf
+ein bestimmtes andere s Feld bewegen lÑ·t. Wir entwickeln dafÅr eine
+Funktion /CanMoveTo/, die als Parameter eine Figur und eine neue Position
+erwartet. Innerhalb einer Fallunterscheidung entscheidet /CanMoveTo/ dann, ob sie
+als Ergebnis /True/ oder /False/ zurÅckliefert.
+
+Da wir noch keinen Datentyp fÅr das Schachbrett haben, wei· die Funktion natÅrlich
+nichts Åber die Positionen der anderen Figuren im Spiel. Sie wird also nur
+prÅfen kînnen, ob eine Figur sich im Rahmen ihrer persînlichen Mîglichkeiten
+bewegt. /CanMoveTo/ kann zwar feststellen, ob sich ein Turm wirklich entweder
+nur waagerecht oder nur senkrecht bewegt, ob der Kînig sich wirklich nur ein
+Feld weit bewegt und da· die Bauern wirklich nur vorwÑrts ziehen. Ohne Kenntnis
+des restlichen Spielfeldes ist es aber unmîglich festzustellen, ob die Felder
+zwischen dem aktuellen und dem Zielfeld leer sind. Ebenso kann die Funktion
+nicht prÅfen, ob das Zielfeld entweder leer oder von einer gegnerischen Figur
+besetzt ist. Um diese Probleme kÅmmern wir uns zu einem spÑteren Zeitpunkt.
+Momentan sollen nur die grundsÑtzlichen Zugregeln fÅr die sechs verschiedenen
+Arten von Figuren berÅcksichtigt werden.
+
+Eine mîgliche Implementierung von /CanMoveTo/ sieht wie folgt aus:
+
+[chess01.pas]
+.XMP
+function CanMoveTo(Piece: TPiece; NewPosition: TPosition): Boolean;
+
+var VerticalMove, HorizontalMove: Integer;
+
+begin
+  HorizontalMove := NewPosition.X - Piece.Position.X;
+  VerticalMove := NewPosition.Y - Piece.Position.Y;
+
+  if (VerticalMove = 0) and (HorizontalMove = 0) then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  case Piece.Name of
+    King:   Result := (VerticalMove   in [-1, 0, 1]) and
+                      (HorizontalMove in [-1, 0, 1]);
+
+    Queen:  Result := (Abs(VerticalMove) = Abs(HorizontalMove)) or
+                      (VerticalMove   = 0) or
+                      (HorizontalMove = 0);
+
+    Knight: Result := (Abs(VerticalMove)   = 2) and
+                      (Abs(HorizontalMove) = 1) or
+                      (Abs(VerticalMove)   = 1) and
+                      (Abs(HorizontalMove) = 2);
+
+    Bishop: Result := Abs(VerticalMove) = Abs(HorizontalMove);
+
+    Rook:   Result := (VerticalMove   = 0) or
+                      (HorizontalMove = 0);
+
+    Pawn:   begin
+              if Piece.Color = White then
+                Result := (HorizontalMove in [-1, 0, 1]) and
+                          (VerticalMove =  1)
+              else
+                Result := (HorizontalMove in [-1, 0, 1]) and
+                          (VerticalMove = -1);
+            end;
+  end;
+end;
+.EXMP
+
+Die Funktion prÅft zuerst, ob die alte Position sich von der neuen unterscheidet.
+Wenn das nicht zutrifft, ist der Zug keinesfalls akzeptabel. Dann wird, abhÑngig
+vom Typ der Figur, ÅberprÅft, ob die Zugregeln eingehalten werden. Dazu wird die
+relative Bewegung der Figur in horizontaler und vertikaler Richtung
+ermittelt. Um Vergleiche zu sparen, wird bei den meisten Regeln nur der
+Betrag (/Abs()/) der Bewegung benutzt. Vergleichen Sie die einzelnen FÑlle mit
+der RegelÅbersicht aus dem vorangehenden Kapitel oder mit Ihren Schachkenntnissen.
+Sie werden feststellen, da· /CanMoveTo/ die Regeln weitgehend korrekt
+implementiert, allerdings mit der bereits erwÑhnten EinschrÑnkung, da· andere
+Figuren auf dem Brett keine BerÅcksichtigung finden, und einer weiteren EinschrÑnkung,
+zu der wir im nÑchsten Abschnitt kommen.
+
+Das gesamte Programm, wenn es denn diese Bezeichnung schon verdient, finden Sie
+auch in der Datei CHESS01.PAS.
+
+.BOLD Zwei Sorten von Figuren
+
+Wenn Sie Schachspieler sind oder die KurzeinfÅhrung in die Regeln aufmerksam
+gelesen haben, ist Ihnen sicherlich die Unterschlagung einiger Zugmîglichkeiten
+aufgefallen. Wir hatten gesagt, da· Bauern bei ihrem ersten Zug wahlweise auch
+zwei Felder weit vorwÑrts gehen dÅrfen. Ebenso kînnen Kînig und Turm,
+wenn sie bislang nicht bewegt wurden, einen speziellen Zug namens Rochade
+ausfÅhren, den Sie bei der Beschreibung des Kînigs nÑher erlÑutert finden. Um
+diese Regeln zu zu berÅcksichtigen ist es nîtig, unsere Figur um ein
+zusÑtzliches Feld zu erweitern, das uns Auskunft darÅber gibt, ob die Figur
+bereits bewegt wurde oder nicht. Das kînnte zum Beispiel so aussehen:
+
+.XMP
+type
+  TPiece = record
+    Name:         TName;
+    Position:     TPosition;
+    Color:        TColor;
+    HasBeenMoved: Boolean;
+  end;
+.EXMP
+
+Allerdings ist dieses Feld bei einem Teil der Figuren, nÑmlich Dame, Springer
+und LÑufer, ÅberflÅssig, was zu einer Platzverschwendung fÅhrt. Nun nimmt
+ein /Boolean/-Wert im Speicher nur ein Byte ein, was den Vorwurf der
+Platzverschwendung nicht gerade rechtfertigt. Aber, und das ist der angekÅndigte
+Verweis auf die reale Welt, es kînnte sich ja auch um einen String handeln. Das
+wÑre eine nicht zu vernachlÑssigende Verschwendung von 256 Byte fÅr die Records,
+die den String niemals benutzen. Mit Blick auf dieses Problem suchen wir
+nach einer Lîsung, die das zusÑtzliche Feld nur bei den Figuren bereitstellt, die
+diese Information auch wirklich benîtigen. Das kînnte zum Beispiel so aussehen, da·
+wir einen einfachen Typ fÅr Dame, Springer und LÑufer definieren und einen
+erweiterten fÅr Kînig, Turm und Bauer.
+
+[chess02a.pas]
+.XMP
+type
+  TPiece = record
+    Name:     TName;
+    Position: TPosition;
+    Color:    TColor;
+  end;
+
+  TExtPiece = record
+    Name:         TName;
+    Position:     TPosition;
+    Color:        TColor;
+    HasBeenMoved: Boolean;
+  end;
+.EXMP
+
+Diese Lîsung entspricht dem, was mit traditioneller Programmierung in Pascal
+mîglich ist. Allerdings ist sie unbefriedigend, weil es notwendig ist,
+in /TExtPiece/ die gesamte Definition von /TPiece/ zu wiederholen. Eine weitere
+Lîsung, die einem in den Sinn kommen kînnte und die vielleicht minimal
+eleganter ist, sieht so aus, da· der erweiterte Typ den einfachen Typen als
+Datenfeld enthÑlt.
+
+[chess02b.pas]
+.XMP
+type
+  TPiece = record
+    Name:     TName;
+    Position: TPosition;
+    Color:    TColor;
+  end;
+
+  TExtPiece = record
+    SimplePiece:  TPiece;
+    HasBeenMoved: Boolean;
+  end;
+.EXMP
+
+In jedem der beiden FÑlle mÅssen wir unsere Funktion /CanMoveTo/ in zwei
+Funktionen aufspalten, weil Pascal keine Funktionen erlaubt, die sowohl /TPiece/
+als auch /TExtPiece/ als Parameter akzeptiert.
+
+.XMP
+function CanMoveTo(Piece: TExtPiece; NewPosition: TPosition): Boolean;
+begin
+  ...
+end;
+
+function ExtCanMoveTo(Piece: TExtPiece; NewPosition: TPosition): Boolean;
+begin
+  ...
+end;
+.EXMP
+
+Wir sparen uns die Implementierung der Funktion an dieser Stelle und verweisen
+auf die Dateien CHESS02A.PAS und CHESS02B.PAS, in denen beide Varianten
+implementiert sind. Sie werden feststellen, da· in CHESS02B.PAS insbesondere der
+Zugriff auf die Felder von TExtPiece ziemlich umstÑndlich ist.
+
+.BOLD Vererbung
+
+Das ungelîste Problem des letzten Abschnitts bestand darin, da· wir einen Grundtypen und einen erweitertern Typen hatten. Letzterer entsprach dem ersten bis auf ein zusÑtzliches Feld. Trotzdem mu·ten wir den erweiterten Typen komplett neu definieren. WÑre
+ es nicht viel schîner, wenn wir einen Mechanismus hÑtten, mit dem wir einen bestehenden Typen Åbernehmen und um zusÑtzliche Eigenschaften erweitern kînnten? In der Tat gibt es einen solchen Mechanismus. Er Ñhnelt Ñu·erlich einem normalen Record, geht abe
+r Åber dessen Mîglichkeiten weit hinaus. Deshalb wurde ihm auch ein eigenes SchlÅsselwort gewidmet: Es hei·t /class/ und steht fÅr Klasse, was in der OOP der gÑngige Begriff fÅr einen Objekttypen ist. Eine Klasse ermîglicht bei Ihrer Definition die Angabe
+ einer Basisklasse, von der eine neue Klasse abgeleitet werden soll. Die neue Klasse Åbernimmt dann alle Felder Ihrer Basisklasse. Damit lassen sich unsere Schachfiguren viel eleganter definieren:
+
+[chess03.pas]
+.XMP
+type
+  TPiece = class
+    Name:     TName;
+    Position: TPosition;
+    Color:    TColor;
+  end;
+
+  TExtPiece = class(TPiece)
+    HasBeenMoved: Boolean;
+  end;
+.EXMP
+
+Durch diese Definition besitzt /TExtPiece/ alle Felder von /TPiece/ und zusÑtzlich
+ein Feld /HasBeenMoved/. Der offensichtlichen Verwandtschaft der beiden Typen
+kann also dadurch Rechnung getragen werden, da· /TExtPiece/ nun wirklich ein
+Nachfahre von /TPiece/ ist. Auf die einzelnen Felder dieser beiden
+Typen greifen wir genauso zu, wie wir es von Records gewohnt sind. Das folgende
+syntaktisch korrekte, aber nicht selbstÑndig lauffÑhige Codefragment soll die
+Mîglichkeiten verdeutlichen:
+
+.XMP
+var
+  MyPiece: TPiece;
+  MyExtPiece: TExtPiece;
+
+begin
+  ...
+
+  // Wei·e Dame initialisieren und auf D4 setzen
+
+  MyPiece.Name := Queen;
+  MyPiece.Colour := White;
+  MyPiece.Position.X := 4;
+  MyPiece.Position.Y := 1;
+
+  // Schwarzen Kînig initialisieren und auf E5 setzen
+
+  MyExtPiece.Name := King;
+  MyExtPiece.Colour := Black;
+  MyExtPiece.Position.X := 5;
+  MyExtPiece.Position.Y := 8;
+  MyExtPiece.HasBeenMoved := False;
+
+  // Positionen ausgeben
+
+  WriteLn('Wei·e Dame:');
+  WriteLn(Chr(64 + MyPiece.Position.X), MyPiece.Position.Y);
+  WriteLn('Scharzer Kînig:');
+  WriteLn(Chr(64 + MyExtPiece.Position.X), MyExtPiece.Position.Y);
+
+  ...
+end.
+.EXMP
+
+Analog zu Records kînnen wir auch bei Klassen einen lÑngeren Block von
+Operationen mit der gleichen Variablen durch Benutzung von /with ... do/ einfacher
+gestalten. Folgendes Codefragment ist von der Funktion her identisch mit dem
+vorangehenden:
+
+.XMP
+var MyPiece: TPiece;
+    MyExtPiece: TExtPiece;
+
+begin
+  ...
+
+  // Wei·e Dame initialisieren und auf D4 setzen
+
+  with MyPiece do
+  begin
+    Name := Queen;
+    Colour := White;
+    Position.X := 4;
+    Position.Y := 1;
+  end;
+
+  // Initialisiere schwarzen Kînig
+
+  with MyExtPiece do
+  begin
+    Name := King;
+    Colour := Black;
+    Position.X := 5;
+    Position.Y := 8;
+    HasBeenMoved := False;
+  end;
+
+  // Gib die Positionen aus
+
+  // Positionen ausgeben
+
+  WriteLn('Wei·e Dame:');
+  with MyPiece do WriteLn(Chr(64 + Position.X), Position.Y);
+  WriteLn('Scharzer Kînig:');
+  with MyExtPiece do WriteLn(Chr(64 + Position.X), Position.Y);
+
+  ...
+end.
+.EXMP
+
+Wenn es die Anwendung verlangt und es uns sinnvoll erscheint, kînnen wir die
+Vererbung auch weiter treiben. Wir kînnen also zum Beispiel noch einen Nachkommen
+von /TExtPiece/ definieren und einen weiteren Nachkommen dieses Nachkommen.
+Wir kînnen auch zusÑtzliche Nachkommen von /TPiece/ definieren, die sich gÑnzlich
+von /TExtPiece/ unterscheiden. Es gibt keine BeschrÑnkung fÅr die Anzahl der
+Nachkommen, die eine Klasse haben kann. Aber jede Klasse hat immer genau einen
+Vorfahren. Immer? Was ist mit /TPiece/? Diese Klasse scheint auf den ersten
+Blick keinen Vorfahren zu haben, aber das ist nicht der Fall. Wenn wir keinen
+expliziten Vorfahren angeben, nimmt der Compiler eine vordefinierte
+Klasse /TObject/ aus der Unit /System/ als Vorfahren an. Damit ist die folgende
+Definition also identisch zu unserer bisherigen:
+
+.XMP
+type
+  TPiece = class(TObject)
+    Name:     TName;
+    Position: TPosition;
+    Color:    TColor;
+  end;
+
+  TExtPiece = class(TPiece)
+    HasBeenMoved: Boolean;
+  end;
+.EXMP
+
+Durch die Verwandtschaft aller Klassen zu /TObject/ ist gewÑhrleistet, da· alle
+Klassen eine Basis haben, sozusagen einen gemeinsamen Stammvater. Die
+Klasse /TObject/ hat keine eigenen Datenfelder, die sie ihrer Nachkommenschaft
+vererben kînnte. DafÅr wartet sie mit anderen Mîglichkeiten auf, die wir spÑter
+noch kennenlernen werden. Im Moment mÅssen Sie Åber /TObject/ nur wissen, da·
+diese Klasse als Standardvorfahr angenommen wird, wenn Sie keinen Vorfahren
+festlegen.
+
+Da der Zugriff auf die einzelnen Felder einer Klasse genauso ablÑuft wie der
+Zugriff auf die Felder eines Records, Ñndert sich in unserem Schachprogramm zwar
+die Definition der Typen. Die Funktionen /CanMoveTo/ und /ExtCanMoveTo/ entsprechen
+aber denen aus CHESS02A.PAS. Das vollstÑndige Ergebnis unserer bisherigen
+BemÅhungen finden Sie in der Datei CHESS03.PAS. Was daran noch ein wenig
+stîrt, ist die Tatsache, da· wir es nach wie vor mit zwei verschiedenen
+Funktionen zu tun haben. Au·erdem mÅssen wir unsvor dem Aufruf fÅr eine der
+beiden entscheiden, und zwar abhÑngig davon, ob wir mit /TPiece/ oder /TExtPiece/
+arbeiten. Im nÑchsten Abschnitt werden wir eine Lîsung fÅr dieses Problem finden.
+
+.TOPIC 2 Kapitel 3 - Methoden
+.HIGH Kapitel 3 - Methoden
+
+.BOLD Prozeduren und Funktionen als Elemente einer Klasse
+
+Wie bereits in der Einleitung angesprochen, ist ein wesentliches Konzept der OOP
+die Einheit von Daten und Code. Von dieser Einheit war bislang nicht viel zu
+sehen. Zwar haben wir ein Verfahren kennengelernt, bei Typdefinitionen elegant
+auf bereits vorhandene Typen zurÅckzugreifen. Aber noch sind wir darauf
+angewiesen, fÅr jeden Typen eine eigene Funktion zur ZugprÅfung zu implementieren.
+Da die Funktionen im Ñu·ersten GÅltigkeitsbereich unseres Programms liegen,
+also global sichtbar sind, mÅssen sie au·erdem verschiedene Bezeichner bekommen.
+So legen es die Regeln von Pascal fest.
+
+Die OOP ermîglicht es uns nun, Prozeduren und Funktionen, deren FunktionalitÑt
+fest mit einer bestimmten Klasse verbunden ist, in diese Klasse zu integrieren.
+Das geschieht derart, da· der Kopf der Prozedur oder Funktion mit in die
+Definition der Klasse aufgenommen wird. Weiter unten im Programm wird sie dann
+implementiert, wie es auch jetzt schon geschehen ist. Diese Art von Deklaration
+mit verzîgerter Implementierung Ñhnelt, wie Sie vielleicht bemerkt haben,
+einer /Forward/-Deklaration. Prozeduren oder Funktionen, die auf die
+beschriebene Weise mit einer Klasse verschmolzen werden, nennt man Methoden.
+Wir werden diesen Begriff deshalb im folgenden synonym sowohl fÅr Prozeduren als
+auch fÅr Funktionen verwenden, wenn diese Element einer Klasse sind.
+
+Schauen wir uns einmal an, wie die Definition unserer Funktion aussieht, wenn
+diese als Methode realisiert wird:
+
+[chess04a.pas]
+.XMP
+type
+  TPiece = class
+    FName:     TName;
+    FPosition: TPosition;
+    FColor:    TColor;
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+  end;
+
+  TExtPiece = class(TPiece)
+    FHasBeenMoved: Boolean;
+    function ExtCanMoveTo(NewPosition: TPosition): Boolean;
+  end;
+
+function TPiece.CanMoveTo(NewPosition: TPosition): Boolean;
+begin
+  ...
+end;
+
+function TExtPiece.ExtCanMoveTo(NewPosition: TPosition): Boolean;
+begin
+  ...
+end;
+.EXMP
+
+Dieser Quellcode enthÑlt auf einen Schlag eine ganze Reihe von neuen Elementen,
+die wir in den folgenden Abschnitten nach und nach erlÑutern werden. Zuerst
+einmal wurde der Kopf der Funktion wie angekÅndigt in die Definition der Klasse
+aufgenommen. Dann wurde bei der Implementierung der Methoden der Name der
+Klasse dem Methodenbezeichner mit dem fÅr Records Åblichen Punktselektor
+vorangestellt. Dadurch wei· der Compiler, da· es sich um eine Methode handelt
+und zu welcher Klasse sie gehîrt. Den Bezeichnern der einzelnen Felder
+haben wir ein 'F' vorangestellt. Schlie·lich haben die formalen Parameter
+von /CanMoveTo/ und /ExtCanMoveTo/ noch eine VerÑnderung erfahren. Beginnen wir mit letzterem.
+
+.BOLD GÅltigkeitsbereich und aufruf von Methoden
+
+Wenn Sie sich den Kopf von /CanMoveTo/ anschauen, stellen Sie fest, da· der erste
+Parameter entfallen ist. Erinnern wir uns: Der erste formale Parameter war vom
+Typ /TPiece/. Er sollte zur Laufzeit als aktuellen Parameter die tatsÑchliche Figur
+enthalten, fÅr die wir eine ZugprÅfung durchfÅhren wollen. Wieso istdieser
+Parameter auf einmal ÅberflÅssig geworden? Weil einer Methode implizit das
+Objekt, fÅr das sie aufgerufen wird, mit Åbergeben wird. Dieser implizite
+Parameter ist in einem Bezeichner namens /Self/ gespeichert, der innerhalb jeder
+Methode verfÅgbar ist. /Self/ ist stets vom Typ der Klasse, zu der die Methode
+gehîrt. In /TPiece.CanMoveTo/ ist /Self/ also vom Typ /TPiece/, in
+/TExtPiece.ExtCanMoveTo/ vom Typ /TExtPiece/.
+
+Da Sie innerhalb einer Methode voraussichtlich bevorzugt auf Felder Ihres Objekts
+zugreifen wollen, und damit Sie dafÅr nicht jedesmal die Sequenz
+
+.XMP
+with Self do
+begin
+  ...
+end;
+.EXMP
+
+schreiben mÅssen, erledigt der Compiler das bereits fÅr Sie. Innerhalb einer
+Methode kînnen Sie direkt sowohl auf die Datenfelder als auch auf die Methoden
+Ihres Objekts zugreifen, ganz so als hÑtten Sie Ihren Code-Block
+mit /with ... do/ eingeschlossen.
+Das kînnen sie an der folgenden Implementierung der beiden Methoden /CanMoveTo/
+und /ExtCanMoveTo/ nachvollziehen, denn diese greifen auf die einzelnen Felder
+zu, ohne da· /Self/ dabei auch nur einmal erwÑhnt wird. Den vollstÑndigen
+Quellcode bis zu dieser Stelle finden Sie in CHESS04A.PAS.
+
+[chess04a.pas]
+.XMP
+function TPiece.CanMoveTo(NewPosition: TPosition): Boolean;
+
+var VerticalMove, HorizontalMove: Integer;
+
+begin
+  HorizontalMove := NewPosition.X - FPosition.X;
+  VerticalMove := NewPosition.Y - FPosition.Y;
+
+  if (VerticalMove = 0) and (HorizontalMove = 0) then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  case FName of
+    Queen:  Result := (Abs(VerticalMove) = Abs(HorizontalMove)) or
+                      (VerticalMove   = 0) or
+                      (HorizontalMove = 0);
+
+    Knight: Result := (Abs(VerticalMove)   = 2) and
+                      (Abs(HorizontalMove) = 1) or
+                      (Abs(VerticalMove)   = 1) and
+                      (Abs(HorizontalMove) = 2);
+
+    Bishop: Result := Abs(VerticalMove) = Abs(HorizontalMove);
+  end;
+end;
+
+function TExtPiece.ExtCanMoveTo(NewPosition: TPosition): Boolean;
+var
+  VerticalMove, HorizontalMove: Integer;
+begin
+  HorizontalMove := NewPosition.X - FPosition.X;
+  VerticalMove := NewPosition.Y - FPosition.Y;
+
+  if (VerticalMove = 0) and (HorizontalMove = 0) then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  case FName of
+    King:   Result := (VerticalMove   in [-1, 0, 1]) and
+                      (HorizontalMove in [-1, 0, 1]) or
+                      (NewPosition.Y  in [2, 7]) and
+                      (VerticalMove = 0) and
+                      not FHasBeenMoved;
+
+    Rook:   Result := (VerticalMove   = 0) or
+                      (HorizontalMove = 0);
+
+    Pawn:   begin
+              if FColor = White then
+                Result := (HorizontalMove in [-1, 0, 1]) and
+                          (VerticalMove   = 1) or
+                          (HorizontalMove = 0) and
+                          (VerticalMove   = 2) and
+                          not FHasBeenMoved
+              else
+                Result := (HorizontalMove in [-1, 0, 1]) and
+                          (VerticalMove   = -1) or
+                          (HorizontalMove =  0) and
+                          (VerticalMove   = -2) and
+                          not FHasBeenMoved;
+            end;
+  end;
+end;
+.EXMP
+
+Wie Sie die Methoden aufrufen zeigt Ihnen das folgende kurze Anwendungsbeispiel
+[siehe Fu·note]. Auch hier wird, genau wie beim Zugriff auf Felder, der Name
+des Objekts dem Methodenaufruf mit einem Punktselektor vorangestellt.
+
+[Fu·note: Das Anwendungsbeispiel soll nur den Zugriff auf die Methoden
+verdeutlichen. Es ist in einer Ñhnlichen Form zwar prinzipiell compilierbar,
+aber nicht lauffÑhig. Wenn Sie es trotzdem versuchen, wird das Programm vermutlich
+mit einer Schutzverletzung abbrechen. Das liegt daran, da· Objekte auf eine
+spezielle Weise initialisiert werden mÅssen, bevor auf sie zugegriffen werden kann.]
+
+.XMP
+var MyPawn: TExtPiece;
+    NewPosition: TPosition;
+
+begin
+  ...
+  NewPosition.X := 5;
+  NewPosition.Y := 4;
+  if MyPawn.CanMoveTo(NewPosition) then MyPawn.FPosition := NewPosition;
+  ...
+end.
+.EXMP
+
+.BOLD öberschreiben von Methoden
+
+Methoden werden, genau wie es bei Feldern der Fall ist, an Nachkommen
+vererbt. /TExtPiece/ verfÅgt also zusÑtzlich zur eigenen Methode /ExtCanMoveTo/
+Åber die Methode /CanMoveTo/ von /TPiece/, seinem Vorfahren. Anders als Felder
+kînnen Methoden jedoch bei Nachfahren auch Åberschrieben werden. Wir kînnen
+also im Nachfahren eine Methode definieren, die unter dem gleichen Bezeichner
+bereits im Vorfahren existiert. Die Methode des Vorfahren wird dann innerhalb des
+Nachfahren durch die neu definierte verdeckt.
+ 
+
+Es entsteht also durch das öberschreiben kein Namenskonflikt, wie wir ihn bei
+gewîhnlichen Prozeduren oder Funktionen hÑtten. Das gibt uns die Mîglichkeit,
+innerhalb einer Hierarchie von verwandten Objekten stets gleiche
+Methodenbezeichner fÅr gleiche Aufgaben zu verwenden. Zum Beispiel kînnten
+wir die Darstellungsmethoden fÅr eine Reihe von verwandten Bildschirmobjekten
+alle /Draw/ nennen, statt auf /DrawWindow/, /DrawButton/ etc. ausweichen zu
+mÅssen. FÅr unsere Schachfiguren hei·t das, da· wir die Methode zur ZugprÅfung
+ab sofort bei beiden Klassen /CanMoveTo/ nennen werden.
+
+.XMP
+type
+  TPiece = class
+    FName:     TName;
+    FPosition: TPosition;
+    FColor:   TColor;
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+  end;
+
+  TExtPiece = class(TPiece)
+    FHasBeenMoved: Boolean;
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+  end;
+
+function TPiece.CanMoveTo(NewPosition: TPosition): Boolean;
+begin
+  ...
+end;
+
+function TExtPiece.CanMoveTo(NewPosition: TPosition): Boolean;
+begin
+  ...
+end;
+.EXMP
+
+Es sei noch angemerkt, da· inbesondere kein Namenskonflikt zwischen Methoden
+und gewîhnlichen Prozeduren oder Funktionen besteht. Es steht uns also frei,
+noch eine global sichtbare Funktion /CanMoveTo/ zu definieren, die nichts mit
+der Methode gleichen Namens zu tun hat. Dies sorgt hîchstens fÅr Verwirrung
+beim Programmierer, der Compiler jedoch lÑ·t sich davon nicht beirren.
+
+Den vollstÑndigen Quellcode bis zu diesem Punkt enthÑlt die Datei CHESS04B.PAS.
+
+.BOLD Methoden aks Mittel zur Kapselung
+
+Eine weitere Kleinigkeit, die Ihnen inzwischen bestimmt aufgefallen ist, sind
+die Feldnamen, denen wir ein 'F' vorangestellt haben. Es ist in WDSibyl-Pascal
+Åblich, die Felder einer Klasse durch dieses 'F' zu kennzeichnen. Sie werden es
+vielleicht fÅr umstÑndlich halten, den Feldern solche 'unschînen' Bezeichner zu
+verpassen. Au·erdem macht es den Zugriff auf die Felder von au·erhalb des
+Objekts scheinbar kompliziert. Aber, und das wird Sie sicherlich Åberraschen, Sie
+sollten Zugriffe auf die Felder des Objekts 'von au·en' mîglichst ganz vermeiden.
+
+Erinnern wir uns an den Beginn dieser EinfÅhrung: Als ein Merkmal der OOP wurde
+die Kapselung von Daten und das Verbergen von Implementierungsdetails
+herausgestellt. Die Felder eines Objekts kann man sicherlich getrost als
+Implementierungsdetails bezeichnen, und die Methoden sindgenau das
+Hilfsmittel, das wir brauchen, um die Felder zu verbergen. Wir bieten dem
+Benutzer unserer Klasse einfach Methoden zum Zugriff auf die Daten an, und zwar
+mîglichst viele. Die Methoden sind dann eine Art Schnittstelle, die wir bei
+Weiterentwicklungen der Klasse konstant halten mÅssen.
+
+Wenn wir zum Beispiel den Zugriff auf die Position einer Figur Åber zwei
+Methoden /GetPosition/ und /SetPosition/ abwickeln, dann kînnen wir die Position
+der Figur innerhalb des Objekts beliebig codieren und diese Codierung jederzeit
+Ñndern. Wir kînnten uns zum Beispiel aus PlatzgrÅnden irgendwann dafÅr
+entscheiden, die Position im Objekt in einem einzigen Byte zu speichern, statt
+in einem Feld vom Typ /TPosition/. Wir mÅ·ten dann nur dafÅr sorgen, da·
+Kopf und Arbeitsweise von /GetPosition/ und /SetPosition/ konstant
+bleiben, also einen Record vom Typ /TPosition/ erwarten bzw. zurÅckgeben. Die
+Methoden wandeln den Record dann in die neue interne Darstellung um und
+umgekehrt. Alle Programme, die die Position einer Schachfigur nur mittels der
+beiden Methoden manipulieren, wÅrden trotz der énderungen an der
+internen Struktur der Klasse weiterhin funktionieren. Programme, die Felder
+direkt manipulieren, mÅssen hingegen immer den énderungen der Klasse angepa·t
+werden. Die Kapselung bringt uns also vîllig neue Mîglichkeiten zur
+Modularisierung, die uns, wenn wir sie konsequent einsetzen, das Leben viel
+leichter machen.
+
+Schauen wir uns Definition und Implementierung der beiden Methoden /GetPosition/
+und /SetPosition/ an, allerdings ohne das Gedankenspiel aus dem letzten
+Abschnitt umzusetzen. Wir bleiben also bei unserer internen Speicherung der
+Position in einem Feld vom Typ /TPosition/.
+
+[chess04c.pas]
+.XMP
+type
+  TPiece = class
+    FName:     TName;
+    FPosition: TPosition;
+    FColor:    TColor;
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    function GetPosition: TPosition;
+    procedure SetPosition(NewPosition: TPosition);
+  end;
+
+  TExtPiece = class(TPiece)
+    FHasBeenMoved: Boolean;
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+  end;
+
+function TPiece.GetPosition: TPosition;
+begin
+  Result := FPosition;
+end;
+
+procedure TPiece.SetPosition(NewPosition: TPosition);
+begin
+  FPosition := NewPosition;
+end;
+.EXMP
+
+Wir wollen versuchen, die restlichen Felder des Objekts auch zu kapseln. Aber
+nicht immer ist es sinnvoll, fÅr jedes Feld einfach eine Lese- und eine
+Schreibmethode anzubieten. Farbe und Typ der Figur sollen zwar zur Laufzeit,
+also quasi 'im Spiel', ausgelesen werden kînnen, aber eine separate énderung
+dieser Felder wÑhrend eines laufenden Spiels ist in den Schachregeln nicht
+vorgesehen. Deshalb implementieren wir nur /GetName/ und /GetColour/. Das
+Setzen von Farbe und Typ einer Figur scheint mehr eine Aufgabe fÅr den
+Beginn des Spiels zu sein. Also fÅgen wir dem Objekt noch eine Methode
+/Initialize/ hinzu, die Farbe, Typ und Startposition einer Figur setzt.
+
+Bei /TExtPiece/ Åbrschreiben wir einige dieser Methoden dann gleich wieder.
+So kÅmmert sich /Initialize/ zum Beispiel zusÑtzlich darum, das Feld
+/HasBeenMoved/ auf /False/ zu setzen, denn zu Beginn des Spiels wurde die
+Figur ja noch nicht bewegt. /TExtPiece.SetPosition/ Ñndert das Feld dann
+bei jeder énderung der Position auf /True/. Hier sehen wir, da· Methoden
+durchaus mehr tun kînnen, als nur Felder zu verstecken. Ein Benutzer unserer
+erweiterten Schachfigur wird niemals selbst auf das Feld /HasBeenMoved/
+zugreifen mÅssen. Er braucht nicht einmal von dessen Existenz zu wissen.
+Trotzdem wird die Schachfigur sich den Regeln entsprechend verhalten,
+weil sie das Feld intern korrekt verwaltet.
+
+[chess04d.pas]
+.XMP
+type
+  TPiece = class
+    FName:     TName;
+    FPosition: TPosition;
+    FColor:   TColor;
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    function GetColor: TColor;
+    function GetName: TName;
+    function GetPosition: TPosition;
+    procedure Initialize(Name: TName; Color: TColor; Position: TPosition);
+    procedure SetPosition(NewPosition: TPosition);
+  end;
+
+  TExtPiece = class(TPiece)
+    FHasBeenMoved: Boolean;
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    procedure Initialize(Name: TName; Color: TColor; Position: TPosition);
+    procedure SetPosition(NewPosition: TPosition);
+  end;
+
+// --- TPiece ---
+
+function TPiece.CanMoveTo(NewPosition: TPosition): Boolean;
+begin
+  ...
+end;
+
+function TPiece.GetColor: TColor;
+begin
+  Result := FColor;
+end;
+
+function TPiece.GetName: TName;
+begin
+  Result := FName;
+end;
+
+function TPiece.GetPosition: TPosition;
+begin
+  Result := FPosition;
+end;
+
+procedure TPiece.Initialize(Name: TName; Color: TColor; Position: TPosition);
+begin
+  FName := Name;
+  FColor := Color;
+  FPosition := Position;
+end;
+
+procedure TPiece.SetPosition(NewPosition: TPosition);
+begin
+  FPosition := NewPosition;
+end;
+
+// --- TExtPiece ---
+
+function TExtPiece.CanMoveTo(NewPosition: TPosition): Boolean;
+begin
+  ...
+end;
+
+procedure TExtPiece.Initialize(Name: TName; Color: TColor; Position: TPosition);
+begin
+  FName := Name;
+  FColor := Color;
+  FPosition := Position;
+  FHasBeenMoved := False;
+end;
+
+procedure TExtPiece.SetPosition(NewPosition: TPosition);
+begin
+  FPosition := NewPosition;
+  FHasBeenMoved := True;
+end;
+.EXMP
+
+Den vollstÑndigen Quellcode finden Sie in der Datei CHESS04D.PAS.
+
+.BOLD INHERITED - Methoden des Vorfahren benutzen
+
+Nachdem wir /TPiece.CanMoveTo/ in /TExtPiece/ Åberschrieben haben, ist die
+ursprÅngliche Methode dort zwar nicht mehr sichtbar, aber es besteht die
+Mîglichkeit, sie bei Bedarf in den GÅltigkeitsbereich von /TExtPiece/
+'zurÅckholen'. Dazu kînnen wir sie innerhalb einer Methode von /TExtPiece/
+explizit mit
+
+/TPiece.CanMoveTo/
+
+aufrufen. Wir kînnen alternativ auch den Aufruf
+
+/inherited CanMoveTo/
+
+benutzen, der sich stets auf die Methode des unmittelbaren VorgÑngers bezieht,
+ohne dabei Namen von Klassen zu nennen. Die Benutzung von /inherited/ ist
+etwas sauberer, weil sie auch nach einer Umbenennung der VorgÑngerklasse oder
+nach dem EinfÅgen einer neuen Klasse inmitten der Hierarchie noch
+funktioniert. Bei der expliziten Nennung des VorgÑngers wÅrde es in einem
+solchen Fall nîtig sein, die Aufrufe anzupassen.
+
+Es ist an vielen Stellen sehr sinnvoll und ungemein elegant, auf den Code des
+VorgÑngers zurÅckzugreifen. Es liegt nahe, da· verwandte Objekte auch
+verwandte Aufgaben verrichten. Deshalb ist es oft mîglich, da· sie gemeinsamen
+Code verwenden. Wenn eine neue Klasse eine Spezialisierung ihres Vorfahren
+darstellt, dann kînnte sie zuerst die Methode des Vorfahren aufrufen und dann
+ihre eigene. Bei unserem Beispiel gibt es derzeit zwei Methoden, in denen
+Code doppelt vorkommt. Die Methode /TExtPiece.Initialize/ fÅhrt zuerst den
+gleichen Code aus wie /TPiece.Initialize/, dann setzt sie /FHasBeenMoved/ auf
+/False/. éhnlich sieht es bei /SetPosition/ aus. Es handelt sich zwar jeweils
+nur um einige wenige Zeilen, aber unser Programm wird trotzdem kleiner, wenn wir
+an diesen Stellen mittels /inherited/ die entsprechende VorgÑngermethode aufrufen.
+
+.XMP
+procedure TExtPiece.Initialize(Name: TName; Color: TColor; Position: TPosition);
+begin
+  inherited Initialize(Name, Color, Position);
+  FHasBeenMoved := False;
+end;
+
+procedure TExtPiece.SetPosition(NewPosition: TPosition);
+begin
+  inherited SetPosition(NewPosition);
+  FHasBeenMoved := True;
+end;
+.EXMP
+
+Den aktuellen Stand unseres Schachprogramms spiegelt die Datei CHESS05.PAS wider.
+
+.BOLD Aktive Objekte sind intelligente Objekte
+
+In den letzten Abschnitten haben wir einen weiteren Grundgedanken der OOP
+kennengelernt: Traditionelle Datentypen wie Records sind sehr passiv. Sie
+kînnen Informationen aufnehmen, verfÅgen aber Åber keinerlei Eigenintelligenz.
+Einer Schachfigur, die als Record implementiert ist, mÅssen wir jede Aktion
+haargenau erklÑren. Wire mÅssen jedes Feld von au·en korrekt verwalten oder
+Prozeduren entwickeln, die das tun. Mit den Mitteln der OOP haben wir eine
+aktive Art von Schachfigur geschaffen, der wir ein Kommando wie 'bewege Dich zum
+Feld XY' geben kînnen. Die Schachfigur wei· dann selbst, was sie zu tun hat.
+Unsere beiden Klassen /TPiece/ und /TExtPiece/ sind sogar Spezialisten auf
+diesem Gebiet, denn jede Klasse implementiert /SetPosition/ auf die fÅr sie be
+ste Weise, obwohl der Aufruf identisch ist.
+
+NatÅrlich sind Methoden letztlich auch nur Funktionen oder Prozeduren. Aber
+durch ihre enge Verschmelzung mit den Objekten fîrdern sie eine andere
+Denkweise, die der natÅrlichen Denkweise des tÑglichen Lebens nÑher kommt.
+Der Unterschied zu simplen Records lÑ·t sich vielleicht durch ein kleines
+Beispiel veranschaulichen:
+
+[Rest des Abschnitts eventuell weglassen]
+
+[Geistreiche Analogie 1]
+
+Ein Auto, ein Zug und ein Schiff kînnen alle von einer Stadt A zu einer Stadt B
+fahren. Ob dies auf einer Stra·e, auf Schienen oder gar auf dem Seeweg geschieht
+und welche Art des Antriebs in den einzelnen FÑllen zugrunde liegt, ist fÅr einen
+Passagier letztlich vîllig irrelevant. Wenn er spÑter von seiner Reise
+berichtet, dann wird er vielleicht sagen: 'Ich bin von A nach B gefahren'. Er
+wird vermutlich nicht sagen, da· er sich auf dem Seeweg mit einer Geschwindigkeit
+von etwa 10 Knoten bei starkem SÅdwestwind bewegt hat. Noch weniger dÅrfte
+ihn interessieren, wieviel Dieselkraftstoff die Schiffsmotoren auf diesem Weg
+verbraucht haben und welche Gedanken sich der Steuermann Åber die korrekte
+Route gemacht hat. Der Passagier ist einfach von A nach B gefahren, und das
+Schiff hat aus seiner Sicht den Rest erledigt. Das ist eine Art von
+Abstraktion, die Sie sehr bald in Ihren Programmen zu schÑtzen wissen werden.
+
+[Geistreiche Analogie 2]
+
+Stellen Sie sich vor, sie kommen mit dem Flugzeug in eine fremde Stadt und rufen
+sich am Flughafen ein Taxi, das sie ins Hotel bringen soll. Es sind zwei Taxis zur
+Stelle. Das eine hat einen cleveren Fahrer. Er versteht ein paar Worte Englisch,
+gerade genug um ihm das Ziel Ihrer Reise mitzuteilen. Er kennt sich in
+der Stadt aus und wÑhlt automatisch den besten Weg. Wenn Sie wÑhrend der
+Fahrt unerwartet an eine Baustelle oder in einen Stau geraten, wei· er, wie er
+das Problem geschickt umfÑhrt. Er ist ein Experte auf seinem Gebiet, und Sie
+kommen schnell, sicher und stre·frei in Ihrem Hotel an.
+
+Der Fahrer des anderen Taxis ist nicht ganz so selbstÑndig. Er ist auch wahrlich
+kein Experte. Bis vor kurzem hat er an einer Stra·enecke WÅrstchen verkauft, aber
+durch eine kleine Ungeschicklichkeit bei der Bedienung seines Grills hat er seine
+WÅrstchenbude in ein HÑuflein Asche verwandelt. Jetzt versucht er sein
+GlÅck als Taxifahrer. Sie versuchen, ihm das Ziel klarzumachen, aber seine
+Englischkenntnisse sind ausgesprochen mager. Er versteht Sie einfach nicht und
+reicht Ihnen stattdessen einen Stadtplan. WÑhrend der ganzen Fahrt mÅssen Sie
+genaue Anweisungen geben, wann und wo er abzubiegen hat. In ProblemfÑllen wie
+Baustellen oder Staus mÅssen Sie selbst die Karte bemÅhen, um einen Ausweg zu
+finden. GlÅcklicherweise merken Sie schnell genug, da· er sogar sogar die
+Ampeln ignoriert, wenn Sie ihn nicht rechtzeitig darauf hinweisen...
+Wenn Sie gute Nerven haben, kommen Sie einigerma·en schnell ins Hotel, aber
+Ihre Reise wird weder sicher noch stre·frei gewesen sein.
+
+Welchem Taxifahrer wÅrden Sie wohl den Vorzug geben?
+
+.TOPIC 2 Kapitel 4 - Schutzmechanismen
+.HIGH Kapitel 4 - Schutzmechanismen
+
+Wir haben im letzten Kapitel besonderen Wert darauf gelegt, das Prinzip der
+Kapselung mîglichst konsequent anzuwenden. Im Zuge dessen haben wir fÅr jedes
+Datenfeld unserer Schachfiguren eine lesende und schreibende Methoden entwickelt,
+die mîglichst jeden Anwendungszweck abdecken. Es steht uns aber weiterhin
+frei, entweder die Methoden zu benutzen oder direkt auf die Datenfelder
+zuzugreifen. Sowohl Datenfelder als auch Methoden sind au·erhalb des Objekts
+sichtbar. Wenn wir also nicht die nîtige Disziplin aufbringen, ist es ein
+leichtes, die Kapselung zu unterwandern, indem wir einfach direkt auf die
+Datenfelder zugreifen.
+
+Um dies zu verhindern, bietet WDSibyl-Pascal dem Programmierer insgesamt vier
+verschiedene Sichtbarkeitsklassen an. Sie kînnen jedes Element einer Klasse
+einer dieser Sichtbarkeitsklassen zuordnen und dadurch kontrollieren, wer die
+Komponente sehen und daruf zugreifen kann und wer nicht. Die vier Sichtbarkeitsklassen
+hei·en /public/, /private/, /protected/ und /published/. Sie kînnen in der
+Klassendefinition vor einem Element eingefÅgt werden und gelten ab dieser Stelle
+entweder fÅr alle folgenden Elemente der Klasse oder bis eine andere Art
+der Sichtbarkeit festgelegt wird. Effektiv kontrollieren Sie damit den
+GÅltigkeitsbereich der Elemente Ihrer Klasse.
+
+Schauen wir uns an, wie der Einsatz der Sichtbarkeitsarten sich auf die
+Definition unserer beiden Klassen auswirkt, bevor wir die verschiedenen Arten
+detailliert kennenlernen. Den folgenden Quelltext finden Sie auch in der Datei
+CHESS06.PAS.
+
+[chess06.pas]
+.XMP
+type
+  TPiece = class
+  private
+    FName:     TName;
+    FPosition: TPosition;
+    FColor:    TColor;
+  public
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    function GetColor: TColor;
+    function GetName: TName;
+    function GetPosition: TPosition;
+    procedure Initialize(Name: TName; Color: TColor; Position: TPosition);
+    procedure SetPosition(NewPosition: TPosition);
+  end;
+
+  TExtPiece = class(TPiece)
+  private
+    FHasBeenMoved: Boolean;
+  public
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    procedure Initialize(Name: TName; Color: TColor; Position: TPosition);
+    procedure SetPosition(NewPosition: TPosition);
+  end;
+.EXMP
+
+
+.ULIST
+.LISTITEM Public
+
+Wenn Sie keine andere Art der Sichtbarkeit angeben, dann wird automatisch /public/
+angenommen. Bestandteile, die als /public/ gekennzeichnet sind, sind fÅr jeden
+ohne EinschrÑnkung sichtbar und zugreifbar. Diese Art der Sichtbarkeit sollten
+Sie normalerwe ise fÅr die Methoden wÑhlen, die Sie dem Benutzer
+zur VerfÅgung stellen mîchten. In unserem Schachbeispiel sind sÑmtliche Methoden
+sinnvollerweise Public.
+
+.LISTITEM Private
+
+Dies ist die eingeschrÑnkteste Form der Sichtbarkeit. Bestandteile einer Klasse,
+die als /private/ gekennzeichnet sind, sind nur innerhalb dieser Klasse und
+innerhalb des Moduls, in dem die Klasse definiert ist, sichtbar. Sie
+sollten /private/ fÅr interne Details einer Klasse wÑhlen, die Sie vor jedermann
+verstecken wollen und die auch innerhalb der Nachfahren der Klasse nicht
+sichtbar sein sollen.
+
+In unserem Schachbeispiel bieten sich alle Felder dazu an, /private/ zu werden.
+WÅrden wir unsere Schachfiguren in einer Unit definieren, dann wÑren die
+Felder der Objekte au·erhalb der Unit nicht sichtbar. WÅrden wir die beiden
+Klassen sogar innerhalb von getrennten Units definieren, dann
+hÑtte /TExtPiece/ keinen Zugriff auf die Felder von /TPiece/. Wir mÅ·ten
+also dann die Methoden des Vorfahren benutzen, um dessen Felder zu manipulieren.
+
+öblicherweise werden Sie im Zuge der Kapselung alle Felder einer Klasse
+als /private/ kennzeichnen. Manchmal kommt es auch vor, da· Sie Methoden
+definieren, die nur intern von der Klasse benîtigt werden und dem Benutzer
+nicht zugÑnglich sein sollen. Das wÑre ein weiterer Anwendungsfall
+fÅr die Sichtbarkeitsklasse /private/.
+
+.LISTITEM Protected
+
+Diese Sichtbarkeitsklasse ist etwas weniger eingeschrÑnkt als /private/. Als
+/protected/ gekennzeichente Teile sind, wie bei /public/, innerhalb der Klasse
+und innerhalb des Moduls sichtbar. Au·erhalb des Moduls sind sie nur innerhalb von
+neuen Klassen sichtbar, die von der Klasse abstammen, die das /protected/ enthÑlt.
+
+Bei den beiden Klassen, die unser Schachbeispiel bisher enthÑlt, ergibt sich
+keine Anwendung fÅr /protected/-Elemente. Wir kînnen aber das Beispiel fortfÅhren,
+da· wir bei der ErklÑrung von /private/ benutzt haben. WÅrden wir /TPiece/ und
+/TExtPiece/ in verschiedenen Units definieren, und wÑren die Felder
+von /TPiece/ als /protected/ gekennzeichnet, dann kînnte zwar /TExtPiece/
+weiterhin direkt darauf zugreifen, aber ein Zugriff 'von au·en' ist nicht mîglich.
+
+Sie kînnen sich vorstellen, da· man /protected/ Åblicherweise fÅr Felder oder
+Methoden benutzt, die zwar nicht direkt fÅr den Anwender einer Klasse zugreifbar
+sein sollen. Ein Entwickler eines Nachkommen der Klasse kînnte aber sehr
+wohl ein Interesse daran haben, das Element zu sehen, weil er zum
+Beispiel aus GeschwindigkeitsgrÅnden ein Feld direkt manipulieren mîchte.
+
+.LISTITEM Published
+
+Teile einer Klasse, die als /published/ gekennzeichnet sind, verhalten sich
+exakt so wie Teile, die /protected/ sind. Allerdings erzeugt der Compiler fÅr
+diese Teile spezielle Informationen, die zur Laufzeit und in der
+Entwicklungsumgebung verfÅgbar sind.
+/published/ ist im Prinzip nur dann wichtig, wenn Sie eigene visuelle, also
+OberflÑchenkomponenten entwickeln, die mit dem Objekt-Inspektor kooperieren
+mÅssen. Es wird hier nur der VollstÑndigkeit halber erwÑhnt. Eine detailliertere
+Beschreibung finden Sie in der Referenz zur OOP und in der EinfÅhrung zur
+SPCC-Bibliothek.
+.EULIST
+
+.TOPIC 2 Kapitel 5 - Instanzen
+.HIGH Kapitel 5 - Instanzen
+
+.BOLD Der dynamische Charakter von Objekten
+
+Wir haben bisher gelernt, wie man Klassen definiert und welche Bestandteile sie
+aufweisen kînnen. Wir haben gesehen, wie eine Klasse sowohl Felder als auch
+Methoden von ihrem Vorfahren erbt. Schlie·lich haben wir uns Gedanken darÅber
+gemacht, wie wir einzelne Teile einer Klassendefinition vor Zugriffen 'von au·en'
+schÅtzen kînnen, indem wir sie quasi 'unsichtbar' machen. Aber unser
+Schachprogramm besteht bislang im wesentlichen aus Typendefinitionen und diversen
+Methoden. Wir haben im Programm weder Variablen deklariert, noch haben wir unsere
+Objekte sinnvoll eingesetzt. Das hat seinen Grund: WDSibyl-Pascal behandelt Objekte
+anders als traditionelle Datentypen. Bevor wir genau sehen wie, ist es nîtig,
+ein paar Begriffe zu klÑren.
+
+Der Begriff der Klasse ist uns inzwischen vertraut, wir haben ihn in den letzten
+Abschnitten ausgiebig benutzt. Es sei trotzdem noch einmal kurz wiederholt: Eine
+Klasse, manchmal auch Objektklasse oder Objekttyp genannt, ist ein Datentyp, der
+mit dem rese rvierten Wort 'class' definiert wird. Eine Klasse ist der
+Bauplan fÅr etwas, das wir ein Objekt nennen, genau wie z.B. die Definition eines
+anderen strukturierten Typs (Record oder Array) ein Bauplan fÅr eine Variable
+dieses Typs ist.
+
+Damit wir mit einer Klasse nutzbringend arbeiten kînnen, mÅssen wir einen
+ReprÑsentanten der Klasse erschaffen. Auch das ist nicht ungewîhnlich, denn
+damit wir zum Beispiel den ganzzahligen Wert 42 speichern kînnen, benutzen wir
+nicht den Typ /Integer/, sondern eine Variable dieses Typs, die wir zuvor
+mit /var/ deklarieren. Die Variable ist dann ein ReprÑsentant des Typs /Integer/.
+Ein ReprÑsentant einer Klasse wird in der OOP eine Instanz oder auch einfach ein
+Objekt genannt.
+
+[Den folgenden Absatz als Fu·note:] Bitte beachten Sie, da· wir es hier nicht
+mit dem im Deutschen Åblichen Begriff der Instanz zu tun haben. WÅrden wir das
+englische 'Instance' korrekt Åbersetzen, dann wÑre sicherlich 'Inkarnation' oder
+'Vertreter' angebrachter. Wir haben uns aber trotzdem entschlossen, von
+Instanzen zu sprechen, weil wir damit nÑher an der im englischsprachigen Raum
+Åblichen Terminologie liegen.
+
+Im Gegensatz zu anderen Datentypen, wie zum Beispiel Records, werden diese
+Instanzen nicht einfach durch die Deklaration einer Variablen erzeugt. Vielmehr
+werden sie dynamisch zur Laufzeit des Programms kreiert. Der Grund dafÅr ist die
+hîhere FlexibilitÑt. Wenn wir uns das Beispiel der graphischen BenutzeroberflÑche
+vor Augen halten, dann leuchtet unmittelbar ein, da· man nicht im voraus fÅr
+jedes Fenster, das eventuell irgendwann auf dem Bildschirm erscheint, eine
+eigene Variable deklarieren kann. Die Objekte werden alsobei Bedarf dynamisch
+erzeugt. Es mu· Speicher angefordert und spÑter wieder freigegeben werden, wenn
+das Objekt nicht mehr benîtigt wird.
+
+Damit wird auch klar, da· Zeiger im Spiel sein mÅssen, in denen die Adresse eines
+dynamisch erzeugten Objekts festgehalten wird. Diese Zeiger werden wir im
+folgenden als Objektreferenzen oder kurz als Referenzen bezeichnen. Eine Variable
+vom Typ einer Klasse enthÑlt eine solche Referenz eines Objektes. Sie enthÑlt nicht,
+wie man vielleicht vermuten kînnte, das Objekt selbst. Es ist aber nicht nîtig,
+bei jedem Zugriff auf das Objekt, den Zeiger mit Hilfe des Operators /^/ zu
+dereferenzieren. Stattdessen nimmt der Compiler an, da· wir beim Zugriff
+auf ein Element des Objekts den Zeiger dereferenzieren mîchten. Genau so haben
+wir das ja bei unseren bisherigen Beispielprogrammen auch kennengelernt.
+
+Das referenzbasierte Objektmodell ist damit in weiten Teilen fÅr Sie nicht als
+solches erkennbar. Sie greifen mit wenigen Ausnahmen auf Objektinstanzen wie
+auf andere strukturierte Datentypen zu. Der auffÑlligste Unterschied betrifft
+offensichtlich die Frage, wie Objektinstanzen erzeugt und wie sie wieder freigegeben
+werden. Dies geschieht nicht Åber die Standard-Prozeduren NEW und DISPOSE, sondern
+Åber besondere Methoden, sogenannte Konstruktoren und Destruktoren. Mehr dazu
+im nÑchsten Abschnitt.
+
+.BOLD Konstruktoren
+
+Konstruktoren sind spezielle Methoden, deren Aufruf eine neue Objektinstanz
+erzeugt und initialisiert. Konstruktoren werden wie gewîhnliche Methoden
+definiert, aber sie werden bei Definition und Implementierung durch das
+reservierte Wort /constructor/ ein geleitet. Ein Konstruktor darf eine beliebige
+Parameterliste haben, aber keinen Wert zurÅckliefern. Er hat also die
+Gestalt einer Prozedur. Beim Aufruf eines Konstruktors werden folgende
+Aktionen ausgefÅhrt:
+
+.ULIST
+.LISTITEM Es wird Speicher fÅr die Objektinstanz auf dem Heap allokiert. Dessen
+Adresse wird spÑter in die Instanzvariable geschrieben.
+
+.LISTITEM Der Speicherbereich des Objekts wird mit Nullbytes gefÅllt. Dadurch
+erhÑlt jedes Feld einen definierten Zustand. Welcher Zustand dies ist, hÑngt
+vom Typ des Feldes ab:
+
+.ULIST
+.LISTITEM Ganzzahlen und Flie·kommazahlen erhalten den Wert Null.
+.LISTITEM Zeiger und Objektreferenzen erhalten den Wert /nil/.
+.LISTITEM Einzelne Zeichen erhalten das Nullzeichen (ASCII Null, Chr(0), #0).
+.LISTITEM Strings erhalten die LÑnge Null.
+.LISTITEM Wahrheitswerte (/Boolean/) erhalten den Wert /False/.
+.LISTITEM Bei strukturierten Feldern wie Records und Arrays gelten diese
+Regeln fÅr alle Elemente.
+.EULIST
+
+.LISTITEM  Der Code, der im Konstruktor zwischen /begin/ und /end/ steht, wird
+ausgefÅhrt.
+.EULIST
+
+Wir wollen die Benutzung von Konstruktoren verdeutlichen, indem wir in unserer
+Klasse /TPiece/ die bisherige Initialisierungmethode /Initialize/ in einen
+Konstruktor namens /Create/ umwandeln. /Create/ ist Åbrigens der Name, der in
+WDSibyl-Pascal Åblicherweise fÅr Konstruktoren verwendet wird. Es steht Ihnen
+allerdings frei, einen anderen Bezeichner zu wÑhlen oder gar einer Klasse
+mehrere Konstruktoren mit verschiedenen Namen und Aufgaben hinzuzufÅgen.
+
+[chess07a.pas]
+
+.XMP
+type
+  TPiece = class
+  private
+    FName:     TName;
+    FPosition: TPosition;
+    FColour:   TColour;
+  public
+    constructor Create(Name: TName; Colour: TColour; Position: TPosition);
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    function GetColour: TColour;
+    function GetName: TName;
+    function GetPosition: TPosition;
+    procedure SetPosition(NewPosition: TPosition);
+  end;
+
+constructor TPiece.Create(Name: TName; Color: TColor; Position: TPosition);
+begin
+  FName := Name;
+  FColor := Color;
+  FPosition := Position;
+end;
+.EXMP
+
+Wir sehen, da· der Konstruktor den gleichen Code enthÑlt wie vorher /Initialize/.
+Es war nicht nîtig, zusÑtzlichen Code zur Erzeugung der Objektinstanz hinzuzufÅgen.
+Das erledigt der Compiler automatisch, wenn er eine Methode mit den SchlÅsselwort
+/constructor/ entdeckt. Damit sind wir endlich in der Lage, Instanzen von /TPiece/ zu
+erzeugen, mit denen wir auch wirklich arbeiten kînnen. Folgendes Beispiel bringt
+die beiden Damen in ihre Anfangspositionen:
+
+.XMP
+var Piece1, Piece2: TPiece;
+
+begin
+  Piece1.Create(Queen, White, MakePosition(4, 1));
+
+  Piece2 := TPiece.Create(Queen, Black, MakePosition(4, 8);
+end.
+.EXMP
+
+Wie wir sehen, gibt es prinzipiell zwei Varianten des Konstruktoraufrufes: Einmal
+in der Form /Variable.Konstruktor/ und einmal in Form einer Zuweisung, bei der
+die Variable das Ergebnis des Aufrufes /Klasse.Konstruktor/ erhÑlt. In unserem
+Beispiel sind beide Mîglichkeiten von der Funktion her identisch. Da die erste
+Variante kÅrzer und prÑgnanter ist, findet sie in vielen FÑllen Anwendung. Die
+zweite Variante ist flexibler und erîffnet uns zusÑtzliche Mîglichkeiten, die
+wir noch kennenlernen werden. FÅrden Moment halten wir einfach fest, da· wir
+Konstruktoren auf zwei Arten aufrufen kînnen, und fÅgen /TExtPiece/ ebenfalls
+einen Konstruktor hinzu. Auch hier machen wir Gebrauch von der Mîglichkeit,
+mittels /inherited/ den Konstruktor der VorgÑngerklasse aufzurufen.
+
+[chess07a.pas]
+.XMP
+type
+  TExtPiece = class(TPiece)
+  private
+    FHasBeenMoved: Boolean;
+  public
+    constructor Create(Name: TName; Colour: TColour; Position: TPosition);
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    procedure SetPosition(NewPosition: TPosition);
+  end;
+
+constructor TExtPiece.Create(Name: TName; Colour: TColor; Position: TPosition);
+begin
+  inherited Create(Name, Color, Position);
+  FHasBeenMoved := False;
+end;
+.EXMP
+
+Von /TExtPiece.Create/ werden Åbrigens nicht, wie Sie vielleicht befÅrchten, zwei
+Objektinstanzen erzeugt. Der Aufruf des Konstruktors des Vorfahren durch
+/inherited/ oder durch explizite Nennung der Klasse fÅhrt nur den Code aus, der
+sich zwischen /begin/ und /end/ befindet. Es wird in in den meisten FÑllen sinvoll
+sein,wenn Sie zuerst den Konstruktor des Vorfahren aufrufen und dann den eigenen
+Code ausfÅhren, obwohl es Anwendungen gibt, wo diese Faustregel nicht gelten mu·.
+
+Genau wie andere Methoden werden auch Konstruktoren an Nachkommen vererbt. So
+erbt jede Klasse, die von /TObject/ abstammt, dessen Konstruktor /Create/, der
+allerdings Åber keinerlei FunktionalitÑt verfÅgt.
+
+.BOLD Destruktoren
+
+Nachdem wir nun wissen, wie Objekte zur Laufzeit eines Programms erzeugt werden,
+stellt sich natÅrlich auch die Frage, wie wir uns dieser 'dienstbaren Geister'
+wieder entledigen, wenn wir sie nicht mehr benîtigen. Es gibt ein GegenstÅck zu
+den Konstruktoren, das diese spezielle Aufgabe erledigt, die Destruktoren. Analog
+zu den Konstruktoren sind es spezielle Methoden, in diesem Fall eingeleitet durch
+das SchlÅsselwort /destructor/, die erst beliebigen Code ausfÅhren und dann
+automatisch den Speicher der Objektinstanz freigeben. Auch hier besteht die
+Mîglichkeit, den Destruktor der VorgÑngerklasse aufzurufen. Das geschieht
+Åblicherweise, aber nicht zwingend nach der AusfÅhrung des eigenen
+Destruktor-Codes. Die Reihenfolge ist also meist der beim Aufruf geerbter
+Konstruktoren genau entgegengesetzt.
+
+Jede Klasse erbt von /TObject/ dessen Destruktor /Destroy/. Ob es nîtig ist,
+diesen Destruktor zu Åberschreiben, hÑngt von der Beschaffenheit der Klasse ab.
+
+.ULIST
+.LISTITEM  EnthÑlt die Klasse dynamische Daten, also Zeiger, Objekte oder
+andere komplexe Strukturen, die im Vorfahren nicht vorhanden waren, dann
+ist sicherlich ein eigener Destruktor vonnîten. Wie sonst sollten diese
+Daten korrekt freigegeben werden? Detor des Vorfahren wei· nichts Åber
+die neuen Daten. Folglich wird er sie bei der Freigabe auch nicht in der nîtigen
+Weise behandeln. Hier sollten zuerst die eigenen Strukturen freigegeben werden,
+dann sollte der Destruktor des Vorfahren aufgerufen werden.
+
+.LISTITEM  EnthÑlt die Klasse keine dynamischen Daten, also z.B. nur Felder vom
+Typ /Integer/ oder /String/, oder hat sie Åberhaupt keine Felder zusÑtzlich zu
+denen des Vorfahren, dann ist meist kein eigener Destruktor nîtig. Der vom
+Vorfahren geerbte Desann die Aufgabe erledigen, denn er gibt immer den
+gesamten von der Instanz belegten Speicher frei.
+.EULIST
+
+Die beiden Klassen unseres Schachprogramms enthalten keine komplexen
+Datenstrukturen. Folglich benîtigen wir auch keinen speziellen Destruktor. Wir
+geben uns mit dem zufrieden, den uns /TObject/ zur VerfÅgung stellt. Testen wir
+unsere neu erworbenen Kenntnisse, indem wir ein paar Figuren erzeugen und
+wieder freigeben. Zwischendurch lassen wir uns zur Kontrolle von Konstruktor und
+Destruktor den freien Speicher anzeigen. Den folgenden Quellcode finden Sie
+Åbrigens auch in der Datei CHESS07A.PAS. Sie kînnen ihn compilieren
+und - ein Novum in dieser EinfÅhrung - zum ersten Mal auch wirklich ausfÅhren.
+
+[chess07a.pas]
+.XMP
+var
+  Pieces: array[1..5] of TPiece;
+  ExtPieces: array[1..11] of TExtPiece;
+
+  N: Integer;
+
+begin
+  WriteLn('Freier Speicher zu Programmbeginn:');
+  WriteLn(MemAvail, ' Byte.');
+
+  ExtPieces[1].Create(Rook, White, MakePos(1, 1));
+  Pieces   [1].Create(Knight, White, MakePos(2, 1));
+  Pieces   [2].Create(Bishop, White, MakePos(3, 1));
+  Pieces   [3].Create(Queen, White, MakePos(4, 1));
+  ExtPieces[2].Create(King, White, MakePos(5, 1));
+  Pieces   [4].Create(Bishop, White, MakePos(3, 1));
+  Pieces   [5].Create(Knight, White, MakePos(2, 1));
+  ExtPieces[3].Create(Rook, White, MakePos(2, 1));
+
+  for N := 1 to 8 do ExtPieces[3 + N].Create(Pawn, White, MakePos(N, 2));
+
+  WriteLn('Freier Speicher nach dem Erzeugen der Figuren:');
+  WriteLn(MemAvail, ' Byte.');
+
+  for N := 1 to 5 do Pieces[N].Destroy;
+  for N := 1 to 11 do ExtPieces[N].Destroy;
+
+  WriteLn('Freier Speicher nach der Freigabe der Figuren:');
+  WriteLn(MemAvail, ' Byte.');
+
+  Write('<Return>');
+  ReadLn;
+end.
+.EXMP
+
+.TOPIC 2 Kapitel 6 - Zuweisungen
+.HIGH Kapitel 6 - Zuweisungen
+
+Nachdem wir jetzt in der Lage sind, Variablen vom Typ einer Klasse zu deklarieren,
+Objekte zu instantiieren und wieder freizugeben, stellt sich die Frage, in welcher
+Form Zuweisungen bei Objekten gehandhabt werden. Etwas nÑher betrachtet teilt
+sich die Frage in folgende beiden Problemstellungen auf:
+
+.ULIST
+.LISTITEM   Was passiert Åberhaupt bei einer Zuweisung?
+
+.LISTITEM   Welche Klassen sind zuweisungskompatibel und welche nicht?
+.EULIST
+
+Die erste Frage lÑ·t sich mit Blick auf die letzten Abschnitte relativ einfach
+beantworten. Wir hatten festgestellt, da· das Objektmodell von Object Pascal auf
+Referenzen basiert, auch wenn dies in vielen FÑllen durch die Sprache
+verdeckt wird, um dem Programmierer das Leben zu erleichtern. Wir wissen, da· die
+Deklaration
+
+.XMP
+var Piece1, Piece2: TPiece;
+.EXMP
+
+nicht zwei Objekte verfÅgbar macht, sondern zwei Zeigervariablen bereitstellt, die
+auf Objektinstanzen zeigen kînnen. Wenn also nun /Piece1/ auf eine Objektinstanz
+zeigt, und wir /Piece2/ den Wert von /Piece1/ zuweisen, dann erstellen wir
+keine Kopie dieses Objekts. Vielmehr enthalten nun beide Zeiger den gleichen
+Wert und referenzieren somit das gleiche Objekt. Lassen Sie uns das an einem
+kleinen Beispiel verdeutlichen.
+
+.XMP
+var Piece1, Piece2: TPiece;
+
+begin
+  Piece1.Create(Queen, White, MakePosition(4, 1));
+  Piece2 := Piece1;
+  Piece2.SetPosition(MakePosition(4, 4));
+  WriteLn(Piece1.GetPosition.X);
+  WriteLn(Piece1.GetPosition.Y);
+end.
+.EXMP
+
+Die zweite Frage im Zusammenhang mit Zuweisungen war die nach der
+ZuweisungskompatibilitÑt von Klassen. Welche Instanzen dÅrfen wir welchen
+Variablen zuweisen? Die Frage erscheint mit Blick auf traditionelle Datentypen wie
+Records etwas unsinnig oder doch zumindestens ungewohnt. Die sehr strikte
+TypprÅfung von Pascal sorgt ja gerade dafÅr, da· wir nicht versehentlich einer
+Variablen einen Wert zuweisen, der nicht exakt ihrem Typ entspricht. Bei der
+OOP wurden diese Regeln zugunsten der FlexibilitÑt etwas gelockert. Es sind
+nicht nur Objekte zuweisungskompatibel, die exakt vom gleichen Typ sind. Einer
+Objektvariablen kann jede Instanz zugewiesen werden, die 'von der gleichen
+Klasse' ist wie die Variable. Was bedeutet das?
+
+Wenn in der OOP davon gesprochen wird, da· ein Objekt 'von einer bestimmten
+Klasse' ist, dann schlie·t diese Aussage sowohl die Klasse selbst als auch deren
+Nachfahren ein. Ein Blick auf die Natur und den Artenstammbaum der verschiedenen
+Lebewesen zeigt uns, da· der Gedanke naheliegend und sinnvoll ist. Wenn wir von
+der Klasse der SÑugetiere reden, meinen wir damit ja auch zum Beispiel alle KÅhe
+dieser Welt. Jede Kuh ist ein SÑugetier. Aber nicht jedes SÑugetier ist eine Kuh.
+
+FÅr unsere Frage nach ZuweisungskompatibilitÑt bedeutet das: Wir kînnen einer
+Variablen vom Typ /TPiece/ jede beliebige Instanz zuweisen, die von der
+Klasse /TPiece/ ist. Das schlie·t sowohl /TPiece/ als auch alle Nachfahren
+von /TPiece/ ein, in unserem Fall /TExtPiece/. Wir kînnen einer Variablen vom
+Typ /TExtPiece/ aber keine Instanz vom Typ /TPiece/ zuweisen. Jede erweiterte
+Schachfigur ist zwar eine Schachfigur, genau wie jede Kuh ein SÑugetier ist,
+aber umgekehrt wird kein Schuh daraus.
+
+Wenn wir noch weitere Klassen definieren, die Åberhaupt nicht mit /TPiece/
+verwandt sind, dann sind selbstverstÑndlich in keiner der beiden Richtungen
+Zuweisungen erlaubt. SÑugetiere und Fische bilden zum Beispiel im natÅrlichen
+Artenstammbaum vollkommen verschiedene éste. Den beiden fehlt es einfach
+an der nîtigen Verwandtschaft, daher besteht zwischen Fischen und SÑugetieren
+(Biologen mîgen diesen Satz bitte ignorieren) in keiner Richtung
+ZuweisungskompatibilitÑt.
+
+Mit diesen erweiterten Zuweisungsregeln machen auf einmal auch beide Varianten
+des Konstruktorausrufes Sinn. Nehmen wir zum Beispiel eine Variable /MyPiece/
+vom Typ /TPiece/. WÑhrend /MyPiece.Create/ immer eine Instanz vom Typ /TPiece/
+erzeugt, erlaubt die andere Variante sowohl /MyPiece := TPiece.Create/
+als auch /MyPiece := TExtPiece.Create/. Das ist einer der Grundsteine fÅr das,
+was wir im einleitenden Abschnitt als Polymorphie bezeichnet haben. Wir kînnen
+es anwenden, indem wir zum Beispiel alle 16 Schachfiguren in einem Array
+des Typs TPiece speichern, statt zwei Arrays verschiedener Typen zu benutzen.
+Allerdings mÅssen wir dann die Zuweisungsvariante des Konstruktoraufrufes
+benutzen. Schauen Sie sich den folgenden Quellcode an und vergleichen Sie
+ihn mit dem Quellcode vom Ende des letzten Abschnitts.
+
+[chess07b.pas]
+.XMP
+var Pieces: array[1..16] of TPiece;
+    N: Integer;
+
+begin
+  WriteLn('Freier Speicher zu Programmbeginn:');
+  WriteLn(MemAvail, ' Byte.');
+
+  Pieces[1] := TExtPiece.Create(Rook, White, MakePosition(1, 1));
+  Pieces[2] := TPiece.Create(Knight, White, MakePosition(2, 1));
+  Pieces[3] := TPiece.Create(Bishop, White, MakePosition(3, 1));
+  Pieces[4] := TPiece.Create(Queen, White, MakePosition(4, 1));
+  Pieces[5] := TExtPiece.Create(King, White, MakePosition(5, 1));
+  Pieces[6] := TPiece.Create(Bishop, White, MakePosition(6, 1));
+  Pieces[7] := TPiece.Create(Knight, White, MakePosition(7, 1));
+  Pieces[8] := TExtPiece.Create(Rook, White, MakePosition(8, 1));
+
+  for N := 1 to 8 do
+  begin
+    Pieces[8 + N] := TExtPiece.Create(Pawn, White, MakePosition(N, 2));
+  end;
+
+  WriteLn('Freier Speicher nach dem Erzeugen der Figuren:');
+  WriteLn(MemAvail, ' Byte.');
+
+  for N := 1 to 16 do Pieces[N].Destroy;
+
+  WriteLn('Freier Speicher nach der Freigabe der Figuren:');
+  WriteLn(MemAvail, ' Byte.');
+
+  Write('<Return>');
+  ReadLn;
+end.
+.EXMP
+
+.BOLD Typwandlungen
+
+Es kommt von Zeit zu Zeit vor, da· man zur Laufzeit des Programms den Typ eines
+Ausdrucks Ñndern mu·. Dazu bietet WDSibyl-Pascal die Mîglichkeit einer Typwandlung
+an. Typwandlungen sind immer eine kritische Sache, denn sie umgehen bewu·t die
+strenge TypprÅfung von Pascal. WÑhrend Typwandlungen bei herkîmmlichen
+Datentypen nur einen gegrenzten Schaden anrichten kînnen, kînnen sie bei
+Objekttypen sehr leicht ein Programm zum Absturz bringen. Stellen Sie sich zwei
+Klassen TMonkey und TFish vor, die keinerlei Gemeinsamkeit haben,also komplett
+verschiedenen ésten der Hierarchie entstammen. TMonkey verfÅgt Åber eine
+Methode Climb, TFish nicht.
+
+.XMP
+var MyFish: TFish;
+
+begin
+  MyFish := TFish.Create;
+  TMonkey(MyFish).Climb;
+end.
+.EXMP
+
+Das Programm wandelt eine Instanz von TFish zur Laufzeit in den Typ TMonkey um.
+Nur deshalb ist es mîglich, die Methode Climb aufzurufen, denn TFish hat ja keine
+solche Methode, wie wir bereits festgestellt haben. Aber es findet keine wirkliche
+énderung an den Daten von MyFish statt. Nur der Sicherheitsmechanismus
+des Compilers wird fÅr einen Moment au·er Kraft gesetzt, so da· wir quasi annehmen
+kînnen, MyFish wÑre vom Typ TMonkey.
+
+Was passiert nun beim Aufruf von Climb? Das hÑngt von der Implementierung der
+beiden Klassen ab. Da sie aber nicht miteinander verwandt sind, werden sie
+vermutlich Åber vollkommen verschiedene interne Daten in Form von Feldern verfÅgen.
+Climb verlÑ·t mîglicherweise auf ein Feld, das Objekte der Klasse TFish gar nicht
+besitzen, sagen wir 'FArmLength'. Beim Zugriff auf dieses Feld greift Climb
+ins Leere und lîst zum Beispiel eine Schutzverletzung aus. NatÅrlich sind auch
+andere Auswirkungen denkbar, bei denen sich der Fehler nicht auf so fatale
+Weise auswirkt. Aber es ist Ñu·erst unwahrscheinlich, da· das Programm das
+gewÅnschte Ergebnis erzielt. Deshalb sollten Typwandlungen daraufhin ÅberprÅft
+werden kînnen, ob sie potentiell gefÑhrlich sind oder nicht. DafÅr stellt
+WDSibyl-Pascal zwei Operatoren zur VerfÅgung.
+
+.BOLD Der Operator IS
+
+Der erste der beiden Operatoren hei·t 'is'. Er ermîglicht es, zur Laufzeit des
+Programms zu prÅfen, ob ein Objekt von einer bestimmten Klasse ist. Das schlie·t,
+genau wie bei den Regeln zur ZuweisungskompatibilitÑt, die Klasse selbst und ihre
+Nachfolger ein. Die Syntax des Operators ist
+
+/Instanz is Klasse/
+
+und liefert /True/ oder /False/ zurÅck. Schauen wir uns ein kleines Beispiel dazu
+an. Wir fÅgen TExtPiece eine Methode 'CanRochadeWith' hinzu, die prÅfen soll,
+ob ein Kînig mit einem Turm eine eine Rochade ausfÅhren kann. Da wir nicht genau
+wissen, ob die beiden zur Laufzeit Åbergebenen Figuren tatsÑchlich ein Kînig und
+ein Turm sind, prÅfen wir dies mit dem is-Operator. WÅrden wir dies nicht tun,
+kînnte der Zugriff auf das Feld 'FHasBeenMoved', den die Methode macht, ins
+Leere gehen, denn Instanzen von Piece haben dieses Feld Åberhaupt nicht.
+
+[hier Quellcode einer Methode CanRochadeWith einfÅgen]
+
+Der Sinn des /is/-Operators liegt also darin, zur Laufzeit Typwandlungen auf ihre
+Sicherheit zu ÅberprÅfen. Als sicher gilt eine Typwandlung dann, wenn die neue
+Klasse der Instanz entweder der alten Klasse entspricht oder ein Vorfahre davon
+ist. Das ist auch verstÑndlich, denn wenn die alte Klasse ein Nachfahre
+der neuen Klasse ist, dann hat sie auch deren Elemente geerbt. Eine Typwandlung
+in die Vorfahrenklasse stellt somit nichts weiter als eine BeschrÑnkung auf
+die Mîglichkeiten des Vorfahren dar. Diese BeschrÑnkung ist ungefÑhrlich, also
+ist die Typwandlung sicher.
+
+Als unsicher sind dementsprechend Typwandlungen anzusehen, deren Ergebnis ein
+Nachfahr der alten Klasse oder ein gÑnzlich unverwandter Typ ist. Wie das
+aussieht, und welche Probleme dabei auftreten kînnen haben wir uns ja mit Hilfe
+von TMonkey und TFish vor Augen gefÅhrt.
+
+.BOLD Der Operator AS
+
+Der zweite Operator fÅr Typwandlungen ist der Operator 'as'. Er prÅft, ebenso
+wie 'is', ob die Typwandlung mîglich ist. Die Regeln sind dabei exakt die
+gleichen wie beim 'is'-Operator, sein Ergebnis ist aber kein Wahrheitswert,
+sondern eine Referenz auf ein Objekt des gewÅnschten Typs. Ist die Wandlung
+nicht mîglich, lîst der Operator einen Laufzeitfehler aus. Damit sind folgende
+beiden Codesequenzen von der Funktion her annÑhernd gleich:
+
+// IS
+.XMP
+if MyObject is MyClass then
+  with MyClass(MyObject) do ...
+else
+  RunError(216);
+.EXMP
+
+// AS
+.XMP
+with MyObject as MyClass do ...
+.EXMP
+
+.TOPIC 2 Kapitel 7 - Methodenzuteilung zur Laufzeit
+.HIGH Kapitel 7 - Methodenzuteilung zur Laufzeit
+
+
+Nachdem wir inzwischen in der Lage sind, Instanzen von Schachfiguren zu
+erzeugen, ist es an der Zeit, sich Gedanken Åber deren Darstellung auf dem
+Bildschirm zu machen. Da unser Beispielprogramm textorientiert sein soll, mÅssen
+wir uns auf die kreativen Mîglichkeiten beschrÑnken, die uns der Zeichensatz
+in einem 80 mal 25 Zeichen gro·en Textfenster bietet. FÅr jedes Feld des
+Schachbretts - und damit auch fÅr jede Figur - stehen uns drei Zeilen a sieben
+Spalten zur VerfÅgung. Das ist zugegebenerma·en nicht sehr viel, aber es
+wird reichen, um die einzelnen Figuren voneinander zu unterscheiden.
+
+Wir erweitern /TPiece/ um zwei zusÑtzliche Methoden /Erase/ und /Draw/, die sich
+um das Lîschen einer Figur vom und das Neuzeichnen auf dem Bildschirm kÅmmern.
+Diese Methoden benîtigen nicht einmal Parameter, denn wer wei· besser Åber die
+Position der Figur Bescheid als die Figur selbst? Die Auswahl eines
+geeigneten Symbols erledigt ebenfalls eine Methode, nennen wir sie /GetPicture/.
+/GetPicture/ erwartet drei Variablen-Parameter vom Typ /string/. In den
+ersten schreibt sie die Kopfzeile der Figur, in den zweiten den Rumpf und in
+den dritten die Fu·zeile. /Draw/ ruft zuerst /GetPicture/ auf und schreibt
+dann die drei Strings untereinander auf den Bildschirm. Sowohl /Draw/ als
+auch /Erase/ wÑhlen automatisch die richtige Farbe fÅr die Figur und das
+unterliegende Feld.
+
+/GetPicture/ mu· in /TExtPiece/ Åberschrieben werden, weil ja jede Klasse nur
+fÅr jeweils eine HÑlfte der Schachfiguren zustÑndig ist. Au·erdem bauen wir
+dort vorsorglich eine Fehlerbehandlung ein: FÅr den Fall, da· ein Objekt im
+Feld /FName/ einen Figurentyp enthÑlt, fÅr den es nicht geeignetist (zum
+Beispiel eine Instanz von /TPiece/, die einen Kînig darstellen soll), gibt
+/GetPicture/ als Symbol ein Fragezeichen zurÅck.
+
+ZusÑtzlich implementieren wir noch eine Hilfsprozedur /PositionToScreen/, die eine
+Position auf dem Schachbrett in die zugehîrige Bildschirmposition umrechnet
+und die Farbe des Feldes ermittelt.
+
+[chess08a.pas]
+.XMP
+type
+  TPiece = class
+  private
+    FName:     TName;
+    FPosition: TPosition;
+    FColor:    TColor;
+  protected
+    procedure GetPicture(var Head, Body, Feet: string);
+  public
+    constructor Create(Name: TName; Color: TColor; Position: TPosition);
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    function GetColor: TColor;
+    function GetName: TName;
+    function GetPosition: TPosition;
+    procedure SetPosition(NewPosition: TPosition);
+    procedure Draw;
+    procedure Erase;
+  end;
+
+  TExtPiece = class(TPiece)
+  private
+    FHasBeenMoved: Boolean;
+  protected
+    procedure GetPicture(var Head, Body, Feet: string);
+  public
+    constructor Create(Name: TName; Color: TColor; Position: TPosition);
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    procedure SetPosition(NewPosition: TPosition);
+  end;
+
+procedure PositionToScreen(Position: TPosition; var X, Y, Color: Integer);
+begin
+  X := 2 + (Position.X - 1) * 7;
+  Y := 25 - Position.Y * 3;
+  if Odd(Position.X + Position.Y) then Color := 4
+  else Color := 2;
+end;
+
+procedure TPiece.GetPicture(var Head, Body, Feet: string);
+begin
+  case FName of
+    Bishop: begin
+              Head := '  //\  ';
+              Body := ' //  \ ';
+              Feet := ' \ L / ';
+            end;
+
+    Knight: begin
+              Head := ' /^^^\ ';
+              Body := ' \_/ | ';
+              Feet := '  /S | ';
+            end;
+
+    Queen:  begin
+              Head := ' !!!!! ';
+              Body := ' //  \ ';
+              Feet := ' \ D / ';
+            end;
+  else
+    Head := '       ';
+    Body := '   ?   ';
+    Feet := '       ';
+  end;
+end;
+
+procedure TPiece.Draw;
+var
+  Row, Column, Color: Integer;
+  Head, Body, Feet: string;
+begin
+  PositionToScreen(FPosition, Column, Row, Color);
+  TextBackground(Color);
+  if FColor = White then TextColor(15) else TextColor(0);
+  GetPicture(Head, Body, Feet);
+  GotoXY(Column, Row);
+  Write(Head);
+  GotoXY(Column, Row + 1);
+  Write(Body);
+  GotoXY(Column, Row + 2);
+  Write(Feet);
+end;
+
+procedure TPiece.Erase;
+var
+  Row, Column, Color: Integer;
+begin
+  PositionToScreen(FPosition, Column, Row, Color);
+  TextBackground(Color);
+  GotoXY(Column, Row);
+  Write('       ');
+  GotoXY(Column, Row + 1);
+  Write('       ');
+  GotoXY(Column, Row + 2);
+  Write('       ');
+end;
+
+procedure TExtPiece.GetPicture(var Head, Body, Feet: string);
+begin
+  case FName of
+    King: begin
+            Head := '  _+_  ';
+            Body := ' //  \ ';
+            Feet := ' \ K / ';
+          end;
+
+    Pawn: begin
+            Head := '  (^)  ';
+            Body := '  / \  ';
+            Feet := ' / B \ ';
+          end;
+
+    Rook: begin
+            Head := '\/\_/\/';
+            Body := ' |   | ';
+            Feet := ' | T | ';
+          end;
+  else
+    Head := '       ';
+    Body := '   ?   ';
+    Feet := '       ';
+  end;
+end;
+.EXMP
+
+Testen wir die neuen Methoden, indem wir - wie in den vorangegangenen
+Beispielen - einen kompletten Satz wei·er Figuren erzeugen. Diesmal sparen wir
+uns allerdings die Anzeige von Speicherdetails. Stattdessen lassen wir jede
+Figur, nachdem sie erzeugt wurde, mit /Draw/ auf dem Bildschirm anzeigen. Das
+komplette Programm finden Sie in der Datei CHESS08A.PAS. Wenn Sie es
+compilieren und ausfÅhren, erhalten Sie folgendes im unteren Teil des
+Ausgabefensters:
+
+[hier Screenshot der Programmausgabe: Manche Figuren werden als '?' angezeigt.]
+
+Offensichtlich werden nicht alle Figuren korrekt angezeigt. Bei einem Teil
+der Figuren werden stattdessen die Fragezeichen angezeigt, was darauf hindeutet,
+da· entweder eine Instanz einen Figurentyp enthÑlt, den sie nicht reprÑsentieren
+darf, oder da· eine falsche Methode aufgerufen wurde. Bei genauerer
+Betrachtung fÑllt auf, da· der Fehler bei Bauern, TÅrmen und dem Kînig auftritt,
+also bei allen erweiterten Figuren.
+
+Was ist hier falsch gelaufen? Um das zu verstehen, beschrÑnken wir unser Szenario
+einmal auf die Elemente, die bei unserem Problem zum Tragen kommen: Die beiden
+Klassen und die Methoden /Draw/ und /GetPicture/.
+
+.XMP
+type
+  TPiece = class
+    ...
+    procedure GetPicture(var Head, Body, Feet: string); 
+    procedure Draw;
+    ...
+  end;
+
+  TExtPiece = class(TPiece)
+    ...
+    procedure GetPicture(var Head, Body, Feet: string); 
+    ...
+  end;
+
+procedure TPiece.GetPicture(var Head, Body, Feet: string);
+begin
+  ...
+end;
+
+procedure TPiece.Draw;
+begin
+  ...
+  GetPicture(...);
+  ...
+end;
+
+procedure TExtPiece.GetPicture(var Head, Body, Feet: string);
+begin
+  ...
+end;
+.EXMP
+
+Wie wir gesehen haben, tritt der Fehler beim Darstellen der Instanzen von
+/TExtPiece/ auf. Die Darstellung Åbernimmt die Methode /Draw/, die /TExtPiece/
+von /TPiece/ geerbt hat. /Draw/ ruft /GetPicture/ auf, und offensichtlich wird
+sowohl bei Instanzen von /TPiece/ als auch bei solchen von /TExtPiece/
+immer /TPiece.GetPicture/ aufgerufen. Das ist die einzig mîgliche ErklÑrung fÅr
+das fehlerhafte Verhalten des Programms, und sie entspricht auch der RealitÑt.
+
+Aber warum wird immer /TPiece.GetPicture/ aufgerufen? Weil es eine statische
+Methode ist. Statisch bezieht sich hier auf die Art der Methodenzuteilung, also
+die Frage, welche Methode zur Laufzeit tatsÑchlich aufgerufen wird, wenn
+theoretisch mehrere Methoden gleichen Namens zur Auswahl stehen. In unserem Fall
+stehen /TPiece.GetPicture/ und /TExtPiece.GetPicture/ zur Auswahl. Es sieht so
+aus, als wÅrde sich der Compiler bei Darstellen von erweiterten Figuren fÅr
+die falsche Methode entscheiden. Warum ist das so?
+
+Die typische Vorgehensweise des Compilers ist es, das Programm vom Anfang zum
+Ende zu bearbeiten. Das ist nicht weiter verwunderlich. Was geschieht nun,
+wenn der Compiler auf die Implementierung der Methode /TPiece.Draw/ mit dem
+Aufruf von /GetPicture/ stî·t? Die einzige Methode mit dem Bezeichner /GetPicture/
+im GÅltigkeitsbereich von /TPiece/ ist /TPiece.GetPicture/. Er ruft also an
+dieser Stelle /TPiece.GetPicture/ auf. Der Aufruf ist statisch. Es ist also
+bereits zur Zeit der Compilierung bestimmt, welche Methode aufgerufen wird.
+Diese Arbeitsweise ist nicht ungewîhnlich, tatsÑchlich entspricht sie genau der
+Behandlung gewîhnlicher Prozeduren und Funktionen.
+
+Weiter unten im Quelltext stî·t der Compiler auf die Implementierung von
+/TExtPiece/. Die Klasse verfÅgt zwar Åber eine eigene Methode /GetPicture/,
+aber das spielt fÅr die Methode /Draw/ Åberhaupt keine Rolle mehr. Da
+/TExtPiece/ die Methode /Draw/ von /TPiece/ Åbernommen hat, steht deren Code
+bereits fest: Es ist der Code von /TPiece.GetPicture/. Wenn eine Klasse eine
+Methode von ihrem Vorfahren erbt, dann erhÑlt sie keine Kopie von deren Code.
+Sie ruft stattdessen die Methode des Vorfahren auf.
+
+Damit sollte klar sein, warum das Programm nicht funktioniert. Jede Instanz von
+/TExtPiece/, also alle Bauern, TÅrme und der Kînig, rufen das von /TPiece/
+geerbte /Draw/ auf. Damit rufen sie tatsÑchlich /TPiece.Draw/ auf. /TPiece.Draw/
+benutzt aufgrund der statischen Bindung /TPiece.GetPicture/ und
+nimmt von /TExtPiece.GetPicture/ Åberhaupt keine Notiz.
+
+Wie kînnen wir dieses Problem umgehen? Auf den ersten Blick scheint es
+eine Lîsung zu sein, /TExtPiece/ eine eigene Methode /Draw/ hinzuzufÅgen. Diese
+Methode wÑre dann wirklich eine Kopie der Methode von /TPiece/, denn sie besitzt
+den gleichen Quellcode. Beim Aufruf von /GetPicture/ innerhalb von
+/TExtPiece.Draw/ wÅrde sich der Compiler dann fÅr die Methode /GetPicture/
+entscheiden, die im GÅltigkeitsbereich von /TExtPiece/ liegt, also
+/TExtPiece.GetPicture/.
+
+.XMP
+type
+  TExtPiece = class(TPiece)
+  private
+    FHasBeenMoved: Boolean;
+  protected
+    procedure GetPicture(var Head, Body, Feet: string);
+  public
+    constructor Create(Name: TName; Color: TColor; Position: TPosition);
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    procedure Draw;
+    procedure SetPosition(NewPosition: TPosition);
+  end;
+
+procedure TExtPiece.Draw;
+var
+  Row, Column, Color: Integer;
+  Head, Body, Feet: string;
+begin
+  PositionToScreen(FPosition, Column, Row, Color);
+  TextBackground(Color);
+  if FColor = White then TextColor(15) else TextColor(0);
+  GetPicture(Head, Body, Feet);
+  GotoXY(Column, Row);
+  Write(Head);
+  GotoXY(Column, Row + 1);
+  Write(Body);
+  GotoXY(Column, Row + 2);
+  Write(Feet);
+end;
+.EXMP
+
+Damit wird unser Programm korrekt ausgefÅhrt. öberzeugen Sie sich selbst davon,
+indem Sie CHESS08B.PAS compilieren.
+
+Auch wenn es seinen Zweck erfÅllt, scheint das öberschreiben von /Draw/ unnîtig
+und wenig elegant zu sein. Es blÑht sowohl den Quellcode als auch das fertige
+Programm auf. Und was wÑre, wenn wir die Klasse /TPiece/ gar nicht im Quellcode
+vorliegen hÑtten?
+Woher wÅ·ten wir dann, welche Aktionen /TPiece.Draw/ wirklich durchfÅhrt? Es gibt
+einen wesentlich eleganteren Weg, dieses Problem zu lîsen, die sogenannten
+virtuellen Methoden.
+
+.BOLD Virtuelle Methoden
+
+Eine virtuelle Methode ist, simpel ausgedrÅckt, das Gegenteil einer statischen
+Methode. Der Compiler entscheidet sich nicht bereits zur Zeit der Compilierung,
+welche Methode aufgerufen wird. Stattdessen verschiebt er die Entscheidung auf
+die Laufzeit des Programms. Wie ist dieses Wunderwerk mîglich? Wir hatten
+bereits gesehen, da· die Objekte Åber Typinformationen verfÅgen, die zur Laufzeit
+erfragt werden kînnen. Ohne nÑher auf die Details dieser Informationen eingehen
+zu wollen, kînnte man sagen, da· jedes Objekt einen Verweis in Form eines Zeigers
+auf seine tatsÑchliche Klasse in sich birgt. Wenn eine Klasse Åber eine oder
+mehrere virtuelle Methoden verfÅgt, dann werden die Einsprungadressen dieser
+Methoden in einer Tabelle gespeichert, die zur Laufzeit bei den Informationen
+Åber die Klasse zu finden ist. Da das Programm die tatsÑchliche Adresse der
+aufzurufenden Methode dieser Tabelle entnimmt, wird stets die richtige Methode
+aufgerufen, denn jede Klasse hat eine eigene Tabelle virtueller Methoden, und
+jedes Objekt verfÅgt Åber einen Zeiger auf seinen tatsÑchliche Klasse.
+
+Genug der grauen Theorie! Eine virtuelle Methode wird bei der Definition
+einer Klasse dadurch kenntlich gemacht, da· hinter dem Methodenkopf das
+SchlÅsselwort 'virtual' eingefÅgt wird. Soll diese Methode von einem Nachfahren
+der Klasse Åberschrieben werden, dann mu· im Nachfahren an der gleichen Stelle das
+SchlÅsselwort 'override' stehen. Au·erdem mu· die Methode im Nachfahren exakt
+den gleichen Kopf, also identische Parameter und - bei Funktionen - den gleichen
+RÅckgabewert haben. Es ist nicht mîglich, eine virtuelle Methode durch eine
+statische zu öberschreiben. Der Compiler wird Sie darauf hinweisen, wenn Sie
+es versuchen.
+
+So sieht unser Beispiel aus, wenn wir /GetPicture/ als virtuelle Methode
+implementieren. Sie finden es komplett in der Datei CHESS08C.PAS. Wenn Sie es
+compilieren und ausfÅhren, stellen Sie fest, da· es das gewÅnschte Ergebnis
+bringt. Alle Figuren werdenkorrekt dargestellt.
+
+[chess08c.pas]
+.XMP
+type
+  TPiece = class
+  private
+    FName:     TName;
+    FPosition: TPosition;
+    FColor:   TColor;
+  protected
+    procedure GetPicture(var Head, Body, Feet: string); virtual;
+  public
+    constructor Create(Name: TName; Color: TColor; Position: TPosition);
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    function GetColor: TColor;
+    function GetName: TName;
+    function GetPosition: TPosition;
+    procedure SetPosition(NewPosition: TPosition);
+    procedure Draw;
+    procedure Erase;
+  end;
+
+  TExtPiece = class(TPiece)
+  private
+    FHasBeenMoved: Boolean;
+  protected
+    procedure GetPicture(var Head, Body, Feet: string); override;
+  public
+    constructor Create(Name: TName; Color: TColor; Position: TPosition);
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    procedure SetPosition(NewPosition: TPosition);
+  end;
+.EXMP
+
+[hier Screenshot von chess08c.pas - alle Figuren korrekt angezeigt.]
+
+Eine virtuelle Methode kann beliebig oft von beliebig vielen Nachfahren Åberschrieben
+werden. Es wird immer zur Laufzeit die richtige aufgerufen, nÑmlich die, die der
+tatsÑchlichen Klasse der Instanz entspricht. Auch in virtuellen Methoden kann
+durch /inherited/ oder explizite Nennung der Klasse die Methode eines
+Vorfahren aufgerufen werden.
+
+Ein Fall, in dem sie immer auf virtuelle Methoden zurÅckgreifen sollten, sind
+Destruktoren. Nur dann kînnen Sie gewÑhrleisten, da· zur Freigabe einer Instanz
+der richtige Destruktor aufgerufen wird. Der Destruktor /Destroy/ von /TObject/
+ist virtuell. Wenn Sie ihn Åberschreiben, mÅssen Sie das stets mit /override/ tun.
+
+.BOLD Dynamische Methoden
+
+Es gibt noch einen weiteren Mechanismus, der das gleiche Ergenis liefert wie
+virtuelle Methoden, die dynamischen Methoden. Dynamische Methoden werden bei
+ihrem ersten Auftreten durch das SchlÅsselwort 'dynamic' gekennzeichnet. Zum
+öberschreiben wird, genau wie bei virtuellen Methoden, die Kennzeichnung 'override'
+benutzt. Dadurch ist ein Wechsel zwischen beiden Mechanismen sehr leicht
+mîglich, da nur eine énderung beim ersten Auftreten einer Methode erforderlich
+ist.
+
+Unser Beispielprogramm funktioniert auch mit dynamischen Methoden, wie die
+Datei CHESS08D.PAS beweist:
+
+[chess08d.pas]
+.XMP
+type
+  TPiece = class
+  private
+    FName:     TName;
+    FPosition: TPosition;
+    FColor:   TColor;
+  protected
+    procedure GetPicture(var Head, Body, Feet: string); dynamic;
+  public
+    constructor Create(Name: TName; Color: TColor; Position: TPosition);
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    function GetColor: TColor;
+    function GetName: TName;
+    function GetPosition: TPosition;
+    procedure SetPosition(NewPosition: TPosition);
+    procedure Draw;
+    procedure Erase;
+  end;
+
+  TExtPiece = class(TPiece)
+  private
+    FHasBeenMoved: Boolean;
+  protected
+    procedure GetPicture(var Head, Body, Feet: string); override;
+  public
+    constructor Create(Name: TName; Color: TColor; Position: TPosition);
+    function CanMoveTo(NewPosition: TPosition): Boolean;
+    procedure SetPosition(NewPosition: TPosition);
+  end;
+.EXMP
+
+WÑhrend bei virtuellen Methoden das Hauptaugenmerk auf der Geschwindigkeit liegt,
+ist es mit dynamischen Methoden mîglich, das resultierende Programm klein zu
+halten. Auch dynamische Methoden arbeiten mit einer Tabelle, der zur Laufzeit
+die Adresse der aufzurufenden Methode entnommen wird. Die Tabellen dynamischer
+Methoden sind aber meist wesentlich kleiner, da sie nur die énderungen der
+Klasse gegenÅber dem VorgÑnger enthalten. Tabellen virtueller Methoden sind
+stets komplett.
+
+Normalerweise werden Sie sich bei der Programmentwicklung fÅr virtuelle
+Methoden entscheiden. Dynamische Methoden sind von Vorteil, wenn Sie eine sehr
+komplexe Hierarchie von Klassen einsetzen, wobei die Basisklasse bereits sehr
+viele Methoden besitzt, von denen nur wenige bei den Nachfahren Åberschrieben
+werden. Indiesem Fall kînnen Sie das Programm merklich kleiner halten,
+allerdings um den Preis, da· der Aufruf einer dynamischen Methode etwas
+zeitaufwendiger ist als der einer virtuellen Methode.
+
+Sie kînnen in einer Klasse sowohl virtuelle als auch dynamische Methoden einsetzen.
+
+.BOLD Abstrakte Methoden
+
+Wir wollen die Hierarchie unserer Schachfiguren unter geschickter Ausnutzung
+virtueller Methoden etwas verfeinern. Wenn bei einer virtuellen Methode stets
+zur Laufzeit der richtige Aufruf durchgefÅhrt wird, was hÑlt uns dann davon ab,
+auf das Feld /FName/ ganz zu verzichten? Wir kînnen stattdessen fÅr jeden Typ Figur
+eine eigene Klasse definieren. Dann trÑgt jedes Objekt seine Typinformationen
+automatisch in sich. UmstÑndliche /case/-Konstrukte wie die in /CanMoveTo/ und
+/GetPicture/ entfallen zugunsten kleinerer, spezialisierter, virtueller Methoden.
+Das Programm wird dadurch modularer und leichter lesbar. Unsere neue Hierarchie,
+unser Artenstammbaum, wenn Sie so wollen, soll wie folgt aussehen:
+
+.XMP
+  TPiece
+  |
+  +-------- TBishop 
+  |             |
+  |           TQueen
+  |
+  |-------- TKnight
+  |
+  TExtPiece ------- TPawn
+  |       |
+  TKing  TRook
+.EXMP
+
+[Bild der neuen Hierarchie]
+
+/TPiece/ und /TExtPiece/ bleiben in dieser Hierarchie zwar in Ñhnlicher Form
+erhalten wie bisher, sind aber nun Klassen, deren Hauptaufgabe darin besteht, eine
+grî·tmîgliche gemeinsame Basis fÅr ihre Nachfahren zu bilden. Wir werden in
+unserem Schachprogramm keine Instanzen von /TPiece/ oder /TExtPiece/
+erzeugen, aber die Nachfahren, also die spezialisierten sechs Typen von Figuren,
+werden auf Felder und Methoden der beiden Klassen zugreifen bzw. diese
+Åberschreiben. Damit stellen /TPiece/ und /TExtPiece/ abstrakte Basisklassen
+fÅr das Schachprogramm dar, Ñhnlich wie das vordefinierte /TObject/ eine
+Basisklasse fÅr alle Objekte von WDSibyl-Pascal darstellt.
+
+Als zusÑtzlichen kleinen Trick haben wir die Dame als Nachfahren des LÑufers
+festgelegt. Das bringt in unserem Programm keinen merklichen Vorteil, soll aber
+verdeutlichen, wie man eine Hierarchie von Klassen so aufbaut, da· viel Code
+gemeinsam genutzt werden kann. Der LÑufer kann sich diagonal bewegen, die
+Dame diagonal, horizontal und vertikal. Damit wird ein Teil der Zugmîglichkeiten
+der Dame bereits vom LÑufer abgedeckt. Die Dame, nun Nachfahre des LÑufers, ruft
+in /CanMoveTo/ zuerst die Methode des LÑufers auf, wodurch alle diagonalen
+Bewegungen erfa·t werden. Dann fÅhrt sie die zusÑtzlichen Abfragen fÅr
+horizontale und vertikale Bewegungen durch.
+
+Schauen Sie sich die Implementierung der Methoden in der Datei CHESS09A.PAS an.
+Achten Sie dabei auf den Einsatz von /inherited/, insbesondere
+in /TQueen.CanMoveTo/.
+
+.XMP
+type
+  TPosition = record
+    X: Integer;
+    Y: Integer;
+  end;
+
+  TColor = (Black, White);
+
+  TPiece = class
+  private
+    FPosition: TPosition;
+    FColor:   TColor;
+  protected
+    procedure GetPicture(var Head, Body, Feet: string); virtual;
+  public
+    constructor Create(Color: TColor; Position: TPosition);
+    function CanMoveTo(NewPosition: TPosition): Boolean; virtual;
+    function GetColor: TColor;
+    function GetPosition: TPosition;
+    procedure SetPosition(NewPosition: TPosition); virtual;
+    procedure Draw;
+    procedure Erase;
+  end;
+
+  TExtPiece = class(TPiece)
+  private
+    FHasBeenMoved: Boolean;
+  public
+    constructor Create(Color: TColor; Position: TPosition);
+    procedure SetPosition(NewPosition: TPosition); override;
+  end;
+
+  TBishop = class(TPiece)
+  protected
+    procedure GetPicture(var Head, Body, Feet: string); override;
+  public
+    function CanMoveTo(NewPosition: TPosition): Boolean; override;
+  end;
+
+  TKnight = class(TPiece)
+  protected
+    procedure GetPicture(var Head, Body, Feet: string); override;
+  public
+    function CanMoveTo(NewPosition: TPosition): Boolean; override;
+  end;
+
+  TQueen = class(TBishop)
+  protected
+    procedure GetPicture(var Head, Body, Feet: string); override;
+  public
+    function CanMoveTo(NewPosition: TPosition): Boolean; override;
+  end;
+
+  TKing = class(TExtPiece)
+  protected
+    procedure GetPicture(var Head, Body, Feet: string); override;
+  public
+    function CanMoveTo(NewPosition: TPosition): Boolean; override;
+  end;
+
+  TRook = class(TExtPiece)
+  protected
+    procedure GetPicture(var Head, Body, Feet: string); override;
+  public
+    function CanMoveTo(NewPosition: TPosition): Boolean; override;
+  end;
+
+  TPawn = class(TExtPiece)
+  protected
+    procedure GetPicture(var Head, Body, Feet: string); override;
+  public
+    function CanMoveTo(NewPosition: TPosition): Boolean; override;
+  end;
+.EXMP
+
+Die Methode /GetPicture/ ist ein sehr schînes Beispiel fÅr die Abstraktion, die
+wir im letzten Schritt betrieben haben. Sie ist nÑmlich zuerst in /TPiece/ als
+virtuell definiert, allerdings ist ihre Implementierung dort leer.
+/TPiece.GetPicture/ legt aber das Interface fest, an das sich alle
+Nachfahren der Klasse halten mÅssen, weil die Methode virtuell ist und der
+Kopf auch beim öberschreiben beibehalten werden mu·.
+
+Methoden in der Art von /GetPicture/ werden Ihnen sehr hÑufig begegnen, wenn
+Sie objektorientierte Prinzipien konsequent umsetzen. Damit Sie in diesen
+FÑllen nicht unnîtig leere Prozedur- oder FunktionsrÅmpfe schreiben mÅssen,
+kînnen Sie die Methode bereits bei der Definition als abstrake Methode
+kennzeichnen, indem Sie das SchlÅsselwort /abstract/ and den Kopf anhÑngen.
+Abstrakte Methoden werden nicht implementiert und sind nicht dazu gedacht, im
+Programm tatsÑchlich aufgerufen zu werden. Falls eine abst rakte Methode
+doch versehentlich aufgerufen wird, wird ein Laufzeitfehler ausgelîst und
+eine entsprechende Meldung auf dem Bildschirm ausgegeben.
+
+[chess09b.pas]
+.XMP
+  TPiece = class
+  private
+    FPosition: TPosition;
+    FColor:   TColor;
+  protected
+    procedure GetPicture(var Head, Body, Feet: string); virtual; abstract;
+  public
+    constructor Create(Color: TColor; Position: TPosition);
+    function CanMoveTo(NewPosition: TPosition): Boolean; virtual;
+    function GetColor: TColor;
+    function GetPosition: TPosition;
+    procedure SetPosition(NewPosition: TPosition); virtual;
+    procedure Draw;
+    procedure Erase;
+  end;
+.EXMP
+
+Es ist leicht nachvollziehbar, da· nur virtuelle oder dynamische Methoden abstrakt
+sein kînnen und dÅrfen. Bei statischen abstrakten Methoden wÅrde immer die
+abstrakte Methode aufgerufen und nie Methode des Nachfahren, weil die Bindung ja
+bereits zur Compilierungszeit festgelegt ist. Daher verbietet der
+Compiler die Definition von statischen abstrakten Methoden.
+
+Wo werden abstrakte Methoden sinnvollerweise eingesetzt? Stellen Sie sich eine
+abstrakte Containerklasse vor, zum Beispiel eine verkettete Liste oder ein
+dynamisches Array. Sie mîchten der Klasse eine Sortiermethode /Sort/ mit auf
+den Weg geben, obwohl Sie noch nicht wissen, welche Elemente sich spÑter im
+Container befinden werden. Mîglicherweise wird es spezialisierte Nachfahren
+der Klasse geben, die Strings aufnehmen, oder solche, die Records mit
+Informationen Åber Dateien aufnehmen.
+
+Bei den Strings liegt alphabetische Sortierung nahe, bei den Dateien kînnte
+eine Sortierung zum Beispiel nach dem Erstellungsdatum vorgenommen werden. Wie
+kann da im voraus eine Sortiermethode implementiert werden, wenn die
+Sortierkriterien so verschieden sind? Mit abstrakten Methoden ganz einfach: Die
+meisten Sortierverfahren basieren auf dem Vergleich und dem Austausch von
+zwei Elementen. Wenn die Containerklasse zwei abstrakte Methoden /Exchange/
+und /Compare/ besitzt, die von spezialisierten Nachfahren Åberschrieben
+werden, dann ist es kein Problem, einen Sortieralgorithmus, zum Beispiel
+QuickSort, bereits in der Containerklasse einzubauen.
+
+.TOPIC 2 Kapitel 8 - Eigenschaften
+.HIGH 2 Kapitel 8 - Eigenschaften
+
+Unsere Schachfiguren verfÅgen inzwischen Åber einige FunktionalitÑt, sind
+aber trotzdem Åberschaubar geblieben und - man denke an die ausgeklÅgelte
+Hierarchie der Figuren - ausgesprochen elegant implementiert. Im diesem Kapitel
+wollen wir zwei neue Klassen entwickeln, die einen Schachspieler und ein
+Spielfeld modellieren.
+
+.BOLD Einfache Eigenschaften
+
+Beginnen wir mit dem Spieler. Er besitzt einen Namen und eine Sammlung von
+Schachfiguren. Die Anzahl der Figuren ist zu Beginn 16 und sinkt im Verlauf des
+Spiels. Daher ist es sinnvoll, sowohl Åber die Figuren selbst als auch Åber
+deren aktuelle Anzahl Buch zu fÅhren. Wie gewohnt kapseln wir alle diese
+Daten durch Methoden.
+
+.XMP
+type
+  TPlayer = class
+  private
+    FPieces: array[1..16] of TPiece;
+    FPieceCount: Integer;
+    FName: String;
+  public
+    constructor Create(const Name: string; Colour: TColour);
+    destructor Destroy; override;
+    function GetName: string;
+    function GetPieceCount: Integer;
+    function GetPiece(Number: Integer): TPiece;
+    procedure DeletePiece(Number: Integer);
+  end;
+.EXMP
+
+Eine Instanz von /TPlayer/ soll sich vollstÑndig um die Verwaltung der Figuren
+kÅmmern. Das hei·t, der Konstruktor wird die Figuren erzeugen und der Destruktor
+wird die noch vorhandenen Figuren zerstîren. ZusÑtzlich entfernt die
+Methode /DeletePiece/ zu einer beliebigen Zeit eine geschlagene Figur
+aus dem Spiel. Der Destruktor fÅr das Figurenobjekt wird aufgerufen, die
+Anzahl der Figuren des Spielers sinkt um eins. Da die Figuren in einem Array
+gespeichert werden, wandern Figuren mit einem hîheren Index als dem der
+entfernten Figur um eine Position nach unten. Die Arbeitsweise der anderen
+Methoden sollte klar sein. Hier sehen Sie die Implementierung der Klasse:
+
+.XMP
+constructor TPlayer.Create(const Name: string; Colour: TColour);
+
+var N, Row: Integer;
+
+begin
+  FName := Name;
+
+  if Colour = White then Row := 1 else Row := 8;
+
+  FPieces[1] := TRook.Create(Colour, MakePosition(1, Row));
+  FPieces[2] := TKnight.Create(Colour, MakePosition(2, Row));
+  FPieces[3] := TBishop.Create(Colour, MakePosition(3, Row));
+  FPieces[4] := TQueen.Create(Colour, MakePosition(4, Row));
+  FPieces[5] := TKing.Create(Colour, MakePosition(5, Row));
+  FPieces[6] := TBishop.Create(Colour, MakePosition(6, Row));
+  FPieces[7] := TKnight.Create(Colour, MakePosition(7, Row));
+  FPieces[8] := TRook.Create(Colour, MakePosition(8, Row));
+
+  if Colour = White then Row := 2 else Row := 7;
+
+  for N := 1 to 8 do
+  begin
+    FPieces[8 + N] := TPawn.Create(Colour, MakePosition(N, Row));
+  end;
+
+  FPieceCount := 16;
+end;
+
+destructor TPlayer.Destroy;
+var
+  N: Integer;
+begin
+  for N := 1 to FPieceCount do FPieces[N].Destroy;
+end;
+
+function TPlayer.GetName: string;
+begin
+  Result := FName;
+end;
+
+function TPlayer.GetPieceCount: Integer;
+begin
+  Result := FPieceCount;
+end;
+
+function TPlayer.GetPiece(Number: Integer): TPiece;
+begin
+  if (Number < 1) or (Number > FPieceCount) then Result := nil
+  else Result := FPieces[Number];
+end;
+
+procedure TPlayer.DeletePiece(Number: Integer);
+var
+  I: Integer;
+begin
+  if (Number >= 1) and (Number <= FPieceCount) then
+  begin
+    FPieces[Number].Destroy;
+    for I := Number + 1 to FPieceCount do FPieces[I - 1] := FPieces[I];
+    Dec(FPieceCount);
+  end;
+end;
+.EXMP
+
+Vielleicht ist Ihnen im Verlauf der EinfÅhrung schon aufgefallen, da· viele
+Methoden, die wir im Zuge der Kapselung einfÅhren, nichts weiter tun als lesende
+oder schreibende Zugriffe auf Felder zu ermîglichen. In einer ganzen Reihe von
+FÑllen besteht der Code einer Methode nur aus einer Zuweisung, wie zum
+Beispiel bei /TPlayer.GetName/ oder /TPlayer.GetPieceCount/. Die Definition
+einer Methode, die nichts weiter tut als ein Feld zu lesen erscheint ein wenig
+wie das sprichwîrtliche Schie·en mit Kanonen auf Spatzen, denn eigentlich
+wollen wir ja im Falle von /GetName/ oder /GetPieceCount/ nur die
+Zugriffsmîglichkeiten des zugrundeliegenden Feldes auf Lesen einschrÑnken.
+Im Prinzip wÅrde es uns vollkommen genÅgen, wenn wir das Feld 'schreibschÅtzen'
+kînnten. Der direkte lesende Zugriff auf die Felder stellt kein Problem dar,
+er ist logischerweise sogar schneller, weil der unnîtige Methodenaufruf entfÑllt.
+
+Wir realisieren diesen Schreibschutz mit Hilfe einer Eigenschaft. Eine Eigenschaft
+wird bei der Definition einer Klasse mit dem SchlÅsselwort 'property' aufgefÅhrt,
+erfordert aber keine Implementierung. Sie stellt sich dem Benutzer einer
+Klasse Ñhnlich wie ein Feld dar, Zugriffe geschehen also Åber Zuweisungen.
+Eigenschaften kînnen als Wert-Parameter an Prozeduren und Funktionen Åbergeben
+werden, jedoch nicht als Variablen-Parameter. Au·erdem kann der Entwickler
+einer Klasse bei einer Eigenschaft festlegen, ob sie nur gelesen,
+nur geschrieben oder sowohl gelesen als auch geschrieben werden kann. Dazu
+gibt es die Zugriffsarten 'read' und 'write', die bei der Definition
+der Eigenschaft wahlweise einzeln oder in Kombination angegeben werden.
+
+Schauen wir uns einen sehr einfachen Einsatzfall von Eigenschaften an, indem
+wir anstelle von /GetName/ und /GetPieceCount/ zwei lesende Eigenschaften
+/Name/ und /PieceCount/ definieren, die direkt auf die Felder /FName/ und
+/FPieceCount/ zugreifen.
+
+[chess10b.pas]
+.XMP
+type
+  TPlayer = class
+  private
+    FPieces: array[1..16] of TPiece;
+    FPieceCount: Integer;
+    FName: String;
+  public
+    constructor Create(const Name: string; Colour: TColour);
+    destructor Destroy; override;
+
+    function GetPiece(Number: Integer): TPiece;
+    procedure DeletePiece(Number: Integer);
+
+    property Name: string read FName;
+    property PieceCount: Integer read FPieceCount;
+  end;
+.EXMP
+
+Wie das Beispiel zeigt, wird die Definition einer Eigenschaft durch das
+SchlÅsselwort 'property' eingeleitet. Eine Eigenschaft hat - genau wie Felder -
+einen Bezeichner und einen Typ. Schlie·lich werden die Zugriffsarten angegeben.
+In unserem Beispiel steht hinter 'read' jeweils der Name einesFeldes, wodurch
+jeder lesende Zugriff des Programmierers auf die Eigenschaft sofort vom
+Compiler auf das entsprechende Feld umgelenkt wird. Der Typ der Eigenschaft und
+der des zugrundeliegenden Feldes mÅssen identisch sein.
+
+Eine schreibende Zugriffsart ist bei /Name/ und /PieceCount/ nicht angegeben,
+wodurch schreibende Zugriffe auf die Felder nicht mîglich sind. Wenn wir die
+Eigenschaft /Name/ sowohl zum Lesen als auch zum Schreiben benutzen wollen,
+dann mÅssen wir die Definition der Klasse wie folgt Ñndern:
+
+.XMP
+type
+  TPlayer = class
+  private
+    FPieces: array[1..16] of TPiece;
+    FPieceCount: Integer;
+    FName: String;
+  public
+    constructor Create(const Name: string; Colour: TColour);
+    destructor Destroy; override;
+
+    function GetPiece(Number: Integer): TPiece;
+    procedure DeletePiece(Number: Integer);
+
+    property Name: string read FName write FName;
+    property PieceCount: Integer read FPieceCount;
+  end;
+.EXMP
+
+Die Zugriffsarten kînnen auch in der entgegengesetzten Reihefolge angegeben
+werden. Au·erdem ist es mîglich, einer Eigenschaft nur die Zugriffsart 'write' zu
+geben, was aber, wie man sich leicht vorstellen kann, in den wenigsten FÑllen
+sinnvoll ist.
+
+Schauen wir uns an einem kleinen Beispiel an, wie die Zugriffe auf diebeiden
+Eigenschaften aussehen.
+
+.XMP
+begin
+  ...
+  WhitePlayer.Name := S;
+  WriteLn(WhitePlayer.Name, ' besitzt ', WhitePlayer.PieceCount, ' Figuren.');
+  ...
+end.
+.EXMP
+
+WÑhrend beim Lesen kein gro·er Unterschied zum Aufruf einer Funktionsmethode
+besteht, ist der Schreibzugriff Åber eine Zuweisung zweifellos dem Aufruf einer
+Prozedurmethode mit Parameter vorzuziehen. Damit haben wir genau das geschafft,
+was wir wollten, nÑmlich die Zugriffe auf Felder ohne zusÑtzlichen Code
+in Form von Methoden einzuschrÑnken.
+
+Eigenschaften bieten aber noch weitaus mehr Mîglichkeiten. Die Zugriffsarten einer
+Eigenschaft mÅssen nicht unbedingt auf einem Feld basieren, sie kînnen auch eine
+Methode benutzen, wenn diese bestimmte Anforderungen erfÅllt. Bei der Zugriffsart
+'read' mu· es sich um eine parameterlose Funktionsmethode handeln, deren Ergebnis
+vom gleichen Typ wie die Eigenschaft ist. Bei der Zugriffsart 'write' mu· es sich
+um eine Prozedurmethode handeln, deren einziger Parameter vom gleichen Typ wie
+die Eigenschaft selbst ist. Die Mîglichkeit, beim Zugriff auf eine Eigenschaft
+nicht nur ein Feld zu lesen oder zu schreiben, sondern Åber Methoden auch
+beliebige Aktionen auszufÅhren, ist sehr mÑchtig. Schauen wir uns das an zwei
+Beispielen an.
+
+Im ersten Beispiel wollen wir uns wieder mit dem Namen eines Schachspielers
+beschÑftigen. Wenn Sie sich ein bi·chen mit den internen Details von WDSibyl-Pascal
+auskennen, wissen Sie vielleicht, da· ein /String/ unabhÑngig von seiner
+tatsÑchlichen LÑnge immer 256 Byte Speicherplatz benîtigt. Die meisten im
+tÑglichen Leben vorkommenden Namen sind wesentlich kÅrzer, weshalb
+wir versuchen wollen, an dieser Stelle etwas weniger verschwenderisch mit dem
+Speicher umzugehen. Wir wollen die FlexibiliÑt unserer Klasse aber auch
+nicht dadurch beschneiden, da· wir den Namen auf eine feste LÑnge, zum Beispiel
+20 Zeichen, beschrÑnken. Stattdessen wollen wir den Namen dynamisch verwalten,
+so da· der benîtigte Speicherplatz der LÑnge des Namens entspricht. Dazu benutzen
+wir die von der Unit SysUtils bereitgestellten Funktionen NewStr und DisposeStr,
+die einen dynamisch allokierten String erzeugen bzw. freigeben. Zugriffe auf den
+Inhalt des Strings geschehen dann mit Hilfe eines Zeigers und des '^'-Operators.
+Da der Aufwand zum Lesen und Schreiben des Strings nicht unbetrÑchtlich und
+au·erdem fehleranfÑllig ist, kapseln wir den Namen wieder mit den bereits bekannten
+Methoden GetName und SetName, hier jedoch mit neuem Inhalt. /FName/ ist jetzt
+vom Typ /PString/, stellt also einen Zeiger auf einen String dar.
+
+[chess10c.pas]
+.XMP
+type
+  TPlayer = class
+  private
+    FPieces: array[1..16] of TPiece;
+    FPieceCount: Integer;
+    FName: PString;
+  public
+    constructor Create(const aName: string; Colour: TColour);
+    destructor Destroy; override;
+
+    function GetPiece(Number: Integer): TPiece;
+    procedure DeletePiece(Number: Integer);
+    function GetName: string;
+    procedure SetName(const aName: string);
+
+    property PieceCount: Integer read FPieceCount;
+  end;
+
+constructor TPlayer.Create(const aName: string; Colour: TColour);
+begin
+  ...
+  FName := NewStr(aName);
+  ...
+end;
+
+destructor TPlayer.Destroy;
+begin
+  ...
+  DisposeStr(FName);
+  ...
+end;
+
+function TPlayer.GetName: string;
+begin
+  Result := FName^;
+end;
+
+procedure TPlayer.SetName(const aName: string);
+begin
+  DisposeStr(FName);
+  FName := NewStr(aName);
+end;
+
+Wenn wir nun die Zugriffe auf den Namen wieder mit Hilfe einer Eigenschaft vom Typ String abwickeln wollen, dann mu· diese auf die beiden Methoden zugreifen. Die Methoden erfÅllen die Forderung nach Parameter bzw. Ergebnis, die wir bereits erwÑhnt haben. 
+GetName gibt als Ergebnis einen String zurÅck und SetName erwartet als Parameter einen String. Wir kînnen sie also bei den Zugriffsarten einsetzen.
+
+type
+  TPlayer = class
+    ...
+    property Name: string read GetName write SetName;
+  end;
+.EXMP
+
+Durch die Eigenschaft sind die Zugriffe auf den Namen des Spielers wieder in Form
+von Zuweisungen mîglich. Der Compiler ersetzt jede Zuweisung, in der Name vorkommt,
+durch einen Aufruf von /GetName/ oder /SetName/. Damit sind folgende Codesequenzen
+Ñquivalent:
+
+Variante 1 - Benutzung der Methoden
+.XMP
+begin
+  ...
+  MyPLayer.SetName('Wei·er Spieler');
+  WriteLn(MyPlayer.GetName);
+  ...
+end.
+.EXMP
+
+Variante 2 - Benutzung der Eigenschaft
+.XMP
+begin
+  ...
+  MyPLayer.Name := 'Wei·er Spieler';
+  WriteLn(MyPlayer.Name);
+  ...
+end.
+.EXMP
+
+Das zweite Beispiel wird zeigen, da· auch die gemischte Benutzung von Feldern un
+Methoden als Zugriffsarten von Eigenschaften mîglich ist. Bei diesem Beispiel
+wollen wir die Position einer Schachfigur /TPiece/ mit einer Eigenschaft
+umgeben. Beim Lesen greift die Eigenschaft direkt auf das Feld /FPosition/
+zu, beim Schreiben ruft sie die Methode /SetPosition/ auf.
+
+type
+  TPiece = class
+  private
+    FPosition: TPosition;
+    ...
+  public
+    procedure SetPosition(NewPosition: TPosition); virtual;
+    ...
+    property Position: TPosition read FPosition write SetPosition;
+  end;
+
+Dieses Beispiel ist ausgesprochen typisch fÅr die Vorgehensweise bei der
+Programmierung graphischer Applikationen mit der SPCC-Bibliothek. Wenn Sie der
+Schachfigur eine neue Position zuweisen, dann zeichnet sich die Figur automatisch
+neu auf dem Bildschirm. Fast alle Klassen der SPCC-Bibliothek verfÅgen Åber
+ein Feld 'Title'. Wenn dieses Feld geÑndert wird, dann wird der Titel
+automatisch, ganz wie bei den Schachfiguren, neu gezeichnet.
+
+Da die Mîglichkeit der Zuweisung die Benutzung der darunterliegenden Methoden aus
+Sicht des Anwenders der Klasse ÅberflÅssig macht, werden diese Åblicherweise
+im 'private'-Teil der Klasse versteckt. Dadurch besteht insbesondere die
+Mîglichkeit, die Zugriffsart zu Ñndern, ohne da· der Benutzer davon etwas
+merkt. Im Prinzip gelten bei den Methoden, die den Zugriffsarten einer Eigenschaft
+zugrundeliegen, die gleichen Argumente wie bei der Kapselung von Feldern.
+
+Sie kînnen Eigenschaften in Nachkommen Åberschreiben oder ihnen eine andere
+Sichtbarkeit zuordnen. Eigenschaften kînnen jedoch nicht virtuell sein. Wenn
+Sie diesen Mechanismus bei einer Eigenschaft benîtigen, dann implementieren Sie
+die zugrundeliegende Methode virtuell, wie es zum Beispiel bei
+TPiece.SetPosition der Fall ist.
+
+Den vollstÑndigen Quellcode unseres Schachprogramms bis zu diesem Zeitpunkt
+finden Sie in der Datei CHESS10C.PAS.
+
+.BOLD Indizierte Eigenschaften
+
+Wir haben Åber die meisten Felder und Methoden unserer Klassen Eigenschaften
+legen und die Zugriffe damit sehr einfach gestalten kînnen. Nur bei
+/TPlayer.GetPiece/ ist es uns nicht mîglich, eine Eigenschaft zu benutzen, denn
+die Methode ermîglicht Zugriffe auf ein Array, weshalb sie natÅrlicherweise einen
+Parameter zur Indizierung des Arrays erwartet. Die Eigenschaften, mit denen wir
+bisher gearbeitet haben, lie·en keine Parameter zu und erwarteten insbesondere
+eine parameterlose 'read'-Funktion. Damit sind sie nicht geeignet, um den Zugriff
+auf die einzelnen Figuren des Spielers mit einem Feld anstelle der Methode
+/GetPiece/ abzuwickeln. Es gibt aber eine Erweiterung der einfachen
+Eigenschaften, die fÅr diesen Anwendungsfall sehr wohl geeignet ist,
+die indizierten Eigenschaften.
+
+Indizierte Eigenschaften werden auf die gleiche Weise definiert wie gewîhnliche
+Eigenschaften, aber unmittelbar hinter dem Bezeichner der Eigenschaft wird
+eine Liste von formalen Parametern angegeben, mit denen die Eigenschaft indiziert
+wird. Die Parameterliste entspricht der einer Prozedur, nur ist sie bei
+Eigenschaften in eckigen statt in runden Klammern eingeschlossen.  Dadurch
+stellt sich eine indizierte Eigenschaft dem Benutzer effektiv wie ein Array
+dar. Die Zugriffsarten einer indizierten Eigenschaft mÅssen auf Methoden
+basieren, Felder sind nicht erlaubt. Damit ist es insbesondere nicht mîglich,
+eine oder beide Zugriffsarten einer indizierten Eigenschaft direkt auf ein
+zugrundeliegendes Array umzulegen. Es mu· stets der Weg Åber Methoden
+gewÑhlt werden.
+
+Die Zugriffsart 'read' erfordert eine Funktionsmethode, deren formale
+Parameterliste der Parameterliste der Eigenschaft entspricht. Das Ergebnis dieser
+Methode mu· wieder vom gleichen Typ wie die Eigenschaft sein.
+
+Die Zugriffsart 'write' erfordert eine Prozedurmethode, deren formale
+Parameterliste der Parameterliste der Eigenschaft entspricht und die einen
+zusÑtzlichen Parameter am Ende der Liste besitzt, der vom gleichen Typ wie die
+Eigenschaft selbst ist.
+
+Schauen wir uns an, wie eine indizierte Eigenschaft aussieht, mit der wir auf
+die Spielfiguren zugreifen kînnen. Zu besser Veranschaulichung haben wir - wie
+beim Namen - auch die schreibende Zugriffsart aufgenommen, obwohl dies
+eigentlich nicht sinnvoll ist. Es wird spÑter nicht mehr im Programm auftauchen.
+
+[code: TPlayer mit Property Pieces, inbesondere write]
+
+Was indizierten Eigenschaften von gewîhnlichen Arrays unterscheidet ist die
+Tatsache, da· sie Åber beliebige Parameter indiziert werden kînnen und nicht
+auf ordinale Typen beschrÑnkt sind. Dadurch ergeben sich eine ganze Reihe von
+neuen Mîglichkeiten. Sokînnten Sie zum Beispiel die Zugriffe auf eine
+Datenbank Åber eine indizierte Eigenschaft abwickeln, deren Index ein String ist.
+
+Wir wollen diese Mîglichkeit der beliebigen Indizierung nutzen, um eine letzte
+neue Klasse einzufÅhren. Sie soll TBoard hei·en und das Schachbrett modellieren.
+Ihr Konstruktor erzeugt automatisch die Objekte fÅr die beiden Mitspieler,
+erfragt deren Namen, zeichnet das Schechbrett, etc. Die Klasse besitzt
+einige Methoden zur Ausgabe von Meldungen und zur Eingabe von ZÅgen, die alle im
+rechten Drittel des Bildschirms arbeiten. Au·erdem verfÅgt TBoard Åber eine
+indizierte Eigenschaft Fields, auf die lesend zugegriffen werden kann und
+die einen formalen Parameter vom Typ TPosition besitzt. Das interessante daran
+ist, da· dieser Eigenschaft kein wirkliches Array zugrundeliegt. Stattdessen
+wird eine Methode GetField aufgerufen, die anhand der Figurenlisten beider
+Mitspieler ÅberprÅft, ob und wie ein Feld besetzt ist. Schlie·lich existiert noch
+eine Methode Play, die quasi den gesamten Spielablauf organisiert.
+
+.XMP
+type
+  TBoard = class
+  private
+    FPlayers: array[Black..White] of TPlayer;
+    FCurrentPlayer, FWaitingPlayer: TColour;
+    FGameOver: Boolean;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure Play;
+  protected
+    function GetPlayer(Colour: TColour): TPlayer;
+    function GetField(Position: TPosition): TPiece;
+
+    function LegalMove(Colour: TColour; Start, Dest: TPosition): Boolean;
+    function IsCheck(Colour: TColour): Boolean;
+
+    procedure NextPlayer;
+    procedure PerformMove(A, B: TPosition);
+    procedure DrawScreen;
+    procedure WelcomeMessage;
+
+    procedure ShowMessage(const Msg: string);
+    function EnterMove(var Start, Dest: TPosition): Boolean;
+
+    property CurrentPlayer: TColour read FCurrentPlayer;
+    property WaitingPlayer: TColour read FWaitingPlayer;
+
+    property Players[Colour: TColour]: TPlayer read GetPlayer;
+    property Fields[Position: TPosition]: TPiece read GetField;
+  end;
+.EXMP
+
+Alle Methoden machen Gebrauch sowohl von den Properties von TBoard selbst als
+auch von denen der Unterobjekte. Schauen Sie sich dem kompletten Code in der
+Datei CHESS11.PAS an.
+
+.TOPIC 2 Kapitel 9 - Klassenreferenztypen
+.HIGH Kapitel 9 - Klassenreferenztypen
+
+WÑhrend eine Klasse, also ein Objekttyp, ..., ist ein Klassenreferenztyp ... . Wir
+wissen inzwischen, da· eine Variable eines Objekttyps eine Objektinstanz
+referenziert, also auf sie zeigt. Etwas unprÑsizer, aber anschaulicher ausgedrÅckt
+kînnte man sagen, da· eine Variable eines Objekttyps ein Objekt enthÑlt.
+Eine Variable eines Klassenreferenztyps tut etwas sehr Ñhnliches, sie
+referenziert - oder enthÑlt - eine Klasse. Der Ausdruck 'eine Klasse' meint hier
+wieder eine spezifische Klasse und deren gesamte Nachkommenschaft, was auch
+gleichzeitig der Bereich ist, aus dem die Werte stammen, die der Variablen
+zugewiesen werden dÅrfen.
+
+Das Konzept der Klassenreferenztypen ist mit Blick auf herkîmmliche Datentypen
+etwas sehr Ungewîhnliches.
+
+Wie werden nun die Klassenreferenztypen definiert? Da sie eine Klasse
+referenzieren sollen, ist offensichtlich, da· diese Klasse bereits befiniert sein
+mu·, wenigstens mithilfe einer Forward-Deklaration. Die Deklaration des
+Klassenreferenztypen geschieht dann mit den SchlÅsselwîrtern 'class of'
+und dem Namen der zu referenzierenden Klasse. Folgendes kleine Beispiel
+definiert Klassenreferenztypen fÅr TPiece und TExtPiece. Es ist Åblich,
+wenngleich nicht zwingend vorgeschrieben, da· der Name eines Klassenreferenztypen
+dem der Klasse mit einem angehÑngten 'Class' entspricht.
+
+.XMP
+type
+  TPiece = class
+    ...
+  end;
+
+  TExtPiece = class
+    ...
+  end;
+
+  TPieceClass = class of TPiece;
+  TExtPieceClass = class of TExtPiece;
+
+Wenn wir Variablen von TPieceClass und TExtPieceClass deklarieren, dann kînnen wir Zuweisungen damit vornehmen. FÅr die ZuweisungskompatibilitÑt gelten die gleichen Regeln, die wir bereits im Kapitel Åber Zuweisungen bei Objektinstanzen kennengelernt habe
+n. Folgende Zuweisungen sind also allesamt gÅltig. Beachten Sie, da· wir die restlichen Klassen unseres Schachprogramms benutzen, ohne da· sie oben explizit aufgefÅhrt wurden.
+
+var
+  TMyClass = TPieceClass;
+
+begin
+  MyClass := TPiece;
+  MyClass := TExtPiece;
+  MyClass := TKing;
+  MyClass := TQueen;
+  MyClass := TPawn;
+end.
+.EXMP
+
+Die Mîglichkeit, Variablen zu deklarieren, denen als Werte verschiedene Typen
+zugewiesen werden kînnen, rechtfertigt sicher nicht die EinfÅhrung dieses
+Sprachkonstruktes. Wo liegt der tiefere Sinn der Klassenreferenztypen? Eine
+Klassenreferenz, also eine Variable von einem Klassenreferenztypen, kann im
+Programm Åberall dort benutzt werden, wo wir mit Klassenbezeichnern operieren.
+Dadurch mu· nicht bereits zur Zeit der Compilierung feststehen, mit welcher
+konkreten Klasse an einer Stelle des Programms gear beitet wird. Die
+tatsÑchliche Klasse kann zur Laufzeit zugewiesen werden. Mîglicherweise ergibt
+sich Ihr Wert aus einer Eingabe des Benutzers oder wird aus einer Datei gelesen.
+Mit diesem Wert, also der konkreten Klasse, kînnen wir all das tun, was wir
+
+Praktische Anwendungen fÅr Klassenreferenztypen fallen wegen der Ungewohntheit des Konstruktes sicherlich nicht sofort ins Auge. Es gibt aber drei typische AnwendungsfÑlle, die wir im folgenden vorstellen mîchten.
+
+.BOLD TypprÅfungen
+
+Wenn wir eine Variable eines Klassenreferenztyps Åberall dort einsetzen kînnen,
+wo wir mit Klassen operieren, dann kînnen wir sie sicherlich auch bei den
+Operatoren IS und AS einsetzen, die wir in einem frÅheren Abschnitt als
+Hilfsmittel fÅr sichere Typwandlungen kennengelernt haben.WÑhrend bislang
+auf der rechten Seite der Operatoren immer eine konkrete Klasse stand,
+ist es nun mîglich, dort eine Klassenreferenz einzusetzen.
+
+Wenn wir eine exaktere PrÅfung der Klasse . 
+
+Jede Klasse erbt von TObject eine Funktionsmethode ClassType, deren Ergebnistyp
+TObjectClass, also 'class of TObject' ist.
+
+
+.BOLD Klassenmethoden
+
+Nehmen wir einmal an, wir mîchten bei der Entwicklung unses Schachprogramms
+au·ergewîhnlich sorgfÑltig vorgehen. Wir mîchten garantieren, da· alle
+Schachfiguren, die wir im Lauf des Spiels erzeugen, auch wirklich wieder zerstîrt
+werden, damit wir keine Speicherlecks zurÅcklassen. Welche Mîglichkeiten haben wir?
+
+Stellen Sie sich folgendes Szenario vor: Unser Schach
+
+Klassenmethoden sind spezielle Methoden, die nicht unbedingt eine Objektinstanz
+benîtigen, um aufgerufen werden zu kînnen.
+
+sowohl auf einem konkreten Objekt als auch auf ihrer Klasse arbeiten. 
+
+.ULIST
+.LISTITEM Klassenmethode arbeitet auf einer Klasse und nicht auf einer Instanz
+.LISTITEM Darf nicht auf Interna von Instanzen zurÅckgreifen
+.LISTITEM Kann sowohl auf Objekt als auch auf Klasse aufgerufen werden
+.LISTITEM Self in Klassenmethoden nicht vom Typ der Klasse, sondern vom Type der Metaklasse
+.LISTITEM Anwendungsgebiete von Klassenmethoden
+.ULIST
+.LISTITEM Schahcbeispiel: GetImage()
+.LISTITEM Allgemeines Beispiel: Typ fÅr Files, der mitzÑhlt, wieviele Dateien offen sind
+.EULIST
+.EULIST
+
+.BOLD Polymorphes Konstruieren von Objekten
+
+Wir haben im Laufe der Einleitung zwei verschiedene Varianten von
+Konstruktoraufrufen kennengelernt. Eine davon erforderte die Angabe der Klasse,
+von der wir eine Instanz erzeugen wollten. Wir haben diese Variante zum
+Beispiel im Konstruktor von TPlayer bei der Erzeugung der 16 Figuren des Spielers
+eingesetzt.
+
+.XMP
+constructor TPlayer.Create(Colour: TColour);
+
+var N, Row: Integer;
+
+begin
+  ...
+
+  if Colour = White then Row := 1 else Row := 8;
+
+  FPieces[1] := TKing.Create(Colour, MakePosition(5, Row));
+
+  FPieces[2] := TRook.Create(Colour, MakePosition(1, Row));
+  FPieces[3] := TKnight.Create(Colour, MakePosition(2, Row));
+  FPieces[4] := TBishop.Create(Colour, MakePosition(3, Row));
+  FPieces[5] := TQueen.Create(Colour, MakePosition(4, Row));
+  FPieces[6] := TBishop.Create(Colour, MakePosition(6, Row));
+  FPieces[7] := TKnight.Create(Colour, MakePosition(7, Row));
+  FPieces[8] := TRook.Create(Colour, MakePosition(8, Row));
+
+  if Colour = White then Row := 2 else Row := 7;
+
+  for N := 1 to 8 do
+  begin
+    FPieces[8 + N] := TPawn.Create(Colour, MakePosition(N, Row));
+  end;
+
+  ...
+end;
+.EXMP
+
+Nehmen wir an, wir haben au·erdem folgenden Klassenreferenztypen definiert:
+
+.XMP
+type
+  TPieceClass = class of TPiece;
+.EXMP
+
+Mit Hilfe von Klassenreferenzen kînnen wir das Erzeugen der ersten Figuren etwas
+anders implementieren. Wir hatten gesagt, da· wir Klassenreferenztypen wie andere
+Typen, z.B. Integer oder Char, benutzen kînnen. Dann sollte es uns insbesondere
+mîglich sein, ein Array von Klassenreferenzen zu definieren.
+
+.XMP
+var PieceTypes: array[1..16] of TPieceClass;
+.EXMP
+
+Wir gehen noch einen Schritt weiter und definieren eine typisierte Konstante,
+also ein Array, da· bereits mit Werten gefÅllt ist. Als Werte wÑhlen wir die
+Typen der 16 Figuren in der Reihenfolge, in der sie zu Spielbeginn auf dem
+Brett aufgestellt werden.
+
+.XMP
+const
+  PieceTypes: arrays[1..16] of TPieceClass =
+              (TRook, TKnight, TBishop, TQueen, TKing, TBishop, TKnight, TRook,
+               TPawn, TPawn,   TPawn,   TPawn,  TPawn, TPawn,   TPawn,   TPawn);
+.EXMP
+
+Damit kînnen wir den Konstruktor von TPlayer auch unter Zuhilfenahme dieses
+Arrays implementieren, wodurch er etwas kÅrzer wird.
+
+.XMP
+constructor TPlayer.Create(Colour: TColour);
+
+const
+  PieceTypes: arrays[1..16] of TPieceClass =
+              (TRook, TKnight, TBishop, TQueen, TKing, TBishop, TKnight, TRook,
+               TPawn, TPawn,   TPawn,   TPawn,  TPawn, TPawn,   TPawn,   TPawn);
+var
+  N, Row: Integer;
+begin
+  ...
+
+  if Colour = White then Row := 1 else Row := 8;
+
+  for N := 1 to 8 do 
+    FPieces[N] := PieceTypes[N].Create(Colour, MakePosition(N, Row));
+
+  if Colour = White then Row := 2 else Row := 7;
+
+  for N := 9 to 16  do
+    FPieces[N] := PieceTypes[N].Create(Colour, MakePosition(N, Row));
+
+  ...
+end;
+.EXMP
+
+wie folgt implementieren.
+
+als die flexiblere der beiden kennengelernt, weil die Instanz nicht zwingend
+vom Typ der Instanzvariablen sein mu·te, sondern auch ein Nachfahre dieses Typen
+sein konnte.
+
+erlaubte Bei der einen Variante wurde immer ein Objekt vom Typ der Instanzvariablen
+erzeugt. Die andere Variante war flexibler, da wird hier beim Konstruktoraufruf
+eine Klasse angeben konnten.
+
+Wenn man sich die Konstruktoren etwas nÑher anschaut, stellt man fest, da· sie
+eine Mischform zwischen gewîhnlichen Methoden und Klassenmethoden darstellen.
+Die beiden Varianten des Konstruktoraufrufes machen dies deutlich. Es gibt eine
+Variante, die  Bei der Variante, die die Angabe einer Klasse erfordert, kînnen wir
+
+Sie arbeiten zwar auch auf konkreten Objekten, aber zuerst einmal mÅssen diese
+ja erzeugt werden.
+
+.ULIST
+.LISTITEM Konstruktoren sind bereits Mischform von normalen und Klassenmethoden (Zwei Varianten des Aufrufes)
+.LISTITEM Polymorphes Konstruieren von Objekten mîglich
+.LISTITEM Beispiel: TPlayer.Create schîner machen (mit Array)
+.EULIST
+

@@ -1,0 +1,24 @@
+{$IFDEF OS2}
+POINTER MultiSel ..\..\..\bmp\WDSibyl\os2\multisel.ptr
+POINTER Insert   ..\..\..\bmp\WDSibyl\os2\insert.ptr
+POINTER Paste    ..\..\..\bmp\wdsibyl\os2\paste.ptr
+POINTER Help     ..\..\..\bmp\wdsibyl\os2\help.ptr
+POINTER VSplit   ..\..\..\bmp\wdsibyl\os2\vsplit.ptr
+POINTER HSplit   ..\..\..\bmp\wdsibyl\os2\hsplit.ptr
+POINTER SQLWait  ..\..\..\bmp\wdsibyl\os2\sqlwait.ptr
+POINTER Cross    ..\..\..\bmp\wdsibyl\os2\cross.ptr
+POINTER APPStart ..\..\..\bmp\wdsibyl\os2\appstart.ptr
+POINTER UpArrow  ..\..\..\bmp\wdsibyl\os2\uparrow.ptr
+{$ENDIF}
+
+{$IFDEF Win32}
+POINTER MultiSel ..\..\..\bmp\WDSibyl\win32\multisel.cur
+POINTER Insert   ..\..\..\bmp\WDSibyl\win32\insert.cur
+POINTER Paste    ..\..\..\bmp\WDSibyl\win32\paste.cur
+POINTER Help     ..\..\..\bmp\WDSibyl\win32\help.cur
+POINTER VSplit   ..\..\..\bmp\WDSibyl\win32\vsplit.cur
+POINTER HSplit   ..\..\..\bmp\WDSibyl\win32\hsplit.cur
+POINTER SQLWait  ..\..\..\bmp\WDSibyl\win32\sqlwait.cur
+POINTER Cross    ..\..\..\bmp\WDSibyl\win32\cross.cur
+POINTER Drag     ..\..\..\bmp\WDSibyl\win32\drag.cur
+{$ENDIF}

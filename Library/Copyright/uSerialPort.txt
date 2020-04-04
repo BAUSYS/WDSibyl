@@ -1,0 +1,70 @@
+I am developing an application that needs to access serial ports both under
+OS/2 and Win32. Because SIBYL doesn't provide a component for this purpose, 
+I decided to write my own.
+The OS/2 information was available on the SpeedSoft website, and fortunately,
+I found an article by Jason Perry on internet, describing a DELPHI component
+to access the serial ports.
+(www.oop.com/white_papers/delphi/serial-communication.htm)
+
+The object allows you to define the normal serial communications parameters
+(baudrate, statbits, stopbits and parity) and also defines the necessary
+hooks to implement hard or software handshaking if desired.
+
+I also added a timer to poll the port and to warn the program when there is data
+waiting to be read.
+
+There are two ways to obtain the data. You can specify that the data comes in
+strings (ended by CR or LF) or in chars.
+When you specify strings, (DataType = dtString) the OnStringRead method will be called whenever the
+control has read a complete string. This procedure should call the ReadString method to obtain the string 
+read.
+When you specify chars, (DataType = dtChars) the OnCharsRead method is called. This procedure should call
+first the BytesInQue function to find out how many characters are waiting to be read, define a memory area
+big enough to contain the data and call the GetData function to read the required number of bytes.
+
+The SendData method sends the data to the comport.
+
+I included a small program that shows how to use the component. The program opens the comport
+and waits for string data to arrive. The received data appears on the screen.
+When you push the SEND button, all the received data will be send to the comport.
+
+
+Licence:
+--------
+
+  This component is copyright (c) 2000 by Horizontes Informatica, S.L. You
+are free to use it in your programs under the following conditions:
+
+- If you use this component in copyrigthed software, the following text must be shown 
+   with your own copyright message in the program and documentation:
+  "Portions copyrighted 2000 by Horizontes Informatica, S.L."
+
+- You may ONLY distribute the whole unmodified archive.
+
+- If you make ANY modifications to the source you HAVE to send all the changes
+  to me for inclusion in a future release.
+
+
+DISCLAIMER
+
+ 	YOU USE THIS COMPONENT AT YOUR OWN RISK! I don't take any
+	responsibility for lost bits or bytes, damages, problems, etc.,
+	resulting from use, inability to use, misuse, possession or non-possession of this
+	component directly or indirectly.
+
+	I also don't give any warranty for bug-free operation or fitness for a particular
+	purpose of the component.
+
+     THE SOFTWARE IS PROVIDED "AS IS'' AND WITHOUT ANY EXPRESS OR
+     IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+     WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+     PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
+     COMPONENT IS WITH YOU.  SHOULD THE COMPONENT PROVE DEFECTIVE, YOU
+     ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+Willem Clements
+Horizontes Informatica, S.L.
+willem@horizontes-informatica.com
+
+
+

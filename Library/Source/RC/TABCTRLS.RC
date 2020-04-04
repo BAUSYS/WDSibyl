@@ -1,0 +1,7 @@
+
+BITMAP StdBmpEdgeTop          ..\..\..\bmp\Compnt\edgetop.bmp
+BITMAP StdBmpEdgeTopPlus      ..\..\..\bmp\Compnt\edgetopp.bmp
+BITMAP StdBmpEdgeTopMinus     ..\..\..\bmp\Compnt\edgetopm.bmp
+BITMAP StdBmpEdgeBottom       ..\..\..\bmp\Compnt\edgebot.bmp
+BITMAP StdBmpEdgeBottomPlus   ..\..\..\bmp\Compnt\edgebotp.bmp
+BITMAP StdBmpEdgeBottomMinus  ..\..\..\bmp\Compnt\edgebotm.bmp

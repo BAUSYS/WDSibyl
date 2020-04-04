@@ -1,0 +1,20 @@
+// Damit die Bilder unter OS/2 und Windows richtig dargestellt werden, muessen
+// die Bilder als OS2-BMP Version 1.2 mit 256 Farben gespeichert werden.
+
+BITMAP SibLogo        ..\..\..\bmp\WDSibyl\startup.bmp
+BITMAP PwByCul        ..\..\..\bmp\WDSibyl\PoweredBy\Cul.bmp
+BITMAP PwByToolbox    ..\..\..\bmp\WDSibyl\PoweredBy\toolbox_mag.bmp
+BITMAP PWByOS2CH      ..\..\..\bmp\WDSibyl\PoweredBy\os2ua.bmp
+BITMAP PwByOS2Hamburg ..\..\..\Bmp\WDSibyl\PoweredBy\os2Hamburg.bmp
+BITMAP PWByViereggM   ..\..\..\Bmp\WDSibyl\PoweredBy\ViereggM.bmp
+BITMAP PWByChristG    ..\..\..\Bmp\WDSibyl\PoweredBy\ChristG.bmp
+              
+ICON MainForm  ..\..\..\bmp\WDSibyl\os2\sibyl.ico
+ICON ISpector  ..\..\..\bmp\WDSibyl\os2\ispector.ico
+ICON Watch     ..\..\..\bmp\WDSibyl\os2\watch.ico
+ICON Edit      ..\..\..\bmp\WDSibyl\os2\edit.ico
+ICON Inspect   ..\..\..\bmp\WDSibyl\os2\inspect.ico
+ICON CpuWin    ..\..\..\bmp\WDSibyl\os2\cpuwin.ico
+
+/* -- date -- -- from -- -- changes ----------------------------------------------- */
+/* 03-Sep-06  WD         Die Icons vom Hauptprojekt uebertragen                     */

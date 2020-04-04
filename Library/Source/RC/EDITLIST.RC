@@ -1,0 +1,5 @@
+
+BITMAP BmpBtnNew  ..\..\..\bmp\WDSibyl\Speedbar\FileNew.bmp
+BITMAP BmpBtnDel  ..\..\..\bmp\WDSibyl\Additional\Delete.bmp
+BITMAP BmpBtnUp   ..\..\..\bmp\WDSibyl\Property\Up.bmp
+BITMAP BmpBtnDown ..\..\..\bmp\WDSibyl\Property\Down.bmp

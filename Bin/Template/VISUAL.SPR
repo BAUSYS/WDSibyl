@@ -1,0 +1,24 @@
+[General]
+
+ProjectType=Visual
+
+
+[MainForm]
+
+Palette=Navigator,Speedbar
+
+
+[Code Editor]
+
+StatusbarVisible=True
+
+
+[Object Inspector]
+
+Visible=True
+
+
+[Linker Options]
+
+LinkerTarget=GUI
+

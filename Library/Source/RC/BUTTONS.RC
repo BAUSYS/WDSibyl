@@ -1,0 +1,25 @@
+BITMAP StdBmpOk       ..\..\..\bmp\Compnt\ok.bmp
+BITMAP StdBmpCancel   ..\..\..\bmp\Compnt\cancel.bmp
+BITMAP StdBmpHelp     ..\..\..\bmp\Compnt\help.bmp
+BITMAP StdBmpYes      ..\..\..\bmp\Compnt\ok.bmp
+BITMAP StdBmpNo       ..\..\..\bmp\Compnt\no.bmp
+BITMAP StdBmpClose    ..\..\..\bmp\Compnt\close.bmp
+BITMAP StdBmpAbort    ..\..\..\bmp\Compnt\cancel.bmp
+BITMAP StdBmpRetry    ..\..\..\bmp\Compnt\retry.bmp
+BITMAP StdBmpIgnore   ..\..\..\bmp\Compnt\ignore.bmp
+BITMAP StdBmpAll      ..\..\..\bmp\Compnt\all.bmp
+BITMAP StdBmpPrev     ..\..\..\bmp\Compnt\dbprior.bmp
+BITMAP StdBmpNext     ..\..\..\bmp\Compnt\dbnext.bmp
+BITMAP StdBmpFind     ..\..\..\Bmp\Compnt\find.bmp
+BITMAP StdBmpFindNext ..\..\..\Bmp\Compnt\findnext.bmp
+BITMAP StdBmpOpen     ..\..\..\bmp\WDSibyl\Speedbar\folder.bmp
+BITMAP StdBmpPrinter  ..\..\..\Bmp\Compnt\Printer.bmp
+BITMAP StdBmpNew      ..\..\..\Bmp\Compnt\New.bmp
+BITMAP StdBmpDelete   ..\..\..\Bmp\Compnt\Delete.bmp
+BITMAP StdBmpEdit     ..\..\..\Bmp\Compnt\Edit.bmp
+
+BITMAP StdBmpAsk      ..\..\..\bmp\Compnt\ask.bmp
+BITMAP StdBmpHand     ..\..\..\bmp\Compnt\hand.bmp
+BITMAP StdBmpInfo     ..\..\..\bmp\Compnt\info1.bmp
+
+BITMAP StdBmpProp     ..\..\..\bmp\Compnt\property.bmp

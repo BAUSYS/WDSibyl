@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   revision="35"
+   repos="http://svn.netlabs.org/repos/wdsibyl"
+   url="http://svn.netlabs.org/repos/wdsibyl/trunk/WDSibyl/Bmp/Internet"
+   last-author="wolfgangd"
+   uuid="cbb429e8-791c-0410-88e6-dcdaa12b25c3"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="dir"
+   name=""
+   committed-rev="5"/>
+<entry
+   checksum="54050ce13b5998e12e718e1037f16b16"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:10.000000Z"
+   text-time="2004-11-11T23:00:00.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="EMailPOP.bmp"
+   committed-rev="5"/>
+</wc-entries>

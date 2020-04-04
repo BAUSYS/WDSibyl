@@ -1,0 +1,12 @@
+/* Speed Resource script */
+
+
+BITMAP RedOn ..\..\..\bmp\Compnt\LED_RON.BMP
+BITMAP RedOff ..\..\..\bmp\Compnt\LED_ROFF.BMP
+BITMAP GrOn ..\..\..\bmp\Compnt\LED_GON.BMP
+BITMAP GrOff ..\..\..\bmp\Compnt\LED_GOFF.BMP
+BITMAP YwOn ..\..\..\bmp\Compnt\LED_YON.BMP
+BITMAP YwOff ..\..\..\bmp\Compnt\LED_YOFF.BMP
+BITMAP BlOn ..\..\..\bmp\Compnt\LED_BON.BMP
+BITMAP BlOff ..\..\..\bmp\Compnt\LED_BOFF.BMP
+

@@ -1,0 +1,185 @@
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\DEFAULT_OS2.ICO
+
+[Application Options Win32]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\DEFAULT_Win32.ICO
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=BSETIB
+File3=BSEEXCPT
+File4=BSEDOS
+File5=BSEERR
+File6=PMWIN
+File7=PMWP
+File8=PMSHL
+File9=SYSUTILS
+File10=BSESUB
+File11=BSEVIO
+File12=BSEKBD
+File13=CRT
+File14=USTREAM
+File15=ULIST
+File16=USTRING
+File17=PMSPL
+File18=PMWINX
+File19=USYSINFO
+File20=USYSCLASS
+File21=BSEREGISTRY
+File22=INIFILES
+File23=USPRINSTALLER
+
+[Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=P:\WDSIBYL\WDSIBYL\LIBRARY\OUTPUT\WIN32
+OutDir=P:\WDSibyl\WDSibyl\Tools\Output\OS2
+LibDir=P:\WDSibyl\WDSibyl\Library\Output\OS2
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=P:\WDSibyl\WDSibyl\Output\OS2
+
+[Directories Win32]
+
+LastDir=P:\WDSIBYL\WDSIBYL\LIBRARY\OUTPUT\WIN32
+OutDir=P:\WDSibyl\WDSibyl\Tools\Output\Win32
+LibDir=P:\WDSibyl\WDSibyl\Library\Output\Win32
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=P:\WDSibyl\WDSibyl\Output\Win32
+
+[Find History]
+
+Find0=separ
+Find1=ReplaceAllStdPath
+Find2=SibylIniFileName
+Find3=SearchForIniFile
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Tools\Source\SPRInstaller.spr
+ProjectType=NonVisual
+RunParameter=V:\Temp\WDSibyl\Samples\mmedia\PicViewer\PicViewer.spr
+InActiveLanguages=
+CurrentLanguage=Default
+Platform=OS/2
+
+[Last Closed Files]
+
+File0=..\..\.\Library\Source\RTL\SYSTEM.PAS
+
+[Last Open Files]
+
+File0=.\SPRInstaller\SPRInstaller.pas
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=836
+File0.Height=475
+File0.Column=23
+File0.Line=6
+File1=.\SPRInstaller\uSPRInstaller.PAS
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=836
+File1.Height=475
+File1.Column=60
+File1.Line=89
+File2=F:\SPRACHEN\PASCAL\WDSIBYL\Library\Source\RTL\SYSTEM.PAS
+File2.Left=-1
+File2.Bottom=-1
+File2.Width=836
+File2.Height=475
+File2.Column=86
+File2.Line=12225
+File3=F:\SPRACHEN\PASCAL\WDSIBYL\LIBRARY\SOURCE\RTL\SYSUTILS.PAS
+File3.Left=-1
+File3.Bottom=-1
+File3.Width=836
+File3.Height=475
+File3.Column=12
+File3.Line=997
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=Window
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\SPRInstaller\SPRInstaller.pas
+MainFile0=.\SPRInstaller\SPRInstaller.pas
+MainFile0.Ext=.EXE
+MainFile0.Checksum=6400
+MainFile0.Expanded=False
+MainFile0.File0=.\SPRInstaller\uSPRInstaller.PAS
+MainFile0.File1=[Dependencies]
+MainFile0.Dependency0=F:\SPRACHEN\PASCAL\WDSIBYL\Library\Source\RTL\SYSTEM.PAS
+MainFile0.Dependency1=F:\SPRACHEN\PASCAL\WDSIBYL\LIBRARY\SOURCE\RTL\SYSUTILS.PAS
+MainFile0.Dependency2=.\SPRInstaller\USPRINSTALLER.PAS
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+

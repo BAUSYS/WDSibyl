@@ -1,0 +1,88 @@
+[Application Options OS/2]
+
+ApplicationIcon=V:\TEMP\WDSibyl\BIN\OS2\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=
+
+[Compiler Options]
+
+CodeGeneration=Assertions
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options OS/2]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+
+[Directories Win32]
+
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=V:\Temp\WDSibyl\Projects\Project1.spr
+ProjectType=NonVisual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Open Files]
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=Window
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=Form1
+

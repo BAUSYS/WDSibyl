@@ -1,0 +1,5168 @@
+.TOPIC 1 Reservierte Worte
+
+.HIGH Reservierte Worte
+
+Reservierte Worte sind fest definiert und dÅrfen in keinem anderen Zusammenhang
+benutzt werden.
+
+Reservierte Worte sind: 
+
+.FIG
+  {absolute}
+  {and}
+  {as}
+  {asm}
+  {assembler}
+  {array}
+  {begin}
+  {case}
+  {class}
+  {const}
+  {constructor}
+  {cstring}
+  {destructor}
+  {div}
+  {do}
+  {downto}
+  {else}
+  {end}
+  {except}
+  {exports}
+  {external}
+  {file}
+  {finally}
+  {for}
+  {function}
+  {goto}
+  {if}
+  {implementation}
+  {imports}
+  {in}
+  {inherited}
+  {interface}
+  {is}
+  {label}
+  {library}
+  {mod}
+  {nil}
+  {not}
+  {object}
+  {of}
+  {on}
+  {or}
+  {packed}
+  {procedure}
+  {program}
+  {raise}
+  {record}
+  {repeat}
+  {set}
+  {shl}
+  {shr}
+  {string}
+  {then}
+  {to}
+  {try}
+  {type}
+  {unit}
+  {until}
+  {uses}
+  {var}
+  {while}
+  {with}
+  {xor}
+.EFIG
+
+.TOPIC 2 absolute
+.HIGH   {Reservierte Worte}
+
+ABSOLUTE legt fest, da· eine Variable die selbe Adresse wie eine andere Variable hat. 
+
+Syntax: 
+.XMP
+    <VariablenName1> ':' <Typ> ABSOLUTE <VariablenName2>;
+.EXMP
+
+
+Beispiel: 
+.XMP
+    VAR
+       aLong:LONGWORD;
+       /* Variable loword enthÑlt das niederwertige
+          Wort der Variablen aLong */
+       loword:WORD ABSOLUTE aLong;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Var}
+.EFIG
+
+.TOPIC 2 and
+.HIGH and {Reservierte Worte}
+
+AND liefert die bitweise logische AND-VerknÅpfung zweier AusdrÅcke. 
+
+Syntax: 
+.XMP
+    <Ausdruck1> AND <Ausdruck2>
+.EXMP
+
+Beide AusdrÅcke mÅssen ganzzahlig oder vom Typ Boolean sein. 
+
+
+Beispiel: 
+
+    a:=1;       (* Der Variablen a den Wert 1 zuweisen *)
+    b:=4;       (* Der Variablen b den Wert 4 zuweisen *)
+    c:=a and b; (* Variable c enthÑlt nun 0 *)
+
+.FIG
+Siehe auch:
+           {not}
+           {or}
+           {Shl}
+           {Shr}
+           {Xor}
+.EFIG
+
+
+.TOPIC 2 as
+.HIGH as  {Reservierte Worte}
+
+Der Operator AS wertet zur Laufzeit bei einem TypeCast die Typ-Informationen aus
+und kann somit feststellen, ob es sich um eine gÅltige Operation handelt.
+
+Falls der TypeCast nicht erlaubt ist, wird eine Exception (EInvalidCast) ausgelîst. 
+
+Syntax: 
+.XMP
+    <Objekt> AS <Objekt-Typ>
+.EXMP
+
+
+Beispiel: 
+.XMP
+    TYPE
+        T1=CLASS
+        END;
+
+        T2=CLASS(T1)
+        END;
+
+    VAR
+        o1:T1;
+        o2:T2;
+
+    BEGIN
+         o1 := T2.Create;
+         o2 := o1 AS T2;   (* kein Fehler beim type cast *)
+
+         o1.Create;
+         o2 := o1 AS T2;   (* Exception: "Invalid type cast" zur Laufzeit *)
+    END.
+.EXMP
+
+.TOPIC 2 asm
+.HIGH asm  {Reservierte Worte}
+
+Greift auf den integrierten Assembler zu. 
+
+Syntax: 
+.XMP
+    ASM
+       <Statement>
+       <Statement>
+        ...
+    END;
+.EXMP
+
+<Statement> ist eine Assembler-Anweisung 
+
+Mehrfache Assembleranweisungen in einer Zeile sind unzulÑssig. Das Wort END
+selbst darf innerhalb der Assembleranweisung nicht vorkommen.
+
+Kommentare kînnen nur als Pascal-Kommentare eingefÅgt werden. 
+
+Eine ASM Anweisung in einer Prozedur/Funktion mu· das EBP-Register sichern,
+falls dieses innerhalb der ASM-Anweisung verÑndert wird - Speed-Pascal
+ÅberprÅft das nicht !!
+
+Werden innerhalb der Assembleranweisung Labels benîtigt mÅssen diese durch ein
+vorangestelltes Ausrufezeichen gekennzeichnet werden. Diese Labels dÅrfen
+nicht mittels LABEL definiert werden !
+
+Ein Label mu· immer auf einer eigenen Zeile stehen. 
+
+
+Beispiel: 
+.XMP
+        ASM
+           MOV ECX,5      //5 SchleifendurchlÑufe
+           MOV AX,1       //Anfangswert
+    !L1:                  //Label definieren
+           MOV [EBX+2],AX //[BX+2] mit AX laden
+           INC AX         //AX inkrementieren
+           LOOP !L1       //bis ECX=0
+        END; (* Ende der ASM Anweisung *)
+.EXMP
+
+.TOPIC 2 assembler
+.HIGH assembler  {Reservierte Worte}
+
+Syntax: 
+.XMP
+    ASSEMBLER
+             <Assembler-Anweisung>
+             .
+             .
+             .
+    END;
+.EXMP
+
+Das reservierte Wort ASSEMBLER erlaubt es bestimmte Codesequenzen VOLLSTéNDIG in
+Assembler zu schreiben. Der String END; selbst darf dabei in den Anweisungen
+nicht vorkommen.
+
+
+Beispiel: 
+.XMP
+    ASSEMBLER
+             !Test PROC NEAR32
+                PUSH EBP
+                MOV EBP,ESP
+                MOV AX,[EBP+6]
+                ADD AX,2
+                MOV EDI,[EBP+8]
+                MOV [EDI+0],AX
+                LEAVE
+                RETN32
+             !Test ENDP
+    END;
+.EXMP
+
+.TOPIC 2 array
+.HIGH array  {Reservierte Worte}
+
+Definiert ein Feld (Array). 
+
+Syntax: 
+.XMP
+    ARRAY [Indexbereich] OF Elementtyp
+.EXMP
+
+Der Indexbereich mu· eine ganzzahlige numerische oder boolsche Konstante oder ein
+AufzÑhlungstyp sein. Als Elementtyp ist jeder Typ zulÑssig.
+
+Mehrdimensionale Arrays enthalten mehrere durch Kommata voneinander getrennte
+Indexbereiche.
+
+
+Beispiel: 
+.XMP
+    VAR
+       a1:ARRAY[1..10] OF char;          (* 10 dimensionales Char-Feld    *)
+       a2:ARRAY[false..true] of word;    (* word Array von false bis true *)
+
+    TYPE
+       Matrix=ARRAY[0..9, 0..9] OF real; (* 10x10 Matrix aus Real-Zahlen *)
+.EXMP
+
+.TOPIC 2 begin
+.HIGH begin  {Reservierte Worte}
+
+Dieses Konstrukt wird auch als Verbundanweisung bezeichnet. 
+
+Syntax: 
+.XMP
+    BEGIN
+      Anweisung1;
+      Anweisung2;
+      ...
+      AnweisungN;
+    END;
+.EXMP
+
+Der Compiler betrachtet die Anweisungen zwischen Begin und {End} als einen einzigen
+Block, das hei·t wie eine einzelne Anweisung. Die Verbundanweisung wird Åberall da
+eingesetzt wo laut Sprachdefinition nur eine Anweisung stehen dÅrfte, zum Beispiel
+nach einer "if" Anweisung oder einer "case" Anweisung. Verbundanweisungen
+umschlie·en auch den Anweisungsteil von Prozeduren bzw. des Hauptprogramms.
+
+
+Beispiel: 
+.XMP
+    (* Verbundanweisung in einer "case" Anweisung *)
+    CASE Zahl of
+        1:BEGIN
+               Writeln('Die Zahl war 1');
+               exit;
+          END;
+
+        ...
+    END; (* of Case *)
+.EXMP
+
+.FIG
+Siehe auch:
+           {end}
+.EFIG
+
+
+.TOPIC 2 case
+.HIGH case  {Reservierte Worte}
+
+Die CASE Anweisung verzweigt entsprechend einem konstanten Vergleichswert in eine
+Anweisungsfolge. Entspricht keine Konstante dem Selektorausdruck wird ein optionaler
+ELSE Zweig ausgefÅhrt.
+
+Syntax: 
+.XMP
+    CASE <expression> OF
+      <constant>: <statement>;
+      ...
+      <constant>: <statement>;
+    END;
+    ELSE <statement>;
+.EXMP
+
+
+Der ELSE-Teil kann hierbei wahlweise entfallen. 
+
+<Expression> ist ein Ausdruck beliebigen Typs. FÅr <constant> sind nur ordinale
+Typen zulÑssig, also keine Records oder Arrays !
+
+Anstelle von <constant> kann auch eine Reihe von Konstanten stehen, welche mit
+Kommata zu trennen sind.
+
+Anstelle von <statement> kann auch eine mit begin...end eingeschlossene
+Anweisungsfolge stehen.
+
+
+Beispiel: 
+.XMP
+    CASE Ch OF
+        'A', 'a'           :  WriteLn('Letter a');
+        '+', '-', '*', '/' :  WriteLn('Operator');
+        ' '                :  BEGIN
+                                   Write('Blank ');
+                                   Writeln('letter');
+                              END;
+    ELSE WriteLn('Special character');
+    END; (* Case *)
+.EXMP
+
+.FIG
+Siehe auch:
+           {else}
+           {if}
+.EFIG
+
+.TOPIC 2 class
+.HIGH class  {Reservierte Worte}
+
+CLASS ist das fundamentale SchlÅsselwort fÅr die Objektorientierte Programmierung.
+Im Gegensatz zu {OBJECT} wird bei Verwendung von CLASS das neue Delphi
+kompatible Objektformat benutzt, welches mehr FlexibilitÑt im Umgang mit Objekten
+ermîglicht.
+
+CLASS deklariert eine Datenstruktur fÅr eine Klasse. Diese Klasse kann Variablen
+(Instanzvariablen) und Prozeduren/Funktionen (Methoden) und Eigenschaften ({Property})
+enthalten.
+
+Instanzvariablen enthalten Daten eines beliebigen Datentypes, wÑhrend Methoden
+Aktionen mit diesen Variablen ausfÅhren.
+
+Die Deklaration einer Klasse ist Ñhnlich zur Deklaration eines Records, auch eine
+Klasse enthÑlt Komponenten.
+
+Eine Klasse ohne Vorfahren hat automatisch die in der System Unit deklarierte Klasse
+TOBJECT als Vorfahren.
+
+Syntax: 
+.XMP
+    <TypName> = CLASS;             (* Forward-Definition mîglich *)
+
+    <TypName> = CLASS              (* Klasse ohne Vorfahren *)
+                    Komponente1;
+                    .
+                    .
+                    .
+                END;
+
+    <TypName> = CLASS(Parent)      (* Klasse mit Vorfahren Parent *)
+                    Komponente1;
+                    .
+                    .
+                    .
+                END;
+.EXMP
+
+Komponenten kînnen Instanzvariablen, Methoden oder Eigenschaften sein. 
+
+
+.FIG
+    Instanzvariable = Name:typ;
+    Methode         = PROCEDURE Name(<Parameter>);<VIRTUAL>;
+    Methode         = FUNCTION Name(<Parameter>):typ;<VIRTUAL>;
+    Methode         = CONSTRUCTOR Name(<Parameter>);
+    Methode         = DESTRUCTOR Name(<Parameter>);
+    Eigenschaft     = PROPERTY Name<[index]>:typ <read Methode|Instanzvariable>
+                                                 <write Methode|Instanzvariable>;
+.EFIG
+
+Ein Klassentyp kann Variablen und Methoden von anderen Klassentypen erben. Die erbende Klasse ist dann ein Nachkomme des Vorfahren. 
+
+
+Weiterhin wird dieses SchlÅsselwort verwendet, um 
+
+ 1.Objekt-Referenzen 
+
+ 2.Klassenmethoden 
+zu definieren. 
+
+Definition einer Objekt-Referenz: 
+
+    <TypName> = CLASS OF <TypName>;
+
+
+Eine Objekt-Referenz ist ein Zeiger auf einen Objekttyp. Ihr kann zur Laufzeit ein
+bestimmter Klassentyp zugewiesen werden. In AbhÑmgigkeit von diesem Typ kann dann
+eine Instanz dieser Klasse erzeugt werden, oder Informationen Åber den Objekttyp
+mittels Klassenmethoden ausgelesen werden.
+
+
+Beispiel: 
+.XMP
+    TYPE
+        TList = CLASS
+        END;
+
+        TList2 = CLASS(TList)
+        END;
+
+        TListClass = CLASS OF TList;
+
+    VAR
+        ListClass:TListClass;          (* ListClass kann Klassentypen
+                                          speichern *)
+        MyList:TList;
+
+    BEGIN
+         ListClass:=TList;             (* Typ zuweisen *)
+         Writeln(ListClass.ClassName); (* Objekttyp Informationen bestimmen *)
+         ListClass:=TList2;            (* neuen Typ zuweisen *)
+         Writeln(ListClass.ClassName); (* Objekttyp Informationen bestimmen *)
+
+         MyList:=ListClass.Create;     (* erzeuge eine Instanz der Klasse mit
+                                          dem Typ, der ListClass zugewiesen
+                                          worden ist; also TList2 *)
+         Writeln(MyList.ClassName);    (* liefert 'TLIST2' *)
+    END.
+.EXMP
+
+
+Klassenmethoden sind eher an den Typ gebunden als an eine Instanz der Klasse.
+Das hei·t, diese Methoden kînnen auch aufgerufen werden ohne vorher eine Instanz der
+Klasse zu erzeugen.
+
+Definition einer Klassenmethode: 
+
+    <TypName> = CLASS
+          CLASS <Prozedurdeklaration>;   (* Klassenmethode *)
+    END;
+
+
+
+Beispiel: 
+.XMP
+    TYPE
+        TMyClass = CLASS
+              CLASS FUNCTION GetName:STRING;
+        END;
+
+
+    CLASS FUNCTION TMyClass.GetName:STRING;
+    BEGIN
+         Result := 'TMyClass';
+    END;
+
+
+    BEGIN
+         Writeln(TMyClass.GetName);  (* kein Konstruktor-Aufruf notwendig *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Constructor}
+           {Destructor}
+           {Object}
+.EFIG
+
+.TOPIC 2 const
+.HIGH const  {Reservierte Worte}
+
+CONST deklariert eine untypisierte Konstante mit einem konstantem Wert. 
+
+Folgt dem Bezeichner nach CONST eine Typspezifikation, so deklariert CONST eine
+typisierte Konstante, welche beim Programmstart den angegebenen Wert zugewiesen
+bekommt.
+
+Typisierte Konstanten kînnen wie Variablen verwendet werden, untypisierte
+Konstanten dÅrfen nie auf der linken Seite einer Zuweisung vorkommen.
+
+Syntax: 
+.XMP
+    CONST
+      <identifier> = <expression>;
+      <identifier>: <type> = <expression>;
+.EXMP
+
+
+Beispiel:
+.XMP
+    CONST typed_Const:Word=10; (* typisierte Word Konstante *)
+          untyped_Const=20;    (* untypisierte Word Konstante *)
+.EXMP
+
+.FIG
+Siehe auch:
+           {type}
+           {var}
+.EFIG
+
+
+
+.TOPIC 2 constructor
+.HIGH   {Reservierte Worte}
+
+CONSTRUCTOR bezeichnet innerhalb eines Objektes die Initialisierungsmethode des
+Objektes - demzufolge mu· jedes Objekt eine Konstruktormethode besitzen.
+
+Es wird Speicher fÅr das Objekt belegt und die Virtuelle Methodentabelle (VMT)
+initialisiert.
+
+Syntax: wie Prozedurdeklaration 
+
+.FIG
+Siehe auch:
+           {Destructor}
+           {Procedure}
+.EFIG
+
+
+.TOPIC 2 cstring
+.HIGH cstring  {Reservierte Worte}
+
+Das reservierte Wort CSTRING deklariert eine null-terminierende String-Variable, d.h. eine Zeichenkette mit einer dynamischen LÑnge und einer konstanten maximalen LÑnge zwischen 1 und 255 Bytes. 
+
+Das Ende der Zeichenkette wird mit einem NULL-Byte (#0) markiert. 
+
+Syntax: 
+.XMP
+    CSTRING
+      oder
+    CSTRING [Konstante]
+.EXMP
+
+
+Ein ARRAY [0..x] OF CHAR ist identisch mit einem CSTRING[x] ! 
+
+
+Beispiel: 
+.XMP
+    VAR
+       s:CSTRING;
+    BEGIN
+       s:='Hallo welt';
+       s[6]:='W';      (* setzt einzeln das 7-te Zeichen *)
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {string}
+.EFIG
+
+.TOPIC 2 destructor
+.HIGH destructor  {Reservierte Worte}
+
+DESTRUCTOR bezeichnet innerhalb eines Objektes die Ende-Routine des Objektes -
+demzufolge mu· jedes Objekt eine Destruktormethode besitzen.
+
+Der Speicher fÅr das Objekt wird wieder freigegeben und das Objekt vernichtet. 
+
+Syntax: wie Prozedurdeklaration 
+
+.FIG
+Siehe auch:
+           {Constructor}
+           {Procedure}
+.EFIG
+
+.TOPIC 2 div
+.HIGH div  {Reservierte Worte}
+
+DIV liefert die Division zweier AusdrÅcke. Beide AusdrÅcke mÅssen vom gleichen Typ
+sein.
+
+Sind die AusdrÅcke ganzzahlig, so liefert DIV die Division dieser AusdrÅcke ohne
+einen Divisionsrest zu berÅcksichtigen, der Ergebnisausdruck ist in diesem Fall
+also auch ganzzahlig.
+
+Bei Bedarf kann der Divisionsrest mit dem Befehl MOD ermittelt werden. 
+
+Syntax: 
+.XMP
+    <Ausdruck1> DIV <Ausdruck2>
+.EXMP
+
+Beide AusdrÅcke mÅssen numerische Werte sein. 
+
+
+Beispiel: 
+.XMP
+    a:=10;      (* Der Variablen a den Wert 1 zuweisen *)
+    b:=4;       (* Der Variablen b den Wert 4 zuweisen *)
+    c:=a DIV b; (* Variable c enthÑlt nun 2 *)
+.EXMP
+
+.FIG
+Siehe auch:
+           {Mod}
+           {Shl}
+           {Shr}
+.EFIG
+
+
+.TOPIC 2 do
+.HIGH do  {Reservierte Worte}
+
+Das reservierte Wort DO wird in folgenden Anweisungen verwendet: 
+
+.ULIST
+.LISTITEM {while}  Schleifen
+.LISTITEM {for}  Schleifen
+.LISTITEM {with}  Anweisungen
+.LISTITEM {on}  Anweisungen
+.EULIST
+
+
+.TOPIC 2 downto
+.HIGH downto  {Reservierte Worte}
+
+Die FOR Anweisung bewirkt die mehrfache AusfÅhrung einer Anweisungsfolge. 
+
+Syntax: 
+.XMP
+    FOR <var> := <Start> TO <End> DO <statement>
+      oder
+    FOR <var> := <Start> DOWNTO <End> DO <statement>
+.EXMP
+
+<var> ist eine ganzzahlige Variable, welche als Steuervariable der Schleife
+fungiert. <Start> ist eine ganzzahlige Konstante, welche der Steuervariablen
+beim ersten Durchlauf der Schleife zugewiesen wird.
+
+Folgt nach <Start> das reservierte Wort TO, so wird die Steuervariable bei jedem
+Schleifendurchlauf um 1 erhîht.
+
+Folgt nach <Start> das reservierte Wort DOWNTO, so wird die Steuervariable bei jedem
+Schleifendurchlauf um 1 erniedrigt.
+
+<End> ist eine ganzzahlige Konstante. Erreicht die Steuervariable den Wert <End>, so
+wird die Schleife verlassen.
+
+Anstelle von <statement> kann auch eine mit begin...end eingeschlossene
+Anweisungsfolge stehen.
+
+
+Beispiel: 
+.XMP
+    (* Gebe alle Kommandozeilenparameter aus *)
+    FOR I := 1 TO ParamCount DO WriteLn(ParamStr(I);
+.EXMP
+
+.FIG
+Siehe auch:
+           {for}
+           {to}
+.EFIG
+
+.TOPIC 2 else
+.HIGH else  {Reservierte Worte}
+
+Mit diesem SchlÅsselwort wird der alternative Zweig eines mit IF eingeleiteten
+Vergleiches sowie einer mit CASE oder ON aufgebauten Verzweigung eingeleitet.
+
+Syntax: 
+.XMP
+    ELSE <statement>
+.EXMP
+
+Anstelle von <statement> kann auch eine mit {begin}...{end} eingeschlossene
+Anweisungsfolge stehen.
+
+Wird ELSE als alternativer Zweig einer IF-Anweisung benutzt, so darf vor dem Wort
+ELSE kein Semikolon stehen.
+
+Wird ELSE als alternativer Zweig einer CASE-Anweisung oder ON-Anweisung benutzt,
+so mu· die ELSE-Anweisung das letzte Element der Anweisung sein.
+
+
+Beispiel: 
+.XMP
+    (* ELSE in einer IF-Anweisung *)
+    IF Wert=1 THEN Writeln('Wert ist eins')
+    ELSE Writeln('Wert ist nicht eins');
+
+    (* ELSE in einer CASE-Anweisung *)
+    CASE Wert of
+        1:Writeln('Wert ist eins');
+        2:Writeln('Wert ist zwei');
+        ELSE Writeln('Wert ist weder eins noch zwei');
+    END; (* of case *)
+
+    (* ELSE in einer ON-Anweisung *)
+    TRY
+    ...
+    EXCEPT
+          ON EListError DO Writeln('List Error');
+          ELSE Writeln('andere Exception');
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {case}
+           {if}
+           {then}
+.EFIG
+
+.TOPIC 2 end
+.HIGH end  {Reservierte Worte}
+
+Dieses SchlÅsselwort beendet eines der fÅnf folgenden Konstrukte: 
+
+
+.ULIST
+.LISTITEM  eine mit begin eingeleitete Verbundanweisung
+.LISTITEM  eine mit case eingeleitete PrÅfungsaktion
+.LISTITEM  eine mit record eingeleitete Deklaration
+.LISTITEM  einen mit asm eingeleiteten Assembler-Anweisungsteil
+.LISTITEM  ein mit try eingeleitetes Exception-Handling
+.EULIST
+
+.TOPIC 2 except
+.HIGH except  {Reservierte Worte}
+
+Das reservierte Wort EXCEPT kennzeichnet den Anfang einer Liste von
+Exception-Behandlungsroutinen.
+
+Syntax: 
+.XMP
+    TRY
+       (* geschÅtzer Block *)
+    EXCEPT
+       (* Exception Behandlung *)
+       ON (* Exception *) DO (* spezieller Exception Handler *);
+       <ELSE (* Default Exception Handler *);>
+    END;
+.EXMP
+
+Jede dieser Routinen, der eine bestimmten Ausnahmebedingungen zugeordnet ist,
+entspricht eine ON..DO Anweisung.
+
+Tritt in einem mit TRY eingeleiteten Exception-Handling-Block eine Ausnahmebedingung
+auf, so verzweigt das Programm unverzÅglich zum EXCEPT Block.
+
+Entspricht keine der dort aufgelisteten Exceptions der eingetretenen Ausnahmebedingung
+so wird der Default-Handler des ELSE Zweiges ausgefÅhrt, falls dieser definiert ist.
+Ansonsten bleibt die Exception unbehandelt.
+
+
+Beispiel: 
+.XMP
+    VAR
+       p:^BYTE;
+
+    BEGIN
+         TRY
+            p:=NIL;
+            p^:=1;  (* Exception *)
+
+         EXCEPT
+               ON EGPFault DO
+               BEGIN
+                    (* speziell fÅr Fehler in Pointeroperationen *)
+                    Writeln('EGPFault');
+               END;
+               ELSE
+               BEGIN
+                    (* Default-Exception-Handler *)
+                    Writeln('Exception');
+               END;
+         END;
+
+         (* Programm wird hier fortgesetzt *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Try}
+           {Finally}
+           {On}
+           {Raise}
+.EFIG
+
+
+
+.TOPIC 2 exports
+.HIGH exports  {Reservierte Worte}
+
+Das reservierte Wort EXPORTS definiert die Prozeduren/Funktionen einer DLL welche
+von anderen Programmen aus zugÑnglich sein sollen.
+
+Syntax: 
+.XMP
+    EXPORTS
+           <Bezeichner>,
+           <Bezeichner> NAME 'Name',
+           <Bezeichner> INDEX 1;
+.EXMP
+
+Wobei <Bezeichner> der Name der Prozedur/Funktion ist. 
+
+Routinen kînnen per Index oder per Name exportiert werden. Wird weder INDEX noch
+NAME angegeben, so werden die Indizes vom Compiler vergeben und mit 1 beginnend
+durchnummeriert.
+
+
+Beispiel: 
+.XMP
+    EXPORTS
+           Prozedur1,                  //Index vom Compiler vergeben (1)
+           Prozedur2 Index 100,        //Index 100
+           Prozedur3 Name 'Prozedur3'; //Name 'Prozedur3'
+.EXMP
+
+.FIG
+Siehe auch:
+           {External}
+           {Imports}
+.EFIG
+
+.TOPIC 2 external
+.HIGH external  {Reservierte Worte}
+
+Das reservierte Wort EXTERNAL dient zur Deklaration von Routinen, die aus DLL's
+eingebunden werden.
+
+Syntax: 
+.XMP
+    <Prozedurdeklaration>;External '<DllName>' INDEX <Zahl>;
+    <Prozedurdeklaration>;External '<DllName>' NAME 'String';
+.EXMP
+
+<Prozedurdeklaration> beschreibt die Prozedur/Funktion mit Ihren Parametern. 
+
+<DllName> ist der Name der DLL aus der die Prozedur importiert werden soll und <Zahl>
+der {Index} der Prozedur in dieser DLL.
+
+Soll die Prozedur Åber einen Namen importiert werden, so mu· der Funktionsname
+nach dem Bezeichner NAME als String angegeben werden.
+
+FÅr Funktionen welche in C-Manier aufgerufen werden sollen mu· die Option APIENTRY
+angegeben werden. Dies gilt vor allem fÅr OS/2 API Funktionen.
+
+
+Beispiel: 
+.XMP
+    PROCEDURE Prozedur1(Code: Word);
+                          External   'MyDll' INDEX 1;
+    FUNCTION  Funktion1:LongWord;
+                          External   'MyDll' NAME 'Funktion1';
+    FUNCTION  DosCloseVDD(ahvdd:HVDD):APIRET;
+                APIENTRY; External   'DosCalls' INDEX 310;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Exports}
+           {Imports}
+           {Index}
+           {ApiEntry}
+.EFIG
+
+
+
+.TOPIC 2 file
+.HIGH file   {Reservierte Worte}
+
+FILE bezeichnet Dateien beliebigen Typs. 
+
+Syntax: 
+.XMP
+    FILE OF <type>
+      oder
+    FILE
+.EXMP
+
+Wird nach dem Wort FILE ein Typ angegeben, so besteht die Datei aus Elementen mit
+dem spezifizierten Komponententyp <type>.
+
+Wenn das reservierte Wort OF und der Komponententyp nicht angegeben sind, handelt es
+sich um eine untypisierte Datei.
+
+
+Beispiel: 
+.XMP
+    (* Deklarationen von Dateitypen *)
+    TYPE
+        Adressen=RECORD
+                      Name    :STRING;
+                      Vorname :STRING;
+                      Strasse :STRING;
+                      Ort     :STRING;
+                      Plz     :Word;
+                 END;
+
+        AdressDatei=FILE OF Adressen;
+        Untyped_File=FILE;
+.EXMP
+
+.TOPIC 2 finally
+.HIGH finally  {Reservierte Worte}
+
+Das reservierte Wort FINALLY kennzeichnet den Anfang des sogenannten CleanUp-Codes
+eines geschÅtzen Blockes. Dieses Code wird immer ausgefÅhrt, egal ob eine Exception
+auftritt oder nicht.
+
+Syntax:
+.XMP
+    TRY
+       (* geschÅtzer Block *)
+    FINALLY
+       (* Ressourcen wieder freigeben *)
+       (* wird ausgefÅhrt, unabhÑngig ob eine Exception auftritt *)
+    END;
+.EXMP
+
+Im FINALLY Segment kann nicht bestimmt werden, ob eine Exception aufgetreten ist oder
+nicht. Das hei·t, es kann somit auch keine Exception speziell behandelt werden.
+
+
+Beispiel: 
+.XMP
+    GetMem(p,1000);
+    a := 0;
+    TRY
+       Result := 5 / a;    (* Exception *)
+       ...
+    FINALLY
+       FreeMem(p,1000);    (* Ressource wird wieder freigegeben *)
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Try}
+           {Except}
+           {On}
+           {Raise}
+.EFIG
+
+
+
+.TOPIC 2 for
+.HIGH for  {Reservierte Worte}
+
+Die FOR Anweisung bewirkt die mehrfache AusfÅhrung einer Anweisungsfolge. 
+
+Syntax: 
+.XMP
+    FOR <var> := <Start> TO <End> DO <statement>
+      oder
+    FOR <var> := <Start> DOWNTO <End> DO <statement>
+.EXMP
+
+<var> ist eine ganzzahlige Variable, welche als Steuervariable der Schleife
+fungiert. <Start> ist eine ganzzahlige Konstante, welche der Steuervariablen beim
+ersten Durchlauf der Schleife zugewiesen wird.
+
+Folgt nach <Start> das reservierte Wort {TO}, so wird die Steuervariable bei jedem S
+chleifendurchlauf um 1 erhîht.
+
+Folgt nach <Start> das reservierte Wort {DOWNTO}, so wird die Steuervariable bei
+jedem Schleifendurchlauf um 1 erniedrigt.
+
+<End> ist eine ganzzahlige Konstante. Erreicht die Steuervariable den Wert <End>,
+so wird die Schleife verlassen. Anstelle von <statement> kann auch eine mit
+{begin}...{end} eingeschlossene Anweisungsfolge stehen.
+
+
+Beispiel: 
+.XMP
+    (* Gebe alle Kommandozeilenparameter aus *)
+    FOR I := 1 TO ParamCount DO WriteLn(ParamStr(I);
+.EXMP
+
+.FIG
+Siehe auch:
+           {to}
+           {downto}
+.EFIG
+
+.TOPIC 2 forward
+.HIGH forward  {Reservierte Worte}
+
+FORWARD deklariert eine Prozedur/Funktion welche spÑter im Quelltext implementiert
+wird.
+
+Syntax: 
+.XMP
+    <Prozedurdeklaration>;FORWARD;
+.EXMP
+
+Der Prozedurkopf der FORWARD Anweisung und der Prozedurkopf der Implementation
+mÅssen identisch sein.
+
+
+Beispiel: 
+.XMP
+    PROCEDURE Test(VAR x:WORD);FORWARD;
+
+    .
+    .  irgendwelche Deklarationen oder andere Prozeduren
+    .
+
+    PROCEDURE Test(VAR x:WORD);
+    BEGIN
+         .
+         .
+         .
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {function}
+           {procedure}
+.EFIG
+
+.TOPIC 2 function
+.HIGH function  {Reservierte Worte}
+
+Mit FUNCTION wird ein Unterprogramm definiert, welches einen Wert berechnet und
+diesen als Funktionsergebnis an den Aufrufer zurÅckliefert.
+
+Syntax: 
+.XMP
+    FUNCTION <Identifier>:<Typ>;
+      oder
+    FUNCTION <Identifier>(<Parameter>):<Typ>;
+.EXMP
+
+<Identifer> bezeichnet den Namen der Funktion, Åber den diese spÑter wieder
+aufgerufen werden kann.
+
+Die optionalen formalen <Parameter> bezeichnen Werte die der Funktion bei ihrem
+Aufruf Åbergeben werden.
+
+Die formale Parameterliste hat das Format 
+
+    <Bezeichner,...,Bezeichner>:<VarTyp>
+      oder
+    VAR <Bezeichner,...,Bezeichner>:<VarTyp>
+
+
+Ein vorangestellts VAR bezeichnet hier einen Variablenparameter, ansonsten
+handelt es sich um einen Werteparameter. <VarTyp> gibt den Typ der Variablen an.
+
+Mehrere formale Parameter mÅssen durch ein Semikolon getrennt werden. 
+
+<Typ> legt den Ergebnistyp der Funktion fest. 
+
+Der Funktionskopf wird gefolgt von: 
+
+.ULIST
+.LISTITEM einem Deklarationsteil, in dem lokale Variablen vereinbart werden kînnen
+.LISTITEM dem Rumpf, der die Anweisungen enthÑlt, die beim Aufruf der Funktion ausgefÅhrt werden.
+.EULIST
+
+Innerhalb des Rumpfes sollte der Funktion der RÅckgabewert zugewiesen werden. Dazu wird automatisch eine lokale Variable mit dem Namen der Funktion als Bezeichner angelegt. 
+
+Das Ergebnis der Funktion kann jedoch auch der Variable {Result} zugewiesen werden,
+welche vom selben Typ ist, wie der RÅckgabewert der Funktion.
+
+
+Beispiel: 
+.XMP
+    (* Deklaration von Funktionen *)
+
+    FUNCTION Min(x,y:Byte):Byte; (* liefert minimalen Wert *)
+    BEGIN
+         IF x>y then Min:=y
+         ELSE Min:=x;
+    END;
+
+    FUNCTION KeyDown:Char;
+    VAR ch:Char;
+    BEGIN
+         REPEAT UNTIL KeyPressed;
+         ch:=ReadKey;
+         IF ch=#0 THEN ch:=readKey;
+         Result:=ch;               (* Funktionsergebnis zuweisen *)
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {forward}
+           {result}
+           {procedure}
+.EFIG
+
+
+.TOPIC 2 goto
+.HIGH goto  {Reservierte Worte}
+
+Mittels GOTO ist es mîglich innerhalb eines Blocks einen Sprung auszufÅhren. 
+
+Syntax: 
+.XMP
+    GOTO <Label>
+.EXMP
+
+<Label> ist ein Labelbezeichner, welcher zuvor mit dem reserviertem Word {LABEL}
+definiert worden sein  mu·. Ein Sprung kann immer nur inerhalb eines Blocks bzw.
+einer Prozedur/Funktion ausgefÅhrt werden.
+
+
+Beispiel: 
+.XMP
+        PROCEDURE JumpX;
+        VAR x: Integer;
+        LABEL Ende;
+        BEGIN
+            ....
+            IF x < 0 THEN GOTO Ende;
+            ....
+    Ende:
+        END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {label}
+.EFIG
+
+.TOPIC 2 if
+.HIGH if  {Reservierte Worte}
+
+Bei dieser Anweisung werden abhÑngig von einem Vergleichsausdruck verschiedene
+Anweisungen ausgefÅhrt.
+
+Syntax: 
+.XMP
+    IF <Ausdruck> THEN <statement>;
+      oder
+    IF <Ausdruck> THEN <statement> ELSE <statement>;
+.EXMP
+
+Wenn der Ausdruck True ergibt, wird der auf {THEN} folgende Anweisung bearbeitet,
+ansonsten wird entweder nichts oder der optionale {ELSE} Zweig ausgefÅhrt.
+
+Anstelle von <statement> kann auch eine mit {begin}...{end} eingeschlossene
+Anweisungsfolge stehen.
+
+
+Beispiel: 
+.XMP
+    (* "if" Anweisungen *)
+    IF (I=1) or (I=2) THEN I := 0;
+
+    IF ParamCount=0 THEN
+    BEGIN
+        WriteLn('Leere Kommandozeile');
+        Halt(1);
+    END
+    ELSE
+    BEGIN
+        Writeln('Kommandozeile ok');
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {else}
+           {then}
+.EFIG
+
+
+.TOPIC 2 implementation
+.HIGH implementation  {Reservierte Worte}
+
+Mit IMPLEMENTATION beginnt der Implementationsteil einer {Unit}. Hier mÅssen alle
+im {Interface}-Teil der Unit aufgefÅhrten Prozedurblîcke implementiert sein.
+
+Werden zusÑtzliche Unterprogramme angegeben, welche nicht im Interface-Teil der Unit
+enthalten sind, so sind diese fÅr den Nutzer der Unit unsichtbar und gelten nur
+innerhalb der Unit.
+
+.FIG
+Siehe auch:
+           {Interface}
+           {unit}
+.EFIG
+
+.TOPIC 2 imports
+.HIGH imports  {Reservierte Worte}
+
+Das reservierte Wort IMPORTS erlaubt das Einbinden von Routinen aus DLL's.
+
+Syntax: 
+.XMP
+    IMPORTS
+           <Prozedurdeklaration>; <DllName> INDEX <Zahl>;
+           <Prozedurdeklaration>; <DllName> NAME 'String';
+           ...
+    END;
+.EXMP
+
+<Prozedurdeklaration> beschreibt die Prozedur/Funktion mit Ihren Parametern. 
+
+<DllName> ist der Name der DLL aus der die Prozedur importiert werden soll und <Zahl>
+der {Index} der Prozedur in dieser DLL.
+
+Soll die Prozedur Åber einen Namen importiert werden, so mu· der Funktionsname nach
+dem Bezeichner NAME als String angegeben werden.
+
+FÅr Funktionen welche in C-Manier aufgerufen werden sollen mu· die Option {APIENTRY}
+angegeben werden. Dies gilt vor allem fÅr OS/2 API Funktionen.
+
+
+Beispiel: 
+.XMP
+    IMPORTS
+         PROCEDURE Prozedur1(Code: Word); MyDll INDEX 1;
+         FUNCTION  Funktion1:LongWord;    MyDll NAME 'Funktion1';
+         FUNCTION DosCloseVDD(ahvdd:HVDD):APIRET;
+                    APIENTRY;             DosCalls INDEX 310;
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Exports}
+           {External}
+           {ApiEntry}
+           {Library}
+.EFIG
+
+.TOPIC 2 in
+.HIGH in  {Reservierte Worte}
+
+Der Operator IN bezeichnet die Zugehîrigkeit eines Elementes zu einer Menge und wird
+vorzugsweise in IF-THEN-Konstrukten eingesetzt.
+
+
+Beispiel: 
+.XMP
+    (* Ende wenn Eingabe <J>a oder <Y>es war *)
+    IF ch IN ['J','j','Y','y'] THEN exit;
+.EXMP
+
+.TOPIC 2 inherited
+.HIGH inherited  {Reservierte Worte}
+
+Mit dem reservierten Wort INHERITED kann der direkte Vorfahre der umschlie·enden
+Methode aufgerufen werden.
+
+Ist beim Vorfahren keine solche Methode deklariert oder gibt es keinen Vorfahren,
+kann INHERITED nicht verwendet werden.
+
+
+Beispiel: 
+.XMP
+    TYPE
+        T1=OBJECT
+              PROCEDURE P1;
+        END;
+
+        T2=OBJECT(T1)
+              PROCEDURE P1;
+        END;
+
+    PROCEDURE T1.P1;
+    BEGIN
+         ...
+    END;
+
+    PROCEDURE T2.P1;
+    BEGIN
+         Inherited P1;  (* ruft T1.P1 auf *)
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Object}
+           {Class}
+           {Virtual}
+           {Override}
+.EFIG
+
+.TOPIC 2 interface
+.HIGH interface  {Reservierte Worte}
+
+Innerhalb des Interface-Teils wird festgelegt, welche Bestandteile einer {Unit} fÅr
+andere Module zugÑnglich sind.
+
+Im Interface-Teil kînnen Konstanten, Datentypen Variablen, Funktionen und Prozeduren
+deklariert werden.
+
+Bei Prozeduren/Funktionen darf nur der Prozedurkopf angegeben werden, die
+Prozedurblîcke enthÑlt der {Implementation}-Teil einer Unit.
+
+.FIG
+Siehe auch:
+           {implementation}
+           {unit}
+.EFIG
+
+.TOPIC 2 is
+.HIGH is  {Reservierte Worte}
+
+Der Operator IS wertet Typ-Informationen zur Laufzeit aus. 
+
+Damit kann bestimmt werden, ob ein Objekt von einem bestimmten Typ bzw. vom Typ einer
+seiner Nachkommen ist.
+
+Syntax: 
+.XMP
+    <Objekt> IS <Objekt-Typ>
+.EXMP
+
+Beispiel: 
+.XMP
+    TYPE
+        T1=CLASS
+        END;
+
+        T2=CLASS(T1)
+        END;
+
+        T3=CLASS(T2)
+        END;
+
+    PROCEDURE CheckType(Obj:TObject);
+    BEGIN
+         IF Obj IS T2 THEN Writeln('TRUE')
+         ELSE Writeln('FALSE');
+    END;
+
+    VAR
+       o1:T1;
+       o2:T2;
+       o3:T3;
+
+    BEGIN
+         o1.Create;
+         CheckType(o1);   (* FALSE *)
+         o2.Create;
+         CheckType(o2);   (* TRUE *)
+         o3.Create;
+         CheckType(o3);   (* TRUE *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {As}
+.EFIG
+
+
+.TOPIC 2 label
+.HIGH label  {Reservierte Worte}
+
+Mittels LABEL wird eine Sprungmarke definiert, welche mittels {GOTO} angesprungen
+werden kann.
+
+Syntax: 
+.XMP
+    LABEL <Bezeichner>, ... <Bezeichner>;
+.EXMP
+
+Jedes Label darf innerhalb desselben Blocks nur einmal definiert werden. 
+
+.FIG
+Siehe auch:
+           {Goto}
+.EFIG
+
+.TOPIC 2 library
+.HIGH library  {Reservierte Worte}
+
+Das reservierte Wort {LIBRARY} erlaubt das Erstellen einer DLL. Verwenden Sie Library
+anstelle von {PROGRAM} und der Compiler erzeugt eine Datei mit der Endung DLL.
+Verwenden Sie {EXPORTS}, um zu exportierende Routinen festzulegen.
+
+.FIG
+Siehe auch:
+           {exports}
+           {imports}
+           {program}
+           {unit}
+.EFIG
+
+.TOPIC 2 mod
+.HIGH mod  {Reservierte Worte}
+
+MOD liefert den Divisionsrest zweier ganzzahliger AusdrÅcke. 
+
+Das Ergebnis ist immer ganzzahlig. Eine ganzzahlige Division kann mit dem Befehl
+{DIV} durchgefÅhrt werden.
+
+Syntax: 
+.XMP
+    <Ausdruck1> MOD <Ausdruck2>
+.EXMP
+
+Beide AusdrÅcke mÅssen ganzzahlig sein. 
+
+
+Beispiel: 
+.XMP
+    a:=9;       (* Der Variablen a den Wert 1 zuweisen *)
+    b:=4;       (* Der Variablen b den Wert 4 zuweisen *)
+    c:=a MOD b; (* Variable c enthÑlt nun 1 *)
+.EXMP
+
+.FIG
+Siehe auch:
+           {Div}
+           {Shl}
+           {Shr}
+.EFIG
+
+.TOPIC 2 nil
+.HIGH nil  {Reservierte Worte}
+
+NIL ist eine Konstante vom Typ eines untypisierten Pointers. NIL bezeichnet immer e
+inen Zeiger der auf "nichts" verweist.
+
+
+Beispiel: 
+.XMP
+    (* Testen ob der Zeiger initialisiert *)
+    IF p=NIL THEN Writeln('Zeiger ist leer !')
+    ELSE p^:=1;  (* Wert zuweisen *)
+.EXMP
+
+
+.TOPIC 2 not
+.HIGH not  {Reservierte Worte}
+
+NOT liefert die bitweise logische Negation eines Ausdruckes. 
+
+Syntax: 
+.XMP
+    NOT <Ausdruck>
+.EXMP
+
+Der Ausdruck mu· ganzzahlig oder vom Typ Boolean sein. 
+
+
+Beispiel: 
+
+    b:=TRUE;    (* Der Variablen b TRUE zuweisen *)
+    c:=NOT b;   (* Variable c enthÑlt nun FALSE *)
+
+.FIG
+Siehe auch:
+           {and}
+           {or}
+.EFIG
+
+
+.TOPIC 2 object
+.HIGH object  {Reservierte Worte}
+
+OBJECT ist das fundamentale SchlÅsselwort fÅr die Objektorientierte Programmierung. 
+
+OBJECT deklariert eine Datenstruktur fÅr ein Objekt. Dieses Objekt kann Variablen
+(Instanzvariablen) und Prozeduren/Funktionen (Methoden) enthalten. Instanzvariablen
+enthalten Daten eines beliebigen Datentypes, wÑhrend Methoden Aktionen mit diesen
+Variablen ausfÅhren.
+
+Die Deklaration eines Objektes ist Ñhnlich zur Deklaration eines Records, auch ein
+Objekt enthÑlt Komponenten.
+
+Syntax: 
+.XMP
+    <TypName> = OBJECT            (* Objekt ohne Vorfahren *)
+                    Komponente1;
+                    .
+                    .
+                    .
+                END;
+      oder
+    <TypName> = OBJECT(Parent)    (* Objekt mit Vorfahren Parent *)
+                    Komponente1;
+                    .
+                    .
+                    .
+                END;
+.EXMP
+
+
+Komponenten kînnen entweder Instanzvariablen oder Methoden sein. 
+
+
+.FIG
+    Instanzvariable = Name:typ;
+    Methode         = PROCEDURE Name(<Parameter>);<VIRTUAL>;
+    Methode         = FUNCTION Name(<Parameter>):typ;<VIRTUAL>;
+    Methode         = CONSTRUCTOR Name(<Parameter>);
+    Methode         = DESTRUCTOR Name(<Parameter>);
+.EFIG
+
+
+Ein Objekttyp kann Variablen und Methoden von anderen Objekttypen erben. Das erbende
+Objekt ist dann ein Nachkomme des Vorfahren.
+
+.FIG
+Siehe auch:
+           {Constructor}
+           {Destructor}
+           {Class}
+.EFIG
+
+
+.TOPIC 2 of
+.HIGH of  {Reservierte Worte}
+
+OF dient zur Angabe des Komponententyps bei {Array}- und {File}-Typen.
+
+Bei {CASE}-Anweisungen und varianten {Record} schlie·t es die Angabe des Selektors ab.
+
+.TOPIC 2 on
+.HIGH on  {Reservierte Worte}
+
+Das reservierte Wort ON kennzeichnet eine Anweisung zur Behandlung einer Exception
+im EXCEPT Segment eines geschÅtzten Blockes.
+
+Syntax: 
+.XMP
+    TRY
+       (* geschÅtzer Block *)
+    EXCEPT
+       (* Exception Behandlung *)
+       ON (* bestimmte Exception *) DO (* spezieller Exception Handler *);
+       <ELSE (* Default Exception Handler *);>
+    END;
+.EXMP
+
+Tritt in einem mit TRY eingeleiteten Exception-Handling-Block eine Ausnahmebedingung
+auf, so verzweigt das Programm unverzÅglich zum EXCEPT Block.
+
+Jede ON Anweisung ist einer bestimmten Ausnahmebedingungen zugeordnet. 
+
+Entspricht keine der dort aufgelisteten Exceptions der eingetretenen Ausnahmebedingung
+so wird der Default-Handler des ELSE Zweiges ausgefÅhrt, falls dieser definiert ist.
+Ansonsten bleibt die Exception unbehandelt.
+
+Nach Behandlung der Exception wird die Instanz des Objektes wieder zerstîrt. Das hat
+zur Folge, das eine Behandlung im umschlie·enden Block nicht mehr mîglich ist. Dies
+kann jedoch dadurch erreicht werden, indem die Exception nochmals ausgelîst wird
+(RE-RAISE).
+
+
+Beispiel: 
+.XMP
+    VAR
+       p:^BYTE;
+
+    BEGIN
+         p:=NIL;
+         TRY
+            (* umschlie·ender geschÅtzter Block *)
+            ...
+            TRY
+               (* speziell geschÅtzter Block *)
+               p^:=1;  (* Exception *)
+
+            EXCEPT
+                  ON EGPFault DO
+                  BEGIN
+                       Writeln('spezielle Behandlung: EGPFault');
+                       RAISE;  (* Exception nochmals generieren *)
+                  END;
+                  ELSE
+                  BEGIN
+                       (* Default-Exception-Handler *)
+                       Writeln('Exception');
+                  END;
+            END;
+
+         EXCEPT
+               ON EGPFault DO Writeln('allgemeine Behandlung: EGPFault');
+               ELSE Writeln('Exception');
+         END;
+    END.
+.EXMP
+
+Meist wird nur die Typ-Information einer Exception benîtigt, zum Beispiel um eine
+Nachricht auszugeben. Wenn jedoch weitere Informationen der Exception Instanz benîtigt
+werden, ist es notwendig, die Instanz temporÑr zu sichern. Das temporÑre
+Exception-Objekt wird automatisch wieder zerstîrt.
+
+
+Beispiel: 
+.XMP
+    TYPE
+        EListEmpty = CLASS(Exception)
+           Info:STRING;
+        END;
+
+    VAR
+       e:EListEmpty;
+
+    BEGIN
+        TRY
+           e.Create('Liste ist leer');
+           e.Info:='Test';
+           RAISE e;
+
+        EXCEPT
+           ON temp: EListEmpty DO Writeln('List Empty: '+ temp.Info);
+        END;
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Try}
+           {Finally}
+           {On}
+           {Raise}
+.EFIG
+
+
+
+.TOPIC 2 or
+.HIGH or {Reservierte Worte}
+
+OR liefert die bitweise logische ODER-VerknÅpfung zweier AusdrÅcke. 
+
+Syntax: 
+.XMP
+    <Ausdruck1> OR <Ausdruck2>
+.EXMP
+
+Beide AusdrÅcke mÅssen ganzzahlig oder vom Typ Boolean sein. 
+
+
+Beispiel: 
+
+    a:=1;       (* Der Variablen a den Wert 1 zuweisen *)
+    b:=4;       (* Der Variablen b den Wert 4 zuweisen *)
+    c:=a OR b;  (* Variable c enthÑlt nun 5 *)
+
+.FIG
+Siehe auch:
+           {and}
+           {not}
+.EFIG
+
+.TOPIC 2 packed
+.HIGH packed  {Reservierte Worte}
+
+Dieses reservierte Wort wird unter Speed-Pascal/2 ignoriert und existiert nur aus
+KompatibilitÑtsgrÅnden.
+
+.TOPIC 2 procedure
+.HIGH procedure  {Reservierte Worte}
+
+Mit PROCEDURE wird ein Unterprogramm definiert. 
+
+Syntax: 
+.XMP
+    PROCEDURE <Identifier>;
+      oder
+    PROCEDURE <Identifier>(<Parameter>);
+.EXMP
+
+<Identifer> bezeichnet den Namen der Prozedur, Åber den diese spÑter wieder
+aufgerufen werden kann.
+
+Die optionalen formalen <Parameter> bezeichnen Werte die der Prozedur bei ihrem
+Aufruf Åbergeben werden.
+
+Die formale Parameterliste hat das Format 
+
+    <Bezeichner,...,Bezeichner>:<VarTyp>
+      oder
+    VAR <Bezeichner,...,Bezeichner>:<VarTyp>
+
+
+Ein vorangestellts {VAR} bezeichnet hier einen Variablenparameter, ansonsten handelt
+es sich um einen Werteparameter.
+
+<VarTyp> gibt den Typ der Variablen an. Mehrere formale Parameter mÅssen durch ein
+Semikolon getrennt werden.
+
+Der Prozedurkopf wird gefolgt von: 
+.ULIST
+.LISTITEM einem Deklarationsteil, in dem lokale Variablen vereinbart werden kînnen
+.LISTITEM dem Rumpf, der die Anweisungen enthÑlt, die beim Aufruf der Funktion ausgefÅhrt werden.
+.EULIST
+
+Beispiel: 
+.XMP
+    (* Deklaration von Prozeduren *)
+    PROCEDURE WriteStr(X, Y: Byte; S: String);
+    BEGIN
+        GotoXY(X, Y);
+        Write(S);
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {forward}
+           {function}
+           {var}
+.EFIG
+
+.TOPIC 2 program
+.HIGH program  {Reservierte Worte}
+
+Jedes Programm kann mit dem reservierten Wort PROGRAM gefolgt von einem Bezeichner
+beginnen, eine Au·nahme bilden Units, fÅr die aber kein ausfÅhrbarer Code erzeugt
+wird.
+
+Syntax: 
+.XMP
+    PROGRAM <Bezeichner>;
+.EXMP
+
+<Bezeichner> kann jeder gÅltige Speed-Pascal Bezeichner sein. 
+
+
+Beispiel: 
+.XMP
+    (* Beispielprogramm *)
+    PROGRAM Hello;
+    BEGIN
+         Writeln('Hallo !');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {library}
+           {unit}
+.EFIG
+
+
+.TOPIC 2 raise
+.HIGH raise  {Reservierte Worte}
+
+Das reservierte Wort RAISE dient dazu, eine Exception eines bestimmten Typs a
+uszulîsen.
+
+Dazu wird eine Instanz einer Exceptionklasse generiert und die Standardprozedur
+RAISE aufgerufen.
+
+Syntax: 
+.XMP
+    RAISE Exceptiontyp;
+.EXMP
+
+Beispiel: 
+.XMP
+    TYPE
+        EListEmpty = CLASS(Exception);
+
+    BEGIN
+         IF (* Anzahl der Listelemente = 0 *) THEN
+           RAISE EListEmpty.Create('Liste ist leer');
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Try}
+           {Except}
+           {Finally}
+           {On}
+.EFIG
+
+.TOPIC 2 record
+.HIGH record  {Reservierte Worte}
+
+Ein Record bezeichnet eine Struktur von verschiedenen Komponenten. Ein Record
+besteht aus einem festen Teil und wahlweise aus einem varianten Teil.
+
+Syntax: 
+.XMP
+    RECORD
+          <Komponente1>;
+          <Komponente2>;
+          ...
+          <KomponenteN>;
+    END;
+      oder
+    RECORD
+          <Komponente1>;
+          <Komponente2>;
+          ...
+          CASE <Selektor>:<Typ> OF
+             <Konstante1>: ( <Komponente1>;
+                             ...
+                             <KomponenteN> );
+             ...
+             <Konstante2>: ( <KomponenteA1>;
+                             ...
+                             <KomponenteAN> );
+             ...
+    END;
+.EXMP
+
+Jede Komponentenliste besteht aus einer Folge von Bezeichnern, die durch Kommata
+voneinander getrennt sind und durch eine Typangabe bezeichnet werden.
+
+Jeder Record mu· mindestens eine Komponente enthalten. 
+
+Der mit CASE eingeleitet variante Teil kann auch zur öberlagerung vom Komponenten
+verwendet werden.
+
+
+Beispiel: 
+.XMP
+    (* Record Definition mit variantem Teil *)
+    TYPE
+         Operationen=[Plus,Minus,Mal,Durch];
+         Typen      =[GanzZahl,Fliesskomma];
+         Zahlen=RECORD
+                   Operation:Operationen;
+                   CASE Typ:Typen OF
+                      GanzZahl   :(Gwert:Integer);
+                      Fliesskomma:(RWert:Real);
+                END;
+
+    (* öberlagerung von Komponenten *)
+    TYPE
+        Struktur=RECORD
+                       CASE Integer OF
+                         0:(a,b:Word);
+                         1:(a_l,a_h,b_l,b_h:Byte);
+                 END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {type}
+.EFIG
+
+.TOPIC 2 repeat
+.HIGH repeat  {Reservierte Worte}
+
+Syntax: 
+.XMP
+    REPEAT
+          <Anweisung>
+          .
+          .
+          .
+    UNTIL <Bedingung>
+.EXMP
+
+Die Anweisungen welche innerhalb des REPEAT...UNTIL Blockes eingeschlossen sind,
+werden solange ausgefÅhrt bis die Bedingung nach UNTIL wahr wird.
+
+
+Beispiel: 
+.XMP
+    REPEAT
+          Writeln('Type <Q> to quit')
+          readln(ch);
+          writeln(ch);
+    UNTIL ch='Q';
+.EXMP
+
+.FIG
+Siehe auch:
+           {until}
+.EFIG
+
+.TOPIC 2 set
+.HIGH set  {Reservierte Worte}
+
+Syntax: 
+.XMP
+    SET OF Typ
+.EXMP
+
+Das reservierte Wort SET deklariert eine Menge vom angegebenen Mengentyp. Eine
+Menge darf maximal 255 Elemente besitzen.
+
+Der Zugriff auf Mengen erfolgt Åber eckige Klammern. Der Ausdruck [] steht fÅr eine
+leere Menge, die zu allen Mengen-Typen kompatibel ist.
+
+Mengen kînnen als Mengenelemente einen Aufzaehlungstyp enthalten. in diesem Fall
+darf die Anzahl der Elemente des AufzÑhlungstypen 32 nicht Åbersteigen.
+
+Des weiteren sind Mengen von Bytes und Mengen von Chars mîglich. 
+
+
+Beispiel: 
+.XMP
+    (* Mengen-Typen *)
+    TYPE
+      Tag = (Mon, Die, Mit, Don, Fre, Sam, Son);
+      Tage= set of Tag;
+
+      Var Days:Tage;
+
+    BEGIN
+         Days:=[];  (* leere Menge *)
+         IF Mon IN [Mon,Die,Mit,Don,Fre] THEN
+            Writeln('Wochentag')
+         ELSE Writeln('Wochenende');
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {type}
+.EFIG
+
+.TOPIC 2 shl
+.HIGH shl {Reservierte Worte}
+
+SHL bewirkt die bitweise Verschiebung eines ganzzahligen Wertes um ein Bit nach links. 
+
+Syntax: 
+.XMP
+    <IntegerWert> SHL <StellenAnzahl>
+.EXMP
+
+<StellenAnzahl> gibt an um wieviel Bits verschoben werden soll. 
+
+
+Beispiel: 
+.XMP
+    i:=1;
+    (* Verschieben um 3 Bit nach links *)
+    i:=i SHL 3; (* i enthÑlt nun 8 *)
+.EXMP
+
+.FIG
+Siehe auch:
+           {div}
+           {mod}
+           {shr}
+.EFIG
+
+.TOPIC 2 shr
+.HIGH shr  {Reservierte Worte}
+
+SHR bewirkt die bitweise Verschiebung eines ganzzahligen Wertes um ein Bit nach rechts. 
+
+Syntax: 
+.XMP
+    <IntegerWert> SHR <StellenAnzahl>
+.EXMP
+
+<StellenAnzahl> gibt an um wieviel Bits verschoben werden soll. 
+
+
+Beispiel: 
+.XMP
+    i:=8;
+    (* Verschieben um 3 Bit nach rechts *)
+    i:=i SHR 3; (* i enthÑlt nun 1 *)
+.EXMP
+
+.FIG
+Siehe auch:
+           {div}
+           {mod}
+           {shl}
+.EFIG
+
+.TOPIC 2 string
+.HIGH string  {Reservierte Worte}
+
+Das reservierte Wort STRING deklariert eine String-Variable, d.h. eine Zeichenkette
+mit einer dynamischen LÑnge und einer konstanten maximalen LÑnge zwischen 1 und
+255 Bytes.
+
+Das erste Byte dieser Datenstruktur enthÑlt aktuelle die LÑnge der Zeichenkette. 
+
+Syntax: 
+.XMP
+    STRING
+      oder
+    STRING [Konstante]
+.EXMP
+
+Beispiel:
+.XMP
+    VAR
+       s:STRING;
+    BEGIN
+       s:='Hallo welt';
+       s[7]:='W';      (* setzt einzeln das 7-te Zeichen *)
+       Writeln(s[0]);  (* gibt die LÑngeninformation aus *)
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {cstring}
+.EFIG
+
+.TOPIC 2 then
+.HIGH then  {Reservierte Worte}
+
+Bei dieser Anweisung werden abhÑngig von einem Vergleichsausdruck verschiedene
+Anweisungen ausgefÅhrt.
+
+Syntax: 
+.XMP
+    IF <Ausdruck> THEN <statement>;
+      oder
+    IF <Ausdruck> THEN <statement> ELSE <statement>;
+.EXMP
+
+
+Wenn der Ausdruck True ergibt, wird der auf THEN folgende Anweisung bearbeitet,
+ansonsten wird entweder nichts oder der optionale {ELSE} Zweig ausgefÅhrt.
+
+Anstelle von <statement> kann auch eine mit {begin}...{end} eingeschlossene
+Anweisungsfolge stehen.
+
+
+Beispiel: 
+.XMP
+    (* "if" Anweisungen *)
+    IF (I=1) or (I=2) THEN I := 0;
+
+    IF ParamCount=0 THEN
+    BEGIN
+        WriteLn('Leere Kommandozeile');
+        Halt(1);
+    END
+    ELSE
+    BEGIN
+        Writeln('Kommandozeile ok');
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {if}
+           {else}
+.EFIG
+
+.TOPIC 2 to
+.HIGH to  {Reservierte Worte}
+
+Die FOR Anweisung bewirkt die mehrfache AusfÅhrung einer Anweisungsfolge. 
+
+Syntax: 
+.XMP
+    FOR <var> := <Start> TO <End> DO <statement>
+      oder
+    FOR <var> := <Start> DOWNTO <End> DO <statement>
+.EXMP
+
+<var> ist eine ganzzahlige Variable, welche als Steuervariable der Schleife fungiert. 
+
+<Start> ist eine ganzzahlige Konstante, welche der Steuervariablen beim ersten
+Durchlauf der Schleife zugewiesen wird.
+
+Folgt nach <Start> das reservierte Wort TO, so wird die Steuervariable bei jedem
+Schleifendurchlauf um 1 erhîht.
+
+Folgt nach <Start> das reservierte Wort DOWNTO, so wird die Steuervariable bei
+jedem Schleifendurchlauf um 1 erniedrigt.
+
+<End> ist eine ganzzahlige Konstante. Erreicht die Steuervariable den Wert <End>,
+so wird die Schleife verlassen.
+
+Anstelle von <statement> kann auch eine mit {begin}...{end} eingeschlossene
+Anweisungsfolge stehen.
+
+
+Beispiel:
+.XMP
+    (* Gebe alle Kommandozeilenparameter aus *)
+    FOR I := 1 TO ParamCount DO WriteLn(ParamStr(I);
+.EXMP
+
+
+.FIG
+Siehe auch:
+           {for}
+           {downto}
+.EFIG
+
+.TOPIC 2 try
+.HIGH try  {Reservierte Worte}
+
+Das reservierte Wort TRY leitet einen geschÅtzten Code-Block ein. Falls in
+diesem Block eine Ausnahmebedingung auftritt, wird unmittelbar zum
+Exception-Behandlungsblock ({EXCEPT}) oder zum sogenannten CleanUp-Code ({FINALLY})
+verzweigt.
+
+Syntax: 
+.XMP
+    TRY
+       (* geschÅtzer Block *)
+    EXCEPT
+       (* Exception Behandlung, nur falls eine Exception auftritt *)
+    END;
+      oder
+    TRY
+       (* geschÅtzer Block *)
+    FINALLY
+       (* Ressourcen freigeben, auch wenn keine Exception auftritt *)
+    END;
+.EXMP
+
+Beispiel: 
+.XMP
+    a := 0;
+    TRY
+       Result := 5 / a;    (* Exception *)
+    EXCEPT
+       ON EDivByZero DO Result := 0;
+    END;
+
+
+    GetMem(p,1000);
+    a := 0;
+    TRY
+       Result := 5 / a;    (* Exception *)
+       ...
+    FINALLY
+       FreeMem(p,1000);    (* Ressource wird wieder freigegeben *)
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Except}
+           {Finally}
+           {On}
+           {Raise}
+.EFIG
+
+.TOPIC 2 type
+.HIGH type  {Reservierte Worte}
+
+Das reservierte Wort TYPE dient zur Deklaration von Typen. 
+
+Syntax: 
+.XMP
+    TYPE <Name>=<Typ>;
+.EXMP
+
+<Name> ist hierbei die Bezeichnung des neuen Typs und <Typ> der entsprechende Typ. 
+
+
+Beispiel: 
+.XMP
+    TYPE a=ARRAY[1..10] OF Integer;
+    TYPE i=Integer;
+    TYPE r=RECORD
+                 a,b:Word;
+           END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {const}
+           {record}
+           {set}
+           {var}
+.EFIG
+
+.TOPIC 2 unit
+.HIGH unit  {Reservierte Worte}
+
+Units sind eine Sammlung von Datenstrukturen, Typen und Unterprogrammen. Mit Hilfe
+von Units ist es mîglich modular zu programmieren.
+
+Syntax: 
+.XMP
+    UNIT <Bezeichner>;  (* Unit-Kopf *)
+
+    INTERFACE       (* îffentliche Bezeichner *)
+    USES ... ;      (* Uses-Anweisung *)
+    CONST ... ;     (* Konstanten *)
+    TYPE ... ;      (* Typen *)
+    VAR ... ;       (* Variablen *)
+    PROCEDURE ... ; (* Prozeduren *)
+    FUNCTION ... ;  (* Funktionen *)
+
+    IMPLEMENTATION  (* Implementationsteil *)
+    PROCEDURE ... ; (* Prozedurblîcke *)
+    FUNCTION ... ;  (* Funktionen *)
+
+    BEGIN           (* Initialisieren *)
+        <Anweisung>;(* Anweisungen *)
+        ...
+        <Anweisung>
+    END.            (* Ende der Unit *)
+.EXMP
+
+Die .SPU Dateien enthalten alle îffentlichen Symbole, die eine Units exportiert. 
+
+Wird eine Unit Åber Uses importiert mÅssen, sich alle benîtigten Units im Output
+Verzeichnis bzw. im Library Verzeichnis befinden.
+
+.FIG
+Siehe auch:
+           {Interface}
+           {implementation}
+           {library}
+           {program}
+           {uses}
+.EFIG
+
+.TOPIC 2 until
+.HIGH until  {Reservierte Worte}
+
+Syntax: 
+.XMP
+    REPEAT
+          <Anweisung>
+          .
+          .
+          .
+    UNTIL <Bedingung>
+.EXMP
+
+Die Anweisungen welche innerhalb des {REPEAT}...{UNTIL} Blockes eingeschlossen sind
+werden solange ausgefÅhrt bis die Bedingung nach UNTIL wahr wird.
+
+
+Beispiel: 
+.XMP
+    REPEAT
+          Writeln('Type <Q> to quit')
+          readln(ch);
+          writeln(ch);
+    UNTIL ch='Q';
+.EXMP
+
+.FIG
+Siehe auch:
+           {repeat}
+.EFIG
+
+.TOPIC 2 uses
+.HIGH uses  {Reservierte Worte}
+
+Syntax: 
+.XMP
+    USES <Unit>,...;
+.EXMP
+
+Jedes Element der USES Anweisung benennt eine Unit welche von diesem Modul benutzt wird. 
+
+Alle in dieser Unit deklarierten Vereinbarungen gelten nun auch in diesem Modul. 
+
+
+Beispiel: 
+.XMP
+    PROGRAM test;
+    USES CRT;       (* Prozedur ClrScr aus CRT importieren *)
+    BEGIN
+         ClrScr;
+    END.
+.EXMP
+
+.TOPIC 2 var
+.HIGH var  {Reservierte Worte}
+
+Mit VAR werden Variablen deklariert und mit einem Typ versehen. 
+
+Innerhalb des Deklarationsteils von Prozeduren oder Funktionen werden mittels VAR
+lokale Variablen angelegt.
+
+Innerhalb der formalen Parameterliste von Prozeduren oder Funktionen wird mit VAR
+festgelegt ob die jeweiligen Parameter als Adressen (Variablenparameter) oder als
+Werte (Werteparameter) Åbergeben werden.
+
+Syntax: 
+.XMP
+    VAR Bezeichner, ... Bezeichner: Typ;
+        ...
+        Bezeichner: Typ;
+.EXMP
+
+öber den Zusatz {absolute} lÑ·t sich die Startadresse dieses Speicherbereichs explizit
+festlegen.
+
+
+Beispiel: 
+.XMP
+    (* Deklarationen von Variablen *)
+    VAR
+       X, Y, Z  : real;
+       Matrix   : array[1..5,1..50] of string;
+       Name     : string[25];
+.EXMP
+
+.FIG
+Siehe auch:
+           {Absolute}
+           {const}
+           {set}
+           {type}
+.EFIG
+
+.TOPIC 2 while
+.HIGH while  {Reservierte Worte}
+
+Syntax: 
+.XMP
+    WHILE <Bedingung> DO <Anweisung(en)>
+.EXMP
+
+Eine WHILE-Schleife bewirkt die wiederholte AusfÅhrung von Anweisungen bis die
+Bedingung nach WHILE falsch wird.
+
+Die Bedingung wird ausgewertet, bevor die WHILE-Anweisung ausgefÅhrt wird. Ist die
+Bedingung nicht wahr, so wird die WHILE-Anweisung nicht ausgefÅhrt.
+
+
+Beispiel: 
+.XMP
+    (* WHILE-Anweisungen *)
+    WHILE NOT (ch in ['Y','y','J','j']) DO ch:=Readkey;
+
+    WHILE i>0 DO
+    BEGIN
+         Writeln(Tabelle[i]);
+         Dec(i);
+    END;
+.EXMP
+
+.TOPIC 2 with
+.HIGH with  {Reservierte Worte}
+
+Syntax: 
+.XMP
+    WITH <var>,... DO <statement>
+      oder
+    WITH <objekt>,... DO  <statement>
+.EXMP
+
+Die WITH-Anweisungen kÅrzt Zugriffe auf Felder eines Records sowie Zugriffe auf
+Felder und Methoden eines Objektes ab.
+
+Jede Variable nach WITH mu· vom Typ Record oder Objekt sein. Innerhalb der
+WITH-Anweisung kann nun auf die Felder dieses Records/Objektes Åber die
+Feldbezeichner zugegriffen werden.
+
+
+Beispiel: 
+.XMP
+    (* WITH-Anweisung *)
+    WITH Adresse DO
+    BEGIN
+         Name:='MÅller';
+         Vorname:='Heinz';
+    END;
+.EXMP
+Dies entspricht der Sequenz: 
+.XMP
+    Adresse.Name:='MÅller';
+    Adresse.Vorname:='Heinz';
+.EXMP
+
+
+
+.TOPIC 2 xor
+.HIGH xor  {Reservierte Worte}
+
+XOR liefert die bitweise logische XOR-VerknÅpfung zweier AusdrÅcke. 
+
+Syntax: 
+.XMP
+    <Ausdruck1> XOR <Ausdruck2>
+.EXMP
+
+Beide AusdrÅcke mÅssen ganzzahlig sein. 
+
+
+Beispiel: 
+.XMP
+    a:=1;       (* Der Variablen a den Wert 1 zuweisen *)
+    b:=4;       (* Der Variablen b den Wert 4 zuweisen *)
+    c:=a XOR b; (* c enthÑlt nun 5 *)
+.EXMP
+
+
+
+.TOPIC 1 Vordefinierte Bezeichner
+
+.HIGH Vordefinierte Bezeichner
+
+Diese Bezeichner haben in einem bestimmten Kontext eine besonderer Bedeutung, dÅrfen
+jedoch auch in einem anderen Zusammenhang benutzt werden, d.h. Åberschrieben werden.
+
+Vordefinierte Bezeichner sind: 
+.FIG
+  {abs}
+  {abstract}
+  {addr}
+  {apientry}
+  {arccos}
+  {arccot}
+  {arcsin}
+  {arctan}
+  {break}
+  {cdecl}
+  {chr}
+  {concat}
+  {continue}
+  {cos}
+  {cosh}
+  {cot}
+  {coth}
+  {dec}
+  {dispose}
+  {dynamic}
+  {exit}
+  {exp}
+  {exports}
+  {external}
+  {fail}
+  {false}
+  {far}
+  {frac}
+  {hi}
+  {high}
+  {inc}
+  {index}
+  {int}
+  {Imports}
+  {lb}
+  {length}
+  {lg}
+  {ln}
+  {lo}
+  {low}
+  {message}
+  {near}
+  {new}
+  {odd}
+  {ofs}
+  {ord}
+  {override}
+  {pred}
+  {private}
+  {property}
+  {protected}
+  {public}
+  {published}
+  {read}
+  {readln}
+  {result}
+  {round}
+  {self}
+  {sin}
+  {sinh}
+  {sizeof}
+  {sqr}
+  {sqrt}
+  {str}
+  {succ}
+  {tan}
+  {tanh}
+  {tostr}
+  {true}
+  {trunc}
+  {typeof}
+  {upcase}
+  {val}
+  {virtual}
+  {write}
+  {writeln}
+.EFIG
+
+.TOPIC 2 abs
+.HIGH abs (Funktion)  {Vordefinierte Bezeichner}
+
+Gibt den Absolutwert des Arguments zurÅck. Der RÅckgabewert hat den selben Typ wie das Argument. 
+
+Deklaration: 
+
+    FUNCTION Abs(X):<selber Typ wie X>;
+
+Beispiel:
+.XMP
+    VAR
+       r:REAL;
+       i:LONGINT;
+    BEGIN
+         r := abs(-4.6);    (* Gleitkomma Typ *)
+         i := abs(-2000);   (* ganzzahliger Typ *)
+    END.
+.EXMP
+
+.TOPIC 2 abstract
+.HIGH abstract {Vordefinierte Bezeichner}
+
+Definiert eine virtuelle Methode als ABSTRACT. 
+
+Die deklarierte Methode braucht nicht implementiert zu sein. Wird sie jedoch
+aufgerufen, lîst das einen Runtime-Error aus.
+
+
+Beispiel: 
+.XMP
+    TYPE
+        T1=CLASS
+             PROCEDURE m1; virtual; abstract;
+        END;
+
+    VAR
+       d1:T1;
+
+    BEGIN
+         d1.Create;
+         d1.m1;      (* Runtime-Error wird ausgelîst *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Virtual}
+           {Override}
+.EFIG
+
+.TOPIC 2 addr
+.HIGH addr (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert die absolute Adresse des Åbergebenen Arguments zurÅck.
+
+Dabei kann es sich um eine Variable, Prozedur oder Funktion handeln. 
+
+Deklaration: 
+
+    FUNCTION Addr(X):Pointer;
+
+Beispiel:
+.XMP
+    VAR
+       p:POINTER;
+
+    BEGIN
+         p := Addr(p);   (* p zeigt jetzt auf sich selbst *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Ofs}
+.EFIG
+
+.TOPIC 2 apientry
+.HIGH apientry ()  {Vordefinierte Bezeichner}
+
+FÅr Funktionen, welche in C-Manier aufgerufen werden sollen, mu· die Option APIENTRY
+in der Deklaration angegeben werden. Dies gilt vor allem fÅr OS/2 API Funktionen.
+
+Der grundlegende Unterschied zur herkîmmlichen Aufrufweise ist, da· die Parameter
+in der Reihenfolge von Rechts nach Links auf den Stack geschoben werden (sonst von
+Links nach Rechts).
+
+Weiterhin nimmt nach Beendigung des Unterprogramms die aufrufende Prozedur die
+Parameter wieder vom Stack herunter (sonst erledigt das das Unterprogramm selbst).
+
+
+Beispiel: 
+.XMP
+    FUNCTION  DosCloseVDD(ahvdd:HVDD):APIRET;       (* API Funktion aus DLL *)
+                APIENTRY; External   'DosCalls' INDEX 310;     (* einbinden *)
+.EXMP
+
+.FIG
+Siehe auch:
+           {Imports}
+           {Exports}
+           {External}
+           {CDecl}
+.EFIG
+
+.TOPIC 2 arccos
+.HIGH arccos (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den ArcusCosinus einer Flie·kommazahl. 
+
+Deklaration: 
+
+    FUNCTION ArcCos(r:Extended):Extended;
+
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden. Die Interpretation des RÅckgabewertes hÑngt vom mittels {SetTrigMode}
+gesetzten Gradma· ab.
+
+Beispiel:
+.XMP
+    (* Beispiel fÅr den Einsatz von ArcCos *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e:=1;
+         e:=ArcCos(e);      (* ArcCos von 1 berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sin}
+           {Cos}
+           {Tan}
+           {Cot}
+           {ArcSin}
+           {ArcTan}
+           {ArcCot}
+.EFIG
+
+.TOPIC 2 arccot
+.HIGH arccot (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den ArcusCotangens einer Flie·kommazahl. 
+
+Deklaration: 
+
+    FUNCTION ArcCot(r:Extended):Extended;
+
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden. Die Interpretation des RÅckgabewertes hÑngt vom mittels SetTrigMode
+gesetzten Gradma· ab.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von ArcCot *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e:=1;
+         e:=ArcCot(e);      (* ArcTan von 1 berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sin}
+           {Cos}
+           {Tan}
+           {Cot}
+           {ArcSin}
+           {ArcCos}
+           {ArcTan}
+.EFIG
+
+.TOPIC 2 arcsin
+.HIGH arcsin (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den ArcusSinus einer Flie·kommazahl. 
+
+Deklaration: 
+
+    FUNCTION ArcSin(r:Extended):Extended;
+
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden. Die Interpretation des RÅckgabewertes hÑngt vom mittels SetTrigMode
+gesetzten Gradma· ab.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von ArcSin *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e:=1;
+         e:=ArcSin(e);      (* ArcSin von 1 berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sin}
+           {Cos}
+           {Tan}
+           {Cot}
+           {ArcCos}
+           {ArcTan}
+           {ArcCot}
+.EFIG
+
+
+.TOPIC 2 arctan
+.HIGH arctan (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den ArcusTangens einer Flie·kommazahl. 
+
+Deklaration: 
+
+    FUNCTION ArcTan(r:Extended):Extended;
+
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden. Die Interpretation des RÅckgabewertes hÑngt vom mittels SetTrigMode
+gesetzten Gradma· ab.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von ArcTan *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e:=1;
+         e:=ArcTan(e);      (* ArcTan von 1 berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sin}
+           {Cos}
+           {Tan}
+           {Cot}
+           {ArcSin}
+           {ArcCos}
+           {ArcCot}
+.EFIG
+
+
+.TOPIC 2 break
+.HIGH break  {Vordefinierte Bezeichner}
+
+Dieses Wort beendet sofort eine FOR, WHILE oder REPEAT Schleife und verlÑ·t den
+entsprechenden Block.
+
+
+Beispiel: 
+.XMP
+    FOR t:=1 TO 20 DO
+    BEGIN
+         IF s='TEST' THEN break; (* sofortiges beenden der FOR Schleife *)
+         .
+         .
+         .
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {For}
+           {While}
+           {Repeat}
+           {Continue}
+.EFIG
+
+.TOPIC 2 cdecl
+.HIGH cdecl  {Vordefinierte Bezeichner}
+
+FÅr Funktionen, welche in C-Manier aufgerufen werden sollen, mu· die Option CDecl
+in der Deklaration angegeben werden.
+
+Der grundlegende Unterschied zur herkîmmlichen Aufrufweise ist, da· die Parameter
+in der Reihenfolge von Rechts nach Links auf den Stack geschoben werden (sonst von
+Links nach Rechts).
+
+Weiterhin nimmt nach Beendigung des Unterprogramms die aufrufende Prozedur die
+Parameter wieder vom Stack herunter (sonst erledigt das das Unterprogramm selbst).
+
+
+Beispiel: 
+.XMP
+    TYPE
+        PPrintInfo=^TPrintInfo;
+        TPrintInfo=RECORD
+                         ...
+                   END;
+
+    PROCEDURE Printing(pPI:PPrintInfo);CDECL;
+    BEGIN
+         ...
+    END;
+
+
+    VAR
+       PTid:TID;
+       PrintInfo:TPrintInfo;      (* zur ParameterÅbergabe an den Thread *)
+
+    BEGIN
+         ...
+         DosCreateThread(PTid,@Printing,@PrintInfo,0,32768);
+         ...
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Imports}
+           {Exports}
+           {External}
+           {ApiEntry}
+.EFIG
+
+.TOPIC 2 chr
+.HIGH chr (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert ein Zeichen zurÅck. 
+
+Deklaration: 
+
+    FUNCTION Chr(X:Byte):Char;
+
+
+X entspricht dabei dem ASCII Code des Zeichens. 
+
+
+Beispiel: 
+.XMP
+    VAR
+       x:BYTE;
+
+    BEGIN
+         Write(chr(#9));      (* Tabulator Zeichen *)
+         x := 65;
+         Writeln(chr(x));     (* 'A' *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Ord}
+.EFIG
+
+.TOPIC 2 concat
+.HIGH concat (Funktion)  {Vordefinierte Bezeichner}
+
+Verbindet zwei Strings miteinander. 
+
+Deklaration: 
+
+    FUNCTION Concat(s1,s2:String):String;
+
+
+Concat liefert die Addition der beiden Åbergebenen Strings, also dasselbe Ergebnis
+wie s1+s1.
+
+.FIG
+Siehe auch:
+           {Copy}
+           {Delete}
+           {Insert}
+           {Length}
+           {Pos}
+.EFIG
+
+.TOPIC 2 continue
+.HIGH continue   {Vordefinierte Bezeichner}
+
+Dieses Wort beendet sofort eine FOR, WHILE oder REPEAT Schleife und beginnt
+mit dem nÑchsten Schleifendurchlauf indem an den Anfang der Schleife gesprungen wird.
+
+
+Beispiel: 
+.XMP
+    FOR t:=1 TO 20 DO
+    BEGIN
+         IF s='TEST' THEN continue;  (* weiter mit nÑchstem Durchlauf *)
+         .
+         .
+         .
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {For}
+           {While}
+           {Repeat}
+           {Break}
+.EFIG
+
+.TOPIC 2 cos
+.HIGH cos (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den Cosinus einer Flie·kommazahl. 
+
+Deklaration: 
+
+    FUNCTION Cos(r:Extended):Extended;
+
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). Die
+Interpretation des Wertes von r hÑngt vom mittels SetTrigMode gesetzten Gradma· ab.
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Cos *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e:=30;
+         e:=Cos(e);         (* Cos von 30 Grad berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sin}
+           {Tan}
+           {Cot}
+           {ArcSin}
+           {ArcCos}
+           {ArcTan}
+           {ArcCot}
+.EFIG
+
+
+.TOPIC 2 cosh
+.HIGH cosh (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den Cosinus hyperbolicus einer Flie·kommazahl. 
+
+Deklaration: 
+
+    FUNCTION Cosh(r:Extended):Extended;
+
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). Die
+Interpretation des Wertes von r hÑngt vom mittels SetTrigMode gesetzten Gradma· ab.
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Cosh *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e:=30;
+         e:=Cosh(e);        (* Cosh von 30 Grad berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sinh}
+           {Tanh}
+           {Coth}
+           {Sin}
+           {Cos}
+           {Tan}
+           {Cot}
+.EFIG
+
+.TOPIC 2 cot
+.HIGH cot (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den Cotangens einer Flie·kommazahl. 
+
+Deklaration: 
+
+    FUNCTION Cot(r:Extended):Extended;
+
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). Die
+Interpretation des Wertes von r hÑngt vom mittels SetTrigMode gesetzten Gradma· ab.
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Cot *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e:=30;
+         e:=Cot(e);         (* Cot von 30 Grad berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sin}
+           {Cos}
+           {Tan}
+           {ArcSin}
+           {ArcCos}
+           {ArcTan}
+           {ArcCot}
+.EFIG
+
+
+.TOPIC 2 coth
+.HIGH coth (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den Cotangens hyperbolicus einer Flie·kommazahl. 
+
+Deklaration: 
+
+    FUNCTION Coth(r:Extended):Extended;
+
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). Die
+Interpretation des Wertes von r hÑngt vom mittels SetTrigMode gesetzten Gradma· ab.
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Coth *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e:=30;
+         e:=Coth(e);        (* Coth von 30 Grad berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sinh}
+           {Cosh}
+           {Tanh}
+           {Sin}
+           {Cos}
+           {Tan}
+           {Cot}
+.EFIG
+
+.TOPIC 2 dec
+.HIGH dec (Procedure)  {Vordefinierte Bezeichner}
+
+Vermindert den Wert einer Variablen. 
+
+Deklaration: 
+
+    PROCEDURE Dec(VAR X [; N:LongInt]);
+
+
+X ist eine Variable ordinalen Typs oder ein Zeiger. 
+
+Wenn der optionale Paramter N nicht angegeben wird, wird X um 1 erniedrigt. Ansonsten
+wird X um N vermindert.
+
+DEC entspricht der Zuweisung 
+
+    X := X-1;  bzw.  X := X-N;
+
+Beispiel: 
+.XMP
+    TYPE
+        TRec=RECORD
+                   b:WORD;
+                   c:LONGWORD;
+             END;
+
+    VAR
+       rec:ARRAY[1..9] OF TRec;
+       ofs:^TRec;
+       a:LONGINT;
+
+    BEGIN
+         a := 0;
+         dec(a);                 (* a enthÑlt nun -1 *)
+
+         ofs := @rec[2];         (* Adresse des zweiten Eintrages im Feld *)
+         dec(ofs,SizeOf(TRec));  (* Zeiger auf das vorherige Element setzen *)
+         ofs^.c := 5;            (* entspricht  rec[1].c := 5; *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Inc}
+           {Pred}
+           {Succ}
+.EFIG
+
+.TOPIC 2 dispose
+.HIGH dispose (Procedure)  {Vordefinierte Bezeichner}
+
+Gibt Speicher auf dem Heap wieder frei. 
+
+Deklaration: 
+
+    PROCEDURE Dispose(VAR p:Pointer [, Destructor]);
+
+p bezeichnet eine beliebige Zeigervariable. Die Grî·e des Bereich der freigegeben wird
+hÑngt von der Grî·e des Typen ab auf den p verweist. Der Speicher mu· zuvor mittels
+der Funktion NEW reserviert worden sein.
+
+Nach dem Aufruf von DISPOSE ist der Wert von p nicht mehr definiert. 
+
+Bei der objektorientierten Programmierung (OOP) kann zusÑtzlich zu dem Zeiger auf das
+freizugebende Objekt noch ein Destruktor mit angegeben werden.
+
+Es wird dann die optionale Destruktor-Methode aufgerufen und der Speicher fÅr das
+Objekt auf dem Heap wieder freigegeben.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Dispose *)
+    TYPE
+        PZeiger=^TZeiger;
+        TZeiger=ARRAY[1..10] OF Byte;
+
+        PObj=^TObj;
+        TObj=OBJECT
+             Feld:PZeiger;
+             CONSTRUCTOR Init;
+             DESTRUCTOR  Done;
+        END;
+
+        CONSTRUCTOR TObj.Init;
+        BEGIN
+             Writeln('Konstruktor');
+             (* zusÑtzliche Ressourcen belegen *)
+             New(Feld);
+        END;
+
+        DESTRUCTOR TObj.Done;
+        BEGIN
+             Writeln('Destruktor');
+             (* zusÑtzlich verwendete Ressourcen wieder freigeben *)
+             Dispose(Feld);
+        END;
+
+    VAR
+        z:PZeiger;
+        obj:PObj;
+
+    BEGIN
+         New(z);        (* dynamische Variable mit 10 Byte LÑnge erzeugen *)
+         z^[1]:=0;      (* auf dynamische Variable zugreifen *)
+         Dispose(z);    (* dynamische Variable lîschen *)
+
+         obj:=New(PObj, Init);   (* NEW mit Konstruktoraufruf *)
+         Dispose(obj, Done);     (* DISPOSE mit Destruktoraufruf *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {New}
+           {GetMem}
+           {FreeMem}
+           {Destructor}
+.EFIG
+
+.TOPIC 2 dynamic
+.HIGH dynamic  {Vordefinierte Bezeichner}
+
+Das Wort DYNAMIC wird bei der Definition von Objekten/Klassen angegeben um
+anzuzeigen, da· die so gekennzeichnete Objekt-Methode eine virtuelle Methode ist.
+Das bedeutet, sie kann von Nachkommen des Objektes Åberschrieben werden.
+
+Im öbrigen hat DYNAMIC die gleiche Bedeutung und FunktionalitÑt wie der vordefinierte
+Bezeichner VIRTUAL.
+
+
+Beispiel: 
+.XMP
+    TYPE
+        TVorfahre=CLASS(TObject)
+             PROCEDURE Write1; Dynamic;             (* virtuelle Methode *)
+             PROCEDURE WMControl(VAR Msg:TMessage); Dynamic WM_CONTROL;
+        END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Object}
+           {Class}
+           {Dynamic}
+           {Override}
+           {Message}
+.EFIG
+
+.TOPIC 2 exit
+.HIGH exit (Procedure)  {Vordefinierte Bezeichner}
+
+VerlÑ·t den aktuellen Block mit sofortiger Wirkung. 
+
+Deklaration: 
+.XMP
+    PROCEDURE Exit;
+.EXMP
+
+Der Aufruf von EXIT im Hauptprogramm, beendet das gesamte Programm. 
+
+.FIG
+Siehe auch:
+           {Halt}
+.EFIG
+
+
+.TOPIC 2 exp
+.HIGH exp (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet e hoch dem Argument. 
+
+Deklaration: 
+.XMP
+    FUNCTION Exp(r:Extended):Extended;
+.EXMP
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). Exp liefert
+als Funktionsergebnis e hoch r (e ist die Konstante 2.71828...).
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen werden. 
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Exp *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         e:=Exp(1);  (* e hoch 1 = e berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Ln}
+.EFIG
+
+.TOPIC 2 fail
+.HIGH fail  {Vordefinierte Bezeichner}
+
+Gibt die dynamische Instanz eines Objekttyps wieder frei und verlÑ·t den
+Konstruktor.
+
+Deklaration: 
+.XMP
+    PROCEDURE Fail;
+.EXMP
+
+FAIL kann nur innerhalb eines Konstruktors aufgerufen werden. 
+
+
+Beispiel: 
+.XMP
+    TYPE
+         PObj=^TObj;
+         TObj=OBJECT
+              Mem:^BYTE;
+              CONSTRUCTOR Init(Size:LONGINT);
+              ...
+         END;
+
+         CONSTRUCTOR TObj.Init(Size:LONGINT);
+         BEGIN
+              GetMem(Mem, Size);
+              IF Mem = NIL THEN Fail;   (* Fehler aufgetreten, Abbruch *)
+              FillChar(Mem^,Size,0);
+         END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Constructor}
+           {New}
+.EFIG
+
+
+.TOPIC 2 false
+.HIGH false  {Vordefinierte Bezeichner}
+
+Der Bezeichner FALSE entspricht dem boolschen Wert "nicht wahr" bzw, "0" und ist
+vom Typ Boolean.
+
+.FIG
+Siehe auch:
+           {True}
+.EFIG
+
+.TOPIC 2 far
+.HIGH far  {Vordefinierte Bezeichner}
+
+Dieses Wort wird unter Speed-Pascal/2 bei Prozedurdeklarationen ignoriert und
+existiert nur aus KompatibilitÑtsgrÅnden.
+
+Aufgrund des linearen Speichermodells wird diese spezielle Aufrufkonvention nicht
+mehr von '{Near}' unterschieden.
+
+.TOPIC 2 frac
+.HIGH frac (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert den nicht ganzzahligen Anteil des Arguments zurÅck. 
+
+Deklaration: 
+.XMP
+    FUNCTION Frac(r:Extended):Extended;
+.EXMP
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Frac *)
+    VAR
+       e:EXTENDED;
+
+    BEGIN
+         e:=Frac(2.56);  (* Frac(2.56)=0.56 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Trunc}
+           {Round}
+           {Int}
+.EFIG
+
+.TOPIC 2 hi
+.HIGH hi (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert das hîherwertige Byte bzw. Word des Arguments zurÅck. 
+
+Deklaration: 
+
+    FUNCTION Hi(X)
+
+
+Wenn X vom Typ LongWord oder LongInt ist, liefert HI das hîherwertige Word des
+Arguments zurÅck;
+
+Wenn X vom Typ Word oder Integer ist, liefert HI das hîherwertige Byte des Arguments
+zurÅck;
+
+
+Beispiel: 
+.XMP
+    VAR
+       l:LongWord;
+       w:Word;
+
+    BEGIN
+         l := $12345;
+         Writeln( ToHex(Hi(l)));      (* Hi-Word  = $1 *)
+         w := $1234;
+         Writeln( ToHex(Hi(w)));      (* Hi-Byte  = $12 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Lo}
+.EFIG
+
+.TOPIC 2 high
+.HIGH high (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert den hîchsten Indexwert des Arguments zurÅck. 
+
+Deklaration: 
+.XMP
+    FUNCTION High(X)
+.EXMP
+
+X ist entweder ein Typbezeichner oder eine Variable mit einem bestimmten Typ. 
+  TYP                 Ergebnis:
+- Array               obere Indexgrenze 
+- Offenes Array       Anzahl der FeldeintrÑge -1
+- String              deklarierte maximale LÑnge
+- AufzÑhlungstyp      hîchster Wert 
+
+Beispiel: 
+.XMP
+    TYPE
+        TA=ARRAY[3..7] OF BYTE;
+
+    VAR
+       A:TA;
+
+    PROCEDURE Test(VAR x:ARRAY OF WORD);     (* offenes Array *)
+    VAR  i:WORD;
+    BEGIN
+         FOR i := Low(x) TO High(x) DO x[i] := i;
+    END;
+
+    BEGIN
+         Writeln(High(A));         (* 7 *)
+         Writeln(High(TA));        (* 7 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Low}
+.EFIG
+
+
+.TOPIC 2 inc
+.HIGH inc (Procedure)  {Vordefinierte Bezeichner}
+
+Erhîht den Wert einer Variablen. 
+
+Deklaration: 
+.XMP
+    PROCEDURE Inc(VAR X [; N:LongInt]);
+.EXMP
+
+X ist eine Variable ordinalen Typs oder ein Zeiger. 
+
+Wenn der optionale Paramter N nicht angegeben wird, wird X um 1 erhîht. Ansonsten wird X um N erhîht. 
+
+INC entspricht der Zuweisung 
+.XMP
+    X := X+1;  bzw.  X := X+N;
+.EXMP
+
+
+Beispiel: 
+.XMP
+    TYPE
+        TRec=RECORD
+                   b:WORD;
+                   c:LONGWORD;
+             END;
+
+    VAR
+       rec:ARRAY[1..9] OF TRec;
+       ofs:^TRec;
+       a:LONGINT;
+
+    BEGIN
+         a := 0;
+         inc(a);                 (* a enthÑlt nun 1 *)
+
+         ofs := @rec;            (* Adresse des Feldes (erster Eintrag) *)
+         inc(ofs,SizeOf(TRec));  (* Zeiger auf das nÑchste Element setzen *)
+         ofs^.c := 5;            (* entspricht  rec[2].c := 5; *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Dec}
+           {Pred}
+           {Succ}
+.EFIG
+
+.TOPIC 2 index
+.HIGH index  {Vordefinierte Bezeichner}
+
+Das Wort INDEX wird zusammen mit dem SchlÅsselwort IMPORTS zur Einbindung von
+Routinen aus DLL's verwendet.
+
+.FIG
+Siehe auch:
+           {Imports}
+           {Exports}
+           {External}
+.EFIG
+
+.TOPIC 2 int
+.HIGH int (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert den ganzzahligen Anteil des Arguments zurÅck. 
+
+Deklaration: 
+.XMP
+    FUNCTION Int(r:Extended):Extended;
+.EXMP
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED).
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Int *)
+    VAR
+       e:EXTENDED;
+
+    BEGIN
+         e:=Int(2.56);  (* Int(2.56)=2 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Trunc}
+           {Round}
+           {Frac}
+.EFIG
+
+.TOPIC 2 lb
+.HIGH lb (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den binÑren Logarithmus des Arguments. 
+
+Deklaration: 
+.XMP
+    FUNCTION Lb(r:Extended):Extended;
+.EXMP
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). Lb liefert
+als Funktionsergebnis den binÑren Logarithmus (Basis 2) von r zurÅck.
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Lb *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         e:=Lb(1);  (* Lb 1 = 0 berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Ln}
+           {Lg}
+.EFIG
+
+.TOPIC 2 length
+.HIGH length (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert die LÑnge eines Strings zurÅck. 
+
+Deklaration: 
+.XMP
+    FUNCTION Length(s:String):Integer;
+.EXMP
+
+
+Beispiel: 
+.XMP
+    VAR
+       s:STRING;
+
+    BEGIN
+         s:='Hallo Welt';
+         Writeln(Length(s));     (* 10 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {String}
+           {Copy}
+           {Concat}
+           {Delete}
+           {Insert}
+           {Pos}
+.EFIG
+
+.TOPIC 2 lg
+.HIGH lg (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den dekadischen Logarithmus des Arguments. 
+
+Deklaration: 
+.XMP
+    FUNCTION Lg(r:Extended):Extended;
+.EXMP
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). Lg liefert als Funktionsergebnis den dekadischen Logarithmus (Basis 10) von r zurÅck. 
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen werden. 
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Lg *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         e:=Lg(1);  (* Lg 1 = 0 berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Ln}
+           {Lb}
+.EFIG
+
+
+.TOPIC 2 ln
+.HIGH ln (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den natÅrlichen Logarithmus des Arguments. 
+
+Deklaration: 
+.XMP
+    FUNCTION Ln(r:Extended):Extended;
+.EXMP
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). Ln liefert
+als Funktionsergebnis den natÅrlichen Logarithmus (Basis e=2.71828...) von r zurÅck.
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Ln *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         e:=Ln(1);  (* Ln 1 = 0 berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Exp}
+           {Lg}
+           {Lb}
+.EFIG
+
+.TOPIC 2 lo
+.HIGH lo (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert das niederwertige Byte oder Word des Arguments zurÅck. 
+
+Deklaration:
+.XMP
+    FUNCTION Lo(X)
+.EXMP
+
+Wenn X vom Typ LongWord oder LongInt ist, liefert LO das niederwertige Word des Arguments zurÅck; 
+
+Wenn X vom Typ Word oder Integer ist, liefert LO das niederwertige Byte des Arguments zurÅck; 
+
+
+Beispiel: 
+.XMP
+    VAR
+       l:LongWord;
+       w:Word;
+
+    BEGIN
+         l := $12345;
+         Writeln( ToHex(Lo(l)));      (* Lo-Word  = $2345 *)
+         w := $1234;
+         Writeln( ToHex(Lo(w)));      (* Lo-Byte  = $34 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Hi}
+.EFIG
+
+.TOPIC 2 low
+.HIGH low (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert den niedrigsten Indexwert des Arguments zurÅck. 
+
+Deklaration: 
+.XMP
+    FUNCTION Low(X)
+.EXMP
+
+X ist entweder ein Typbezeichner oder eine Variable mit einem bestimmten Typ. 
+  TYP                 Ergebnis:
+- Array               untere Indexgrenze 
+- Offenes Array       0 
+- String              0
+- AufzÑhlungstyp      niedrigster Wert 
+
+Beispiel: 
+.XMP
+    TYPE
+        TA=ARRAY[3..7] OF BYTE;
+
+    VAR
+       A:TA;
+
+    PROCEDURE Test(VAR x:ARRAY OF WORD);     (* offenes Array *)
+    VAR  i:WORD;
+    BEGIN
+         FOR i := Low(x) TO High(x) DO x[i] := i;
+    END;
+
+    BEGIN
+         Writeln(Low(A));         (* 3 *)
+         Writeln(Low(TA));        (* 3 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {High}
+.EFIG
+
+.TOPIC 2 message
+.HIGH message  {Vordefinierte Bezeichner}
+
+Der Bezeichner MESSAGE bei einer Methodendeklaration bewirkt, da· fÅr die Methode
+ein Eintrag in der DMT (Dynamic Message Table) angelegt wird. Das bedeutet, da· diese
+Prozedur durch Versenden einer Nachricht aufgerufen werden kann.
+
+Syntax: 
+.XMP
+    PROCEDURE Method(VAR Msg:TMessage); Message Msg_ID;
+.EXMP
+
+Diese Definition hat die gleiche Wirkung wie: 
+.XMP
+    PROCEDURE Method(VAR Msg:TMessage); Virtual Msg_ID;
+.EXMP
+
+
+Beispiel: 
+.XMP
+    PROCEDURE WMControl(VAR Msg:TMessage); Message WM_CONTROL;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Virtual}
+           {Override}
+.EFIG
+
+.TOPIC 2 near
+.HIGH near  {Vordefinierte Bezeichner}
+
+Dieses Wort wird unter Speed-Pascal/2 bei Prozedurdeklarationen ignoriert und
+existiert nur aus KompatibilitÑtsgrÅnden.
+
+Aufgrund des linearen Speichermodells wird diese spezielle Aufrufkonvention nicht
+mehr von '{Far}' unterschieden.
+
+.TOPIC 2 new
+.HIGH new (Procedure)  {Vordefinierte Bezeichner}
+
+Erzeugt eine dynamische Variable und belegt Speicher auf dem Heap. 
+
+Deklaration: 
+.XMP
+    PROCEDURE New(VAR p:Pointer [, Init:Constructor]);
+.EXMP
+
+New belegt Speicher auf dem Heap und ÅbertrÑgt die Adresse dieses Speicherblocks
+in die Zeigervariable p, erzeugt also eine dynamische Variable.
+
+p bezeichnet eine beliebige typisierte Zeigervariable. Die Grî·e des Bereich der
+belegt wird, hÑngt von der Grî·e des Typen ab auf den p verweist. Mit NEW allozierte
+Speicherbereiche kînnen mit {DISPOSE} wieder freigegeben werden.
+
+NEW kann auch als Funktion verwendet werden. Das Argument ist dann ein beliebiger Typ
+und das Ergebnis ein Zeiger auf den reservierten Heapspeicherbereich.
+
+Bei der objektorientierten Programmierung (OOP) kann zusÑtzlich zu dem Zeiger auf das
+neue Objekt noch ein Konstruktor zur Instantiierung des Objektes mit angegeben werden.
+
+Es wird dann Speicher fÅr das Objekt auf dem Heap bereitgestellt und die optionale
+Konstruktor-Methode aufgerufen.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von New *)
+    TYPE
+        PZeiger=^TZeiger;
+        TZeiger=ARRAY[1..10] OF Byte;
+
+        PObj=^TObj;
+        TObj=OBJECT
+             CountDown:BYTE;
+             CONSTRUCTOR Init;
+        END;
+
+        CONSTRUCTOR TObj.Init;
+        BEGIN
+             Writeln('Konstruktor');
+             CountDown := 99;          (* Instanzvariable initialisieren *)
+        END;
+
+    VAR
+        z:PZeiger;
+        obj:PObj;
+
+    BEGIN
+         New(z);       (* dynamische Variable mit 10 Byte LÑnge erzeugen *)
+         z^[1]:=0;     (* auf dynamische Variable zugreifen *)
+         Dispose(z);   (* dynamische Variable lîschen *)
+
+         z:=New(PZeiger);        (* NEW als Funktion verwendet *)
+
+         obj:=New(PObj, Init);   (* NEW mit Konstruktoraufruf *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Dispose}
+           {GetMem}
+           {FreeMem}
+           {Constructor}
+.EFIG
+
+.TOPIC 2 odd
+.HIGH odd (Funktion)  {Vordefinierte Bezeichner}
+
+ODD prÅft, ob es sich bei dem Argument um eine ungerade Zahl handelt. 
+
+Deklaration: 
+.XMP
+    FUNCTION Odd(X:LongInt):Boolean;
+.EXMP
+
+X mu· ein Zahltyp sein. 
+
+ODD liefert den Wert TRUE, falls X ungeradzahlig ist, ansonsten FALSE. 
+
+
+Beispiel: 
+.XMP
+    BEGIN
+         IF Odd(7) THEN Writeln('ungerade')
+         ELSE Writeln('gerade');
+    END.
+.EXMP
+
+.TOPIC 2 ofs
+.HIGH ofs (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert den Offset des Åbergebenen Arguments zurÅck. 
+
+Dabei kann es sich um eine Variable, Prozedur oder Funktion handeln. 
+
+Das Ergebnis ist aufgrund des linearen Speichermodells eine 32 Bit Zahl. 
+
+Deklaration: 
+.XMP
+    FUNCTION Ofs(X):Pointer;
+.EXMP
+
+
+Beispiel: 
+.XMP
+    VAR
+       p:POINTER;
+
+    BEGIN
+         p := Ofs(p);   (* p zeigt jetzt auf sich selbst *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Addr}
+.EFIG
+
+.TOPIC 2 ord
+.HIGH ord (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert die Ordinalzahl des Arguments zurÅck. 
+
+Deklaration: 
+.XMP
+    FUNCTION Ord(X):LongInt;
+.EXMP
+
+X ist ein Ausdruck ordinalen Typs. 
+
+
+Beispiel: 
+.XMP
+    TYPE
+        TEnum=(Enum1,Enum2,Enum3,Enum4);
+
+    BEGIN
+         Writeln(Ord(Enum3));      (* 2 *)
+         Writeln(Ord('A'));        (* liefert den ASCII Code von 'A' = 65 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Chr}
+.EFIG
+
+.TOPIC 2 override
+.HIGH override  {Vordefinierte Bezeichner}
+
+Das Wort OVERRIDE wird bei der Definition von Objekten/Klassen angegeben um
+anzuzeigen, da· die so gekennzeichnete Objekt-Methode eine im Vorfahre definierte
+virtuelle Methode Åberschreibt.
+
+Syntax: 
+.XMP
+    PROCEDURE Method(<Parameter>); Override;
+.EXMP
+
+
+Beispiel: 
+.XMP
+    TYPE TMyApp=OBJECT(TApplication)
+                 CONSTRUCTOR Init;
+                 DESTRUCTOR Done;
+                 PROCEDURE DesktopRedraw;Override; (* Åberschreibe Methode *)
+         END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Object}
+           {Class}
+           {Virtual}
+           {Message}
+.EFIG
+
+.TOPIC 2 pred
+.HIGH pred (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert den VorgÑnger des Arguments zurÅck. 
+
+Deklaration: 
+.XMP
+    FUNCTION Pred(X):<selber Typ wie X>;
+.EXMP
+
+X ist ein Ausdruck ordinalen Typs. 
+
+
+Beispiel: 
+.XMP
+    TYPE
+        TEnum=(Enum1,Enum2,Enum3,Enum4);
+
+    VAR
+        Enum:TEnum;
+
+    BEGIN
+         Enum := Pred(Enum3);      (* Enum2 *)
+         Writeln(Pred('C'));       (* 'B' *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Inc}
+           {Dec}
+           {Succ}
+.EFIG
+
+.TOPIC 2 private
+.HIGH private  {Vordefinierte Bezeichner}
+
+Das Wort PRIVATE bezeichnet innerhalb einer Objektdeklaration eine Sektion, in der
+Komponenten mit folgenden Eigenschaften deklariert werden.
+
+.OLIST
+.LISTITEM Innerhalb des Modules (Unit) verhalten sich die Bezeichner wie bei PUBLIC.
+.LISTITEM Au·erhalb des Modules sind sie unbekannt und somit nicht verwendbar.
+.EOLIST
+
+Der GÅltigkeitsbereich der im Abschnitt PRIVATE deklarierten Komponentenbezeichner
+ist auf das Modul (Programm oder Unit) beschrÑnkt, welche die Deklaration des
+Objekttyps enthÑlt.
+
+
+Beispiel: 
+.XMP
+    TClipboard = CLASS(TComponent)
+       PRIVATE
+             FOpenWin :HWindow;
+             FUNCTION  GetOwner:HWindow;
+             FUNCTION  GetViewer:HWindow;
+             PROCEDURE SetViewer(viewer:HWindow);
+       PUBLIC
+             ...
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Protected}
+           {Public}
+           {Published}
+           {Property}
+.EFIG
+
+.TOPIC 2 property
+.HIGH property  {Vordefinierte Bezeichner}
+
+Mit Hilfe von Properties (Eigenschaften) stellt Speed-Pascal ein Werkzeug zur
+objektorientierten Programmierung bereit.
+
+Syntax: 
+.XMP
+    PROPERTY Name<[index]>:Typ <read  Methode|Instanzvariable>
+                               <write Methode|Instanzvariable>;
+.EXMP
+
+Eine Property kann auch indiziert sein. Das hei·t, man kann darauf wie auf ein Array
+zugreifen.
+
+Properties werden wie Zuweisungen verwendet. 
+
+Eine Eigenschaft kann lesbar (read), schreibbar (write) oder auch beides sein, jenachdem welche Attribute definiert sind. 
+
+Ist das Attribut READ gesetzt, kann der Wert einer Eigenschaft gelesen werden: 
+
+.OLIST
+.LISTITEM Ist das Lese-Attribut eine Instanzvariable so liefert die Eigenschaft diesen
+Wert zurÅck.
+.LISTITEM Ist das Lese-Attribut eine Methode so liefert die Eigenschaft das Ergebnis
+der Funktion zurÅck.
+.EOLIST
+
+.XMP
+    TSwitchButton = CLASS(TBitButton)
+           PROTECTED
+                  FState:BOOLEAN;
+                  FUNCTION GetColor:TColor;
+           PUBLISHED
+                  PROPERTY State:BOOLEAN read FState;    (* Variable *)
+                  PROPERTY Color:TColor  read GetColor;  (* Methode *)
+    END;
+
+    FUNCTION TSwitchButton.GetColor:TColor;
+    BEGIN
+         IF FState THEN Result := clRed
+         ELSE Result := clBlack;
+    END;
+
+    VAR
+       SwitchButton:TSwitchButton;
+
+    BEGIN
+         ...
+         State := SwitchButton.State;    (* Ergenbis ist Wert der Variable *)
+         Color := SwitchButton.Color;    (* Ergenbis ist Wert der Funktion *)
+    END;
+.EXMP
+
+Ist das Attribut WRITE gesetzt, kann einer Eigenschaft ein Wert zugewiesen werden:
+
+.OLIST
+.LISTITEM Ist das Schreib-Attribut eine Instanzvariable, so wird ihr der Wert
+zugewiesen.
+.LISTITEM Ist das Schreib-Attribut eine Methode, so wird ihr der Wert als Parameter
+Åbergeben.
+.EOLIST
+
+.XMP
+    TSwitchButton = CLASS(TBitButton)
+           PROTECTED
+                  FState:BOOLEAN;
+                  FColor:TColor;
+                  PROCEDURE SetColor(col:TColor);
+           PUBLISHED
+                  PROPERTY State:BOOLEAN write FState;    (* Variable *)
+                  PROPERTY Color:TColor  write SetColor;  (* Methode *)
+    END;
+
+    PROCEDURE TSwitchButton.GetColor(col:TColor);
+    BEGIN
+         IF col = clRed THEN FState := TRUE
+         ELSE FState := FALSE;
+         FColor := col;
+    END;
+
+    VAR
+       SwitchButton:TSwitchButton;
+
+    BEGIN
+         ...
+         SwitchButton.State := TRUE;
+         SwitchButton.Color := clBlue; (* FState wird dadurch wieder FALSE *)
+    END;
+.EXMP
+
+Indizierte Eigenschaft: 
+.XMP
+    TList = CLASS
+         FUNCTION  Get(idx:LONGINT):BYTE;
+         PROCEDURE Put(idx:LONGINT; b:BYTE);
+         PROPERTY  Items[idx:LONGINT]:BYTE read Get write Put;
+    END;
+
+    FUNCTION TList.Get(idx:LONGINT):BYTE;
+    BEGIN
+         (* Suche Element mit Index idx und gib dessen Wert zurÅck *)
+    END;
+
+    PROCEDURE TList.Put(idx:LONGINT; b:BYTE);
+    BEGIN
+         (* Suche Element mit Index idx und weise ihm den Wert p zu *)
+    END;
+
+    VAR
+       List:TList;
+
+    BEGIN
+         ...
+         List.Items[4] := 1;
+
+         Writeln(List.Items[0]);
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Private}
+           {Protected}
+           {Public}
+           {Published}
+.EFIG
+
+.TOPIC 2 protected
+.HIGH protected  {Vordefinierte Bezeichner}
+
+Das Wort PROTECTED bezeichnet innerhalb einer Objektdeklaration eine Sektion, in der
+Komponenten mit folgenden Eigenschaften deklariert werden.
+
+.OLIST
+.LISTITEM Die Komponenten sind nur vom Objekt selbst und von dessen Nachkommen
+verwendbar.
+.EOLIST
+
+Das bietet die Mîglichkeit, bestimmte Komponenten des Objektes vor den
+End-Benutzern zu verbergen. Gleichzeitig ist es aber mîglich, diese Komponenten in
+einem abgeleiteten Objekt weiter zu benutzen, ohne da· sich beide Deklarationen im
+selben Modul befinden mÅssen.
+
+PROTECTED Komponenten eignen sich gut, um die Implementation von Eigenschaften
+(PROPERTY) zu verbergen.
+
+
+Beispiel: 
+.XMP
+    TSwitchButton = CLASS(TBitButton)
+           ....
+           PROTECTED
+                  FUNCTION GetSwitchState:TSwitchButtonState;
+                  PROCEDURE SetSwitchState(NewState:TSwitchButtonState);VIRTUAL;
+           PUBLISHED
+                  PROPERTY State:TSwitchButtonState read  GetSwitchState
+                                                    write SetSwitchState;
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Private}
+           {Public}
+           {Published}
+           {Property}
+.EFIG
+
+.TOPIC 2 public
+.HIGH public  {Vordefinierte Bezeichner}
+
+Das Wort PUBLIC bezeichnet innerhalb einer Objektdeklaration eine Sektion, in der
+Komponenten mit folgenden Eigenschaften deklariert werden.
+
+.OLIST
+.LISTITEM Die Bezeichner in dieser Sektion sind innerhalb und au·erhalb des Modules
+bekannt und somit verwendbar.
+.EOLIST
+
+Der GÅltigkeitsbereich der im Abschnitt PUBLIC deklarierten Komponentenbezeichner ist nicht beschrÑnkt. 
+
+
+Beispiel:
+.XMP
+    TClipboard = CLASS(TComponent)
+       PRIVATE
+             ...
+       PUBLIC
+             FUNCTION Open(ahwnd:HWindow):BOOLEAN;
+             FUNCTION Close:BOOLEAN;
+             FUNCTION Empty:BOOLEAN;
+             ...
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Private}
+           {Protected}
+           {Published}
+           {Property}
+.EFIG
+
+.TOPIC 2 published
+.HIGH published  {Vordefinierte Bezeichner}
+
+Das Wort PUBLISHED bezeichnet innerhalb einer Objektdeklaration eine Sektion, in der
+Komponenten mit folgenden Eigenschaften deklariert werden.
+
+.OLIST
+.LISTITEM Innerhalb der Applikation verhalten sich die Bezeichner wie bei PUBLIC.
+.LISTITEM ZusÑtzlich werden Laufzeit-Typeinformationen erzeugt, die von anderen Applikationen Åber das îffentliche Interface ausgewertet werden kînnen.
+.EOLIST
+
+.FIG
+Siehe auch:
+           {Private}
+           {Protected}
+           {Public}
+           {Property}
+.EFIG
+
+
+.TOPIC 2 read
+.HIGH read (Procedure)  {Vordefinierte Bezeichner}
+
+Liest Werte von der Standardeingabe (Tastatur) bzw. aus einer typisierten Datei ein. 
+
+Deklaration: 
+.XMP
+    PROCEDURE Read([VAR F:<typisierte Datei>;] V1 [,V2,...,Vn]);
+.EXMP
+
+Vi sind eine oder mehrere durch Komma getrennte beliebige Variable. 
+
+Ist F angegeben, erfolgt die Eingabe nicht Åber die Tastatur, sondern Åber die
+durch F bezeichnete offene typisierte Datei.
+
+Ist F eine Textdatei, liest READ bis zur Zeilenendemarkierung (CR/LF) bzw. bis zum
+Dateiende ({EOF}(F) liefert TRUE), falls das vorher erreicht wird.
+Ein anschlie·endes READ Åberliest die Endemarkierung und liefert einen leeren String
+zurÅck. Beide Aufrufe kînnen jedoch auch durch ein {READLN} ersetzt werden.
+
+
+Beispiel: 
+.XMP
+    VAR
+       F:TEXT;
+       s:STRING;
+
+    BEGIN
+         Write('Geben Sie den Dateiname an: ');
+         ReadLn(s);
+         Assign(F,s);
+         Reset(F);
+         WHILE not Eof(F) DO        (* gibt den Inhalt der Textdatei *)
+         BEGIN                      (*  auf dem Bildschirm aus *)
+              ReadLn(F,s);
+              Writeln(s);
+         END;
+         Close(F);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {ReadLn}
+           {Write}
+           {WriteLn}
+.EFIG
+
+.TOPIC 2 readln
+.HIGH readln (Procedure)  {Vordefinierte Bezeichner}
+
+FÅhrt zunÑchst ein {READ} aus und Åberliest anschlie·end die Zeilenendemarkierung
+(CR/LF). Das hei·t, es wird zur nÑchsten Zeile gesprungen.
+
+Deklaration: 
+.XMP
+    PROCEDURE ReadLn([VAR F:<typisierte Datei>;] [V1,V2,...,Vn]);
+.EXMP
+
+READLN liest Werte entweder von der Tastatur (Standardeingabe) oder von einer
+offenen Textdatei, inklusive CR/LF (Carriage return, Line feed).
+
+Vi sind eine oder mehrere durch Komma getrennte beliebige Variable. 
+
+Ist F angegeben, erfolgt die Eingabe nicht Åber die Tastatur, sondern Åber die
+durch F bezeichnete Textdatei.
+
+
+Beispiel: 
+.XMP
+    VAR
+       F:TEXT;
+       s:STRING;
+       b,c:INTEGER;
+
+    BEGIN
+         Assign(F,'TextDat.txt');
+         Reset(F);
+         ReadLn(F,s);    (* liest die erste Zeichenkette aus der Datei *)
+         Close(F);
+
+         ReadLn(b,c);    (* liest zwei Zahlen von der Standardeingabe *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Read}
+           {Write}
+           {WriteLn}
+.EFIG
+
+.TOPIC 2 result
+.HIGH result  {Vordefinierte Bezeichner}
+
+Das Ergebnis einer Funktion kann der Variable RESULT zugewiesen werden, welche vom
+selben Typ ist, wie der RÅckgabewert der Funktion.
+
+Dieser Bezeichner brauch nicht extra definiert zu werden, kann jedoch Åberschrieben
+werden.
+
+
+Beispiel: 
+.XMP
+    FUNCTION KeyDown:Char;
+    VAR  ch:Char;
+    BEGIN
+         REPEAT UNTIL KeyPressed;
+         ch := ReadKey;
+         IF ch = #0 THEN ch := ReadKey;
+         Result := ch;                  (* Funktionsergebnis zuweisen *)
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Function}
+.EFIG
+
+.TOPIC 2 round
+.HIGH round (Funktion)  {Vordefinierte Bezeichner}
+
+Rundet das Argument auf einen ganzzahligen Wert. 
+
+Deklaration: 
+.XMP
+    FUNCTION Round(r:Extended):LongInt;
+.EXMP
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Round *)
+    VAR
+       l:LONGINT;
+
+    BEGIN
+         l:=Round(2.56);  (* Round(2.56)=3 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Trunc}
+           {Frac}
+           {Int}
+.EFIG
+
+
+.TOPIC 2 self
+.HIGH self  {Vordefinierte Bezeichner}
+
+SELF ist ein impliziter Parameter (32 Bit-Zeiger). 
+
+Er zeigt innerhalb von Methoden auf die Objektinstanz, die die Methode aufrief. 
+
+
+Beispiel: 
+.XMP
+    TYPE
+        TObj=CLASS
+             Feld:BYTE;
+             PROCEDURE Init;
+        END;
+
+        PROCEDURE TObj.Init;
+        BEGIN
+             Self.Feld := 5;  (* Self kann hier auch weggelassen werden *)
+        END;
+
+    VAR
+        obj:TObj;
+
+    BEGIN
+         obj.Create;
+         obj.Init;
+         Writeln(obj.Feld);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Object}
+           {Class}
+.EFIG
+
+.TOPIC 2 sin
+.HIGH sin (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den Sinus einer Flie·kommazahl. 
+
+Deklaration: 
+.XMP
+    FUNCTION Sin(r:Extended):Extended;
+.EXMP
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+Die Interpretation des Wertes von r hÑngt vom mittels SetTrigMode gesetzten
+Gradma· ab.
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Sin *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e:=30;
+         e:=Sin(e);         (* Sin von 30 Grad berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Cos}
+           {Tan}
+           {Cot}
+           {ArcSin}
+           {ArcCos}
+           {ArcTan}
+           {ArcCot}
+.EFIG
+
+.TOPIC 2 sinh
+.HIGH sinh (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den Sinus hyperbolicus einer Flie·kommazahl. 
+
+Deklaration: 
+.XMP
+    FUNCTION Sinh(r:Extended):Extended;
+.EXMP
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+Die Interpretation des Wertes von r hÑngt vom mittels SetTrigMode gesetzten
+Gradma· ab.
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Sinh *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e:=30;
+         e:=Sinh(e);        (* Sinh von 30 Grad berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Cosh}
+           {Tanh}
+           {Coth}
+           {Sin}
+           {Cos}
+           {Tan}
+           {Cot}
+.EFIG
+
+.TOPIC 2 sizeof
+.HIGH sizeof (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert die Grî·e des Arguments zurÅck, also die Anzahl von Bytes, die es an Speicherplatz belegt. 
+
+Deklaration: 
+.XMP
+    FUNCTION SizeOf(X):LongInt;
+.EXMP
+
+
+Beispiel: 
+.XMP
+    TYPE
+        TRec=RECORD
+                   b:WORD;
+                   c:LONGWORD;
+             END;
+
+    VAR
+       rec:ARRAY[1..9] OF TRec;
+
+    BEGIN
+         Writeln(SizeOf(rec));       (* 9*6 = 54 Byte *)
+    END.
+.EXMP
+
+.TOPIC 2 sqr
+.HIGH sqr (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet das Quadrat des Arguments. 
+
+Deklaration: 
+.XMP
+    FUNCTION Sqr(r:Extended):Extended;
+.EXMP
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+Sqr liefert als Funktionsergebnis das Quadrat von r (r*r). 
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen werden. 
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Sqr *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         e:=Sqr(2);  (* Quadrat von 2 berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sqrt}
+.EFIG
+
+.TOPIC 2 sqrt
+.HIGH sqrt (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet die Wurzel des Arguments. 
+
+Deklaration: 
+.XMP
+    FUNCTION Sqrt(r:Extended):Extended;
+.EXMP
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Sqrt *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         e:=Sqrt(2);  (* Wurzel 2 berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sqr}
+.EFIG
+
+.TOPIC 2 str
+.HIGH str (Funktion)  {Vordefinierte Bezeichner}
+
+Wandelt einen numerischen Wert in einen String um. 
+
+Deklaration: 
+.XMP
+    PROCEDURE Str(X [:Width [:Decimals]]; VAR S:String);
+.EXMP
+
+X ist ein numerischer Wert, dessen Zahlendarstellung in eine Zeichenkette S
+Åbertragen wird.
+
+Mittels WIDTH und DECIMALS kann sowohl die GesamtlÑnge der Zeichenkette als auch
+die Anzahl Zeichen nach dem Komma bestimmt werden.
+
+Beispiel: 
+.XMP
+    VAR
+       r:REAL;
+       s:STRING;
+
+    BEGIN
+         Str(120,s);
+         Writeln(s);
+         r:=1234.5678;
+         Str(r:8:2,s);    (* nur 2 Nachkommastellen *)
+         Writeln(s);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Val}
+           {ToStr}
+.EFIG
+
+.TOPIC 2 succ
+.HIGH succ (Funktion)  {Vordefinierte Bezeichner}
+
+Liefert den Nachfolger des Arguments zurÅck. 
+
+Deklaration: 
+.XMP
+    FUNCTION Succ(X):<selber Typ wie X>;
+.EXMP
+
+X ist ein Ausdruck ordinalen Typs. 
+
+
+Beispiel: 
+.XMP
+    TYPE
+        TEnum=(Enum1,Enum2,Enum3,Enum4);
+
+    VAR
+        Enum:TEnum;
+
+    BEGIN
+         Enum := Succ(Enum3);      (* Enum4 *)
+         Writeln(Succ('C'));       (* 'D' *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Inc}
+           {Dec}
+           {Pred}
+.EFIG
+
+.TOPIC 2 tan
+.HIGH tan (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den Tangens einer Flie·kommazahl. 
+
+Deklaration: 
+
+    FUNCTION Tan(r:Extended):Extended;
+
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+Die Interpretation des Wertes von r hÑngt vom mittels SetTrigMode gesetzten Gradma· ab. 
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Tan *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e:=30;
+         e:=Tan(e);         (* Tan von 30 Grad berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sin}
+           {Cos}
+           {Cot}
+           {ArcSin}
+           {ArcCos}
+           {ArcTan}
+           {ArcCot}
+.EFIG
+
+.TOPIC 2 tanh
+.HIGH tanh (Funktion)  {Vordefinierte Bezeichner}
+
+Berechnet den Tangens hyperbolicus einer Flie·kommazahl. 
+
+Deklaration: 
+
+    FUNCTION Tanh(r:Extended):Extended;
+
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+Die Interpretation des Wertes von r hÑngt vom mittels SetTrigMode gesetzten
+Gradma· ab.
+
+Das Funktionsergebnis kann an eine Flie·kommavariable beliebigen Typs zugewiesen
+werden.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Tanh *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e:=30;
+         e:=Tanh(e);        (* Tanh von 30 Grad berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sinh}
+           {Cosh}
+           {Coth}
+           {Sin}
+           {Cos}
+           {Tan}
+           {Cot}
+.EFIG
+
+.TOPIC 2 tostr
+.HIGH tostr (Funktion)  {Vordefinierte Bezeichner}
+
+Wandelt einen numerischen Wert in einen String um. 
+
+Deklaration: 
+
+    FUNCTION ToStr(X):String;
+
+
+X ist ein numerischer Wert, dessen Zahlendarstellung in das Ergebnis der Funktion
+Åbertragen wird.
+
+
+Beispiel: 
+.XMP
+    VAR
+       s:STRING;
+
+    BEGIN
+         s := ToStr(120);
+         Writeln(s);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Val}
+           {Str}
+.EFIG
+
+.TOPIC 2 true
+.HIGH true  {Vordefinierte Bezeichner}
+
+Der Bezeichner TRUE entspricht dem boolschen Wert "wahr" bzw, "1" und ist vom Typ
+Boolean.
+
+.FIG
+Siehe auch:
+           {False}
+.EFIG
+
+.TOPIC 2 trunc
+.HIGH trunc (Funktion)  {Vordefinierte Bezeichner}
+
+Wandelt eine Flie·kommazahl in einen LongInt um. 
+
+Deklaration: 
+
+    FUNCTION Trunc(r:Extended):LongInt;
+
+
+r ist eine Flie·kommazahl beliebigen Typs (REAL, DOUBLE oder EXTENDED). 
+
+Trunc liefert als Funktionsergebnis einen Integer der aus r durch Abschneiden der
+Nachkommastellen entsteht.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Trunc *)
+    VAR
+       l:LONGINT;
+
+    BEGIN
+         l:=Trunc(2.56);  (* Trunc(2.56)=2 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Frac}
+           {Round}
+           {Int}
+.EFIG
+
+
+.TOPIC 2 typeof
+.HIGH  typeof(Funktion)  {Vordefinierte Bezeichner}
+
+Liefert einen Zeiger auf die Virtuelle Methoden Tabelle (VMT) zurÅck. 
+
+Deklaration: 
+
+    FUNCTION TypeOf(Obj:ObjectType):Pointer;
+
+
+ObjectType kann dabei entweder ein Objekttyp oder eine Objektinstanz sein. 
+
+
+Beispiel: 
+.XMP
+    TYPE
+        PObj=^TObj;
+        TObj=OBJECT
+            CONSTRUCTOR Init;
+            PROCEDURE m1; Virtual;
+        END;
+
+    CONSTRUCTOR TObj.Init;
+    BEGIN
+    END;
+
+    PROCEDURE TObj.m1;
+    BEGIN
+         IF TypeOf(tobj) = TypeOf(self) THEN Writeln('SELF ist ok');
+    END;
+
+    VAR
+       obj:PObj;
+
+    BEGIN
+         New(obj,Init);
+         obj^.m1;
+    END.
+.EXMP
+
+
+.TOPIC 2 upcase
+.HIGH upcase (Funktion)  {Vordefinierte Bezeichner}
+
+Wandelt Klein- in Gro·buchstaben um. 
+
+Deklaration: 
+
+    FUNCTION Upcase(ch:Char):Char;
+
+
+Falls ch im Bereich von 'a'..'z' liegt, gibt UPCASE den entsprechenden Gro·buchstaben
+zurÅck. Ansonsten bleibt ch unverÑndert.
+
+
+Beispiel: 
+.XMP
+    VAR
+       s:STRING;
+       i:BYTE;
+
+    BEGIN
+         s := 'abcdefg';
+         FOR i := 1 TO Length(s) DO s[i] := upcase(s[i]);
+    END.
+.EXMP
+
+
+.TOPIC 2 val
+.HIGH val (Procedure)  {Vordefinierte Bezeichner}
+
+
+Wandelt einen String in einen numerischen Wert um. 
+
+Deklaration: 
+
+    PROCEDURE Val(S; VAR V; VAR Code: Integer);
+
+
+Der umgewandelte Wert wird in die numerische Variable V Åbertragen. Konnte die Zahl
+nicht fehlerfrei ausgefÅhrt werden enthÑlt die Variable Code einen Wert ungleich 0
+(die Position des fehlerhaften Zeichens im String S).
+
+
+Beispiel: 
+.XMP
+    VAR
+       s:STRING;
+       l:LONGINT;
+       c:INTEGER;
+
+    BEGIN
+         s:='123';
+         Val(s,l,c);  (* l enthÑlt nun 123 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Str}
+           {ToStr}
+.EFIG
+
+.TOPIC 2 virtual
+.HIGH virtual  {Vordefinierte Bezeichner}
+
+Das Wort VIRTUAL wird bei der Definition von Objekten/Klassen angegeben um
+anzuzeigen, da· die so gekennzeichnete Objekt-Methode eine virtuelle Methode ist.
+Das bedeutet, sie kann von Nachkommen des Objektes Åberschrieben werden.
+
+Soll diese Methode von einem Nachkommen des Objektes (OBJECT) Åberschrieben werden,
+dann mu· im Nachkommen an der gleichen Stelle das Wort 'virtual' stehen.
+
+Syntax: 
+
+    PROCEDURE Method(<Parameter>); Virtual;
+
+
+
+Beispiel: 
+
+    TYPE TMyApp=OBJECT(TApplication)
+                 CONSTRUCTOR Init;
+                 DESTRUCTOR Done;
+                 PROCEDURE DesktopRedraw;Virtual; (* Åberschreibe Methode *)
+         END;
+
+
+
+Bei Klassen wird eine neue Hierarchieebene fÅr die Methode mit dem Wort VIRTUAL
+eingefÅhrt. Soll diese Methode von einem Nachkommen der Klasse (CLASS)
+Åberschrieben werden, dann mu· im Nachkommen an der gleichen Stelle das Wort
+'override' stehen. Damit wird gewÑhrleistet, da· die Methode des Nachkommen
+automatisch auch vom Vorfahreaus aufgerufen wird.
+
+Wird beim Nachkommen jedoch auch das Wort 'virtual' verwendet, dann wird die neue
+Methode nur bei Aufrufen im Nachkommen verwendet. FÅr Methoden des Vorfahren
+ist die neue Methode nicht "erreichbar".
+
+
+Beispiel: 
+.XMP
+    TYPE
+        TVorfahre=CLASS(TObject)
+             PROCEDURE WriteText;
+             PROCEDURE Write1;Virtual;     (* virtuelle Methode *)
+             PROCEDURE Write2;Virtual;     (* virtuelle Methode *)
+        END;
+
+        TNachkomme=CLASS(TVorfahre)
+             PROCEDURE Write1;Virtual;     (* neue Ebene *)
+             PROCEDURE Write2;Override;    (* Methode Åberschrieben *)
+        END;
+
+    VAR
+        MyClass:TNachkomme;
+
+    PROCEDURE TVorfahre.WriteText;
+    BEGIN
+         Write1;  (* virtuelle Methode des Vorfahren wird aufgerufen *)
+         Write2;  (* virtuelle Methode des Nachkommen wird aufgerufen *)
+    END;
+
+    PROCEDURE TVorfahre.Write1;
+    BEGIN
+         Writeln('TVorfahre.Write1');
+    END;
+
+    PROCEDURE TVorfahre.Write2;
+    BEGIN
+         Writeln('TVorfahre.Write2');
+    END;
+
+    PROCEDURE TNachkomme.Write1;
+    BEGIN
+         Writeln('TNachkomme.Write1');
+    END;
+
+    PROCEDURE TNachkomme.Write2;
+    BEGIN
+         Writeln('TNachkomme.Write2');
+    END;
+
+
+    BEGIN
+         MyClass.Create;
+         MyClass.WriteText;
+    END.
+.EXMP
+
+
+.FIG
+Siehe auch:
+           {Object}
+           {Class}
+           {Override}
+           {Message}
+.EFIG
+
+
+.TOPIC 2 write
+.HIGH write (Procedure)  {Vordefinierte Bezeichner}
+
+Gibt Daten in die Standardausgabe (Bildschirm) oder in eine typisierte Datei aus. 
+
+Deklaration: 
+.XMP
+    PROCEDURE Write([VAR F:<typisierte Datei>;] P1[,P2,...,Pn]);
+.EXMP
+
+Pi sind ein oder mehrere durch Komma getrennte beliebige AusdrÅcke.
+Jeder Ausgabe-Ausdruck mu· entweder ein Char-Typ, ein Integer-Typ, ein Real-Typ,
+ein String oder Boolean sein.
+
+Ist F angegeben, erfolgt die Ausgabe nicht in die Standardausgabe sondern in die
+durch F bezeichnete offene typisierte Datei.
+
+
+Beispiel: 
+.XMP
+    VAR
+       T:TEXT;
+       F:FILE OF INTEGER;
+       i:INTEGER;
+       s:STRING;
+       a:ARRAY[1..9] OF INTEGER;
+
+    BEGIN
+         Write('Geben Sie den Dateiname an: ');
+         ReadLn(s);
+         Assign(T,s);
+         Rewrite(T);
+         REPEAT              (* liest Zeichenketten von der Standardeingabe *)
+              ReadLn(s);     (*  und schreibt sie in eine Textdatei *)
+              Write(T,s);
+              WriteLn;
+         UNTIL s = '';
+         Close(T);
+
+         Assign(F,'Integer.dat');
+         Rewrite(F);
+         FOR i := 1 TO 9 DO Write(F,a[i]);
+         Close(F);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Read}
+           {ReadLn}
+           {WriteLn}
+.EFIG
+
+
+.TOPIC 2 writeln
+.HIGH writeln (Procedure)  {Vordefinierte Bezeichner}
+
+Schreibt Daten mittels {WRITE} und ergÑnzt anschlie·end ein Zeilenendezeichen (CR/LF).
+
+Deklaration: 
+.XMP
+    PROCEDURE WriteLn([VAR F:<typisierte Datei>;] [P1,P2,...,Pn]);
+.EXMP
+
+Gibt Variablen auf die Standardausgabe (Bildschirm) oder in eine offene Textdatei aus
+und hÑngt ein CR/LF (Carriage return, Line feed) an.
+
+Pi sind eine oder mehrere durch Komma getrennte beliebige AusdrÅcke. Jeder
+Ausgabe-Ausdruck mu· entweder ein Char-Typ, ein Integer-Typ, ein Real-Typ, ein
+String oder Boolean sein. Werden keine Pi spezifiziert, wird nur ein
+Zeilenendezeichen ausgegeben.
+
+Ist F angegeben, erfolgt die Ausgabe nicht in die Standardausgabe, sondern in die
+durch F bezeichnete Textdatei. Dann sind jedoch als Parameter nur String-Typen
+zulÑssig.
+
+Beispiel:
+.XMP
+    VAR
+       F:TEXT;
+       s:STRING;
+
+    BEGIN
+         Write('Geben Sie den Dateiname an: ');
+         ReadLn(s);
+         Assign(F,s);
+         Rewrite(F);
+         REPEAT              (* liest Zeichenketten von der Standardeingabe *)
+              ReadLn(s);     (*  und schreibt sie in eine Textdatei *)
+              WriteLn(F,s);
+         UNTIL s = '';
+         Close(F);
+    END.
+.EXMP
+
+Siehe auch:
+           {Read}
+           {ReadLn}
+           {Write}
+
+
+
+

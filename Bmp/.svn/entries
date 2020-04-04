@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="http://svn.netlabs.org/repos/wdsibyl"
+   revision="35"
+   url="http://svn.netlabs.org/repos/wdsibyl/trunk/WDSibyl/Bmp"
+   last-author="wolfgangd"
+   uuid="cbb429e8-791c-0410-88e6-dcdaa12b25c3"
+   committed-date="2006-06-23T05:12:40.000000Z"
+   kind="dir"
+   name=""
+   committed-rev="33"/>
+<entry
+   kind="dir"
+   name="Compnt"/>
+<entry
+   name="Internet"
+   kind="dir"/>
+<entry
+   kind="dir"
+   name="WDSibyl"/>
+</wc-entries>

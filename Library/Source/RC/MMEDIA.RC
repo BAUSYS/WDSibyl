@@ -1,0 +1,15 @@
+
+BITMAP StdBmpPlay    ..\..\..\bmp\Compnt\play.bmp
+BITMAP StdBmpPause   ..\..\..\bmp\Compnt\pause.bmp
+BITMAP StdBmpRewind  ..\..\..\bmp\Compnt\rewind.bmp
+BITMAP StdBmpStop    ..\..\..\bmp\Compnt\stop.bmp
+BITMAP StdBmpPlay1   ..\..\..\bmp\Compnt\play1.bmp
+BITMAP StdBmpPlay2   ..\..\..\bmp\Compnt\play2.bmp
+BITMAP StdBmpPlay3   ..\..\..\bmp\Compnt\play3.bmp
+BITMAP StdBmpRecord  ..\..\..\bmp\Compnt\record0.bmp
+BITMAP StdBmpRecord1 ..\..\..\bmp\Compnt\record1.bmp
+BITMAP StdBmpNextTrk ..\..\..\bmp\Compnt\nexttrk.bmp
+BITMAP StdBmpPrevTrk ..\..\..\bmp\Compnt\prevtrk.bmp
+BITMAP StdBmpBackTrk ..\..\..\bmp\Compnt\backtrk.bmp
+BITMAP StdBmpStepTrk ..\..\..\bmp\Compnt\steptrk.bmp
+BITMAP StdBmpEject   ..\..\..\bmp\Compnt\eject.bmp

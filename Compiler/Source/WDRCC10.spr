@@ -1,0 +1,217 @@
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\default_win32.ico
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=PMWIN
+File3=BSESUB
+File4=BSEVIO
+File5=BSEKBD
+File6=BSETIB
+File7=BSEEXCPT
+File8=BSEDOS
+File9=BSEERR
+File10=PMWP
+File11=PMSHL
+File12=SYSUTILS
+File13=CRT
+File14=USTREAM
+File15=ULIST
+File16=USTRING
+File17=USYSCLASS
+File18=BSEREGISTRY
+File19=INIFILES
+File20=PMSPL
+File21=PMWINX
+File22=USYSINFO
+File23=DOS
+File24=SPC_DATA
+File25=UCONST
+File26=UFUNC
+
+[Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\COMPLIB.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=P:\WDSIBYL\WDSIBYL\TOOLS\SOURCE\GENHELP
+OutDir=P:\WDSibyl\WDSibyl\Compiler\Output\OS2;P:\WDSIBYL\WDSIBYL\BIN\OS2
+LibDir=P:\WDSibyl\WDSibyl\Library\Output\OS2
+LibSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
+IncSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\RC
+CompInstallDir=
+
+[Directories Win32]
+
+LastDir=P:\WDSIBYL\WDSIBYL\COMPILER\SOURCE\SHARE
+OutDir=P:\WDSibyl\WDSibyl\Compiler\Output\Win32
+LibDir=P:\WDSibyl\WDSibyl\Output\Win32
+LibSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
+IncSrcDir=
+CompInstallDir=
+
+[Find History]
+
+Find0=CompilerDirective
+Find1=CompDir_Include
+Find2=include
+Find3=readln
+Find4=indexof
+Find5=indexofd
+Find6=writeln
+Find7=ExtractBmpName
+Find8=cErrCmdNotFound
+Find9=showerror
+Find10=ShowError
+Find11=wdsibyl
+Find12=Put
+Find13=GetStrItem
+Find14=PosEnde
+Find15=Could write
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Compiler\Source\WDRCC10.spr
+ProjectType=NonVisual
+RunParameter=P:\WDSIBYL\Test\WDSibyl\Test.RC -NEW
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Closed Files]
+
+File0=.\Share\uSourceFile.pas
+File1=.\RC\WDRCD10\uResDll.pas
+
+[Last Open Files]
+
+File0=.\RC\WDRCC10\WDRCC10.pas
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=829
+File0.Height=566
+File0.Column=47
+File0.Line=28
+File1=.\SHARE\uFunc.pas
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=829
+File1.Height=566
+File1.Column=52
+File1.Line=19
+File2=.\Share\SPC_DATA.PAS
+File2.Left=-1
+File2.Bottom=-1
+File2.Width=829
+File2.Height=566
+File2.Column=63
+File2.Line=247
+File3=..\..\.\Library\Source\RTL\uSysInfo.PAS
+File3.Left=-1
+File3.Bottom=-1
+File3.Width=829
+File3.Height=566
+File3.Column=1
+File3.Line=547
+File4=..\..\.\LIBRARY\SOURCE\RTL\uSysClass.pas
+File4.Left=-1
+File4.Bottom=-1
+File4.Width=829
+File4.Height=566
+File4.Column=1
+File4.Line=544
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=Window
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\RC\WDRCC10\WDRCC10.pas
+MainFile0=.\RC\WDRCC10\WDRCC10.pas
+MainFile0.Ext=.EXE
+MainFile0.Checksum=7168
+MainFile0.Expanded=False
+MainFile0.File0=.\Share\SPC_DATA.PAS
+MainFile0.File1=..\.\Test\Test.RC
+MainFile0.File2=.\SHARE\uFunc.pas
+MainFile0.File3=[Dependencies]
+MainFile0.Dependency0=..\..\.\LIBRARY\SOURCE\RTL\uSysClass.pas
+MainFile0.Dependency1=..\..\.\Library\Source\RTL\uSysInfo.PAS
+MainFile0.Dependency2=.\Share\SPC_DATA.PAS
+MainFile0.Dependency3=.\Share\UCONST.PAS
+MainFile0.Dependency4=.\Share\UFUNC.PAS
+
+[Replace History]
+
+Replace0=NextToken
+Replace1=CompStatusMsg('
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+

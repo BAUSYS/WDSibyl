@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   revision="35"
+   repos="http://svn.netlabs.org/repos/wdsibyl"
+   url="http://svn.netlabs.org/repos/wdsibyl/trunk/WDSibyl/Bmp/WDSibyl/Win32"
+   last-author="wolfgangd"
+   uuid="cbb429e8-791c-0410-88e6-dcdaa12b25c3"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="dir"
+   name=""
+   committed-rev="5"/>
+<entry
+   checksum="6fe07822004c24ed3d5dc1b577656b8a"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:16.000000Z"
+   text-time="2001-04-14T08:05:32.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="CPUWIN.ICO"
+   committed-rev="5"/>
+<entry
+   checksum="c95ca2540dddb8d0c368cdf72c6f25c0"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="1998-04-16T12:48:54.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="CROSS.CUR"
+   committed-rev="5"/>
+<entry
+   checksum="aa232164affc13c7fea0d6252ff72dbe"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="2001-04-14T08:05:28.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="DBEXPLOR.ICO"
+   committed-rev="5"/>
+<entry
+   checksum="cf4361b43a04b7b60530061aa6d92bb2"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:16.000000Z"
+   text-time="1996-06-17T15:48:44.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="DBREFRSH.BMP"
+   committed-rev="5"/>
+<entry
+   checksum="df306d3a83ab58c0ac22d0e6509888e6"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="2001-04-14T08:05:28.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="DEFAULT.ICO"
+   committed-rev="5"/>
+<entry
+   checksum="75f8d26af62834feed23ed31198c5e60"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="2001-04-14T08:05:28.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="DOCU.ICO"
+   committed-rev="5"/>
+<entry
+   checksum="0a2ae623c18fc5b32ef2636f9ad27393"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="1998-04-24T22:47:48.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="DRAG.CUR"
+   committed-rev="5"/>
+<entry
+   checksum="6fe07822004c24ed3d5dc1b577656b8a"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="2001-04-14T08:05:32.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="EDIT.ICO"
+   committed-rev="5"/>
+<entry
+   checksum="889455e4bf2821b4482b069cd48f73d3"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="2001-04-14T08:05:28.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="HCOMP.ICO"
+   committed-rev="5"/>
+<entry
+   checksum="3fb87a13ff2b9948a70ac778070b64ea"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="1998-04-16T19:56:32.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="HELP.CUR"
+   committed-rev="5"/>
+<entry
+   checksum="db9f1d578f96ba62c4afafd91c038abb"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="1998-04-16T23:24:14.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="HSPLIT.CUR"
+   committed-rev="5"/>
+<entry
+   checksum="f9497dd0077aac5128f2c3e82a85bcf6"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="2001-04-14T08:05:30.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="ICEDIT.ICO"
+   committed-rev="5"/>
+<entry
+   checksum="320bf9e0813cb2fbf4212beff3364088"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="1998-04-19T15:43:04.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="INSERT.CUR"
+   committed-rev="5"/>
+<entry
+   checksum="6fe07822004c24ed3d5dc1b577656b8a"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:16.000000Z"
+   text-time="2001-04-14T08:05:32.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="INSPECT.ICO"
+   committed-rev="5"/>
+<entry
+   checksum="f9497dd0077aac5128f2c3e82a85bcf6"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="2001-04-14T08:05:30.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="ISPECTOR.ICO"
+   committed-rev="5"/>
+<entry
+   checksum="bd2f3adba5e92f092945aa16c61ed8ab"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="1998-04-16T12:46:20.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="MOVE.CUR"
+   committed-rev="5"/>
+<entry
+   checksum="b3c0209f7ec8a83742192ea5bb8ee195"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="1998-04-19T15:39:40.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="MULTISEL.CUR"
+   committed-rev="5"/>
+<entry
+   checksum="95513db89ee401b8d5e2978777d3338a"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="2001-04-14T08:05:30.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="NLSMGR.ICO"
+   committed-rev="5"/>
+<entry
+   checksum="14bf4350ba436e53b3091ef91040c4a4"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="1998-04-19T15:45:30.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="PASTE.CUR"
+   committed-rev="5"/>
+<entry
+   checksum="63fa9dc192fe2afb11c2a39a5ec03c55"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="2001-04-14T08:05:30.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="RCOMP.ICO"
+   committed-rev="5"/>
+<entry
+   checksum="7a0d7615a8f84d8e6e05944e2ef6efb0"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:16.000000Z"
+   text-time="2001-04-14T08:05:30.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="SAMPLES.ICO"
+   committed-rev="5"/>
+<entry
+   checksum="db247896a2fa9831459419b70ea18aee"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="2004-12-28T21:08:20.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="SIBYL.ico"
+   committed-rev="5"/>
+<entry
+   checksum="ab198f5f0cb53b84f834c3fe7e39eda6"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:16.000000Z"
+   text-time="1998-04-16T23:23:42.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="SQLWAIT.CUR"
+   committed-rev="5"/>
+<entry
+   checksum="dcd681f85589e83d0eb4ba8f7adbb462"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="1998-04-16T23:23:56.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="VSPLIT.CUR"
+   committed-rev="5"/>
+<entry
+   checksum="6fe07822004c24ed3d5dc1b577656b8a"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:14.000000Z"
+   text-time="2001-04-14T08:05:32.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="WATCH.ICO"
+   committed-rev="5"/>
+</wc-entries>

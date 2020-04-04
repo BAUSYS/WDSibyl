@@ -1,0 +1,168 @@
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\DEFAULT_OS2.ICO
+
+[Application Options Win32]
+
+ApplicationIcon=P:\WDSIBYL\WDSIBYL\BIN\Win32\DEFAULT_Win32.ICO
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=BSETIB
+File3=BSEEXCPT
+File4=BSEDOS
+File5=BSEERR
+File6=PMWIN
+File7=PMWP
+File8=PMSHL
+File9=SYSUTILS
+File10=USTREAM
+File11=ULIST
+File12=USTRING
+File13=USYSCLASS
+File14=BSEREGISTRY
+File15=INIFILES
+File16=PMSPL
+File17=PMWINX
+File18=USYSINFO
+File19=DOS
+File20=SPC_DATA
+
+[Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\COMPLIB.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=P:\WDSIBYL\WDSIBYL\COMPILER
+OutDir=P:\WDSibyl\WDSibyl\Compiler\Output\OS2;P:\WDSibyl\WDSibyl\BIN\OS2
+LibDir=P:\WDSibyl\WDSibyl\Library\Output\OS2;P:\WDSibyl\WDSibyl\IDE\Output\OS2
+LibSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
+IncSrcDir=
+CompInstallDir=
+
+[Directories Win32]
+
+LastDir=P:\WDSIBYL\WDSIBYL\COMPILER
+OutDir=P:\WDSibyl\WDSibyl\Compiler\Output\Win32
+LibDir=P:\WDSibyl\WDSibyl\Library\Output\Win32;P:\WDSibyl\WDSibyl\IDE\Output\Win32
+LibSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
+IncSrcDir=
+CompInstallDir=
+
+[Find History]
+
+Find0=writeln
+Find1=yyy
+Find2=xxx
+Find3=gCompilerDLL
+Find4=BraekCompiler
+Find5=SetCompilerStatusMessage
+Find6=Language
+Find7=language
+Find8=Quell
+Find9=sibyl
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Compiler\Source\WDSPD10.spr
+ProjectType=NonVisual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Open Files]
+
+File0=.\PAS\WDSPD10\WDSPD10.pas
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=828
+File0.Height=500
+File0.Column=23
+File0.Line=211
+File1=.\Share\SPC_DATA.PAS
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=828
+File1.Height=500
+File1.Column=21
+File1.Line=123
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=Window
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\PAS\WDSPD10\WDSPD10.pas
+MainFile0=.\PAS\WDSPD10\WDSPD10.PAS
+MainFile0.Ext=.DLL
+MainFile0.Checksum=5632
+MainFile0.Expanded=False
+MainFile0.File0=.\Share\SPC_DATA.PAS
+MainFile0.File1=[Dependencies]
+MainFile0.Dependency0=.\Share\SPC_DATA.PAS
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+

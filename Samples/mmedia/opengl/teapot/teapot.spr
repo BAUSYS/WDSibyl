@@ -1,0 +1,135 @@
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=
+
+[Breakpoints]
+
+Breakpoint5=.\TEAPOT.PAS|169
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OPENGL
+
+[Compiler Options]
+
+CodeGeneration=Assertions
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=P:\WDSibyl\Bin\OS2\CompLib.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
+
+[Directories Win32]
+
+LastDir=
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
+
+[Find History]
+
+Find0=renderTeapot
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Samples\mmedia\opengl\teapot\teapot.spr
+ProjectType=Visual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Open Files]
+
+File0=.\teapot.pas
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=876
+File0.Height=538
+File0.Column=1
+File0.Line=169
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=GUI
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\teapot.pas
+MainFile0=.\teapot.pas
+MainFile0.Ext=.EXE
+MainFile0.Checksum=768
+MainFile0.Expanded=False
+MainFile0.File0=[Dependencies]
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=.\teapot.scu
+MainForm=
+

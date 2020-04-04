@@ -1,0 +1,736 @@
+.TOPIC 1 Hilfe Precompiler WDHLPC10
+
+.HIGH Hilfe Precompiler WDHLPC10
+
+WDHLPC10.EXE (bzw. WDHLPD10) ist ein Compiler fÅr OS/2, der ASCII Textdateien in das IPF
+Format umwandelt. Die resultierenden Dateien kînnen dann mittel demm IPF Compiler
+(Information Presentation Facility Compiler) zu Hilfedateien (HLP) oder Online-Dokumente
+konvertiert werden.
+
+Der Hilfe Precompiler wurde entwickelt, um die Lesbarkeit von Hilfe-Quelltexten zu
+verbessern, und deren Erstellung zu vereinfachen.
+
+
+.TOPIC 2 Syntax
+
+.HIGH Syntax
+
+Die Syntax fÅr den Hilfe Precompiler beinhaltet eine Menge von SchlÅsselwîrtern
+({Kommandos}), die zur Formatierung des Flie·textes verwendet werden.
+
+Es ist jedoch auch mîglich, IPF Kommandos direkt in die Quelltexte einzubinden und somit
+alle Mîglichkeiten des IPFC auszuschîpfen.
+
+
+Verweise auf andere Seiten der Hilfedatei, sogenannte Links werden durch Einschlie·ung
+mit geschweiften Klammern definiert.
+
+.TOPIC 3 Kommandos
+
+Folgende Kommandos sind verfÅgbar und mÅssen mit einem einleitenden Punkt am Anfang
+einer Zeile platziert sein:
+.FIG
+
+  {BITMAP}
+  {BOLD}
+  {BOLD_UNDERLINE}
+  {COLOR}
+  DDESC
+  DLIST
+  DTERM
+  EDLIST
+  {EFIG}
+  {EOLIST}
+  {ESLIST}
+  {EULIST}
+  {EXMP}
+  {FIG}
+  HCTX
+  HIDDEN
+  {HIGH (WDHLPC)}
+  {INCLUDE}
+  {INDEX (WDHLPC)}
+  {IPFC / REAL}
+  {LISTITEM}
+  {MASTERINDEX}
+  {OLIST}
+  REFBASE
+  {SET_INCFILENAME}
+  {SET_LANG}
+  {SLIST}
+  {TITLE}
+  {TOPIC}
+  {ULIST}
+  {UNDERLINE}
+  {XMP}
+.EFIG
+
+Andere Wîrter, die mit einem Punkt am Zeilenanfang beginnen sind nicht zulÑssig und haben
+den Abbruch der Compilierung zur Folge.
+
+
+.TOPIC 3 BITMAP
+
+.HIGH BITMAP
+
+Diese Kommando bindet ein externes Bitmap in die Hilfeseite ein. 
+
+Als Parameter mu· der Name der externen Bitmap-Datei angegeben werden. 
+
+Beispiel:
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH Bitmap Beispiel
+
+ .BITMAP C:\OS2\BITMAP\OS2LOGO.BMP
+.EXMP
+
+.TOPIC 3 BOLD
+.HIGH BOLD
+
+Dieses Kommando gibt die Zeile Fettgedruckt aus.
+
+Beispiel:
+.XMP
+ .BOLD Dies ist ein Beispiel fuer Fettdruck.
+.EXMP
+
+.FIG
+Siehe auch:
+           {BOLD_UNDERLINE}
+           {UNDERLINE}
+.EFIG
+
+
+.TOPIC 3 BOLD_UNDERLINE
+.HIGH BOLD_UNDERLINE
+
+Dieses Kommando gibt die Zeile Fettgedruckt und Unterstrichen aus.
+
+Beispiel:
+.XMP
+ .BOLD_UNDERLINE Dies ist ein Beispiel fuer Fettdruck und Unterstrichen.
+.EXMP
+
+.FIG
+Siehe auch:
+           {BOLD}
+           {UNDERLINE}
+.EFIG
+
+
+.TOPIC 3 COLOR
+
+.HIGH COLOR
+
+Mit diesem Komando lassen sich die Farben der Textdarstellung Ñndern. 
+
+Dabei kînnen die Vordergrund- (fc) und die Hintergrundfarbe (bc) wahlweise als Attribute angegeben werden. 
+
+Folgenden Farben sind mîglich:
+
+.ULIST
+.LISTITEM blue
+.LISTITEM cyan
+.LISTITEM default
+.LISTITEM green
+.LISTITEM neutral
+.LISTITEM red
+.LISTITEM yellow
+.EULIST
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH Color Beispiel
+
+ .COLOR fc=yellow bc=blue
+ Dieser Text
+ .COLOR bc=red
+ ist zweifarbig.
+
+ .COLOR fc=default bc=default
+ Jetzt ist die Textfarbe wieder normal.
+.EXMP
+
+.TOPIC 3 EFIG
+
+.HIGH EFIG
+
+Dieses Kommando beendet einen Block (Figure), in welchem die Textzeilen so dargestellt
+werden, wie sie eingegeben wurden.
+
+In so einem Block werden die Zeilen am rechten Fensterrand nicht automatisch umgebrochen
+sondern werden abgeschnitten.
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH Figure Beispiel
+
+ Dieser Text wird beim Verkleinern des Fensters
+ automatisch umgebrochen.
+ .FIG
+ Dieser Text wird beim Verkleinern des Fensters
+ nicht mehr automatisch umgebrochen.
+ .EFIG
+.EXMP
+
+.FIG
+Siehe auch:
+           {FIG}
+.EFIG
+
+.TOPIC 3 EOLIST
+
+.HIGH EOLIST
+
+Das EOList Kommando beendet eine geornete Liste. 
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH EOList Beispiel
+
+ .OLIST
+ .LISTITEM Item 1
+ .OLIST
+ .LISTITEM Item 1.1
+ .LISTITEM Item 1.2
+ .EOLIST
+ .LISTITEM Item 2
+ .LISTITEM Item 3
+ .EOLIST
+.EXMP
+
+.FIG
+Siehe auch:
+           {OLIST}
+           {LISTITEM}
+.EFIG
+
+.TOPIC 3 ESLIST
+
+.HIGH ESLIST
+
+Das EOList Kommando beendet eine einfache Liste. 
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH ESList Beispiel
+
+ .SLIST
+ .LISTITEM Item 1
+ .SLIST Compact
+ .LISTITEM Item 1.1
+ .LISTITEM Item 1.2
+ .ESLIST
+ .LISTITEM Item 2
+ .LISTITEM Item 3
+ .ESLIST
+.EXMP
+
+.FIG
+Siehe auch:
+           {SLIST}
+           {LISTITEM}
+.EFIG
+
+
+.TOPIC 3 EULIST
+
+.HIGH EULIST
+
+
+Das EUList Kommando beendet eine ungeornete Liste.
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH EUList Beispiel
+
+ .ULIST
+ .LISTITEM Item 1
+ .ULIST Compact
+ .LISTITEM Item 1.1
+ .LISTITEM Item 1.2
+ .EULIST
+ .LISTITEM Item 2
+ .LISTITEM Item 3
+ .EULIST
+.EXMP
+
+.FIG
+Siehe auch:
+           {ULIST}
+           {LISTITEM}
+.EFIG
+
+.TOPIC 3 EXMP
+
+.HIGH EXMP
+
+Das Kommando beendet einen Textblock, der nicht formatiert werden soll. Der Text wird so dargestellt, wie das Beispiel auf dieser Seite. 
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH EXMP Beispiel
+
+ Das ist normaler Flie·text, der am rechten Fensterrand immer
+ automatisch umgebrochen wird.
+ .XMP
+ Dieser Text wird nicht formatiert.
+ .EXMP
+.EXMP
+
+.FIG
+Siehe auch:
+           {XMP}
+           {FIG}
+.EFIG
+
+.TOPIC 3 FIG
+
+.HIGH FIG
+
+Dieses Kommando leitet einen Block (Figure) ein, in welchem die Textzeilen so dargestellt werden, wie sie eingegeben wurden. 
+
+In so einem Block werden die Zeilen am rechten Fensterrand nicht automatisch umgebrochen sondern werden abgeschnitten. 
+
+Der Block wird mit einer Leerzeile eingeleitet. 
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH Figure Beispiel
+
+ Dieser Text wird beim Verkleinern des Fensters
+ automatisch umgebrochen.
+ .FIG
+ Dieser Text wird beim Verkleinern des Fensters
+ nicht mehr automatisch umgebrochen.
+ .EFIG
+.EXMP
+
+.FIG
+Siehe auch:
+           {EFIG}
+.EFIG
+
+.TOPIC 3 HIGH (WDHLPC)
+
+.HIGH HIGH
+
+Der Text nach dem Kommando High wird eingerahmt, wie die öberschrift auf dieser Seite. 
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH High Beispiel
+.EXMP
+
+ So kann einfach eine öberschrift gestaltet werden.
+
+.TOPIC 3 INCLUDE
+
+.HIGH INCLUDE
+
+Das Kommando Include erlaubt es, andere HComp-Quelldateien einzubinden. 
+
+Das hat die gleiche Wirkung, als wenn der Inhalt der Datei an dieser Stelle eingefÅgt wird. Auf diese Weise kînnen bestimmte Quelltexte in verschiedene Dokumente eingebunden werden. Die Information braucht aber nur an einer Stelle gewartet zu werden. 
+
+Als Parameter wird ein Dateiname erwartet. 
+
+Beispiel:
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH Include Beispiel
+
+ Text fÅr Seite 1.
+
+
+ .INCLUDE Seite2.txt
+
+
+ .TOPIC 1 Seite 3
+ .HIGH Include Beispiel
+
+ Text fÅr Seite 3.
+.EXMP
+
+Die Seite 2 des Dokuments wurde in eine andere Datei ausgelagert.
+
+.TOPIC 3 INDEX (WDHLPC)
+
+.HIGH INDEX
+
+Mit diesem Kommando wird die Seite in den Index des Hilfe-Dokuments aufgenommem. 
+
+Es werden 2 Parameter erwartet: 
+
+ 1.Der erste Parameter legt fest, ob der Eintrag im primÑren (1) oder im sekundÑren (2)
+Indexverzeichnis erfolgen soll.
+
+ 2.Der zweite Parameter bestimmt den Text, der im Index angezeigt wird. 
+
+Ein primÑrer Eintrag kann auch mit dem Kommando MASTERINDEX erzeugt werden. 
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .MASTERINDEX Seite 1
+ Diese Seite erscheint im primÑren Indexverzeichnis.
+
+ .TOPIC 1 Seite 2
+ .INDEX 2 Seite 2
+ Diese Seite erscheint im sekundÑren Indexverzeichnis.
+.EXMP
+
+.FIG
+Siehe auch:
+           {MASTERINDEX}
+.EFIG
+
+.TOPIC 3 IPFC / REAL
+
+.HIGH IPFC / REAL
+
+Mit diesem Kommando kann ein IPF Kommando direkt in den Quelltext eingebunden werden. 
+
+Der Parameter wird als IPF Kommando interpretiert. 
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH IPFC Beispiel
+
+ Das ist normaler Flie·text.
+
+ .IPFC :note text='Achtung'.Das ist eine Anmerkung.
+.EXMP
+
+.TOPIC 3 LISTITEM
+
+.HIGH LISTITEM
+
+Mit diesem Kommando wird ein Eintrag in einer Liste definiert. 
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH ListItem Beispiel
+
+ .OLIST
+ .LISTITEM Item 1
+ .ULIST Compact
+ .LISTITEM Item 1.1
+ .LISTITEM Item 1.2
+ .EULIST
+ .LISTITEM Item 2
+ .LISTITEM Item 3
+ .EOLIST
+.EXMP
+
+.FIG
+Siehe auch:
+           {ULIST}
+           {OLIST}
+           {SLIST}
+.EFIG
+
+.TOPIC 3 MASTERINDEX
+
+.HIGH MASTERINDEX
+
+Mit diesem Kommando wird die Seite in den primÑren Index des Hilfe-Dokuments aufgenommem. 
+
+Der Parameter definiert den Namen, der im Index erscheint. 
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .MASTERINDEX Seite 1
+ Diese Seite erscheint im primÑren Indexverzeichnis.
+
+ .TOPIC 1 Seite 2
+ .INDEX 2 Seite 2
+ Diese Seite erscheint im sekundÑren Indexverzeichnis.
+.EXMP
+
+.FIG
+Siehe auch:
+           {INDEX (WDHLPC)}
+.EFIG
+
+.TOPIC 3 OLIST
+
+.HIGH OLIST
+
+Das OList Kommando kennzeichnet den Anfang einer sortierten Liste. Die EintrÑge werden
+dabei durchnummeriert (1,2,3,... oder a,b,c,..).
+
+Als Parameter kann die Option "Compact" angegeben werden. Das bewirkt, da· zwischen den
+einzelnen ListeneintrÑgen keine Leerzeilen eingefÅgt werden.
+
+Listen kînnen auch mehrfach ineinander verschachtelt werden. 
+
+Beispiel:
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH OList Beispiel
+
+ .OLIST
+ .LISTITEM Item 1
+ .OLIST Compact
+ .LISTITEM Item 1.1
+ .LISTITEM Item 1.2
+ .EOLIST
+ .LISTITEM Item 2
+ .LISTITEM Item 3
+ .EOLIST
+.EXMP
+
+.FIG
+Siehe auch:
+           {EOLIST}
+           {ULIST}
+           {SLIST}
+           {LISTITEM}
+.EFIG
+
+
+.TOPIC 3 SET_INCFILENAME
+
+.HIGH SET_INCFILENAME
+
+Setzt die Inc-Output-Datei.
+
+.TOPIC 3 SET_LANG
+
+.HIGH SET_LANG
+
+Setzt die aktuelle Sprache.
+
+.TOPIC 3 SLIST
+
+.HIGH SLIST
+
+Das SList Kommando kennzeichnet den Anfang einer einfachen Liste. Die EintrÑge werden
+dabei weder durchnummeriert noch besonders gekennzeichnet.
+
+Als Parameter kann die Option "Compact" angegeben werden. Das bewirkt, da· zwischen den
+einzelnen ListeneintrÑgen keine Leerzeilen eingefÅgt werden.
+
+Listen kînnen auch mehrfach ineinander verschachtelt werden. 
+
+Beispiel:
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH SList Beispiel
+
+ .SLIST
+ .LISTITEM Item 1
+ .SLIST Compact
+ .LISTITEM Item 1.1
+ .LISTITEM Item 1.2
+ .ESLIST
+ .LISTITEM Item 2
+ .LISTITEM Item 3
+ .ESLIST
+.EXMP
+
+.FIG
+Siehe auch:
+           {ESLIST}
+           {ULIST}
+           {OLIST}
+           {LISTITEM}
+.EFIG
+
+.TOPIC 3 TITLE
+
+.HIGH TITLE
+
+Mit diesem Kommando kann der Titel eines Online-Dokuments festgelegt werden. 
+
+Der Parameter definiert den Name des Dokuments. 
+
+FÅr Hilfedateien hat dieses Kommando keine Bedeutung. 
+
+Beispiel: 
+.XMP
+
+ .TITLE Das ist der Titel des Online Dokuments
+
+ .TOPIC 1 Seite 1
+ .HIGH Beispiel
+ Text der Seite 1.
+.EXMP
+
+.TOPIC 3 TOPIC
+
+.HIGH TOPIC
+
+Mit diesem Kommando wird eine neue Hilfeseite definiert. 
+
+Es werden 2 Parameter erwartet. 
+
+ 1.Der erste Parameter kennzeichnet die Ebene (Kapitel, Abschnitt, öberschrift,...) der
+Seite. Dabei sind Zahlen von 1 bis 6 zulÑssig.
+
+ 2.Der zweite Parameter definiert den Namen der Seite. Dieser Name wird verwendet, wenn
+von einem anderen Panel auf diese Seite verwiesen werden soll.
+
+Die Ebenen mÅssen baumartig verschachtelt werden. Die erste Seite mu· in der Ebene 1
+liegen.
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Kapitel 1
+ Seite 1
+
+ .TOPIC 2 Unterkapitel 1.1
+ Seite 2
+
+ .TOPIC 2 Unterkapitel 1.2
+ Seite 3
+
+ .TOPIC 1 Kapitel 2
+ Seite 4
+.EXMP
+
+.FIG
+Siehe auch:
+           {Links}
+.EFIG
+
+.TOPIC 3 ULIST
+.HIGH ULIST
+
+Das UList Kommando kennzeichnet den Anfang einer ungeordneten Liste. Die EintrÑge werden
+dabei besonders gekennzeichnet.
+
+Als Parameter kann die Option "Compact" angegeben werden. Das bewirkt, da· zwischen den
+einzelnen ListeneintrÑgen keine Leerzeilen eingefÅgt werden.
+
+Listen kînnen auch mehrfach ineinander verschachtelt werden. 
+
+Beispiel:
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH UList Beispiel
+
+ .ULIST
+ .LISTITEM Item 1
+ .ULIST Compact
+ .LISTITEM Item 1.1
+ .LISTITEM Item 1.2
+ .EULIST
+ .LISTITEM Item 2
+ .LISTITEM Item 3
+ .EULIST
+.EXMP
+
+.FIG
+Siehe auch:
+           {EULIST}
+           {SLIST}
+           {OLIST}
+           {LISTITEM}
+.EFIG
+
+.TOPIC 3 UNDERLINE
+.HIGH UNDERLINE
+
+Dieses Kommando gibt die Zeile Unterstrichen aus.
+
+Beispiel:
+.XMP
+ .UNDERLINE Diese Zeile wird Unterstrichen dargestellt.
+.EXMP
+
+.FIG
+Siehe auch:
+           {BOLD}
+           {BOLD_UNDERLINE}
+.EFIG
+
+
+
+.TOPIC 3 XMP
+
+.HIGH XMP
+
+Das Kommando leitet einen Textblock ein, der nicht formatiert werden soll. Der Text wird
+so dargestellt, wie das Beispiel auf dieser Seite.
+
+Der Block wird mit einer Leerzeile eingeleitet. 
+.XMP
+Beispiel: 
+.FIG
+ .TOPIC 1 Seite 1
+ .HIGH XMP Beispiel
+
+ Das ist normaler Flie·text, der am rechten Fensterrand immer
+ automatisch umgebrochen wird.
+ .XMP
+ Dieser Text wird nicht formatiert.
+ .EXMP
+.EXMP
+
+.FIG
+Siehe auch:
+           {EXMP}
+           {FIG}
+.EFIG
+
+.TOPIC 2 Links
+
+.HIGH Links
+
+Verweise auf andere Seiten des Hilfetextes erlauben es, die aktuelle Seite Åbersichtlich
+zu gestalten und die Menge der redundanten Informationen in der Hilfedatei so gering wie
+mîglich zu halten.
+
+Ein Link wird definiert, indem der Name der gewÅnschten Seite (siehe {TOPIC}) in
+geschweiften Klammern eingeschlossen wird.
+
+Beispiel: 
+.XMP
+
+ .TOPIC 1 Seite 1
+ .HIGH öberschrift von Seite 1
+
+ Das ist ein Verweis auf \#1Seite 2\#2
+
+
+ .TOPIC 1 Seite 2
+ .HIGH öberschrift von Seite 2
+
+ Das ist ein Verweis auf \#1Seite 1\#2.
+.EXMP
+
+.FIG
+Siehe auch:
+           {TOPIC}
+.EFIG

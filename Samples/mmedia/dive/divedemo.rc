@@ -1,0 +1,89 @@
+/* Speed Resource script */
+
+
+MENU 256
+BEGIN
+     SUBMENU "~Options", 257, MIS_TEXT
+     BEGIN
+          MENUITEM "~Snap 1:1", 258, MIS_TEXT
+          MENUITEM "~Query Caps", 261, MIS_TEXT
+          MENUITEM SEPARATOR
+          MENUITEM "E~xit", 259, MIS_TEXT
+     END
+END
+
+DLGTEMPLATE 262
+BEGIN
+     DIALOG "Query screen capabilities",262, 54, -11, 244, 150
+       STYLE FS_SCREENALIGN|FS_DLGBORDER|WS_VISIBLE
+       FLAGS FCF_TITLEBAR|FCF_SYSMENU|FCF_NOBYTEALIGN
+     BEGIN
+       
+        LTEXT           "Direct screen access", 0, 11, 132, 146, 10
+          STYLE WS_VISIBLE
+          FLAGS SS_TEXT
+        LTEXT           "Screen access requires bank switch. ", 1, 11, 120, 146, 10
+          STYLE WS_VISIBLE
+          FLAGS SS_TEXT
+        LTEXT           "Screen color depth ", 2, 11, 108, 146, 10
+          STYLE WS_VISIBLE
+          FLAGS SS_TEXT
+        LTEXT           "Horizontal resolution", 3, 11, 96, 146, 10
+          STYLE WS_VISIBLE
+          FLAGS SS_TEXT
+        LTEXT           "Vertical resolution", 4, 11, 84, 146, 10
+          STYLE WS_VISIBLE
+          FLAGS SS_TEXT
+        LTEXT           "Screen scan line length in bytes", 5, 11, 72, 146, 10
+          STYLE WS_VISIBLE
+          FLAGS SS_TEXT
+        LTEXT           "Screen color encoding", 6, 11, 60, 146, 10
+          STYLE WS_VISIBLE
+          FLAGS SS_TEXT
+        LTEXT           "Screen aperture size", 7, 11, 48, 146, 10
+          STYLE WS_VISIBLE
+          FLAGS SS_TEXT
+        LTEXT           "Number of input formats", 8, 11, 36, 146, 10
+          STYLE WS_VISIBLE
+          FLAGS SS_TEXT
+        LTEXT           "Number of output formats", 9, 11, 24, 146, 10
+          STYLE WS_VISIBLE
+          FLAGS SS_TEXT
+        ENTRYFIELD      "", 11, 174, 134, 50, 8
+          STYLE WS_VISIBLE
+          FLAGS ES_MARGIN
+        ENTRYFIELD      "", 12, 174, 122, 50, 8
+          STYLE WS_VISIBLE
+          FLAGS ES_MARGIN
+        ENTRYFIELD      "", 13, 174, 110, 50, 8
+          STYLE WS_VISIBLE
+          FLAGS ES_MARGIN
+        ENTRYFIELD      "", 14, 174, 98, 50, 8
+          STYLE WS_VISIBLE
+          FLAGS ES_MARGIN
+        ENTRYFIELD      "", 15, 174, 86, 50, 8
+          STYLE WS_VISIBLE
+          FLAGS ES_MARGIN
+        ENTRYFIELD      "", 16, 174, 74, 50, 8
+          STYLE WS_VISIBLE
+          FLAGS ES_MARGIN
+        ENTRYFIELD      "", 17, 174, 62, 50, 8
+          STYLE WS_VISIBLE
+          FLAGS ES_MARGIN
+        ENTRYFIELD      "", 18, 174, 50, 50, 8
+          STYLE WS_VISIBLE
+          FLAGS ES_MARGIN
+        ENTRYFIELD      "", 19, 174, 38, 50, 8
+          STYLE WS_VISIBLE
+          FLAGS ES_MARGIN
+        ENTRYFIELD      "", 20, 174, 26, 50, 8
+          STYLE WS_VISIBLE
+          FLAGS ES_MARGIN
+        PUSHBUTTON      "OK", 23, 95, 6, 40, 14
+          STYLE WS_VISIBLE
+          FLAGS BS_DEFAULT
+    END
+END
+
+ICON 256 DiveDemo.ICO
+

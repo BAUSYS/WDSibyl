@@ -1,0 +1,318 @@
+[Application Options]
+
+ApplicationIcon=
+
+[Application Options Linux]
+
+ApplicationIcon=
+
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_win32.ico
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=BSETIB
+File3=BSEEXCPT
+File4=BSEDOS
+File5=BSEERR
+File6=PMWIN
+File7=PMSHL
+File8=SYSUTILS
+File9=USTREAM
+File10=ULIST
+File11=USTRING
+File12=USYSCLASS
+File13=COLOR
+File14=DOS
+File15=UEXTENSION
+File16=BSEREGISTRY
+File17=INIFILES
+File18=CLASSES
+File19=PMBITMAP
+File20=PMGPI
+File21=PMDEV
+File22=PMSTDDLG
+File23=PMHELP
+File24=MESSAGES
+File25=CLIPBRD
+File26=UCONVERT
+File27=GRAPHICS
+File28=MENUS
+File29=UDATETIME
+File30=ULOG
+File31=PMWINX
+File32=PMSPL
+File33=USYSINFO
+File34=PRINTERS
+File35=FORMS
+File36=BUTTONS
+File37=STDCTRLS
+File38=EXTCTRLS
+File39=COMCTRLS
+File40=FILECTRL
+File41=DIALOGS
+File42=MASK
+File43=GRIDS
+File44=UTABLE
+File45=UMYSQLDLL
+File46=UMYSQL
+File47=UDBMYSQL
+File48=UMYSQLDLG
+File49=DBLAYER
+File50=DBBASE
+File51=DBCTRLS
+
+[Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library]
+
+CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\COMPLIB.dll
+
+[Component Library Linux]
+
+CompLibName=
+
+[Component Library OS/2]
+
+CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\CompLib.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories Linux]
+
+LastDir=
+OutDir=
+LibDir=
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=
+
+[Directories OS/2]
+
+LastDir=
+OutDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Output
+LibDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Compnt
+
+[Directories Win32]
+
+LastDir=
+OutDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Output
+LibDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Compnt
+
+[Find History]
+
+Find0=toboolea
+Find1=tcmySQL
+Find2=fmySQL
+Find3=ttable.destroy
+Find4=SetActive
+Find5=tdataset.
+Find6=.update
+Find7=-update
+Find8=168
+Find9=gettoLongWord
+Find10=row
+Find11=getlist
+Find12=linux
+Find13=writeln
+Find14=.log
+Find15=tStrings
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Library\Source\MakeDB.spr
+ProjectType=NonVisual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Closed Files]
+
+File0=.\DB\DBBASE.PAS
+File1=.\DB\mySQL\uDBMySQL.pas
+File2=.\DB\mySQL\umySQL.pas
+File3=.\DB\DBLAYER.PAS
+
+[Last Open Files]
+
+File0=.\MakeDB.PAS
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=797
+File0.Height=507
+File0.Column=25
+File0.Line=6
+File1=.\DB\uTable.pas
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=797
+File1.Height=507
+File1.Column=46
+File1.Line=150
+File2=.\DB\mySQL\umySQLDlg.pas
+File2.Left=-1
+File2.Bottom=-1
+File2.Width=797
+File2.Height=507
+File2.Column=58
+File2.Line=252
+File3=.\DB\MYSQL\umySQLDll.pas
+File3.Left=-1
+File3.Bottom=-1
+File3.Width=797
+File3.Height=507
+File3.Column=1
+File3.Line=1
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=GUI
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\MakeDB.PAS
+MainFile0=.\MakeDB.PAS
+MainFile0.Ext=.EXE
+MainFile0.Checksum=13568
+MainFile0.Expanded=True
+MainFile0.File0=.\DB\mySQL\uDBMySQL.pas
+MainFile0.File1=.\DB\mySQL\umySQL.pas
+MainFile0.File2=.\DB\uTable.pas
+MainFile0.File3=.\DB\MYSQL\umySQLDll.pas
+MainFile0.File4=.\DB\mySQL\umySQLDlg.pas
+MainFile0.File5=.\DB\DBBASE.PAS
+MainFile0.File6=.\DB\DBCTRLS.PAS
+MainFile0.File7=.\DB\DBLAYER.PAS
+MainFile0.File8=[Dependencies]
+MainFile0.Dependency0=.\DB\UTABLE.PAS
+MainFile0.Dependency1=.\DB\mySQL\umySQLDlg.pas
+MainFile0.Dependency2=.\DB\DBLAYER.PAS
+MainFile0.Dependency3=.\DB\DBBASE.PAS
+MainFile0.Dependency4=.\DB\DBCTRLS.PAS
+
+[Replace History]
+
+Replace0=Password
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+
+[Win32 Application Options]
+
+ApplicationIcon=
+
+[Win32 Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Win32 Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Win32 Component Library]
+
+CompLibName=
+
+[Win32 Debugger Options]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Win32 Directories]
+
+LastDir=P:\WDSibyl\Allgemeines
+OutDir=P:\WDSibyl\BS\OS2\Output
+LibDir=P:\WDSibyl\BS\OS2\LIB;P:\WDSibyl\Allgemeines
+LibSrcDir=P:\WDSibyl\WDSibylIDE\Source\RTL;P:\WDSibyl\WDSibylIDE\Source\SPCC;P:\WDSibyl\Allgemeines
+IncSrcDir=P:\WDSibyl\Allgemeines
+CompInstallDir=P:\WDSibyl\BS\OS2\Compnt;P:\WDSibyl\Allgemeines
+
+[Win32 Linker Options]
+
+DataSegment=Normal
+LinkerTarget=GUI
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Win32 Memory Sizes]
+
+Heap=8192
+Stack=256
+

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="http://svn.netlabs.org/repos/wdsibyl"
+   revision="35"
+   url="http://svn.netlabs.org/repos/wdsibyl/trunk/WDSibyl/Bmp/WDSibyl/PoweredBy"
+   last-author="wolfgangd"
+   uuid="cbb429e8-791c-0410-88e6-dcdaa12b25c3"
+   committed-date="2006-06-23T05:12:40.000000Z"
+   name=""
+   kind="dir"
+   committed-rev="33"/>
+<entry
+   checksum="907d07f7e7bcc0072d96ceff09bdb997"
+   revision="54"
+   last-author="wolfgangd"
+   prop-time="2007-03-08T22:43:56.000000Z"
+   text-time="2007-02-12T21:46:30.000000Z"
+   committed-date="2007-03-08T22:46:26.436000Z"
+   name="ChristG.bmp"
+   kind="file"
+   committed-rev="54"/>
+<entry
+   checksum="63de4cf4272122218a88c8cef9e6453f"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2006-06-06T21:50:36.000000Z"
+   committed-date="2006-06-23T05:12:40.000000Z"
+   name="CuL.bmp"
+   kind="file"
+   committed-rev="33"/>
+<entry
+   checksum="057362e5287d225b6a8e83c0054e0367"
+   revision="36"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T20:23:54.000000Z"
+   text-time="2006-09-03T21:15:42.000000Z"
+   committed-date="2006-09-11T20:23:15.261000Z"
+   name="MartinV.BMP"
+   kind="file"
+   committed-rev="36"/>
+<entry
+   checksum="057362e5287d225b6a8e83c0054e0367"
+   revision="54"
+   last-author="wolfgangd"
+   prop-time="2007-03-08T22:43:56.000000Z"
+   text-time="2006-09-03T21:15:42.000000Z"
+   committed-date="2007-03-08T22:46:26.436000Z"
+   kind="file"
+   name="ViereggM.BMP"
+   committed-rev="54"/>
+<entry
+   checksum="49647297fc220202a43a3007a9a709fe"
+   revision="54"
+   last-author="wolfgangd"
+   prop-time="2007-03-08T22:43:56.000000Z"
+   text-time="2007-03-08T22:14:12.000000Z"
+   committed-date="2007-03-08T22:46:26.436000Z"
+   kind="file"
+   name="os2Hamburg.BMP"
+   committed-rev="54"/>
+<entry
+   checksum="cd34ef6b0c06eff8547cb77143973bdb"
+   revision="48"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2006-11-12T19:21:26.000000Z"
+   committed-date="2006-11-14T00:00:47.626000Z"
+   name="os2ua.BMP"
+   kind="file"
+   committed-rev="48"/>
+<entry
+   checksum="124d1d8a35bdc962a28a9acad436a904"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2006-04-19T05:53:48.000000Z"
+   committed-date="2006-04-29T07:58:36.000000Z"
+   name="toolbox_mag.bmp"
+   kind="file"
+   committed-rev="30"/>
+</wc-entries>

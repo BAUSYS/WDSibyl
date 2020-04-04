@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   revision="35"
+   repos="http://svn.netlabs.org/repos/wdsibyl"
+   url="http://svn.netlabs.org/repos/wdsibyl/trunk/WDSibyl/Bmp/WDSibyl/CodeEditor"
+   last-author="wolfgangd"
+   uuid="cbb429e8-791c-0410-88e6-dcdaa12b25c3"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="dir"
+   name=""
+   committed-rev="5"/>
+<entry
+   checksum="152e5758654c94efee22445b5480ce04"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:05:16.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="book0.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="6c955e788b9d8582cef310496eea4f7a"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:05:26.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="book1.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="b663f13b6565577005cb059a3f5c0ed5"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:05:30.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="book2.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="3fa922e44c37fb1ee81cb38845093218"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:05:34.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="book3.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="50079c9a9ccfea36464440cd85611fee"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:05:40.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="book4.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="ab3d658c7863d20a20b27b38c8aaecb7"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:05:46.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="book5.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="ed5c7544e8a175f705245009d21f1f2a"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:05:52.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="book6.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="c79517a63d25f46bd8e718f7fb7704bb"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:05:56.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="book7.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="e9b9a50e4d12759768267ed826c8a7cb"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:06:02.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="book8.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="835288f9be2258a1946d4f87d55608f7"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:06:08.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="book9.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="7b1f70c04e89d18bb7d112d1844ddb22"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2006-05-14T23:07:46.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="bookmark.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="9452f0318e61301f10e8bc580f7b26ba"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:07:02.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="brkline.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="a4f3b2a8e353c64c3a3d0fdd8872306b"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:07:10.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="brkline2.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="656b342cb7007f54fd35ee3e8c2a2b01"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:07:38.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="dbgbreak.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="072fe13d99bf59eceaf615fc8939bfc5"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:07:28.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="dbginfo.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="057b296e2d3ec1bb6a43937d0a3e1b92"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:06:52.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="dbgline.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="10107fdf3f74ea00c3debfa9f9ff9e76"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:12.000000Z"
+   text-time="2001-03-13T23:07:20.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="errline.bmp"
+   committed-rev="5"/>
+</wc-entries>

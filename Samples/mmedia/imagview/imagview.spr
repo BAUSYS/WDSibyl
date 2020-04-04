@@ -1,0 +1,195 @@
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=BSETIB
+File3=BSEEXCPT
+File4=BSEDOS
+File5=PMWIN
+File6=PMBITMAP
+File7=PMGPI
+File8=PMDEV
+File9=PMSTDDLG
+File10=PMHELP
+File11=PMSHL
+File12=BSEERR
+File13=PMWP
+File14=SYSUTILS
+File15=USTREAM
+File16=ULIST
+File17=USTRING
+File18=USYSCLASS
+File19=COLOR
+File20=BSEREGISTRY
+File21=INIFILES
+File22=PMSPL
+File23=PMWINX
+File24=USYSINFO
+File25=DOS
+File26=CLASSES
+File27=MESSAGES
+File28=CLIPBRD
+File29=UCONVERT
+File30=GRAPHICS
+File31=ULANGUAGE
+File32=MENUS
+File33=PRINTERS
+File34=FORMS
+File35=BUTTONS
+File36=STDCTRLS
+File37=EXTCTRLS
+File38=COMCTRLS
+File39=DIALOGS
+File40=FILECTRL
+File41=VIEWWIN
+File42=IMAGEWIN
+
+[Compiler Options]
+
+CodeGeneration=Assertions
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=P:\WDSibyl\Bin\OS2\CompLib.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
+
+[Directories Win32]
+
+LastDir=
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
+
+[Find History]
+
+Find0=TImageForm1
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Samples\imagview\imagview.spr
+ProjectType=Visual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Open Files]
+
+File0=.\imagview.pas
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=806
+File0.Height=559
+File0.Column=20
+File0.Line=8
+File1=.\imagewin.pas
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=806
+File1.Height=559
+File1.Column=2
+File1.Line=26
+File2=.\viewwin.pas
+File2.Left=-1
+File2.Bottom=-1
+File2.Width=806
+File2.Height=559
+File2.Column=1
+File2.Line=1
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=GUI
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\imagview.pas
+MainFile0=.\imagview.pas
+MainFile0.Ext=.EXE
+MainFile0.Checksum=11520
+MainFile0.Expanded=False
+MainFile0.File0=.\imagewin.pas
+MainFile0.File1=.\viewwin.pas
+MainFile0.File2=[Dependencies]
+MainFile0.Dependency0=.\VIEWWIN.PAS
+MainFile0.Dependency1=.\IMAGEWIN.PAS
+MainFile0.Dependency2=.\imagview.scu
+
+[Replace History]
+
+Replace0=TImageForm
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=.\imagview.scu
+MainForm=ImageForm
+

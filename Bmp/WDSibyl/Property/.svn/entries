@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   revision="35"
+   repos="http://svn.netlabs.org/repos/wdsibyl"
+   url="http://svn.netlabs.org/repos/wdsibyl/trunk/WDSibyl/Bmp/WDSibyl/Property"
+   last-author="wolfgangd"
+   uuid="cbb429e8-791c-0410-88e6-dcdaa12b25c3"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="dir"
+   name=""
+   committed-rev="5"/>
+<entry
+   checksum="df9ebf1f94089e24321a11c94dd9e270"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="1997-11-29T11:29:06.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="DOWN.BMP"
+   committed-rev="5"/>
+<entry
+   checksum="7f3c7bfeb10f63a8a239cf0c951a7876"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="1996-03-14T23:19:12.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="K_BLUE.BMP"
+   committed-rev="5"/>
+<entry
+   checksum="41e7cfce398212a7424c13f076d90e60"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="1996-03-14T23:08:46.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="K_LILA.BMP"
+   committed-rev="5"/>
+<entry
+   checksum="6c16b1dfea0827bf4d9676ea9ce2fe89"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="1996-03-14T23:07:48.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="K_RED.BMP"
+   committed-rev="5"/>
+<entry
+   checksum="66107ebe2275a8ab8dc3c9ee072e2a4d"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="1997-11-29T11:31:36.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="UP.BMP"
+   committed-rev="5"/>
+<entry
+   checksum="b4224f4103d1e3d7886ba9492b8017fd"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="2003-07-05T08:56:22.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="attentio.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="eacd67b5fddd6dc332797d5bc3be49ad"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="1997-11-27T00:20:46.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="cancel.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="f4c7b7c9d5f2ef61d9900e4d3395d745"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="2003-07-05T08:56:22.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="help.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="b854e6843c0fd75aa7444a63ebbaebd9"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="2003-07-05T08:56:22.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="info.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="05a214c82702aaf468444458e0e7305d"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="2003-07-05T08:56:22.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="left.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="6d8ae0b7e3ba38479d62b8a51d4571ae"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="2003-07-05T08:56:22.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="no.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="d6deaedccec617191eaa2a161f1d30dd"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="2003-07-05T08:56:22.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="ok.bmp"
+   committed-rev="5"/>
+<entry
+   checksum="766f5d414f7cbeac7860e6718b1a335b"
+   last-author="wolfgangd"
+   prop-time="2006-09-11T19:58:20.000000Z"
+   text-time="2003-07-05T08:56:22.000000Z"
+   committed-date="2005-01-30T10:31:03.000000Z"
+   kind="file"
+   name="right.bmp"
+   committed-rev="5"/>
+</wc-entries>

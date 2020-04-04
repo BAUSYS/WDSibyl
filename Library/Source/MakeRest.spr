@@ -1,0 +1,171 @@
+[Application Options Linux]
+
+ApplicationIcon=
+
+[Application Options OS/2]
+
+ApplicationIcon=
+
+[Application Options Win32]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\default_win32.ico
+
+[Browser Files]
+
+File0=SYSTEM
+File1=WINNT
+File2=WINDEF
+File3=WINBASE
+File4=WINUSER
+File5=SYSUTILS
+File6=COLOR
+File7=USTREAM
+File8=ULIST
+File9=USTRING
+File10=USYSCLASS
+File11=DOS
+File12=CLASSES
+File13=WINGDI
+File14=COMMCTRL
+File15=MESSAGES
+File16=CLIPBRD
+File17=UCONVERT
+File18=UEXTENSION
+File19=WINADVAPI
+File20=INIFILES
+File21=MENUS
+File22=UDATETIME
+File23=ULOG
+File24=PMWINX
+File25=USYSINFO
+File26=WINSPOOL
+File27=PRINTERS
+File28=FORMS
+File29=GRAPHICS
+File30=WINGRAPH
+
+[Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\CompLib.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories Linux]
+
+LastDir=
+OutDir=
+LibDir=
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=
+
+[Directories OS/2]
+
+LastDir=
+OutDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Output
+LibDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Compnt
+
+[Directories Win32]
+
+LastDir=
+OutDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Output
+LibDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Compnt
+
+[Find History]
+
+Find0=ThreadProc
+Find1=sqleninfo
+Find2=sqledinfo
+Find3=EXCEPTION_DEBUG_INFO
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Library\Source\MakeRest.spr
+ProjectType=NonVisual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Open Files]
+
+File0=.\MakeRest.PAS
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=859
+File0.Height=614
+File0.Column=10
+File0.Line=4
+File1=.\TP70\WinGraph.pas
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=859
+File1.Height=614
+File1.Column=54
+File1.Line=9
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=GUI
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\Makerest.PAS
+MainFile0=.\MakeRest.PAS
+MainFile0.Ext=.EXE
+MainFile0.Checksum=8192
+MainFile0.Expanded=False
+MainFile0.File0=.\TP70\WinGraph.PAS
+MainFile0.File1=[Dependencies]
+MainFile0.Dependency0=.\TP70\WinGraph.pas
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+

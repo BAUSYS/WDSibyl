@@ -1,0 +1,17 @@
+Library CompLib;
+
+{$m 65535,4194304}
+
+Uses Classes, Forms;
+
+Exports
+  SetupCompLib name 'SETUPCOMPLIB',
+  SearchClassByName name 'SEARCHCLASSBYNAME',
+  CallClassPropertyEditor name 'CALLCLASSPROPERTYEDITOR',
+  CallPropertyEditor name 'CALLPROPERTYEDITOR',
+  PropertyEditorAvailable name 'PROPERTYEDITORAVAILABLE',
+  ClassPropertyEditorAvailable name 'CLASSPROPERTYEDITORAVAILABLE',
+  GetExperts name 'GETEXPERTS';
+
+Begin
+End.

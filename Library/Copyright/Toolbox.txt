@@ -1,0 +1,7 @@
+Einige Funktionen (markiert mit dem Text "Toolbox") sind vom dem Buch 
+
+Tips und Tricks zu Delphi, 
+Hrsg. Red. Toolbox, C&L-Verlag 2002, 
+ISBN 3-932311-92-2
+
+mit frdl. Genehmigung des Verlags Åbernommen worden. 

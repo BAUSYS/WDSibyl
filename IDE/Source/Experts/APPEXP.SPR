@@ -1,0 +1,209 @@
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=BSETIB
+File3=BSEEXCPT
+File4=BSEDOS
+File5=PMWIN
+File6=PMBITMAP
+File7=PMGPI
+File8=PMDEV
+File9=PMSTDDLG
+File10=PMHELP
+File11=PMSHL
+File12=MESSAGES
+File13=BSEERR
+File14=SYSUTILS
+File15=COLOR
+File16=USTREAM
+File17=ULIST
+File18=USTRING
+File19=USYSCLASS
+File20=DOS
+File21=CLASSES
+File22=CLIPBRD
+File23=UCONVERT
+File24=GRAPHICS
+File25=UEXTENSION
+File26=BSEREGISTRY
+File27=INIFILES
+File28=MENUS
+File29=UDATETIME
+File30=ULOG
+File31=PMWINX
+File32=PMSPL
+File33=USYSINFO
+File34=PRINTERS
+File35=FORMS
+File36=BUTTONS
+File37=STDCTRLS
+File38=EXTCTRLS
+File39=COMCTRLS
+File40=FILECTRL
+File41=DIALOGS
+File42=MASK
+File43=GRIDS
+File44=EDITORS
+File45=TOOLSAPI
+File46=UAPPEXP
+
+[Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=V:\Temp\WDSibyl\Bin\OS2\CompLib.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2
+OutDir=V:\Temp\WDSibyl\OS\OS2\Output
+LibDir=V:\Temp\WDSibyl\OS\OS2\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=V:\Temp\WDSibyl\OS\OS2\Compnt
+
+[Directories Win32]
+
+LastDir=
+OutDir=V:\Temp\WDSibyl\OS\Win32\Output
+LibDir=V:\Temp\WDSibyl\OS\Win32\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=V:\Temp\WDSibyl\OS\Win32\Compnt
+
+[Find History]
+
+Find0=TAppExpert
+Find1=libexpert
+Find2=experts
+Find3=getexperts
+Find4=nextbtn
+Find5=next
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\IDE\Source\Experts\APPEXP.SPR
+ProjectType=Visual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Open Files]
+
+File0=.\APPEXP\APPEXP.PAS
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=707
+File0.Height=527
+File0.Column=14
+File0.Line=6
+File1=.\APPEXP\uAppExp.PAS
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=707
+File1.Height=527
+File1.Column=17
+File1.Line=1142
+File2=.\APPEXP\AppExp.RC
+File2.Left=-1
+File2.Bottom=-1
+File2.Width=707
+File2.Height=527
+File2.Column=1
+File2.Line=1
+File3=..\..\..\.\Library\Source\SPCC\TOOLSAPI.PAS
+File3.Left=-1
+File3.Bottom=-1
+File3.Width=707
+File3.Height=527
+File3.Column=30
+File3.Line=389
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=GUI
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Object Inspector]
+
+Visible=TRUE
+
+[Project Files]
+
+Primary=.\APPEXP\APPEXP.pas
+MainFile0=.\APPEXP\APPEXP.pas
+MainFile0.Ext=.EXE
+MainFile0.Checksum=12288
+MainFile0.Expanded=False
+MainFile0.File0=.\APPEXP\uAppExp.PAS
+MainFile0.File1=.\APPEXP\AppExp.RC
+MainFile0.File2=[Dependencies]
+MainFile0.Dependency0=.\APPEXP\UAPPEXP.PAS
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=.\APPEXP\APPEXP.scu
+MainForm=AppExpertDlg0
+

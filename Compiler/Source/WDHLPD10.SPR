@@ -1,0 +1,198 @@
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=BSETIB
+File3=BSEEXCPT
+File4=BSEDOS
+File5=BSEERR
+File6=PMWIN
+File7=PMWP
+File8=PMSHL
+File9=SYSUTILS
+File10=USTREAM
+File11=ULIST
+File12=USTRING
+File13=USYSCLASS
+File14=BSEREGISTRY
+File15=INIFILES
+File16=PMSPL
+File17=PMWINX
+File18=USYSINFO
+File19=DOS
+File20=BSESUB
+File21=BSEVIO
+File22=BSEKBD
+File23=CRT
+File24=SPC_DATA
+File25=UHLPTOPICS
+File26=UHLPDEF
+File27=UHLPCOMP
+
+[Compiler Options]
+
+CodeGeneration=Assertions
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\COMPLIB.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories]
+
+
+[Directories OS/2]
+
+LastDir=P:\
+OutDir=P:\WDSibyl\WDSibyl\Compiler\Output\OS2
+LibDir=P:\WDSibyl\WDSibyl\Library\Output\OS2
+LibSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
+IncSrcDir=
+CompInstallDir=
+
+[Directories Win32]
+
+LastDir=P:\WDSIBYL\WDSibyl\Compiler\Source\WDHLPD10
+OutDir=P:\WDSibyl\WDSibyl\Compiler\Output\Win32
+LibDir=P:\WDSibyl\WDSibyl\Output\Win32
+LibSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
+IncSrcDir=
+CompInstallDir=
+
+[Find History]
+
+Find0=HC_SET_LANG
+Find1=HC_IPFC
+Find2=real
+Find3=HC_HCTX
+Find4=setlanguage
+Find5=,nl
+Find6=nl
+Find7=writeln(
+Find8=Error(
+Find9=ParamStr
+Find10=tCompStatusMsg
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Compiler\Source\WDHLPD10.SPR
+ProjectType=NonVisual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Open Files]
+
+File0=.\HLP\WDHLPD10\WDHLPD10.PAS
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=829
+File0.Height=566
+File0.Column=17
+File0.Line=5
+File1=.\HLP\WDHLPD10\uHLPComp.pas
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=829
+File1.Height=566
+File1.Column=48
+File1.Line=1083
+File2=.\HLP\WDHLPD10\uHlpDef.pas
+File2.Left=-1
+File2.Bottom=-1
+File2.Width=829
+File2.Height=566
+File2.Column=1
+File2.Line=82
+File3=.\Share\uHlpTopics.PAS
+File3.Left=-1
+File3.Bottom=-1
+File3.Width=829
+File3.Height=566
+File3.Column=3
+File3.Line=49
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=Window
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\HLP\WDHLPD10\WDHLPD10.PAS
+MainFile0=.\HLP\WDHLPD10\WDHLPD10.PAS
+MainFile0.Ext=.DLL
+MainFile0.Checksum=7424
+MainFile0.Expanded=False
+MainFile0.File0=.\HLP\WDHLPD10\uHLPComp.pas
+MainFile0.File1=.\HLP\WDHLPD10\uHlpDef.pas
+MainFile0.File2=.\Share\uHlpTopics.PAS
+MainFile0.File3=[Dependencies]
+MainFile0.Dependency0=.\Share\SPC_DATA.PAS
+MainFile0.Dependency1=.\Share\UHLPTOPICS.PAS
+MainFile0.Dependency2=.\HLP\WDHLPD10\UHLPDEF.PAS
+MainFile0.Dependency3=.\HLP\WDHLPD10\UHLPCOMP.PAS
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+

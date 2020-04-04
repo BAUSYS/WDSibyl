@@ -1,0 +1,210 @@
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=
+
+[Breakpoints]
+
+Breakpoint1=.\DIVEDEMO.PAS|613
+Breakpoint2=.\DIVEDEMO.PAS|261
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=BSETIB
+File3=BSEEXCPT
+File4=BSEDOS
+File5=PMBITMAP
+File6=PMWIN
+File7=PMGPI
+File8=DIVE
+File9=BSEERR
+File10=PMWP
+File11=PMSHL
+File12=SYSUTILS
+File13=USTREAM
+File14=ULIST
+File15=USTRING
+File16=USYSCLASS
+File17=BSEREGISTRY
+File18=INIFILES
+File19=PMSPL
+File20=PMWINX
+File21=USYSINFO
+File22=DOS
+
+[Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=P:\WDSibyl\Bin\OS2\CompLib.dll
+
+[Component Library Win32]
+
+CompLibName=..\..\.\BIN\OS2\CompLib.dll
+
+[Debugger Options]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories]
+
+LastDir=D:\PASCPAS
+OutDir=d:\pascpas
+LibDir=d:\pascpas
+LibSrcDir=
+IncSrcDir=d:\pascpas\libsrc;d:\pascpas\pcl
+CompInstallDir=
+
+[Directories OS/2]
+
+LastDir=
+OutDir=P:\WDSIBYL\OS\OS2\Output
+LibDir=P:\WDSIBYL\OS\OS2\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
+
+[Directories Win32]
+
+LastDir=
+OutDir=P:\WDSIBYL\OS\Win32\Output
+LibDir=P:\WDSIBYL\OS\Win32\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
+
+[Find History]
+
+Find0=WinQueryWindowPos
+Find1=pwinData
+Find2=pszDefFile
+Find3=bmp
+Find4=VisibleRegion
+Find5=WinQueryVisibleRegion
+Find6=pmdll
+Find7=pmwin
+Find8=cxWidthWindow
+Find9=win
+Find10=cxWidthBorder
+Find11=bmpdir
+Find12=readfile
+Find13=ReadFile
+Find14=bitmaps
+Find15=.bmp
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Samples\mmedia\dive\divedemo.spr
+ProjectType=NonVisual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Open Files]
+
+File0=.\divedemo.pas
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=806
+File0.Height=521
+File0.Column=1
+File0.Line=268
+File1=.\divedemo.rc
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=806
+File1.Height=521
+File1.Column=6
+File1.Line=12
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=GUI
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\DiveDemo.pas
+MainFile0=.\DiveDemo.pas
+MainFile0.Ext=.EXE
+MainFile0.Checksum=6400
+MainFile0.Expanded=False
+MainFile0.File0=.\divedemo.rc
+MainFile0.File1=..\..\.\Library\Source\RTL\OS2\DIVE.PAS
+MainFile0.File2=[Dependencies]
+MainFile0.Dependency0=.\DIVEDEMO.RC
+
+[Replace History]
+
+Replace0=DIVEDEMO
+Replace1=_qmsg
+Replace2=_hmq
+Replace3=0
+Replace4=)
+Replace5=(
+Replace6=_hps
+Replace7=_hrgn
+Replace8=_pointl
+Replace9=_hwnd
+Replace10==
+Replace11=:=
+Replace12=SizeOf
+Replace13=<>
+Replace14=^.
+Replace15=_hFile
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+

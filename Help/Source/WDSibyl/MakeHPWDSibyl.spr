@@ -1,0 +1,198 @@
+[Application Options Linux]
+
+ApplicationIcon=
+
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=
+
+[Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=P:\WDSIBYL\WDSIBYL\HELP\SOURCE\WDSIBYL
+OutDir=P:\WDSibyl\WDSibyl\Help\Output\OS2
+LibDir=
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=
+
+[Directories Win32]
+
+LastDir=P:\WDSibyl\WDSibyl\Help\Source
+OutDir=P:\WDSibyl\WDSibyl\Help\Output\Win32
+LibDir=
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=
+
+[Find History]
+
+Find0=underline
+Find1=BOLD
+Find2=METHODENZUTEILUNG ZUR LAUFZEIT
+Find3=BITMAP
+Find4={BITMAP}
+Find5=werden
+Find6=kapitel 4
+Find7=Schutzmechanismen
+Find8=uList
+Find9=methoden
+Find10=chess
+Find11=speed
+Find12=Kapitel
+Find13=TObject
+Find14={Unit SYSTEM}
+Find15=system
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Help\Source\WDSibyl\MakeHPWDSibyl.spr
+ProjectType=NonVisual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Closed Files]
+
+File0=.\OOPRef.SHS
+File1=.\WDSIDNT.SHS
+File2=.\RTL.SHS
+File3=.\TP70.SHS
+
+[Last Open Files]
+
+File0=.\WDSibyl.SHS
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=826
+File0.Height=551
+File0.Column=25
+File0.Line=8
+File1=.\OOPIndr.SHS
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=826
+File1.Height=551
+File1.Column=6
+File1.Line=3220
+File2=.\WDSHLPC.SHS
+File2.Left=-1
+File2.Bottom=-1
+File2.Width=826
+File2.Height=551
+File2.Column=1
+File2.Line=1
+File3=.\WDSIDE.SHS
+File3.Left=-1
+File3.Bottom=-1
+File3.Width=826
+File3.Height=551
+File3.Column=27
+File3.Line=11
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=GUI
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\WDSibyl.SHS
+MainFile0=.\WDSibyl.SHS
+MainFile0.Ext=
+MainFile0.Checksum=0
+MainFile0.Expanded=True
+MainFile0.File0=.\WDSIDE.SHS
+MainFile0.File1=.\WDSHLPC.SHS
+MainFile0.File2=.\TP70.SHS
+MainFile0.File3=.\RTL.SHS
+MainFile0.File4=.\WDSIDNT.SHS
+MainFile0.File5=.\OOPRef.SHS
+MainFile0.File6=.\OOPIndr.SHS
+
+[Replace History]
+
+Replace0={Unit SYSTEM}
+Replace1=.BOLD
+Replace2={Color.TColor}($
+Replace3={Color.TColor}
+Replace4=TColor($
+Replace5=.HIGH
+Replace6=.HIGH
+Replace7== TColor
+Replace8=.LISTITEM {Color.cl
+Replace9=.LISTITEM cl
+Replace10={Unit CRT/WinCrt}
+Replace11={Unit DOS}
+Replace12={DOS Unit}
+Replace13=.TOPIC
+Replace14=.TOPIC
+Replace15=Crt.
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+

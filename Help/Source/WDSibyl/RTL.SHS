@@ -1,0 +1,2909 @@
+.TOPIC 1 Standard Units von WDSibyl
+
+.HIGH Standard Units von WDSibyl
+
+Standardunits von WDSibyl sind folgende
+
+.FIG
+  {Unit SYSTEM} (Laufzeitsystem)
+
+  {Unit CRT/WinCrt} (Textausgabe) und
+  {Unit DOS} (Dateisystem)
+  sowie die Units der SPCC Library.
+.EFIG
+
+.TOPIC 2 Unit SYSTEM
+
+.HIGH Die Unit SYSTEM
+
+Die Unit SYSTEM beinhaltet das Laufzeitsystem von Speed-Pascal/2  sowie hÑufig benutzte
+Standardprozeduren und -funktionen.
+
+Prozeduren und Funktionen der Unit System:
+
+.FIG
+  {Append}
+  {Assign}
+  {Assigned}
+  {Beep}
+  {BlockRead}
+  {BlockWrite}
+  {ChDir}
+  {Close}
+  {Copy}
+  {Delete}
+  {Eof}
+  {Eoln}
+  {Erase}
+  {FilePos}
+  {FileSize}
+  {FillChar}
+  {FreeApiMem}
+  {FreeMem}
+  {FreeSharedMem}
+  {GetSharedMem}
+  {GetApiMem}
+  {GetDir}
+  {GetMem}
+  {Halt}
+  {Insert}
+  {LongJmp}
+  {MainDispatchLoop}
+  {Mark}
+  {MaxAvail}
+  {MemAvail}
+  {MkDir}
+  {Move}
+  {NewSystemHeap}
+  {ParamCount}
+  {ParamStr}
+  {Pos}
+  {Release}
+  {ReleaseHeapMutex}
+  {Rename}
+  {RequestHeapMutex}
+  {Reset}
+  {Rewrite}
+  {RmDir}
+  {RunError}
+  {Seek}
+  {SeekEof}
+  {SeekEoln}
+  {SelToFlat}
+  {SetFileBuf}
+  {SetJmp}
+  {SetTextBuf}
+  {SetTrigMode}
+  {SubStr}
+  {Swap}
+  {ToHex}
+  {Truncate}
+  {UpcaseStr}
+
+Klassen der Unit System: 
+  {EAccessDenied}
+  {EBreakpoint}
+  {EConvertError}
+  {EDiskFull}
+  {EDivByZero}
+  {EEndOfFile}
+  {EFault}
+  {EFileNotFound}
+  {EGPFault}
+  {EInOutError}
+  {EIntError}
+  {EIntOverflow}
+  {EInvalidCast}
+  {EInvalidFileName}
+  {EInvalidHeap}
+  {EInvalidInput}
+  {EInvalidOp}
+  {EInvalidOpCode}
+  {EInvalidPointer}
+  {EMathError}
+  {EOutOfMemory}
+  {EOverflow}
+  {EPageFault}
+  {EProcessorException}
+  {ERangeError}
+  {ESingleStep}
+  {EStackFault}
+  {ETooManyOpenFiles}
+  {EUnderflow}
+  {Exception}
+  {EZeroDivide}
+
+  {TObject}
+.EFIG
+
+.TOPIC 3 Append
+.HIGH Append (Prozedur)  {Unit SYSTEM}
+
+ôffnet eine Datei fÅr das AnfÅgen weiterer Daten. 
+
+Deklaration: 
+
+    PROCEDURE Append(Var f:Text);
+
+
+F ist eine Datei-Variable beliebigen Typs (FILE oder TEXT). 
+
+Die Datei kann nur zum Schreiben benutzt werden, ein Lesebefehl auf durch Append
+geîffnete Dateien ist also nicht mîglich.
+
+Append îffnet die Datei und setzt den Dateizeiger auf das Ende der Datei. 
+
+Ist die Datei nicht vorhanden oder tritt ein anderer Fehler auf, wird die
+systeminterne Variable IOResult (im Modus \#1$I-\#2) mit dem Fehlercode geladen,
+andernfalls enthÑlt sie 0.
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Append *)
+    VAR f:File;
+        s:String;
+
+    BEGIN
+         s := 'Das ist ein Text';
+         Assign(f,'C:\Datei.Dat');
+         Append(f);
+         IF IOResult <> 0 THEN Writeln('Fehler beim ôffnen der Datei.')
+         (* Daten ans Ende der Datei anhÑngen *)
+         ELSE BlockWrite(f,s,length(s)+1);
+         Close(f);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Assign}
+           {Close}
+           {Reset}
+           {Rewrite}
+.EFIG
+
+.TOPIC 3 Assign
+.HIGH Assign (Prozedur)  {Unit SYSTEM}
+
+Ordnet einer Datei-Variablen den Namen einer Datei zu. 
+
+Deklaration: 
+
+    PROCEDURE Assign(Var f; Const Name:String);
+
+F ist eine Datei-Variable beliebigen Typs (TEXT oder FILE). Die Datei darf nicht
+offen sein.
+
+Name gibt den Pfad der Datei und den Dateinamen im OS/2-Format an. 
+
+Assign ordnet F die durch Name angegebene Datei zu. Alle weiteren Operationen mit f
+beziehen sich auf diese Datei.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Assign *)
+    VAR f:File;
+
+    BEGIN
+         (* Der Variablen die Datei zuweisen *)
+         Assign(f,'C:\Datei.Dat');
+         (* Rewrite bezieht sich jetzt auf C:\Datei.Dat *)
+         Rewrite(f,1);
+         IF IOResult <> 0 THEN Writeln('Fehler beim ôffnen der Datei.')
+         (* Close bezieht sich auf C:\Datei.Dat *)
+         ELSE Close(f);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Append}
+           {Close}
+           {Reset}
+           {Rewrite}
+.EFIG
+
+.TOPIC 3 Assigned
+.HIGH Assigned (Prozedur)  {Unit SYSTEM}
+
+PrÅft, ob eine Zeiger- oder eine Prozedurvariable NIL ist. 
+
+Deklaration: 
+
+    FUNCTION Assigned(P:Pointer):Boolean;
+
+Liefert TRUE zurÅck, wenn P ungleich NIL ist, ansonsten FALSE. 
+
+Diese Funktion entspricht dem Ausdruck 
+
+.ULIST
+.LISTITEM P <> NIL  wenn P eine Zeigervariable ist
+.LISTITEM  @P <> NIL  wenn P eine Prozedurvariable ist
+.EULIST
+
+Beispiel: 
+.XMP
+    VAR
+       p:Pointer;
+
+      BEGIN
+           p := NIL;
+           IF Assigned(p) THEN Writeln('Das ist nicht sichtbar');
+           p := @p;
+           IF Assigned(p) THEN Writeln('Das ist sichtbar');
+      END.
+.EXMP
+
+.TOPIC 3 Beep
+.HIGH Beep (Prozedur)  {Unit SYSTEM}
+
+Erzeugt einen Ton Åber den PC-Lautsprecher. 
+
+Deklaration: 
+
+    PROCEDURE Beep(Freq,Duration:LongWord);
+
+Freq ist die Frequenz des auszugebenden Tones und Duration die LÑnge in ms. 
+
+Beispiel:
+.XMP
+    Beep(1000,1000);
+.EXMP
+
+.TOPIC 3 BlockRead
+.HIGH BlockRead (Prozedur)  {Unit SYSTEM}
+
+Liest ein oder mehrere DatensÑtze einer Datei. 
+
+Deklaration: 
+
+    PROCEDURE BlockRead(Var F:File; Var Buf; Count:LongWord;
+                        [Var Result:LongWord]);
+
+
+F steht fÅr eine beliebige Dateivariable. Die entsprechende Datei mu· offen sein. 
+
+BlockRead liest Count DatensÑtze aus der durch F referenzierten Datei in den Puffer
+Buf. Die Grî·e eines Datensatzes (RecSize) wird beim ôffnen der Datei festgelegt.
+Die Gesamtzahl der zu Åbertragenden Bytes ergibt sich aus Count*RecSize.
+
+Der Puffer mu· gro· genug fÅr die Daten sein! 
+
+Der optionale Parameter Result enthÑlt nach dem Aufruf von BlockRead die Anzahl der
+tatsÑchlich gelesenen Records. Wurde der gesamte Block Åbertragen, ist der Wert von
+Result gleich dem Wert von Count. Hat jedoch nach Abschlu· der Operation Result
+einen Wert kleiner Count, dann wurde das Dateiende erreicht, bevor der gesamte Block
+Åbertragen werden konnte. Result gibt in diesem Fall die Anzahl der vollstÑndig
+eingegelesenen Records zurÅck.
+
+Wurde BlockRead fehlerfrei ausgefÅhrt, so wird die systeminterne Variable IOResult
+(im Modus \#1$I-\#2) auf 0 gesetzt, andernfalls enthÑlt sie den Fehlercode.
+
+Beispiel: 
+.XMP
+    VAR
+       F:FILE;
+       Version:LONGWORD;
+
+    BEGIN
+         Assign(F,'Datei.dat');
+         Reset(F,1);
+         BlockRead(F,Version,SizeOf(Version));      (* lese 4 Byte *)
+         IF Version <> 1234 THEN Writeln('Falsche Version');
+         Close(F);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {BlockWrite}
+.EFIG
+
+.TOPIC 3 BlockWrite
+.HIGH BlockWrite (Prozedur)  {Unit SYSTEM}
+
+Schreibt ein oder mehrere DatensÑtze in eine Datei. 
+
+Deklaration: 
+
+    PROCEDURE BlockWrite(Var F:File; Var Buf; Count:LongWord;
+                         [Var Result:LongWord]);
+
+
+F steht fÅr eine beliebige Dateivariable. Die entsprechende Datei mu· offen sein. 
+
+BlockWrite schreibt Count DatensÑtze aus dem Puffer Buf in die durch F referenzierte
+Datei. Die Grî·e eines Datensatzes (RecSize) wird beim ôffnen der Datei festgelegt.
+Die Gesamtzahl der zu Åbertragenden Bytes ergibt sich aus Count*RecSize.
+
+Der optionale Parameter Result enthÑlt nach dem Aufruf von BlockWrite die Anzahl
+der tatsÑchlich gelesenen Records. Wurde der gesamte Block Åbertragen, ist der Wert
+von Result gleich dem Wert von Count. Hat jedoch nach Abschlu· der Operation Result einen
+Wert kleiner Count, dann konnten aus irgendeinem Grund nicht alle Records geschrieben
+werden. Result gibt in diesem Fall die Anzahl der vollstÑndig geschriebenen Records
+zurÅck.
+
+Wurde BlockWrite fehlerfrei ausgefÅhrt, so wird die systeminterne Variable IOResult
+(im Modus \#1$I-\#2) auf 0 gesetzt, andernfalls enthÑlt sie den Fehlercode.
+
+Beispiel:
+.XMP
+    VAR
+       F:FILE;
+       Version:LONGWORD;
+       Data:ARRAY[0..999] OF BYTE;
+
+    BEGIN
+         Assign(F,'Datei.dat');
+         Rewrite(F,1);
+         Version := 1234;
+         BlockWrite(F,Version,SizeOf(Version));      (* schreibe 4 Byte *)
+         BlockWrite(F,Data,SizeOf(Data));            (* schreibe die Daten *)
+         Close(F);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {BlockRead}
+.EFIG
+
+.TOPIC 3 ChDir
+.HIGH ChDir (Prozedur)  {Unit SYSTEM}
+
+Wechselt das aktuelle Verzeichnis. 
+
+Deklaration: 
+
+    PROCEDURE ChDir(Const S:String);
+
+S gibt den Namen des neuen Verzeichnisses an. 
+
+Wenn der angegebene Suchweg nicht existiert, wird die systeminterne Variable IOResult
+(im Modus \#1$I-\#2) mit dem Fehlercode geladen, ansonsten enthÑlt sie 0.
+
+
+Beispiel: 
+.XMP
+    BEGIN
+         \#1$I-\#2
+         ChDir('C:\');
+         IF IOResult <> 0
+         THEN Writeln('Kann nicht ins Hauptverzeichnis wechseln');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {MkDir}
+           {RmDir}
+           {GetDir}
+.EFIG
+
+.TOPIC 3 Close
+.HIGH Close (Prozedur)  {Unit SYSTEM}
+
+Schlie·t eine offene Datei. 
+
+Deklaration: 
+
+    PROCEDURE Close(Var F);
+
+
+F ist eine Datei-Variable beliebigen Typs. Die Datei mu· zuvor geîffnet worden sein. 
+
+Konnte Close nicht fehlerfrei ausgefÅhrt, wird die systeminterne Variable
+IOResult (im Modus \#1$I-\#2) mit dem Fehlercode geladen, andernfalls enthÑlt sie 0.
+
+
+Beispiel: 
+.XMP
+     (* Beispiel fÅr den Einsatz von Close *)
+     VAR f:File;
+
+     BEGIN
+          Assign(f,'C:\Datei.Dat');
+          Reset(f,1);
+          IF IOResult<>0
+          THEN Writeln('Fehler beim ôffnen der Datei.')
+          ELSE Writeln('Datei ist geîffnet');
+          (* Die Datei wird nun geschlossen *)
+          Close(f);
+     END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Append}
+           {Assign}
+           {Reset}
+           {Rewrite}
+.EFIG
+
+.TOPIC 3 Copy
+.HIGH Copy (Prozedur)  {Unit SYSTEM}
+
+Liefert einen Teil eines Strings zurÅck. 
+
+Deklaration: 
+
+    FUNCTION Copy(Const S:String; Index,Count:Integer;):String;
+
+
+Copy liefert ab Position Index einen Teilstring aus S mit der LÑnge Count zurÅck. 
+
+
+Beispiel: 
+.XMP
+    BEGIN
+         Writeln(copy('ABCDEF',2,4));    (* 'BCDE' *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Concat}
+           {Delete}
+           {Insert}
+           {Length}
+           {Pos}
+.EFIG
+
+.TOPIC 3 Delete
+.HIGH Delete (Prozedur)  {Unit SYSTEM}
+
+Lîscht einen Teil eines Strings. 
+
+Deklaration: 
+
+    PROCEDURE Delete(Var S:String; Index,Count:Integer);
+
+
+Delete lîscht im String S ab Position Index Count Bytes, die nachfolgenden Zeichen
+rÅcken entsprechend vor.
+
+
+Beispiel: 
+.XMP
+    VAR
+       s:STRING;
+
+    BEGIN
+         s := 'ABCDEF';
+         delete(s,2,4);
+         Writeln(s);        (* 'AF' *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Concat}
+           {Copy}
+           {Insert}
+           {Length}
+           {Pos}
+.EFIG
+
+.TOPIC 3 Eof
+.HIGH Eof (Prozedur)  {Unit SYSTEM}
+
+Ermittelt, ob Dateiende erreicht.
+
+Deklaration: 
+
+    FUNCTION Eof(Var F:File):Boolean;
+
+F steht fÅr eine beliebige Dateivariable. Die entsprechende Datei mu· offen sein. 
+
+Zeigt der Dateizeiger dieser Datei auf deren Dateiende liefert Eof TRUE an den
+Aufrufer zurÅck, andernfalls FALSE.
+
+Wurde Eof fehlerfrei ausgefÅhrt, so wird die systeminterne Variable IOResult (im
+Modus \#1$I-\#2) auf 0 gesetzt, andernfalls enthÑlt sie den Fehlercode.
+
+Beispiel: 
+.XMP
+    VAR
+       F:File;
+       s:STRING;
+
+    BEGIN
+         Assign(F,'Datei.txt');
+         Reset(F);
+         WHILE not Eof(F) DO
+         BEGIN
+              ReadLn(F,s);
+              Writeln(s);
+         END;
+         Close(F);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Assign}
+           {Reset}
+           {Rewrite}
+           {Eoln}
+           {SeekEof}
+.EFIG
+
+.TOPIC 3 Eoln
+.HIGH Eoln (Prozedur)  {Unit SYSTEM}
+
+Ermittelt, ob Zeilenende erreicht. 
+
+Deklaration: 
+
+    FUNCTION Eoln(Var F:Text):Boolean;
+
+
+F steht fÅr eine Dateivariable (TEXT). Die entsprechende Datei mu· offen sein. 
+
+Zeigt der Dateizeiger dieser Datei auf das Ende einer Zeile (CRLF) oder auf das
+Dateiende, liefert Eoln TRUE an den Aufrufer zurÅck, andernfalls FALSE.
+
+Wurde Eoln fehlerfrei ausgefÅhrt, so wird die systeminterne Variable IOResult
+(im Modus \#1$I-\#2) auf 0 gesetzt, andernfalls enthÑlt sie den Fehlercode.
+
+
+Beispiel: 
+.XMP
+    VAR
+       F:Text;
+       a:Byte;
+
+    BEGIN
+         Assign(F,'Datei.txt');
+         Rewrite(F);                   (* generiere die Datei *)
+         Writeln(F,'1 2 3 4  ');
+         Writeln(F,'5 6 7 8  ');
+
+         Reset(F);                     (* zurÅcksetzen zum Lesen *)
+         WHILE not Eoln(F) DO
+         BEGIN
+              Read(F,a);
+              Writeln(a);
+         END;
+         Close(F);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Eof}
+           {SeekEoln}
+.EFIG
+
+.TOPIC 3 Erase
+.HIGH Erase (Prozedur)  {Unit SYSTEM}
+
+Lîscht eine Datei. 
+
+Deklaration: 
+
+    PROCEDURE Erase(Var F:File);
+
+
+Erase lîscht die durch F angegebene externe Datei. 
+
+Wurde Erase fehlerfrei ausgefÅhrt wird die systeminterne Variable IOResult
+(im Modus \#1$I-\#2) mit 0 geladen, ansonsten enthÑlt sie den Fehlercode.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Erase *)
+    VAR
+       f:FILE;
+
+    BEGIN
+         \#1$I-\#2
+         Assign(f,'C:\Datei.Dat'):
+         Erase(f);
+         IF IOResult <> 0 then Writeln('Datei nicht gefunden');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Rename}
+.EFIG
+
+.TOPIC 3 FilePos
+.HIGH FilePos (Prozedur)  {Unit SYSTEM}
+
+Liefert die momentane Position des Dateizeigers innerhalb einer Datei zurÅck. 
+
+Deklaration: 
+
+    FUNCTION FilePos(Var F):LongWord;
+
+
+F steht fÅr eine Datei-Variable beliebigen Typs. Die Datei mu· zuvor geîffnet worden
+sein.
+
+Filepos liefert die Komponente auf die der Dateizeiger augenblicklich verweist.
+Die ZÑhlung beginnt hierbei mit 0. Die Grî·e einer Komponente wird durch die
+Recordgrî·e beim ôffnen der Datei bestimmt.
+
+Wenn Filepos fehlerfrei ausgefÅhrt werden konnte, wird die systeminterne Variable
+IOResult (im Modus \#1$I-\#2) auf 0 gesetzt, andernfalls enthÑlt sie den Fehlercode.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Filepos *)
+    VAR f:File;
+        s:String;
+        l:Longint;
+
+    BEGIN
+         s := 'Das ist ein Text';
+         Assign(f,'C:\Datei.Dat');
+         Rewrite(f,1);
+         l := FilePos(f);
+         Writeln('Filepos Nach dem ôffnen: ',l);
+         BlockWrite(f,s,length(s)+1);
+         l := Filepos(f);
+         Writeln('Filepos nach dem Schreiben: ',l);
+         Close(f);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {FileSize}
+           {Seek}
+           {Assign}
+           {Close}
+.EFIG
+
+.TOPIC 3 FileSize
+.HIGH FileSize (Prozedur)  {Unit SYSTEM}
+
+Liefert die Grî·e einer Datei zurÅck. 
+
+Deklaration: 
+
+    FUNCTION FileSize(Var F):LongWord;
+
+
+F steht fÅr eine Datei-Variable beliebigen Typs. Die Datei mu· zuvor geîffnet worden
+sein.
+
+FileSize liefert die Anzahl der Komponenten zurÅck, die in der angegebenen Datei
+gespeichert sind. Die ZÑhlung beginnt hierbei mit 0. Die Grî·e einer Komponente wird
+durch die Recordgrî·e beim ôffnen der Datei bestimmt.
+
+Wurde FileSize fehlerfrei ausgefÅhrt, so wird die systeminterne Variable IOResult
+(im Modus \#1$I-\#2) auf 0 gesetzt, andernfalls enthÑlt sie den Fehlercode.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von FileSize *)
+     VAR f:File;
+         s:String;
+         l:LongInt;
+
+     BEGIN
+          s := 'Das ist ein Text';
+          Assign(f,'C:\Datei.Dat');
+          Rewrite(f,1);
+          BlockWrite(f,s,length(s)+1);
+          l := FileSize(f);
+          Writeln('Grî·e der Datei: ',l);
+          Close(f);
+     END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {FilePos}
+           {Assign}
+           {Close}
+.EFIG
+
+.TOPIC 3 FillChar
+.HIGH FillChar (Prozedur)  {Unit SYSTEM}
+
+FÅllen eines Speicherbereiches. 
+
+Deklaration: 
+
+    FUNCTION FillChar(Var Dest; Size:LongWord; Value:Byte);
+
+
+FillChar fÅllt ab der Adresse die durch Dest bestimmt wird, Size Bytes mit dem Wert
+Value.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von FillChar *)
+    VAR a:ARRAY[0..10] OF Byte;
+
+    BEGIN
+         (* Array a mit Nullen fÅllen *)
+         FillChar(a,SizeOf(a),0);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Move}
+.EFIG
+
+.TOPIC 3 FreeApiMem
+.HIGH FreeApiMem (Prozedur)  {Unit SYSTEM}
+
+Gibt System-Speicher wieder frei. 
+
+Deklaration: 
+
+    PROCEDURE FreeApiMem(p:Pointer; Size:LongWord);
+
+p bezeichnet eine beliebige Pointervariable. Die Grî·e des Bereichs der freigegeben
+wird, hÑngt vom Wert von Size ab.
+
+Der Speicher mu· zuvor mittels der Funktion {GetApiMem} reserviert worden sein.
+
+.FIG
+Siehe auch:
+           {FreeMem}
+           {FreeSharedMem}
+           {GetApiMem}
+.EFIG
+
+
+.TOPIC 3 FreeMem
+.HIGH FreeMem (Prozedur)  {Unit SYSTEM}
+
+Gibt HeapSpeicher frei. 
+
+Deklaration: 
+
+    PROCEDURE FreeMem(p:Pointer; Size:LongWord);
+
+
+Dispose gibt Speicher auf dem Heap frei. 
+
+p bezeichnet eine beliebige Pointervariable. Die Grî·e des Bereichs der freigegeben
+wird, hÑngt vom Wert von Size ab.
+
+Der Speicher mu· zuvor mittels der Funktion {GetMem} reserviert worden sein.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von FreeMem *)
+    TYPE PZeiger=^TZeiger;
+         TZeiger=ARRAY[1..10] OR Byte;
+    VAR z:PZeiger;
+
+    BEGIN
+         (* dynamische Variable mit 10 Byte LÑnge erzeugen *)
+         GetMem(z,10);
+         (* auf dynamische Variable zugreifen *)
+         z^[1] := 0;
+         (* dynamische Variable lîschen *)
+         FreeMem(z,10);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Dispose}
+           {New}
+           {GetMem}
+           {FreeSharedMem}
+           {FreeApiMem}
+.EFIG
+
+.TOPIC 3 FreeSharedMem
+.HIGH FreeSharedMem (Prozedur)  {Unit SYSTEM}
+
+Gibt geteilten Speicher (Shared Memory) wieder frei.
+
+Deklaration: 
+
+    PROCEDURE FreeSharedMem(p:Pointer; Size:LongWord);
+
+p bezeichnet eine beliebige Pointervariable. Die Grî·e des Bereichs der freigegeben wird, hÑngt vom Wert von Size ab. 
+
+Der Speicher mu· zuvor mittels der Funktion GetSharedMem reserviert worden sein. 
+
+.FIG
+Siehe auch:
+           {FreeMem}
+           {FreeApiMem}
+           {GetSharedMem}
+.EFIG
+
+.TOPIC 3 GetSharedMem
+.HIGH GetSharedMem (Prozedur)  {Unit SYSTEM}
+
+Reserviert geteilten Speicher (Shared Memory). 
+
+Deklaration: 
+
+    PROCEDURE GetSharedMem(Var p:Pointer; Size:LongWord);
+
+
+GetSharedMem reserviert Shared Memory und ÅbertrÑgt die Adresse dieses Speicherblocks
+in die Pointervariable p, erzeugt also eine dynamische Variable.
+
+p bezeichnet eine beliebige Pointervariable. Die Grî·e des Bereich der belegt wird,
+hÑngt vom Wert von Size ab.
+
+Mit GetSharedMem allozierte Speicherbereiche kînnen mit FreeSharedMem wieder
+freigegeben werden.
+
+Shared Memory kann beim Datenaustausch (z.B. Text Åber das ClipBoard) zwischen
+verschiedenen Applikationen verwendet werden.
+
+
+Beispiel: 
+.XMP
+    USES PMWin;
+
+    VAR
+       s:STRING;
+       Len:BYTE;
+       PBuf:PChar;
+
+    BEGIN
+         s := 'ClipBoard Test' + #0; (* Nullzeichen als Textendemarkierung *)
+         Len := Length(s);
+
+         IF WinOpenClipBrd(AppHandle) THEN     (* ClipBoard îffnen *)
+         BEGIN
+              GetSharedMem(PBuf,Len);          (* Speicher anfordern *)
+              IF PBuf = NIL THEN
+              BEGIN
+                   WinCloseClipBrd(AppHandle);
+                   Writeln('Fehler beim Reservieren von Shared Memory');
+                   exit;
+              END;
+
+              Move(s[1],PBuf^,Len);            (* Puffer PBuf fÅllen *)
+
+              WinEmptyClipBrd(AppHandle);
+              (* Zeiger auf die Text-Daten im ClipBoard bekanntmachen *)
+              WinSetClipBrdData(AppHandle,LONGWORD(PBuf),CF_TEXT,CFI_POINTER);
+              WinCloseClipBrd(AppHandle);      (* ClipBoard schlie·en *)
+         END
+         ELSE Writeln('Fehler beim ôffnen des ClipBoard');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {GetMem}
+           {GetApiMem}
+           {FreeSharedMem}
+.EFIG
+
+
+.TOPIC 3 GetApiMem
+.HIGH GetApiMem (Prozedur)  {Unit SYSTEM}
+
+Reserviert System-Speicher. 
+
+Deklaration: 
+
+    PROCEDURE GetApiMem(Var p:Pointer; Size:LongWord);
+
+
+GetApiMem reserviert direkt Speicher vom System (nicht vom Heap) und ÅbertrÑgt die
+Adresse dieses Speicherblocks in die Pointervariable p, erzeugt also eine
+dynamische Variable.
+
+p bezeichnet eine beliebige Pointervariable. Die Grî·e des Bereich der belegt wird,
+hÑngt vom Wert von Size ab.
+
+Mit GetApiMem allozierte Speicherbereiche kînnen mit FreeApiMem wieder freigegeben
+werden.
+
+.FIG
+Siehe auch:
+           {GetMem}
+           {GetSharedMem}
+           {FreeApiMem}
+.EFIG
+
+.TOPIC 3 GetDir
+.HIGH GetDir (Prozedur)  {Unit SYSTEM}
+
+Ermittelt das aktuelle Verzeichnis. 
+
+Deklaration: 
+
+    PROCEDURE GetDir(Drive:Byte; Var S:String);
+
+Wobei fÅr Drive gilt: 
+    0     aktuelles Laufwerk 
+    1     Laufwerk A 
+    2     Laufwerk B 
+    3     Laufwerk C 
+    usw.
+
+Der Name des in diesem Laufwerk momentan aktiven Verzeichnisses wird in die
+Variable S geladen. Wenn das angegebene Laufwerk nicht existiert wird die
+systeminterne Variable IOResult (im Modus \#1$I-\#2) mit dem Fehlercode geladen,
+ansonsten enthÑlt sie 0.
+
+
+Beispiel: 
+.XMP
+    VAR
+       s:String;
+
+    BEGIN
+         GetDir(0,s);
+         Writeln('aktuelles Verzeichnis ist: ',s);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {MkDir}
+           {RmDir}
+           {ChDir}
+.EFIG
+
+.TOPIC 3 GetMem
+.HIGH GetMem (Prozedur)  {Unit SYSTEM}
+
+Belegt HeapSpeicher. 
+
+Deklaration: 
+
+    PROCEDURE GetMem(Var p:Pointer; Size:LongWord);
+
+
+GetMem belegt Speicher auf dem Heap und ÅbertrÑgt die Adresse dieses Speicherblocks
+in die Pointervariable p, erzeugt also eine dynamische Variable.
+
+p bezeichnet eine beliebige Pointervariable. Die Grî·e des Bereich der belegt wird,
+hÑngt vom Wert von Size ab.
+
+Mit GetMem allozierte Speicherbereiche kînnen mit {FreeMem} wieder freigegeben
+werden.
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von FreeMem *)
+    TYPE PZeiger=^TZeiger;
+         TZeiger=ARRAY[1..10] OR Byte;
+    VAR z:PZeiger;
+
+    BEGIN
+         (* dynamische Variable mit 10 Byte LÑnge erzeugen *)
+         GetMem(z,10);
+         (* auf dynamische Variable zugreifen *)
+         z^[1] := 0;
+         (* dynamische Variable lîschen *)
+         FreeMem(z,10);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Dispose}
+           {New}
+           {FreeMem}
+           {GetSharedMem}
+           {GetApiMem}
+.EFIG
+
+.TOPIC 3 Halt
+.HIGH Halt (Prozedur)  {Unit SYSTEM}
+
+Beendet die AusfÅhrung des aktiven Programms. 
+
+Deklaration: 
+
+    PROCEDURE Halt [(Retcode:Byte)];
+
+Halt beendet das aktive Programm und alle seine Threads. Als Retcode kann der
+Fehlercode des Programms Åbergeben werden. Ist er ungleich 0 wird die Meldung
+"Runtime error" vom Laufzeitsystem ausgegeben.
+
+Beispiel: 
+.XMP
+    BEGIN
+         ...
+         IF i <> 0 THEN Halt(i);    (* Beende Programm mit ErrorCode i *)
+         ...
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {RunError}
+           {Exit}
+.EFIG
+
+.TOPIC 3 Insert
+.HIGH Insert (Prozedur)  {Unit SYSTEM}
+
+FÅgt einen Stringteil in einen String ein. 
+
+Deklaration: 
+
+    PROCEDURE Insert(Const Source:String; Var S:String; Index:Integer);
+
+Insert fÅgt den String Source ab Position Index in den String S ein. 
+
+
+Beispiel: 
+.XMP
+    VAR
+       s:String;
+
+    BEGIN
+         s := 'ABCDEF';
+         insert('_',s,3);     (* 'ABC_DEF' *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Concat}
+           {Copy}
+           {Delete}
+           {Length}
+           {Pos}
+.EFIG
+
+.TOPIC 3 LongJmp
+.HIGH LongJmp (Prozedur)  {Unit SYSTEM}
+
+Springt zu einer Sprungmarke. 
+
+Deklaration: 
+
+    PROCEDURE LongJmp(Var JmpBuf:Jmp_Buf; RetVal:LongWord);
+
+
+Es wird zu einer prozedurÅbergreifenden Sprungmarke gesprungen, die mittels
+{SetJmp} gesetzt worden ist. Dabei kann der RÅckgabewert von SetJmp
+(standardmÑ·ig 0) durch den Aufruf von LongJmp neu gesetzt werden.
+
+Beispiel: 
+.XMP
+    VAR
+       JmpBuf:Jmp_Buf;
+
+    PROCEDURE Target;
+    BEGIN
+         Writeln('Target');
+         IF SetJmp(JmpBuf) <> 0 THEN
+         BEGIN
+              Writeln('Sprungmarke erreicht');
+              (* Hierher wird gesprungen, wenn bei LongJmp ein *)
+              (*  RÅckgabewert <> 0 angegeben wird             *)
+         END;
+         (* falls der RÅckgabewert von LongJmp = 0 ist, wird   *)
+         (*  die AusfÅhrung des Programms hier fortgesetzt     *)
+    END;
+
+    PROCEDURE Source;
+    BEGIN
+         Writeln('Source');
+         LongJmp(JmpBuf,1);    (* RÅckgabewert 1 fÅr SetJmp *)
+    END;
+
+    BEGIN
+         Target;    (* Setze Sprungmarke *)
+         Source;    (* und springe *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {SetJmp}
+.EFIG
+
+.TOPIC 3 MainDispatchLoop
+.HIGH MainDispatchLoop (Prozedur)  {Unit SYSTEM}
+
+Bearbeitet die Nachrichtenwarteschlange. 
+
+Deklaration: 
+
+    PROCEDURE MainDispatchLoop;
+
+Bearbeitet die Nachrichtenqueue eines PM-Programms, indem solange die API Funktionen
+WinGetMsg und WinDispatchMsg aufgerufen werden bis die Nachricht WM_QUIT erkannt wird.
+
+Diese Prozedur darf nur aufgerufen werden, wenn ein gÅltiges PM-Fenster dargestellt
+wurde, da das Programm sonst keine Mîglichkeit hat eine WM_QUIT Nachricht abzusenden
+und MainDispatchLoop in einer Endlosschleife "hÑngt".
+
+.TOPIC 3 Mark
+.HIGH Mark (Prozedur)  {Unit SYSTEM}
+
+Diese Prozedur hat unter Speed-Pascal/2 keine FunktionalitÑt. 
+
+Sie existiert nur aus KompatibilitÑtsgrÅnden.ªª±
+
+.TOPIC 3 MaxAvail
+.HIGH MaxAvail (Prozedur)  {Unit SYSTEM}
+
+Ermittelt grî·ten freien Speicherblock auf dem Heap. 
+
+Deklaration: 
+
+    FUNCTION MaxAvail:LongWord;
+
+
+MaxAvail gibt die Grî·e des grî·ten freien Speicherblocks auf dem Heap zurÅck. Das
+ist der grî·te zusammenhÑngende Speicherblock auf dem Heap.
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von MaxAvail *)
+    BEGIN
+         Writeln('Grî·ter Bereich auf dem Heap: ',MaxAvail);
+         Writeln('Gesamter freier Heapspeicher: ',MemAvail);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {MemAvail}
+.EFIG
+
+.TOPIC 3 MemAvail
+.HIGH MemAvail (Prozedur)  {Unit SYSTEM}
+
+Ermittelt Grî·e des freien Heapspeichers. 
+
+Deklaration: 
+
+    FUNCTION MemAvail:LongWord;
+
+MemAvail gibt die Grî·e des freien HeapSpeichers auf dem Heap zurÅck. Dabei werden
+alle eventuell vorhandenen Lîcher addiert.
+
+Beispiel:
+.XMP
+    (* Beispiel fÅr den Einsatz von MemAvail *)
+    BEGIN
+         Writeln('Grî·ter Bereich auf dem Heap: ',MaxAvail);
+         Writeln('Gesamter freier Heapspeicher: ',MemAvail);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {MaxAvail}
+.EFIG
+
+.TOPIC 3 MkDir
+.HIGH MkDir (Prozedur)  {Unit SYSTEM}
+
+Erstellt ein neues Unterverzeichnis. 
+
+Deklaration: 
+
+    PROCEDURE MkDir(Const S:String);
+
+S gibt den Namen des zu erstellenden Unterverzeichnisses an. 
+
+Wenn der angegebene Suchweg schon existiert oder ein anderer Fehler auftritt, wird
+die systeminterne Variable IOResult (im Modus \#1$I-\#2) mit dem Fehlercode geladen,
+ansonsten enthÑlt sie 0.
+
+Beispiel:
+.XMP
+    BEGIN
+         \#1$I-\#2
+         MkDir('C:\TestDir');
+         IF IOResult <> 0
+         THEN Writeln('Kann Verzeichnis nicht erstellen');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {ChDir}
+           {GetDir}
+           {RmDir}
+.EFIG
+
+
+
+.TOPIC 3 Move
+.HIGH Move (Prozedur)  {Unit SYSTEM}
+
+Kopieren von Speicherbereichen. 
+
+Deklaration: 
+
+    PROCEDURE Move(Const Source; Var dest; Size:LongWord);
+
+Move dient zum Kopieren von beliebigen Speicherbereichen. 
+
+Source und Dest sind beliebige Variablen und werden als Startadressen des Quell- bzw. Zielbereiches interpretiert. 
+
+Es werden Size Bytes von der Quelladresse nach der Zieladresse kopiert, Quell- und Zielbereich dÅrfen sich dabei Åberlappen! Die Grî·enangabe Size sollte mîglichst Åber die Funktion SizeOf ermittelt werden. 
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Move *)
+    VAR a,b:ARRAY[0..10] OF Byte;
+
+    BEGIN
+         (* b den Inhalt von a zuweisen *)
+         (* entspricht b:=a             *)
+         Move(a,b,SizeFf(a));
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {FillChar}
+.EFIG
+
+
+
+
+.TOPIC 3 NewSystemHeap
+.HIGH NewSystemHeap (Prozedur)  {Unit SYSTEM}
+
+Erzeugt einen neuen Heap. 
+
+Deklaration: 
+
+    PROCEDURE NewSystemHeap;
+
+Diese Funktion zerstîrt den aktuellen Heap und gibt dessen Speicherbereich komplett
+wieder frei. Anschlie·end wird wieder ein neuer Heap mit der selben Grî·e erzeugt.
+
+Wenn ALLE Zeiger auf Heapspeicherblîcke auf einmal freigegeben werden sollen, kann
+diese Funktion anstelle der vielen FreeMems benutzt werden.
+
+.FIG
+Siehe auch:
+           {GetMem}
+           {FreeMem}
+.EFIG
+
+.TOPIC 3 ParamCount
+.HIGH ParamCount (Prozedur)  {Unit SYSTEM}
+
+Anzahl der Kommandozeilenargumente ermitteln. 
+
+Deklaration: 
+
+    FUNCTION ParamCount:Byte;
+
+
+ParamCount liefert die Anzahl der Kommandozeilenargumente. 
+
+Kommandozeilenargumente werden dem Programm bei dessen Start Åbergeben. Die einzelnen
+Kommandozeilenargumente kînnen Åber die Funktion {ParamStr} bestimmt werden. Die
+ZÑhlung beginnt hierbei bei eins.
+
+Beispiel:
+.XMP
+    (* Beispiel fÅr den Einsatz von ParamCount *)
+    PROGRAM Para;
+    BEGIN
+         IF ParamCount > 0 THEN
+         BEGIN
+              Writeln('1. Kommandozeilenargument ist: ',ParamStr(1));
+         END
+         ELSE Writeln('Keine Parameter!');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {ParamStr}
+.EFIG
+
+
+.TOPIC 3 ParamStr
+.HIGH ParamStr (Prozedur)  {Unit SYSTEM}
+
+Kommandozeilenargument ermitteln. 
+
+Deklaration: 
+
+    FUNCTION ParamStr(N:Byte):String;
+
+ParamStr liefert das N-te Kommandozeilenargument. 
+
+Kommandozeilenargumente werden dem Programm bei dessen Start Åbergeben. 
+
+Die aktuelle Anzahl der Kommandozeilenargumente kann Åber die Funktion {ParamCount}
+bestimmt werden. Die ZÑhlung beginnt hierbei bei eins.
+
+ParamStr(0) liefert den Suchpfad und Namen des laufenden Programms. 
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von ParamStr *)
+    PROGRAM Para;
+    BEGIN
+         IF ParamCount > 0 THEN
+         BEGIN
+              Writeln('1. Kommandozeilenargument ist: ',ParamStr(1));
+         END
+         ELSE Writeln('Keine Parameter!');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {ParamCount}
+.EFIG
+
+.TOPIC 3 Pos
+.HIGH Pos (Prozedur)  {Unit SYSTEM}
+
+Sucht einen String nach einer Zeichenfolge ab. 
+
+Deklaration: 
+
+    FUNCTION Pos(Const Substr,S:String):Byte;
+
+Pos sucht im String S vom ersten Zeichen beginnend nach dem Suchstring SubStr. 
+
+Wird der Suchstring gefunden, liefert Pos die Position von SubStr in S, ansonsten liefert Pos 0. 
+
+Beispiel:
+.XMP
+    BEGIN
+         Writeln(pos('CDE',ABCDEF'));      (* 3 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Delete}
+           {Concat}
+           {Copy}
+           {Insert}
+           {Length}
+
+.EFIG
+
+
+
+.TOPIC 3 Release
+.HIGH Release (Prozedur)  {Unit SYSTEM}
+
+Diese Prozedur hat unter Speed-Pascal/2 keine FunktionalitÑt. 
+
+Sie existiert nur aus KompatibilitÑtsgrÅnden.
+
+.TOPIC 3 ReleaseHeapMutex
+.HIGH ReleaseHeapMutex (Prozedur)  {Unit SYSTEM}
+
+Gibt die Mutex-Semaphore zum Zugriff auf den Heap wieder frei. 
+
+Deklaration: 
+
+    PROCEDURE ReleaseHeapMutex;
+
+
+Solange die Semaphore gesetzt ist ({RequestHeapMutex}), werden alle
+Heapfunktionen blockiert.
+
+Diese Routinen sollten verwendet werden, um den Zugriff auf den Heap zu
+synchronisieren, wenn ein Thread abgebrochen wird (DosKillThread} und dessen Status
+nicht bekannt ist. Dieses Vorgehen verhindert Fehler in der Heapverwaltung.
+
+Beispiel: 
+.XMP
+    VAR
+       aThreadId:TID;
+
+    BEGIN
+         ...
+         RequestHeapMutex;         (* verhindert, da· der Thread mitten   *)
+                                   (*  in einer Heapoperation abgebrochen *)
+         DosKillThread(aThreadId); (*  wird, und somit vielleicht die     *)
+                                   (*  neuen Heapinformationen noch nicht *)
+         ReleaseHeapMutex;         (*  gespeichert sind                   *)
+         ...
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {RequestHeapMutex}
+           {GetMem}
+           {FreeMem}
+           {New}
+           {Dispose}
+.EFIG
+
+.TOPIC 3 Rename
+.HIGH Rename (Prozedur)  {Unit SYSTEM}
+
+Benennt eine Datei um. 
+
+Deklaration: 
+
+    PROCEDURE Rename(Var F:File; NewName:String);
+
+F ist eine Datei-Variable beliebigen Typs. Die Datei mu· mittels {Assign}
+einen Namen zugewiesen bekommen haben und darf nicht offen sein.
+
+Newname ist ein String-Ausdruck und gibt den neuen Namen der Datei an. 
+
+Wurde Rename fehlerfrei ausgefÅhrt wird die systeminterne Variable IOResult
+(im Modus \#1$I-\#2) mit 0 geladen, ansonsten enthÑlt sie den Fehlercode.
+
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Rename *)
+    VAR f:File;
+        s:String;
+
+    BEGIN
+         s := 'Datei2.Dat';
+         Assign(f,'C:\Datei.Dat');
+         Rename(f,s);
+         IF IoResult <> 0 then Writeln('Datei nicht gefunden');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Erase}
+.EFIG
+
+.TOPIC 3 RequestHeapMutex
+.HIGH RequestHeapMutex (Prozedur)  {Unit SYSTEM}
+
+Setzt die Mutex-Semaphore zum Zugriff auf den Heap. 
+
+Deklaration: 
+
+    PROCEDURE RequestHeapMutex;
+
+
+Solange die Semaphore nicht wieder freigegeben ist (ReleaseHeapMutex), werden alle
+Heapfunktionen blockiert.
+
+Diese Routinen sollten verwendet werden, um den Zugriff auf den Heap zu
+synchronisieren, wenn ein Thread abgebrochen wird (DosKillThread} und dessen
+Status nicht bekannt ist. Dieses Vorgehen verhindert Fehler in der Heapverwaltung.
+
+Beispiel: 
+.XMP
+    VAR
+       aThreadId:TID;
+
+    BEGIN
+         ...
+         RequestHeapMutex;         (* verhindert, da· der Thread mitten   *)
+                                   (*  in einer Heapoperation abgebrochen *)
+         DosKillThread(aThreadId); (*  wird, und somit vielleicht die     *)
+                                   (*  neuen Heapinformationen noch nicht *)
+         ReleaseHeapMutex;         (*  gespeichert sind                   *)
+         ...
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {ReleaseHeapMutex}
+           {GetMem}
+           {FreeMem}
+           {New}
+           {Dispose}
+.EFIG
+
+
+.TOPIC 3 Reset
+.HIGH Reset (Prozedur)  {Unit SYSTEM}
+
+ôffnet eine Datei zum lesen. 
+
+Deklaration: 
+
+    PROCEDURE Reset(Var F:File [;Recsize:LongWord});
+
+
+F steht fÅr eine Datei-Variable beliebigen Typs. Dieser Dateivariablen mu· zuvor
+mittels Assign eine externe Datei zugeordnet worden sein.
+
+Der optionale Parameter RecSize legt die Recordgrî·e fest. 
+
+Reset îffnet die Datei mit dem bei Assign angegebenen Namen. Existiert die Datei
+nicht wird die systeminterne Variable IOResult (im Modus \#1$I-\#2) mit dem Fehlercode
+geladen, andernfalls enthÑlt sie 0.
+
+Der Dateizeiger der Datei wird auf den Dateianfang gesetzt. 
+
+Beispiel:
+.XMP
+    (* Beispiel fÅr den Einsatz von Reset *)
+    VAR f:File;
+
+    BEGIN
+         Assign(f,'C:\Datei.Dat');
+         Reset(f,1);
+         IF IOResult <> 0 THEN Writeln('Fehler beim ôffnen der Datei.')
+         ESLE Writeln('Datei ist geîffnet');
+         Close(f);
+    END;
+.EXMP
+
+.FIG
+Siehe auch:
+           {Append}
+           {Assign}
+           {Close}
+           {Rewrite}
+           {Truncate}
+.EFIG
+
+.TOPIC 3 Rewrite
+.HIGH Rewrite (Prozedur)  {Unit SYSTEM}
+
+ôffnet eine Datei zum Schreiben und lîscht sie. 
+
+Deklaration: 
+
+    PROCEDURE Rewrite(Var F:File [;Recsize:LongWord]);
+
+
+F steht fÅr eine Datei-Variable beliebigen Typs. Dieser Dateivariablen mu· zuvor
+mittels Assign eine externe Datei zugeordnet worden sein.
+
+Der optionale Parameter RecSize legt die Recordgrî·e fest. 
+
+Rewrite îffnet die Datei mit dem bei Assign angegebenen Namen. Existiert die Datei
+nicht wird eine neue Datei erstellt, andernfalls wird die existierende Datei gelîscht,
+das hei·t ALLE Informationen in dieser Datei gehen verloren.
+
+Konnte Rewrite nicht fehlerfrei ausgefÅhrt werden, wird die systeminterne Variable
+IOResult (im Modus \#1$I-\#2) mit dem Fehlercode geladen, andernfalls enthÑlt sie 0.
+
+Der Dateizeiger der Datei wird auf den Dateianfang gesetzt. 
+
+Beispiel:
+.XMP
+    (* Beispiel fÅr den Einsatz von Rewrite *)
+    VAR f:File;
+
+    BEGIN
+         Assign(f,'C:\Datei.Dat');
+         Rewrite(f,1);
+         IF IOResult <> 0 THEN Writeln('Fehler beim Erstellen der Datei.')
+         ELSE Writeln('Datei ist ertsellt');
+         Close(f);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Append}
+           {Assign}
+           {Close}
+           {Reset}
+           {Truncate}
+.EFIG
+
+.TOPIC 3 RmDir
+.HIGH RmDir (Prozedur)  {Unit SYSTEM}
+
+Lîscht ein leeres Unterverzeichnis. 
+
+Deklaration: 
+
+    PROCEDURE RmDir(Const S:String);
+
+S gibt den Namen des zu lîschenden Unterverzeichnisses an. 
+
+Wenn der angegebene Suchweg nicht existiert oder noch DateieintrÑge enthÑlt, wird
+die systeminterne Variable IOResult (im Modus \#1$I-\#2) mit dem Fehlercode geladen,
+ansonsten enthÑlt sie 0.
+
+
+Beispiel: 
+.XMP
+    BEGIN
+         \#1$I-\#2
+         RmDir('C:\TestDir');
+         IF IOResult <> 0
+         THEN Writeln('Kann Verzeichnis nicht lîschen');
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {ChDir}
+           {GetDir}
+           {MkDir}
+.EFIG
+
+.TOPIC 3 RunError
+.HIGH  RunError (Prozedur)  {Unit SYSTEM}
+
+Beendet die AusfÅhrung des aktiven Programms durch einen Fehler. 
+
+Deklaration: 
+
+    PROCEDURE RunError(Retcode:LongWord);
+
+Gibt die Meldung "Runtime error" aus und beendet das aktive Programm und alle seine Threads. Retcode ist der Fehlercode. 
+
+Beispiel:
+.XMP
+    BEGIN
+         ...
+         IF p = NIL THEN RunError(204); (* Beende Programm mit Laufzeitfehler *)
+         ...
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Halt}
+           {Exit}
+.EFIG
+
+.TOPIC 3 Seek
+.HIGH Seek (Prozedur)  {Unit SYSTEM}
+
+Setzt den Dateizeiger einer Datei auf eine bestimmte Komponente. 
+
+Deklaration: 
+
+    PROCEDURE Seek(Var F; N:LongInt);
+
+
+F steht fÅr eine Datei-Variable beliebigen Typs. Die Datei mu· zuvor geîffnet
+worden sein.
+
+N gibt die Nummer der Komponente an, auf die der Dateizeiger der Datei verschoben
+werden soll. Die ZÑhlung beginnt hierbei mit 0.
+
+Die Grî·e einer Komponente wird durch die Recordgrî·e beim ôffnen der Datei bestimmt. 
+
+Wenn Seek fehlerfrei ausgefÅhrt werden konnte wird die systeminterne Variable
+IOResult (im Modus \#1$I-\#2) auf 0 gesetzt, andernfalls enthÑlt sie den Fehlercode.
+
+Beispiel: 
+.XMP
+    (* Beispiel fÅr den Einsatz von Seek *)
+    VAR f:File;
+        s:String;
+
+    BEGIN
+         s := 'Das ist ein Test';
+         Assign(f,'C:\Datei.Dat');
+         Rewrite(f,1);
+         BlockWrite(f,s,length(s)+1);
+         BlockWrite(f,s,length(s)+1);
+         (* In der Datei steht nun 2 mal der String s      *)
+         (* Der Dateizeiger wird nun hinter den ersten     *)
+         (*  String verschoben                             *)
+         Seek(f,length(s)+1);
+         Truncate(f);
+         (* In der Datei steht nur noch 1 mal der String s *)
+         Close(f);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {FilePos}
+           {Assign}
+           {Close}
+.EFIG
+
+.TOPIC 3 SeekEof
+.HIGH SeekEof (Prozedur)  {Unit SYSTEM}
+
+Liefert TRUE, wenn der Datenzeiger auf das Ende der Datei zeigt. 
+
+Deklaration: 
+
+    FUNCTION SeekEof(Var F:Text):Boolean;
+
+Der Unterschied zu Eof ist, da· Leerzeichen (#32), Tabulatoren (#9) und
+Zeilenendezeichen (#13#10) vor dem Test Åbersprungen werden.
+
+Beispiel:
+.XMP
+    VAR
+       F:Text;
+       a:Byte;
+
+    BEGIN
+         Assign(F,'Datei.txt');
+         Rewrite(F);                 (* generiere die Datei *)
+         Writeln(F,'1 2 3 4  ');
+         Writeln(F,'5 6 7 8  ');
+         Writeln(F);
+
+         Reset(F);                   (* zurÅcksetzen zum Lesen *)
+         WHILE not SeekEof(F) DO     (* ignoriere Leerzeichen am Dateiende *)
+         BEGIN
+              Read(F,a);
+              Writeln(a);
+         END;
+         Close(F);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Eof}
+           {SeekEoln}
+.EFIG
+
+.TOPIC 3 SeekEoln
+.HIGH SeekEoln (Prozedur)  {Unit SYSTEM}
+
+Liefert TRUE, wenn der Datenzeiger auf das Ende einer Zeile oder auf das Dateiende zeigt. 
+
+Deklaration: 
+
+    FUNCTION SeekEoln(Var F:Text):Boolean;
+
+Der Unterschied zu Eoln ist, da· Leerzeichen (#32) und Tabulatoren (#9) vor dem Test
+Åbersprungen werden.
+
+Beispiel: 
+.XMP
+    VAR
+       F:Text;
+       ch:Char;
+
+    BEGIN
+         Assign(F,'Datei.txt');
+         Rewrite(F);                 (* generiere die Datei *)
+         Writeln(F,'A B C D  ');
+         Writeln(F,'E F G H  ');
+         Writeln(F);
+
+         Reset(F);                   (* zurÅcksetzen zum Lesen *)
+         WHILE not SeekEoln(F) DO    (* ignoriere Leerzeichen am Zeilenende *)
+         BEGIN
+              Read(F,ch);
+              Writeln(ch);
+         END;
+         Close(F);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Eoln}
+           {SeekEof}
+.EFIG
+
+.TOPIC 3 SelToFlat
+.HIGH SelToFlat (Prozedur)  {Unit SYSTEM}
+
+Wandelt einen 16-Bit (Segment:Offset) in einen 32-Bit (Flat) Zeiger um. 
+
+Deklaration: 
+
+    PROCEDURE SelToFlat(Var p:Pointer);
+
+Beispiel: 
+.XMP
+    USES BseSub;
+
+    VAR
+       ScreenPointer:Pointer;
+       ScrSize:Word;
+
+    BEGIN
+         ...
+         VioGetBuf(ScreenPointer, ScrSize, 0);   (* Liefert Seg:Ofs Zeiger *)
+         SelToFlat(ScreenPointer);
+         ...
+    END.
+.EXMP
+
+.TOPIC 3 SetFileBuf
+.HIGH SetFileBuf (Prozedur)  {Unit SYSTEM}
+
+Diese Prozedur hat unter Speed-Pascal/2 keine FunktionalitÑt. 
+
+Sie existiert nur aus KompatibilitÑtsgrÅnden.ªª±
+
+.TOPIC 3 SetJmp
+.HIGH SetJmp (Prozedur)  {Unit SYSTEM}
+
+Setzt eine Sprungmarke. 
+
+Deklaration: 
+
+    FUNCTION SetJmp(Var JmpBuf:Jmp_Buf):LongWord;
+
+Es wird eine prozedurÅbergreifende Sprungmarke gesetzt. 
+
+Mittels LongJmp kann unmittelbar an die Stelle nach dem Befehl gesprungen werden.
+Dabei kann der RÅckgabewert von SetJmp (standardmÑ·ig 0) durch den Aufruf von
+{LongJmp} neu gesetzt werden.
+
+Beispiel: 
+.XMP
+    VAR
+       JmpBuf:Jmp_Buf;
+
+    PROCEDURE Target;
+    BEGIN
+         Writeln('Target');
+         IF SetJmp(JmpBuf) <> 0 THEN
+         BEGIN
+              Writeln('Sprungmarke erreicht');
+              (* Hierher wird gesprungen, wenn bei LongJmp ein *)
+              (*  RÅckgabewert <> 0 angegeben wird             *)
+         END;
+         (* falls der RÅckgabewert von LongJmp = 0 ist, wird   *)
+         (*  die AusfÅhrung des Programms hier fortgesetzt     *)
+    END;
+
+    PROCEDURE Source;
+    BEGIN
+         Writeln('Source');
+         LongJmp(JmpBuf,1);    (* RÅckgabewert 1 fÅr SetJmp *)
+    END;
+
+    BEGIN
+         Target;    (* Setze Sprungmarke *)
+         Source;    (* und springe *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {LongJmp}
+.EFIG
+
+.TOPIC 3 SetTextBuf
+.HIGH SetTextBuf (Prozedur)  {Unit SYSTEM}
+
+Diese Prozedur hat unter Speed-Pascal/2 keine FunktionalitÑt. 
+
+Sie existiert nur aus KompatibilitÑtsgrÅnden.ªª±
+
+.TOPIC 3 SetTrigMode
+.HIGH SetTrigMode (Prozedur)  {Unit SYSTEM}
+
+Setzt die Recheneinheit fÅr trigonometrische Funktionen. 
+
+Deklaration: 
+
+    PROCEDURE SetTrigMode(Mode:Byte);
+
+SetTrigMode verÑndert die Recheneinheit fÅr die trigonometrischen Funktionen. 
+
+Alle Funktionen die Winkel erwarten (z.B. SIN) oder zurÅckliefern (z.B. ARCSIN) verwenden als Einheit diesen Wert. 
+
+FÅr Mode sind die Werte RAD (Bogenmass), DEG (Gradmass) und GRA (Polar) erlaubt. Die Voreinstellung ist RAD. 
+
+Beispiel:
+.XMP
+    (* Beispiel fÅr den Einsatz von SetTrigMode *)
+    VAR e:EXTENDED;
+
+    BEGIN
+         SetTrigMode(deg);  (* Grad als Winkelma· *)
+         e := 1;
+         e := ArcCos(e);    (* ArcCos von 1 berechnen *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Sin}
+           {Cos}
+           {Tan}
+           {Cot}
+.EFIG
+
+
+.TOPIC 3 SubStr
+.HIGH SubStr (Prozedur)  {Unit SYSTEM}
+
+Liefert einen Teilstring aus einem String. 
+
+Deklaration: 
+
+    PROCEDURE SubStr(Var S:String; Start,Len:Byte);
+
+
+Diese Prozedur entspricht im wesentlichen der Funktion Copy. 
+
+Start und Len geben die Startposition und die LÑnge des neuen Strings im alten String
+an. der alte String wird hierbei Åberschrieben!
+
+Diese Funktion arbeitet schneller als Copy. 
+
+
+Beispiel: 
+.XMP
+    (*Beispiel fÅr den Einsatz von SubStr*)
+    VAR s:STRING;
+
+    BEGIN
+         s := 'ABCDEF';
+         SubStr(s,2,3);  (* s wird 'BC'*)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Copy}
+           {Pos}
+           {Length}
+           {Concat}
+           {Insert}
+           {Delete}
+           {Str}
+           {Val}
+.EFIG
+
+.TOPIC 3 Swap
+.HIGH Swap (Prozedur)  {Unit SYSTEM}
+
+Vertauscht das niederwertige und das hîherwertige Byte des Arguments miteinander.
+
+Deklaration: 
+
+    FUNCTION Swap(i:Integer);
+
+i ist ein Ausdruck des Typs Integer oder Word. 
+
+.XMP
+Beispiel: 
+
+    VAR
+       i:Integer;
+
+    BEGIN
+         i := $001F;           (* $001F =   31 *)
+         i := Swap(i);         (* $1F00 = 7936 *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Hi}
+           {Lo}
+.EFIG
+
+.TOPIC 3 ToHex
+.HIGH ToHex (Prozedur)  {Unit SYSTEM}
+
+Wandelt eine Zahl in einen String mit hexadezimaler Schreibweise um. 
+
+Deklaration: 
+
+    FUNCTION ToHex(l:LongWord):String;
+
+Beispiel:
+.XMP
+    CONST
+         l=$0FFFF;
+
+    BEGIN
+         Writeln(l);             (* 65535 *)
+         Writeln(ToHex(l));      (* $0000FFFF *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {ToStr}
+.EFIG
+
+.TOPIC 3 Truncate
+.HIGH Truncate (Prozedur)  {Unit SYSTEM}
+
+Schneidet eine Datei an der momentanen Position ab. 
+
+Deklaration: 
+
+    PROCEDURE Truncate(Var F);
+
+
+F steht fÅr eine Datei-Variable beliebigen Typs. Die Datei mu· geîffnet sein. 
+
+Die Datei wird an der augenblicklichen Position des Dateizeigers abgeschnitten, das hei·t ALLE Daten nach dieser Position werden gelîscht. Nach der AusfÅhrung von Truncate zeigt der Dateizeiger also auf End-of-File. 
+
+Wurde Truncate fehlerfrei ausgefÅhrt, so wird die systeminterne Variable IOResult
+(im Modus \#1$I-\#2) auf 0 gesetzt, andernfalls enthÑlt sie den Fehlercode.
+
+
+Beispiel:
+.XMP
+    (* Beispiel fÅr den Einsatz von Truncate *)
+    VAR f:File;
+        s:String;
+
+    BEGIN
+         s := 'Das ist ein Test';
+         Assign(f,'C:\Datei.Dat');
+         Rewrite(f,1);
+         BlockWrite(f,s,length(s)+1);
+         BlockWrite(f,s,length(s)+1);
+         (* In der Datei steht nun 2 mal der String s      *)
+         (* Der Dateizeiger wird nun hinter den ersten     *)
+         (*  String verschoben                             *)
+         Seek(f,length(s)+1);
+         Truncate(f);
+         (* In der Datei steht nur noch 1 mal der String s *)
+         Close(f);
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Reset}
+           {Rewrite}
+           {Seek}
+           {Assign}
+           {Close}
+.EFIG
+
+.TOPIC 3 UpcaseStr
+.HIGH UpcaseStr (Prozedur)  {Unit SYSTEM}
+
+Wandelt eine Zeichenkette in Gro·buchstaben um. 
+
+Deklaration: 
+
+    PROCEDURE UpcaseStr(Var s:String);
+
+Beispiel:
+.XMP
+    VAR
+       s:String;
+
+    BEGIN
+         s := 'abcdef';
+         UpcaseStr(s);         (* 'ABCDEF' *)
+    END.
+.EXMP
+
+.FIG
+Siehe auch:
+           {Upcase}
+.EFIG
+
+
+
+.TOPIC 3 EAccessDenied
+.HIGH EAccessDenied (Exception Klasse)  {Unit SYSTEM}
+
+Access Denied - Zugriff verweigert. 
+
+Deklaration: 
+
+    EAccessDenied = CLASS(EInOutError);
+
+
+Der Zugriff auf die Datei ist nicht mîglich, eventuell ist sie schreibgeschÅtzt. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EInOutError}
+           {EFileNotFound}
+           {EInvalidFileName}
+           {ETooManyOpenFiles}
+           {EEndOfFile}
+           {EDiskFull}
+           {EInvalidInput}
+.EFIG
+
+.TOPIC 3 EBreakpoint
+.HIGH  EBreakpoint(Exception Klasse)  {Unit SYSTEM}
+
+Breakpoint - Haltepunkt erreicht. 
+
+Deklaration: 
+
+    EBreakpoint = CLASS(EProcessorException);
+
+
+Die Anwendung lîste eine Breakpoint Exception aus. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EFault}
+           {EProcessorException}
+           {EGPFault}
+           {EStackFault}
+           {EPageFault}
+           {EInvalidOpCode}
+           {ESingleStep}
+.EFIG
+
+.TOPIC 3 EConvertError
+.HIGH EConvertError (Exception Klasse)  {Unit SYSTEM}
+
+Convert Error - Konvertierungsfehler. 
+
+Deklaration: 
+
+    EConvertError = CLASS(Exception);
+
+
+Die angegebene Konvertierung konnte nicht ausgefÅhrt werden. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EInvalidCast}
+.EFIG
+
+.TOPIC 3 EDiskFull
+.HIGH  EDiskFull(Exception Klasse)  {Unit SYSTEM}
+
+Disk full - KapazitÑt des Laufwerks erschîpft 
+
+Deklaration: 
+
+    EDiskFull = CLASS(EInOutError);
+
+
+Auf dem aktuellen Laufwerk ist kein Platz mehr vorhanden. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EInOutError}
+           {EFileNotFound}
+           {EInvalidFileName}
+           {ETooManyOpenFiles}
+           {EAccessDenied}
+           {EEndOfFile}
+           {EInvalidInput}
+.EFIG
+
+.TOPIC 3 EDivByZero
+.HIGH EDivByZero (Exception Klasse)  {Unit SYSTEM}
+
+Division by zero - Division durch 0. 
+
+Deklaration: 
+
+    EDivByZero = CLASS(EIntError);
+
+
+Es wurde versucht einen Integerwert durch Null zu dividieren. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EIntError}
+           {ERangeError}
+           {EIntOverflow}
+.EFIG
+
+.TOPIC 3 EEndOfFile
+.HIGH EEndOfFile (Exception Klasse)  {Unit SYSTEM}
+
+File not found - Datei nicht gefunden. 
+
+Deklaration: 
+
+    EFileNotFound = CLASS(EInOutError);
+
+
+Die angegebene Datei ist nicht vorhanden oder der Zugriff auf die Datei ist nicht
+mîglich.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EInOutError}
+           {EInvalidFileName}
+           {ETooManyOpenFiles}
+           {EAccessDenied}
+           {EEndOfFile}
+           {EDiskFull}
+           {EInvalidInput}
+.EFIG
+
+.TOPIC 3 EFault
+.HIGH EFault (Exception Klasse)  {Unit SYSTEM}
+
+Deklaration: 
+
+    EFault = CLASS(EProcessorException);
+
+
+Diese Klasse dient als Basisklasse fÅr Hardware-Exceptions (Faults). Eine Exception
+dieses Typs wird nie direkt ausgelîst.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EProcessorException}
+           {EGPFault}
+           {EStackFault}
+           {EPageFault}
+           {EInvalidOpCode}
+           {EBreakpoint}
+           {ESingleStep}
+.EFIG
+
+
+.TOPIC 3 EFileNotFound
+.HIGH EFileNotFound (Exception Klasse)  {Unit SYSTEM}
+
+File not found - Datei nicht gefunden. 
+
+Deklaration: 
+
+    EFileNotFound = CLASS(EInOutError);
+
+
+Die angegebene Datei ist nicht vorhanden oder der Zugriff auf die Datei ist nicht
+mîglich.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EInOutError}
+           {EInvalidFileName}
+           {ETooManyOpenFiles}
+           {EAccessDenied}
+           {EEndOfFile}
+           {EDiskFull}
+           {EInvalidInput}
+.EFIG
+
+.TOPIC 3 EGPFault
+.HIGH EGPFault (Exception Klasse)  {Unit SYSTEM}
+
+General Protection Fault - Allgemeine Schutzverletzung. 
+
+Deklaration: 
+
+    EGPFault = CLASS(EFault);
+
+
+Es fand ein ungÅltiger Zugriff auf eine Speicheradresse statt. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EFault}
+           {EProcessorException}
+           {EStackFault}
+           {EPageFault}
+           {EInvalidOpCode}
+           {EBreakpoint}
+           {ESingleStep}
+.EFIG
+
+
+.TOPIC 3 EInOutError
+.HIGH EInOutError (Exception Klasse)  {Unit SYSTEM}
+
+Diese Klasse dient als Basisklasse fÅr I/O-Exceptions. Eine Exception dieses Typs
+wird nur selten direkt ausgelîst.
+
+Deklaration: 
+
+    EInOutError = CLASS(Exception)
+
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EFileNotFound}
+           {EInvalidFileName}
+           {ETooManyOpenFiles}
+           {EAccessDenied}
+           {EEndOfFile}
+           {EDiskFull}
+           {EInvalidInput}
+.EFIG
+
+.TOPIC 3 EIntError
+.HIGH EIntError (Exception Klasse)  {Unit SYSTEM}
+
+Diese Klasse dient als Basisklasse fÅr Integer-Exceptions. Eine Exception dieses
+Typs wird nie direkt ausgelîst.
+
+Deklaration: 
+
+    EIntError = CLASS(Exception);
+
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EDivByZero}
+           {ERangeError}
+           {EIntOverflow}
+.EFIG
+
+.TOPIC 3 EIntOverflow
+.HIGH EIntOverflow (Exception Klasse)  {Unit SYSTEM}
+
+Integer Overflow - Integer öberlauf
+
+Deklaration: 
+
+    EIntOverflow = CLASS(EIntError);
+
+
+Eine arithmetische Integer-Operation verursachte einen Integer-öberlauf. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EIntError}
+           {EDivByZero}
+           {ERangeError}
+.EFIG
+
+.TOPIC 3 EInvalidCast
+.HIGH EInvalidCast (Exception Klasse)  {Unit SYSTEM}
+
+Invalid Cast - UngÅltige Typumwandlung 
+
+Deklaration: 
+
+    EInvalidCast = CLASS(Exception);
+
+
+Eine Anwendung versuchte eine ungÅltige Typumwandlung auszufÅhren. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EConvertError}
+.EFIG
+
+.TOPIC 3 EInvalidFileName
+.HIGH EInvalidFileName (Exception Klasse)  {Unit SYSTEM}
+
+Invalid File Name - UngÅltiger Dateiname. 
+
+Deklaration: 
+
+    EInvalidFileName = CLASS(EInOutError);
+
+
+Der angegebene Dateiname ist ungÅltig. Dieser Fehler tritt auch auf, wenn einer
+Dateivariablen nicht mit /Assign/ ein Wert zugewiesen wurde.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EInOutError}
+           {EFileNotFound}
+           {ETooManyOpenFiles}
+           {EAccessDenied}
+           {EEndOfFile}
+           {EDiskFull}
+           {EInvalidInput}
+.EFIG
+
+.TOPIC 3 EInvalidHeap
+.HIGH EInvalidHeap (Exception Klasse)  {Unit SYSTEM}
+
+Invalid Heap - Heap zerstîrt.
+
+Deklaration: 
+
+    EInvalidHeap = CLASS(Exception);
+
+
+Der Heapbereich wurde beschÑdigt. Dies kann zum Beispiel durch Speicherzugriffe
+au·erhalb des fÅr einen Pointer reservierten Bereiches ausgelîst werden.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EOutOfMemory}
+           {EInvalidPointer}
+.EFIG
+
+
+.TOPIC 3 EInvalidInput
+.HIGH EInvalidInput (Exception Klasse)  {Unit SYSTEM}
+
+Invalid input - UngÅltige Eingabe. 
+
+Deklaration: 
+
+    EInvalidInput = CLASS(EInOutError);
+
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EInOutError}
+           {EFileNotFound}
+           {EInvalidFileName}
+           {ETooManyOpenFiles}
+           {EAccessDenied}
+           {EEndOfFile}
+           {EDiskFull}
+.EFIG
+
+.TOPIC 3 EInvalidOp
+.HIGH EInvalidOpCode (Exception Klasse)  {Unit SYSTEM}
+
+Invalid Opcode - UngÅltiger Opcode. 
+
+Deklaration: 
+
+    EInvalidOp = CLASS(EMathError);
+
+
+Eine Applikation versuchte eine ungÅltige Operation auszufÅhren. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EMathError}
+           {EZeroDivide}
+           {EOverflow}
+           {EUnderflow}
+.EFIG
+
+.TOPIC 3 EInvalidOpCode
+.HIGH  (Exception Klasse)  {Unit SYSTEM}
+
+Invalid Opcode - UngÅltige Instruktion
+
+Deklaration: 
+
+    EInvalidOpCode = CLASS(EFault);
+
+
+Die Anwendung versuchte eine ungÅltige Prozessoranweisung auszufÅhren. UngÅltige
+Anweisungen sind auch Protected-Mode Anweisungen welche nur auf Betriebssystemebene
+ausgefÅhrt werden dÅrfen (z.B. IN, OUT, LGDT, LLDT, SMSW)
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EFault}
+           {EProcessorException}
+           {EGPFault}
+           {EStackFault}
+           {EPageFault}
+           {EBreakpoint}
+           {ESingleStep}
+.EFIG
+
+.TOPIC 3 EInvalidPointer
+.HIGH EInvalidPointer (Exception Klasse)  {Unit SYSTEM}
+
+Invalid Pointer - UngÅltiger Zeiger.
+
+Deklaration: 
+
+    EInvalidPointer = CLASS(Exception);
+
+
+Es wurde versucht mittels FreeMem einen ungÅltigen oder bereits freigegebenen Zeiger
+freizugeben.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EOutOfMemory}
+           {EInvalidHeap}
+.EFIG
+
+
+.TOPIC 3 EMathError
+.HIGH EMathError (Exception Klasse)  {Unit SYSTEM}
+
+Diese Klasse dient als Basisklasse fÅr Coprozessor-Exceptions. Eine Exception dieses
+Typs wird nie direkt ausgelîst.
+
+Deklaration: 
+
+    EMathError = CLASS(Exception);
+
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EInvalidOp}
+           {EZeroDivide}
+           {EOverflow}
+           {EUnderflow}
+.EFIG
+
+.TOPIC 3 EOutOfMemory
+.HIGH EOutOfMemory (Exception Klasse)  {Unit SYSTEM}
+
+Out of memory - Kein Speicher mehr. 
+
+Deklaration: 
+
+    EOutOfMemory = CLASS(Exception);
+
+
+Es steht kein Speicher mehr auf dem Heap zur VerfÅgung. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EInvalidPointer}
+           {EInvalidHeap}
+.EFIG
+
+
+.TOPIC 3 EOverflow
+.HIGH EOverflow (Exception Klasse)  {Unit SYSTEM}
+
+Overflow - öberlauf 
+
+Deklaration: 
+
+    EOverflow = CLASS(EMathError);
+
+
+Eine arithmetische Flie·komma-Operation verursachte einen öberlauf. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EMathError}
+           {EInvalidOp}
+           {EZeroDivide}
+           {EUnderflow}
+.EFIG
+
+.TOPIC 3 EPageFault
+.HIGH EPageFault (Exception Klasse)  {Unit SYSTEM}
+
+Page Fault - Seitenfehler. 
+
+Deklaration: 
+
+    EPageFault = CLASS(EFault);
+
+
+Beim Ein-/Auslagern einer Seite trat ein Fehler auf. Dies ist in der Regel ein
+OS-Systemfehler.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EFault}
+           {EProcessorException}
+           {EGPFault}
+           {EStackFault}
+           {EInvalidOpCode}
+           {EBreakpoint}
+           {ESingleStep}
+.EFIG
+
+.TOPIC 3 EProcessterm
+.HIGH EProcessterm (Exception Klasse)  {Unit SYSTEM}
+
+Process Terminated - Proze· beendet. 
+
+Deklaration: 
+
+    EProcessTerm = CLASS(Exception);
+
+
+Der Proze· wurde beendet. 
+
+.FIG
+Siehe auch:
+           {Exception}
+.EFIG
+
+.TOPIC 3 EProcessorException
+.HIGH EProcessorException (Exception Klasse)  {Unit SYSTEM}
+
+Ein schwerer Prozessorfehler ist aufgetreten. 
+
+Deklaration: 
+
+    EProcessorException = CLASS(Exception);
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EFault}
+           {EGPFault}
+           {EStackFault}
+           {EPageFault}
+           {EInvalidOpCode}
+           {EBreakpoint}
+           {ESingleStep}
+.EFIG
+
+.TOPIC 3 ERangeError
+.HIGH ERangeError (Exception Klasse)  {Unit SYSTEM}
+
+Range check error - BereichsÅberschreitung 
+
+Deklaration: 
+
+    ERangeError = CLASS(EIntError);
+
+
+Der Wert des Ausdrucks Åberschreitet die Bereichsgrenzen des zugehîrigen
+Integer-Types.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EIntError}
+           {EDivByZero}
+           {EIntOverflow}
+.EFIG
+
+.TOPIC 3 ESingleStep
+.HIGH ESingleStep (Exception Klasse)  {Unit SYSTEM}
+
+Single Step - Einzelschrittmodus. 
+
+Deklaration: 
+
+    ESingleStep = CLASS(EProcessorException);
+
+
+Die Anwendung lîste eine Single-Step Exception aus. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EFault}
+           {EProcessorException}
+           {EGPFault}
+           {EStackFault}
+           {EPageFault}
+           {EInvalidOpCode}
+           {EBreakpoint}
+.EFIG
+
+.TOPIC 3 EStackFault
+.HIGH EStackFault (Exception Klasse)  {Unit SYSTEM}
+
+Stack Fault - Stackfehler. 
+
+Deklaration: 
+
+    EStackFault = CLASS(EFault);
+
+
+Es fand ein ungÅltiger Zugriff auf den Stack statt. Mîglicherweise trat ein
+StackÅberlauf ein.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EFault}
+           {EProcessorException}
+           {EGPFault}
+           {EPageFault}
+           {EInvalidOpCode}
+           {EBreakpoint}
+           {ESingleStep}
+.EFIG
+
+
+.TOPIC 3 ETooManyOpenFiles
+.HIGH ETooManyOpenFiles (Exception Klasse)  {Unit SYSTEM}
+
+Too many open files - Zu viele geîffnete Dateien. 
+
+Deklaration: 
+
+    ETooManyOpenFiles = CLASS(EInOutError);
+
+Dieser Fehler tritt auf, wenn zu viele Dateien geîffnet werden. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EInOutError}
+           {EFileNotFound}
+           {EInvalidFileName}
+           {EAccessDenied}
+           {EEndOfFile}
+           {EDiskFull}
+           {EInvalidInput}
+.EFIG
+
+.TOPIC 3 EUnderflow
+.HIGH EUnderflow (Exception Klasse)  {Unit SYSTEM}
+
+Underflow - Unterlauf 
+
+Deklaration: 
+
+    EUnderflow = CLASS(EMathError);
+
+
+Eine arithmetische Flie·komma-Operation verursachte einen Unterlauf. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EMathError}
+           {EInvalidOp}
+           {EZeroDivide}
+           {EOverflow}
+.EFIG
+
+.TOPIC 3 EZeroDivide
+.HIGH EZeroDivide (Exception Klasse)  {Unit SYSTEM}
+
+Division by zero - Division durch 0.
+
+Deklaration: 
+
+    EZeroDivide = CLASS(EMathError);
+
+Es wurde versucht einen Flie·kommawert durch Null zu dividieren. 
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EMathError}
+           {EInvalidOp}
+           {EOverflow}
+           {EUnderflow}
+.EFIG
+
+.TOPIC 3 Exception
+.HIGH Exception  {Unit SYSTEM}
+
+Exceptions werden intern als Objekte verwaltet. Sie sind spezielle Klassen welche
+vom Laufzeitsystem bereitgestellt werden. ZusÑtzlich kînnen selbstdefinierte
+Exceptions deklariert werden.
+
+Deklaration: 
+
+    Exception = CLASS(TObject)
+
+
+RTL-EXCEPTIONS 
+
+RTL-Exceptions werden vom Laufzeitsystem von Speed-Pascal ausgelîst. Jede Exception
+basiert auf der Klasse /Exception/ welche in der Unit SYSTEM definiert ist.
+
+.FIG
+RTL-Exceptions sind:
+           {Hardware Exceptions}
+           {Software Excpetions}
+           {Memory Exceptions}
+           {Input/Output Exceptions}
+           {Integer Exceptions}
+           {Coprozessor Exceptions}
+           {Type cast Exceptions}
+.EFIG
+
+.TOPIC 3 Hardware Exceptions
+.HIGH Hardware Exceptions  {Unit SYSTEM}
+
+Hardware-Exceptions werden bei schweren Hardwarefehlern oder ungÅltigen Zugriffen
+ausgelîst. In der Regel ist das Programm nach diesen Ausnahmen nicht mehr stabil.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EFault}
+           {EProcessorException}
+           {EGPFault}
+           {EStackFault}
+           {EPageFault}
+           {EInvalidOpCode}
+           {EBreakpoint}
+           {ESingleStep}
+.EFIG
+
+.TOPIC 3 Software Excpetions
+.HIGH Software Excpetions {Unit SYSTEM}
+
+Diese Ausnahmen werden von OS/2 intern ausgelîst und sind in der Regel nur als
+Benachrichtigung zu verstehen.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EProcessTerm}
+.EFIG
+
+.TOPIC 3 Memory Exceptions
+.HIGH Memory Exceptions {Unit SYSTEM}
+
+Diese Ausnahmen werden von den Heapfunktionen von WDSibyl bzw. Speed-Pascal ausgelîst,
+wenn wÑhrend einer Heapoperation ein Fehler auftrat.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EOutOfMemory}
+           {EInvalidPointer}
+           {EInvalidHeap}
+.EFIG
+
+.TOPIC 3 Input/Output Exceptions
+.HIGH Input/Output Exceptions {Unit SYSTEM}
+
+Diese Ausnahmen werden vom Laufzeitsystem von WDSibyl bzw. Speed-Pascal ausgelîst,
+wenn wÑhrend einer Ein- Ausgabeoperation ein Fehler auftrat.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EInOutError}
+           {EFileNotFound}
+           {EInvalidFileName}
+           {ETooManyOpenFiles}
+           {EAccessDenied}
+           {EEndOfFile}
+           {EDiskFull}
+           {EInvalidInput}
+.EFIG
+
+.TOPIC 3 Integer Exceptions
+.HIGH Integer Exceptions {Unit SYSTEM}
+
+Diese Ausnahmen werden vom Laufzeitsystem von WDSibyl bzw. Speed-Pascal beim Eintreten
+einer Integer-Excetpion ausgelîst.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EIntError}
+           {EDivByZero}
+           {ERangeError}
+           {EIntOverflow}
+.EFIG
+
+.TOPIC 3 Coprozessor Exceptions
+.HIGH Coprozessor Exceptions {Unit SYSTEM}
+
+Coprozessor Ausnahmen werden vom numerischen Coprozessor beim Auftreten einer
+Fliesskomma-Exception aufgerufen.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EMathError}
+           {EInvalidOp}
+           {EZeroDivide}
+           {EOverflow}
+           {EUnderflow}
+.EFIG
+
+.TOPIC 3 Type cast Exceptions
+.HIGH Type cast Exceptions {Unit SYSTEM}
+
+Type-cast Ausnahmen werden ausgelîst wenn eine Typwandlung (z.B. mit dem
+Operator /AS/) ungÅltig ist.
+
+.FIG
+Siehe auch:
+           {Exception}
+           {EInvalidCast}
+           {EConvertError}
+.EFIG
+
+.TOPIC 3 TObject
+.HIGH  (Klasse)  {Unit SYSTEM}

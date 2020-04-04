@@ -1,0 +1,197 @@
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\DEFAULT_Win32.ICO
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=BSETIB
+File3=BSEEXCPT
+File4=BSEDOS
+File5=BSEERR
+File6=PMWIN
+File7=PMWP
+File8=PMSHL
+File9=SYSUTILS
+File10=USTREAM
+File11=ULIST
+File12=USTRING
+File13=USYSCLASS
+File14=BSEREGISTRY
+File15=INIFILES
+File16=PMSPL
+File17=PMWINX
+File18=USYSINFO
+File19=DOS
+File20=COLOR
+File21=CLASSES
+File22=DBGHELP
+
+[Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\COMPLIB.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=V:\SHAREDFOLDER\WDSIBYL\INSTALL
+OutDir=P:\WDSibyl\WDSibyl\Compiler\Output\OS2;P:\WDSibyl\WDSibyl\IDE\Output\OS2
+LibDir=P:\WDSIBYL\WDSIBYL\Library\Output\OS2
+LibSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
+IncSrcDir=
+CompInstallDir=
+
+[Directories Win32]
+
+LastDir=V:\SHAREDFOLDER\WDSIBYL\INSTALL
+OutDir=P:\WDSibyl\WDSibyl\Compiler\Output\Win32;P:\WDSibyl\WDSibyl\IDE\Output\Win32;V:\SharedFolder\WDSibyl\Install
+LibDir=P:\WDSIBYL\WDSIBYL\Library\Output\Win32
+LibSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
+IncSrcDir=
+CompInstallDir=
+
+[Find History]
+
+Find0=DebugCommand
+Find1=ProfileEvent
+Find2=EXCEPTION_DEBUG_EVENT
+Find3='  go'
+Find4='go'
+Find5=case/else
+Find6=DBG_C_Term
+Find7=DBG_C_ReadMem
+Find8=DosDebug
+Find9=dos
+Find10=ContinueDebugEvent
+Find11=logwriteln
+Find12=LOAD_DLL_DEBUG_EVENT
+Find13=CREATE_PROCESS_DEBUG_EVENT
+Find14=Logwriteln
+Find15=sem1
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Compiler\Source\WDSPDB10.spr
+ProjectType=NonVisual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Open Files]
+
+File0=.\WDSPDB10\WDSPDB10.PAS
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=707
+File0.Height=527
+File0.Column=17
+File0.Line=14
+File1=.\WDSPDB10\DBGHELP.PAS
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=707
+File1.Height=527
+File1.Column=21
+File1.Line=1252
+File2=..\..\.\Library\Source\RTL\SYSTEM.PAS
+File2.Left=-1
+File2.Bottom=-1
+File2.Width=707
+File2.Height=527
+File2.Column=40
+File2.Line=9
+File3=..\..\.\Library\Source\RTL\Win32\WINBASE.PAS
+File3.Left=-1
+File3.Bottom=-1
+File3.Width=707
+File3.Height=527
+File3.Column=27
+File3.Line=410
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=Window
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\WDSPDB10\WDSPDB10.PAS
+MainFile0=.\WDSPDB10\WDSPDB10.PAS
+MainFile0.Ext=.DLL
+MainFile0.Checksum=6144
+MainFile0.Expanded=False
+MainFile0.File0=.\WDSPDB10\DBGHELP.PAS
+MainFile0.File1=..\..\.\Library\Source\RTL\SYSTEM.PAS
+MainFile0.File2=..\..\.\Library\Source\RTL\Win32\WINBASE.PAS
+MainFile0.File3=[Dependencies]
+MainFile0.Dependency0=..\..\.\Library\Source\RTL\SYSTEM.PAS
+MainFile0.Dependency1=.\WDSPDB10\DBGHELP.PAS
+
+[Replace History]
+
+Replace0=CompStatusMsg('
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+

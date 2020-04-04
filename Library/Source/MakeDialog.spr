@@ -1,0 +1,205 @@
+[Application Options Linux]
+
+ApplicationIcon=
+
+[Application Options OS/2]
+
+ApplicationIcon=
+
+[Application Options Win32]
+
+ApplicationIcon=
+
+[Browser Files]
+
+File0=SYSTEM
+File1=UDEF
+File2=OS2DEF
+File3=PMWIN
+File4=BSETIB
+File5=BSEEXCPT
+File6=BSEDOS
+File7=BSEERR
+File8=PMSHL
+File9=LANGUAGE
+File10=SYSUTILS
+File11=MESSAGES
+File12=COLOR
+File13=DOS
+File14=USTREAM
+File15=ULIST
+File16=USTRING
+File17=CLASSES
+File18=PMBITMAP
+File19=PMGPI
+File20=PMDEV
+File21=PMSTDDLG
+File22=PMHELP
+File23=CLIPBRD
+File24=GRAPHICS
+File25=MENUS
+File26=UEXTENSION
+File27=INIFILES
+File28=UDATETIME
+File29=ULOG
+File30=FORMS
+File31=BUTTONS
+File32=CRT
+File33=CACHE
+File34=STDCTRLS
+File35=EXTCTRLS
+File36=COMCTRLS
+File37=DDEMAN
+File38=FILECTRL
+File39=PMSPL
+File40=PRINTERS
+File41=DIALOGS
+File42=DOCKTOOL
+File43=EDITORS
+File44=MASK
+File45=GRIDS
+File46=OUTLINE
+File47=LISTVIEW
+File48=MMEDIA
+File49=SYNCOBJS
+File50=TABCTRLS
+File51=TOOLSAPI
+
+[Compiler Options]
+
+CodeGeneration=ASMSource
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=F:\Sprachen\pascal\WDSibyl\Bin\OS2\CompLib.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=
+OutDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Output
+LibDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Compnt
+
+[Directories Win32]
+
+LastDir=
+OutDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Output
+LibDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Compnt
+
+[Find History]
+
+Find0=MsgProc
+Find1=msgproc
+Find2=tthread
+Find3=tlistbox
+Find4=tmemo.set
+Find5=tedit.setmax
+Find6=maxlen
+Find7=tmemo
+Find8=TListBoxStrings
+Find9=FItems
+Find10=longWord
+Find11=tlixtbox
+Find12={$M
+Find13=listbox
+Find14=logwriteln
+Find15=cmopen
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Library\Source\MakeDialog.spr
+ProjectType=NonVisual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Open Files]
+
+File0=.\MakeDialog.PAS
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=839
+File0.Height=626
+File0.Column=21
+File0.Line=5
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=GUI
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=
+MainFile0=.\MakeDialog.PAS
+MainFile0.Ext=.EXE
+MainFile0.Checksum=11264
+MainFile0.Expanded=False
+MainFile0.File0=.\Dialog\DIALOGS.PAS
+MainFile0.File1=[Dependencies]
+
+[Replace History]
+
+Replace0=SysInfo
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+

@@ -1,0 +1,229 @@
+[Application Options]
+
+ApplicationIcon=
+
+[Application Options Linux]
+
+ApplicationIcon=
+
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_win32.ico
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=PMWIN
+File3=BSESUB
+File4=BSEVIO
+File5=BSEKBD
+File6=BSETIB
+File7=BSEEXCPT
+File8=BSEDOS
+File9=BSEERR
+File10=PMWP
+File11=PMSHL
+File12=SYSUTILS
+File13=CRT
+File14=USTREAM
+File15=ULIST
+File16=USTRING
+File17=BSEREGISTRY
+File18=INIFILES
+File19=USYSCLASS
+File20=PMSPL
+File21=PMWINX
+File22=USYSINFO
+File23=DOS
+File24=SPC_DATA
+File25=UFUNC
+File26=PMBITMAP
+File27=PMGPI
+File28=PMDEV
+File29=PMSTDDLG
+File30=PMHELP
+File31=COLOR
+File32=CLASSES
+File33=MESSAGES
+File34=CLIPBRD
+File35=UCONVERT
+File36=GRAPHICS
+File37=ULANGUAGE
+File38=MENUS
+File39=PRINTERS
+File40=FORMS
+File41=CONSTS
+
+[Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library Linux]
+
+CompLibName=
+
+[Component Library OS/2]
+
+CompLibName=
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=P:\WDSIBYL\WDSIBYL\TOOLS\SOURCE\COMPILEALL
+OutDir=P:\WDSibyl\WDSibyl\Tools\Output\OS2;C:\PROGRAMS\WDSibyl\Tools\Output\OS2
+LibDir=P:\WDSIBYL\WDSIBYL\COMPILER\Output\OS2;P:\WDSIBYL\WDSIBYL\Library\Output\OS2
+LibSrcDir=
+IncSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
+CompInstallDir=
+
+[Directories Win32]
+
+LastDir=P:\WDSIBYL\WDSIBYL\TOOLS\SOURCE\COMPILEALL
+OutDir=P:\WDSibyl\WDSibyl\Tools\Output\Win32;V:\SharedFolder\WDSibyl\Install
+LibDir=P:\WDSIBYL\WDSIBYL\COMPILER\Output\Win32;P:\WDSIBYL\WDSIBYL\Library\Output\Win32
+LibSrcDir=
+IncSrcDir=P:\WDSibyl\WDSibyl\Compiler\Source\Share
+CompInstallDir=
+
+[Find History]
+
+Find0=readln
+Find1=Exception occured
+Find2=CopyRightText
+Find3=typtext
+Find4=RunFromInstall
+Find5=CreateHandle
+Find6=fLastPostCount
+Find7=pc
+Find8=FPostCount
+Find9=DosQueryEventSem
+Find10=Request
+Find11=SEM_IDEDINITE_WAIT
+Find12=fMutexCreate
+Find13=Log
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Tools\Source\CompileAllRC.spr
+ProjectType=NonVisual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=Default
+Platform=OS/2
+
+[Last Closed Files]
+
+File0=..\..\.\LIBRARY\SOURCE\RTL\uSysClass.pas
+
+[Last Open Files]
+
+File0=.\CompileAll\CompileAllRC.PAS
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=854
+File0.Height=488
+File0.Column=11
+File0.Line=183
+File1=..\..\.\Compiler\Source\Share\SPC_DATA.PAS
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=854
+File1.Height=488
+File1.Column=57
+File1.Line=61
+File2=..\..\.\Compiler\Source\Share\uFunc.pas
+File2.Left=-1
+File2.Bottom=-1
+File2.Width=854
+File2.Height=488
+File2.Column=1
+File2.Line=1
+File3=..\..\.\Library\Source\RTL\system.pas
+File3.Left=-1
+File3.Bottom=-1
+File3.Width=854
+File3.Height=488
+File3.Column=29
+File3.Line=4781
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=Window
+ExePacking=None
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\CompileAll\CompileAllRC.PAS
+MainFile0=.\CompileAll\CompileAllRC.PAS
+MainFile0.Ext=.EXE
+MainFile0.Checksum=11008
+MainFile0.Expanded=False
+MainFile0.File0=..\..\.\Compiler\Source\Share\CONSTS.PAS
+MainFile0.File1=..\..\.\Compiler\Source\Share\SPC_DATA.PAS
+MainFile0.File2=..\..\.\Compiler\Source\Share\uFunc.pas
+MainFile0.File3=..\..\.\Library\Source\RTL\system.pas
+MainFile0.File4=[Dependencies]
+MainFile0.Dependency0=..\..\.\Library\Source\RTL\system.pas
+MainFile0.Dependency1=..\..\.\Compiler\Source\Share\SPC_DATA.PAS
+MainFile0.Dependency2=..\..\.\Compiler\Source\Share\UFUNC.PAS
+MainFile0.Dependency3=..\..\.\Compiler\Source\Share\CONSTS.PAS
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+

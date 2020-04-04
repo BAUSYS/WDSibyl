@@ -1,0 +1,46 @@
+WDSibyl
+=======
+
+WDSibyl ist eine Weiterentwicklung von Sibyl, das vor einigen Jahren von 
+der Firma Speedsoft entwickelt und dann aufgegeben wurde. Die Original 
+Sourcen von der IDE unterliegen der GPL (General Public License) und sind 
+von Hobbes downloadbar. Die Original Sourcen von RTL, SPCC usw. hatte 
+die Firma SpeedSoft schon vor einigen Jahren auf der Homepage bereitgestellt. 
+
+Da die Firma Speedsoft nicht mehr existiert, habe ich angefangen diese 
+Sourcen zu kompilieren und es entstand nach lÑngerer Zeit ØWDSibylÆ. 
+Bei diesem Produkt sind auch einige Neuerungen (z.B. USB-, ODBC-, 
+Joystick-Support, Abspeichern von der Position und Farben der 
+Komponente, einige Klassen von anderen Personen usw.) und eine Menge 
+Korrekturen mit eingeflossen.
+
+Meine énderungen bzw. Erweiterung der Sourcen unterliegen auch GPL.
+
+Ich Åbernehme keine Haftung bei direkten oder indirekten SchÑden durch 
+die Benutzung des Produktes. Aber falls jemand einen Fehler oder ein 
+Problem mit WDSibyl hat, freue ich mich Åber Feedback per E-Mail. 
+
+Da ich nicht alles programmieren bzw. schreiben kann, kînnte ich jede 
+Hilfe brauchen um das Produkt weiterzuentwickeln. 
+HauptsÑchlich fehlen: 
+.) neue Komponenten bzw. Sourcen
+.) Dokumentantion
+.) Testen und weiter entwickeln des Produktes
+
+Bitte meldet Euch unter der Mail-Adresse: wdsibyl@chello.at
+
+-------
+
+Ausserdem mîchte ich mich gleich bei einigen Leuten bedanken, die bei diesem Produkt geholfen haben.
+.) Als erstes natÅrlich bei meiner Ehefrau Yvonne. Sie gibt mir Kraft und das VerstÑndnis fÅr dieses Projekt
+.) Hr. Martin Vieregg: Er hat mir einige Bugs bzw. Korrekturen geschickt. Weiters entdeckt er immer wieder Fehler, die sehr interessant sind und die mir immer wieder einige NÑchte gekostet haben. ;-) (Åberhaupt im Windows-Bereich)
+.) Hr. Rene Nuernberger: FÅr seine Diplomarbeit die es bei TU-Chemnitz gibt oder hier auf der Homepage als PDF-Datei.
+.) Hr. Willem Clements: FÅr die Komponente tSerialPort (Bitte auch Copyrights von der Klasse durchlesen)
+.) Hr. Aaron Lawrence: FÅr diverse Komponenten tColorWheel, tValueBar (Bitte auch Copyrights von den Klassen durchlesen)
+.) Hr. Adrian Gschwend: FÅr die Herstellung der Mailinglist (http://news.gmane.org/index.php?prefix=gmane.org.netlabs)
+.) Hr. Udo Schelp: Er fÅhrt diverse Tests im Bereich OS/2 durch. Weiters hat er auch schon sehr viele Bugs und Tipps gemeldet.
+.) Hr. Herbert Rosenau: FÅr Rat und Tat fÅr die Homepage.
+
+... und nun viel Spass mit dem Produkt
+
+Ing. Wolfgang Draxler

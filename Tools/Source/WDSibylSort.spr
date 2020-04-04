@@ -1,0 +1,178 @@
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_win32.ico
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=BSETIB
+File3=BSEEXCPT
+File4=BSEDOS
+File5=PMWIN
+File6=PMBITMAP
+File7=PMGPI
+File8=PMDEV
+File9=PMSTDDLG
+File10=PMHELP
+File11=PMSHL
+File12=BSEERR
+File13=PMWP
+File14=SYSUTILS
+File15=USTREAM
+File16=ULIST
+File17=USTRING
+File18=PMSPL
+File19=PMWINX
+File20=USYSINFO
+File21=BSEREGISTRY
+File22=INIFILES
+File23=USYSCLASS
+File24=COLOR
+File25=DOS
+File26=CLASSES
+File27=MESSAGES
+File28=CLIPBRD
+File29=UCONVERT
+File30=GRAPHICS
+File31=ULANGUAGE
+File32=MENUS
+File33=PRINTERS
+File34=FORMS
+File35=BUTTONS
+File36=STDCTRLS
+File37=EXTCTRLS
+File38=COMCTRLS
+File39=FILECTRL
+File40=DIALOGS
+File41=UWDSIBYLSORT
+
+[Compiler Options]
+
+CodeGeneration=Assertions
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\CompLib.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=LocalSymbols
+EvalHints=True
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=LocalSymbols
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=LocalSymbols
+Dbg_Options=0
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=P:\WDSIBYL\WDSIBYL\TOOLS\SOURCE
+OutDir=P:\WDSibyl\WDSibyl\Tools\Output\OS2;V:\SharedFolder\WDSibyl\Install
+LibDir=P:\WDSibyl\WDSibyl\Library\Output\OS2;P:\WDSIBYL\WDSIBYL\Compiler\Output\OS2
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=P:\WDSibyl\WDSibyl\Output\OS2
+
+[Directories Win32]
+
+LastDir=P:\WDSibyl\WDSibyl\Tools\Source\WDSibylSort
+OutDir=P:\WDSibyl\WDSibyl\Tools\Output\Win32;V:\SharedFolder\WDSibyl\Install;G:\STAROFFICE\HOMEPAGE\WDSIBYL\INSTALL\DATEIEN
+LibDir=F:\SPRACHEN\PASCAL\WDSIBYL\OS\Win32\LIB;P:\WDSIBYL\WDSIBYL\Compiler\Output\Win32
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=P:\WDSibyl\WDSibyl\Output\Win32
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=P:\WDSibyl\WDSibyl\Tools\Source\WDSibylSort.spr
+ProjectType=Visual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Open Files]
+
+File0=.\WDSibylSort\uWDSibylSort.pas
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=900
+File0.Height=597
+File0.Column=1
+File0.Line=36
+File1=.\WDSibylSort\WDSibylSort.pas
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=900
+File1.Height=597
+File1.Column=13
+File1.Line=3
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=GUI
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\WDSibylSort\WDSibylSort.pas
+MainFile0=.\WDSibylSort\WDSibylSort.pas
+MainFile0.Ext=.EXE
+MainFile0.Checksum=11264
+MainFile0.Expanded=False
+MainFile0.File0=.\WDSibylSort\uWDSibylSort.pas
+MainFile0.File1=[Dependencies]
+MainFile0.Dependency0=.\WDSibylSort\UWDSIBYLSORT.PAS
+MainFile0.Dependency1=.\WDSibylSort\WDSibylSort.scu
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=.\WDSibylSort\WDSibylSort.scu
+MainForm=MainForm
+

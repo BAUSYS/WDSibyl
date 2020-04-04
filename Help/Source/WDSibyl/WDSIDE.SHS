@@ -1,0 +1,4376 @@
+.TOPIC 1 WDSibylIDE
+
+.HIGH Hilfe WDSibylIDE
+
+Die WDSibyl IDE ist eine mÑchtige Entwicklungsumgebung, welche alle Schritte die zur
+Generierung einer lauffÑhigen Applikation nîtig sind, unterstÅtzt.
+
+öbersicht Åber die WDSibyl Hilfe
+.FIG
+
+ {Copyright}
+ {Lizenzvereinbarung}
+ {Der WDSibyl Compiler}
+ {WDSibyl Compiler Tools}
+ {Danksagung}
+
+ {Tastaturbelegung}
+.EFIG
+
+.TOPIC 2 Copyright
+
+.HIGH Copyright
+
+WDSibyl ist eine Erweiterung von dem Produkt Sibyl.
+Diese wurde von der Firma Speedsoft hergestellt. Die original Sourcen von der IDE
+unterliegen der GPL (General Public License) und sind von Hobbes download bar.
+Die original Sourcen von RTL, SPCC usw. hat schon die Firma SpeedSoft vor einigen Jahren
+auf der Homepage bereitgestellt.
+
+Da die Firma Speedsoft anscheinend nicht mehr existiert habe ich angefangen diese Sourcen
+zu kompilieren und es entstand nach lÑngerer Zeit ØWDSibylÆ. Bei diesem Produkt sind auch
+einige Neuerungen (z.b Joystick-Support, einige Klassen von anderen Personen usw.) bzw. Korrekturen
+mit eingeflossen.
+
+Meine énderungen bzw. Erweiterung der Sourcen unterliegen auch GPL.
+
+Ich Åbernehme keine Haftung bei direkten oder indirekten SchÑden durch die BenÅtzung des
+Produktes. Aber falls Du einen Fehler oder ein Problem mit dem Produkt hast, dann
+schreibe mir ein Mail.
+
+Da ich nicht alles Programmieren bzw. Schreiben kann, kînnte ich jede Hilfe brauchen um
+das Produkt weiterzuentwickeln. HauptsÑchlich fehlen:
+.ULIST
+.LISTITEM neue Komponenten bzw. Sourcen
+.LISTITEM Dokumentantion
+.LISTITEM Testen des Produktes
+.EULIST
+
+Bitte meldet Euch unter der Mail-Adresse: wdsibyl@chello.at
+
+.HIGH Copyright (C) 1995 SpeedSoft
+
+Alle Rechte vorbehalten. Ohne ausdrÅckliche, schriftliche Genehmigung des Herausgebers
+ist es nicht gestattet, diese Dokumentation oder Teile daraus in irgedeiner Form durch
+Fotokopie, Mikrofilm oder ein anderes Verfahren zu verfielfÑltigen oder zu verbreiten.
+Dasselbe gilt fÅr das Recht der îffentlichen Wiedergabe.
+Der Verlag macht darauf aufmerksam, da· die genannten Firmen- und Markennamen,
+sowie Produktbezeichnungen in der Regel marken-, patent- oder warenzeichenrechtliche
+m Schutz unterliegen. Die Herausgeber Åbernehmen keine GewÑhr fÅr die FunktionsfÑhigkeit
+beschriebener Verfahren, Programme oder Schaltungen.
+
+Turbo Pascal und Delphi sind Warenzeichen von Borland International.
+OS/2 Warp ist ein Warenzeichen der International Business Machines Corporation.
+Windows, Windows95 und Windows NT sind Warenzeichen von Microsoft.
+
+.TOPIC 2 Lizenzvereinbarung
+
+.HIGH Lizenzvereinbarung
+
+Diese Software unterliegt der Lizenzvereinbarung, die diesem Programm beigefÅgt ist.
+
+HaftungsbeschrÑnkung
+
+.COLOR fc=red
+UNTER KEINEN UMSTéNDEN HAFTET SPEEDSOFT ODER ING. WOLFGANG DRAXLER FöR IRGENDWELCHE
+SCHéDEN, EINSCHLIESSLICH DATENVERLUST, ENTGANGENEM GEWINN, DECKUNGSBETRéGEN ODER ANDEREN
+NEBEN- FOLGE- ODER INDIREKTEN SCHéDEN, DIE SICH AUS DER BENUTZUNG DES PROGRAMMS ODER
+DER BEILIEGENDEN DOKUMETATION ERGEBEN KôNNEN, UND ZWAR UNGEACHTET DER SCHADENSURSACHE
+ODER DER GRUNDLAGE DES HAFTUNGSANSPRUCHS. DIESE BESCHRéNKUNG GILT AUCH, WENN SPEEDSOFT
+ODER EIN VERTRAGSHéNDLER AUF DIE MôGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN
+IST.
+.COLOR fc=default
+
+.TOPIC 2 Der WDSibyl Compiler
+
+.HIGH Der WDSibyl Compiler
+
+WDSibyl ist eine visuelle Entwicklungsumgebung fÅr OS/2 Warp und Windows mit einem
+32 Bit Compiler.
+Er erzeugt speziell optimierten Code der nur unter der OS/2 Warp Version 3, 4, eCS (1.0
+bis 1.2) oder hîher lauffÑhig ist.
+
+Einige Highlights dieses Compilers sind:
+
+.ULIST
+.LISTITEM Volle 32 Bit UnterstÅtzung
+.LISTITEM Schneller kompakter Code
+.LISTITEM Compilieren im Hintergrund
+.LISTITEM Generierung von Fehlern und Warnungen
+.LISTITEM SPCC Klassenbibliothek
+.LISTITEM Volle Integration in die WPS
+.LISTITEM Bis zu 99% Turbo-Pascal (TM) und Delphi (TM) kompatibel
+.LISTITEM Einbindung und Erzeugung von DLL's
+.LISTITEM Wahlweise Erzeugung von Assembler Quelltext
+.LISTITEM Alle Bibliotheken im Quelltext
+.EULIST
+
+.TOPIC 2 WDSibyl Compiler Tools
+
+.HIGH WDSibyl Compiler Tools
+
+Zum Sibyl Compiler gehîren eine Reihe von Tools, welche die Programmierung des
+Presentation Managers unterstÅtzen:
+
+.ULIST
+.LISTITEM WDSibyl Compiler WDSPC10
+.LISTITEM Ressourcen Compiler WDRCC10
+.LISTITEM IPFC Precompiler WDHLPC10
+.EULIST
+
+.TOPIC 2 Danksagung
+
+.HIGH Danksagung
+
+.ULIST
+.LISTITEM Als erstes natÅrlich bei meiner Ehefrau Yvonne. Sie gibt mir Kraft und das
+VerstÑndnis fÅr dieses Projekt
+.LISTITEM Hr. Martin Vieregg: Er hat mir einige Bugs bzw. Korrekturen geschickt. Weiters
+entdeckt er immer wieder Fehler, die sehr interessant sind und die mir immer wieder einige NÑchte gekostet haben. ;-) (Åberhaupt im Windows-Bereich)
+.LISTITEM Hr. Rene Nuernberger: FÅr seine Diplomarbeit die es bei TU-Chemnitz gibt oder hier auf
+der Homepage als PDF-Datei.
+.LISTITEM Hr. Willem Clements: FÅr die Komponente tSerialPort (Bitte auch Copyrights von der
+Klasse durchlesen)
+.LISTITEM Hr. Aaron Lawrence: FÅr diverse Komponenten tColorWheel, tValueBar (Bitte auch
+Copyrights von den Klassen durchlesen)
+.LISTITEM Hr. Adrian Gschwend: FÅr die Herstellung der Mailinglist
+(http://news.gmane.org/index.php?prefix=gmane.org.netlabs)
+.LISTITEM Hr. Udo Schelp: Er fÅhrt diverse Tests im Bereich OS/2 durch. Weiters hat er auch
+schon sehr viele Bugs und Tipps gemeldet.
+.LISTITEM Hr. Herbert Rosenau: FÅr Rat und Tat fÅr die Homepage.
+.EULIST
+
+.TOPIC 2 Tastaturbelegung
+.HIGH Tastaturbelegung
+.HCTX hctxKeysHelp
+
+Folgende Tasturbelegung werden von der IDE unterstÅtzt
+
+.FIG
+    {Code Editor - WordStar}
+    {Code Editor - CUA}
+    {Code Editor - Default}
+
+    {Code Formular Designer}
+.EFIG
+
+.TOPIC 3 Code Editor - WordStar
+
+.HIGH WordStar|Cursor-Bewegung
+.XMP
+ Zeichen links               Cursor links, Strg+S
+ Zeichen rechts              Cursor rechts, Strg+D
+ Zeichen nach oben           Cursor hoch, Strg+E
+ Zeichen nach unten          Cursor runter, Strg+X
+ Seite nach oben             Seite hoch, Strg+R
+ Seite nach unten            Seite runter, Strg+C
+ Wort nach rechts            Strg+Cursor rechts, Strg+F
+ Wort nach links             Strg+Cursor links, Strg+A
+ Dateianfang                 Strg+Seite hoch, Strg+QR
+ Dateiende                   Strg+Seite runter, Strg+QC
+ Seitenanfang                Strg+Pos1, Strg+QE
+ Seitenende                  Strg+Ende, Strg+QX
+ Zeilenanfang                Pos1, Strg+QS
+ Zeilenende                  Ende, Strg+QD
+ Seite nach unten rollen     Strg+W
+ Seite nach oben rollen      Strg+Z
+ Anfang der Markierung       Strg+QB
+ Ende der Markierung         Strg+QK
+ vorheriger Tabulator        Umschalt+Tab
+.EXMP
+
+.HIGH WordStar|Suchen/Ersetzen
+.XMP
+ Text suchen             Strg+QF
+ Text ersetzen           Strg+QA
+ Weitersuchen            Strg+L
+ inkrementelle Suche     Strg+QI, Strg+Umschalt
+.EXMP
+
+.HIGH WordStar|Bearbeiten
+.XMP
+ bis Zeilenende lîschen                        Strg+QY
+ Zeilenumbruch                                 Strg+N
+ Zeile lîschen                                 Strg+Y
+ rechtes Wort lîschen                          Strg+T
+ linkes Wort lîschen                           Strg+RÅcktaste
+ Tabulator einfÅgen                            Tab, Strg+I
+ rechtes Zeichen lîschen                       Entf, Strg+G
+ linkes Zeichen lîschen                        RÅcktaste, Strg+H
+ Operation zurÅcknehmen                        Alt+RÅcktaste
+ RÅcknahme widerrufen                          Alt+Umschalt+RÅcktaste
+ Zeilenumbruch auf nÑchste Zeile               Enter
+ Wort am Cursor in Gro·buchstaben umwandeln    Strg+KF
+ Wort am Cursor in Kleinbuchstaben umwandeln   Strg+KE
+ Gro·-/Kleinschreibung Ñndern                  Strg+OU
+ Klammern einfÅgen ()                          Strg+(
+ Klammern einfÅgen []                          Strg+[
+ Klammern einfÅgen \#1\#2                          Strg+\#1
+ Klammern einfÅgen (**)                        Strg+*
+ Klammern einfÅgen /**/                        Strg+/
+.EXMP
+
+.HIGH WordStar|Markieren
+.XMP
+ Anfang der Markierung setzen                       Strg+KB
+ Ende der Markierung setzen                         Strg+KK
+ Wort am Cursor markieren                           Strg+KT
+ Zeile am Cursor markieren                          Strg+KL
+ Markierung ein-/ausschalten                        Strg+KH
+ nach links erweitern                               Umschalt+Cursor links
+ nach rechts erweitern                              Umschalt+Cursor rechts
+ nach oben erweitern                                Umschalt+Cursor hoch
+ nach unten erweitern                               Umschalt+Cursor runter
+ eine Seite nach oben erweitern                     Umschalt+Seite hoch
+ eine Seite nach unten erweitern                    Umschalt+Seite runter
+ zum Zeilenanfang erweitern                         Umschalt+Pos1
+ zum Zeilenende erweitern                           Umschalt+Ende
+ ein Wort nach links erweitern                      Strg+Umschalt+Cursor links
+ ein Wort nach rechts erweitern                     Strg+Umschalt+Cursor rechts
+ zum Seitenanfang erweitern                         Strg+Umschalt+Pos1
+ zum Seitenende erweitern                           Strg+Umschalt+Ende
+ zum Dateianfang erweitern                          Strg+Umschalt+Seite hoch
+ zum Dateiende erweitern                            Strg+Umschalt+Seite runter
+ Blockmarkierung, nach links erweitern              Alt+Umschalt+Cursor links
+ Blockmarkierung, nach rechts erweitern             Alt+Umschalt+Cursor rechts
+ Blockmarkierung, nach oben erweitern               Alt+Umschalt+Cursor hoch
+ Blockmarkierung, nach unten erweitern              Alt+Umschalt+Cursor runter
+ Blockmarkierung, eine Seite nach oben erweitern    Alt+Umschalt+Seite hoch
+ Blockmarkierung, eine Seite nach unten erweitern   Alt+Umschalt+Seite runter
+ Blockmarkierung, zum Zeilenanfang erweitern        Alt+Umschalt+Pos1
+ Blockmarkierung, zum Zeilenende erweitern          Alt+Umschalt+Ende
+ Blockmarkierung, ein Wort nach links erweitern     Strg+Alt+Shift+Cursor links
+ Blockmarkierung, ein Wort nach rechts erweitern    Strg+Alt+Shift+Cursor rechts
+ Blockmarkierung, zum Seitenanfang erweitern        Strg+Alt+Shift+Pos1
+ Blockmarkierung, zum Seitenende erweitern          Strg+Alt+Shift+Ende
+ Blockmarkierung, zum Dateianfang erweitern         Strg+Alt+Shift+Seite hoch
+ Blockmarkierung, zum Dateiende erweitern           Strg+Alt+Shift+Seite runter
+ Alles markieren                                    Strg+/
+ Markierung aufheben                                Strg+\
+.EXMP
+
+.HIGH WordStar|Markierung bearbeiten
+.XMP
+ Markierung lîschen                             Strg+Entf, Strg+KY
+ Markierung nach links verschieben              Strg+KU, Alt+Cursor links
+ Markierung nach rechts verschieben             Strg+KI, Alt+Cursor rechts
+ Markierung an die Cursorposition kopieren      Strg+KC
+ Markierung an die Cursorposition verschieben   Strg+KV
+ Markierung in Gro·buchstaben umwandeln         Strg+KN, Strg+Cursor hoch
+ Markierung in Kleinbuchstaben umwandeln        Strg+KO, Strg+Cursor runter
+ Markierung in Datei schreiben                  Strg+KW
+ Block von Datei einlesen                       Strg+KR
+ SchlÅsselworte in Gro·buchstaben umwandeln     Alt+Cursor hoch
+ SchlÅsselworte in Kleinbuchstaben umwandeln    Alt+Cursor runter
+.EXMP
+
+.HIGH WordStar|Zwischenablage
+.XMP
+ Ausschneiden                      Umschalt+Entf
+ Kopieren                          Strg+Einfg
+ EinfÅgen                          Umschalt+Einfg
+ Zwischenablagefenster anzeigen    Strg+Umschalt+Einfg
+.EXMP
+
+.HIGH WordStar|Lesezeichen
+.XMP
+ Lesezeichen 0 bis 9 setzen            Strg+K0..Strg+K9
+ Lesezeichen 0 bis 9 anzeigen          Strg+Q0..Strg+Q9, Strg+0..Strg+9
+ Lesezeichen 0 bis 9 lîschen           Strg+U0..Strg+U9
+ alle Lesezeichen lîschen              Strg+UU
+ Lesezeichen des Projektes anzeigen    Strg+B
+.EXMP
+
+.HIGH WordStar|Editor-Makros
+.XMP
+ Makro aufnehmen, Aufnahme beenden     Strg+Umschalt+R
+ Makro abspielen                       Strg+Umschalt+P
+ Makroliste anzeigen                   Strg+Umschalt+M
+ letztes Makro speichern               Strg+Umschalt+A
+.EXMP
+
+.HIGH WordStar|Sonstige
+.XMP
+ EinfÅgemodus umschalten                 Einfg, Strg+V
+ Datei speichern                         Strg+KS
+ Blockmarkierung                         Strg+OC
+ fortlaufende Markierung                 Strg+OK
+ Compileroptionen einfÅgen               Strg+OO
+ Dialog fÅr 'Gehe zu Zeile' aufrufen     Strg+OG
+ Datei am Cursor îffnen                  Strg+Enter
+ nÑchstes Editorfenster aktivieren       Strg+Tab
+ vorheriges Editorfenster aktivieren     Strg+Umschalt+Tab
+ Kontrollzentrum anzeigen                Strg+J
+ MDI Modus umschalten                    Strg+M
+ letzten Compilerfehler anzeigen         Strg+QW
+ letzten Parserfehler anzeigen           Strg+QP
+.EXMP
+
+.HIGH WordStar|VDE
+.XMP
+ Compiler anhalten                                  Esc
+ Inhalt der Hilfe anzeigen                          F1
+ Datei speichern                                    F2
+ Datei îffnen                                       F3
+ Programm bis Cursorposition im Debugger ausfÅhren  F4
+ Fenster maximieren/wiederherstellen                F5
+ nÑchstes Editorfenster aktivieren                  F6
+ einzelne Anweisung im Debugger ausfÅhren           F7
+ gesamte Routine im Debugger ausfÅhren              F8
+ Prozedur im Debugger beenden                       Strg+F3
+ Projekt aktualisieren                              F9
+ Objekt Inspektor anzeigen                          F11
+ zwischen Formular und Unit umschalten              F12
+ aktuelles Editorfenster schlie·en                  Alt+F3, Strg+F4
+ VDE beenden                                        Alt+X
+ Fensterliste anzeigen                              Alt+0
+ vorheriges Editorfenster aktivieren                Umschalt+F6
+ Kontexthilfe                                       Strg+F1
+ Programm im Debugger zurÅcksetzen                  Strg+F2
+ Variable im Debugger auswerten/Ñndern              Strg+F5
+ Åberwachten Ausdruck hinzufÅgen                    Strg+F7
+ Haltepunkt umschalten                              Strg+F8
+ Programm ausfÅhren                                 Strg+F8
+ Programm ausfÅhren                                 Strg+F9
+ Datei Åbersetzen                                   Strg+F10
+ Programm im Debugger ausfÅhren                     Strg+Alt+F9
+ Datei drucken                                      Strg+P
+ Editorfenster 1 bis 9 aktivieren                   Alt+1..A
+.EXMP
+
+.TOPIC 3 Code Editor - CUA
+
+.HIGH CUA|Cursor-Bewegung
+.XMP
+ Zeichen links            Cursor links
+ Zeichen rechts           Cursor rechts
+ Zeichen nach oben        Cursor hoch
+ Zeichen nach unten       Cursor runter
+ Zeilenanfang             Pos1
+ Zeilenende               Ende
+ Seite nach unten         Seite runter
+ Seite nach oben          Seite hoch
+ Wort nach links          Strg+Cursor
+ links  Wortnach rechts   Strg+Cursor
+ rechts  Seitenanfang     Strg+Seite
+ hoch Seitenende          Strg+Seite
+ runter  Dateianfang      Strg+Pos1
+ Dateiende                Strg+Ende
+ vorheriger Tabulator     Umschalt+Tab
+.EXMP
+
+.HIGH CUA|Suchen/Ersetzen
+.XMP
+ Text suchen              Strg+S, Strg+F
+ Text ersetzen            Strg+R
+ Weitersuchen             Strg+N
+ inkrementelle Suche      Strg+E, Strg^   LTNR¿
+.EXMP
+
+.HIGH CUA|Bearbeiten
+.XMP
+ Zeile lîschen                       Strg+RÅcktaste, Strg+Y
+ Operation zurÅcknehmen              Alt+RÅcktaste
+ RÅcknahme widerrufen                Alt+Umschalt+RÅcktaste
+ Tabulator einfÅgen                  Tab
+ rechtes Zeichen lîschen             Entf
+ linkes Zeichen lîschen              RÅcktaste
+ Zeilenumbruch auf nÑchste Zeile     Enter
+ Klammern einfÅgen ()                Strg+(
+ Klammern einfÅgen []                Strg+[
+ Klammern einfÅgen \#1\#2                Strg+\#1
+ Klammern einfÅgen (**)              Strg+*
+.EXMP
+
+.HIGH CUA|Markieren
+.XMP
+ nach links erweitern                Umschalt+Cursor links
+ nach rechts erweitern               Umschalt+Cursor rechts
+ nach oben erweitern                 Umschalt+Cursor hoch
+ nach unten erweitern                Umschalt+Cursor runter
+ eine Seite nach oben erweitern      Umschalt+Seite hoch
+ eine Seite nach unten erweitern     Umschalt+Seite runter
+ zum Zeilenanfang erweitern          Umschalt+Pos1
+ zum Zeilenende erweitern            Umschalt+Ende
+ ein Wort nach links erweitern       Strg+Umschalt+Cursor links
+ ein Wort nach rechts erweitern      Strg+Umschalt+Cursor rechts
+ zum Dateianfang erweitern           Strg+Umschalt+Pos1
+ zum Dateiende erweitern             Strg+Umschalt+Ende
+ zum Seitenanfang erweitern          Strg+Umschalt+Seite hoch
+ zum Seitenende erweitern            Strg+Umschalt+Seite runter
+ Alles markieren                     Strg+/
+ Markierung aufheben                 Strg+\
+.EXMP
+
+.HIGH CUA|Markierung bearbeiten
+.XMP
+ Markierung lîschen                            Strg+Entf
+ Markierung nach links verschieben             Alt+Cursor links, Strg+Umschalt+U
+ Markierung nach rechts verschieben            Alt+Cursor rechts, Strg+Umschalt+I
+ Markierung in Gro·buchstaben umwandeln        Strg+Cursor hoch
+ Markierung in Kleinbuchstaben umwandeln       Strg+Cursor runter
+ SchlÅsselworte in Gro·buchstaben umwandeln    Alt+Cursor hoch
+ SchlÅsselworte in Kleinbuchstaben umwandeln   Alt+Cursor runter
+.EXMP
+
+.HIGH CUA|Zwischenablage
+.XMP
+ Ausschneiden                       Umschalt+Entf
+ Kopieren                           Strg+Einfg
+ EinfÅgen                           Umschalt+Einfg
+ Zwischenablagefenster anzeigen     Strg+Umschalt+Einfg
+.EXMP
+
+.HIGH CUA|Lesezeichen
+.XMP
+ Lesezeichen 0 bis 9 setzen            Strg+K0..Strg+K9
+ Lesezeichen 0 bis 9 anzeigen          Strg+Q0..Strg+Q9
+ Lesezeichen 0 bis 9 lîschen           Strg+U0..Strg+U9
+ alle Lesezeichen lîschen              Strg+UU
+ Lesezeichen des Projektes anzeigen    Strg+B
+.EXMP
+
+.HIGH CUA|Editor-Makros
+.XMP
+ Makro aufnehmen, Aufnahme beenden     Strg+Umschalt+R
+ Makro abspielen                       Strg+Umschalt+P
+ Makroliste anzeigen                   Strg+Umschalt+M
+ letztes Makro speichern               Strg+Umschalt+A
+.EXMP
+
+.HIGH CUA|Sonstige
+.XMP
+ EinfÅgemodus umschalten                Einfg
+ Compileroptionen einfÅgen              Strg+OO
+ Dialog fÅr 'Gehe zu Zeile' aufrufen    Strg+OG
+ Datei am Cursor îffnen                 Strg+Enter
+ nÑchstes Editorfenster aktivieren      Strg+Tab
+ vorheriges Editorfenster aktivieren    Strg+Umschalt+Tab
+ Kontrollzentrum anzeigen               Strg+J
+ MDI Modus umschalten                   Strg+M
+ letzten Compilerfehler anzeigen        Strg+QW
+ letzten Parserfehler anzeigen          Strg+QP
+.EXMP
+
+.HIGH CUA|VDE
+.XMP
+ Compiler anhalten                                  Esc
+ Inhalt der Hilfe anzeigen                          F1
+ Datei speichern                                    F2
+ VDE beenden                                        F3
+ Programm bis Cursorposition im Debugger ausfÅhren  F4
+ Fenster maximieren/wiederherstellen                F5
+ nÑchstes Editorfenster aktivieren                  F6
+ einzelne Anweisung im Debugger ausfÅhren           F7
+ gesamte Routine im Debugger ausfÅhren              F8
+ Prozedur im Debugger beenden                       Strg+F3
+ Projekt aktualisieren                              F9
+ Objekt Inspektor anzeigen                          F11
+ zwischen Formular und Unit umschalten              F12
+ aktuelles Editorfenster schlie·en                  Alt+F3, Strg+F4
+ VDE beenden                                        Alt+X
+ Fensterliste anzeigen                              Alt+0
+ vorheriges Editorfenster aktivieren                Umschalt+F6
+ Kontexthilfe                                       Strg+F1
+ Programm im Debugger zurÅcksetzen                  Strg+F2
+ Variable im Debugger auswerten/Ñndern              Strg+F5
+ Åberwachten Ausdruck hinzufÅgen                    Strg+F7
+ Haltepunkt umschalten                              Strg+F8
+ Programm ausfÅhren                                 Strg+F9
+ Datei Åbersetzen                                   Strg+F10
+ Programm im Debugger ausfÅhren                     Strg+Alt+F9
+ Datei îffnen                                       Strg+O
+ Datei drucken                                      Strg+P
+ Editorfenster 1 bis 9 aktivieren                   Alt+1..Alt+9
+.EXMP
+
+.TOPIC 3 Code Editor - Default
+
+.HIGH Default|Cursor-Bewegung
+.XMP
+ Zeichen links               Cursor links
+ Zeichen rechts              Cursor rechts
+ Zeichen nach oben           Cursor hoch
+ Zeichen nach unten          Cursor runter
+ Seite nach unten            Seite runter
+ Seite nach oben             Seite hoch
+ Wort nach links             Strg+Cursor links
+ Wort nach rechts            Strg+Cursor rechts
+ Zeilenanfang                Pos1, Strg+QS
+ Zeilenende                  Ende, Strg+QD
+ Seitenanfang                Strg+Seite hoch, Strg+QE
+ Seitenende                  Strg+Seite runter, Strg+QX
+ Dateianfang                 Strg+Pos1, Strg+QR
+ Dateiende                   Strg+QC
+ Seite nach unten rollen     Strg+Cursor hoch
+ Seite nach oben rollen      Strg+Cursor runter
+ Anfang der Markierung       Strg+QB
+ Ende der Markierung         Strg+QK
+ vorheriger Tabulator        Umschalt+Tab
+.EXMP
+
+.HIGH Default|Suchen/Ersetzen
+.XMP
+ Text suchen             Strg+F, Strg+QF
+ Text ersetzen           Strg+R, Strg+QA
+ Weitersuchen            F3
+ inkrementelle Suche     Strg+E, Strg+QI
+.EXMP
+
+.HIGH Default|Bearbeiten
+.XMP
+ Tabulator einfÅgen                             Strg+I
+ Zeilenumbruch                                  Strg+N
+ linkes Wort lîschen                            Strg+RÅcktaste
+ rechtes Wort lîschen                           Strg+T
+ Zeile lîschen                                  Strg+Y
+ Operation zurÅcknehmen                         Alt+RÅcktaste, Strg+Z
+ RÅcknahme widerrufen                           Alt+Umschalt+RÅcktaste, Strg+Umschalt+Z
+ bis Zeilenende lîschen                         Strg+QY, Strg+Umschalt+Y
+ Zeilenumbruch auf nÑchste Zeile                Enter
+ rechtes Zeichen lîschen                        Entf
+ linkes Zeichen lîschen                         RÅcktaste
+ Tabulator einfÅgen                             Tab
+ Wort am Cursor in Gro·buchstaben umwandeln     Strg+KF
+ Wort am Cursor in Kleinbuchstaben umwandeln    Strg+KE
+ Gro·-/Kleinschreibung Ñndern                   Strg+OU
+ Klammern einfÅgen ()                           Strg+(
+ Klammern einfÅgen []                           Strg+[
+ Klammern einfÅgen \#1\#2                           Strg+\#1
+ Klammern einfÅgen (**)                         Strg+*
+ Klammern einfÅgen /**/                         Strg+/
+.EXMP
+
+.HIGH Default|Markieren
+.XMP
+ nach links erweitern                               Umschalt+Cursor links
+ nach rechts erweitern                              Umschalt+Cursor rechts
+ nach oben erweitern                                Umschalt+Cursor hoch
+ nach unten erweitern                               Umschalt+Cursor runter
+ eine Seite nach oben erweitern                     Umschalt+Seite hoch
+ eine Seite nach unten erweitern                    Umschalt+Seite runter
+ zum Zeilenanfang erweitern                         Umschalt+Pos1
+ zum Zeilenende erweitern                           Umschalt+Ende
+ ein Wort nach links erweitern                      Strg+Umschalt+Cursor links
+ ein Wort nach rechts erweitern                     Strg+Umschalt+Cursor rechts
+ zum Dateianfang erweitern                          Strg+Umschalt+Pos1
+ zum Dateiende erweitern                            Strg+Umschalt+Ende
+ zum Seitenanfang erweitern                         Strg+Umschalt+Seite hoch
+ zum Seitenende erweitern                           Strg+Umschalt+Seite runter
+ Blockmarkierung, nach links erweitern              Alt+Umschalt+Cursor links
+ Blockmarkierung, nach rechts erweitern             Alt+Umschalt+Cursor rechts
+ Blockmarkierung, nach oben erweitern               Alt+Umschalt+Cursor hoch
+ Blockmarkierung, nach unten erweitern              Alt+Umschalt+Cursor runter
+ Blockmarkierung, eine Seite nach oben erweitern    Alt+Umschalt+Seite hoch
+ Blockmarkierung, eine Seite nach unten erweitern   Alt+Umschalt+Seite runter
+ Blockmarkierung, zum Zeilenanfang erweitern        Alt+Umschalt+Pos1
+ Blockmarkierung, zum Zeilenende erweitern          Alt+Umschalt+Ende
+ Blockmarkierung, ein Wort nach links erweitern     Strg+Alt+Shift+Cursor links
+ Blockmarkierung, ein Wort nach rechts erweitern    Strg+Alt+Shift+Cursor rechts
+ Blockmarkierung, zum Dateianfang erweitern         Strg+Alt+Shift+Pos1
+ Blockmarkierung, zum Dateiende erweitern           Strg+Alt+Shift+Ende
+ Blockmarkierung, zum Seitenanfang erweitern        Strg+Alt+Shift+Seite hoch
+ Blockmarkierung, zum Seitenende erweitern          Strg+Alt+Shift+Seite runter
+ Anfang der Markierung setzen                       Strg+KB
+ Ende der Markierung setzen                         Strg+KK
+ Markierung ein-/ausschalten                        Strg+KH
+ Zeile am Cursor markieren                          Strg+KL
+ Wort am Cursor markieren                           Strg+KT
+ Alles markieren                                    Strg+/
+ Markierung aufheben                                Strg+\
+.EXMP
+
+.HIGH Default|Markierung bearbeiten
+.XMP
+ Markierung lîschen                             Strg+Entf, Strg+KY
+ Markierung nach rechts verschieben             Alt+Cursor rechts, Strg+KI, Strg+Umschalt+I
+ Markierung nach links verschieben              Alt+Cursor links, Strg+KU, Strg+Umschalt+U
+ Markierung an die Cursorposition kopieren      Strg+KC
+ Markierung in Gro·buchstaben umwandeln         Strg+KN
+ Markierung in Kleinbuchstaben umwandeln        Strg+KO
+ Markierung an die Cursorposition verschieben   Strg+KV
+ Markierung in Datei schreiben                  Strg+KW
+ Block von Datei einlesen                       Strg+KR
+ SchlÅsselworte in Gro·buchstaben umwandeln     Alt+Cursor hoch
+ SchlÅsselworte in Kleinbuchstaben umwandeln    Alt+Cursor runter
+.EXMP
+
+.HIGH Default|Zwischenablage
+.XMP
+ Ausschneiden                       Umschalt+Entf, Strg+X
+ Kopieren                           Strg+Einfg, Strg+C
+ EinfÅgen                           Umschalt+Einfg, Strg+V
+ Zwischenablagefenster anzeigen     Strg+Umschalt+Einfg
+.EXMP
+
+.HIGH Default|Lesezeichen
+.XMP
+ Lesezeichen 0 bis 9 setzen             Strg+K0..Strg+K9
+ Lesezeichen 0 bis 9 anzeigen           Strg+Q0..Strg+Q9, Strg+0..Strg+9
+ Lesezeichen 0 bis 9 lîschen            Strg+U0..Strg+U9
+ alle Lesezeichen lîschen               Strg+UU
+ Lesezeichen des Projektes anzeigen     Strg+B
+.EXMP
+
+.HIGH Default|Editor-Makros
+.XMP
+ Makro aufnehmen, Aufnahme beenden     Strg+Umschalt+R
+ Makro abspielen                       Strg+Umschalt+P
+ Makroliste anzeigen                   Strg+Umschalt+M
+ letztes Makro speichern               Strg+Umschalt+A
+.EXMP
+
+.HIGH Default|Sonstige
+.XMP
+ Datei speichern                        Strg+S, Strg+KS
+ EinfÅgemodus umschalten                Einfg
+ Blockmarkierung                        Strg+OC
+ fortlaufende Markierung                Strg+OK
+ Compileroptionen einfÅgen              Strg+OO
+ Dialog fÅr 'Gehe zu Zeile' aufrufen    Strg+OG
+ Datei am Cursor îffnen                 Strg+Enter, Strg+OA
+ nÑchstes Editorfenster aktivieren      Strg+Tab
+ vorheriges Editorfenster aktivieren    Strg+Umschalt+Tab
+ Kontrollzentrum anzeigen               Strg+J
+ MDI Modus umschalten                   Strg+M
+ letzten Compilerfehler anzeigen        Strg+QW
+ letzten Parserfehler anzeigen          Strg+QP
+.EXMP
+
+.HIGH Default|Sonstige
+.XMP Default|VDE
+ Compiler anhalten                                  Esc
+ Inhalt der Hilfe anzeigen                          F1
+ Programm bis Cursorposition im Debugger ausfÅhren  F4
+ Haltepunkt umschalten                              F5
+ einzelne Anweisung im Debugger ausfÅhren           F7
+ gesamte Routine im Debugger ausfÅhren              F8
+ Prozedur im Debugger beenden                       Strg+F3
+ Programm ausfÅhren                                 F9
+ Objekt Inspektor anzeigen                          F11
+ zwischen Formular und Unit umschalten              F12
+ Fensterliste anzeigen                              Alt+0
+ Kontexthilfe                                       Strg+F1
+ Programm im Debugger zurÅcksetzen                  Strg+F2
+ aktuelles Editorfenster schlie·en                  Strg+F4
+ Åberwachten Ausdruck hinzufÅgen                    Strg+F5
+ Variable im Debugger auswerten/Ñndern              Strg+F7
+ Programm im Debugger ausfÅhren                     Strg+Alt+F9
+ Datei drucken                                      Strg+P
+ Editorfenster 1 bis 9 aktivieren                   Alt+1..Alt+9
+.EXMP
+
+.TOPIC 3 Code Formular Designer
+
+.HIGH Code Formular Designer
+.XMP
+ Operation abbrechen                              Esc
+ Letzes Zeichen der aktiven Caption lîschen       RÅcktaste
+ Kontexthilfe zur aktiven Komponenete anzeigen    Strg+F1
+ Zum Objekt Inspektor umschalten                  Enter, F11
+ Zur Unit des Formulars umschalten                F12
+
+ NÑchste Komponente auswÑhlen                     Tab
+ Vorherige Komponente auswÑhlen                   Umschalt+Tab
+
+ Komponenten in die Zwischenablage ausschneiden   Umschalt+Entf
+ Komponenten in die Zwischenablage kopieren       Strg+Einfg
+ Komponenten aus der Zwischenablage einfÅgen      Umschalt+Einfg
+ AusgewÑhlte Komponenten lîschen                  Entf, Strg+Entf
+
+ NÑchste Komponente auswÑhlen
+   nach oben                                      Cursor hoch
+   nach unten                                     Cursor runter
+   nach links                                     Cursor links
+   nach rechts                                    Cursor rechts
+
+ AusgewÑhlte Komponenten verschieben
+   nach oben                                      Strg+Cursor hoch
+   nach unten                                     Strg+Cursor runter
+   nach links                                     Strg+Cursor links
+   nach rechts                                    Strg+Cursor rechts
+   nach oben um den Gitterabstand                 Strg+Umschalt+Cursor hoch
+   nach unten um den Gitterabstand                Strg+Umschalt+Cursor runter
+   nach links um den Gitterabstand                Strg+Umschalt+Cursor links
+   nach rechts um den Gitterabstand               Strg+Umschalt+Cursor rechts
+
+ AusgwÑhlte Komponenten vergrî·ern/verkleinern
+   Hîhe vergrî·ern                                Umschalt+Cursor hoch
+   Hîhe verkleinern                               Umschalt+Cursor runter
+   Breite vergrî·ern                              Umschalt+Cursor links
+   Breite verkleinern                             Umschalt+Cursor rechts
+
+ AusgewÑhlte Komponenten ausrichten
+   nach links                                     Alt+Cursor links
+   horizontal zentrieren                          Alt+Pos1
+   horizontal als Gruppe zentrieren               Alt+Seite hoch
+   nach rechts                                    Alt+Cursor rechts
+   nach oben                                      Alt+Cursor hoch
+   vertikal zentrieren                            Alt+Ende
+   vertikal als Gruppe zentrieren                 Alt+Seite runter
+   nach unten                                     Alt+Cursor runter
+.EXMP
+
+
+.TOPIC 2 Menue
+
+.HIGH Menue
+
+WDSibyl Menuestruktur
+
+.FIG
+ {Menue Datei}
+ {Menue Bearbeiten}
+ {Menue Suchen}
+ {Menue Ansicht}
+ {Menue Komponente}
+ {Menue Debug}
+ {Menue Projekte}
+ {Menue Optionen}
+ {Menue Fenster}
+ {Menue Hilfe}
+.EFIG
+
+.TOPIC 2 Menue Datei
+.HIGH Menue Datei
+.HCTX hctxMenuFile
+
+Das UntermenÅ "Datei" dient zur Verwaltung von Dateien und Verzeichnissen, sowie zum
+Verlassen der VDE. Im einzelnen sind das die folgenden Befehle:
+
+.FIG
+    {Menue Datei|Neu}
+    {Menue Datei|Neue Datei}
+    {Menue Datei|ôffnen}
+    {Menue Datei|EinfÅgen}
+    {Menue Datei|Speichern}
+    {Menue Datei|Speichern unter}
+    {Menue Datei|Alles speichern}
+    {Menue Datei|Drucken}
+    {Menue Datei|Verzeichnis erstellen}
+    {Menue Datei|Verzeichnis wechseln}
+    {Menue Datei|Beenden}
+.EFIG
+
+.TOPIC 3 Menue Datei|Neu
+.HIGH Menue Datei|Neu
+.HCTX hctxMenuFileNewObject
+
+Dieser Befehl erlaubt es, Dateien, Experten, Komponenten und neue Formulare aus dem
+Repository zum aktuellen Projekt hinzuzufÅgen.
+
+.TOPIC 3 Menue Datei|Neue Datei
+.HIGH Menue Datei|Neue Datei
+.HCTX hctxMenuFileNewFile
+
+Dieser Befehl erlaubt es, eine neue Datei zu erstellen
+
+.TOPIC 3 Menue Datei|ôffnen
+.HIGH Menue Datei|ôffnen
+.HCTX hctxMenuFileOpen
+
+Dieser Befehl erlaubt es, eine bereits exisitierende Datei in den Code Editor zu laden.
+
+.TOPIC 3 Menue Datei|EinfÅgen
+.HIGH Menue Datei|EinfÅgen
+.HCTX hctxMenuFileInsert
+
+Dieser Befehl erlaubt es, eine Datei an der aktuellen Position im aktiven Editorfenster
+einzufÅgen
+
+.TOPIC 3 Menue Datei|Speichern
+.HIGH Menue Datei|Speichern
+.HCTX hctxMenuFileSave
+
+Dieser Befehl erlaubt es, die Datei im aktiven Editorfenster zu speichern.
+
+.TOPIC 3 Menue Datei|Speichern unter
+.HIGH Menue Datei|Speichern unter
+.HCTX hctxMenuFileSaveAs
+
+Dieser Befehl erlaubt es, die Datei im aktiven Editorfenster unter einem neuen Namen
+oder an einer anderen Position zu speichern.
+
+.TOPIC 3 Menue Datei|Alles speichern
+.HIGH Menue Datei|Alles speichern
+.HCTX hctxMenuFileSaveAll
+
+Dieser Befehl erlaubt es, alle modifizierten Dateien im Code Editor auf einmal zu
+speichern.
+
+.TOPIC 3 Menue Datei|Drucken
+.HIGH Menue Datei|Drucken
+.HCTX hctxMenuFilePrint
+
+Dieser Befehl erlaubt es, die Datei im aktiven Editorfenster auf dem Drucker auszugeben.
+Dabei kann zwischen dem selektierten Text und der ganzen Datei ausgewÑhlt werden.
+Wahlweise kînnen sowohl SchlÅsselworte als auch Kommentare hervorgehoben werden.
+
+.TOPIC 3 Menue Datei|Verzeichnis erstellen
+.HIGH Menue Datei|Verzeichnis erstellen
+.HCTX hctxMenuFileCreateDir
+
+Dieser Befehl erlaubt es, von der VDE aus ein neues Verzeichnis anzulegen und
+gegebenenfalls in dieses zu wechseln.
+
+.TOPIC 3 Menue Datei|Verzeichnis wechseln
+.HIGH Menue Datei|Verzeichnis wechseln
+.HCTX hctxMenuFileChangeDir
+
+Dieser Befehl erlaubt es, das Arbeitsverzeichnis des aktuellen Projektes zu wechseln.
+
+.TOPIC 3 Menue Datei|Beenden
+.HIGH Menue Datei|Beenden
+.HCTX hctxMenuFileExit
+
+Dieser Befehl erlaubt es, das aktuelle Projekt zu schlie·en und die VDE zu verlassen.
+
+.TOPIC 2 Menue Bearbeiten
+.HIGH Menue Bearbeiten
+.HCTX hctxMenuEdit
+
+Das UntermenÅ "Bearbeiten" stellt Funktionen zur Verwaltung der Zwischenablage fÅr
+den Code Editor und Formular Designer zur VerfÅgung. Weiterhin kînnen Lesezeichen und
+Tastatur Makros fÅr den Code Editor manipuliert werden. Im einzelnen sind das die
+folgenden Befehle:
+
+.FIG
+    {Menue Bearbeiten|RÅckgÑngig}
+    {Menue Bearbeiten|Widerrufen}
+    {Menue Bearbeiten|Ausschneiden}
+    {Menue Bearbeiten|Kopieren}
+    {Menue Bearbeiten|EinfÅgen}
+    {Menue Bearbeiten|Lîschen}
+    {Menue Bearbeiten|Alles auswÑhlen}
+    {Menue Bearbeiten|Auswahl aufheben}
+    {Menue Bearbeiten|Makro aufnehmen}
+    {Menue Bearbeiten|Makro abspielen}
+    {Menue Bearbeiten|Makro speichern}
+.EFIG
+
+.TOPIC 3 Menue Bearbeiten|RÅckgÑngig
+.HIGH Menue Bearbeiten|RÅckgÑngig
+.HCTX hctxMenuEditUndo
+
+Dieser Befehl erlaubt es, die letzen Operationen im aktiven Editorfenster wieder
+rÅckgÑngig zu machen.
+
+.TOPIC 3 Menue Bearbeiten|Widerrufen
+.HIGH Menue Bearbeiten|Widerrufen
+.HCTX hctxMenuEditRedo
+
+Dieser Befehl erlaubt es, die zuletzt rÅckgÑngig gemachten Operationen im aktiven
+Editorfenster zu widerrufen.
+
+.TOPIC 3 Menue Bearbeiten|Ausschneiden
+.HIGH Menue Bearbeiten|Ausschneiden
+.HCTX hctxMenuEditCut
+
+Dieser Befehl erlaubt es, den ausgewÑhlten Text im aktiven Editorfenster bzw. die
+ausgewÑhlten Komponenten im aktiven Formular Designer in die Zwischenablage zu
+kopieren. Danach werden der Text bzw. die Komponenten gelîscht
+
+.TOPIC 3 Menue Bearbeiten|Kopieren
+.HIGH Menue Bearbeiten|Kopieren
+.HCTX hctxMenuEditCopy
+
+Dieser Befehl erlaubt es, den ausgewÑhlten Text im aktiven Editorfenster bzw. die
+ausgewÑhlten Komponenten im aktiven Formular Designer in die Zwischenablage zu kopieren.
+
+.TOPIC 3 Menue Bearbeiten|EinfÅgen
+.HIGH Menue Bearbeiten|EinfÅgen
+.HCTX hctxMenuEditPaste
+
+Dieser Befehl erlaubt es, Text bzw. Komponenten aus der Zwischenablage in das aktive
+Editorfenster bzw. den aktiven Formular Designer einzufÅgen.
+
+.TOPIC 3 Menue Bearbeiten|Lîschen
+.HIGH Menue Bearbeiten|Lîschen
+.HCTX hctxMenuEditDelete
+
+Dieser Befehl erlaubt es, den ausgewÑhlten Text im aktiven Editorfenster bzw. die
+ausgewÑhlten Komponenten im aktiven Formular Designer zu lîschen.
+
+.TOPIC 3 Menue Bearbeiten|Alles auswÑhlen
+.HIGH Menue Bearbeiten|Alles auswÑhlen
+.HCTX hctxMenuEditSelectAll
+
+Dieser Befehl erlaubt es, den gesamten Text im aktiven Editorfenster bzw. alle
+Komponenten im aktiven Formular Designer auszuwÑhlen.
+
+.TOPIC 3 Menue Bearbeiten|Auswahl aufheben
+.HIGH Menue Bearbeiten|Auswahl aufheben
+.HCTX hctxMenuEditDeselectAll
+
+Dieser Befehl erlaubt es, die Auswahl im aktiven Editorfenster bzw. im aktiven Formular
+Designer aufzuheben.
+
+.TOPIC 3 Menue Bearbeiten|Makro aufnehmen
+.HIGH Menue Bearbeiten|Makro aufnehmen
+.HCTX hctxMenuEditRecordMacro
+
+Dieser Befehl erlaubt es, eine Folge von Tastatureingaben im Code Editor als Tastatur
+Makro aufzunehmen bzw. eine bereits begonnene Aufnahme anzuhalten.
+Diese Folge kann dann mit dem Befehl "Makro abspielen" erneut generiert werden ohne
+jedoch alle Tasten  noch einmal zu drÅcken.
+
+.TOPIC 3 Menue Bearbeiten|Makro abspielen
+.HIGH Menue Bearbeiten|Makro abspielen
+.HCTX hctxMenuEditPlayMacro
+
+Dieser Befehl erlaubt es, eine Folge von Tastatureingaben, die als Makro im Code Editor
+aufgenommen wurde, erneut zu generieren, ohne dabei alle Tasten nocheinmal zu drÅcken.
+
+.TOPIC 3 Menue Bearbeiten|Makro speichern
+.HIGH Menue Bearbeiten|Makro speichern
+.HCTX hctxMenuEditSaveMacro
+
+Dieser Befehl erlaubt es, das zuletzt im Code Editor aufgenommene Tastatur Makro in
+einer Liste unter einem bestimmten Namen zu speichern.
+Diese Liste wird dann beim Speichern der VDE Einstellungen ebenfalls gespeichert und
+steht somit nach dem Neustart d er VDE wieder zur VerfÅgung.
+
+.TOPIC 3 Menue Bearbeiten|Spaltenblock
+.HIGH Menue Bearbeiten|Spaltenblock
+.HCTX hctxMenuSelectMode
+
+Schaltet den Spaltenmakierungsmodus ein bzw. aus.
+
+.TOPIC 2 Menue Suchen
+.HIGH Menue Suchen
+.HCTX hctxMenuSearch
+
+Das UntermenÅ "Suchen" dient zum Suchen und Ersetzen von Zeichenketten im Code Editor.
+Im einzelnen sind das die folgenden Befehle:
+
+.FIG
+    {Menue Suchen|Suchen nach}
+    {Menue Suchen|Ersetzen}
+    {Menue Suchen|Weitersuchen}
+    {Menue Suchen|Inkrementelle Suche}
+    {Menue Suchen|Gehe zu Zeile}
+    {Menue Suchen|Gehe zum letzten Fehler}
+    {Menue Suchen|Lesezeichen}
+.EFIG
+
+.TOPIC 3 Menue Suchen|Suchen nach
+.HIGH Menue Suchen|Suchen nach
+.HCTX hctxMenuSearchFind
+
+Dieser Befehl erlaubt es, im aktiven Editorfenster nach Zeichenketten zu suchen.
+
+.TOPIC 3 Menue Suchen|Ersetzen
+.HIGH Menue Suchen|Ersetzen
+.HCTX hctxMenuSearchReplace
+
+Dieser Befehl erlaubt es, im aktiven Editorfenster nach Zeichenketten zu suchen und
+diese durch andere Zeichenketten zu ersetzen.
+
+.TOPIC 3 Menue Suchen|Weitersuchen
+.HIGH Menue Suchen|Weitersuchen
+.HCTX hctxMenuSearchFindNext
+
+Dieser Befehl erlaubt es, eine bereits begonnene Suche an der aktuellen Cursorposition
+fortzusetzen. Es werden dabei die Parameter der der letzten Such- bzw. Ersetzoperation
+Åbernommen.
+
+.TOPIC 3 Menue Suchen|Inkrementelle Suche
+.HIGH Menue Suchen|Inkrementelle Suche
+.HCTX hctxMenuSearchIncSearch
+
+Dieser Befehl erlaubt es, vom Anfang des Dokumentes an durch fortlaufende Eingabe von
+Zeichen nach dem Auftreten von Zeichenketten zu suchen.
+
+.TOPIC 3 Menue Suchen|Gehe zu Zeile
+.HIGH Menue Suchen|Gehe zu Zeile
+.HCTX hctxMenuSearchGotoLine
+
+Dieser Befehl erlaubt es, den Cursor zu einer bestimmten Zeile im aktiven Editorfenster
+zu bewegen.
+
+.TOPIC 3 Menue Suchen|Gehe zum letzten Fehler
+.HIGH Menue Suchen|Gehe zum letzten Fehler
+.HCTX hctxMenuSearchGotoError
+
+Dieser Befehl erlaubt es, an die Stelle des letzten Fehlers beim Compilieren zu
+springen und den dazugehîrigen Fehlertext anzuzeigen.
+
+.TOPIC 3 Menue Suchen|Lesezeichen
+.HIGH Menue Suchen|Lesezeichen
+.HCTX hctxMenuSearchBookmarks
+
+Dieser Befehl erlaubt es, Lesezeichen fÅr Editorfenster zu definieren, zu lîschen und
+zu verÑndern. Durch die Auswahl eines Lesezeichens kann zur dazugehîrigen
+Editorposition gesprungen werden.
+Diese Lesezeichen werden im aktuellen Projekt gespeichert und sind somit nach dem
+Neustart der VDE wieder verfÅgbar.
+
+.TOPIC 2 Menue Ansicht
+.HIGH Menue Ansicht
+.HCTX hctxMenuView
+
+Das UntermenÅ "Ansicht" dient zur Anzeige verschiedener Fenster und Werkeugleisten
+der VDE. Im einzelnen sind das die folgenden Befehle:
+
+.FIG
+    {Menue Ansicht|Projektverwaltung}
+    {Menue Ansicht|Browser}
+    {Menue Ansicht|Fensterliste}
+    {Menue Ansicht|Makroliste}
+    {Menue Ansicht|Zwischenablage}
+    {Menue Ansicht|Objekt Inspektor}
+    {Menue Ansicht|Komponentenliste}
+    {Menue Ansicht|Umschalten Formular/Unit}
+    {Menue Ansicht|Neues Formular}
+    {Menue Ansicht|Importiere WDSibyl/Delphi Formular}
+    {Menue Ansicht|Werkzeugleisten}
+    {Menue Ansicht|Speedbar}
+    {Menue Ansicht|Komponentenpalette}
+    {Menue Ansicht|Statuszeile}
+.EFIG
+
+.TOPIC 3 Menue Ansicht|Projektverwaltung
+.HIGH Menue Ansicht|Projektverwaltung
+.HCTX hctxMenuViewProjectManager
+
+Dieser Befehl erlaubt es, das Projektverwaltungsfenster anzuzeigen. Innerhalb
+dieses Fensters kînnen neue Dateien und Formulare zum Projekt hinzugefÅgt bzw. von
+diesem gelîscht werden.
+
+.TOPIC 3 Menue Ansicht|Browser
+.HIGH Menue Ansicht|Browser
+.HCTX  hctxMenuViewBrowser
+
+Dieser Befehl erlaubt es, das Fenster des Objekt Browsers anzuzeigen.
+Innerhalb dieses Fensters kînnen die Browsing-Informationen des aktuellen
+Projektes, wie Typen, Variablen, Methoden und Eigenschaften von Klassen betrachtet
+werden.
+
+.TOPIC 3 Menue Ansicht|Fensterliste
+.HIGH Menue Ansicht|Fensterliste
+.HCTX hctxMenuViewWindowList
+
+Dieser Befehl erlaubt es, eine Liste der aktuell geîffneten Fenster anzuzeigen.
+
+.TOPIC 3 Menue Ansicht|Makroliste
+.HIGH Menue Ansicht|Makroliste
+.HCTX hctxMenuViewMacroList
+
+Dieser Befehl erlaubt es, eine Liste der gespeicherten Tastatur Makros anzuzeigen
+diese abzuspielen
+
+.TOPIC 3 Menue Ansicht|Zwischenablage
+.HIGH Menue Ansicht|Zwischenablage
+.HCTX  hctxMenuViewClipboard
+
+Dieser Befehl erlaubt es, eine Liste der letzten Texte anzuzeigen, die vom Code
+Editor aus in die Zwischenablage kopiert wurden. Diese Texte kînnen dann wieder in
+ein Editorfenster eingefÅgt werden.
+
+.TOPIC 3 Menue Ansicht|Objekt Inspektor
+.HIGH Menue Ansicht|Objekt Inspektor
+.HCTX hctxMenuViewInspector
+
+Dieser Befehl erlaubt es, in einem visuellen Projekt den Objekt Inspektor
+anzuzeigen. Innerhalb dieses Fensters kînnen die Eigenschaften und
+Ereignisbehandlungsroutinen von Komponenten und Formularen verÑndert werden.
+
+.TOPIC 3 Menue Ansicht|Komponentenliste
+.HIGH Menue Ansicht|Komponentenliste
+.HCTX hctxMenuViewComponentList
+
+Dieser Befehl erlaubt es, in einem visuellen Projekt eine Liste der installierten
+Komponenten anzuzeigen und diese in den aktiven Formular Designer einzufÅgen.
+
+.TOPIC 3 Menue Ansicht|Umschalten Formular/Unit
+.HIGH Menue Ansicht|Umschalten Formular/Unit
+.HCTX hctxMenuViewSwitchFormUnit
+
+Dieser Befehl erlaubt es, vom akiven Formular Designer zur Unit, in welcher der
+dazugehîrige Quelltext steht umzuschalten. Ebenfalls kann vom aktiven Editorfenster
+zum dazugehîrigen Formular gewechselt werden.
+
+.TOPIC 3 Menue Ansicht|Neues Formular
+.HIGH Menue Ansicht|Neues Formular
+.HCTX hctxMenuViewNewForm
+
+Dieser Befehl erlaubt es, ein neues Formular in ein visuelles Projekt einzufÅgen.
+Falls ein Experte dafÅr registriert ist, wird dieser ausgefÅhrt ansonsten wird ein
+leeres Standardformular geîffnet.
+
+.TOPIC 3 Menue Ansicht|Importiere WDSibyl/Delphi Formular
+.HIGH Menue Ansicht|Importiere WDSibyl/Delphi Formular
+.HCTX hctxMenuViewImportForm
+
+Dieser Befehl erlaubt es, bereits entworfene Formulare in das aktuelle Projekt zu
+integrieren. Diese Formulare kînnen von einer Sibyl SCU Ressource oder von einer
+Delphi DFM Datei importiert werden.
+
+.TOPIC 3 Menue Ansicht|Werkzeugleisten
+.HIGH Menue Ansicht|Werkzeugleisten
+.HCTX hctxMenuViewToolbars
+
+Dieser Befehl erlaubt es, die einzelnen Werkzeugleisten der VDE selektiv anzuzeigen
+und zu schlie·en. Mit den Schaltern der Werkzeugleisten kînnen die gleichen
+Kommandos wie Åber das HauptmenÅ ausgefÅhrt werden.
+
+.TOPIC 3 Menue Ansicht|Speedbar
+.HIGH Menue Ansicht|Speedbar
+.HCTX hctxMenuViewSpeedbar
+
+Dieser Befehl erlaubt es, die Speedbar anzuzeigen und zu schlie·en.
+Die Speedbar ist eine nicht verschiebbare Werkzeugleiste, welche hÑufig verwendete
+Kommandos des HauptmenÅs enthÑlt.
+
+.TOPIC 3 Menue Ansicht|Komponentenpalette
+.HIGH Menue Ansicht|Komponentenpalette
+.HCTX hctxMenuViewComponentPalette
+
+Dieser Befehl erlaubt es, in visuellen Projekten die Komponentenpalette anzuzeigen
+und zu schlie·en. Diese Palette enthÑlt die installierten Komponenten der VDE in
+verschiedenen Seiten eines Notizbuches.
+
+.TOPIC 3 Menue Ansicht|Statuszeile
+.HIGH Menue Ansicht|Statuszeile
+.HCTX hctxMenuViewStatusbar
+
+Dieser Befehl erlaubt es, die Statuszeile im Code Editor anzuzeigen und zu schlie·en.
+Die Statuszeile zeigt Informationen Åber den aktuellen Zustand der VDE und
+Operationen, die gerade ausgefÅhrt werden.
+
+.TOPIC 2 Menue Komponente
+.HIGH Menue Komponente
+.HCTX hctxMenuComponent
+
+Das UntermenÅ "Komponente" dient zur Verwaltung des Repository sowie zum
+Installieren und Deinstallieren von Komponenten und zur Konfiguration der
+dynamischen Komponentenbibliothek. Im einzelnen sind das die folgenden Befehle:
+
+.FIG
+    {Menue Komponente|Neu}
+    {Menue Komponente|Installieren}
+    {Menue Komponente|Entfernen}
+    {Menue Komponente|Bibliothek laden}
+    {Menue Komponente|Bibliothek compilieren}
+    {Menue Komponente|Palette konfigurieren}
+    {Menue Komponente|Repository konfigurieren}
+    {Menue Komponente|Importiere Formularvorlage}
+    {Menue Komponente|Exportiere Formularvorlage}
+    {Menue Komponente|Formular zum Repository hinzufÅgen}
+.EFIG
+
+.TOPIC 3 Menue Komponente|Neu
+.HIGH Menue Komponente|Neu
+.HCTX hctxMenuComponentNew
+
+Dieser Befehl erlaubt es, eine neue Komponente auf der Grundlage einer bereits
+registrierten Basisklasse zu erstellen.
+Es wird automatisch eine neue Datei geîffnet und das dazugehîrige CodegerÅst erzeugt.
+
+.TOPIC 3 Menue Komponente|Installieren
+.HIGH Menue Komponente|Installieren
+.HCTX hctxMenuComponentInstall
+
+Dieser Befehl erlaubt es, neue Komponenten in die Komponentenbibliothek der VDE
+einzubinden, um diese im Anschlu· in Formularen zu verwenden
+
+.TOPIC 3 Menue Komponente|Entfernen
+.HIGH Menue Komponente|Entfernen
+.HCTX hctxMenuComponentRemove
+
+Dieser Befehl erlaubt es, installierte Komponenten aus der dynamischen
+Komponentenbibliothek zu entfernen.
+
+.TOPIC 3 Menue Komponente|Bibliothek laden
+.HIGH Menue Komponente|Bibliothek laden
+.HCTX hctxMenuComponentLoadComplib
+
+Dieser Befehl erlaubt es, eine neue Komponentenbibliothek an das aktuelle Projekt
+zu binden.
+
+.TOPIC 3 Menue Komponente|Bibliothek compilieren
+.HIGH Menue Komponente|Bibliothek compilieren
+.HCTX hctxMenuComponentRecompileComplib
+
+Dieser Befehl erlaubt es, die aktuell geladenen Komponentenbibliothek neu zu
+Åbersetzen.
+
+.TOPIC 3 Menue Komponente|Palette konfigurieren
+.HIGH Menue Komponente|Palette konfigurieren
+.HCTX hctxMenuComponentConfigurePalette
+
+Dieser Befehl erlaubt es, die Elemente der Komponentenpalette neu anzuordnen.
+
+.TOPIC 3 Menue Komponente|Repository konfigurieren
+.HIGH Menue Komponente|Repository konfigurieren
+.HCTX hctxMenuComponentConfigureRepository
+
+Dieser Befehl erlaubt es, die Elemente des Repositories neu anzuordnen und die
+installierten Experten zu konfigurieren.
+
+.TOPIC 3 Menue Komponente|Importiere Formularvorlage
+.HIGH Menue Komponente|Importiere Formularvorlage
+.HCTX hctxMenuComponentImportFormTemplate
+
+Dieser Befehl erlaubt es, eine oder mehrere Formularvorlagen aus einer Datei in das
+Repository der VDE einzufÅgen.
+
+.TOPIC 3 Menue Komponente|Exportiere Formularvorlage
+.HIGH Menue Komponente|Exportiere Formularvorlage
+.HCTX hctxMenuComponentExportFormTemplate
+
+Dieser Befehl erlaubt es, eine oder mehrere Formularvorlagen aus dem Repository der
+VDE als externe Datei abzuspeichern.
+
+.TOPIC 3 Menue Komponente|Formular zum Repository hinzufÅgen
+.HIGH Menue Komponente|Formular zum Repository hinzufÅgen
+.HCTX hctxMenuComponentAddFormToRepository
+
+Dieser Befehl erlaubt es, das aktive Formular als Vorlage in das Repository zu
+Åbernehmen und zu einem spÑteren Zeitpunkt in ein anderes Projekt wieder einzufÅgen.
+
+.TOPIC 2 Menue Debug
+.HIGH Menue Debug
+.HCTX hctxMenuDebug
+
+Das UntermenÅ "Debug" stellt die Funktionen des internen Debuggers zur VerfÅgung
+und unterstÅtzt damit die Fehlersuche in Programmen.
+Im einzelnen sind das die folgenden Befehle:
+
+.FIG
+    {Menue Debug|Haltepunkt umschalten}
+    {Menue Debug|Lîsche alle Haltepunkte}
+    {Menue Debug|Start}
+    {Menue Debug|Gehe zur Cursorposition}
+    {Menue Debug|Gesamte Routine}
+    {Menue Debug|Einzelne Anweisung}
+    {Menue Debug|Prozedur beenden}
+    {Menue Debug|Programm zurÅcksetzen}
+    {Menue Debug|Programm neu laden}
+    {Menue Debug|Auswerten/éndern}
+    {Menue Debug|Ausdruck hinzufÅgen}
+    {Menue Debug|Wert Åberwachen}
+    {Menue Debug|öberwachte Adressen}
+    {Menue Debug|Lokale Variablen}
+    {Menue Debug|öberwachte AusdrÅcke}
+    {Menue Debug|Haltepunkte}
+    {Menue Debug|Speicher}
+    {Menue Debug|Quelldateien}
+    {Menue Debug|Symbole}
+    {Menue Debug|CPU Fenster}
+.EFIG
+
+.TOPIC 3 Menue Debug|Haltepunkt umschalten
+.HIGH Menue Debug|Menue Debug|Haltepunkt umschalten
+.HCTX hctxMenuDebugToggleBreakpoint
+
+Dieser Befehl erlaubt es, eine Liste der Haltepunkte des aktuellen Projektes
+anzuzeigen und Åber diese Liste zu den entsprechenden Stellen im Quelltext zu
+springen.
+
+.TOPIC 3 Menue Debug|Lîsche alle Haltepunkte
+.HIGH Menue Debug|Menue Debug|Lîsche alle Haltepunkte
+.HCTX hctxMenuDebugClearBreakpoints
+
+Dieser Befehl erlaubt es, alle Haltepunkte des aktuellen Projektes zu lîschen. 
+
+.TOPIC 3 Menue Debug|Start
+.HIGH Menue Debug|Start
+.HCTX hctxMenuDebugGo
+
+Dieser Befehl erlaubt es, das aktuelle Projekt Åber den internen Debugger zu starten.
+
+.TOPIC 3 Menue Debug|Gehe zur Cursorposition
+.HIGH Menue Debug|Gehe zur Cursorposition
+.HCTX hctxMenuDebugGotoCursor
+
+Dieser Befehl erlaubt es, das aktuelle Projekt Åber den internen Debugger bis zur
+aktuellen Cursorposition auszufÅhren.
+
+.TOPIC 3 Menue Debug|Gesamte Routine
+.HIGH Menue Debug|Gesamte Routine
+.HCTX hctxMenuDebugStepOver
+
+Dieser Befehl erlaubt es, das aktuelle Projekt Åber den internen Debugger zu starten
+oder eine einzelne Anweisung komplett Åber den Debugger auszufÅhren.
+
+.TOPIC 3 Menue Debug|Einzelne Anweisung
+.HIGH Menue Debug|Einzelne Anweisung
+.HCTX hctxMenuDebugStepInto
+
+Dieser Befehl erlaubt es, das aktuelle Projekt Åber den internen Debugger zu
+starten oder eine einzelne Anweisung Åber den Debugger auszufÅhren. Handelt es sich
+bei der Anweisung um einen Prozeduraufruf, fÅr den Debug Informationen verfÅgbar
+sind, so hÑlt der Debugger innerhalb dieser Routine.
+
+.TOPIC 3 Menue Debug|Prozedur beenden
+.HIGH Menue Debug|Prozedur beenden
+.HCTX hctxMenuDebugStepOut
+
+Dieser Befehl erlaubt es, die aktuelle Routine Åber den Debugger bis zum Ende
+auszufÅhren und nach dem RÅcksprung zur aufrufenden Prozedur die AusfÅhrung des
+aktuellen Programmes zu unterbrechen.
+
+.TOPIC 3 Menue Debug|Programm zurÅcksetzen
+.HIGH Menue Debug|Programm zurÅcksetzen
+.HCTX hctxMenuDebugProgramReset
+
+Dieser Befehl erlaubt es, die AusfÅhrung des aktuellen Programms Åber den internen
+Debugger zu beenden.
+
+.TOPIC 3 Menue Debug|Programm neu laden
+.HIGH Menue Debug|Programm neu laden
+.HCTX hctxMenuDebugProgramReload
+
+Dieser Befehl erlaubt es, die AusfÅhrung des aktuellen Programms Åber den internen
+Debugger zu beenden und es im Anschlu· erneut Åber den Debugger zu starten.
+Dabei wird das Programm vor der ersten Anweisung angehalten.
+
+.TOPIC 3 Menue Debug|Auswerten/éndern
+.HIGH Menue Debug|Auswerten/éndern
+.HCTX hctxMenuDebugEvaluateModify
+
+Dieser Befehl erlaubt es, den Inhalt von Variablen des aktuellen Programms im
+Debugger anzuzeigen und zu verÑndern.
+
+.TOPIC 3 Menue Debug|Ausdruck hinzufÅgen
+.HIGH Menue Debug|Ausdruck hinzufÅgen
+.HCTX hctxMenuDebugAddWatch
+
+Dieser Befehl erlaubt es, eine Variable oder einen neuen Ausdruck zur Liste der
+Åberwachten AusdrÅcke hinzuzufÅgen.
+
+.TOPIC 3 Menue Debug|Wert Åberwachen
+.HIGH Menue Debug|Wert Åberwachen
+.HCTX hctxMenuDebugInspect
+
+Dieser Befehl erlaubt es, eine Variable oder einen Ausdruck in einem gesonderten
+Fenster zu Åberwachen.
+
+.TOPIC 3 Menue Debug|öberwachte Adressen
+.HIGH Menue Debug|öberwachte Adressen
+.HCTX hctxMenuDebugWatchPoints
+
+hctxMenuDebugWatchPoints
+
+.TOPIC 3 Menue Debug|Lokale Variablen
+.HIGH Menue Debug|Lokale Variablen
+.HCTX hctxMenuDebugLocals
+
+hctxMenuDebugLocals
+
+.TOPIC 3 Menue Debug|öberwachte AusdrÅcke
+.HIGH Menue Debug|öberwachte AusdrÅcke
+.HCTX hctxMenuDebugViewWatch
+
+Dieser Befehl erlaubt es, Adressen des aktuellen Programms im Debugger hinsichtlich
+Schreib- und Lesezugriff zu Åberwachen und bei erfolgter Operation die AusfÅhrung
+des Programms zu unterbrechen.
+
+.TOPIC 3 Menue Debug|Haltepunkte
+.HIGH Menue Debug|Haltepunkte
+.HCTX hctxMenuDebugBreakpoints
+
+Dieser Befehl erlaubt es, eine Liste der Haltepunkte des aktuellen Projektes
+anzuzeigen und Åber diese Liste zu den entsprechenden Stellen im Quelltext zu
+springen.
+
+.TOPIC 3 Menue Debug|Speicher
+.HIGH Menue Debug|Speicher
+.HCTX hctxMenuDebugStorage
+
+Dieser Befehl erlaubt es, einen bestimmten Speicherbereich zu betrachten und
+gegebenenfalls seinen Inhalt zu verÑndern.
+
+.TOPIC 3 Menue Debug|Quelldateien
+.HIGH Menue Debug|Quelldateien
+.HCTX hctxMenuDebugSourceFiles
+
+Dieser Befehl erlaubt es, eine Liste aller Quelldateien, die zum aktuellen Projekt
+im Debugger gehîren, anzuzeigen.
+
+.TOPIC 3 Menue Debug|Symbole
+.HIGH Menue Debug|Symbole
+.HCTX hctxMenuDebugSymbols
+
+Dieser Befehl erlaubt es, eine hierarchische Darstellung aller Symbole anzuzeigen,
+die zum aktuellen Projekt im Debugger gehîren.
+
+.TOPIC 3 Menue Debug|CPU Fenster
+.HIGH Menue Debug|CPU Fenster
+.HCTX hctxMenuDebugCPUWindow
+
+Dieser Befehl erlaubt es, ein CPU Fenster zu îffnen, indem die AusfÅhrung des
+aktuellen Projektes auf Assembler-Ebene analysiert und verarbeitet werden kann.
+
+.TOPIC 2 Menue Projekte
+.HIGH Menue Projekte
+.HCTX hctxMenuProject
+
+Dieser Befehl erlaubt es, das Hauptprogramm des Projektes zu setzen. 
+
+Dies sollte immer die ausfÅhrbare Datei des Projektes sein. Wird der Befehl
+{Menue Projekt|AusfÅhren} aufgerufen, so wird versucht, die ausfÅhrbare EXE Datei
+dieser Datei zu starten.
+
+Ist ein Hauptprogramm fÅr das Projekt gesetzt, beziehen sich die Befehle
+{Menue Projekt|Aktualisieren} und {Menue Projekt|Alles compilieren} sowie
+{Menue Projekt|AusfÅhren} auf diese Datei anstatt auf die Datei im aktuellen
+Editorfenster.
+
+.TOPIC 3 Menue Projekt|AusfÅhren
+.HIGH Menue Projekt|AusfÅhren
+.HCTX hctxMenuProjectRun
+
+Dieser Befehl erlaubt es, das Hauptprogramm des aktuellen Projektes von der VDE
+heraus zu starten.
+
+.TOPIC 3 Menue Projekt|Parameter
+.HIGH Menue Projekt|Parameter
+.HCTX hctxMenuProjectParameter
+
+Dieser Befehl erlaubt es, dem Hauptprogramm des aktuellen Projektes Parameter zu
+Åbergeben, wenn es von der VDE heraus gestartet wird.
+
+.TOPIC 3 Menue Projekt|Compilieren
+.HIGH Menue Projekt|Compilieren
+.HCTX hctxMenuProjectCompile
+
+Dieser Befehl erlaubt es, die Datei im aktuellen Editorfenster zu Åbersetzen.
+Ist kein Editorfenster aktiv, so wird versucht das Hauptprogramm des Projektes zu
+Åbersetzen.
+
+.TOPIC 3 Menue Projekt|Aktualisieren
+.HIGH Menue Projekt|Aktualisieren
+.HCTX hctxMenuProjectMake
+
+Dieser Befehl erlaubt es, das aktuelle Projekt zu aktualisieren.
+Ist das Projekt nicht aktuell, werden alle Dateien neu Åbersetzt, die nicht auf dem
+neuesten Stand sind.
+
+.TOPIC 3 Menue Projekt|Alles compilieren
+.HIGH Menue Projekt|Alles compilieren
+.HCTX hctxMenuProjectBuild
+
+Dieser Befehl erlaubt es, alle Dateien neu zu Åbersetzen, die zum Projekt gehîre
+
+.TOPIC 3 Menue Projekt|Anhalten
+.HIGH Menue Projekt|Anhalten
+.HCTX hctxMenuProjectStopBuild
+
+Dieser Befehl erlaubt es, den Compiler wÑhrend eines öbersetzungsvorganges anzuhalten.
+
+.TOPIC 3 Menue Projekt|Language-Datei erstellen
+.HIGH Menue Projekt|Language-Datei erstellen
+.HCTX hctxMenuCreateLngFile
+
+Erstellt aus den Forms eine .LNG-Datei.
+
+Hinweis: In WDSibyl ist automatischen Language-System noch nicht komplett
+implementiert.
+
+.TOPIC 3 Menue Projekt|Neu
+.HIGH Menue Projekt|Neu
+.HCTX hctxMenuProjectNew
+
+Dieser Befehl erlaubt es, ein neues Projekt zu erstellen.
+Es kann dabei auf bereits vorhandene Vorlagen zurÅckgegriffen werden.
+
+.TOPIC 3 Menue Projekt|ôffnen
+.HIGH Menue Projekt|ôffnen
+.HCTX hctxMenuProjectOpen
+
+Dieser Befehl erlaubt es, ein existierendes Projekt zu îffnen.
+
+.TOPIC 3 Menue Projekt|Schlie·en
+.HIGH Menue Projekt|Schlie·en
+.HCTX hctxMenuProjectClose
+
+Dieser Befehl erlaubt es, das aktuell geîffnete Projekt zu schlie·en.
+Die VDE wird danach mit den Standardeinstellungen eines nichtvisuellen Projektes
+initialisiert, die jedoch verÑndert und schlie·lich auch wieder gespeichert werden
+kînnen.
+
+.TOPIC 3 Menue Projekt|Speichern
+.HIGH Menue Projekt|Speichern
+.HCTX hctxMenuProjectSave
+
+Dieser Befehl erlaubt es, den Zustand des aktuellen Projektes zu speichern.
+Dazu gehîren die Dateien im Code Editor, die Projekteinstellungen, die SCU
+Informationen fÅr visuelle Projekte und die Einstellungen der VDE.
+
+.TOPIC 3 Menue Projekt|Speichern unter
+.HIGH Menue Projekt|Speichern unter
+.HCTX hctxMenuProjectSaveAs
+
+Dieser Befehl erlaubt es, den Zustand des aktuellen Projektes zu speichern.
+Dazu gehîren die Dateien im Code Editor, die Projekteinstellungen, die SCU
+Informationen fÅr visuelle Projekte und die Einstellungen der VDE.
+
+Es ist dabei mîglich, die Projekteinstellungen unter einem neuen Namen oder an
+einer anderen Position abzuspeichern.
+
+.TOPIC 3 Menue Projekt|Hauptprogrammeintrag lîshen
+.HIGH Menue Menue Projekt|Hauptprogrammeintrag lîshen
+.HCTX hctxPopupProjectClearPrimary
+
+Dieser Befehl erlaubt es, den Hauptprogrammeintrag des Projektes zu lîschen. 
+
+Ist kein Hauptprogramm fÅr das Projekt gesetzt, beziehen sich die Befehle
+{Menue Projekt|Aktualisieren} und {Menue Projekt|Alles compilieren} sowie
+{Menue Projekt|AusfÅhren} auf die Datei im aktuellen Editorfenster anstatt auf das
+Hauptprogramm.
+
+.TOPIC 3 Menue Projekt|Hauptprogramm
+.HIGH Menue Menue Projekt|Hauptprogramm
+.HCTX hctxMenuProjectPrimary
+
+Dieser Befehl erlaubt es, ein neues Hauptprogramm fÅr das Projekt anzugeben.
+Diese Datei sollte immer das auszufÅhrende Programm des Projektes sein.
+
+.TOPIC 3 Menue Projekt|Einstellungen
+.HIGH Menue Menue Projekt|Einstellungen
+.HCTX hctxMenuProjectSettings
+
+Dieser Befehl erlaubt es, die Einstellungen des aktuellen Projektes zu verÑndern.
+Es ist weiterhin mîglich, die Standardeinstellungen fÅr neue Projekte zu setzen.
+
+.TOPIC 2 Menue Optionen
+.HIGH Menue Optionen
+.HCTX hctxMenuOptions
+
+Das UntermenÅ "Optionen" dient zur Konfiguration der VDE. Im einzelnen sind das die
+folgenden Befehle:
+
+.FIG
+    {Menue Optionen|Allgemein}
+    {Menue Optionen|VDE anpassen}
+    {Menue Optionen|Spracheinstellungen}
+    {Menue Optionen|Werkzeuge}
+.EFIG
+
+.TOPIC 3 Menue Optionen|Allgemein
+.HIGH Menue Optionen|Allgemein
+.HCTX hctxMenuOptionsGeneral
+
+Dieser Befehl erlaubt es, die allgemeinen Einstellungen der VDE, wie Farben,
+Tastaturbelegungen, Fonts sowie das Verhalten der VDE bei bestimmten Ereignissen zu
+definieren.
+Diese Einstellungen werden unabhÑngig von den Projekten gespeichert und sind somit
+auch fÅr alle Projekte gleich.
+
+.TOPIC 3 Menue Optionen|VDE anpassen
+.HIGH Menue Optionen|VDE anpassen
+.HCTX hctxMenuOptionsCustomize
+
+Dieser Befehl erlaubt es, bestimmte Einstellungen der VDE anzupassen, wie zum
+Beispiel die Konfiguration der Speedbar.
+Diese Einstellungen werden unabhÑngig von den Projekten gespeichert und sind somit
+auch fÅr alle Projekte gleich.
+
+.TOPIC 3 Menue Optionen|Spracheinstellungen
+.HIGH Menue Optionen|Spracheinstellungen
+.HCTX hctxMenuOptionsLanguageSettings
+
+Dieser Befehl erlaubt es, die Spracheinstellungen fÅr die VDE und das Hauptprogramm
+des Projektes festzulegen. Es ist weiterhin mîglich, zusÑtzliche Sprachenversionen
+fÅr die VDE zu installieren.
+
+.TOPIC 3 Menue Optionen|Werkzeuge
+.HIGH Menue Optionen|Werkzeuge
+.HCTX hctxMenuOptionsTools
+
+Dieser Befehl erlaubt es, externe Programme als Werkzeuge in die VDE zu integrieren.
+Diesen Werkzeugen kînnen bei ihrem Start die aktuellen Einstellungen des Projektes
+und der VDE als Parameter Åbergeben werden.
+
+.TOPIC 2 Menue Fenster
+.HIGH Menue Fenster
+.HCTX hctxMenuWindow
+
+Das UntermenÅ "Fenster" dient zur Verwaltung der Fenster des Code Editors innerhalb
+der VDE. Im einzelnen sind das die folgenden Befehle:
+
+.FIG
+    {Menue Fenster|Nebeneinander}
+    {Menue Fenster|öberlappend}
+    {Menue Fenster|Alle schlie·en}
+    {Menue Fenster|Maximieren}
+    {Menue Fenster|NÑchstes}
+    {Menue Fenster|Vorheriges}
+    {Menue Fenster|Schlie·en}
+.EFIG
+
+.TOPIC 3 Menue Fenster|Nebeneinander
+.HIGH Menue Fenster|Nebeneinander
+.HCTX hctxMenuWindowTile
+
+Dieser Befehl erlaubt es, die Fenster des Code Editors im MDI Modus nebeneinander
+darzustellen.
+
+.TOPIC 3 Menue Fenster|öberlappend
+.HIGH Menue Fenster|öberlappend
+.HCTX hctxMenuWindowCascade
+
+Dieser Befehl erlaubt es, die Fenster des Code Editors im MDI Modus Åberlappend
+darzustellen.
+
+.TOPIC 3 Menue Fenster|Alle schlie·en
+.HIGH Menue Fenster|Alle schlie·en
+.HCTX hctxMenuWindowCloseAll
+
+Dieser Befehl erlaubt es, alle Fenster des Code Editors zu schlie·en.
+
+.TOPIC 3 Menue Fenster|Maximieren
+.HIGH Menue Fenster|Maximieren
+.HCTX hctxMenuWindowMaximizeRestore
+
+Dieser Befehl erlaubt es, das aktive Fenster des Code Editor im MDI Modus zu
+maximieren. Ist das Fenster bereits maximiert, so wird seine ursprÅngliche Grî·e
+wieder hergestellt.
+
+.TOPIC 3 Menue Fenster|NÑchstes
+.HIGH Menue Fenster|NÑchstes
+.HCTX hctxMenuWindowNext
+
+Dieser Befehl erlaubt es, das nÑchste Fenster in der Fensterliste des Code Editors zu aktivieren.
+
+.TOPIC 3 Menue Fenster|Vorheriges
+.HIGH Menue Fenster|Vorheriges
+.HCTX hctxMenuWindowPrevious
+
+Dieser Befehl erlaubt es, das vorherige Fenster in der Fensterliste des Code Editor zu aktivieren.
+
+.TOPIC 3 Menue Fenster|Schlie·en
+.HIGH Menue Fenster|Schlie·en
+.HCTX hctxMenuWindowClose
+
+Dieser Befehl erlaubt es, das aktive Fenster des Code Editors zu schlie·e
+
+.TOPIC 2 Menue Hilfe
+.HIGH Menue Hilfe
+.HCTX hctxMenuHelp
+
+Das UntermenÅ "Hilfe" dient zur Hilfestellung bei der Arbeit mit der VDE. Im einzelnen
+sind das die folgenden Befehle:
+
+.FIG
+    {Menue Hilfe|Inhalt}
+    {Menue Hilfe|Index}
+    {Menue Hilfe|Hilfe verwenden}
+    {Menue Hilfe|Hilfe fÅr Tasten}
+    {Menue Hilfe|Kontext Hilfe}
+    {Menue Hilfe|Produkt Information}
+.EFIG
+
+.TOPIC 3 Menue Hilfe|Inhalt
+.HIGH Menue Hilfe|Inhalt
+.HCTX hctxMenuHelpContents
+
+Dieser Befehl erlaubt es, das Inhaltsverzeichnis der Online-Hilfe anzuzeigen. 
+
+.TOPIC 3 Menue Hilfe|Index
+.HIGH Menue Hilfe|Index
+.HCTX hctxMenuHelpIndex
+
+Dieser Befehl erlaubt es, den alphabetischen Index der Online-Hilfe anzuzeigen.
+
+.TOPIC 3 Menue Hilfe|Hilfe verwenden
+.HIGH Menue Hilfe|Hilfe verwenden
+.HCTX hctxMenuHelpHelpOnHelp
+
+Dieser Befehl erlaubt es, Informationen zur Verwendung der Hilfefunktion anzuzeigen
+
+.TOPIC 3 Menue Hilfe|Hilfe fÅr Tasten
+.HIGH Menue Hilfe|Hilfe fÅr Tasten
+.HCTX hctxMenuHelpKeyboard
+
+Dieser Befehl erlaubt es, Informationen zu den verfÅgbaren Tastaturbelegungen der
+VDE anzuzeigen.
+
+.TOPIC 3 Menue Hilfe|Kontext Hilfe
+.HIGH Menue Hilfe|Kontext Hilfe
+.HCTX hctxMenuHelpContext
+
+Dieser Befehl erlaubt es, zum aktuell fokusierten Element (zB. Wort am Cursor oder
+ausgewÑhlte Eigenschaft im Objekt Inspektor) eine Hilfe anzuzeigen, sofern
+entsprechende Informationen verfÅgbar sind.
+
+.TOPIC 3 Menue Hilfe|Produkt Information
+.HIGH Menue Hilfe|Produkt Information
+.HCTX hctxMenuHelpAbout
+
+Dieser Befehl erlaubt es, die Hinweise zum Copyright des Produktes anzuzeigen.
+
+.TOPIC 2 Formular Designer
+.HIGH Fomular Designer
+
+Tastaturbelegung ist unter {Code Formular Designer} zu finden
+
+Im Popumenue sind folgende Befehle definiert
+
+.FIG
+    {Formular Designer|Kopieren}
+    {Formular Designer|EinfÅgen}
+    {Formular Designer|Lîschen}
+    {Formular Designer|Anordnen}
+    {Formular Designer|Layout Palette}
+    {Formular Designer|Objekt Inspektor}
+    {Formular Designer|Formular Quelldatei}
+    {Formular Designer|Formular als Datei speichern}
+    {Formular Designer|Formular als Vorlage speichern}
+    {Formular Designer|Eigenschaften}
+.EFIG
+
+.TOPIC 3 Formular Designer|Kopieren
+.HIGH Formular Designer|Kopieren
+.HCTX hctxPopupFormDesignerCopy
+
+Dieser Befehl erlaubt es, die ausgewÑhlten Komponenten im Formular Designer in
+die Zwischenablage zu kopieren. Von der Zwischenablage kînnen diese dann in andere
+Formulare wieder eingefÅgt werden.
+
+.TOPIC 3 Formular Designer|EinfÅgen
+.HIGH Formular Designer|EinfÅgen
+.HCTX hctxPopupFormDesignerPaste
+
+Dieser Befehl erlaubt es, bereits in die Zwischenablage kopierte Komponenten in
+ein Formular einzufÅgen. Der Status des EinfÅgens wird dabei durch einen
+verÑnderten Mauszeiger deutlich.
+Das EinfÅgen und Positionieren der Komponenten wird aber erst durch einen
+Mausklick in den entsprechenden Formular Designer aktiviert.
+
+.TOPIC 3 Formular Designer|Lîschen
+.HIGH Formular Designer|Lîschen
+.HCTX hctxPopupFormDesignerDelete
+
+Dieser Befehl erlaubt es, die ausgewÑhlten Komponenten des Formular Designers zu
+lîschen.
+
+.TOPIC 3 Formular Designer|Anordnen
+.HIGH Formular Designer|Anordnen
+.HCTX hctxPopupFormDesignerAlignment
+
+Dieses UntermenÅ erlaubt es, die Komponenten des Formular Designers Åber
+verschiedene Standardfunktionen neu anzuordnen oder deren Grî·e zu beeinflussen.
+
+Folgende Mîglichkeiten gibt es:
+
+.FIG
+    {Formular Designer|Anordnen|Nach links ausrichten}
+    {Formular Designer|Anordnen|Nach rechts ausrichten}
+    {Formular Designer|Anordnen|Nach oben ausrichten}
+    {Formular Designer|Anordnen|Nach unten ausrichten}
+
+    {Formular Designer|Anordnen|Horizontal zentrieren}
+    {Formular Designer|Anordnen|Vertikal zentrieren}
+    {Formular Designer|Anordnen|Gruppe horizontal zentrieren}
+    {Formular Designer|Anordnen|Gruppe vertikal zentrieren}
+
+    {Formular Designer|Anordnen|Gleiche Breite}
+    {Formular Designer|Anordnen|Gleiche Hîhe}
+    {Formular Designer|Anordnen|Gleicher horizontaler Abstand}
+    {Formular Designer|Anordnen|Gleicher vertikaler Abstand}
+    {Formular Designer|Anordnen|Gleicher horizontaler Abstand im Parent}
+    {Formular Designer|Anordnen|Gleicher vertikaler Abstand im Parent}
+
+    {Formular Designer|Anordnen|Ausrichtung erzwingen}
+    {Formular Designer|Anordnen|Formular neu zeichnen}
+    {Formular Designer|Anordnen|Komponenten lîschen}
+    {Formular Designer|Anordnen|Gitter Sichtbarkeit}
+    {Formular Designer|Anordnen|Am Gitter ausrichten}
+
+.EFIG
+
+.TOPIC 3 Formular Designer|Anordnen|Nach links ausrichten
+.HIGH Formular Designer|Anordnen|Nach links ausrichten
+.HCTX hctxPopupAlign1
+
+Dieser Befehl erlaubt es, die ausgewÑhlten Komponenten nach links auszurichten. 
+
+Ist nur eine Komponente ausgewÑhlt, so wird diese an den linken Rand des Formulars
+verschoben. Ansonsten werden die Komponenten am linken Rand der primÑr markierten
+Komponente ausgerichtet.
+
+.TOPIC 3 Formular Designer|Anordnen|Nach rechts ausrichten
+.HIGH Formular Designer|Anordnen|Nach rechts ausrichten
+.HCTX hctxPopupAlign2
+
+Dieser Befehl erlaubt es, die ausgewÑhlten Komponenten nach rechts auszurichten. 
+
+Ist nur eine Komponente ausgewÑhlt, so wird diese an den rechten Rand des
+Formulars verschoben. Ansonsten werden die Komponenten am rechten Rand der primÑr
+markierten Komponente ausgerichtet.
+
+.TOPIC 3 Formular Designer|Anordnen|Nach oben ausrichten
+.HIGH Formular Designer|Anordnen|Nach oben ausrichten
+.HCTX hctxPopupAlign3
+
+Dieser Befehl erlaubt es, die ausgewÑhlten Komponenten nach oben auszurichten. 
+
+Ist nur eine Komponente ausgewÑhlt, so wird diese an den oberen Rand des Formulars
+verschoben. Ansonsten werden die Komponenten am oberen Rand der primÑr markierten
+Komponente ausgerichtet.
+
+
+.TOPIC 3 Formular Designer|Anordnen|Nach unten ausrichten
+.HIGH Formular Designer|Anordnen|Nach unten ausrichten
+.HCTX hctxPopupAlign4
+
+Dieser Befehl erlaubt es, die ausgewÑhlten Komponenten nach unten auszurichten. 
+
+Ist nur eine Komponente ausgewÑhlt, so wird diese an den unteren Rand des
+Formulars verschoben. Ansonsten werden die Komponenten am unteren Rand der primÑr
+markierten Komponente ausgerichtet.
+
+.TOPIC 3 Formular Designer|Anordnen|Horizontal zentrieren
+.HIGH Formular Designer|Anordnen|Horizontal zentrieren
+.HCTX hctxPopupAlign5
+
+Dieser Befehl erlaubt es, die ausgewÑhlten Komponenten horizontal zu zentrieren. 
+
+Ist nur eine Komponente ausgewÑhlt, so wird diese horizontal innerhalb ihres
+Elternkontrollelementes verschoben. Ansonsten werden die Komponenten an der Mitte
+der primÑr markierten Komponente horizontal ausgerichtet.AusrichtungLTNR
+
+.TOPIC 3 Formular Designer|Anordnen|Vertikal zentrieren
+.HIGH Formular Designer|Anordnen|Vertikal zentrieren
+.HCTX hctxPopupAlign6
+
+Dieser Befehl erlaubt es, die ausgewÑhlten Komponenten vertikal zu zentrieren. 
+
+Ist nur eine Komponente ausgewÑhlt, so wird diese vertikal innerhalb ihres
+Elternkontrollelementes verschoben. Ansonsten werden die Komponenten an der Mitte
+der primÑr markierten Komponente vertikal ausgerichtet.
+
+.TOPIC 3 Formular Designer|Anordnen|Gruppe horizontal zentrieren
+.HIGH Formular Designer|Anordnen|Gruppe horizontal zentrieren
+.HCTX hctxPopupAlign7
+
+Dieser Befehl erlaubt es, die ausgewÑhlten Komponenten als Gruppe horizontal zu
+zentrieren.
+
+Dabei werden alle ausgewÑhlten Komponenten als Einheit gleicherma·en horizontal
+verschoben.
+
+.TOPIC 3 Formular Designer|Anordnen|Gruppe vertikal zentrieren
+.HIGH Formular Designer|Anordnen|Gruppe vertikal zentrieren
+.HCTX hctxPopupAlign8
+
+Dieser Befehl erlaubt es, die ausgewÑhlten Komponenten als Gruppe vertikal zu
+zentrieren.
+
+Dabei werden alle ausgewÑhlten Komponenten als Einheit gleicherma·en vertikal
+verschoben.
+
+.TOPIC 3 Formular Designer|Anordnen|Gleiche Breite
+.HIGH Formular Designer|Anordnen|Gleiche Breite
+.HCTX hctxPopupAlign9
+
+Dieser Befehl erlaubt es, die Breite aller ausgewÑhlten Komponenten an die Breite
+der primÑr markierten Komponente anzupassen
+
+.TOPIC 3 Formular Designer|Anordnen|Gleiche Hîhe
+.HIGH Formular Designer|Anordnen|Gleiche Hîhe
+.HCTX hctxPopupAlign10
+
+Dieser Befehl erlaubt es, die Hîhe aller ausgewÑhlten Komponenten an die Hîhe
+der primÑr markierten Komponente anzupassen.
+
+.TOPIC 3 Formular Designer|Anordnen|Gleicher horizontaler Abstand
+.HIGH Formular Designer|Anordnen|Gleicher horizontaler Abstand
+.HCTX hctxPopupAlign11
+
+Dieser Befehl erlaubt es, alle ausgewÑhlten Komponenten so anzuordnen, da· sie
+den gleichen horizontalen Abstand haben.
+
+.TOPIC 3 Formular Designer|Anordnen|Gleicher vertikaler Abstand
+.HIGH Formular Designer|Anordnen|Gleicher vertikaler Abstand
+.HCTX hctxPopupAlign12
+
+Dieser Befehl erlaubt es, alle ausgewÑhlten Komponenten so anzuordnen, da· sie
+den gleichen vertikalen Abstand haben.
+
+.TOPIC 3 Formular Designer|Anordnen|Gleicher horizontaler Abstand im Parent
+.HIGH Formular Designer|Anordnen|Gleicher horizontaler Abstand im Parent
+.HCTX hctxPopupAlign13
+
+Dieser Befehl erlaubt es, alle ausgewÑhlten Komponenten so anzuordnen, da· sie den
+gleichen horizontalen Abstand haben. Der Abstand der linken und rechten Komponente
+zum Rand des Elternkontrollelements wird dabei ebenfalls angeglichen.
+
+.TOPIC 3 Formular Designer|Anordnen|Gleicher vertikaler Abstand im Parent
+.HIGH Formular Designer|Anordnen|Gleicher vertikaler Abstand im Parent
+.HCTX hctxPopupAlign14
+
+Dieser Befehl erlaubt es, alle ausgewÑhlten Komponenten so anzuordnen, da· sie den
+gleichen vertikalen Abstand haben. Der Abstand der unteren und oberen Komponente
+zum Rand des Elternkontrollelements wird dabei ebenfalls angeglichen.
+
+.TOPIC 3 Formular Designer|Anordnen|Ausrichtung erzwingen
+.HIGH Formular Designer|Anordnen|Ausrichtung erzwingen
+.HCTX hctxPopupForceAlign
+
+Dieser Befehl erlaubt es, alle ausgewÑhlten Komponenten am Gitter des Formular
+Designers auszurichten. Als Referenzpunkt wird dabei die linke untere Ecke der
+Komponente verwendet.
+
+.TOPIC 3 Formular Designer|Anordnen|Formular neu zeichnen
+.HIGH Formular Designer|Anordnen|Formular neu zeichnen
+.HCTX hctxPopupRefreshForm
+
+Dieser Befehl erlaubt es, das Formular komplett neu zu zeichnen.
+
+.TOPIC 3 Formular Designer|Anordnen|Komponenten lîschen
+.HIGH Formular Designer|Anordnen|Komponenten lîschen
+.HCTX hctxPopupDeleteComponent
+
+Dieser Befehl erlaubt es, alle ausgewÑhlten Komponenten zu lîschen.
+
+.TOPIC 3 Formular Designer|Anordnen|Gitter Sichtbarkeit
+.HIGH Formular Designer|Anordnen|Gitter Sichtbarkeit
+.HCTX hctxPopupGridVisible
+
+Dieser Befehl erlaubt es, die Sichtbarkeit des Ausrichtungsgitters im Formular
+Designer ein- und auszuschalten
+
+.TOPIC 3 Formular Designer|Anordnen|Am Gitter ausrichten
+.HIGH Formular Designer|Anordnen|Am Gitter ausrichten
+.HCTX hctxPopupSnapToGrid
+
+Dieser Befehl erlaubt es, die Ausrichtung von Komponenten beim EinfÅgen und
+Verschieben im Formular Designer ein- und auszuschalten.
+
+
+.TOPIC 3 Formular Designer|Layout Palette
+.HIGH Formular Designer|Layout Palette
+.HCTX hctxPopupFormDesignerLayoutPalette
+
+Dieser Befehl erlaubt es, die andockbare Layout Palette anzuzeigen.
+Durch sie kînnen die wichtigsten Befehle zum Anordnen von Komponenten im Form
+Designer ausgelîst werden.
+
+.TOPIC 3 Formular Designer|Objekt Inspektor
+.HIGH Formular Designer|Objekt Inspektor
+.HCTX hctxPopupFormDesignerObjectInspector
+
+Dieser Befehl erlaubt es, den Objekt Inspektor anzuzeigen. Durch ihn ist es
+mîglich die Eigenschaften und Ereignissbehandlung von Komponenten anzupassen.
+
+.TOPIC 3 Formular Designer|Formular Quelldatei
+.HIGH Formular Designer|Formular Quelldatei
+.HCTX hctxPopupFormDesignerFormSourceLocation
+
+Dieser Befehl erlaubt es, die Verbindung der Form mit einer Quelldatei zu
+verÑndern.
+Diese Bindung wird benîtigt, um den Quelltext fÅr Komponenten und
+Ereignisbehandlungsroutinen einzufÅgen oder anzupassen.
+
+.TOPIC 3 Formular Designer|Formular als Datei speichern
+.HIGH Formular Designer|Formular als Datei speicher
+.HCTX hctxPopupFormDesignerSaveFormToFile
+
+Dieser Befehl erlaubt es, das aktuelle Formular als Datei im SCU Format
+abzuspeichern, um es z.B. fÅr andere Anwender oder andere Projekte verfÅgbar zu
+machen. Die Bindung zum aktuellen Quelltext bleibt allerdings erhalten und mu·
+gegebenenfalls aktualisi ert werden.
+
+.TOPIC 3 Formular Designer|Formular als Vorlage speichern
+.HIGH Formular Designer|Formular als Vorlage speichern
+.HCTX hctxPopupFormDesignerSaveFormAsTemplate
+
+Dieser Befehl erlaubt es, das aktuelle Formular mitsamt dem Quelltext in das
+Repository aufzunehmen und es somit fÅr weiter Projekte verfÅgbar zu mache
+
+.TOPIC 3 Formular Designer|Eigenschaften
+.HIGH Formular Designer|Eigenschaften
+.HCTX hctxPopupFormDesignerProperties
+
+Dieser Befehl erlaubt es, den Dialog mit den Einstellungen des Formular Designers
+zu îffnen.
+
+.TOPIC 2 Dialog
+.HIGH Dialog
+
+Beschreibungen fÅr die diversen Dialoge
+
+.TOPIC 3 Dialog Datei îffnen
+.HIGH Dialog Datei îffnen
+.HCTX hctxDialogOpenFile
+
+Dieser Dialog gestattet es, eine bereits existierende Datei zu îffnen. 
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Laufwerk aus, auf dem sich die
+Datei befindet und wechseln Sie Åber die Verzeichnisliste in das entsprechende
+Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste
+gefiltert werden, soda· nur Dateien mit einer bestimmten Namenserweiterung
+angezeigt werden.
+
+.TOPIC 3 Dialog Repository konfigurieren
+.HIGH Dialog Repository konfigurieren
+.HCTX hctxDialogRepositoryForm
+
+Dieser Dialog gestattet es, das Repository zu konfigurieren.
+Das Repository ist eine Sammlung von Experten, die z.B. neue Formulare aus
+Formularvorlagen erstellen kînnen.
+
+Mit dem Schaltknopf "Neue Seite" kann eine neue Seite im Repository Dialog erzeugt
+werden.
+In diese Seite kînnen dann neue oder bereits vorhandene Experten oder Formularvorlagen
+eingefÅgt werden.
+
+Der Schaltknopf "Seite lîschen" entfernt die ausgewÑhlte Seite aus dem Repository.
+Eine Seite kann nur gelîscht werden, wenn sie keine EintrÑge mehr enthÑlt.
+
+Mit dem Schaltknopf "Seite umbenennen" kann der ausgewÑhlten Repository Seite ein
+anderer Name zugewiesen werden.
+
+Die Eigenschaften (Titel, Beschreibung, Autor) eines Repository Objektes kînnen Åber den
+Schaltknopf "Objekt bearbeiten" verÑndert werden.
+
+Ein Objekt kann mit dem Schaltknopf "Objekt lîschen" aus dem Repository entfernt werden.
+
+FÅr eine ausgewÑhlte Formularvorlage kînnen noch zwei weitere Eigenschaften festgelegt
+werden:
+
+.ULIST
+.LISTITEM Ist die Eigenschaft "Hauptformular" eingeschaltet, wird fÅr jedes
+Hauptformular (erstes Formular) eines neuen Projektes diese Vorlage verwendet, anstatt
+ein leeres Formular zu erzeugen.
+.LISTITEM Ist die Eigenschaft "Neues Formular" eingeschaltet, wird fÅr jedes neue
+Formular eines Projektes diese Vorlage verwendet, anstatt ein leeres Formular zu
+erzeugen.
+.EULIST
+
+FÅr einen ausgewÑhlten Experten kann noch eine weitere Eigenschaft festgelegt werden: 
+
+.ULIST
+.LISTITEM Ist die Eigenschaft "Neues Projekt" eingeschaltet, wird beim Erstellen eines
+neuen Projektes dieser Experte ausgefÅhrt.
+.EULIST
+
+Repository Objekte kînnen mittels Drag & Drop von einer Seite zu einer anderen Seite
+kopiert werden.
+
+.TOPIC 3 Dialog Kommandozeilenparameter
+.HIGH Dialog Kommandozeilenparameter
+.HCTX hctxDialogRunParameter
+
+Dieser Dialog gestattet es, die Kommandozeilenparameter fÅr das aktuelle Projekt
+festzulegen.
+Diese Parameter werden der Applikation beim Start Åber die VDE als Parameter
+Åbergeben.
+
+Tragen Sie hierzu die entsprechende Parameter in das Eingabefeld ein und
+bestÑtigen Sie mit dem "Ok" Schaltknopf.
+
+.TOPIC 3 Dialog Neues Projekt
+.HIGH Dialog Neues Projekt
+.HCTX hctxDialogNewProject
+
+Dieser Dialog gestattet es, ein neues Projekt anzulegen. 
+
+Tragen Sie hierzu den Namen des neuen Projektes in das Eingabefeld "Projektname"
+ein und wÑhlen Sie ein Verzeichnis fÅr das Projekt, in dem alle Dateien des
+Projektes zentral gespeichert werden kînnen.
+
+Die ausgewÑhlte Eintrag in der Liste "Vorlage" dient als Vorlage fÅr das neue
+Projekt.
+Hier sind alle Projektdateien aus dem Verzeichnis "BIN\TEMPLATE" aufgelistet.
+
+Normalerweise wird ein Projekt mit den Standardeinstellungen aus der SIBYL.INI
+erzeugt (Listeneintrag "Standard").
+Wird jedoch eine andere Vorlage in der Liste ausgewÑhlt, werden alle
+Informationen aus der Vorlage in das neue Projekt Åbernommen.
+Ausgenommen hiervon sind jedoch die Informationen Åber Projektformulare (SCU
+Information).
+
+Eine neue Vorlage kann durch kopieren einer Projektdatei in das
+Vorlagenverzeichnis "BIN\TEMPLATE" erzeugt werden.
+Die Textdatei (*.SPR) kann im Anschlu· noch manuell soweit verÑndert werden, das
+nur noch bestimmte Informationen die Standardeinstellun gen Åberschreiben.
+
+.TOPIC 3 Dialog Projekt speichern
+.HIGH Dialog Projekt speichern
+.HCTX hctxDialogSaveProjectAs
+
+Dieser Dialog gestattet es, das aktuelle Projekt zu speichern.
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Ziellaufwerk aus, auf dem die
+Datei gespeichert werden soll und wechseln Sie Åber die Verzeichnisliste in das
+entsprechende Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste
+gefiltert werden, soda· nur nur bereits existierende Dateien mit einer bestimmten
+Namenserweiterung angezeigt werden.
+
+.TOPIC 3 Dialog Projekt îffnen
+.HIGH Dialog Projekt îffnen
+.HCTX hctxDialogOpenProject
+
+Dieser Dialog gestattet es, ein bereits existierendes Projekt zu îffnen. 
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Laufwerk aus, auf dem sich die
+Datei befindet und wechseln Sie Åber die Verzeichnisliste in das entsprechende
+Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste
+gefiltert werden, soda· nur Dateien mit einer bestimmten Namenserweiterung
+angezeigt werden.
+
+.TOPIC 3 Dialog Projekteinstellungen
+.HIGH Dialog Projekteinstellungen
+.HCTX hctxDialogProjectSettings
+
+Dieser Dialog gestattet es, die Einstellungen des aktuellen Projektes zu
+konfigurieren.
+
+Der Dialog umfa·t folgende Katagorien: 
+
+.ULIST
+.LISTITEM {Dialog Projekteinstellungen Compiler}
+.LISTITEM {Dialog Projekteinstellungen Warnungen}
+.LISTITEM {Dialog Projekteinstellungen Linker}
+.LISTITEM {Dialog Projekteinstellungen Debugger}
+.LISTITEM {Dialog Projekteinstellungen Verzeichnisse}
+.LISTITEM {Dialog Projekteinstellungen Formulare}
+.EULIST
+
+.TOPIC 3 Dialog Projekteinstellungen Compiler
+.HIGH Dialog Projekteinstellungen Compiler
+.HCTX hctxDialogProjectSettingsCompiler
+
+Diese Seite enthÑlt die Compilereinstellungen des aktuellen Projektes. 
+
+WÑhlen Sie in der Liste "Plattform" die Zielplattform fÅr Ihre Applikation. 
+
+Folgende Optionen sind bei markierter SchaltflÑche mîglich: 
+
+"Assemblerquelltext" - beim öbersetzen von Dateien wird eine Assemblerdatei (*.ASM) erzeugt 
+
+"Inline Stringfunktionen" - fÅr Stringoperationen (z.B. Kopieren) wird eine
+Codesequenz erzeugt, die sehr schnell ist jedoch den Codeumfang vergrî·ert;
+ansonsten wird nur ein Aufruf einer Prozedur zum Kopieren von Strings erzeugt.
+
+
+"Strenge VAR Strings" - die StringlÑnge von formalen und aktuellen Parametern bei
+Prozeduraufrufen mu· Åbereinstimmen.
+
+
+"Boolsche AusdrÅcke komplett" - alle Komponenten eines boolschen Ausdrucks werden
+komplett ausgewertet; ansonsten wird die Auswertung abgebrochen, sobal das
+Gesamtergebnis feststeht.
+
+
+"Gemeinsame TeilausdrÅcke" - Optimierung der Codegrî·e durch Zusammenfassen von
+gemeinsamen TeilausdrÅcken.
+
+
+"Peephole Optimierung" - allgemeine Optimierungen, z.B. Registeroptimierungen
+Åber einen eng begrenzten Codebereich (im allgemeinen 10-20 Assembleranweisungen)
+
+
+"I/O-PrÅfung" - öberprÅfung von Ein- und Ausgabeoperationen zur Laufzeit.
+
+
+"öberlaufsprÅfung" - PrÅfung, beim Zuweisen des Ergebnisses einer Operation an
+eine Variable; wenn das Ergebniss au·erhalb des darstellbaren Datenbereiches des
+Variablentyps liegt wird eine Exception ausgelîst.
+
+
+"StackprÅfung" - beim Aufruf von Unterprogrammen wird geprÅft, ob genug Platz fÅr
+lokale Variablen und RÅckkehradressen auf dem Stack vorhanden ist.
+
+
+"BereichsprÅfung" - Zuweisungen an Array-, Set-, AufzÑhlungs- und
+Unterbereichstypen werden auf ihre GÅltigkeit geprÅft.
+
+
+Im Eingabefeld 'Definition fÅr bedingte Compilierung' kînnen Symbole deklariert
+werden, welche dann im Quelltext von den Anweisungen fÅr die bedingte
+Compilierung ($IDFEF,...) ausgewertet werden kînnen.
+
+
+Benutzen Sie den Schaltknopf "Seite als Standard", um die Seite als
+Standardeinstellung fÅr neue Projekte zu speichern.
+
+.TOPIC 3 Dialog Projekteinstellungen Warnungen
+.HIGH Dialog Projekteinstellungen Warnungen
+.HCTX hctxDialogProjectSettingsWarnings
+
+Diese Seite enthÑlt die Ereinstellungen fÅr die, vom Compiler erzeugten Warnungen. 
+
+Folgende Warnungen sind bei markierter SchaltflÑche mîglich: 
+
+"Mîgliche Variablenbenutzung vor Initialisierung" - eine Variable wurde
+mîglicherweise ausgewertet, bevor ihr ein Wert zugewiesen wurde; das Resultat der
+Operation kann damit zufÑllig sein.
+
+
+"Vererbte Eigenschaft neu definiert" - eine Eigenschaft (Property) wurde in einer
+Klasse neu definiert; ein Vorfahre der Klasse hat aber ebenfalls schon so eine
+Eigenschaft definiert; damit ist die Eigenschaft des Vorfahren in der neuen
+Klasse nicht mehr verfÅgbar.
+
+
+"Vererbte Variable neu definiert" - eine Variable wurde in einer Klasse neu
+definiert; ein Vorfahre der Klasse hat aber ebenfalls schon so eine Variable
+definiert; damit ist die Variable des Vorfahren in der neuen Klasse nicht mehr
+verfÅgbar.
+
+
+"Virtuelle Methode neu definiert" - eine virtuelle Methode wurde in einer Klasse
+neu definiert; ein Vorfahre der Klasse hat aber ebenfalls schon so eine virtuelle
+Methode definiert; damit ist die Methode des Vorfahren beim Zugriff auf die neue
+Klasse nicht mehr verfÅgbar,
+
+
+"Bezeichner ist deklariert aber nicht benutzt" - ein deklarierter Bezeicher wird
+nicht verwendet und belegt damit nur unnîtigen Speicherplatz.
+
+
+"Parameter ist deklariert aber nicht benutzt" - ein formaler Parameter wird
+innerhalb einer Prozedur nicht verwendet.
+
+
+"Funktion sollte Wert zurÅckliefern" - eine Funktion liefert keinen Wert zurÅck;
+damit ist der RÅckgabewert der Funktion undefiniert.
+
+
+Die beiden Eingabefelder dienen zur Konfiguration der mîglichen Fehler und
+Warnungen beim Compilieren. Wird eine der beiden Grî·en Åberschritten, wird die
+öbersetzung abgebrochen.
+
+Benutzen Sie den Schaltknopf "Seite als Standard", um die Seite als
+Standardeinstellung fÅr neue Projektesungen fÅr die Seite als Standardeinstellung
+fÅr neue Projekte zu speichern.
+
+.TOPIC 3 Dialog Projekteinstellungen Linker
+.HIGH Dialog Projekteinstellungen Linker
+.HCTX hctxDialogProjectSettingsLinker
+
+Diese Seite enthÑlt die Linkereinstellungen des aktuellen Projektes. 
+
+Die Gruppe "Linkeroption" bestimmt die Art der Applikation.
+Hier wird festgelegt, ob das Programm eine Anwendung mit graphischer
+BenutzeroberflÑche (GUI) oder eine Textmode-Applikation (Vollbildschirm oder
+Fenster) sein soll.
+
+
+Der Schalter "Single shared" ist fÅr die Erzeugung von DLL's relevant.
+Ist die Option markiert, wird ein shared Datensegment fÅr die DLL generiert.
+Alle Programme, welche die DLL nutzen, wÅrden in diesem Fall auf den selben
+operieren.
+Ist der Schalter nicht gesetzt, bekommt jedes Programm ein eigenes Datensegment
+zugewiesen.
+
+
+Die Eingabefelder fÅr die Speicherkonfiguration bestimmen die Heapgrî·e und die
+Grî·e des Stacks des compilierten Programms.
+Die Grî·e des Heaps ist auf 256 MByte limitiert. Zu beachten ist weiter, da·
+Heap, Stack, Daten und Programm zusammen nicht grî·er als 512 MByte werden
+dÅrfen.
+
+Benutzen Sie den Schaltknopf "Seite als Standard", um die Seite als
+Standardeinstellung fÅr neue Projektesungen fÅr die Seite als Standardeinstellung
+fÅr neue Projekte zu speichern.
+
+.TOPIC 3 Dialog Projekteinstellungen Debugger
+.HIGH Dialog Projekteinstellungen Debugger
+.HCTX hctxDialogProjectSettingsDebugger
+
+Diese Seite enthÑlt die Debuggereinstellungen des aktuellen Projektes. 
+
+Folgende Einstellungen sind bei markierter SchaltflÑche mîglich: 
+
+"Debug-Informationen erzeugen" - beim öbersetzen werden Informationen Åber
+Zeilennummer erzeugt; erlaubt die Zuordnung von erzeugten Assemblerbefehlen und
+den dazugehîrigen Pascal-Befehlen.
+
+"Lokale Symbole einbeziehen" - beim öbersetzen werden Informationen Åber lokale
+Symbole (z.B. Variablen) erzeugt; diese Symbole kînnen dann wÑhrend einer
+Debugger-Sitzung ausgewertet werden.
+
+
+"Schnelles Auswerten" - AusdrÅcke werden sofort ausgewertet (Tool Tip), wenn man
+wÑhrend einer Debugger-Sitzung mit dem Mauszeiger auf den betreffenden Bezeicher
+zeigt; durch Markieren kînnen auch komplexere AusdrÅcke ausgewertet werden (z.B.
+klasse1.variable1)
+
+
+Die Listen "RTL und System-Ausnahmen" sowie "SPCC" Ausnahmen erlauben das Filtern
+von Exceptions beim Debuggen von Applikationen. Ist eine Exception markiert, wird
+bei dessen Auftreten die Anwendung angehalten und weitere Aktionen erfragt.
+Ansonsten wird sofort die normale Ausnahmebehandlung durchgefÅhrt.
+
+
+Benutzen Sie den Schaltknopf "Seite als Standard", um die Seite als
+Standardeinstellung fÅr neue Projektesungen fÅr die Seite als Standardeinstellung
+fÅr neue Projekte zu speichern.
+
+.TOPIC 3 Dialog Projekteinstellungen Verzeichnisse
+.HIGH Dialog Projekteinstellungen Verzeichnisse
+.HCTX hctxDialogProjectSettingsDirectories
+
+Diese Seite enthÑlt die Verzeichniseinstellungen des aktuellen Projektes. 
+
+"Ausgabe Verzeichnis" - in diesem Verzeichnis werden die Åbersetzten Dateien
+angelegt; ist der Eintrag leer, so wird die Åbersetzte Datei bei der Quelldatei
+gespeichert.
+
+"Unit Verzeichnisse" - in diesen Verzeichnissen sucht der Compiler wÑhrend der
+öbersetzung nach bereits Åbersetzten Dateien; ist der Eintrag leer, so werden die
+Åbersetzten Dateien bei den Quelldateien gesucht.
+
+"Bibliotheksquellen-Verzeichnisse" - in diesen Verzeichnissen stehen die
+Quelldateien der Laufzeitbibliothek und der Komponentenbibliothek; die Dateien in
+diesen Verzeichnissen werden z.B. bei der NeuÅbersetzung des Projektes (Build)
+nicht auf AktualitÑt geprÅft.
+
+"Quellen-Verzeichnisse" - hier sollten alle Verzeichnisse eingetragen werden, in
+denen Projektdateien gespeichert sind; diese Verzeichnisse werden fÅr die PrÅfung
+der AktualitÑt des Projektes benutzt, um die Quelldateien zu finden.
+
+"Komponenten Verzeichnisse" - hier sollten alle Verzeichnisse von Åbersetzten
+Komponentendateien eingetragen werden, die in der dynamischen
+Komponentenbibliothek (CompLib) eingebunden sind, damit diese Dateien bei der
+öbersetzung der dynamischen Komponent enbibliothek gefunden werden kînnen.
+
+
+Benutzen Sie den Schaltknopf "Seite als Standard", um die Seite als
+Standardeinstellung fÅr neue Projektesungen fÅr die Seite als Standardeinstellung
+fÅr neue Projekte zu speichern.
+
+.TOPIC 3 Dialog Projekteinstellungen Formulare
+.HIGH Dialog Projekteinstellungen Formulare
+.HCTX hctxDialogProjectSettingsForms
+
+Diese Seite enthÑlt die Einstellungen fÅr automatisch erzeugte Formulare. 
+
+FÅr ein automatisch erzeugtes Formular wird wÑhrend der Initialisierung der
+Applikation bereits der Konstruktor aufgerufen, soda· z.B. sofort auf die
+Variable "MyForm1" zugegriffen werden kann.
+
+FÅr die nichtautomatisch erzeugten Formulare mu· der Konstruktor manuell
+aufgerufen werden (z.B. MyForm1.Create(Nil);)
+
+Das Hauptformular der Applikation wird generell automatisch erzeugt und kann Åber
+die entsprechende Liste festgelegt werden.
+
+
+.TOPIC 3 Dialog Allgemein
+.HIGH Dialog Allgemein
+.HCTX hctxDialogGeneralSettings
+
+Dieser Dialog gestattet es, die allgemeinen Einstellungen fÅr die VDE zu konfigurieren.
+Diese Einstellungen werden unabhÑngig vom Projekt gespeichert und sind somit fÅr jedes
+Projekt gleich.
+
+Der Dialog umfa·t folgende Katagorien:
+
+.ULIST
+.LISTITEM {Dialog Editor Einstellungen}
+.LISTITEM {Dialog Farbeinstellungen}
+.LISTITEM {Dialog Formateinstellungen}
+.LISTITEM {Dialog Designer Einstellungen}
+.LISTITEM {Dialog Browser Einstellungen}
+.LISTITEM {Dialog Automatische Einstellungen}
+.LISTITEM {Dialog Allgemeine Einstellungen}
+.EULIST
+
+.TOPIC 3 Dialog Editor Einstellungen
+.HIGH Dialog Editor Einstellungen
+.HCTX hctxDialogGeneralSettingsEditor
+
+Diesee Seite gestattet es, die Editoreinstellungen des Code Editors zu konfigurieren. 
+
+Folgende Optionen sind bei markierter SchaltflÑche mîglich: 
+
+"EinfÅgemodus" - bei der Eingabe von Zeichen wird der Text an der Cursorposition
+eingefÅgt; ansonsten wird der Text Åberschrieben.
+
+"Auto Zeileneinzug" -  beim Zeilenumbruch mittels Enter Taste wird der Cursor
+automatisch unter das erste Nicht-Leerzeichen der vorherigen Zeile plaziert;
+ansonsten erfolgt keine EinrÅckung und der Cursor befindet sich in der ersten Spalte.
+
+"ZusÑtzl. Einzug" - beim Zeilenumbruch mittels Enter Taste und eingeschalteter Option "Auto Zeileneinzug" wird der Cursor bei bestimmten SchlÅsselwîrtern ('BEGIN','EXCEPT','FINALLY','REPEAT','RECORD','EXPORTS','TRY','CONST','TYPE', 'VAR','OF') zusÑtzlich 
+eingerÅckt; das Ausma· der EinrÅckung lÑ·t sich Åber die Option "BlockeinrÅckung" in der Seite Format regulieren 
+
+"Einzug rÅckgÑngig" - wenn beim BetÑtigen der RÅcktaste (Backspace) der Cursor auf dem
+ersten Nicht-Leerzeichen in der Zeile steht, so werden so viele Zeichen links vom Cursor
+gelîscht, bis der Cursor unter dem ersten Nicht-Leerzeichen der vorherigen Zeile steht;
+ansonsten wird immer genau ein Zeichen gelîscht.
+
+"Cursor wechselt Zeile" - wenn beim Navigieren mit der linken und rechten Cursortaste
+der Zeilenanfang bzw. das Zeilenende erreicht wird, springt der Cursor automatisch an
+das Ende der vorherigen Zeile bzw. an den Anfang der nÑchsten Zeile.
+
+"Doppelklick markiert Zeile" - beim Doppelklick in ein Editorfenster wird die Zeile
+unter dem Mauscursor markiert; ansonsten wird nur das Wort am Cursor markiert.
+
+"Blockmarkierung" - die Markierung im Code Editor kann einen bestimmten Bereich von
+Spalten Åber mehrere Zeilen umfassen;
+ansonsten geht die Markierung immer von der ersten bis zur letzten Spalte (fÅr Zeilen
+zwischen Anfangszeile und Endzeile der Markierung);
+(--> Diese Funktion ist nicht fÅr DBCS Systeme verfÅgbar)
+
+"Persistente Blîcke" - beim Bewegen des Cursors wird die Markierung im Editorfenster
+gelîscht; ansonsten bleibt die Markierung erhalten.
+
+"Block Åberschreiben" - ist ein Textblock markiert und wird Text im Editorfenster eingefÅgt so wird der markierte Textblock durch den neuen Text Åberschrieben; ansonsten wird der Text an der aktuellen Cursorposition eingefÅgt 
+
+"Gruppen zurÅcknehmen" - durch den Befehl "RÅckgÑngig" werden aufeinanderfolgende
+Editoroperationen gleichen Typs (z.B. Cursorbewegungen) auf einmal zurÅckgenommen;
+ansonsten wird jede Operation einzeln zurÅckgenommen.
+
+"Angepa·te Tabulatoren" - beim BetÑtigen der Tabulator Taste werden genau so viele
+Leerzeichen an der aktuellen Cursorposition eingefÅgt, da· der Cursor am Anfang eines
+neuen Wortes der vorherigen Zeile steht; ansonsten werden so viele Leezeichen eingefÅg
+t, wie im Eingabefeld "Tabulatorgrî·e" definiert sind.
+
+"Pos1 aufs erste Wort" - beim BetÑtigen der Pos1 Taste wird der Cursor auf das erste
+Nichtleerzeichen der Zeile positioniert; ansonsten wird er in der ersten Spalte
+positioniert.
+
+"Automatische Klammer" - beim EinfÅgen einer îffnendem Klammer wird automatisch die
+schlie·ende Klammer eingefÅgt und der Cursor dazwischen positioniert.
+
+"Backups generieren" - beim Speichern einer Datei wird vorher eine Sicherungskopie der
+alten Datei angelegt (*.BAK).
+
+"'.BAK' anhÑngen" - die alte Dateinamenserweiterung (falls vorhanden) wird nicht
+ersetzt, sondern das Wort '.BAK' an den Dateinamen angehÑngt.
+
+"Suche Text am Cursor" - beim ôffnen des Suchen- bzw. Ersetzen-Dialogs wird der Text am
+Cursor automatisch in das entsprechende Eingabefeld Åbertragen.
+
+"Syntax hervorheben" - Hervorhebung von SchlÅsselwîrtern, Kommentaren und Sonderzeichen
+aktivieren.
+
+"Verzeichnis wechseln" - beim Laden einer Datei Åber den Befehl Datei|ôffnen wird
+anschlie·end in das Verzeichnis der ausgewÑhlten Datei gewechselt.
+
+"Pfadname im Titel" - der Titel eines Editorfensters (MDI Modus) bzw. des Code Editors
+enthÑlt immer den vollstÑndigen Dateinamen mit Pfadangabe;
+ansonsten wird nur der Dateiname angezeigt, wenn sich die Datei im aktuellen
+Arbeitsverzeichnis befindet.
+
+"Wortumbruch" - beim EinfÅgen von Text wird der Text automatisch ab der im Eingabefeld
+festgelegten Spalte auf die nÑchste Zeile umgebrochen;
+ist die Spalte 0 eingetragen, wird immer am rechten Fensterrand umgebrochen.
+
+"Auto speichern" - die aktuelle Datei wird automatisch nach der im Eingabefeld
+festgelegten Anzahl von Editoroperationen abgespeichert.
+
+"Tabulatorgrî·e" - Anzahl der Leerzeichen, die beim BetÑtigen der Tabulator Taste
+eingefÅgt werden.
+
+"Op. rÅckgÑngig" - Anzahl der zurÅcknehmbaren Operationen in einem Editorfenster.
+
+
+WÑhlen Sie in der Liste "Tastaturbelegung" die gewÅnschte Abbildung von
+Tastenkombinationen auf entsprechende Editoroperationen.
+
+
+Bestimmen Sie in der Gruppe "Code Editor" das Aussehen des Code Editors.
+Hier sind als Option entweder mehrere Editorfenster ("MDI") oder ein sichtbares
+Editorfenster mit einer Umschaltleiste ("Tableiste") verfÅgbar.
+
+
+Die Gruppe "Mauszeiger" legt das Aussehen des Mauscursors entweder als "Pfeil" oder als
+vertikaler "Balken" fest.
+
+
+Die Gruppe "Cursorform" legt das Aussehen des Textcursors im EinfÅgemodus entweder als
+"Unterstrich" oder als vertikaler "Balken" fest.
+
+
+.TOPIC 3 Dialog Farbeinstellungen
+.HIGH Dialog Farbeinstellungen
+.HCTX hctxDialogGeneralSettingsColors
+
+Diesee Seite gestattet es, die Farbeinstellungen der Editorfenster zu konfigurieren. 
+
+WÑhlen Sie in der Liste "Element" das entsprechende Element aus und klicken Sie mit der
+linken Maustaste in die Farbpalette, um die Vordergrundfarbe (FG) des Elements
+festzulegen.
+Benutzen Sie die rechte Maustaste, um die Hintergrundfarbe (BG) zu verÑndern..
+
+Markieren Sie die entsprechende SchaltflÑche in der Gruppe "Standards benutzen", um die
+Systemeinstellungen bzw. Standardwerte fÅr das Element zu verwenden.
+
+WÑhlen Sie in der Liste "Zeichensatz" den aktuellen Zeichesatz fÅr die Editorfenster aus.
+
+Das Editorbeispiel wird bei jeder énderung der Einstellungen aktualisiert.
+
+.TOPIC 3 Dialog Formateinstellungen
+.HIGH Dialog Formateinstellungen
+.HCTX hctxDialogGeneralSettingsFormat
+
+Diesee Seite gestattet es, die Formatierung von automatisch generierten Quelltexten zu
+konfigurieren.
+
+Die Gruppe "Bezeichnerstil" legt die Schreibweise von Wîrtern fest.
+So kînnen die Wîrter entweder nur in "Gro·buchstaben", nur in "Kleinbuchstaben" oder in
+Kleinbuchstaben mit einem gro·en Anfangsbuchstaben ("Gemischt") eingefÅgt werden.
+
+Die Gruppe "EinrÅckung" legt die EinrÅckung von entsprechenden Textbestandteilen z.B.
+bei Klassendefinitionen fest.
+
+"Block" - EinrÅckung eines neuen Blocks (z.B. zwischen BEGIN und END) 
+
+"Sicht" - EinrÅckung von SchlÅsselwîrtern zur Beschreibung der Sichtbarkeit von
+Bezeichnern in Klassendefinitionen (z.B. PRIVATE oder PUBLISHED)
+
+"Feld" - EinrÅckung von Bezeichnern in Klassendefinitionen (z.B. Button1:TButton) 
+
+"Leer" - Anzahl von Leerzeichen zwischen Wîrtern (z.B. in Parameterlisten von Ereignisbehandlungsroutinen) 
+
+Benutzen Sie die Schieber, um die entsprechenden Einstellungen zu verÑndern.
+Die Auswirkungen werden sofort im Editorbeispiel sichtbar.
+
+Geben Sie im Eingabefeld "Zeilenumbruch" die Anzahl von Zeichen ein, nach der eine
+automatisch generierte Zeile umgebrochen werden soll.
+Dies kann zur öbersichtlichkeit der Quelltextes beitragen, wenn sehr lange
+Parameterlisten bei Ereignisbehandlungsroutinen erzeugt werden.
+
+.TOPIC 3 Dialog Designer Einstellungen
+.HIGH Dialog Designer Einstellungen
+.HCTX hctxDialogGeneralSettingsDesigner
+
+Diese Seite gestattet es, die Einstellungen des Formular Designers zu konfigurieren. 
+
+Die Gruppe "Gitter" legt den horizontalen und vertikalen Abstand der Gitterpunkte fest.
+Ebenso kann die Anzeige des Gitters ein- und ausgeschalten werden.
+Ist die SchaltflÑche "Aktivieren" markiert, so ist der Fangmodus beim Verschieben und
+Vergrî·ern bzw. Verkleinern von sichtbaren Komponenten im Designer aktiviert und die
+Komponenten werden am Gitter ausgerichtet.
+
+Die Gruppe "EinfÅgemodus" legt den Modus beim EinfÅgen neuer Komponenten aus der
+Komponentenpalette fest.
+Hier kann festgelegt werden, ob die Komponente nach dem EinfÅgen bei gedrÅckter linker
+Maustaste sofort verschoben ("Verschieben") oder in ihrer Grî·e verÑndert werden kann
+("Grî·e anpassen").
+
+
+Bestimmen Sie in der Gruppe "Mehrfachauswahl" das Verhalten des Designers bei der
+Mehrfachauswahl von Komponenten durch Aufziehen eines Rechteckes.
+Entweder werden alle Komponenten ausgewÑhlt, die sich vollstÑndig innerhalb des
+Rechteckes ("Eingeschlossen") befinden oder auch solche, die nur teilweise eingeschlossen ("BerÅhrt") und somit vom
+Rechteck berÅhrt werden.
+
+
+Mit dem Schalter "Automatisch" in der Gruppe "Neues Formular" legen Sie fest, ob ein
+neues Formular standardmÑ·ig den Status "automatisch erzeugtes Formular" erhÑlt.
+Dieser Status kann spÑter noch im Dialog Formulare verÑndert werden.
+
+.TOPIC 3 Dialog Browser Einstellungen
+.HIGH Dialog Browser Einstellungen
+.HCTX hctxDialogGeneralSettingsBrowser
+
+Diese Seite gestattet es, die Einstellungen des Objekt Browsers zu konfigurieren.
+
+Markieren Sie in der Gruppe "Browserinformationen" die Informationskategorien, die im
+Browser angezeigt werden sollen.
+
+WÑhlen Sie in der Gruppe "Browserdateien" die Dateikategorien aus, die als Grundlage fÅr
+die Browserinformation verwendet werden.
+Die Dateien der nichtmarkierten Kategorien werden herausgefiltert und somit im Browser
+nicht dargestellt.
+
+Durch die genannten Optionen kann die darstellbare Menge an Informationen auf relevante
+Informationen beschrÑnkt werden, was die öbersichtlichkeit im Browser und gleichzeit
+auch die Aktualisierungsgeschwindigkeit erhîht.
+
+.TOPIC 3 Dialog Automatische Einstellungen
+.HIGH Dialog Automatische Einstellungen
+.HCTX hctxDialogGeneralSettingsAuto
+
+Diese Seite gestattet es, die Einstellungen der VDE zu konfigurieren, die zu bestimmten
+Zeitpunkten automatisch ausgefÅhrt werden kînnen.
+
+Die Gruppe "Auto speichern" beinhaltet Verweise auf Dateien, die automatisch beim
+öbersetzen von Quelldateien oder beim Starten von Applikationen abgespeichert werden.
+
+
+Die Gruppe "'Speichern unter' aktualisiert" beinhaltet Aktionen, die automatisch
+ausgefÅhrt werden, wenn eine Datei im Code Editor unter einem neuen Namen abgespeichert
+wird.
+
+.TOPIC 3 Dialog Allgemeine Einstellungen
+.HIGH Dialog Allgemeine Einstellungen
+.HCTX hctxDialogGeneralSettingsGeneral
+
+Diese Seite gestattet es, allgemeine Einstellungen der VDE zu konfigurieren.
+
+Folgende Optionen sind bei markierter SchaltflÑche mîglich: 
+
+"Hinweise anzeigen" - es werden Hinweistexte (Tool Tips) zu verschiedenen Elementen
+(z.B. Schaltkîpfe) der VDE angeziegt, wenn der Mauszeiger eine bestimmte Zeit darÅber
+stillgestanden hat.
+
+"Compilerfenster îffnen" - das Kontrollzentrum mit dem Statusfenster des Compilers wird
+angezeigt, wenn eine Datei Åbersetzt wird.
+
+"3D Aktionsknîpfe" - alle Schaltknîpfe in den Werkzeugleisten der VDE werden
+dreidimensional dargestellt;
+ansonsten werden die Schaltknîpfe nur dreidimensional dargestellt, wenn der Mauszeiger
+sich gerade Åber dem Schalter befindet (Fly Over).
+
+"Knîpfe mit Bitmaps" - die Standardschaltknîpfe der VDE (Ok,Abbruch,Hilfe,...) werden
+zusÑtzlich zum Text noch mit einem Bitmap dargestellt.
+
+"Editor Iconleiste" - zeigt die Symbolleiste in den Editorfenstern an; diese Leiste
+enthÑlt Symbole fÅr bestimmte Zeileninformationen (Debuginformation vorhanden, gesetzter
+Haltepunkt, ...);
+
+"Compilieren abfragen" - wird beim Starten des aktuellen Programms festgestellt, da· es
+nicht mehr aktuell ist, wird nachgefragt, ob es neu Åbersetzt werden soll.
+
+
+Die Gruppe "Datei fallenlassen" bestimmt das Verhalten des Code Editors, wenn per Drag &
+Drop eine externe Datei darauf gezogen und anschlie·end fallengelassen wurde.
+Entweder wird ein neues Editorfenster fÅr die Datei geîffnet ("ôffnen") oder der Inhalt
+der Datei in das aktuelle Editorfenster eingefÅgt ("Importieren"). 
+
+
+Der Schaltknopf "VDE Zeichensatz" îffnet einen Zeichensatz-Dialog, Åber den der aktuelle
+zeichensatz der VDE konfiguriert werden kann.
+
+
+Das Eingabefeld "Projektverzeichnis" enthÑlt das Verzeichnis, welches im Projekt|ôffnen
+Dialog standardmÑ·ig angezeigt wird. Benutzen Sie den Schaltknopf "Suchen", um das
+Verzeichnis bequem Åber einen Auswahldialog zu bestimmen.
+
+.TOPIC 3 Dialog hctxDialogNewSource
+.HIGH Dialog hctxDialogNewSource
+.HCTX hctxDialogNewSource
+
+hctxDialogNewSource
+
+.TOPIC 3 Dialog Browser
+.HIGH Dialog Browser
+.HCTX hctxDialogBrowserForm
+
+öber das KontextmenÅ kînnen noch die anderen Ansichten des Browsers ausgewÑhlt werden:
+
+.ULIST
+.LISTITEM {Dialog Browser Objekthierarchie}
+.LISTITEM {Dialog Browser Unit Hierarchie}
+.LISTITEM {Dialog Browser Globale Symbole}
+.EULIST
+
+.TOPIC 3 Dialog Browser Objekthierarchie
+.HIGH Dialog Browser Objekthierarchie
+.HCTX hctxDialogBrowserObjectTree
+
+Diese Ansicht zeigt die Vererbungsfolge der Klassen des aktuellen Projektes. 
+
+Es werden alle Klassen aufgelistet, die in den Units des aktuellen Projektes als
+îffentliche Bezeichner definiert sind, auch solche, die nicht direkt vom aktuellen
+Projekt benutzt werden.
+
+Die zugrunde liegenden Units kînnen noch durch einen Filter in den VDE Browser
+Einstellungen konfiguriert werden, soda· damit die Zeit fÅr den Aufbau der Informationen
+beeinflu·t werden kann.
+
+Durch Auswahl (Doppelklick oder Enter) einer Klasse kînnen im Fenster
+"Detailinformationen" die Methoden und Instanzenvariablen der Klasse aufgelistet werden.
+
+öber das KontextmenÅ kînnen noch die anderen Ansichten des Browsers ausgewÑhlt werden:
+
+.ULIST
+.LISTITEM {Dialog Browser Unit Hierarchie}
+.LISTITEM {Dialog Browser Globale Symbole}
+.EULIST
+
+.TOPIC 3 Dialog Browser Unit Hierarchie
+.HIGH Dialog Browser Unit Hierarchie
+.HCTX hctxDialogBrowserUnitsTree
+
+Diese Ansicht zeigt die Units des aktuellen Projektes.
+Weiterhin kann zu jeder Units eine alphabetisch sortierte Liste der îffentlichen Symbole
+angezeigt werden.
+
+Es werden alle îffentlichen Symbole aufgelistet, die in den Units des aktuellen
+Projektes definiert sind, auch solche, die nicht direkt vom aktuellen Projekt benutzt
+werden.
+
+Die zugrunde liegenden Units kînnen noch durch einen Filter in den VDE Browser
+Einstellungen konfiguriert werden, soda· damit die Zeit fÅr den Aufbau der Informationen
+beeinflu·t werden kann.
+
+Durch Auswahl (Doppelklick oder Enter) eines Symbols kînnen im Fenster
+"Detailinformationen" detailiertere Informationen zu diesem Symbol aufgelistet werden.
+Dies ist der Fall, wenn es sich bei dem Symbol z.B. um eine Prozedur mit Parametern, eine Klasse
+oder einen strukturierten Datentyp handelt. 
+
+öber das KontextmenÅ kînnen noch die anderen Ansichten des Browsers ausgewÑhlt werden:
+
+.ULIST
+.LISTITEM {Dialog Browser Objekthierarchie}
+.LISTITEM {Dialog Browser Globale Symbole}
+.EULIST
+
+.TOPIC 3 Dialog Browser Globale Symbole
+.HIGH Dialog Browser Globale Symbole
+.HCTX hctxDialogBrowserGlobalsList
+
+Diese Ansicht zeigt die alle globalen Symbole des aktuellen Projektes.
+Weiterhin kann zu jeder Units eine alphabetisch sortierte Liste der îffentlichen Symbole
+angezeigt werden.
+
+Es werden dabei standardmÑ·ig alle Units aufgelistet, die im aktuellen Projekt
+eingebunden sind.
+
+Die zugrunde liegenden Units kînnen jedoch noch durch einen Filter in den VDE Browser
+Einstellungen konfiguriert werden, soda· damit die Zeit fÅr den Aufbau der Informationen
+beeinflu·t werden kann.
+
+Durch Auswahl (Doppelklick oder Enter) eines Symbols kînnen im Fenster
+"Detailinformationen" detailiertere Informationen zu diesem Symbol aufgelistet werden.
+Dies ist der Fall, wenn es sich bei dem Symbol z.B. um eine Prozedur mit Parametern,
+eine Klasse oder einen strukturierten Datentyp handelt.
+
+öber das KontextmenÅ kînnen noch die anderen Ansichten des Browsers ausgewÑhlt werden: 
+
+.ULIST
+.LISTITEM {Dialog Browser Objekthierarchie}
+.LISTITEM {Dialog Browser Unit Hierarchie}
+.EULIST
+
+.TOPIC 3 Dialog hctxDialogBrowserDetailList
+.HIGH Dialog hctxDialogBrowserDetailList
+.HCTX hctxDialogBrowserDetailList
+
+hctxDialogBrowserDetailList
+
+.TOPIC 3 Dialog hctxDialogModifyWatchPoint
+.HIGH Dialog hctxDialogModifyWatchPoint
+.HCTX hctxDialogModifyWatchPoint
+
+hctxDialogModifyWatchPoint
+
+.TOPIC 3 Dialog öberwachte Adresse
+.HIGH Dialog öberwachte Adresse
+.HCTX hctxDialogWatchPoints
+
+Dieser Dialog gestattet es, Adressen des aktuellen Projektes zur Laufzeit vom Debugger
+Åberwachen zu lassen.
+
+Um eine neue Adresse zu Åberwachen, wÑhlen Sie die Seite "Neu" und tragen die Adresse
+in das entprechende Eingabefeld ein (z.B. $40000).
+
+Der Parameter "Anzahl Bytes" bestimmt die Grî·e des zu Åberwachenden Adre·bereichs. 
+
+Die Einstellung "Halten bei" bestimmt, bei welcher Zugriffsart auf die Adresse das
+aktuelle Programm vom Debugger unterbrochen wird.
+
+Eine bereits Åberwachte Adresse kann auf der Seite "éndern" konfiguriert oder gelîscht
+
+.TOPIC 3 Dialog ctxDialogInspectForm
+.HIGH Dialog ctxDialogInspectForm
+.HCTX hctxDialogInspectForm
+
+hctxDialogInspectForm
+
+.TOPIC 3 Dialog Neuen Wert Åberwachen
+.HIGH Dialog Neuen Wert Åberwachen
+.HCTX hctxDialogAddInspect
+
+Tragen Sie den Namen des zu Åberwachenden Wertes in das Eingabefeld ein und bestÑtigen
+Sie den Dialog mit "Ok".
+
+.TOPIC 3 Dialog Neuen Ausdruck Åberwache
+.HIGH Dialog Neuen Ausdruck Åberwache
+.HCTX hctxDialogAddWatch
+
+Tragen Sie den Namen des zu Åberwachenden Ausdruckes in das Eingabefeld ein und
+bestÑtigen Sie den Dialog mit "Ok".
+
+.TOPIC 3 Dialog hctxDialogSymbolsForm
+.HIGH Dialog hctxDialogSymbolsForm
+.HCTX hctxDialogSymbolsForm
+
+hctxDialogSymbolsForm
+
+.TOPIC 3 Dialog hctxDialogEvaluateModify
+.HIGH Dialog hctxDialogEvaluateModify
+.HCTX hctxDialogEvaluateModify
+
+hctxDialogEvaluateModify
+
+.TOPIC 3 Dialog hctxDialogViewSource
+.HIGH Dialog hctxDialogViewSource
+.HCTX hctxDialogViewSource
+
+hctxDialogViewSource
+
+.TOPIC 3 Dialog hctxDialogSelectSCU
+.HIGH Dialog hctxDialogSelectSCU
+.HCTX hctxDialogSelectSCU
+
+hctxDialogSelectSCU
+
+.TOPIC 3 Dialog WDSibyl/Sibyl/Delphi Formular importieren
+.HIGH Dialog WDSibyl/Sibyl/Delphi Formular importieren
+.HCTX hctxDialogOpenDFMSCU
+
+Dieser Dialog gestattet es, den Namen einer Formulardatei auszuwÑhlen.
+Die Formulare aus dieser Datei kînnen danach dem aktuellen Projekt selektiv hinzugefÅgt
+werden.
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Laufwerk aus, auf dem sich die Datei
+befindet und wechseln Sie Åber die Verzeichnisliste in das entsprechende Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste gefiltert
+werden, soda· nur Dateien mit einer bestimmten Namenserweiterung angezeigt werden.
+
+.TOPIC 3 Dialog Speicher
+.HIGH Dialog Speicher
+.HCTX hctxDialogStorageForm
+
+Dieses Fenster zeigt einen Ausschnitt des Speichers ab einer bestimmten Adresse.
+Die Anzeige ist jedoch nur wÑhrend einer Debugger Sitzung gÅltig.
+
+öber das KontextmenÅ kann die Startadresse des anzuzeigenden Speicherbereichs verÑndert
+werden.
+
+Ebenso kann die Darstellung der Informationen in verschiedenen Formaten erfolgen, welche
+Åber das KontextmenÅ ausgewÑhlt werden kînnen.
+
+Durch Auswahl einer Speicherinformation mit der Maus kann im Anschlu· der Inhalt der
+entsprechenden Speicherstelle Åber das KontextmenÅ geÑndert werden.
+
+.TOPIC 3 Dialog Gehe zu Speicheradresse
+.HIGH Dialog Gehe zu Speicheradresse
+.HCTX hctxDialogEnterStorageAddress
+
+Geben Sie die neue Speicheradresse in das Eingabefeld ein. 
+
+Hierbei kînnen sowohl Dezimalzahlen (z.B. 100000) als auch Hexadezimalzahlen (z.B.
+$40000) und Registernamen (z.B. EAX) verwendet werden.
+
+Weiterhin ist es mîglich, mit Offsetwerten zu arbeiten (z.B. EAX+4)
+
+.TOPIC 3 Dialog hctxDialogEnterStorageData
+.HIGH Dialog hctxDialogEnterStorageData
+.HCTX hctxDialogEnterStorageData
+
+hctxDialogEnterStorageData
+
+.TOPIC 3 Dialog CPU Fenster
+.HIGH Dialog CPU Fenster
+.HCTX hctxDialogCPUForm
+
+Das CPU Fenster ermîglicht die AusfÅhrung des aktuellen Programm auf Assembler Ebene.
+Das hei·t, die Assemblerbefehle einer normalen Pascal Anweisung kînnen einzeln im
+Debugger ausgefÅhrt werden und somit direkt der Zustand der Register und des Speichern
+nach jedem Teilschritt ausgewertet und somit Åberwacht werden. 
+
+Das Fenster besteht aus mehreren Teilfenstern, die folgende Funktion haben: 
+
+.ULIST
+.LISTITEM Das Programmcode Fenster (links oben) zeigt die Assemblerbefehle und die dazugehîrigen
+Pascal Anweisungen.
+Es ist mîglich die Assemblerbefehle im Einzelschrittmodus (F7) oder als ganze Anweisung
+(F8) abzuarbeiten.
+Weiterhin kann Åber das KontextmenÅ die Adresse des anzuzeigenden Speicherbereichs
+verÑndert werden.
+.LISTITEM Das Registerfenster (rechts oben) enthÑlt zwei Seiten und zeigt die aktuelle Belegung
+der CPU Register und der FPU Register.
+.LISTITEM Das dritte Fenster (unten) enthÑlt ebenfalls zwei Seiten und zeigt den Inhalt
+des Speichers (siehe Speicher) ab einer bestimmten Adresse.
+Die andere Seite zeigt den Aufruf-Stack des aktuelle Programms.
+Durch die Auswahl eines Eintrages in dieser Liste, kann zur entsprechenden Adresse gesprungen
+werden, an der die Prozedur aufgerufen wurde.
+.EULIST
+
+.TOPIC 3 Dialog CPU - Gehe zu Adresse
+.HIGH Dialog CPU - Gehe zu Adresse
+.HCTX hctxDialogEnterCPUAddress
+
+Geben Sie die neue Adresse in das Eingabefeld ein.
+
+Hierbei kînnen sowohl Dezimalzahlen (z.B. 100000) als auch Hexadezimalzahlen (z.B.
+$40000) und Registernamen (z.B. EAX) verwendet werden.
+
+Weiterhin ist es mîglich, mit Offsetwerten zu arbeiten (z.B. EAX
+
+.TOPIC 3 Dialog Quelldatei des Formulars Ñndern
+.HIGH Dialog Quelldatei des Formulars Ñndern
+.HCTX hctxDialogOpenFormSourceLocation
+
+Dieser Dialog gestattet es, die Bindung einer Formulardatei zur Quelltextdatei zu
+Ñndern.
+Diese Bindung wird benîtigt, um z.B beim EinfÅgen oder Lîschen von Komponenten in diesem
+Formular den entsprechenden Quelltext gleichzeitig zu aktualisieren.
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Laufwerk aus, auf dem sich die Datei
+befindet und wechseln Sie Åber die Verzeichnisliste in das entsprechende Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste gefiltert
+werden, soda· nur Dateien mit einer bestimmten Namenserweiterung angezeigt werde
+
+.TOPIC 3 Dialog Formular als Datei speichern
+.HIGH Dialog Formular als Datei speichern
+.HCTX hctxDialogSaveFormToFile
+
+Dieser Dialog gestattet es, ein Formular als einzelne Datei abzuspeichern.
+Dies kann nÅtzlich sein, wenn bestimmte Formulare eines grî·eren Projektes einzeln
+weitergegeben werden sollen.
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Ziellaufwerk aus, auf dem die Datei
+gespeichert werden soll und wechseln Sie Åber die Verzeichnisliste in das entsprechende
+Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste gefiltert
+werden, soda· nur nur bereits existierende Dateien mit einer bestimmten
+Namenserweiterung angezeigt werden.
+
+.TOPIC 3 Dialog hctxDialogOpenObjectBitmap
+.HIGH Dialog hctxDialogOpenObjectBitmap
+.HCTX hctxDialogOpenObjectBitmap
+
+hctxDialogOpenObjectBitmap
+
+.TOPIC 3 Dialog hctxDialogEditObject
+.HIGH Dialog hctxDialogEditObject
+.HCTX hctxDialogEditObject
+
+hctxDialogEditObject
+
+.TOPIC 3 Dialog hctxDialogOpenNewSource
+.HIGH Dialog hctxDialogOpenNewSource
+.HCTX hctxDialogOpenNewSource
+
+hctxDialogOpenNewSource
+
+.TOPIC 3 Dialog Repository
+.HIGH Dialog Repository
+.HCTX hctxDialogNewObject
+
+Dieser Dialog enthÑlt alle registrierten Experten und Formularvorlagen.
+Formularvorlagen kînnen z.B. verwendet werden, um komplexere Formulare als
+Schablonen im Repository zu speichern und sie zu einem spÑteren Zeitpunkt in
+andere Projekte wieder einfÅgen zu kînnen.
+
+öber den {Dialog Repository konfigurieren} kînnen die Objekte und Seiten des
+Repository Dialogs konfiguriert werden.
+
+Ein bereits erstelltes Formular kann in das Repository Åber den Befehl
+{Menue Komponente|Formular zum Repository hinzufÅgen} aufgenommen werden.
+Weiterhin kînnen solche Vorlagen in externe Dateien gespeichert
+{Menue Komponente|Exportiere Formularvorlage} oder aus diesen geladen werden
+{Menue Komponente|Importiere Formularvorlage}.
+
+Experten kînnen nur Åber die dynamische Komponentenbibliothek in das Repository
+aufgenommen werden.
+WÑhlen Sie dazu den Befehl {Menue Komponente|Installieren} und geben Sie die
+entsprechende Unit des Experten in dem darauffolgenden Dialog an.
+
+Um einen Experten auszufÅhren oder ein neues Formular aus einer Vorlage zu
+erzeugen, wÑhlen Sie das entsprechende Objekt aus und bestÑtigen Sie mit dem "Ok"
+Schaltknopf.
+
+
+.TOPIC 3 Dialog hctxDialogOpenFormBitmap
+.HIGH Dialog hctxDialogOpenFormBitmap
+.HCTX hctxDialogOpenFormBitmap
+
+hctxDialogOpenFormBitmap
+
+.TOPIC 3 Dialog Formular als Repository Vorlage speichern
+.HIGH Dialog Formular als Repository Vorlage speichern
+.HCTX hctxDialogAddFormToRepository
+
+Dieser Dialog gestattet es, ein Formular des aktuellen Projektes in das Repository der
+VDE als Formularvorlage aufzunehmen.
+
+WÑhlen Sie hierzu aus der Formularliste ein Formular aus und ergÑnzen Sie die Felder
+"Titel", "Beschreibung" und "Autor" auf der rechten Seite des Dialoges, um die neue
+Formularvorlage zu beschreiben.
+Anschlie·end mu· im Kombinationsfeld "Seite" noch eine Seite des Repository Dialogs fÅr
+das neue Objekt ausgewÑhlt werden.
+
+öber den Schaltknopf "Suchen" kann optional ein neues Bitmap fÅr das Repository Objekt
+gesetzt werden.
+
+Die Formularvorlage kann dann zu einem spÑteren Zeitpunkt Åber den Befehl "Datei|Neu"
+aus dem Repository in das aktuelle Projekt eingefÅgt werden.
+
+.TOPIC 3 Dialog hctxDialogSaveFormTemplatesToFile
+.HIGH DialoghctxDialogSaveFormTemplatesToFile
+.HCTX hctxDialogSaveFormTemplatesToFile
+
+hctxDialogSaveFormTemplatesToFile
+
+.TOPIC 3 Dialog Formularvorlage(n) exportieren
+.HIGH Dialog Formularvorlage(n) exportieren
+.HCTX hctxDialogExportTemplateForms
+
+Dieser Dialog gestattet es, eine oder mehrere Formularvorlagen aus dem Repository als
+externe Datei abzuspeichern.
+
+WÑhlen Sie hierzu die entsprechenden EintrÑge aus der Liste der verfÅgbaren
+Formularvorlagen aus und verschieben Sie sie mit den Schaltknîpfen in die Liste der
+Zielvorlagen.
+
+In das Eingabefeld "Zieldatei" mu· dann noch der Name der neu anzulegenden Datei
+eingetragen werden. Dieser Name kann auch Åber den Schaltknopf "Suchen" bestimmt werden.
+
+Die so gespeicherten Formularvorlagen kînnen spÑter Åber den Befehl
+"Komponente|Importiere Formularvorlage" wieder in das Repository eingefÅgt werden.
+
+.TOPIC 3 Dialog Formularvorlage(n) von Datei laden
+.HIGH Dialog Formularvorlage(n) von Datei laden
+.HCTX hctxDialogOpenTemplateForms
+
+Dieser Dialog gestattet es, eine Datei mit Formularvorlagen auszuwÑhlen. 
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Laufwerk aus, auf dem sich die Datei
+befindet und wechseln Sie Åber die Verzeichnisliste in das entsprechende Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste gefiltert
+werden, soda· nur Dateien mit einer bestimmten Namenserweiterung angezeigt werden.
+
+.TOPIC 3 Dialog hctxDialogImportTemplateForms
+.HIGH Dialog hctxDialogImportTemplateForms
+.HCTX hctxDialogImportTemplateForms
+
+hctxDialogImportTemplateForms
+
+.TOPIC 3 Dialog Objekt Inspektor
+.HIGH Dialog Objekt Inspektor
+.HCTX hctxDialogInspectorForm
+
+Der Objekt Inspektor gestattet es, verîffentlichte Eigenschaften (published Properties)
+und Ereignisbehandlungsroutinen von Komponenten des Formular Designers zu verÑndern.
+
+Das Kombinationsfeld des Inspektors enthÑlt alle Komponenten des aktiven Formular
+Designer und dient zur schnellen Auswahl einzelner Komponenten.
+
+
+Die erste Seite des Inspektors enthÑlt alle Eigenschaften der ausgewÑhlten Komponente.
+Dabei steht links der Name der Eigenschaft und rechts der gerade aktuelle Wert.
+
+Bei einige Eigenschaften (z.B. AufzÑhlungstypen) ist die mîgliche Wertemenge begrenzt
+und kann Åber das Listenfeld der Eigenschaft direkt ausgewÑhlt werden.
+Durch einen Dopelklick auf so eine Eigenschaft, kann ihr Wert zum nÑchsten Element der
+Menge umgeschalten werden.
+
+Falls fÅr eine Eigenschaften ein besonderer Editor existiert, wird dies mit drei Punkten
+im Schaltfeld des Eingabefeldes gekennzeichnet.
+Durch Anklicken der SchaltflÑche wird der Editor aufgerufen.
+
+Ist der Name der Eigenschaft mit einem anfÅhrenden '+' Zeichen gekennzeichnet, kann sie
+durch einen Doppelklick erweitert werden, soda· ihre einzelnen Bestandteile sichtbar
+werden.
+Durch erneuten Doppelklick wird die Darstellung der Eigenschaft wieder eingeklappt.
+
+
+Die zweite Seite des Inspektors enthÑlt alle Ereignisse der ausgewÑhlten Komponente,
+denen eine Ereignisbehandlungsroutine zugeordnet werden kann.
+Dabei steht links der Name des Ereignisses und rechts der Name der Routine.
+
+Tritt das Ereignis fÅr die Komponente ein und ist eine Routine dafÅr festgelegt, so wird
+diese Prozedur ausgefÅhrt.
+
+Durch Doppelklick auf ein Ereignis wird eine Prozedur mit einem Standardnamen erzeugt
+und dem Ereignis zugewiesen.
+War bereits eine Routine zugewiesen worden, so wird im Code Editor zum Quelltext der
+entsprechenden Prozedur gesprungen.
+
+
+Bei einer Mehrfachauswahl von Komponenten im Formular Designer werden nur die
+Eigenschaften im Inspektor angezeigt, die alle ausgewÑhlten Komponenten gemeinsam haben.
+Wird dann eine Eigenschaft verÑndert, so Ñndert sich die Eigenschaft bei allen
+ausgewÑhlten Komponenten.
+
+.TOPIC 3 Dialog Auswahl einer Farbe
+.HIGH Dialog Auswahl einer Farbe
+.HCTX hctxDialogColorProperty
+
+Dieser Dialog gestattet es, den Farbwert einer Eigenschaft zu verÑndern.
+
+Das Kombinationsfeld enthÑlt die Standardfarbkonstanten zur schnellen Auswahl eines
+Farbwertes.
+
+Es kann jedoch auch mit Hilfe der drei Rollbalken jede Farbkomponente (Rot, GrÅn, Blau)
+einzeln eingestellt werden.
+
+Die resultierende Farbe wird im Panel dargestellt.
+
+.TOPIC 3 Dialog hctxDialogRenamePalettePage
+.HIGH Dialog hctxDialogRenamePalettePage
+.HCTX hctxDialogRenamePalettePage
+
+hctxDialogRenamePalettePage
+
+.TOPIC 3 Dialog hctxDialogNewPalettePage
+.HIGH Dialog hctxDialogNewPalettePage
+.HCTX hctxDialogNewPalettePage
+
+hctxDialogNewPalettePage
+
+.TOPIC 3 Dialog hctxDialogConfigurePalette
+.HIGH Dialog hctxDialogConfigurePalette
+.HCTX hctxDialogConfigurePalette
+
+Dieser Dialog gestattet es, die Seiten der Komponentenpalette zu konfigurieren. 
+
+Die Komponentenpalette ist ein mehrseiges Kontrollelement, welches die Standardkomponenten
+und zusÑtzlich installierte Komponenten fÅr den Formular Designer enthÑlt.
+Diese Komponenten kînnen mittels Doppelklick sofort in den aktiven Designer eingefÅgt
+werden oder durch Einfachklick ausgewÑhlt werden.
+
+Ist eine Komponente in der Palette ausgewÑhlt, kann sie durch Einfachklick in den
+Formular Designer eingefÅgt werden.
+Die Auswahl wird dabei jedoch wieder rÅckgÑngig gemacht. Sollen mehrere gleiche
+Komponenten aus der Palette eingefÅgt werden, so mu· wÑhrend der Auswahl mit der Maus in
+der Palette die Umschalt-Taste gedrÅckt werden.
+Damit bleibt die Auswahl der Komponente nach dem EinfÅgen in den Designer erhalten.
+
+Eine neue Seite in der Palette kann mit dem Schaltknopf "HinzufÅgen" erstellt werden.
+
+Bereits existierende Seiten kînnen mit dem Schaltknopf "Umbenennen" umbenannt werden
+oder mit dem Schaltknopf "Lîschen" entfernt werden.
+
+Eine Seite kann jedoch nur entfernt werden, wenn sie keine Komponenten mehr enthÑlt.
+Ansonsten wird die ausgewÑhlte Komponente aus der aktuellen Seite gelîscht.
+
+Die einzelnen Komponenten kînnen mittels Drag & Drop von der Komponentenliste in die
+Liste der verfÅgbaren Seiten kopiert werden und somit in die entsprechende Seite
+eingefÅgt werden.
+Weiterhin ist es mîglich, die Komponenten in der Komponentenliste mittels Drag & Drop
+umzusortieren.
+
+.TOPIC 3 Dialog Komponentenliste
+.HIGH Dialog Komponentenliste
+.HCTX hctxDialogComponentViewer
+
+Die Komponentenliste enthÑlt alle installierten Komponenten in alphabetischer Reihenfolge.
+
+Zur Schnellauswahl einer Komponente geben sie den Typnamen der Komponente in das
+Eingabefeld ein.
+Bei jedem neuen Zeichen wird die Komponente ausgewÑhlt, dessen Typname der eingegebenen
+Zeichkette am ehesten entspricht.
+
+Durch Doppelklick auf eine Komponente in der Liste oder durch BetÑtigen des
+Schaltknopfes "HinzufÅgen" wird die ausgewÑhlte Komponente in den aktiven Formular
+Designer eingefÅgt.
+
+
+.TOPIC 3 Dialog Bitmap wÑhlen
+.HIGH Dialog Bitmap wÑhlen
+.HCTX hctxDialogBitmapPropertyEditor
+
+Dieser Dialog gestattet es, ein Bitmap fÅr eine Eigenschaft vom Typ "TBitmap"
+auszuwÑhlen.
+
+WÑhlen Sie hierzu entweder eines der Standardbitmaps aus der Palette aus oder laden Sie
+eine externe Bitmapdatei durch Anklicken des Schaltknopfes "Laden".
+
+öber den Schaltknopf "Lîschen" kann die Eigenschaft auf NIL gesetzt werden
+
+.TOPIC 3 Dialog Zeichensatz auswÑhlen
+.HIGH Dialog Zeichensatz auswÑhlen
+.HCTX hctxDialogFontPropertyEditor
+
+Dieser Dialog gestattet es, fÅr ein Kontrollelement einen neuen Zeichensatz
+auszuwÑhlen.
+
+WÑhlen Sie hierzu in den entsprechenden Kombinationsfeldern den Namen und die Grî·e
+des neuen Zeichensatzes aus.
+Setzen Sie den Stil und die Optionen fÅr den ausgewÑhlten Zeichensatz.
+
+Der Zeichensatz wird bei jeder neuen Auswahl im Beispielfeld aktualisiert.ˇ
+
+.TOPIC 3 Dialog Icon wÑhlen
+.HIGH Dialog Icon wÑhlen
+.HCTX hctxDialogOpenIcon
+
+Dieser Dialog gestattet es, ein Icon fÅr eine Eigenschaft vom Typ "TIcon" auszuwÑhlen. 
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Laufwerk aus, auf dem sich die Datei
+befindet und wechseln Sie Åber die Verzeichnisliste in das entsprechende Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste gefiltert
+werden, soda· nur Dateien mit einer bestimmten Namenserweiterung angezeigt werden.
+
+.TOPIC 3 Dialog hctxDialogOpenBitmap
+.HIGH Dialog hctxDialogOpenBitmap
+.HCTX hctxDialogOpenBitmap
+
+hctxDialogOpenBitmap
+
+.TOPIC 3 Dialog Datei auswÑhlen
+.HIGH Dialog Datei auswÑhlen
+.HCTX hctxDialogOpenStrings
+
+Dieser Dialog gestattet es, eine Datei mit Zeichenketten fÅr eine Eigenschaft vom Typ
+"TStrings" auszuwÑhlen.
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Laufwerk aus, auf dem sich die Datei
+befindet und wechseln Sie Åber die Verzeichnisliste in das entsprechende Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste gefiltert
+werden, soda· nur Dateien mit einer bestimmten Namenserweiterung angezeigt werde
+
+.TOPIC 3 Dialog Strings bearbeiten
+.HIGH Dialog Strings bearbeiten
+.HCTX hctxDialogStringsPropertyEditor
+
+Dieser Dialog gestattet es, eine Liste von Zeichenketten fÅr eine Eigenschaft vom Typ
+"TStrings" auszuwÑhlen.
+
+Geben Sie dazu die Zeichenketten in das mehrzeilige Eingabefeld ein.
+Dabei wird jede Zeile im Eingabefeld zu einem Eintrag in der Stringliste.
+
+Klicken Sie auf den Schalter "Lîschen", um den Inhalt der Liste zu lîsche
+
+.TOPIC 3 Dialog Filter bearbeiten
+.HIGH Dialog Filter bearbeiten
+.HCTX hctxDialogFilterPropertyEditor
+
+Dieser Dialog gestattet es, eine Liste von Filtern fÅr eine Eigenschaft auszuwÑhlen. 
+
+Jeder Filtereintrag enthÑlt dabei einen Filternamen (z.B. "Alle Dateien") und eine
+Filtermaske (z.B. "*.*").ˇ
+
+.TOPIC 3 Dialog hctxDialogMasterFieldPropertyEditor
+.HIGH Dialog hctxDialogMasterFieldPropertyEditor
+.HCTX hctxDialogMasterFieldPropertyEditor
+
+hctxDialogMasterFieldPropertyEditor
+
+.TOPIC 3 Dialog hctxDialogOpenMCIFile
+.HIGH Dialog hctxDialogOpenMCIFile
+.HCTX hctxDialogOpenMCIFile
+
+hctxDialogOpenMCIFile
+
+.TOPIC 3 Dialog hctxDialogOpenMediaPlayerFile
+.HIGH Dialog hctxDialogOpenMediaPlayerFile
+.HCTX hctxDialogOpenMediaPlayerFile
+
+hctxDialogOpenMediaPlayerFile
+
+.TOPIC 3 Dialog hctxDialogDBGridFontEditor
+.HIGH Dialog hctxDialogDBGridFontEditor
+.HCTX hctxDialogDBGridFontEditor
+
+hctxDialogDBGridFontEditor
+
+.TOPIC 3 Dialog hctxDialogDBGridColumnsPropertyEditor
+.HIGH Dialog hctxDialogDBGridColumnsPropertyEditor
+.HCTX hctxDialogDBGridColumnsPropertyEditor
+
+hctxDialogDBGridColumnsPropertyEditor
+
+.TOPIC 3 Dialog hctxDialogStatusPanelsPropertyEditor
+.HIGH Dialog  hctxDialogStatusPanelsPropertyEditor
+.HCTX hctxDialogStatusPanelsPropertyEditor
+
+hctxDialogStatusPanelsPropertyEditor
+
+.TOPIC 3 Dialog hctxDialogHeaderSectionsPropertyEditor
+.HIGH Dialog hctxDialogHeaderSectionsPropertyEditor
+.HCTX hctxDialogHeaderSectionsPropertyEditor
+
+hctxDialogHeaderSectionsPropertyEditor
+
+.TOPIC 3 Dialog hctxDialogPageItemEditor
+.HIGH Dialog hctxDialogPageItemEditor
+.HCTX hctxDialogPageItemEditor
+
+hctxDialogPageItemEditor
+
+.TOPIC 3 Dialog hctxDialogPageAccessPropertyEditor
+.HIGH Dialog hctxDialogPageAccessPropertyEditor
+.HCTX hctxDialogPageAccessPropertyEditor
+
+hctxDialogPageAccessPropertyEditor
+
+.TOPIC 3 Dialog hctxDialogImageListPropertyEditor
+.HIGH Dialog hctxDialogImageListPropertyEditor
+.HCTX hctxDialogImageListPropertyEditor
+
+hctxDialogImageListPropertyEditor
+
+.TOPIC 3 Dialog hctxDialogOpenImageListBitmap
+.HIGH Dialog  hctxDialogOpenImageListBitmap
+.HCTX hctxDialogOpenImageListBitmap
+
+hctxDialogOpenImageListBitmap
+
+.TOPIC 3 Dialog hctxDialogSaveImageListBitmap
+.HIGH Dialog hctxDialogSaveImageListBitmap
+.HCTX hctxDialogSaveImageListBitmap
+
+hctxDialogSaveImageListBitmap
+
+.TOPIC 3 Dialog Verzeichnis erstellen
+.HIGH Dialog Verzeichnis erstellen
+.HCTX hctxDialogCreateDirectory
+
+Dieser Dialog gestattet es, ein neues Verzeichnis zu erstellen.
+
+Geben sie den Namen des Verzeichnisses an, welches Sie erstellen mîchten.
+Dies kann ein voller Pfadname oder ein einzelner Verzeichnisname sein.
+Im letzteren Fall wird das Verzeichnis relativ zum aktuellen Vezeichnis generiert.
+
+Es werden dabei auch alle fehlenden Zwischen-Verzeichnisse automatisch erstellt.
+Anschlie·end wird in das Zielverzeichnis gewechselt, wenn die SchaltflÑche "Wechsel ins
+Zielverzeichnis" markiert wurde.
+
+.TOPIC 3 Dialog Verzeichnis wechseln
+.HIGH Dialog Verzeichnis wechseln
+.HCTX hctxDialogChangeDirectory
+
+Dieser Dialog gestattet es, das Arbeitsverzeichnis des aktuellen Projektes zu Ñndern.
+
+Das Eingabefeld "Verzeichnisname" enthÑlt den Namen des Verzeichnisses, in das beim
+Anklicken des Schaltknopfes "Wechseln" gewechselt werden soll.
+Dieser Name kann sowohl durch Navigation in der Verzeichnisliste erzeugt als auch direkt
+eingegeben werden.
+
+Durch Anklicken des "Erzeugen" Schaltknopfes kann auch innerhalb dieses Dialoges ein
+neues Verzeichnis erstellt werden.
+
+.TOPIC 3 Dialog hctxDialogSetPrimary
+.HIGH Dialog hctxDialogSetPrimary
+.HCTX hctxDialogSetPrimary
+
+hctxDialogSetPrimary
+
+.TOPIC 3 Dialog hctxDialogSelectInstallComponents
+.HIGH Dialog hctxDialogSelectInstallComponents
+.HCTX hctxDialogSelectInstallComponents
+
+hctxDialogSelectInstallComponents
+
+.TOPIC 3 Dialog hctxDialogOpenInstallComponentUnit
+.HIGH Dialog hctxDialogOpenInstallComponentUnit
+.HCTX hctxDialogOpenInstallComponentUnit
+
+Dieser Dialog gestattet es, eine Datei fÅr die Installation neuer Komponenten
+auszuwÑhlen.
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Laufwerk aus, auf dem sich die Datei
+befindet und wechseln Sie Åber die Verzeichnisliste in das entsprechende Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste gefiltert
+werden, soda· nur Dateien mit einer bestimmten Namenserweiterung angezeigt werden.
+
+.TOPIC 3 Dialog Komponenten-Bibliothek lade
+.HIGH Dialog Komponenten-Bibliothek lade
+.HCTX hctxDialogOpenComponentLibrary
+
+Dieser Dialog gestattet es, eine neue Komponenten-Bibliothek fÅr das aktuelle Projekt zu
+laden.
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Laufwerk aus, auf dem sich die Datei
+befindet und wechseln Sie Åber die Verzeichnisliste in das entsprechende Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste gefiltert
+werden, soda· nur Dateien mit einer bestimmten Namenserweiterung angezeigt werden.
+
+.TOPIC 3 Dialog Komponenten entfernen
+.HIGH Dialog Komponenten entfernen
+.HCTX hctxDialogRemoveComponents
+
+Dieser Dialog gestattet es, installierte Komponenten aus der Komponenten-Bibliothek
+wieder zu entfernen.
+
+WÑhlen Sie dazu die Komponente aus der entsprechenden Unit aus und klicken Sie
+anschlie·end den Schaltknopf "Entfernen".
+Entfernen Sie auf diese Weise die entsprechenden Komponenten aus der Komponentenliste
+und bestÑtigen Sie die Aktion durch Anklicken de s "Ok" Schaltknopfes.
+
+.TOPIC 3 Dialog hctxDialogNewComponent
+.HIGH Dialog hctxDialogNewComponent
+.HCTX hctxDialogNewComponent
+
+Dieser Dialog gestattet es, eine neue Komponente auf der Basis einer bereits
+registrierten Klasse zu erzeugen.
+
+Tragen Sie dazu den Namen der neuen Klasse und den Dateinamen fÅr den erzeugten
+Quelltext der Komponente in die entsprechenden Eingabefelder ein.
+Bestimmen Sie eine Basisklasse, von der die neue Komponente abgeleitet werden soll durch
+Auswahl aus der Liste "Vorfahrklasse".
+
+.TOPIC 3 Dialog Produkt Information
+.HIGH Dialog Produkt Information
+.HCTX hctxDialogAbout
+
+Dieser Dialog enthÑlt die Copyright Hinweise des Herstellers.
+
+.TOPIC 3 Dialog Aktionen zurÅcknehmen
+.HIGH Dialog Aktionen zurÅcknehmen
+.HCTX hctxDialogSlidingUndo
+
+Dieser Dialog gestattet es, Editoroperationen des aktiven Editorfensters zurÅckzunehmen. 
+
+Bewegen Sie den Schieber nach links, um die letzten Operationen zurÅckzunehmen oder
+wieder nach rechts um die RÅcknahmen zu widerrufen.
+
+.TOPIC 3 Dialog hctxDialogBrowseBookmarkFileName
+.HIGH Dialog hctxDialogBrowseBookmarkFileName
+.HCTX hctxDialogBrowseBookmarkFileName
+
+hctxDialogBrowseBookmarkFileName
+
+.TOPIC 3 Dialog Lesezeichen
+.HIGH Dialog Lesezeichen
+.HCTX hctxDialogBookmarks
+
+Dieser Dialog gestattet es, die Lesezeichen des aktuellen Projektes zu konfigurieren.
+Diese Lesezeichen werden mit dem Projekt zusammen gespeichert und sind somit auch nach
+dem Neuladen des Projektes wieder verfÅgbar.
+
+FÅr jedes Lesezeichen wird ein Name, ein Verweis auf eine Datei und die entsprechende
+Zeilennummer gespeichert.
+
+Ein neues Lesezeichen wird Åber den Schaltknopf "HinzufÅgen" erzeugt.
+Die erzeugten Standardwerte fÅr das Lesezeichen (Name, Dateiname, Zeilennummer) mÅssen
+anschlie·end noch entsprechend verÑndert werden. Der dazugehîrige Eintrag in der Liste
+der verfÅgb aren Lesezeichen wird daraufhin aktualisiert.
+
+Mit dem Schaltknopf "Entfernen" wird das ausgewÑhlte Lesezeichen aus der Liste gelîscht. 
+
+Der Dateinamen fÅr ein Lesezeichen kann auch Åber den Dateidialog (Schaltknopf "Suchen")
+eingetragen werden.
+
+Soll die aktuelle Cursorposition als Lesezeichen gespeichert werden, kînnen die
+dazugehîrigen Informationen automatisch mit dem Schaltknopf "Aktuelle Editorposition"
+eingetragen werden.
+
+Mit dem Schaltknopf "Gehe zu" kann im Code Editor an die Position des ausgewÑhlten
+Lesezeichens gesprungen werden.
+
+.TOPIC 3 Dialog hctxDialogApplicationFont
+.HIGH Dialog hctxDialogApplicationFont
+.HCTX hctxDialogApplicationFont
+
+hctxDialogApplicationFont
+
+.TOPIC 3 Dialog Projektverzeichnis wÑhlen
+.HIGH Dialog Projektverzeichnis wÑhlen
+.HCTX hctxDialogChangeProjectDirectory
+
+Dieser Dialog gestattet es, das Arbeitsverzeichnis fÅr ein neues Projekt zu wÑhlen. 
+
+In diesem Verzeichnis werden sowohl die Projektdatei (*.SPR) als auch die automatisch
+erzeugten Dateien des Projektes angelegt.
+
+Das Eingabefeld "Verzeichnisname" enthÑlt den Namen des Verzeichnisses.
+Dieser Name kann sowohl durch Navigation in der Verzeichnisliste erzeugt als auch direkt
+eingegeben werden.
+
+Durch Anklicken des "Erzeugen" Schaltknopfes kann auch innerhalb dieses Dialoges ein
+neues Verzeichnis erstellt werden.
+
+.TOPIC 3 Dialog hctxDialogChangeTemplateDirectory
+.HIGH Dialog hctxDialogChangeTemplateDirectory
+.HCTX hctxDialogChangeTemplateDirectory
+
+hctxDialogChangeTemplateDirectory
+
+.TOPIC 3 Dialog VDE anpassen
+.HIGH Dialog VDE anpassen
+.HCTX hctxDialogCustomizeSettings
+
+Dieser Dialog gestattet es, die VDE zu konfigurieren. 
+
+Der Dialog umfa·t folgende Katagorien:
+
+.TOPIC 3 Dialog Speedbar anpassen
+.HIGH Dialog Speedbar anpassen
+.HCTX hctxDialogCustomizeSettingsSpeedbar
+
+Die Speedbar ist eine nicht andockbare Werzeugleiste und enthÑlt Schaltknîpfe fÅr
+hÑufig benutzte Befehle in der VDE.
+
+Innerhalb der VDE ist fast jeder Befehl des HauptmenÅs auch als Schaltknopf verfÅgbar.
+Dabei kann jeder Befehl immer nur durch einen Schaltknopf reprÑsentiert werden, der
+sich entweder in der Speedbar oder in einer der andockbaren Werkzeugleisten befinden
+kann.
+
+Um einen Schaltknopf zur Speedbar hinzuzufÅgen, wÑhlen Sie die entprechende Kategorie
+in der Liste der verfÅgbaren Befehlsgruppen aus.
+Ziehen Sie nun den gewÅnschten Schaltknopf mittels Drag & Drop von der Vorlage zur
+Zielposition in der Beispiel-Speedbar.
+
+Ziehen Sie einen Schaltknopf von der Beispiel-Speedbar auf eine leere FlÑche des
+Dialogs, um den Schaltknopf aus der Speedbar zu entfernen.
+
+Separatoren (ZwischenrÑume zwischen zwei Schaltknîpfen) dienen zur Gruppierung von
+Befehlen innerhalb der Speedbar.
+Sie kînnen erzeugt bzw. entfernt werden, indem ein Schaltknopf ein kurzes StÅck auf
+der Speedbar gezogen und mit dem Mauszeiger auf sich selbst wieder fallengelassen wird.
+
+Eine so erzeugte Konfiguration wird mit dem "Ok" Schaltknopf gespeichert.
+Die VDE mu· jedoch erst neu gestartet werden, damit die énderungen aktiv werden.
+
+.TOPIC 3 Dialog Projektformulare
+.HIGH Dialog Projektformulare
+.HCTX hctxDialogProjectFormsList
+
+Dieses Fenster enthÑlt alle Formulare des aktuellen Projektes in einer Liste. 
+
+Benutzen Sie die Schaltknîpfe in der Schalterleiste der Projektverwaltung oder das
+KontextmenÅ, um neue Formulare zum Projekt hinzuzufÅgen oder sie zu entfernen.
+
+Die Bindung eines Formulars zu einer Quelldatei kann ebenfalls Åber das KontextmenÅ
+geÑndert werden.
+
+.TOPIC 3 Dialog Projektdateien
+.HIGH Dialog Projektdateien
+.HCTX hctxDialogProjectFilesTree
+
+Dieses Fenster enthÑlt alle Dateien des aktuellen Projektes in einer hierarchischen
+Struktur.
+
+In der ersten Ebene stehen eine oder mehrere Hauptdateien des Projektes.
+Hauptdateien sind z.B. das Hauptprogramm der Applikationen oder die Quelldatei einer
+DLL, die von der Applikation eingebunden wird.
+FÅr die meisten Projekte ist jedoch eine Hauptdatei (das Hauptprogramm) ausreichend.
+
+Zu jeder Hauptdatei kînnen mehrere Dateien zugeordnet werden.
+Diese EintrÑge in der hierarchischen Liste dienen erstens dazu, um die entsprechenden
+Dateien schneller Åber die Projektverwaltung îffnen zu kînnen und zweitens, um der VDE
+die Pfade zu den Dat eien bekannt zu machen (z.B. fÅr das Debugger der Applikation).
+
+Zu jeder Hauptdatei existiert noch ein Eintrag "Dependencies".
+Dieser Eintrag enthÑlt alle Dateien, die beim öbersetzen der Hauptdatei eingebunden
+werden.
+Diese Informationen werden verwendet, um die AktualitÑt des Projektes beim öbersetzen
+und Starten zu ÅberprÅfen.
+
+Benutzen Sie die Schaltknîpfe in der Schalterleiste der Projektverwaltung oder das
+KontextmenÅ, um neue Hauptdateien und Dateien zum Projekt hinzuzufÅgen oder sie zu
+entfernen.
+
+.TOPIC 3 Dialog hctxDialogAddProjectMainFile
+.HIGH Dialog hctxDialogAddProjectMainFile
+.HCTX hctxDialogAddProjectMainFile
+
+hctxDialogAddProjectMainFile
+
+.TOPIC 3 Dialog hctxDialogAddProjectFile
+.HIGH Dialog hctxDialogAddProjectFile
+.HCTX hctxDialogAddProjectFile
+
+hctxDialogAddProjectFile
+
+.TOPIC 3 Dialog hctxDialogProjectManager
+.HIGH Dialog hctxDialogProjectManager
+.HCTX hctxDialogProjectManager
+
+hctxDialogProjectManager
+
+.TOPIC 3 Dialog hctxDialogTipOfTheDay
+.HIGH Dialog hctxDialogTipOfTheDay
+.HCTX hctxDialogTipOfTheDay
+
+hctxDialogTipOfTheDay
+
+.TOPIC 3 Dialog Gehe zu Zeile
+.HIGH Dialog Gehe zu Zeile
+.HCTX hctxDialogGotoLine
+
+Dieser Dialog gestattet es, zu einer bestimmten Zeile im aktiven Editorfenster zu
+springen.
+
+Tragen Sie hierzu die entsprechende Zeilennummer in das Eingabefeld ein und bestÑtigen
+Sie mit dem "Ok" Schaltknopf.
+
+.TOPIC 3 Dialog hctxDialogBrowseNewProjectDirectory
+.HIGH Dialog  hctxDialogBrowseNewProjectDirectory
+.HCTX hctxDialogBrowseNewProjectDirectory
+
+hctxDialogBrowseNewProjectDirectory
+
+.TOPIC 3 Dialog Werkzeug Datei auswÑhlen
+.HIGH Dialog Werkzeug Datei auswÑhlen
+.HCTX hctxDialogBrowseToolFileName
+
+Dieser Dialog gestattet es, den Namen einer ausfÅhrbaren Datei auszuwÑhlen.
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Laufwerk aus, auf dem sich die Datei
+befindet und wechseln Sie Åber die Verzeichnisliste in das entsprechende Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste gefiltert
+werden, soda· nur Dateien mit einer bestimmten Namenserweiterung angezeigt werden.
+
+.TOPIC 3 Dialog Werkzeuge
+.HIGH Dialog Werkzeuge
+.HCTX hctxDialogToolOptions
+
+Dieser Dialog gestattet es, externe Werkzeuge in die VDE einzubinden. 
+
+FÅr jedes Werkzeug wird ein Name, ein Verweis auf eine ausfÅhrbare Datei und die
+dazugehîrigen Kommandozeilenparameter gespeichert.
+
+Ein neues Werkzeug wird Åber den Schaltknopf "HinzufÅgen" erzeugt.
+Die erzeugten Standardwerte fÅr das Werkzeug (Name, Programmname, Parameter) mÅssen
+anschlie·end noch entsprechend verÑndert werden.
+Der dazugehîrige Eintrag in der Liste der verfÅgbaren Werkzeuge wird daraufhin
+aktualisiert.
+
+Mit dem Schaltknopf "Entfernen" wird das ausgewÑhlte Werkzeug aus der Liste gelîscht. 
+
+Der Dateinamen fÅr das ausfÅhrbare Programm eines Werkzeuges kann auch Åber den
+Dateidialog (Schaltknopf "Suchen") eingetragen werden.
+
+Der Schaltknopf (">") neben dem Eingabefeld "Parameter" dient zur Erzeugung von Makros
+als Kommandozeilenparameter, die erst beim Aufruf des externen Programmes ausgewertet
+werden und bestimmte Informationen und Aktionen innerhalb der VDE beinhalten kînnen.
+
+.TOPIC 3 Dialog Datei drucken
+.HIGH Dialog Datei drucken
+.HCTX hctxDialogPrintFile
+
+Dieser Dialog gestattet es, die Datei im aktiven Editorfenster zu drucken.
+
+WÑhlen Sie dazu den gewÅnschten Drucker in der Druckerliste aus. 
+
+Die Auswahl in der Gruppe "Druckbereich" entscheidet darÅber, ob die ganze Datei oder
+nur der markierte Bereich gedruckt werden soll.
+
+Die Hervorhebung von SchlÅsselwîrtern (fett gedruckt) und Kommentaren (kursiv) kann Åber
+die Gruppe "Layout" eingestellt werden.
+
+Benutzen Sie den Schaltknopf "Parameter", um die Eigenschaften des Druckauftrages zu ver
+
+.TOPIC 3 Dialog Resource Datei auswÑhlen
+.HIGH Dialog Resource Datei auswÑhlen
+.HCTX hctxDialogOpenInstallLanguage
+
+Dieser Dialog gestattet es, eine Åbersetzte Ressourcen-Datei (*.SRF) auszuwÑhlen. 
+
+Diese Datei sollte mindestens eine Sibyl Sprachversion in Form einer entsprechenden
+Stringtabelle enthalten.
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Laufwerk aus, auf dem sich die Datei
+befindet und wechseln Sie Åber die Verzeichnisliste in das entsprechende Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste gefiltert
+werden, soda· nur Dateien mit einer bestimmten Namenserweiterung angezeigt werden.
+
+.TOPIC 3 Dialog hctxDialogNLSSelection
+.HIGH Dialog hctxDialogNLSSelection
+.HCTX hctxDialogNLSSelection
+
+hctxDialogNLSSelection
+
+.TOPIC 3 Dialog Sprach-Datei auswÑhlen
+.HIGH Dialog Sprach-Datei auswÑhlen
+.HCTX hctxDialogOpenAppInstallLanguage
+
+Dieser Dialog gestattet es, eine Sprach-Datei (*.SLF) fÅr das aktuelle Projekt
+auszuwÑhlen.
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Laufwerk aus, auf dem sich die Datei
+befindet und wechseln Sie Åber die Verzeichnisliste in das entsprechende Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste gefiltert
+werden, soda· nur Dateien mit einer bestimmten Namenserweiterung angezeigt werden.
+
+.TOPIC 3 Dialog Spracheinstellungen
+.HIGH Dialog Spracheinstellungen
+.HCTX hctxDialogLanguageSettings
+
+Dieser Dialog gestattet es, die Spracheinstellungen fÅr die VDE und die Applikation
+des aktuellen Projektes zu konfigurieren.
+
+Die Seite "VDE" enthÑlt eine Liste der bereits installierten Sprachen fÅr die WDSibyl
+VDE.
+
+Um eine neue Sprachversion aus einer Ressourcen-Datei zu installieren, klicken Sie den
+Schaltknopf "Installieren" an. Die Ressourcen-Datei mu· mindestens eine Stringtabelle
+enthalten, die einer Sibyl Sprachtabelle entspricht.
+
+Klicken Sie den Schaltknopf "Lîschen", um die ausgewÑhlte Sprache aus der Liste der
+installierten Sprachen zu entfernen.
+
+WÑhlen Sie im Anschlu· die aktive Sprache aus der aufklappbaren Liste aus und starten
+Sie Sibyl neu, damit die énderungen aktiv werden.
+
+
+Die Seite "Applikation" enthÑlt eine Liste der zur Laufzeit verfÅgbaren Sprachen fÅr
+die Applikation.
+
+Um eine neue Sprachversion fÅr die Applikation zu installieren, klicken Sie den
+Schaltknopf "Installieren" an. Die Sprachversion (*.SLF) kann mit dem WDSibyl
+Sprach-Manager erzeugt werden, der als externes Programm verfÅgbar ist.
+
+Klicken Sie den Schaltknopf "Lîschen", um die ausgewÑhlte Sprache aus der Liste der
+verfÅgbaren Sprachen zu entfernen.
+
+WÑhlen Sie im Anschlu· die Sprache aus der aufklappbaren Liste aus, die beim
+Programmstart aktiv sein soll.
+
+.TOPIC 3 Dialog Werkzeugleisten
+.HIGH Dialog Werkzeugleisten
+.HCTX hctxDialogToolbars
+
+Dieser Dialog gestattet es, die Werkzeugleisten der VDE anzuzeigen oder zu verbergen.
+
+Die Liste enthÑlt alle verfÅgbaren Werkzeugleisten.
+Die Sichtbarkeit einer Palette kann durch Doppelklick auf den entsprechenden Eintrag in
+der Liste umgeschalten werden. Alle sichtbaren Paletten sind mit einem HÑkchen versehen.ÓÓÓÓÓ‡
+
+.TOPIC 3 Dialog hctxDialogDockingControlCentre
+.HIGH Dialog hctxDialogDockingControlCentre
+.HCTX hctxDialogDockingControlCentre
+
+hctxDialogDockingControlCentre
+
+.TOPIC 3 Dialog Datei speichern
+.HIGH Dialog Datei speichern
+.HCTX hctxDialogSaveFileAs
+
+Dieser Dialog gestattet es, eine Datei abzuspeichern. 
+
+WÑhlen Sie im Kombinationsfeld "Laufwerke" das Ziellaufwerk aus, auf dem die Datei
+gespeichert werden soll und wechseln Sie Åber die Verzeichnisliste in das entsprechende
+Verzeichnis.
+
+öber das Kombinationsfeld "Dateityp" kînnen die Dateien in der Dateiliste gefiltert
+werden, soda· nur nur bereits existierende Dateien mit einer bestimmten
+Namenserweiterung angezeigt werden.
+
+.TOPIC 3 Dialog Text suchen
+.HIGH Dialog Text suchen
+.HCTX hctxDialogFind
+
+Dieser Dialog gestattet es, nach Text im Code Editor zu suchen.
+
+öber die SchaltflÑchen der Gruppe "Optionen" kînnen verschiedene Parameter fÅr die Suche
+eingestellt werden. So ist es mîglich, bei der Suche zwischen Gro·- und Kleinbuchstaben
+zu unterscheiden. Ebenfalls kann nur nach ganzen Wîrtern gesucht werden.
+
+Die Gruppe "Bereich" begrenzt den Suchbereich fÅr die Textsuche.
+Hier kann entweder die gesamte Datei oder nur der markierte Bereich im aktiven
+Editorfenster ausgewÑhlt werden. Es ist jedoch auch mîglich, den Text in allen
+Editorfenstern des Code Editor zu suchen.
+
+Die Gruppe "Startpunkt" legt den Startpunkt der Suche fest.
+Dies kann entweder der Anfang bzw. das Ende der Datei sein oder aber die aktuelle
+Cursorposition.
+
+Die Gruppe "Richtung" gibt die Richtung der Suche an. Hier ist entweder die Suche in
+Richtung Dateiende ("VorwÑrts") oder die Suche in Richtung Dateianfang ("RÅckwÑrts")
+mîglich.
+
+.TOPIC 3 Dialog Text ersetzen
+.HIGH Dialog Text ersetzen
+.HCTX hctxDialogReplace
+
+Dieser Dialog gestattet es, nach Text im Code Editor zu suchen und diesen durch anderen
+Text ersetzen zu lassen.
+
+öber die SchaltflÑchen der Gruppe "Optionen" kînnen verschiedene Parameter fÅr die Suche
+eingestellt werden.
+So ist es mîglich, bei der Suche zwischen Gro·- und Kleinbuchstaben zu unterscheiden.
+Ebenfalls kann nur nach ganzen Wîrtern gesucht werden. Wenn die entsprechende
+Zeichenkette gefunden wurde, kann vor dem Ersetzen noch eine BestÑtigung abgefragt
+werden, wenn die SchaltflÑche "BestÑtigen" markiert wird.
+
+Die Gruppe "Bereich" begrenzt den Suchbereich fÅr die Textsuche.
+Hier kann entweder die gesamte Datei oder nur der markierte Bereich im aktiven
+Editorfenster ausgewÑhlt werden.
+Es ist jedoch auch mîglich, den Text in allen Editorfenstern des Code Editor zu suchen.
+
+Die Gruppe "Startpunkt" legt den Startpunkt der Suche fest.
+Dies kann entweder der Anfang bzw. das Ende der Datei sein oder aber die aktuelle
+Cursorposition.
+
+Die Gruppe "Richtung" gibt die Richtung der Suche an. Hier ist entweder die Suche in
+Richtung Dateiende ("VorwÑrts") oder die Suche in Richtung Dateianfang ("RÅckwÑrts")
+mîglich.
+
+Durch Anklicken des Schaltknopfes "Alle" wird die Suche nach dem Ersetzen der
+Zeichenkette fortgesetzt, bis der Suchbereich vollstÑndig durchsucht wurde.
+
+.TOPIC 3 Dialog hctxDialogDockingPanelForm
+.HIGH Dialog hctxDialogDockingPanelForm
+.HCTX hctxDialogDockingPanelForm
+
+hctxDialogDockingPanelForm
+
+.TOPIC 3 Dialog Fensterliste
+.HIGH Dialog Fensterliste
+.HCTX hctxDialogWindowList
+
+Die Fensterliste enthÑlt fÅr jedes geîffnete Fenster/Formular der VDE einen Eintrag. 
+
+Die Fensterliste ist in drei Gruppen (spezielle Fenster, Editorfenster des Code Editors,
+Formularfenster des Formular Designers) unterteilt.
+
+Ein Fenster kann durch Auswahl des dazugehîrigen Listeneintrages in den Vordergrund
+geholt werden oder Åber das KontextmenÅ geschlossen werden.
+
+.TOPIC 3 Dialog hctxDialogMacroList
+.HIGH Dialog hctxDialogMacroList
+.HCTX hctxDialogMacroList
+
+hctxDialogMacroList
+
+.TOPIC 3 Dialog hctxDialogNewMacroName
+.HIGH Dialog hctxDialogNewMacroName
+.HCTX hctxDialogNewMacroName
+
+hctxDialogNewMacroName
+
+.TOPIC 3 Dialog Zwischenablage
+.HIGH Dialog Zwischenablage
+.HCTX hctxDialogClipboardHistory
+
+Die Liste fÅr die Zwischenablage enthÑlt die letzten Textblîcke, die vom Code Editor aus
+in die Zwischenablage kopiert wurden.
+
+Durch die Auswahl eines Eintrages kann der entsprechende Textblock in das aktive
+Editorfenster wiederholt eingefÅgt werden, auch wenn in der Zwischenablage gerade ein
+anderer Textblock gespeichert wird.
+
+.TOPIC 2 Popup
+.HIGH Popup
+
+Diverse Popup-Menues
+
+.TOPIC 3 Popup Browser|Objekte anzeigen
+.HIGH Popup Browser|Objekte anzeigen
+.HCTX hctxPopupBrowseObjects
+
+Dieser Befehl erlaubt es, die Klassenhierarchie des aktuellen Projektes anzuzeigen.
+Dabei werden alle Klassen angezeigt, die in den Units des Projektes enthalten sind.
+
+.TOPIC 3 Popup Browser|Units anzeigen
+.HIGH Popup Browser|Units anzeigen
+.HCTX hctxPopupBrowseUnits
+
+Dieser Befehl erlaubt es, alle îffentlichen Symbole der zum Projekt gehîrenden Units
+anzuzeigen.
+Dabei kînnen auch Detailinformationen wie zum Beispiel Prozedurparameter oder strukturierte
+Datentypen betrachtet werden.
+
+.TOPIC 3 Popup Browser|Globale Bezeichner anzeigen
+.HIGH Popup Browser|Globale Bezeichner anzeigen
+.HCTX hctxPopupBrowseGlobals
+
+Dieser Befehl erlaubt es, eine systematisch und alphabetisch geordnete Liste aller
+globalen Bezeichner des aktuellen Projekts anzuzeigen.
+
+.TOPIC 3 Popup Browser|Quelldatei ansehen
+.HIGH Popup Browser|Quelldatei ansehen
+.HCTX hctxPopupBrowserSource
+
+Dieser Befehl erlaubt es, zur Position in der Quelldatei zu springen, an welcher der
+fokusierte Bezeichner definiert ist.
+
+.TOPIC 3 Popup Browser|Aktualisieren
+.HIGH Popup Browser|Aktualisieren
+.HCTX hctxPopupBrowserUpdate
+
+Dieser Befehl erlaubt es, die Daten im Browser zu aktualisieren.
+Dies kann zum Beispiel nach der énderung und NeuÅbersetzung des Projektes notwendig
+werden.
+
+.TOPIC 3 Popup Browser|Eigenschaften
+.HIGH Popup Browser|Eigenschaften
+.HCTX hctxPopupBrowserProperties
+
+Dieser Befehl erlaubt es, den Dialog mit den Einstellungen des Browsers zu îffnen.
+
+.TOPIC 3 Popup öberwachen|Neuer Ausdruck
+.HIGH Popup öberwachen|Neuer Ausdruck
+.HCTX hctxPopupWatchAddWatch
+
+Dieser Befehl erlaubt es, einen neuen Ausdruck zur Liste der Åberwachten AusdrÅcke hinzuzufÅge
+
+.TOPIC 3 Popup öberwachen|AusdrÅck lîschen
+.HIGH Popup öberwachen|AusdrÅck lîschen
+.HCTX hctxPopupWatchRemoveWatch
+
+Dieser Befehl erlaubt es, einen Ausdruck aus der Liste der Åberwachten AusdrÅcke zu
+lîschen.
+
+.TOPIC 3 Popup öberwachen|Alle AusdrÅcke lîschen
+.HIGH Popup öberwachen|Alle AusdrÅcke lîschen
+.HCTX hctxPopupWatchRemoveAllWatches
+
+Dieser Befehl erlaubt es, alle AusdrÅcke aus der Liste der Åberwachten AusdrÅcke zu
+lîschen.
+
+.TOPIC 3 Popup öberwachen|Wert Åberwachen
+.HIGH Popup öberwachen|Wert Åberwachen
+.HCTX hctxPopupWatchInspectValue
+
+Dieser Befehl erlaubt es, ein neues öberwachungsfenster zu îffnen, welches den
+markierten Eintrag und eventuell dessen Detailinformationen (z.B. bei Klassen oder
+strukturierten Datentypen) Åbersichtlich darstellt und Åberwacht.
+
+.TOPIC 3 Popup öberwachen|Wert Ñnder
+.HIGH Popup öberwachen|Wert Ñnder
+.HCTX hctxPopupWatchChangeValue
+
+Dieser Befehl erlaubt es, den Dialog fÅr das Auswerten und éndern von AusdrÅcken
+anzuzeigen.
+Damit ist es z.B. mîglich, den Inhalt einer Variablen wÑhrend der Debugger Sitzung zu
+Ñndern.
+
+.TOPIC 3 Popup öberwachen|Eintrag aktivieren
+.HIGH Popup öberwachen|Eintrag aktivieren
+.HCTX hctxPopupWatchItemEnabled
+
+Dieser Befehl erlaubt es, die Auswertung eines Åberwachten Ausdruckes ein- und
+auszuschalten.
+Bei sehr langen Ergebnissen des Ausdruckes kann damit dessen Auswertung verhindert und
+somit ein schnelleres Aktualisieren der Åberwachten AusdrÅcke beim Debuggen im
+Einzelschrittmodus erfolgen.
+
+.TOPIC 3 Popup Speicher|Gehe zu
+.HIGH Popup Speicher|Gehe zu
+.HCTX hctxPopupDumpGoto
+
+Dieser Befehl erlaubt es, den Inhalt des Speichers ab einer bestimmten Adresse
+darzustellen.
+
+.TOPIC 3 Popup Speicher|éndern
+.HIGH Popup Speicher|éndern
+.HCTX hctxPopupDumpChange
+
+Dieser Befehl erlaubt es, ein Eingabefeld zu îffnen, in welchem der Inhalt des peichers
+an der ausgewÑhlten Adresse verÑndert werden kann.
+
+.TOPIC 3 Popup Speicher|Anzeigen als
+.HIGH Popup Speicher|Anzeigen als
+.HCTX hctxPopupDumpDisplayAs
+
+Dieses UntermenÅ erlaubt es, die Darstellung des Speicherinhaltes zu formatieren.
+
+.TOPIC 3 Popup CPU Fenster|Gehe zu
+.HIGH Popup CPU Fenster|Gehe zu
+.HCTX hctxPopupCPUGoto
+
+Dieser Befehl erlaubt es, zu einer bestimmte Adresse im auszufÅhrenden Programm zu
+blÑttern und den dort vorhandenen Code als Assembler Code darzustellen.
+
+.TOPIC 3 Popup CPU Fenster|Aktuelle Position
+.HIGH Popup CPU Fenster|Aktuelle Position
+.HCTX hctxPopupCPUOrigin
+
+Dieser Befehl erlaubt es, zu der Adresse im auszufÅhrenden Programm zu blÑttern, an der
+die ProgrammausfÅhrung im Debugger unterbrochen wurde.
+
+.TOPIC 3 Popup CPU Fenster|Einzelne Anweisung
+.HIGH Popup CPU Fenster|Einzelne Anweisung
+.HCTX hctxPopupCPUStepInto
+
+Dieser Befehl erlaubt es, eine einzelne Anweisung im debuggten Programm auszufÅhren.
+Ist die Anweisung ein Funktionsaufruf, fÅr dessen Implementierung Debug-Informationen verfÅgbar
+sind, hÑlt der Debugger bei der ersten Anweisung der Funktion an.
+
+.TOPIC 3 Popup CPU Fenster|Gesamte Routine
+.HIGH Popup CPU Fenster|Gesamte Routine
+.HCTX hctxPopupCPUStepOver
+
+Dieser Befehl erlaubt es, eine einzelne Anweisung im debuggten Programm komplett
+auszufÅhren.
+Ist die Anweisung ein Funktionsaufruf, fÅr dessen Implementierung Debug-Informationen
+verfÅgbar sind, hÑlt der Debugger erst nach der RÅckkehr der Funktion an.
+
+.TOPIC 3 Popup Projekt|Datei compilieren
+.HIGH Popup Projekt|Datei compilieren
+.HCTX hctxPopupProjectFileCompile
+
+Dieser Befehl erlaubt es, die ausgewÑhlte Datei zu Åbersetzen. 
+
+.TOPIC 3 Popup Projekt|Datei aktualisieren
+.HIGH Popup Projekt|Datei aktualisieren
+.HCTX hctxPopupProjectFileMake
+
+Dieser Befehl erlaubt es, die ausgewÑhlte Datei zu aktualisieren.
+Dabei werden auch alle Dateien neu Åbersetzt, die von der ausgewÑhlten Datei benutzt
+werden und deren Åbersetzte Dateien nicht mehr aktuell sind.
+
+.TOPIC 3 Popup Projekt|Hauptdatei hinzufÅgen
+.HIGH Popup Projekt|Hauptdatei hinzufÅgen
+.HCTX hctxPopupProjectAddMainFile
+
+Dieser Befehl erlaubt es, eine neue Hauptdatei zum Projekt hinzuzufÅgen. 
+
+Hauptdateien sind zum Beispiel das Hauptrogramm des Projektes oder die Quelle einer DLL,
+die vom Hauptprogramm benutzt wird.
+
+.TOPIC 3 Popup Projekt|Datei hinzufÅgen
+.HIGH Popup Projekt|Datei hinzufÅgen
+.HCTX hctxPopupProjectAddFile
+
+Dieser Befehl erlaubt es, eine neue Datei zum Projekt hinzuzufÅgen. 
+
+Diese Dateien sollten der Hauptdatei zugeordnet werden, in der sie benutzt werden.
+
+.TOPIC 3 Popup Projekt|Datei entfernen
+.HIGH Popup Projekt|Datei entfernen
+.HCTX hctxPopupProjectRemoveFile
+
+Dieser Befehl erlaubt es, eine Datei aus dem Projekt zu entfernen. 
+
+Dabei wird jedoch nur die Verbindung zum Projekt gelîst, nicht aber eine eventuell
+vorhandene Einbindung in der USES Anweisung der Hauptprogramms.
+
+.TOPIC 3 Popup Projekt|Hauptprogramm des Projektes
+.HIGH Popup Projekt|Hauptprogramm des Projektes
+.HCTX hctxPopupProjectSetPrimary
+
+Dieser Befehl erlaubt es, das Hauptprogramm des Projektes zu setzen.
+
+Dies sollte immer die ausfÅhrbare Datei des Projektes sein.
+Wird der Befehl {Menue Projekt|AusfÅhren} aufgerufen, so wird versucht, die ausfÅhrbare EXE
+Datei dieser Datei zu starten.
+
+Ist ein Hauptprogramm fÅr das Projekt gesetzt, beziehen sich die Befehle
+Projekt|Aktualisieren und Projekt|Alles compilieren sowie {Menue Projekt|AusfÅhren} auf diese
+Datei anstatt auf die Datei im aktuellen Editorfenster.
+
+.TOPIC 3 Popup Projekt|Formular hinzufÅgen
+.HIGH Popup Projekt|Formular hinzufÅgen
+.HCTX hctxPopupProjectAddForm
+
+Dieser Befehl erlaubt es, ein neues Formular zum Projekt hinzuzufÅgen.
+
+Ist ein Formularexperte registriert, so wird dieser ausgefÅhrt.
+Ansonsten entsteht ein leeres Formular und eine neue Quelltextdatei, die mit diesem
+Formular verbunden ist.
+
+.TOPIC 3 Popup Projekt|Formular entfernen
+.HIGH Popup Projekt|Formular entfernen
+.HCTX hctxPopupProjectRemoveForm
+
+Dieser Befehl erlaubt es, ein Formular aus dem Projekt zu entfernen.
+
+Dabei wird die SCU Information des Formulars aus dem Projekt gelîscht und die Definition
+des Formulars im dazugehîrigen Quelltext entfernt.
+Bereits implementierte Ereignisbehandlungsroutinen mÅssen manuell aus dem Quelltext
+entfernt werden. Die Quelldatei des gelîschten Formulars wird nicht automatisch aus dem
+Projekt und der USES Anweisung des Hauptprogramms gelîscht
+
+.TOPIC 3 Popup Projekt|Formular importieren
+.HIGH Popup Projekt|Formular importieren
+.HCTX hctxPopupProjectImportForm
+
+Dieser Befehl erlaubt es, ein Formular aus einer beliebigen SCU Datei in das aktuelle
+Projekt einzufÅgen.
+
+Dabei wird jedoch die Bindung des zu importierenden Formulars an dessen Quelltext nicht
+aufgehoben.
+Das hat zur Folge, da· énderungen im neuen Formular des aktuellen Projektes auch den
+Quelltext des anderen Formulars beeinflussen kînnen, obwohl sich dieses Formular nicht
+geÑndert hat.
+Wenn also das importierte Formular nach dem EinfÅgen noch manipuliert werden soll,
+sollte auch der Quelltext kopiert werden und die Bindung des neuen Formulars mit dem
+Befehl Projekt|Quelltextverweis der Form angepa·t werden .
+
+.TOPIC 3 Popup Projekt|Quelltextverweis der Form
+.HIGH Popup Projekt|Quelltextverweis der Form
+.HCTX hctxPopupProjectFormSourceLoc
+
+Dieser Befehl erlaubt es, die Bindung eines Formulars an einen bestimmten Quelltext zu
+Ñndern.
+
+Diese Bindung ist notwendig, damit beim EinfÅgen und Entfernen von Komponenten und
+Ereignisbehandlungsroutinen im Formular Designer auch der dazugehîrige Quelltext
+automatisch verÑndert werden kann.
+
+.TOPIC 3 Popup Projekt|Formular in Datei speichern
+.HIGH Popup Projekt|Formular in Datei speichern
+.HCTX hctxPopupProjectSaveFormToFile
+
+Dieser Befehl erlaubt es, ein Formular als einzelne Datei im SCU Format abzuspeichern,
+um es z.B. fÅr andere Anwender oder andere Projekte verfÅgbar zu machen.
+Die Bindung zum aktuellen Quelltext bleibt allerdings erhalten und mu· gegebenenfalls
+aktualisi ert werden.
+
+.TOPIC 3 Popup Projekt|Formular Eigenschafte
+.HIGH Popup Projekt|Formular Eigenschafte
+.HCTX hctxPopupProjectFormProperties
+
+Dieser Befehl erlaubt es, den Dialog mit den Einstellungen des Formular Designers zu
+îffnen.
+
+.TOPIC 3 Popup Werkzeuge|Projekt speichern
+.HIGH Popup Werkzeuge|Projekt speichern
+.HCTX hctxPopupToolsSaveProject
+
+Dieser Befehl erlaubt es, vor dem AusfÅhren eines externen Programms (Werkzeug), das
+aktuelle Projekt zu speichern.
+
+.TOPIC 3 Popup Werkzeuge|SCU speichern
+.HIGH Popup Werkzeuge|SCU speichern
+.HCTX hctxPopupToolsSaveSCU
+
+Dieser Befehl erlaubt es, vor dem AusfÅhren eines externen Programms (Werkzeug), die SCU
+Information des aktuellen Projektes zu speichern.
+
+.TOPIC 3 Popup Werkzeuge|Alle Editordateien speichern
+.HIGH Popup Werkzeuge|Alle Editordateien speichern
+.HCTX hctxPopupToolsSaveAllEditors
+
+Dieser Befehl erlaubt es, vor dem AusfÅhren eines externen Programms (Werkzeug), alle
+modifizierten Dateien im Code Editor zu speichern.
+
+.TOPIC 3 Popup Werkzeuge|Aktuelle Editordatei speichern
+.HIGH Popup Werkzeuge|Aktuelle Editordatei speichern
+.HCTX hctxPopupToolsSaveCurrentEditor
+
+Dieser Befehl erlaubt es, vor dem AusfÅhren eines externen Programms (Werkzeug), die
+Datei im aktuellen Editorfenster des Code Editors zu speichern.
+
+.TOPIC 3 Popup Werkzeuge|Aktuelle Editordatei
+.HIGH Popup Werkzeuge|Aktuelle Editordatei
+.HCTX hctxPopupToolsCurrentEditor
+
+Dieser Befehl erlaubt es, den Namen der Datei im aktuellen Editorfenster, einem externen
+Programm (Werkzeug) als Parameter zu Åbergeben.
+
+.TOPIC 3 Popup Werkzeuge|Aktuelle Editorzeile
+.HIGH Popup Werkzeuge|Aktuelle Editorzeile
+.HCTX hctxPopupToolsCurrentEditorLine
+
+Dieser Befehl erlaubt es, die Zeilennummer der Datei im aktuellen Editorfenster, einem
+externen Programm (Werkzeug) als Parameter zu Åbergeben.
+
+.TOPIC 3 Popup Werkzeuge|Aktuelle Editorspalte
+.HIGH Popup Werkzeuge|Aktuelle Editorspalte
+.HCTX hctxPopupToolsCurrentEditorColumn
+
+Dieser Befehl erlaubt es, die Spaltennummer der Datei im aktuellen Editorfenster, einem
+externen Programm (Werkzeug) als Parameter zu Åbergeben.
+
+.TOPIC 3 Popup Werkzeuge|Projektname
+.HIGH Popup Werkzeuge|Projektname
+.HCTX hctxPopupToolsPrjName
+
+Dieser Befehl erlaubt es, den Dateinamen des aktuellen Projektes, einem externen
+Programm (Werkzeug) als Parameter zu Åbergeben.
+
+.TOPIC 3 Popup Werkzeuge|SCU Name
+.HIGH Popup Werkzeuge|SCU Name
+.HCTX hctxPopupToolsSCUName
+
+Dieser Befehl erlaubt es, den Namen der SCU Datei des aktuellen Projektes, einem
+externen Programm (Werkzeug) als Parameter zu Åbergeben.
+
+.TOPIC 3 Popup Werkzeuge|Name der ausfÅhrbaren Datei
+.HIGH Popup Werkzeuge|Name der ausfÅhrbaren Datei
+.HCTX hctxPopupToolsExecutableFile
+
+Dieser Befehl erlaubt es, den Namen der ausfÅhrbaren Datei des aktuellen Projektes,
+einem externen Programm (Werkzeug) als Parameter zu Åbergeben.
+
+.TOPIC 3 Popup Werkzeuge|Fehlerdatei
+.HIGH Popup Werkzeuge|Fehlerdatei
+.HCTX hctxPopupToolsErrorFileName
+
+Dieser Befehl erlaubt es, den Namen der Datei, in welcher der letzte Fehler beim
+öbersetzen auftrat, einem externen Programm (Werkzeug) als Parameter zu Åbergeben.
+
+
+.TOPIC 3 Popup Werkzeuge|Fehlerzeile
+.HIGH Popup Werkzeuge|Fehlerzeile
+.HCTX hctxPopupToolsErrorLine2
+
+Dieser Befehl erlaubt es, die Nummer der Zeile, an welcher der letzte Fehler beim
+öbersetzen auftrat, einem externen Programm (Werkzeug) als Parameter zu Åbergeben.
+
+.TOPIC 3 Popup Werkzeuge|Fehlerspalte
+.HIGH Popup Werkzeuge|Fehlerspalte
+.HCTX hctxPopupToolsErrorColumn
+
+Dieser Befehl erlaubt es, die Nummer der Spalte, an welcher der letzte Fehler beim
+öbersetzen auftrat, einem externen Programm (Werkzeug) als Parameter zu Åbergeben.
+
+
+.TOPIC 3 Popup Werkzeuge|Fehlertext
+.HIGH Popup Werkzeuge|Fehlertext
+.HCTX hctxPopupToolsErrorText
+
+Dieser Befehl erlaubt es, den Text des letzten Fehlers, der beim öbersetzen auftrat,
+einem externen Programm (Werkzeug) als Parameter zu Åbergeben.
+
+.TOPIC 3 Popup Werkzeuge|Laufwerk von
+.HIGH Popup Werkzeuge|Laufwerk von
+.HCTX hctxPopupToolsDriveOf
+
+Dieser Befehl erlaubt es, die Laufwerksbezeichnung von einem Dateinamen, einem externen
+Programm (Werkzeug) als Parameter zu Åbergeben.
+
+.TOPIC 3 Popup Werkzeuge|Verzeichnis von
+.HIGH Popup Werkzeuge|Verzeichnis von
+.HCTX hctxPopupToolsDirectoryOf
+
+Dieser Befehl erlaubt es, das Verzeichnis von einem Dateinamen, einem externen Programm
+(Werkzeug) als Parameter zu Åbergeben.
+
+.TOPIC 3 Popup Werkzeuge|Dateiname vo
+.HIGH Popup Werkzeuge|Dateiname vo
+.HCTX hctxPopupToolsFileNameOf
+
+Dieser Befehl erlaubt es, nur den Namen einer Datei von einem vollstÑndigen Dateinamen,
+einem externen Programm (Werkzeug) als Parameter zu Åbergeben.
+
+.TOPIC 3 Popup Werkzeuge|Dateierweiterung von
+.HIGH Popup Werkzeuge|Dateierweiterung von
+.HCTX hctxPopupToolsFileNameExtOf
+
+Dieser Befehl erlaubt es, die Dateinamenserweiterung von einem Dateinamen, einem
+externen Programm (Werkzeug) als Parameter zu Åbergeben.
+
+.TOPIC 3 Popup Editor|Schlie·en
+.HIGH Popup Editor|Schlie·en
+.HCTX hctxPopupEditorClose
+
+Dieser Befehl erlaubt es, das aktive Editorfenster zu schlie·en.
+
+.TOPIC 3 Popup Editor|Datei am Cursor îffnen
+.HIGH Popup Editor|Datei am Cursor îffnen
+.HCTX hctxPopupEditorOpen
+
+Dieser Befehl erlaubt es, die Datei, deren Namen an der Cursorposition steht zu îffnen.
+
+.TOPIC 3 Popup Editor|Speichern
+.HIGH Popup Editor|Speichern
+.HCTX hctxPopupEditorSave
+
+Dieser Befehl erlaubt es, die Datei im aktiven Editorfenster zu speichern.
+
+.TOPIC 3 Popup Editor|Kontexthilfe
+.HIGH Popup Editor|Kontexthilfe
+.HCTX hctxPopupEditorTopicSearch
+
+Dieser Befehl erlaubt es, eine Hilfe zu dem Text am Cursor des aktiven Editorfensters zu
+bekommen.
+
+Dabei wird versucht, das Wort am Cursor im Hilfeindex der Online Hilfe zu finden und
+falls erfolgreich, das passende Hilfefenster zu îffnen.
+
+.TOPIC 3 Popup Editor|Compilieren
+.HIGH Popup Editor|Compilieren
+.HCTX hctxPopupEditorCompile
+
+Dieser Befehl erlaubt es, die Datei im aktiven Editorfenster zu Åbersetzen.
+
+.TOPIC 3 Popup Editor|Aktualisieren
+.HIGH Popup Editor|Aktualisieren
+.HCTX hctxPopupEditorMake
+
+Dieser Befehl erlaubt es, die Datei im aktiven Editorfenster zu aktualisieren.
+Dabei werden auch alle Dateien neu Åbersetzt, die von der Datei benutzt werden und deren
+Åbersetzte Dateien nicht mehr aktuell sind.
+
+.TOPIC 3 Popup Editor|Haltepunkt umschalten
+.HIGH Popup Editor|Haltepunkt umschalten
+.HCTX hctxPopupEditorToggleBreak
+
+Dieser Befehl erlaubt es, einen Haltepunkt an der Cursorposition des aktiven
+Editorfensters zu setzen oder einen bereits dort vorhandenen Haltepunkt wieder zu
+entfernen.
+
+.TOPIC 3 Popup Editor|Gehe zur Cursorposition
+.HIGH Popup Editor|Gehe zur Cursorposition
+.HCTX hctxPopupEditorGoToCursor
+
+Dieser Befehl erlaubt es, das aktuelle Projekt Åber den internen Debugger bis zur
+Cursorposition des aktiven Editorfensters auszufÅhren.
+
+.TOPIC 3 Popup Editor|Auswerten/éndern
+.HIGH Popup Editor|Auswerten/éndern
+.HCTX hctxPopupEditorEvalModify
+
+Dieser Befehl erlaubt es, den Inhalt von Variablen des aktuellen Programms im Debugger
+anzuzeigen und zu verÑndern.
+
+.TOPIC 3 Popup Editor|Ausdruck Åberwache
+.HIGH Popup Editor|Ausdruck Åberwache
+.HCTX hctxPopupEditorAddWatch
+
+Dieser Befehl erlaubt es, eine Variable oder einen neuen Ausdruck zur Liste der
+Åberwachten AusdrÅcke hinzuzufÅgen.
+
+.TOPIC 3 Popup Editor|Nur lesen
+.HIGH Popup Editor|Nur lesen
+.HCTX hctxPopupEditorReadOnly
+
+Dieser Befehl erlaubt es, die Datei in aktiven Editorfenster als "nur lesbar" zu
+markieren.
+Damit kann die Datei nicht mehr verÑndert werden.
+Diese Information wird auch im Projekt mit gespeichert und wird somit beim Laden des
+Projektes automatisch wieder gesetzt.
+
+.TOPIC 3 Popup Editor|Kontrollzentrum
+.HIGH Popup Editor|Kontrollzentrum
+.HCTX hctxPopupEditorMessageWindow
+
+Dieser Befehl erlaubt es, das andockbare Kontrollfenster anzuzeigen. 
+
+Diese Fenster enthÑlt Seiten mit den wichtigsten Informationen, die beim Debuggen von
+Programmen benîtigt werden.
+Weiterhin enthÑlt es eine Seite fÅr die Meldungen des Compilers beim öbersetzen von
+Dateien.
+
+.TOPIC 3 Popup Editor|Eigenschaften
+.HIGH Popup Editor|Eigenschaften
+.HCTX hctxPopupEditorProperties
+
+Dieser Befehl erlaubt es, den Dialog mit den Einstellungen des Code Editors zu îffnen. 
+
+.TOPIC 3 Popup Fensterliste|Fenster anzeigen
+.HIGH Popup Fensterliste|Fenster anzeigen
+.HCTX hctxPopupWindowListShow
+
+Dieser Befehl erlaubt es, das ausgewÑhlte Fenster in den Vordergrund zu holen und
+gleichzeitig zu aktivieren.
+
+.TOPIC 3 Popup Fensterliste|Fenster schlie·en
+.HIGH Popup Fensterliste|Fenster schlie·en
+.HCTX hctxPopupWindowListClose
+
+Dieser Befehl erlaubt es, das ausgewÑhlte Fenster, zu schlie·en.
+
+.TOPIC 3 Popup Makroliste|Makro abspielen
+.HIGH Popup Makroliste|Makro abspielen
+.HCTX hctxPopupMacroListPlay
+
+Dieser Befehl erlaubt es, das ausgewÑhlte Editor Makro im aktiven Editorfenster
+abzuspielen.
+
+.TOPIC 3 Popup Makroliste|Makro lîschen
+.HIGH Popup Makroliste|Makro lîschen
+.HCTX hctxPopupMacroListDelete
+
+Dieser Befehl erlaubt es, das ausgewÑhlte Editor Makro aus der Liste zu lîschen.
+
+.TOPIC 3 Popup Zwischenablage|EinfÅgen
+.HIGH Popup Zwischenablage EinfÅgen
+.HCTX hctxPopupClipboardPaste
+
+Dieser Befehl erlaubt es, den ausgewÑhlten Text in das aktive Editorfenster einzufÅgen.
+
+.TOPIC 3 Popup Zwischenablage|Eintrag lîschen
+.HIGH Popup  Zwischenablage|Eintrag lîschen
+.HCTX hctxPopupClipboardDelete
+
+Dieser Befehl erlaubt es, den ausgewÑlten Eintrag aus der Liste zu lîschen.
+
+.TOPIC 3 Menue Noch nicht zu geordnet
+.HIGH Menue Noch nicht zu geordnet
+.HCTX hctxMenuExperts
+
+hctxMenuExperts
+

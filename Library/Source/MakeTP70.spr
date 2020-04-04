@@ -1,0 +1,214 @@
+[Application Options Linux]
+
+ApplicationIcon=
+
+[Application Options OS/2]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_os2.ico
+
+[Application Options Win32]
+
+ApplicationIcon=F:\SPRACHEN\PASCAL\WDSIBYL\BIN\OS2\default_win32.ico
+
+[Browser Files]
+
+File0=SYSTEM
+File1=OS2DEF
+File2=PMWIN
+File3=BSESUB
+File4=BSEVIO
+File5=BSEKBD
+File6=BSETIB
+File7=BSEEXCPT
+File8=BSEDOS
+File9=BSEERR
+File10=PMWP
+File11=PMSHL
+File12=SYSUTILS
+File13=CRT
+File14=USTREAM
+File15=ULIST
+File16=USTRING
+File17=USYSCLASS
+File18=BSEREGISTRY
+File19=INIFILES
+File20=PMSPL
+File21=PMWINX
+File22=USYSINFO
+File23=DOS
+File24=PRINTER
+File25=COLOR
+File26=PMBITMAP
+File27=PMGPI
+File28=WINCRT
+File29=FASTCRT
+
+[Compiler Options]
+
+CodeGeneration=
+Syntax=
+Optimize=OptimizeCommonSub,OptimizePeephole
+RuntimeCheck=
+CondDefine=
+
+[Compiler Warnings]
+
+Warnings=W2,W3,W4,W5,W6,W7
+MaxWarnings=200
+MaxErrors=10
+
+[Component Library OS/2]
+
+CompLibName=..\..\.\Bin\OS2\CompLib.dll
+
+[Component Library Win32]
+
+CompLibName=
+
+[Debugger Options]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options OS/2]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Debugger Options Win32]
+
+DebugInfo=LineNumbers,LocalSymbols
+Dbg_Options=1
+RTL_Exceptions=1073741823
+SPCC_Exceptions=4194303
+
+[Directories OS/2]
+
+LastDir=P:\WDSIBYL\WDSIBYL\LIBRARY\SOURCE\RTL\WIN32
+OutDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Output
+LibDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\OS2\Compnt
+
+[Directories Win32]
+
+LastDir=
+OutDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Output
+LibDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Lib
+LibSrcDir=
+IncSrcDir=
+CompInstallDir=F:\Sprachen\pascal\WDSibyl\OS\Win32\Compnt
+
+[Find History]
+
+Find0=SetColors
+Find1=dLoadAttributes
+Find2=textcolor
+Find3=Paramstr
+Find4=Synchron
+Find5=Exec:=
+Find6=exec(
+Find7=Exec_Visible
+Find8=exec
+Find9=viowhere
+Find10=//
+Find11=os2
+Find12=wherex
+Find13=//
+Find14=vioget
+Find15=uses
+
+[General]
+
+Version=Sibyl Project Ver2.05
+ProjectName=F:\SPRACHEN\PASCAL\WDSIBYL\Library\Source\MakeTP70.spr
+ProjectType=NonVisual
+RunParameter=
+InActiveLanguages=
+CurrentLanguage=
+Platform=OS/2
+
+[Last Closed Files]
+
+File0=.\TP70\WinGraph.pas
+File1=.\TP70\DOS.PAS
+File2=.\TP70\WINCRT.PAS
+
+[Last Open Files]
+
+File0=.\MakeTP70.PAS
+File0.Left=-1
+File0.Bottom=-1
+File0.Width=846
+File0.Height=597
+File0.Column=19
+File0.Line=5
+File1=.\TP70\CRT.PAS
+File1.Left=-1
+File1.Bottom=-1
+File1.Width=846
+File1.Height=597
+File1.Column=20
+File1.Line=255
+File2=.\TP70\fastcrt.pas
+File2.Left=-1
+File2.Bottom=-1
+File2.Width=846
+File2.Height=597
+File2.Column=26
+File2.Line=667
+File3=.\TP70\PRINTER.PAS
+File3.Left=-1
+File3.Bottom=-1
+File3.Width=846
+File3.Height=597
+File3.Column=1
+File3.Line=1
+
+[Linker Options]
+
+DataSegment=Normal
+LinkerTarget=GUI
+ExePacking=ExePack2
+RunVDM=True
+CurrentLanguage=Default
+InstallLanguages=
+
+[Memory Sizes]
+
+Heap=8192
+Stack=256
+
+[Project Files]
+
+Primary=.\MakeTP70.PAS
+MainFile0=.\MakeTP70.PAS
+MainFile0.Ext=.EXE
+MainFile0.Checksum=7936
+MainFile0.Expanded=False
+MainFile0.File0=.\TP70\CRT.PAS
+MainFile0.File1=.\TP70\DOS.PAS
+MainFile0.File2=.\TP70\PRINTER.PAS
+MainFile0.File3=.\TP70\WINCRT.PAS
+MainFile0.File4=.\TP70\WINGRAPH.PAS
+MainFile0.File5=.\TP70\fastcrt.pas
+MainFile0.File6=[Dependencies]
+MainFile0.Dependency0=.\TP70\CRT.PAS
+MainFile0.Dependency1=.\TP70\PRINTER.PAS
+MainFile0.Dependency2=.\TP70\fastcrt.pas
+
+[Repository]
+
+Page0=[Object Repository]
+Page0.Installed=True
+
+[SCU]
+
+SCUName=
+MainForm=
+

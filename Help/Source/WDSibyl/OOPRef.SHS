@@ -1,0 +1,2688 @@
+.TOPIC 1 WDSibyl OOP Referenz
+
+.FIG
+ {Klassen}
+ {Sichtbarkeit}
+ {Instanzen}
+ {Zuweisungen}
+ {Felder}
+ {Methoden}
+ {Eigenschaften}
+ {Metaklassen}
+ {Vordefinierte Klassen}
+ {Exceptions}
+ {Vordefinierte Exceptions}
+.EFIG
+
+.TOPIC 2 Klassen
+.INDEX 2 Klassen
+.HIGH Klassen
+
+.BOLD Was sind Klassen?
+
+Die Basis der objektorientierten Programmierung ist der Begriff der Klasse.
+Ein Klasse ist ein strukturierter Datentyp, Ñhnlich einem Record, jedoch
+weitaus mÑchtiger.
+
+Ein ReprÑsentant einer Klasse wird eine Instanz oder ein Objekt der Klasse
+genannt. Objekte sind dynamische Datentypen, die zur Laufzeit erzeugt und
+zerstîrt werden. Eine Klasse legt den Bauplan fÅr jede ihrer Instanzen fest.
+
+Die Deklaration einer neuen Klasse kann drei Arten von Komponenten aufweisen:
+Felder, Methoden und Eigenschaften. ZusÑtzlich kînnen Klassen Åber den
+Mechanismus der Vererbung die Komponenten einer bestehenden Klasse Åbernehmen.
+
+Jeder Komponente einer Klasse kann individuell ein Typ von Sichtbarkeit
+zugeordnet werden. Dadurch wird festgelegt, wer die Komponente sehen und
+darauf zugreifen kann.
+
+.BOLD Deklaration von Klassen
+
+Klassen werden auf die folgende Weise deklariert:
+
+<Syntaxdiagramm Classes>
+
+Klassen kînnen nur im Ñu·ersten GÅltigkeitsbereich eines Moduls deklariert
+werden. Es ist nicht mîglich, Klassen lokal in Prozeduren oder Funktionen zu
+deklarieren. Es ist ebenfalls nicht mîglich, Klassen im Rahmen einer
+Variablen-Deklaration einzufÅhren.
+
+Es ist in WDSibyl-Pascal Åblich, wenngleich nicht zwingend vorgeschrieben,
+da· die Bezeichner von Klassen mit einem 'T' beginnen, um sie als
+Typbezeichner kenntlich zu machen.
+
+.BOLD Komponenten einer Klasse
+
+Die Deklaration einer Klasse kann drei Arten von Komponenten aufweisen:
+Felder, Methoden und Eigenschaften.
+
+.ULIST
+.LISTITEM Felder
+
+sind Variablen innerhalb einer Klasse und werden auf die gleiche
+Weise deklariert und benutzt wie die Felder eines Records. Jedes Objekt
+einer Klasse verfÅgt Åber einen kompletten eigenen Satz aller Felder der
+Klasse.
+.LISTITEM Methoden
+
+sind Prozeduren oder Funktionen, deren FunktionalitÑt eng mit der
+Klasse verknÅpft ist. Methoden werden Åblicherweise in Verbindung mit einer
+Instanz aufgerufen. Alle Instanzen einer Klasse teilen sich den gleichen
+Satz Methoden, so da· deren Code nur einmal im Programm vorhanden ist.
+.LISTITEM Eigenschaften
+
+stellen sich dem Benutzer einer Klasse Ñhnlich wie Felder dar,
+bieten jedoch weitaus mehr Mîglichkeiten. Lesende und schreibende Zugriffe
+auf eine Eigenschaft kînnen sowohl auf ein Feld als auch auf eine Methode
+umgelenkt werden. Im letzteren Fall wird bei der AusfÅhrung einer Zuweisung
+implizit die zugrundeliegende Methode aufgerufen. Au·erdem kînnen die
+Zugriffsmîglichkeiten einer Eigenschaft auf nur-Lesen oder nur-Schreiben
+eingeschrÑnkt werden.
+.EULIST
+
+.BOLD Vererbung
+
+Bei der Deklaration einer neuen Klasse kann eine bereits bestehende Klasse
+als Vorfahr angegeben werden, wodurch die neue Klasse automatisch Åber
+sÑmtliche Komponenten des Vorfahren verfÅgt, sofern es deren Sichtbarkeit
+zulÑ·t.
+
+ZusÑtzlich kînnen neue Komponenten deklariert oder vom Vorfahren geerbte
+Komponenten Åberschrieben werden. öberschreiben bedeutet, es wird fÅr
+eine Komponente der neuen Klasse ein Bezeichner gewÑhlt, der bereits im
+Vorfahren verwendet wird. Dadurch wird die Åberschriebene Komponente
+innerhalb der neuen Klasse verdeckt. Das öberschreiben hat aber keinen
+Einflu· auf den Vorfahren selbst.
+
+Es kînnen nur Methoden und Eigenschaften Åberschrieben werden, nicht jedoch
+Felder. Beim öberschreiben von Methoden ist es wichtig, das Laufzeitverhalten
+der verschiedenen Arten von Methoden zu kennen und die geeignete Art
+auszuwÑhlen.
+
+.COLOR fc=red
+Achtung:
+.COLOR fc=default
+Bei Borland Delphi ist es auch mîglich, Felder des Vorfahren zu Åberschreiben.
+Bei WDSibyl-Pascal besteht diese Mîglichkeit derzeit nicht.
+
+Die Vererbung ist ein transitive Beziehung. Wenn zum Beispiel eine Klasse {C}
+von einer Klasse {B} abstammt, die wiederum von einer Klasse {A} abstammt,
+dann erbt {B} als Nachkomme von {A} deren Komponenten. {C} ist Nachkomme
+von {B} und damit auch Nachkomme von {A}. Zu den Komponenten, die {C} von {B}
+erbt, gehîren also auch die von {A}.
+
+Im folgenden Beispiel werden zwei Klassen {TWindow} und {TEditorWindow}
+deklariert. Da {TEditorWindow} ein Nachfahre von {TWindow} ist, besitzt die
+Klasse sÑmtliche Komponenten von {TWindow} ({FX}, {FY}, {FWidth}, {FHeight}
+und die Methode {Draw}) sowie die beiden neuen Felder {FCursorRow} und
+{FCursorColumn}.
+
+.xmp
+type
+  TWindow = class
+    FX, FY, FWidth, FHeight: Integer;
+    procedure Draw;
+  end;
+
+  TEditorWindow = class(TWindow)
+    FCursorRow, FCursorColumn: Integer;
+  end;
+.exmp
+
+Durch mehrmalige Anwendung der Vererbung entsteht eine baumartige Hierarchie
+von Klassen. Es gibt keine BeschrÑnkung fÅr die Anzahl der Nachkommen, die
+eine Klasse besitzen kann. Jede Klasse hat aber immer genau einen Vorfahren.
+
+Wenn nicht explizit ein Vorfahr angegeben wird, dann nimmt der Compiler die
+in der {Unit SYSTEM} vordefinierte Klasse {TObject} als Vorfahren an.
+
+Damit sind die folgenden beiden Klassendeklarationen Ñquivalent:
+
+.xmp
+type
+  TMyObject = class           // impliziter Nachkomme von TObject
+    ...
+  end;
+
+type
+  TMyObject = class(TObject)  // expliziter Nachkomme von TObject
+    ...
+  end;
+.exmp
+
+Die Hierarchie der Klassen schlÑgt sich auch in den Regeln fÅr
+ZuweisungskompatibilitÑt von Objekten nieder, die sich von denen fÅr
+traditionelle Datentypen unterscheiden.
+
+.TOPIC 2 Sichtbarkeit
+.INDEX 2 Sichtbarkeit
+.HIGH Sichtbarkeit
+
+.BOLD Was ist Sichtbarkeit?
+
+Die Sichtbarkeit einer Komponente bestimmt, wer diese Komponente sehen und
+darauf zugreifen kann.
+
+Innerhalb des Moduls, in dem eine Klasse deklariert wird, sind immer alle
+ihre Komponenten uneingeschrÑnkt sichtbar. Die Sichtbarkeit einer
+Komponente au·erhalb dieses Moduls kann mit Hilfe der SchlÅsselwîrter
+{public}, {protected} und {private} abgestuft eingeschrÑnkt werden.
+ZusÑtzlich existiert mit {published} eine Art von Sichtbarkeit,
+die Komponenten einer Klasse im Objekt-Inspektor der Sibyl-Umgebung
+editierbar macht und spezielle Laufzeitinformationen erzeugt, die von
+SPCC-Anwendungen benîtigt werden.
+
+Ein Sichtbarkeitsbezeichner wird in der Deklaration der Klasse vor einer
+Komponente eingefÅgt. Er gilt ab dieser Stelle entweder fÅr alle folgenden
+Komponenten der Klasse, oder bis eine andere Art der Sichtbarkeit festgelegt
+wird. Die Sichtbarkeit einer Komponente vererbt sich auf die Nachfahren der
+Klasse, kann aber in Nachfahren geÑndert werden, wenn die Komponente dort
+sichtbar ist.
+
+.ULIST
+.LISTITEM public - ôffentliche Komponenten
+
+Wenn keine andere Art der Sichtbarkeit vorgegeben wird, dann wÑhlt der
+Compiler automatisch {public}. Komponenten, die als {public} gekennzeichnet
+werden, sind sowohl innerhalb als auch au·erhalb des Moduls, in dem die
+Klassendeklaration beheimatet ist, uneingeschrÑnkt sichtbar.
+
+{public} ist die Art von Sichtbarkeit, die Åblicherweise fÅr Komponenten
+gewÑhlt wird, die dem Anwender einer Klasse zur VerfÅgung stehen sollen.
+.LISTITEM protected - GeschÅtzte Komponenten
+
+{protected} stellt eine etwas eingeschrÑnktere Art von Sichtbarkeit dar als
+{public}. Komponenten, die als {protected} gekennzeichnet werden, sind
+innerhalb des Moduls, in dem ihre Klasse deklariert wird, uneingeschrÑnkt
+sichtbar. Au·erhalb des Moduls sind sie nur innerhalb von Methoden von
+Nachfahren der Klasse sichtbar.
+
+{protected} ist die Art von Sichtbarkeit, die Åblicherweise fÅr Komponenten
+gewÑhlt wird, die zwar dem Entwickler von Nachfahren der Klasse zur
+VerfÅgung stehen, aber vor dem Anwender einer Klasse verborgen werden sollen.
+.LISTITEM private - Versteckte Komponenten
+
+{private} ist die eingeschrÑnkteste Art von Sichtbarkeit. Komponenten die
+als {private} gekennzeichnet werden, sind innerhalb des Moduls, in dem ihre
+Klasse deklariert wird, uneingeschrÑnkt sichtbar. Au·erhalb des Moduls sind
+sie nicht sichtbar.
+
+{private} ist die Art von Sichtbarkeit, die Åblicherweise fÅr Komponenten gewÑhlt wird, die im Rahmen der Kapselung gÑnzlich verborgen werden sollen.
+.LISTITEM published - Verîffentlichte Komponenten
+
+{published} stellt eine besondere Art von Sichtbarkeit dar, die innerhalb
+der Sibyl-Umgebung zum Einsatz kommt. Komponenten, die als {published}
+gekennzeichnet werden, sind sowohl innerhalb als auch au·erhalb des Moduls,
+in dem ihre Klasse deklariert wird, uneingeschrÑnkt sichtbar. Damit
+verhalten sie sich exakt so wie Komponenten, die als {public} gekennzeichnet
+werden.
+
+ZusÑtzlich erzeugt der Compiler aber fÅr Felder und Eigenschaften mit der
+Sichtbarkeit {published} spezielle Laufzeitinformationen, die fÅr die
+Zusammenarbeit mit dem Objekt-Inspektor und fÅr das Laufzeitverhalten von
+SPCC-Anwendungen von Bedeutung sind.
+
+{published} ist die Art von Sichtbarkeit, die fÅr Komponenten gewÑhlt werden
+mu·, die innerhalb des Objekt-Inspektors editierbar sein sollen. ZusÑtzlich
+gelten folgende EinschrÑnkungen fÅr Komponenten mit der Sichtbarkeit
+{published}:
+.ULIST
+.LISTITEM Handelt es sich bei der Komponente um ein Feld, so mu· dieses vom
+Typ einer Klasse sein.
+.LISTITEM Handelt es sich bei der Komponente um eine Eigenschaft, so mu·
+diese einfach, also nicht-indiziert sein. Au·erdem ist ihr Typ auf eine der
+folgenden Mîglichkeiten beschrÑnkt:
+.ULIST
+.LISTITEM AufzÑhlungstyp
+.LISTITEM Ganzzahliger Typ
+.LISTITEM Flie·kommazahl
+.LISTITEM String
+.LISTITEM Mengentyp mit nicht mehr als 16 Elementen
+.LISTITEM Objekttyp
+.LISTITEM Methodenzeiger
+.EULIST
+.EULIST
+.EULIST
+
+.TOPIC 2 Instanzen
+.INDEX 2 Instanzen
+.HIGH Instanzen
+
+.BOLD Was sind Instanzen?
+
+Ein ReprÑsentant einer Klasse wird eine Instanz oder ein Objekt der Klasse
+genannt. Objekte sind dynamische Datentypen, die zur Laufzeit erzeugt und
+zerstîrt werden. Eine Klasse legt den Bauplan fÅr jede ihrer Instanzen fest.
+
+Das Erzeugen und Zerstîren von Objekten geschieht mithilfe spezieller
+Methoden. Zum Erzeugen eines Objekts wird ein Konstruktor aufgerufen, der
+den vom Objekt benîtigten Speicherbereich auf dem Heap reserviert und
+initialisiert. Wird das Objekt nicht mehr benîtigt, sollte es durch den
+Aufruf eines Destruktors zerstîrt werden, wodurch auch der reservierte
+Speicher wieder freigegeben wird.
+
+Das Objektmodell von WDSibyl-Pascal basiert auf Referenzen. Eine Variable vom
+Typ einer Klasse enthÑlt kein Objekt, sondern einen Zeiger. Dieser Zeiger
+kann zur Laufzeit ein Objekt referenzieren oder den Wert {nil} enthalten,
+um anzudeuten, da· er gerade kein gÅltiges Objekt referenziert. Beim
+Erzeugen eines neuen Objekts wird dem Zeiger die Adresse des
+Speicherbereiches zugewiesen, der fÅr das Objekt reserviert wurde.
+
+Es ist weder notwendig noch mîglich, den Zeiger explizit zu dereferenzieren.
+Der Compiler erledigt dies bei Bedarf.
+.ULIST
+.LISTITEM Beim Zugriff auf die Elemente eines Objekts wird der Zeiger
+automatisch dereferenziert. Dadurch stellt sich ein Objekt trotz dynamischer
+Allokation wie eine statische Variable dar.
+.LISTITEM Beim Zugriff auf das gesamte Objekt wird der Zeiger nicht
+dereferenziert. Stattdessen wird mit dem Wert des Zeigers, also der Adresse
+der Instanz gearbeitet. Das wirkt sich insbesondere bei Zuweisungen aus.
+.EULIST
+
+.BOLD Erzeugen von Instanzen
+
+Instanzen werden erzeugt, indem eine spezielle Art von Methode aufgerufen
+wird, ein sogenannter Konstruktor. Der Konstruktur reserviert den fÅr die
+Instanz nîtigen Speicherbereich auf dem Heap und initialisiert das neue
+Objekt. Die Adresse der Instanz wird in eine Instanzvariable geschrieben,
+die zuvor deklariert sein mu·.
+
+Genauere Informationen zur Implementierung und zum Aufruf von Konstruktoren
+finden Sie im entsprechenden Abschnitt.
+
+.BOLD Zerstîren von Instanzen
+
+Objektinstanzen werden zerstîrt, indem eine spezielle Art von Methode, ein
+sogenannter Destruktor aufgerufen wird. Der Destruktor fÅhrt zuerst Code aus,
+der notwendig ist, um die Benutzung er Objektinstanz korrekt zu beenden.
+Das schlie·t insbesondere die Freigabe untergeordneter Objekte ein. Dieser
+Code wird vom Programmierer festgelegt. Dann gibt der Destruktor den vom
+Objekt auf dem Heap belegten Speicherplatz wieder frei.
+
+Genauere Informationen zur Implementierung und zum Aufruf von Destruktoren
+finden Sie im entsprechenden Abschnitt.
+
+.TOPIC 2 Zuweisungen
+.INDEX 2 Zuweisungen
+.HIGH Zuweisungen
+
+.BOLD Was geschieht bei Zuweisungen?
+
+Das Objektmodell von WDSibyl-Pascal basiert auf Referenzen. Eine Variable vom
+Typ einer Klasse bietet nicht Platz fÅr eine Objektinstanz, sondern nur fÅr
+einen Zeiger, der eine Objektinstanz referenzieren kann.
+
+Bei einer Zuweisung wird demzufolge keine Kopie des Quellobjektes erstellt.
+Stattdessen wird die Adresse des Objektes auf der rechten Seite der
+Zuweisung in die Variable auf der linken Seite der Zuweisung geschrieben.
+Dadurch referenzieren beide Variablen nach der Zuweisung das gleiche Objekt,
+was auch das folgende Beispiel verdeutlicht.
+
+.xmp
+var
+  A, B: TObject;
+
+begin
+  A.Create;   // Erzeugt eine Instanz von TObject. Die
+              // Variable A referenziert diese Instanz.
+
+  B := A;     // Weist B den Wert von A zu. Beide Variablen
+              // referenzieren nun das gleiche Objekt.
+
+  B.Destroy;  // Zerstîrt die von B referenzierte Instanz.
+              // Damit ist auch der Wert von A ungÅltig.
+end.
+.exmp
+
+.BOLD ZuweisungskompatibilitÑt:
+
+Durch den Vererbungsmechanismus ergeben sich verwandtschaftliche Beziehungen
+zwischen Klassen. Diesen Beziehungen wird durch erweiterte Mîglichkeiten bei
+Zuweisungen Rechnung getragen.
+
+Au·er mit sich selbst ist eine Klasse zuweisungskompatibel mit all ihren
+Vorfahren. Das schlie·t sowohl den einen direkten als auch jeden weiteren
+indirekten Vorfahren ein. Zur Laufzeit kann eine Variable vom Typ einer
+Klasse {A} also eine Instanz genau dieser Klasse {A} oder eines beliebigen
+Nachfahren von {A} referenzieren.
+
+Umgekehrt gilt diese ZuweisungskompatibilitÑt nicht. Eine Klasse ist mit
+keinem ihrer Nachfahren zuweisungskompatibel. Zwischen gÑnzlich unverwandten
+Klassen, die vîllig verschiedenen ésten der Objekthierarchie entstammen,
+besteht ebenfalls keinerlei ZuweisungskompatibilitÑt.
+
+Folgendes Beispiel demonstriert eine Reihe von legalen und illegalen
+Zuweisungen. Illegale Zuweisungen werden vom Compiler erkannt und nicht
+akzeptiert.
+
+.xmp
+type
+  TVehicle   = class(TObject);
+  TShip      = class(TVehicle);
+  TSubmarine = class(TShip);
+
+  TAirplane  = class(TVehicle);
+
+var
+  Vehicle:   TVehicle;
+  Ship:      TShip;
+  Submarine: TSubmarine;
+  Airplane:  TAirplane;
+
+begin
+  // Die folgenden Zuweisungen sind gÅltig.
+
+  Vehicle := Ship;
+  Vehicle := Submarine;
+  Vehicle := Airplane;
+
+  Ship    := Submarine;
+
+  // Die folgenden Zuweisungen sind ungÅltig
+  // und werden vom Compiler nicht akzeptiert.
+
+  Ship      := Vehicle;  // TShip ist Nachkomme von TVehicle.
+  Submarine := Vehicle;  // TSubmarine ist Nachkomme von TVehicle.
+  Airplane  := Vehicle;  // TAirplane ist Nachkomme von TVehicle.
+
+  Submarine := Ship;     // TSubmarine ist Nachkomme von TShip.
+
+  Ship      := Airplane; // TShip und TAirplane sind nicht verwandt.
+  Airplane  := Ship;     // TAirplane und TShip sind nicht verwandt.
+end.
+.exmp
+
+.BOLD Typwandlungen
+
+Bei Objekten kînnen - wie bei anderen Datentypen auch - Typwandlungen
+durchgefÅhrt werden. Durch eine Typwandlung wird die TypprÅfung von
+WDSibyl-Pascal bewu·t unterlaufen, wodurch sich potentielle Gefahren ergeben.
+Um diese Gefahren zu minimieren, bietet WDSibyl-Pascal mit {is} und {as} zwei
+Operatoren, die unter anderem sichere Typwandlungen ermîglichen.
+
+.ULIST
+.LISTITEM Der Operator is
+
+Der Operator {is} dient dazu, zur Laufzeit eine TypprÅfung fÅr ein Objekt
+durchzufÅhren. Die Syntax ist:
+
+.xmp
+  MyObject is MyClass
+.exmp
+
+Das Ergebnis dieses Ausdrucks ist vom Typ {Boolean}. Zur Laufzeit wird der
+tatsÑchliche Typ des Objekts {MyObject} mit der Klasse {MyClass} verglichen.
+Ist der Typ von {MyObject} identisch mit {MyClass} oder einem beliebigen
+direkten oder indirekten Nachfahren von {MyClass}, dann ist das Ergebnis des
+Ausdrucks {True}. In allen anderen FÑllen, insbesondere wenn {MyObject} {nil}
+ist, liefert die Anwendung des Operators den Wert {False}.
+
+.xmp
+type
+  TVehicle  = class(TObject);
+  TShip     = class(TVehicle);
+  TAirplane = class(TVehicle);
+
+var
+  MyVehicle: TVehicle;
+
+begin
+  ...
+  if MyVehicle is TShip then WriteLn('Es ist ein Schiff.')
+  else if MyVehicle is TAirplane then WriteLn('Es ist ein Flugzeug.');
+  ...
+end.
+.exmp
+
+Beachten Sie, da· {MyClass} nicht unmittelbar den Namen einer Klasse angeben
+mu·, sondern auch eine Variable vom Typ einer Metaklasse sein kann. Die
+tatsÑchliche Klasse wird dann zur Laufzeit dieser Variablen entnommen.
+NÑheres dazu entnehmen Sie bitte dem Abschnitt Åber Metaklassen.
+.LISTITEM Der Operator as
+
+Der Operator {as} dient dazu, zur Laufzeit sichere Typwandlungen
+durchzufÅhren. Die Syntax ist:
+
+.xmp
+  MyObject as MyClass
+.exmp
+
+Das Ergebnis des Ausdrucks ist vom Typ {MyClass}. Zur Laufzeit wird anhand
+des tatsÑchlichen Typs von {MyObject} geprÅft, ob die Typwandlung sicher ist.
+Als sicher gilt die Typwandlung genau dann, wenn {MyClass} identisch mit dem
+tatsÑchlichen Typ von {MyObject} oder ein direkter oder indirekter Vorfahre
+davon ist. Ist diese Bedingung nicht erfÅllt, dann wird eine Exception
+ausgelîst.
+
+Sie kînnen den Operator mit {with..do} kombinieren, um eine Reihe von
+Operationen auf einem Objekt nur dann durchzufÅhren, wenn das Objekt
+zuweisungskompatibel zu einer bestimmten Klasse ist.
+
+.xmp
+var
+  MyStream: TStream;
+
+begin
+  ...
+  with MyStream as THandleStream do  // Wenn MyStream zuweisungskompatibel
+  begin                              // zu THandleStream ist, dann wird der
+    WriteLn('Handle: ', Handle);     // Block ausgefÅhrt. Sonst wird eine
+  end;                               // Exception ausgelîst.
+  ...
+end;
+.exmp
+
+Beachten Sie, da· {MyClass} nicht unmittelbar den Namen einer Klasse
+angeben mu·, sondern auch eine Variable vom Typ einer Metaklasse sein kann.
+Die tatsÑchliche Klasse wird dann zur Laufzeit dieser Variablen entnommen.
+NÑheres dazu entnehmen Sie bitte dem Abschnitt Åber Metaklassen.
+
+Beachten Sie au·erdem, da· die Typwandlung auch dann als sicher gilt,
+wenn {MyObject} den Wert {nil} enthÑlt. Wenn Sie nicht sicher sind,
+ob {MyObject} wirklich ein gÅltiges Objekt referenziert, dann sollten Sie
+dies zuerst prÅfen. Anderenfalls riskieren Sie den Abbruch des Programms
+mit einer Schutzverletzung.
+.EULIST
+
+.TOPIC 2 Felder
+.INDEX 2 Felder
+.HIGH Felder
+
+.BOLD Was sind Felder?
+
+Felder sind Variablen innerhalb einer Klasse.
+
+Sie entsprechen in Deklaration und Anwendung weitgehend den Feldern von
+Records. Jedes Objekt verfÅgt Åber einen eigenen Satz aller Felder seiner
+Klasse, insbesondere auch der Felder, die die Klasse von ihren Vorfahren
+geerbt hat.
+
+Das éndern eines Feldes von Objekt {A} hat keinen Einflu· auf das
+gleichnamige Feld eines Objekts {B} der gleichen Klasse, solange die
+Variablen {A} und {B} nicht die gleiche Instanz referenzieren. Hingegen
+teilen sich alle Objekte einer Klasse den gleichen Satz Methoden, wodurch
+deren Code nur einmal vorhanden ist.
+
+.BOLD Deklaration von Feldern
+
+Felder werden auf die folgende Weise deklariert:
+
+<Syntaxdiagramm: Fields>
+
+Es ist in WDSibyl-Pascal Åblich, wenngleich nicht zwingend vorgeschrieben, da·
+Feldbezeichner mit einem {F} beginnen.
+
+Folgendes Beispiel zeigt die Deklaration von Feldern.
+
+.xmp
+type
+  TCity = class
+    FName: string;
+    FLongitude, FLatitude: Integer;
+    FPopulation: LongWord;
+  end;
+.exmp
+
+Alle Instanzen der Klasse {TCity} verfÅgen Åber ihre eigenen Felder zur
+Aufnahme von Name, geographischer Position und Bevîlkerungszahl einer Stadt.
+
+.BOLD Benutzen von Feldern
+
+Die Zugriffe auf die Felder eines Objekts entsprechen den Zugriffen auf
+Felder von Records. Einzelne Felder kînnen Åber den Punkt und den Bezeichner
+des Feldes selektiert werden. Au·erdem kann eine Operation auf einem Objekt
+durch {with..do} angefÅhrt werden, wodurch alle Felder des Objekts direkt
+ansprechbar werden.
+
+.xmp
+type
+  TCompiler = class
+    FName: string;
+    FVersionHi, FVersionLo: Integer;
+  end;
+
+var
+  MyCompiler: TCompiler;
+
+begin
+  ...
+
+  // Qualifizierter Zugriff auf die Felder des Objekts.
+
+  MyCompiler.FName := 'WDSibyl';
+  MyCompiler.FVersionHi := 2;
+  MyCompiler.FVersionLo := 0;
+
+  // Zugriff auf die Felder mit Hilfe von WITH..DO. Die
+  // folgende Sequenz hat die gleiche Wirkung wie die
+  // vorangehende.
+
+  with MyCompiler do
+  begin
+    FName := 'WDSibyl';
+    FVersionHi := 2;
+    FVersionLo := 0;
+  end;
+
+  // Lesender Zugriff, WITH..DO ohne BEGIN..END.
+
+  with MyCompiler do
+    WriteLn(FName, ' Version ', FVersionHi, '.', FVersionLo);
+
+  ...
+end.
+.exmp
+
+.TOPIC 2 Methoden
+.INDEX 2 Methoden
+.HIGH Methoden
+
+.BOLD Was sind Methoden?
+
+Methoden sind Prozeduren oder Funktionen, deren FunktionalitÑt fest mit
+einer Klasse verknÅpft ist.
+
+Methoden werden Åblicherweise in Verbindung mit einer Instanz der Klasse
+aufgerufen. Bei Klassenmethoden ist auch ein Aufruf in Verbindung mit einer
+Klasse mîglich. Felder, Methoden und Eigenschaften einer Klasse sind
+innerhalb der Implementierung ihrer Methoden verfÅgbar.
+
+Methoden werden an Nachfahren vererbt. Alle Instanzen einer Klasse teilen
+sich den gleichen Satz Methoden, so da· deren Code nur einmal im Programm
+vorhanden ist.
+
+Es gibt eine Reihe von SchlÅsselwîrtern, die das Laufzeitverhalten einer
+Methode beeinflussen. WÑhrend bei statischen Methoden die Aufrufadresse
+bereits zur Zeit der Compilierung feststeht, wird sie bei virtuellen und
+dynamischen Methoden erst zur Laufzeit ermittelt. ZusÑtzlich existieren
+botschaftsverarbeitende Methoden, die das Zusammenspiel verschiedener
+Bildschirmelemente mit dem Betriebssystem Åber den Austausch von Nachrichten
+koordinieren.
+
+Zwei spezielle Arten von Methoden, Konstruktoren und Destruktoren, dienen
+zum Erzeugen und Zerstîren von Objektinstanzen.
+
+.BOLD Deklarieren von Methoden
+
+Methoden werden auf die folgende Weise deklariert:
+
+<Syntaxdiagramm: Methods>
+
+Folgendes Beispiel deklariert eine Klasse {TWindow} zur Darstellung eines
+Fensters auf dem Bildschirm. Die Klasse enthÑlt zwei Methoden zum Lesen und
+Schreiben des Fenstertitels.
+
+.xmp
+type
+  TWindow = class
+    ...
+    function GetTitle: string;
+                                procedure SetTitle(const S: string);
+    ...
+  end;
+.exmp
+
+.BOLD Implementieren von Methoden
+
+Die Methoden einer Klasse werden nach der Deklaration der Klasse
+implementiert, Ñhnlich der Implementierung einer als {forward} deklarierten
+Prozedur oder Funktion.
+
+Falls die Klasse in einer Unit deklariert wird, findet die Implementierung
+der Methoden im {implementation}-Teil der Unit statt.
+
+Jeder einzelnen Methode geht bei der Implementierung der Name der Klasse
+gefolgt von einem Punkt voran.
+
+Die Liste formaler Parameter der Methode kann, mu· aber nicht bei der
+Implementierung wiederholt werden. Wenn sie wiederholt wird, dann mu· sie
+exakt mit der Parameterliste der Deklaration Åbereinstimmen.
+
+.xmp
+type
+  TWindow = class
+    X, Y, Width, Height: Integer;
+    Title: string;
+    ...
+    procedure Draw;
+    procedure SetPosition(X, Y: Integer);
+    procedure SetTitle(const S: string);
+  end;
+
+// Draw besitzt keine Parameter.
+
+procedure TWindow.Draw;
+begin
+  ...
+end;
+
+// Bei SetPosition wird die gesamte Parameterliste wiederholt.
+
+procedure TWindow.SetPosition(X, Y: Integer);
+begin
+  ...
+end;
+
+// Bei SetTitle wird die gesamte Parameterliste weggelassen.
+
+procedure TWindow.SetTitle;
+begin
+  ...
+end;
+.exmp
+
+Der GÅltigkeitsbereich aller Komponenten einer Klasse erstreckt sich unter
+anderem auf die Implementierung aller Methoden der Klasse. Dadurch sind alle
+Felder, Methoden und Eigenschaften der Klasse innerhalb der Methode direkt
+zugreifbar.
+
+.xmp
+procedure TWindow.SetTitle(const S: string);
+begin
+  FTitle := S;
+  Draw;
+end;
+.exmp
+
+ZusÑtzlich existiert in jeder Methode ein impliziter Parameter {Self}, der
+vom Typ der Klasse ist, zu der die Methode gehîrt. {Self} referenziert zur
+Laufzeit stets das Objekt, auf dem die Methode aufgerufen wurde. Wenn durch
+eine {with..do}-Anweisung oder durch formale Parameter der Methode
+Komponenten der Klasse aus dem aktuellen GÅltigkeitsbereich verdrÑngt werden,
+dann kann Åber {Self} weiterhin auf diese Komponenten zugegriffen werden.
+
+.xmp
+procedure TWindow.SetPosition(X, Y: Integer);
+begin
+  // Der Konflikt zwischen den Feldern X, Y und den
+  // gleichnamigen formalen Parametern wird durch
+  // Self gelîst.
+
+  Self.X := X;
+  Self.Y := Y;
+
+  Draw;
+end;
+.exmp
+
+Falls innerhalb der Implementierung einer Methode einer Klasse auf eine
+gleichnamige Methode des Vorfahren zugegriffen werden soll, die in der neuen
+Klasse Åberschrieben oder verdeckt wurde, dann ist dies mit dem
+SchlÅsselwort {inherited} mîglich.
+
+.xmp
+type
+  TEditorWindow = class(TWindow)
+    procedure Draw;
+  end;
+
+procedure TWindow.Draw;
+begin
+  DrawFrameAndTitle;  // Soll den den Rahmen und die Titelzeile zeichnen.
+end;
+
+procedure TEditorWindow.Draw;
+begin
+  inherited Draw;     // Ruft zuerst TWindow.Draw auf.
+  DrawContents;       // Soll den Inhalt des Editor-Fensters zeichnen.
+end;
+.exmp
+
+.BOLD Aufruf von Methoden
+
+Der Aufruf einer Methode geschieht durch Angabe der Instanz, auf der die
+Methode operieren soll, gefolgt von einem Punkt, dem Namen der Methode und
+der Liste aktueller Parameter. Innerhalb einer {with..do}-Anweisung, die
+eine Objektinstanz in den aktuellen GÅltigkeitsbereich rÅckt, kann die
+Angabe der Instanz auch entfallen.
+
+.xmp
+type
+  TWindow = class
+    procedure SetPosition(X, Y: Integer);
+  end;
+
+var
+  MyWindow: TWindow;
+
+begin
+  ...
+  MyWindow.SetPosition(100, 200);  // Qualifizierter Aufruf.
+  ...
+  with MyWindow do
+  begin
+    SetPosition(100, 200);         // Aufruf innerhalb von WITH..DO
+  end;                             // benîtigt keine Angabe der Instanz.
+  ...
+end.
+.exmp
+
+Bei Klassenmethoden besteht zusÑtzlich die Mîglichkeit, die Methode mit dem
+Bezeichner einer Klasse anstelle der Objektinstanz aufzurufen.
+
+Welche Methode zur Laufzeit tatsÑchlich aufgerufen, hÑngt wesentlich davon
+ab, welches Laufzeitverhalten fÅr die Methode gewÑhlt wurde. WÑhrend bei
+statischen Methoden die Bindung bereits zur Zeit der Compilierung
+durchgefÅhrt wird, ermittelt bei virtuellen oder dynamischen Methoden das
+Laufzeitsystem anhand des tatsÑchlichen Typs der Instanz, welche Methode
+aufgerufen wird.
+
+.BOLD Spezielle Arten von Methoden
+
+.ULIST
+.LISTITEM Statische Methoden
+
+Sofern bei der Deklaration einer Methode keine andere Art der
+Methodenzuteilung gewÑhlt wird, ist die Methode statisch.
+
+Die Adresse der aufzurufenden Methode steht dann bereits zur Zeit der
+Compilierung fest und wird vom Linker fest ins Programm eingetragen.
+.LISTITEM Virtuelle Methoden
+
+Das Laufzeitverhalten einer Methode wird als virtuell festgelegt, wenn an
+die Deklaration der Methode das SchlÅsselwort {virtual} angehÑngt wird.
+
+Bei virtuellen Methoden steht die Adresse des Aufrufes nicht bereits zur
+Zeit der Compilierung fest. Stattdessen wird diese Entscheidung auf die
+Laufzeit des Programms verschoben. Das Laufzeitsystem ermittelt anhand des
+tatsÑchlichen Typs der Instanz, welche Methode aufgerufen wird.
+
+Wenn eine Methode einmal als virtuell festgelegt wird, dann gilt dies
+automatisch auch fÅr alle Nachfahren der Klasse, zu der die Methode gehîrt.
+Das bedeutet insbesondere, da· die einmal festgelegte Liste formaler
+Parameter beim öberschreiben der Methode beibehalten werden mu·. Zum
+öberschreiben einer virtuellen Methode wird das SchlÅsselwort {override}
+anstelle von {virtual} eingesetzt.
+
+Folgendes Beispiel zeigt einen typischen Einsatzfall fÅr eine virtuelle
+Methode. Verschiedene graphische Bildschirmelemente besitzen eine
+Methode {Draw}, mit der sie neu gezeichnet werden. Dadurch, da· diese
+Methode virtuell ist, wird zur Laufzeit stets die zur Instanz passende
+Version von {Draw} aufgerufen. Bei einer statischen Methode hingegen wÅrde
+stets die Version von {Draw} aufgerufen, die zum deklarierten Typ der
+Variablen gehîrt, im Beispiel also {TWindow.Draw}.
+
+.xmp
+type
+  TWindow = class(TObject)
+     procedure Draw; virtual;    // Kennzeichnet die Methode als virtuell.
+  end;
+
+  TEditorWindow = class(TWindow)
+    procedure Draw; override;    // öberschreibt die virtuelle Methode.
+  end;
+
+  ...
+
+var
+  MyWindow: TWindow;
+
+begin
+  MyWindow := TWindow.Create;        // Erzeugt eine Instanz von TWindow.
+
+  MyWindow.Draw;                     // Ruft TWindow.Draw auf.
+
+  MyWindow.Destroy;                  // Zerstîrt die Instanz.
+
+  MyWindow := TEditorWindow.Create;  // Erzeugt eine neue Instanz von
+                                     // TEditorWindow
+
+  MyWindow.Draw;                     // Ruft TEditorWindow.Draw auf. WÑre
+                                     // Draw nicht virtuell, wÅrde hier
+                                     // auch TWindow.Draw aufgerufen, was
+                                     // in diesem Fall sicher nicht sehr
+                                     // sinnvoll ist.
+
+  MyWindow.Destroy;                  // Zerstîrt die Instanz.
+end.
+.exmp
+
+Es ist auch mîglich, eine virtuelle Methode in einem Nachfahren neu zu
+deklarieren. Dadurch wird die geerbte virtuelle Methode in der neuen Klasse
+verdeckt, analog zu einer statischen Methode, die durch die Neudeklaration
+einer statischen Methode gleichen Namens verdeckt wird. Die neu deklarierte
+Methode mu· dabei wieder eine als {virtual} gekennzeichnete virtuelle
+Methode sein, jedoch kann sich ihre Liste formaler Parameter von der der
+verdeckten Methode unterscheiden.
+
+Das Verhalten von auf diese Weise neu deklarierten virtuellen Methoden ist
+aber unter UmstÑnden schwerer zu durchschauen als das von Åberschriebenen
+virtuellen Methoden. Sie sollten deshalb eine einmal als virtuell
+gekennzeichnete Methode stets mit {override} Åberschreiben.
+
+.COLOR fc=red
+Achtung:
+.COLOR fc=default
+Im Gegensatz zu Borland Delphi ist es bei WDSibyl derzeit nicht
+mîglich, da· eine virtuelle Methode durch die Neudeklaration einer
+statischen Methode in einem Nachfahren verdeckt wird. Der Compiler
+verbietet dies, um Fehler seitens des Programmierers abzufangen.
+Normalerweise handelt es sich dabei eher um ein vergessenes {override} als
+um eine gewollte Neudeklaration. Diese Art von Fehler ist aber meist schwer
+zu entdecken, weil das Programm korrekt compiliert wird, und sich das
+falsche Verhalten der Methode nur in einzelnen FÑllen und oft nur auf sehr
+subtile Weise bemerkbar macht.
+
+Virtuelle Methoden werden vom Compiler mit Hilfe einer Tabelle virtueller
+Methoden realisiert. Jede Klasse besitzt eine solche Tabelle mit den
+Einsprungadressen aller ihrer virtuellen Methoden. Zur Laufzeit wird die
+Adresse der aufzurufenden Methode aus dieser Tabelle ermittelt. Der
+Aufrufmechanismus ist sehr schnell, benîtigt aber dennoch minimal mehr Zeit
+als der Aufruf einer statischen Methode.
+
+Virtuelle Methoden sind ein mÑchtiges Hilfsmittel, um Polymorphie zu
+erreichen.
+.LISTITEM Dynamische Methoden
+
+Das Laufzeitverhalten einer Methode wird als dynamisch festgelegt, wenn an
+die Deklaration der Methode das SchlÅsselwort {dynamic} angehÑngt wird.
+
+Dynamische Methoden verhalten sich exakt so wie virtuelle Methoden,
+insbesondere was das öberschreiben und die Neudeklaration betrifft.
+
+Achtung: Das SchlÅsselwort existiert nur aus GrÅnden der KompatibilitÑt zu
+Borland Delphi. Programme, die auf dynamische Methoden zurÅckgreifen, werden
+unter WDSibyl problemlos funktionieren. Jedoch werden sie vermutlich
+geringfÅgige Unterschiede in AusfÅhrungsgeschwindigkeit und Speicherbedarf
+aufweisen.
+.LISTITEM Abstrakte Methoden
+
+Eine virtuelle oder dynamische Methode wird zu einer abstrakten Methode,
+wenn an die Deklaration der Methode das SchlÅsselwort {abstract} angehÑngt
+wird.
+
+Nur virtuelle und dynamische Methoden kînnen abstrakt sein, nicht jedoch
+statische. Das SchlÅsselwort {abstract} mu· dabei dem SchlÅsselwort {virtual}
+oder {dynamic} folgen.
+
+Abstrakte Methoden werden nicht implementiert, kînnen jedoch von anderen
+Methoden oder von Code, der nicht Teil einer Methode ist, benutzt werden.
+Ihr Sinn liegt darin, ein funktionsloses Interface bereitzustellen, das von
+Nachfahren einer Klasse aufrechterhalten werden mu·. Spezialisierte
+Nachfahren mÅssen abstrakte Methoden mit {override} Åberschreiben, wenn die
+Methode tatsÑchlich genutzt werden soll. Der Aufruf einer abstrakten Methode
+auf einer Instanz, deren Klasse die Methode nicht Åberschreibt, fÅhrt zu
+einem Laufzeitfehler.
+
+Innerhalb der Implementierung einer Methode, die eine abstrakte Methode
+Åberschreibt, kann nicht mit {inherited} auf die Methode des Vorfahren
+zugegriffen werden.
+
+Folgendes Beispiel deklariert eine Basisklasse {TContainer}
+fÅr Container-Objekte. Sie verfÅgt Åber zwei abstrakte Methoden zum Vergleich und zum Vertauschen zweier Elemente anhand ihrer Indizes. Au·erdem beinhaltet die Klasse eine Sortiermethode. Innerhalb der Sortiermethode kînnen die beiden abstrakten Methoden 
+aufgerufen werden. Jedoch darf die Sortiermethode nie auf einer Instanz von {TContainer} aufgerufen werden, wohl aber auf Instanzen von Nachfahren, die diese Methoden geeignet Åberschreiben.
+
+.xmp
+type
+  TContainer = class
+    FSize: Integer;
+
+    function BiggerThan(Item1, Item2: Integer): Boolean; virtual; abstract;
+    procedure Swap(Item1, Item2: Integer); virtual; abstract;
+    procedure BubbleSort;
+  end;
+
+procedure TContainer.BubbleSort;
+var
+  N, I: Integer;
+begin
+  for N := FSize downto 2 do
+    for I := 1 to N - 1 do
+      if BiggerThan(I, I + 1) then Swap(I, I + 1);
+end;
+.exmp
+.LISTITEM Botschaftsverarbeitende Methoden
+
+Eine Methode wird zu einer botschaftsverarbeitenden Methode, indem an ihre
+Deklaration das SchlÅsselwort {message} gefolgt von einer ganzzahligen,
+positiven Konstanten angehÑngt wird.
+
+ZusÑtzlich mu· die Methode eine Prozedurmethode sein, die Åber genau einen
+{var}-Parameter beliebigen Typs verfÅgt. Auch ein untypisierter
+{var}-Parameter ist erlaubt.
+
+.xmp
+type
+  TMyButton = class(TButton)
+    ...
+    procedure WMButton1Down(var Message); message WM_BUTTON1DOWN;
+    ...
+  end;
+.exmp
+
+Botschaftsverarbeitende Methoden dienen Åblicherweise zum Austausch von
+Nachrichten mit dem Betriebssystem, insbesondere bei der Programmierung von
+graphischen OberflÑchen wie dem OS/2 Presentation Manager oder Windows. So
+wird zum Beispiel bei einem Tastendruck oder einem Mausklick vom
+Betriebssystem eine Botschaft an das zugehîrige Bildschirmobjekt gesandt,
+das diese Botschaft dann verarbeiten mu·. Es wird genau die
+botschaftsverarbeitende Methode aufgerufen, deren hinter {message}
+angegebene Nummer mit der Identifikation der Nachricht Åbereinstimmt.
+
+Es ist mîglich, weitere Informationen an eine solche Methode zu Åbergeben.
+Dazu dient der {var}-Parameter, der die öbergabe fast beliebiger Typen
+erlaubt. Wichtig fÅr das Funktionieren des Botschaftsmechanismus ist nur,
+da· die ersten vier Byte des Parameters die Nummer der Botschaft enthalten.
+Die darauf folgenden Daten kînnen vom Programmierer frei gewÑhlt werden.
+Damit sehen alle zulÑssigen Parameter-Typen etwa wie folgt aus:
+
+.xmp
+type
+  TMessageRec = record
+    MessageID: LongWord; // Die Identifikation der Nachricht.
+    ...                  // Ab hier beliebige weitere Informationen.
+  end;
+.exmp
+
+Der OS/2 Presentation Manager und Windows erlauben beim Austausch die
+öbergabe von zwei zusÑtzlichen 32 Bit breiten Parametern, die je nach Art
+der Nachricht in mehrere logische 16 oder 8 Bit breite Parameter unterteilt
+sein kînnen. Daher ist fÅr Anwendungen, die auf die SPCC-Bibliothek
+zurÅckgreifen, in der Unit {Classes} bereits ein Botschaftstyp {TMessage}
+deklariert, der diesen Fall abdeckt.
+
+Es ist mîglich und ausgesprochen sinnvoll, botschaftsverarbeitende Methoden
+bei Nachfahren einer Klasse zu Åberschreiben, um ein vom Vorfahren
+abweichendes Verhalten bei bestimmten Nachrichten zu realisieren. Anders als
+bei virtuellen Methoden ist hier beim öberschreiben das SchlÅsselwort
+{override} nicht notwendig. Botschaftsverarbeitende Methoden sind immer
+dynamisch gebunden; das hei·t, die Adresse des Aufrufes wird immer zur
+Laufzeit anhand des tatsÑchlichen Typs der Instanz ermittelt. Dazu legt der
+Compiler fÅr jede Klasse eine Tabelle von botschaftsverarbeitenden Methoden
+mit deren Nummern und Einsprungsadressen an.
+
+Die Informationen dieser Tabelle werden von einer Methode {Dispatch}
+ausgewertet, die von {TObject} bereitgestellt wird. Da alle Objekte
+Nachfahren von {TObject} sind, steht diese Methode in jedem Objekt zur
+VerfÅgung.
+
+.xmp
+procedure Dispatch(var Message);
+.exmp
+
+Botschaftsverarbeitende Methoden werden Åblicherweise nicht direkt
+aufgerufen, sondern Åber einen Aufruf von {Dispatch} mit einem geeigneten
+Parameter, der die Nummer der Nachricht und mîglicherweise weitere
+Informationen enthÑlt.
+
+{Dispatch} erledigt das Auffinden der zur Botschaft passenden Methode und
+ruft diese dann auf. Dazu sucht {Dispatch} sucht zuerst in der Tabelle der
+tatsÑchlichen Klasse der Instanz nach einer Methode mit der in der Botschaft
+enthaltenen Nummer. Ist dort keine solche Methode enthalten, wird die
+Tabelle des Vorfahren der Klasse durchsucht, dann die von dessen Vorfahren,
+und so weiter.
+
+Es ist wichtig zu wissen, da· fÅr den Aufruf einer botschaftsverarbeitenden
+Methode Åber {Dispatch} nur deren Nummer entscheidend ist. Der Name der
+Methode ist vîllig irrelevant. Es ist insbesondere mîglich, eine
+botschaftsverarbeitende Methode durch eine Methode vîllig anderen Namens zu
+Åberschreiben, solange nur die Nummern Åbereinstimmen.
+
+EnthÑlt beim Aufruf von {Dispatch} der gesamte in Frage kommende Zweig der
+Klassenhierarchie keine Methode mit der angegebenen Nummer, dann wird eine
+virtuelle Methode {DefaultHandler} aufgerufen, die von der Basisklasse
+{TObject} wie folgt bereitgestellt wird:
+
+.xmp
+procedure DefaultHandler(var Message); virtual;
+.exmp
+
+Diese Methode tut Åberhaupt nichts. Es ist aber mîglich, {DefaultHandler} zu
+Åberschreiben, um ein anderes Standardverhalten bei unbehandelten
+Nachrichten zu implementieren, zum Beispiel die Ausgabe einer Fehlermeldung.
+
+Die graphischen Bildschirmelemente der SPCC-Bibliothek Åberschreiben diese
+Methode derart, da· vom Objekt nicht behandelte Nachrichten an eine
+Betriebssystem-Routine Åbergeben werden, die eine passende Standard-Aktion
+fÅr das entsprechende Bildschirmelement durchfÅhrt.
+.LISTITEM Konstruktoren
+
+Konstruktoren sind spezielle Methoden, deren Aufruf ein neues Objekt
+erzeugt und initialisiert.
+
+Konstruktoren werden bei Deklaration und Implementierung durch das
+SchlÅsselwort {constructor} eingeleitet. Ein Konstruktor darf eine beliebige
+Liste formaler Parameter haben, aber keinen Wert zurÅckliefern. Er hat also
+die Gestalt einer Prozedurmethode.
+
+Es gibt zwei Varianten, einen Konstruktor aufzurufen. Die eine entspricht
+dem Aufruf einer gewîhnlichen Methode auf einer Instanzvariablen, nur da·
+diese Variable vor dem Aufruf des Konstruktors noch kein gÅltiges Objekt
+referenziert. Es wird ein Objekt erzeugt und initialisiert, dessen Typ dem
+der Instanzvariablen entspricht. Die Adresse dieses Objekts wird in die
+Instanzvariable geschrieben.
+
+.xmp
+type
+  TCustomer = class(TObject)
+  private
+    FName: PString;
+  public
+    constructor Create(Name: string);
+  end;
+
+constructor TCustomer.Create(Name: string);
+begin
+  FName := NewStr(Name);
+end;
+
+var
+  Customer: TCustomer;
+
+begin
+  // Erzeuge eine Instanz von TCustomer.
+
+  Customer.Create('Thomas Jefferson');
+end.
+.exmp
+
+Die andere Variante benîtigt die Angabe einer Klasse anstelle der
+Instanzvariablen. Das Ergebnis dieses Aufrufes mu· im Rahmen einer
+Zuweisung an eine Instanzvariable Åbergeben werden. Bei dieser Variante ist
+es mîglich, Objekte zu erzeugen, deren Typ nicht exakt dem der Variablen
+entspricht, sofern die Regeln fÅr ZuweisungskompatibilitÑt eingehalten
+werden.
+
+.xmp
+type
+  TMailOrderCustomer = class(TCustomer)
+  private
+    FAddress: PString;
+  public
+    constructor Create(Name, Address: string);
+  end;
+
+constructor TMailOrderCustomer.Create(Name, Address: string);
+begin
+  inherited Create(Name);
+  FAddress := NewStr(Address);
+end;
+
+var
+  Customer1, Customer2: TCustomer;
+
+begin
+  // Erzeuge eine Instanz von TCustomer.
+
+  Customer1 := TCustomer.Create('Thomas Jefferson');
+
+  // Erzeuge eine Instanz von TMailOrderCustomer. Da diese Klasse
+  // zuweisungskompatibel zu TCustomer ist, kann Customer2 diese
+  // Instanz referenzieren.
+
+  Customer2 := TMailOrderCustomer.Create('George Washington',
+                  'White-House, Washington, DC');
+end.
+.exmp
+
+Achtung: Bei Borland Delphi ist nur die zweite Variante mîglich. Wenn
+Programme entwickelt werden, deren Quellcode zwischen WDSibyl und
+Delphi ausgetauscht werden soll, dann mu· die erste Variante vermieden
+werden, was aber keinerlei EinschrÑnkung der FunktionalitÑt des Programms
+darstellt.
+
+Beim Aufruf eines Konstruktors werden automatisch folgende Aktionen
+ausgefÅhrt:
+.ULIST
+.LISTITEM Der fÅr die Objektinstanz benîtigte Speicher wird auf
+dem Heap reserviert. Die Adresse des Speicherbereiches wird in die
+Instanzvariable geschrieben, mit der Konstruktor aufgerufen wurde.
+.LISTITEM Der reservierte Speicherbereich wird mit Nullen gefÅllt.
+Dadurch erhÑlt jedes Feld des neuen Objekts einen definierten Zustand.
+Welcher Zustand dies ist, hÑngt vom Typ des Feldes ab:
+.ULIST
+.LISTITEM Ganzzahlen und Flie·kommazahlen erhalten den Wert Null.
+.LISTITEM Zeiger und Objektreferenzen erhalten den Wert {nil}.
+.LISTITEM Einzelne Zeichen erhalten das Nullzeichen {Chr(0)}.
+.LISTITEM Strings erhalten die LÑnge Null.
+.LISTITEM Felder vom Typ {Boolean} erhalten den Wert {False}.
+.LISTITEM Bei strukturierten Feldern wie Records und Arrays gelten diese Regeln
+fÅr alle Elemente.
+.EULIST
+.LISTITEM Der Benutzercode des Konstruktors, also die Folge der Anweisungen
+zwischen {begin} und {end}, wird ausgefÅhrt.
+.EULIST
+
+Bei der Implementierung eines Konstruktors sollten die Schritte ausgefÅhrt
+werden, die nîtig sind, um eine neue Instanz korrekt zu initialisieren.
+
+Es ist mîglich, mit {inherited} den Konstruktor des Vorfahren aufzurufen.
+Dabei wird nur der Benutzercode des geerbten Konstruktors ausgefÅhrt, nicht
+aber eine weitere Instanz erzeugt. Es ist Åblich, zuerst den Konstruktor
+des Vorfahren aufzurufen, um die von Vorfahren geerbten Fehler zu
+initialisieren. Im Anschlu· werden meist die zusÑtzlichen Fehler der neuen
+Klasse initialisiert.
+
+Eine Klasse, die keine Felder zusÑtzlich zu denen ihres Vorfahren deklariert
+oder deren Felder bei der Initialisierung alle auf Null gesetzt werden
+mÅssen, kommt eventuell ohne eigenen Konstruktor aus. Der Konstruktor des
+Vorfahren, im Extremfall der von TObject, kann diese Aufgabe Åbernehmen.
+
+Wenn wÑhrend des Konstruktoraufrufes an einer beliebigen Stelle eine
+Exception ausgelîst wird, dann wird zuerst zum Destruktor verzweigt, bevor
+die Exception-Behandlungsroutine angesprungen oder ein Laufzeitfehler
+ausgelîst wird. Deshalb ist es notwendig, da· der Destruktor auf diesen Fall
+reagieren kann, also auch in der Lage ist, nur teilweise initialisierte
+Objekte zu zerstîren.
+
+Konstruktoren kînnen virtuell sein. Dadurch wird polymorphes Erzeugen von
+Objekten mîglich, also von Objekten, deren exakter Typ zur Zeit der
+Compilierung noch nicht bekannt ist. Ein virtueller Konstruktor mu· immer
+in der Zuweisungsvariante aufgerufen werden. Genaueres dazu befindet sich
+im Abschnitt Åber Metaklassen.
+.LISTITEM Destruktoren
+
+Destruktoren sind spezielle Methoden, deren Aufruf ein Objekt zerstîrt.
+
+Destruktoren werden bei Deklaration und Implementierung durch das
+SchlÅsselwort {destructor} eingeleitet. Ein Destruktor darf eine beliebige
+Liste formaler Parameter haben, was aber Åblicherweise nicht der Fall ist.
+Ein Destruktor darf keinen Wert zurÅckliefern, hat also die Gestalt einer
+Prozedurmethode.
+
+Destruktoren sollten virtuell sein, damit sichergestellt ist, da· zur
+Laufzeit der zur Instanz passende Destruktor aufgerufen wird. Jede Klasse
+erbt von {TObject} einen virtuellen, parameterlosen Destruktor {Destroy}.
+Es wird empfohlen, da· Sie diesen Destruktor in Ihren eigenen Klassen
+mit {override} Åberschreiben.
+
+Ein Destruktor wird auf die gleiche Weise aufgerufen wie eine gewîhnliche
+Methode. Er fÅhrt zuerst den Benutzercode, also die Anweisungsfolge
+zwischen {begin} und {end} aus, dann gibt er den von der Instanz benîtigten
+Speicher auf dem Heap frei.
+
+Es ist mîglich, innerhalb eines Destruktors mit {inherited} auf den
+Destruktor des Vorfahren zuzugreifen. In diesem Fall wird nur der
+Benutzercode des geerbten Destruktors ausgefÅhrt, die Instanz wird aber
+erst beim Beenden des Åbergeordneten Destruktoraufrufes zerstîrt.
+
+.xmp
+type
+  TCustomer = class(TObject)
+  private
+    FName: PString;
+  public
+    constructor Create(Name: string);
+    destructor Destroy; override;
+  end;
+
+constructor TCustomer.Create(Name: string);
+begin
+  FName := NewStr(Name);
+end;
+
+destructor TCustomer.Destroy;
+begin
+  DisposeStr(FName);
+end;
+
+var
+  Customer: TCustomer;
+
+begin
+  // Erzeuge eine Instanz.
+
+  Customer.Create('Thomas Jefferson');
+
+  // Zerstîre die Instanz wieder.
+
+  Customer.Destroy;
+end.
+.exmp
+
+Eine Klasse, die keine Felder zusÑtzlich zu denen ihres Vorfahren
+deklariert oder deren Felder nur einfache, nicht-verzeigerte Strukturen
+enthalten, benîtigt mîglicherweise keine speziellen AufrÑumaktionen zum
+Zerstîren des Objekts. In diesem Fall kann der Destruktor des Vorfahren
+benutzt werden, und es mu· kein eigener Destruktor deklariert werden. Ob
+dies so ist, mÅssen Sie von Fall zu Fall entscheiden.
+
+Wenn wÑhrend eines Konstruktoraufrufes eine Exception auftritt, dann wird
+zuerst zum Destruktor verzweigt, bevor die Exception-Behandlungsroutine
+angesprungen oder ein Laufzeitfehler ausgelîst wird. Deshalb ist es
+notwendig, da· ein Destruktor auf diesen Fall reagieren kann, also auch in
+der Lage ist, nur teilweise initialisierte Objekte zu zerstîren.
+
+Das ist insbesondere wichtig, wenn das Objekt Åber Felder von Zeiger- oder
+Objekttypen verfÅgt. Der Destruktor sollte diese Felder auf {nil} prÅfen,
+bevor er versucht, die zugehîrigen Strukturen freizugeben.
+
+Das Zerstîren eines Objektes kann sicherer gestaltet werden, wenn statt des
+Destruktors die Methode {Free} aufgerufen wird, die alle Klassen
+von {TObject} erben. {Free} prÅft, ob die Instanz den Wert {Nil} enthÑlt,
+und ruft nur dann den Destruktor {Destroy} auf, wenn das nicht der Fall ist.
+.LISTITEM Klassenmethoden
+
+Klassenmethoden sind Prozedur- oder Funktionsmethoden, denen bei Deklaration
+und Implementierung zusÑtzlich das SchlÅsselwort {class} vorangestellt wird.
+
+Sie kînnen virtuell sein, dÅrfen dann aber wieder nur durch Klassenmethoden
+Åberschrieben werden. Die Regeln sind hierbei die gleichen, die auch bei
+gewîhnlichen virtuellen Methoden gelten.
+
+.xmp
+type
+  TConfigFile = class
+    ...
+    class function GetDefaultName: string;
+    ...
+  end;
+.exmp
+
+Eine Klassenmethode kann sowohl auf einem Objekt als auch auf einer Klasse
+operieren. Damit stehen Klassenmethoden auch dann zur VerfÅgung, wenn keine
+einzige Instanz einer Klasse existiert.
+
+.xmp
+begin
+  WriteLn(TConfigFile.GetDefaultName);
+end.
+.exmp
+
+Innerhalb der Implementierung einer Klassenmethode darf au·er auf globale
+Bezeichner nur auf andere Klassenmethoden zugegriffen werden. Ein
+Zugriff auf Felder, Eigenschaften oder gewîhnliche Methoden der Klasse
+wird vom Compiler unterbunden. Der auch in Klassenmethoden vorhandene
+implizite Parameter {Self} enthÑlt keine Objektreferenz, sondern eine
+Referenz auf die Klasse, fÅr die die Methode tatsÑchlich aufgerufen wurde.
+Beim Aufruf der Klassenmethode auf einer Instanz enthÑlt {Self} den
+tatsÑchlichen Typ dieser Instanz.
+
+Klassenmethoden sind dazu gedacht, bestimmte Prozeduren oder Funktionen
+einer Klasse auch dann verfÅgbar zu machen, wenn keine Instanz der Klasse
+existiert. Dabei handelt es sich Åblicherweise um Methoden, die auf
+irgendeine Weise Informationen Åber die Klasse liefern.
+
+{TObject} vererbt seinen Nachkommen eine Reihe von Klassenmethoden, mit
+denen zum Beispiel der Name einer Klasse ermittelt werden kann, der Name
+des Moduls, in dem die Klasse deklariert wurde, oder die Grî·e einer
+Instanz der Klasse. NÑheres dazu entnehmen Sie der Beschreibung der
+Klasse {TObject}.
+.EULIST
+
+.TOPIC 2 Eigenschaften
+.INDEX 2 Eigenschaften
+.HIGH Eigenschaften
+
+.BOLD Was sind Eigenschaften?
+
+Eigenschaften sind benannte Attribute eines Objekts.
+
+Sie stellen sich dem Benutzer Ñhnlich wie Felder dar, da sie Åber einen Typ
+verfÅgen und ihr Wert in Form einer Zuweisung geÑndert wird. Die
+Mîglichkeiten von Eigenschaften gehen aber Åber die von Feldern weit hinaus,
+da es mîglich ist, sowohl den lesenden als auch den schreibenden Zugriff auf
+die Eigenschaft einzeln zu kontrollieren oder zu verbieten.
+
+Jeder der beiden mîglichen Zugriffsarten einer Eigenschaft liegt entweder
+ein Feld oder eine Methode zugrunde. Im ersten Fall wird der Wert der
+Eigenschaft aus dem Feld gelesen oder in dieses geschrieben. Im zweiten Fall
+wird durch das Lesen oder Schreiben der Eigenschaft implizit die Methode
+aufgerufen, so da· durch eine einfache Zuweisung komplexe Operationen in
+Gang gesetzt werden kînnen.
+
+Es ist mîglich, indizierte Eigenschaften zu deklarieren, die fÅr den
+Benutzer die Gestalt eines Arrays haben. Da beiden Zugriffsarten einer
+indizierten Eigenschaft immer eine Methode zugrunde liegt, kann sie im
+Gegensatz zu gewîhnlichen Arrays Åber beliebige Typen indiziert werden.
+
+Eine indizierte Eigenschaft kann zur voreingestellten Eigenschaft erklÑrt
+werden, so da· sich das gesamte Objekt dem Benutzer als Array darstellt.
+Es ist in diesem Fall nicht mehr notwendig, bei einem Zugriff auf die
+Eigenschaft deren Bezeichner anzugeben.
+
+FÅr Eigenschaften, die als {published} gekennzeichnet werden, erzeugt der
+Compiler spezielle Informationen, die zur Laufzeit des Programms oder fÅr
+die Zusammenarbeit mit dem Objekt-Inspektor der Sibyl-Umgebung von Bedeutung
+sind. Das Verhalten einer Eigenschaft in diesem Kontext kann mit einigen
+speziellen SchlÅsselwîrtern kontrolliert werden.
+
+.BOLD Deklarieren von Eigenschaften
+
+Eigenschaften werden auf die folgende Weise deklariert:
+
+<Syntaxdiagramm: Properties>
+
+Die Deklaration einer Eigenschaft wird durch das SchlÅsselwort {property}
+eingeleitet, gefolgt vom Bezeichner der Eigenschaft und von deren Typ.
+Es folgen in beliebiger Reihenfolge die Definitionen dessen, was bei
+lesendem oder schreibendem Zugriff auf die Eigenschaft geschieht. Die
+Definition der mit dem Lesen der Eigenschaft assoziierten Aktion wird
+eingeleitet durch das SchlÅsselwort {read}, die der schreibenden Aktion
+analog durch {write}.
+
+Wenn eine der beiden Aktionen nicht definiert wird, dann existiert die
+entsprechende Zugriffsart nicht. Der Versuch, den Wert einer nur zum Lesen
+freigegebenen Eigenschaft zu Ñndern, wird vom Compiler ebenso abgewiesen wie
+der Versuch, eine nur zum Schreiben freigegebene Eigenschaft in einem
+Ausdruck als Wert einzusetzen und damit implizit auszulesen.
+
+Sowohl das Lesen als auch das Schreiben einer Eigenschaft kann entweder mit
+einem Feld oder mit einer Methode assoziiert werden.
+
+Wenn das Lesen mit einem Feld assoziiert ist, dann wird beim Einsetzen der
+Eigenschaft in einen Ausdruck der Wert des Feldes herangezogen. Wenn das
+Schreiben mit einem Feld assoziiert ist, dann wird beim Zuweisen eines
+Wertes an die Eigenschaft dieser Wert in das entsprechende Feld geschrieben.
+In beiden FÑllen mu· das Feld vom gleichen Typ sein wie die Eigenschaft.
+
+Wird das Lesen einer einfachen Eigenschaft mit einer Methode assoziiert, so
+mu· die Methode eine parameterlose Funktion sein, deren Ergebnistyp dem Typ
+der Eigenschaft entspricht. Der Compiler ersetzt jede Benutzung der
+Eigenschaft in einem Ausdruck durch einen Aufruf der Methode und bezieht
+das Funktionsergebnis dann in den Ausdruck ein.
+
+Wird das Schreiben einer einfachen Eigenschaft mit einer Methode
+assoziiert, so mu· diese Methode eine Prozedur sein, deren einziger
+Parameter dem Typ der Eigenschaft entspricht. Der Compiler ersetzt jede
+énderung des Wertes der Eigenschaft in Form einer Zuweisung durch einen
+Aufruf der Methode, wobei er den neuen Wert der Eigenschaft als aktuellen
+Parameter der Methode einsetzt.
+
+Die Methoden, die einer Eigenschaft zugrundeliegen, erhalten in WDSibyl
+Åblicherweise einen Bezeichner, der dem Bezeichner der Eigenschaft
+entspricht, wobei der lesenden Methode ein {Get} und der schreibenden
+ein {Set} vorangestellt wird. Sowohl Felder als auch Methoden, die einer
+Eigenschaft zugrundeliegen, sind meist {private}.
+
+Folgendes Beispiel demonstriert die Arbeit mit einer Eigenschaft, die auf
+zwei Methoden basiert.
+
+.xmp
+type
+  TCustomer = class(TObject)
+  private
+    FName: PString;
+    FID: Integer;
+    function GetName: string;
+    procedure SetName(const S: string);
+  public
+    constructor Create(Name: string);
+    destructor Destroy; override;
+
+    property ID: Integer           // Auf diese Eigenschaft kann nur lesend
+      read FID;                    // zugegriffen werden. Sie liefert den
+                                   // Wert des Feldes FID.
+
+    property Name: string          // Auf diese Eigenschaft kann lesend und
+      read GetName write SetName;  // schreibend zugegriffen werden. Sie
+                                   // ruft implizit die Methoden GetName
+                                   // und SetName auf.
+  end;
+
+  ...
+
+function TCustomer.GetName: string;
+begin
+  Result := FName^;
+end;
+
+procedure TCustomer.SetName(const S: string);
+begin
+  AssignStr(FName, S);
+end;
+
+var
+  Customer: TCustomer;
+
+begin
+  ...
+  with Customer do
+  begin
+    WriteLn('ID:   ', ID);   // Liest implizit das Feld FID aus.
+    WriteLn('Name: ', Name); // Ruft implizit die Funktion GetName auf.
+  end;
+  ...
+end.
+.exmp
+
+.BOLD Zugriff auf Eigenschaften
+
+Der Zugriff auf Eigenschaften eines Objekts entspricht aus der Sicht des
+Benutzers dem Zugriff auf Felder.
+
+Der Wert der Eigenschaft wird gelesen, indem die Eigenschaft in AusdrÅcken
+eingesetzt wird. Eine Eigenschaft erhÑlt einen neuen Wert durch eine
+Zuweisung. Falls einer der beiden Zugriffsarten eine Methode zugrunde liegt,
+wird diese an den entsprechenden Stellen des Programms automatisch
+aufgerufen.
+
+Da Eigenschaften nicht notwendigerweise tatsÑchlich vorhandene Felder
+zugrundeliegen, kann der Operator {@} nicht benutzt werden, um die
+Adresse einer Eigenschaft zu ermitteln. Ebenso ist es nicht mîglich,
+eine Eigenschaft als aktuellen Parameter an eine Prozedur oder Funktion zu
+Åbergeben, die dort einen {var}-Parameter erwartet. Der Compiler fÑngt
+diese Fehler ab.
+
+.BOLD Indizierte Eigenschaften
+
+Eine indizierte Eigenschaft stellt sich dem Benutzer wie ein Array dar.
+
+Bei der Deklaration einer indizierten Eigenschaft wird zwischen ihrem
+Bezeichner und ihrem Typ in eckigen Klammern eine beliebige Liste von
+formalen Parametern angegeben, Åber die die Eigenschaft indiziert wird.
+Dabei ist jeder Typ erlaubt, der in der formalen Parameterliste einer
+Prozedur erlaubt ist; indizierte Eigenschaften sind nicht wie Arrays auf
+AufzÑhlungstypen beschrÑnkt.
+
+Die mit dem Lesen und Schreiben einer indizierten Eigenschaft assoziierten
+Aktionen mÅssen Methoden sein. Sie werden auf die gleiche Weise angegeben
+wie bei einfachen Eigenschaften, aber sie mÅssen besondere Bedingungen
+erfÅllen:
+.ULIST
+.LISTITEM Die mit dem Lesen der Eigenschaft assoziierte Methode mu· eine
+Funktion sein. Ihre formale Parameterliste mu· der in eckigen Klammern
+angegebenen Parameterliste der Eigenschaft entsprechen. Der Typ des
+Funktionsergebnisses mu· dem Typ der Eigenschaft entsprechen.
+.LISTITEM Die mit dem Schreiben der Eigenschaft assoziierte Methode mu· eine
+Prozedur sein. Ihre formale Parameterliste mu· der in eckigen Klammern
+angegebenen Parameterliste der Eigenschaft entsprechen. ZusÑtzlich mu· sie
+einen weiteren Parameter am Ende ihrer Parameterliste besitzen, dessen Typ
+mit dem Typ der Eigenschaft Åbereinstimmt.
+.EULIST
+
+.xmp
+type
+  TStrings = class(TObject)
+  protecedD
+    function GetValue(const Name: string): string; virtual;
+    procedure SetValue(const Name, Value: string); virtual;
+    ...
+  public
+    property Values[const Name: string]: string
+      read GetValue write SetValue;
+  end;
+
+  ...
+
+var
+  MyStrings: TStrings;
+
+begin
+  ...
+  MyStrings.Values['Compiler'] := 'WDSibyl';
+  WriteLn(MyStrings.Values['Compiler']);
+  ...
+end.
+.exmp
+
+Indizierte Eigenschaften dÅrfen nicht als {published} gekennzeichnet werden,
+weil der Compiler fÅr sie keine Laufzeitinformationen erzeugen kann.
+
+.BOLD Voreingestellte Eigenschaften
+
+Es ist mîglich, eine indizierte Eigenschaft zur voreingestellten Eigenschaft
+der Klasse zu erklÑren. Dies geschieht durch AnhÑngen des SchlÅsselwortes
+{default} an die Deklaration der Eigenschaft.
+
+Auf eine voreingestellte Eigenschaft kann zugegriffen werden, ohne da· der
+Bezeichner der Eigenschaft angegeben werden mu·. Der gewÅnschte Index der
+Eigenschaft folgt in eckigen Klammern und ohne Punkt unmittelbar auf den
+Bezeichner der Instanzvariablen. Damit stellt sich dem Benutzer das gesamte
+Objekt wie ein Array dar. Er kann jedoch weiterhin auf alle Komponenten des
+Objektes Åber deren Bezeichner zugreifen.
+
+.xmp
+type
+  TStrings = class(TObject)
+  protected
+    function Get(Index: LongInt): string; virtual; abstract;
+    procedure Put(Index: LongInt; const S: string); virtual; abstract;
+    ...
+  public
+    property Strings[Index: LongInt]: string read Get write Put; default;
+    ...
+  end;
+
+  ...
+
+var
+  MyStrings: TStrings;
+
+begin
+  ...
+  MyStrings[1] := 'WDSibyl';
+  WriteLn(MyStrings[1]);
+  ...
+end.
+.exmp
+
+Eine Klasse kann nur eine voreingestellte Eigenschaft besitzen.
+Die Voreinstellung einer Eigenschaft vererbt sich an Nachfahren, so da·
+die Eigenschaft auch dort voreingestellt ist und bleibt. Auch die
+Sichtbarkeit einer voreingestellten Eigenschaft kann in Nachfahren nicht
+geÑndert werden.
+
+Beachten Sie, da· der Angabe von {default} zum Festlegen einer
+voreingestellten Eigenschaft ein Semikolon vorangeht, im Gegensatz zum
+Festlegen des Standardwertes einer Eigenschaft im Objekt-Inspektor, der
+ebenfalls mit dem SchlÅsselwort {default}, aber ohne Semikolon angegeben
+wird.
+
+.BOLD Gemeinsame Zugriffsmethoden
+
+Das SchlÅsselwort {index} wird derzeit nicht unterstÅtzt.
+
+.BOLD Eigenschaften und Laufzeitinformationen
+
+Die SchlÅsselwîrter {default}, {nodefault} und {stored} werden derzeit nicht
+unterstÅtzt.
+
+.TOPIC 2 Metaklassen
+.INDEX 2 Metaklassen
+.HIGH Metaklassen
+
+.BOLD Was sind Metaklassen?
+
+Eine Metaklasse ist ein Datentyp, dessen Werte Klassen sind.
+
+éhnlich wie eine Klasse einen Typ definiert, der Objektreferenzen aufnehmen
+kann, kann eine Variable vom Typ einer Metaklasse Referenzen auf Klassen
+enthalten. Deshalb werden Metaklassen auch als Klassenreferenztypen
+bezeichnet.
+
+Der Wertebereich einer Metaklasse umfa·t die Klasse, fÅr die sie deklariert
+wurde, und alle deren Nachfahren, insbesondere auch jene, die erst zu einem
+spÑteren Zeitpunkt deklariert werden. Einer Variablen vom Typ einer
+Metaklasse kînnen also genau die Klassen als Werte zugewiesen werden, die
+mit der Klasse zuweisungskompatibel sind, fÅr die die Metaklasse deklariert
+wurde.
+
+Metaklassen kînnen Åberall dort im Programm eingesetzt werden, wo auch
+direkt mit Klassen operiert wird. Das betrifft insbesondere den Aufruf von
+Klassenmethoden, das PrÅfen und Wandeln von Typen mit den Operatoren {is}
+und {as}, sowie das polymorphe Konstruieren von Objekten. In allen FÑllen
+mu· die tatsÑchliche Klasse nicht bereits zur Zeit der Compilierung
+feststehen, sondern es wird die Klasse benutzt, die zur Laufzeit als Wert
+der Variablen vorgefunden wird.
+
+.BOLD Deklarieren von Metaklassen
+
+Metaklassen werden auf die folgende Weise deklariert:
+
+<Syntaxdiagramm: Metaclasses>
+
+Eine Metaklasse wird mit den SchlÅsselwîrtern {class of} deklariert. Die
+Klasse, zu der die Metaklasse gehîrt, mu· bereits deklariert sein,
+zumindestens mit einer {forward}-Deklaration.
+
+.xmp
+type
+  TVehicle = class
+    ...
+  end;
+
+  TVehicleClass = class of TVehicle;
+.exmp
+
+Die {Unit SYSTEM} deklariert bereits eine Metaklasse {TClass} als
+{class of TObject}.
+
+.BOLD Benutzen von Metaklassen
+
+Variablen vom Typ einer Metaklasse kînnen als Werte alle Klassen aufnehmen,
+die mit der Klasse, fÅr die die Metaklasse deklariert wurde,
+zuweisungskompatibel sind. ZusÑtzlich kann einer solchen Variablen der
+Wert {nil} zugewiesen werden, um anzudeuten, da· die Variable momentan
+keine gÅltige Klasse referenziert.
+
+.xmp
+type
+  TVehicle = class(TObject);
+    ...
+  end;
+
+  TShip = class(TVehicle)
+    ...
+  end;
+
+  TVehicleClass = class of TVehicle;
+
+var
+  AllowedVehicles: TVehicleClass;
+
+begin
+  ...
+  AllowedVehicles := TVehicle;
+  ...
+  AllowedVehicles := TShip;
+  ...
+end.
+.exmp
+
+Variablen vom Typ einer Metaklasse kînnen Åberall dort im Programm
+eingesetzt werden, wo auch direkt mit Klassen operiert wird. Insbesondere
+kînnen sie auf der rechten Seite eines der Operatoren {is} und {as}
+auftauchen, bei Aufruf von Klassenmethoden und beim Konstruieren von
+Objekten.
+
+.ULIST
+.LISTITEM Metaklassen und Klassenoperatoren
+
+Metaklassen kînnen auf der rechten Seite eines Ausdrucks benutzt werden, der mit den Operatoren {is} und {as} gebildet wird. Es gelten dabei prinzipiell die gleichen Regeln wie bei der direkten Angabe eines Klassenbezeichners. Der Unterschied liegt darin,
+ da· die tatsÑchliche Klasse nicht bereits zur Zeit der Compilierung feststeht, sondern erst zur Laufzeit der Variablen entnommen wird.
+.LISTITEM Metaklassen und Klassenmethoden
+
+Metaklassen kînnen benutzt werden, um eine Klassenmethode aufzurufen. Der
+entsprechende Variablenbezeichner wird dabei gefolgt von einem Punkt vor
+den Methodenbezeichner gesetzt, analog zum Aufruf der Methode Åber einen
+Klassenbezeichner. Der tatsÑchliche Typ der Klasse steht dann nicht bereits
+zur Zeit der Compilierung fest, sondern wird erst zur Laufzeit der Variablen
+entnommen. Es wird die Klassenmethode aufgerufen, die dem tatsÑchlichen Wert
+der Klassenreferenz entsricht.
+
+Achten Sie darauf, da· Klassenmethoden, die Sie auf diese Weise benutzen
+wollen, als virtuell gekennzeichnet sind. Ansonsten findet die Bindung wie
+gewohnt bereits zur Zeit der Compilierung statt. Es wird dann stets die
+Methode der Klasse aufgerufen, zu der die Metaklasse der Variablen
+deklariert wurde.
+.LISTITEM Metaklassen und Konstruktoren
+
+Metaklassen kînnen beim Aufruf eines Konstruktors zum Erzeugen eines neuen
+Objekts benutzt werden. Bedingung dafÅr ist, da· die Zuweisungsvariante des
+Konstruktoraufrufes gewÑhlt wird, da die einfache Variante nur die Angabe
+einer Instanzvariablen, nicht aber einer Klasse erlaubt.
+
+Diese Art des Aufrufes von Konstruktoren ermîglicht das polymorphe
+Konstruieren von Objekten, also von Objekten, deren tatsÑchlicher Typ nicht
+bereits zur Zeit der Compilierung feststeht. Die Klasse, von der die neue
+Instanz erzeugt wird, wird zur Laufzeit der Variablen entnommen.
+
+Achten Sie darauf, da· Konstruktoren, die Sie zum polymorphen Konstruieren
+von Objekten benutzen wollen, als virtuell gekennzeichnet sind. Ansonsten
+findet die Bindung wie gewohnt bereits zur Zeit der Compilierung statt. Es
+wird dann stets eine Instanz der Klasse erzeugt, zu der die Metaklasse der
+Variablen deklariert wurde.
+.EULIST
+
+.xmp
+type
+  TVehicle = class
+    constructor Create; virtual;
+  end;
+
+  TShip = class(TVehicle)
+    constructor Create; override;
+  end;
+
+  TVehicleClass = class of TVehicle;
+
+var
+  VehicleType: TVehicleClass;
+  MyVehicle:   TVehicle;
+
+begin
+  ...
+  VehicleType := TShip;
+  MyVehicle := TVehicleType.Create;
+  ...
+end.
+.exmp
+
+.TOPIC 2 Vordefinierte Klassen
+.INDEX 2 Vordefinierte Klassen
+.HIGH Vordefinierte Klassen
+
+.BOLD TObject und TClass
+
+Die in der {Unit SYSTEM} deklarierte Klasse {TObject} ist die Basis der
+Objekthierarchie von WDSibyl. {TObject} besitzt rudimentÑre
+Konstruktoren und Destruktoren sowie eine Reihe von Methoden, die fÅr die
+Zusammenarbeit von Objekten mit der Sibyl-Umgebung wichtig sind.
+
+{TObject} ist letztlich Vorfahr jeder anderen Klasse. Wenn bei der
+Deklaration einer neuen Klasse nicht explizit ein Vorfahr angegeben wird,
+dann nimmt der Compiler {TObject} als Vorfahren an. Damit ist sichergestellt,
+da· alle Objekte auf eine gemeinsame Basis zurÅckgreifen kînnen.
+
+{TClass} ist die Metaklasse von {TObject}. Da alle anderen Klassen aufgrund
+ihrer Abstammung zuweisungskompatibel zu {TObject} sind, kann eine Variable
+vom Typ {TClass} als Werte sÑmtliche Klassen aufnehmen, die jemals mit
+WDSibyl deklariert werden.
+
+.BOLD Deklaration von TObject und TClass
+
+Die Klasse {TObject} ist zusammen mit ihrer Metaklasse {TClass} in der
+{Unit SYSTEM} auf die folgende Weise deklariert:
+
+.xmp
+type
+
+  TObject = CLASS;
+
+  TClass  = CLASS OF TObject;
+
+  TObject = CLASS
+    CONSTRUCTOR Create;
+    DESTRUCTOR Destroy; VIRTUAL;
+    PROCEDURE Free;
+    CLASS FUNCTION NewInstance: TObject; VIRTUAL;
+    PROCEDURE FreeInstance; VIRTUAL;
+    CLASS FUNCTION InitInstance(Instance: Pointer): TObject;
+    CLASS FUNCTION ClassType: TClass;
+    CLASS FUNCTION ClassName: STRING;
+    CLASS FUNCTION ClassUnit: STRING;
+    CLASS FUNCTION ClassParent: TClass;
+    CLASS FUNCTION GetClassInfo: POINTER;
+    CLASS FUNCTION InstanceSize: LONGWORD;
+    CLASS FUNCTION InheritsFrom(AClass: TClass): BOOLEAN;
+    PROCEDURE DefaultHandler(VAR Message); VIRTUAL;
+    PROCEDURE DefaultFrameHandler(VAR Message); VIRTUAL;
+    PROCEDURE Dispatch(VAR Message);
+    PROCEDURE DispatchCommand(VAR Message;Command:LONGWORD);
+    PROCEDURE FrameDispatch(VAR Message);
+    CLASS FUNCTION MethodAddress(CONST Name: STRING): POINTER;
+    CLASS FUNCTION MethodName(Address: POINTER): STRING;
+    FUNCTION FieldAddress(Name: STRING): POINTER;
+  END;
+.exmp
+
+.BOLD Methoden von TObject
+
+Viele Methoden von {TObject} werden entweder intern vom Laufzeitsystem
+benîtigt oder dienen zum Austausch von Informationen mit der visuellen
+Entwicklungsumgebung Sybil und der SPCC-Bibliothek. Eine Reihe von Methoden,
+unter anderem Konstruktor, Destruktor und die Methoden zur
+Botschaftsverarbeitung, kînnen und sollen vom Benutzer verwendet werden.
+
+.ULIST
+.LISTITEM CONSTRUCTOR Create;
+
+Der Konstruktor {Create} erzeugt eine neue, leere Instanz von {TObject} und
+fÅllt sie durch einen Aufruf von InitInstance mit Nullbytes.
+
+In Nachfahren von {TObject} mÅssen Sie den Konstruktor mit hoher
+Wahrscheinlichkeit Åberschreiben, um zusÑtzliche Felder des Objektes korrekt
+zu initialisieren. Wenn bei der Initialisierung alle Felder auf Null gesetzt
+werden, oder die neue Klasse keine Felder besitzt, dann kann auch der
+Konstruktor von {TObject} diese Aufgabe Åbernehmen.
+.LISTITEM DESTRUCTOR Destroy; VIRTUAL;
+
+Der Destruktor {Destroy} zerstîrt die Instanz und gibt den von ihr belegten
+Speicher auf dem Heap frei.
+
+Wenn in einem Nachfahren von {TObject} keine weiteren Aktionen zum Zerstîren
+einer Instanz notwendig sind, dann kann der Destruktor von {TObject} auch
+als Destruktor fÅr diese Klasse benutzt werden. Wenn die Klasse komplexe
+Unterstrukturen besitzt, die aufgerÑumt werden mÅssen, dann benîtigt die
+Klasse einen eigenen Destruktor.
+
+Es wird empfohlen, da· jede Klasse, die einen Destruktor benîtigt, {Destroy}
+prinzipiell als parameterlosen Destruktor beibehÑlt und mittels {override}
+Åberschreibt.
+.LISTITEM PROCEDURE Free;
+
+Die Methode {Free} prÅft eine Instanz auf {nil} und ruft genau dann den
+Destruktor {Destroy} auf, wenn der Wert der Instanz nicht {nil} ist, die
+Variable also ein gÅltiges Objekt referenziert.
+
+Benutzen Sie {Free}, um mehr Sicherheit beim Zerstîren eines Objektes zu
+erhalten. Ein direkter Aufruf eines Destruktors auf einer Instanzvariablen,
+die {nil} enthÑlt, bricht das Programm mit einem Laufzeitfehler ab. Die
+Verwendung von {Free} verhindert diesen Fehler.
+.LISTITEM CLASS FUNCTION NewInstance: TObject; VIRTUAL;
+
+Diese Methode wird derzeit nicht verwendet.
+.LISTITEM PROCEDURE FreeInstance; VIRTUAL;
+
+Diese Methode wird derzeit nicht verwendet.
+.LISTITEM CLASS FUNCTION InitInstance(Instance: Pointer): TObject;
+
+Die Klassenmethode {InitInstance} fÅllt die Åbergebene Objektinstanz mit
+Nullbytes, wodurch alle ihre Felder zurÅckgesetzt werden. Die Methode wird
+beim Erzeugen eines neuen Objektes vom Konstruktor {Create} aufgerufen.
+.LISTITEM CLASS FUNCTION ClassType: TClass;
+
+Die Klassenmethode {ClassType} liefert tatsÑchlichen Typ einer Klasse oder
+einer Klassenreferenz. Wird die Methode auf einem Objekt aufgerufen, dann
+ist dies die tatsÑchliche Klasse des Objekts zur Laufzeit.
+.LISTITEM CLASS FUNCTION ClassName: STRING;
+
+Die Klassenmethode {ClassName} liefert den Namen einer Klasse. Wird die
+Methode auf einem Objekt aufgerufen, dann ist dies der Name der
+tatsÑchlichen Klasse des Objekts zur Laufzeit.
+
+Der Name wird komplett in Gro·buchstaben zurÅckgegeben.
+.LISTITEM CLASS FUNCTION ClassUnit: STRING;
+
+Die Klassenmethode {ClassUnit} liefert den Namen des Moduls, in dem eine
+Klasse deklariert wurde.
+.LISTITEM CLASS FUNCTION ClassParent: TClass;
+
+Die Klassenmethode {ClassParent} liefert den tatsÑchlichen Typ des
+unmittelbaren Vorfahren einer Klasse oder einer Klassenreferenz zurÅck.
+Wird die Methode auf einem Objekt aufgerufen, dann ist dies der Vorfahre
+der tatsÑchlichen Klasse des Objekts.
+.LISTITEM CLASS FUNCTION GetClassInfo: POINTER;
+
+Die Klassenmethode {GetClassInfo} liefert einen Zeiger auf interne
+Informationen Åber die Klasse.
+
+Achtung: Bei Borland Delphi hei·t diese Klassenmethode {ClassInfo}.
+Sie wurde in WDSibyl umbenannt, da das OS/2-API bereits eine Funktion
+mit dem gleichen Namen bereitstellt.
+.LISTITEM CLASS FUNCTION InstanceSize: LONGWORD;
+
+Die Klassenmethode {InstanceSize} liefert die Grî·e einer Instanz einer
+Klasse.
+.LISTITEM CLASS FUNCTION InheritsFrom(AClass: TClass): BOOLEAN;
+
+Die Klassenmethode {InheritsFrom} prÅft, ob die Klasse, auf der die Methode
+aufgerufen wird, ein direkter oder indirekter Nachfahre von {AClass} ist.
+Sie gibt entsprechend {True} oder {False} zurÅck.
+.LISTITEM PROCEDURE Dispatch(VAR Message);
+
+Die Methode {Dispatch} dient zum Verteilen von Nachrichten an
+botschaftsverarbeitende Methoden.
+
+{Dispatch} sucht die zur Identifikation der Nachricht passende Methode
+heraus und ruft diese auf.
+
+Existiert weder in der tatsÑchlichen Klasse des Objekts noch in einem
+beliebigen Vorfahren eine Methode, die die Nachricht behandeln kann, dann
+wird die Methode {DefaultHandler} aufgerufen, die eine Standardbehandlung
+der Nachricht durchfÅhrt.
+.LISTITEM PROCEDURE DispatchCommand(VAR Message;Command:LONGWORD);
+
+Die Methode {DispatchCommand} dient zum Verteilen von Nachrichten des Typs
+{WM_COMMAND} an botschaftsverarbeitende Methoden.
+
+{DispatchCommand} sucht die zur Identifikation der Nachricht passende
+Methode heraus und ruft diese auf.
+
+Existiert weder in der tatsÑchlichen Klasse des Objekts noch in einem
+beliebigen Vorfahren eine Methode, die die Nachricht behandeln kann, dann
+wird die Methode {DefaultHandler} aufgerufen, die eine Standardbehandlung
+der Nachricht durchfÅhrt.
+.LISTITEM PROCEDURE FrameDispatch(VAR Message);
+
+Die Methode {FrameDispatch} dient zum Verteilen von Nachrichten an
+botschaftsverarbeitende Methoden. Im Gegensatz zu {Dispatch} wird
+{FrameDispatch} fÅr Nachrichten benutzt, die an das Rahmenfenster eines
+Bildschirmobjektes gehen sollen.
+
+{FrameDispatch} fÅr sucht die zur Identifikation der Nachricht passende
+Methode heraus und ruft diese auf.
+
+Existiert weder in der tatsÑchlichen Klasse des Objekts noch in einem
+beliebigen Vorfahren eine Methode, die die Nachricht behandeln kann,
+dann wird die Methode {DefaultFrameHandler} aufgerufen, die eine
+Standardbehandlung der Nachricht durchfÅhrt.
+.LISTITEM PROCEDURE DefaultHandler(VAR Message); VIRTUAL;
+
+Die Methode {DefaultHandler} wird von {Dispatch} aufgerufen, wenn keine
+Methode zur Behandlung einer bestimmten Botschaft gefunden werden konnte.
+{DefaultHandler} tut nichts, wird aber von graphischen Bildschirmelementen
+derart Åberschrieben, da· eine Routine des Betriebssystems aufgerufen wird,
+die eine Standardbehandlung der Nachricht durchfÅhrt.
+.LISTITEM PROCEDURE DefaultFrameHandler(VAR Message); VIRTUAL;
+
+Die Methode {DefaultFrameHandler} wird von {FrameDispatch} aufgerufen, wenn
+keine Methode zur Behandlung einer bestimmten Botschaft gefunden werden
+konnte. {DefaultFrameHandler} tut nichts, wird aber von graphischen
+Bildschirmelementen derart Åberschrieben, da· eine Routine des
+Betriebssystems aufgerufen wird, die eine Standardbehandlung der Nachricht
+durchfÅhrt.
+.LISTITEM CLASS FUNCTION MethodAddress(CONST Name: STRING): POINTER;
+
+Die Klassenmethode {MethodAddress} ermittelt die Einsprungadresse einer
+Methode anhand von deren Namen.
+.LISTITEM CLASS FUNCTION MethodName(Address: POINTER): STRING;
+
+Die Klassenmethode {MethodName} ermittelt den Namen einer Methode anhand
+ihrer Einsprungadresse.
+.LISTITEM FUNCTION FieldAddress(Name: STRING): POINTER;
+
+Die Methode {FieldAddress} liefert die Adresse eines Feldes anhand von
+dessen Namen.
+.EULIST
+
+.TOPIC 2 Exceptions
+.INDEX 2 Exceptions
+.HIGH Exceptions
+
+.BOLD Was sind Exceptions?
+
+Exceptions sind ein Hilfsmittel zur Behandlung von Ausnahmesituationen in
+Programmen, insbesondere zur Fehlerbehandlung.
+
+Wenn eine Exception ausgelîst wird, verzweigt das Programm sofort zu einem
+Exception-Handler, der auf den Fehler reagieren kann. Existiert kein solcher
+Exception-Handler dann wird das Programm mit einer Fehlermeldung abgebrochen.
+
+Durch die Benutzung von Exceptions wird der normale Kontrollflu· des
+Programms vom Kontrollflu· fÅr FehlerfÑlle getrennt, wodurch das Programm
+besser strukturiert und leichter zu warten wird.
+
+Exceptions sind Objekte. Neue Exceptions kînnen von der Vererbung Gebrauch
+machen, wodurch sich eine baumartige Hierarchie von Exceptions ergibt.
+Von dieser Struktur profitieren Exception-Handler, indem sie viele spezielle
+Exceptions, die einen gemeinsamen Vorfahren besitzen, gleichzeitig behandeln.
+
+Als Objekte kînnen Exceptions au·erdem beliebige weitere Komponenten
+besitzen, zum Beispiel Felder fÅr zusÑtzliche Informationen, die beim
+Auslîsen der Exception gefÅllt werden. Auch von diesen Informationen kann
+der Exception-Handler Gebrauch machen, etwa indem eine detaillierte
+Fehlermeldung angezeigt wird.
+
+.BOLD Deklarieren von Exceptions
+
+Die Deklaration einer Exception entspricht der Deklaration einer Klasse, da
+Exceptions Objekte sind. Exceptions sollten, mÅssen aber nicht unbedingt von
+der vordefinierten Klasse {Exception} oder einer ihrer Nachfahren abstammen.
+
+In sehr vielen FÑllen ist nur die Art des aufgetretenen Fehlers relevant.
+Diese findet sich dank der zur Laufzeit verfÅgbaren Typinformationen bereits
+in der Klasse der Exception wieder. Deshalb werden Exceptions meist sehr
+einfach deklariert:
+
+.xmp
+type
+  EMyException = class(Exception);
+.exmp
+
+Es ist in WDSibyl Åblich, die Bezeichner von Exceptions stets mit dem
+Buchstaben 'E' zu beginnen.
+
+Genau wie gewîhnliche Klassen kînnen auch Exceptions durch geschickte
+Ausnutzung der Vererbung hierarchisch strukturiert werden. Die
+vordefinierten Exceptions unterteilen sich zum Beispiel in Prozessorfehler,
+Speicherfehler, Ein- / Ausgabefehler und mathematische Fehler bei Integer-
+und Flie·kommaoperationen.
+
+Dieses System sollten Sie auch bei neuen Exceptions beibehalten, da es
+Åbersichtlicher ist und die Implementierung von Exception-Handlern
+erleichtert. Wenn Sie eine Reihe von Exceptions fÅr einen neuen
+Anwendungsfall oder fÅr eine neue Klasse deklarieren, dann tun sie dies,
+indem Sie zuerst eine Basis-Exception einfÅhren, von der Sie die weiteren
+ableiten.
+
+.xmp
+type
+  ENetworkError  = class(Exception);
+  EWrongUserName = class(ENetworkError);
+  EWrongPassword = class(ENetworkError);
+.exmp
+
+Es ist mîglich, einer Exception beliebige Komponenten in Form von Feldern,
+Methoden oder Eigenschaften hinzuzufÅgen. Diese Komponenten, meist werden
+es Felder mit detaillierten Fehlerinformationen sein, kînnen dann vom
+Exception-Handler benutzt werden.
+
+Die Basisklasse {Exception} besitzt bereits Felder zur Aufnahme einer
+Fehlermeldung und einer Fehleradresse. Die Exceptions, die sich mit
+Ein- / Ausgabefehlern beschÑftigen, fÅgen ein Feld mit dem Fehlercode der
+fehlgeschlagenen Operation hinzu.
+
+.xmp
+type
+  EInOutError = class(Exception)
+    ErrorCode: Integer;
+  end;
+.exmp
+
+Achtung: Im Gegensatz zu Borland Delphi mÅssen Sie nicht die zusÑtzliche
+Unit {SysUtils} einbinden, um die Fehlerbehandlung Åber Exceptions zu
+aktivieren. SÑmtliche Fehler des Laufzeitsystems werden bereits Åber
+Exceptions abgewickelt. Der Basistyp {Exception} ist in der {Unit SYSTEM}
+deklariert.
+
+.BOLD Auslîsen von Exceptions
+
+Eine Exception wird durch das SchlÅsselwort {raise} und die Angabe einer
+Exception-Instanz ausgelîst. Diese Instanz kann und wird meistens genau an
+dieser Stelle durch einen Konstruktor-Aufruf erzeugt. Es ist aber durchaus
+mîglich, wenngleich meist ÅberflÅssig, die Instanz vorher zu erzeugen.
+
+<Syntaxdiagramm: Raise>
+
+Der Konstruktor von {Exception} erwartet als Parameter einen String. Sie
+kînnen darin beim Auslîsen der Exception eine Fehlermeldung angeben. Sollte
+das Programm mangels eines passenden Exception-Handlers abgebrochen werden,
+gibt es zuvor diese Meldung aus.
+
+.xmp
+  if Password <> 'top secret' then
+    raise EWrongPassword.Create('Illegal password.');
+.exmp
+
+Achtung: Im Unterschied zu Borland Delphi ist es derzeit nicht mîglich,
+eine Fehleradresse mit Hilfe des SchlÅsselwortes {at} anzugeben. Als
+Fehleradresse wird stets die Adresse innerhalb des Codesegmentes angenommen,
+an der die Exception ausgelîst wurde.
+
+.BOLD Behandeln von Exceptions
+
+Wenn Sie nicht wollen, da· Ihr Programm beim Auftreten einer Exception mit
+einer Fehlermeldung abbricht, dann mÅssen Sie auf die Exception reagieren.
+Dazu Åberwachen Sie kritische Codesequenzen und fÅgen ihnen einen
+Exception-Block hinzu. Der Exception-Block enthÑlt Code, der nur im
+Fehlerfall ausgefÅhrt werden soll. Er kann einen einen oder mehrere
+Exception-Handler bereitstellen, die Fehler innerhalb der Åberwachten
+Codesequenz behandeln.
+
+Wenn innerhalb des Åberwachten Abschnitts eine Exception ausgelîst wird,
+tritt sofort der Exception-Block in Aktion.
+
+Wird der Åberwachte Abschnitt fehlerfrei beendet, wird die AusfÅhrung hinter
+dem Exception-Block wiederaufgenommen.
+
+Bei verschachtelten Åberwachten Codesequenzen genie·t stets der
+Exception-Block die hîchste PrioritÑt, der zur innersten Åberwachten
+Sequenz gehîrt. Behandelt er eine aufgetretene Exception nicht, wird sie
+nach au·en durchgereicht.
+
+öberwachte Codesequenzen und Exception-Handler
+
+<Syntaxdiagramm: Try_Except>
+
+Eine Anweisungsfolge, die von den SchlÅsselwîrtern {try..except}
+eingeschlossen wird, ist eine Åberwachte Codesequenz.
+
+Wenn innerhalb dieser Codesequenz eine Exception ausgelîst wird, dann
+verzweigt das Programm unmittelbar zu der Anweisungsfolge, die sich
+zwischen den SchlÅsselwîrtern {except..end} befindet und als Exception-Block
+bezeichnet wird.
+
+Dieser Exception-Block kann einen oder mehrere Exception-Handler
+bereitstellen, um bestimmte Fehler zu behandeln. Er kann auch einen
+universellen Exception-Handler beinhalten, der jede Art von Fehler behandelt.
+
+.xmp
+try
+  /*Die folgenden Anweisungen sind kritisch. Wenn die Datei
+    nicht geîffnet werden kann, oder sich wÑhrend des Lesens
+    Probleme einstellen, dann wird eine Exception ausgelîst.
+    Das Programm verzweigt dann unmittelbar zum EXCEPT..END-
+    Block, der den Fehler behandeln solle. */
+
+  Assign(F, 'c:\userdata\report.txt');
+  Reset(F);
+  ...
+  Close(F);
+
+except
+  ...
+end;
+.exmp
+
+Der Exception-Block kann auf die Fehlerbedingung reagieren, mu· dies aber
+nicht tun. Ob ein Exception-Block auf eine bestimmte Art von Exception
+reagiert, kann vom Programmierer festgelegt werden. Im allgemeinsten Fall
+werden die Exceptions nicht weiter differenziert. Es ergibt sich ein
+universeller Exception-Handler, der jede Art von Exception behandelt.
+
+.xmp
+except
+  /*Dies ist ein universeller Exception-Handler. Der Code
+    zwischen EXCEPT..END wird in jedem Fehlerfall ausgefÅhrt.
+    Der Fehler wird dadurch beseitigt. */
+
+  WriteLn('Unbekannter Fehler beim Lesen der Datei.');
+end;
+.exmp
+
+Durch Einsatz der SchlÅsselwîrter {on..do} kann die Arbeit des
+Exception-Blockes auf eine oder mehrere Arten von Exceptions eingeschrÑnkt
+werden. Jedes {on..do} definiert einen Handler fÅr eine bestimmte Klasse von
+Exceptions.
+
+.xmp
+except
+  /*Dieser Exception-Handler bearbeitet nur Fehler vom Typ
+    'EFileNotFound'. Alle weiteren Exceptions reicht er an die
+    nÑchsthîhere Ebene weiter. */
+
+  on EFileNotFound do
+    WriteLn('Die angegebene Datei existiert nicht.');
+end;
+.exmp
+
+Es kînnen mit {on..do} beliebig viele Exception-Handler angegeben werden.
+Das Laufzeitsystem geht sie im Fehlerfall der Reihe nach durch. Sobald ein
+passender Exception-Handler gefunden wird, wird dessen Code ausgefÅhrt, und
+der Fehler wird beseitigt. Es wird niemals mehr als ein Exception-Handler
+ausgefÅhrt.
+
+Beachten Sie, da· ein Exception-Handler auch immer alle Nachfahren der
+Klasse behandelt, fÅr die er installiert wurde. Deshalb sollten speziellere
+Exception-Handler in der Liste stets weiter vorn stehen, da sie sonst
+niemals erreicht werden.
+
+Ausgehend davon, da· alle Exceptions, die im Zusammenhang mit
+Dateioperationen stehen, einen gemeinsamen Vorfahren {EInOutError} besitzen,
+kînnte eine Fehlerbehandlung etwa wie folgt aussehen:
+
+.xmp
+except
+  /*Diese Exception-Handler bearbeiten eine Reihe von Fehlern.
+    Die spezielleren Handler stehen dabei weiter vorn, die
+    allgemeineren am Ende der Liste. */
+
+  on EFileNotFound do
+    WriteLn('Die angegebene Datei existiert nicht.');
+
+  on EAccessDenied do
+    WriteLn('Zugriff auf die Datei verweigert.');
+
+  on EInvalidFilename do
+    WriteLn('UngÅltiger Dateiname.');
+
+  on EInOutError do
+    WriteLn('Ein-/Ausgabefehler beim Lesen der Datei.');
+end;
+.exmp
+
+Bei Angabe einer Liste von Exception-Handlern mit {on..do} ist es au·erdem
+mîglich, im Anschlu· an den letzten Exception-Handler mit {else} einen
+weiteren anzugeben, der alle Exceptions behandelt, auf die nicht bereits
+einer der speziellen Handler reagiert hat.
+
+.xmp
+except
+  /*Diese Exception-Handler bearbeiten eine Reihe von Fehlern.
+    Die spezielleren Handler stehen dabei weiter vorn, die
+    allgemeineren am Ende der Liste. Fehler, die nicht mit der
+    Ein-/Ausgabeoperation in Zusammenhang stehen, werden durch
+    den ELSE-Teil behandelt. */
+
+  on EFileNotFound do
+    WriteLn('Die angegebene Datei existiert nicht.');
+  on EAccessDenied do
+    WriteLn('Zugriff auf die Datei verweigert.');
+  on EInvalidFilename do
+    WriteLn('UngÅltiger Dateiname.');
+
+  on EInOutError do
+    WriteLn('Ein-/Ausgabefehler beim Lesen der Datei.');
+
+  else
+    WriteLn('Unbekannter Fehler beim Lesen der Datei.');
+end;
+.exmp
+
+Wird eine Exception innerhalb des Exception-Blocks behandelt, dann wird sie
+beseitigt, und die AusfÅhrung wird unmittelbar hinter dem
+{except..end}-Block wiederaufgenommen. Behandelt keiner der
+Exception-Handler den aufgetretenen Fehler, dann bleibt die Exception
+bestehen. Der eingebaute Exception-Handler von WDSibyl tritt in Aktion
+und beendet das Programm mit einer Fehlermeldung, es sei denn, der gesamte
+Abschnitt befindet sich innerhalb einer weiteren mittels {try..except}
+Åberwachten Codesequenz.
+
+Tritt innerhalb der Åberwachten Codesequenz gar keine Exception auf, dann
+verzweigt das Programm nach Beendigung des {try..except}-Blockes unmittelbar
+hinter das Ende des Exception-Blockes. Es besteht in diesem Fall keine
+Veranlassung, die Fehlerbehandlung aufzurufen.
+
+Beachten Sie, da· es sich bei der Verzweigung im Fehlerfall um einen
+unmittelbaren Sprung handelt, nicht um einen Prozeduraufruf. Der Stack wird
+soweit aufgerÑumt, da· er sich im gleichen Zustand befindet wie beim
+Betreten der Åberwachten Codesequenz. Danach wird die Exception-Behandlung
+angesprungen. Nach der Behandlung der Exception kann kein RÅcksprung an die
+Fehleradresse mehr stattfinden. Stattdessen wird die AusfÅhrung hinter
+dem {except..end}-Block wiederaufgenommen.
+
+.BOLD Geschachtelte Exception-Handler
+
+Es ist mîglich, Åberwachte Codesequenzen zu schachteln. Dies kann entweder
+direkt durch Schachtelung von {try..except}-Anweisungen geschehen oder
+indirekt dadurch, da· innerhalb der Åberwachten Codesequenz aufgerufene
+Prozeduren oder Funktionen selbst lokal Codesequenzen Åberwachen. In
+beiden FÑllen werden die zugehîrigen {except..end}-Blîcke auf eine Art
+Stapel gelegt, wobei sich der zum zuletzt betretenen {try..except}-Block
+gehîrende zuoberst befindet.
+
+Tritt eine Exception auf, so wird zum obersten auf dem Stapel befindlichen
+{except..end}-Block verzweigt. Dieser gehîrt zu genau der Åberwachten
+Codesequenz, die zuletzt betreten und noch nicht wieder beendet wurde.
+Falls hier ein Exception-Handler existiert, der die aufgetretene Exception
+behandelt, findet die Behandlung statt, und die Exception wird gelîscht.
+Die AusfÅhrung wird hinter dem {except..end}-Block wiederaufgenommen.
+
+Behandelt keiner der Exception-Handler die aufgetretene Exception, so wird
+der {except..end}-Block vom Stapel abgerÑumt, und es wird zum nÑchsten
+{except..end}-Block verzeigt. Dies geschieht solange, bis ein
+Exception-Handler den aufgetretenen Fehler behandelt. Existiert kein solcher
+Exception-Handler, tritt die eingebaute Fehlerbehandlung von WDSibyl
+in Aktion. Das Programm wird abgebrochen.
+
+.BOLD Auslîsen von Exceptions im Exception-Handler
+
+Bei Schachtelung von Åberwachten Codesequenzen kann es sinnvoll sein, lokal
+auf den Fehler zu reagieren, aber die Fehlerbedingung bestehen zu lassen,
+damit die nÑchsthîhere Ebene auch darauf reagieren kann. In diesem Fall kann
+innerhalb des {except..end}-Blockes durch Einsatz von {raise} ohne jeden
+weiteren Parameter dafÅr gesorgt werden, da· die aufgetretene Exception
+unmittelbar wieder ausgelîst wird. Der {except..end}-Block wird vom Stapel
+abgerÑumt, und es wird so verfahren, als wÑre die Exception nicht behandelt
+worden. Diese spezielle syntaktische Variante von {raise} kann nur innerhalb
+eines Exception-Handlers benutzt werden.
+
+Es ist auch mîglich, mittels der normalen Syntax von {raise} eine andere
+Exception innerhalb eines {except..end}-Blockes auszulîsen. Wird diese
+Exception nicht lokal innerhalb des {except..end}-Blockes behandelt, dann
+verdrÑngt sie die ursprÅngliche Exception. Diese wird gelîscht,
+der {except..end}-Block wird vom Stapel abgerÑumt, und die Behandlung der
+neuen Exception wird an die nÑchsthîhere Ebene verwiesen.
+
+Dies kann manchmal sinnvoll sein, wenn mehrere lokal auftretende Exceptions
+abgefangen und in einen gemeinsamen Typ von Exception umgewandelt werden
+sollen, der von der nÑchsthîheren Ebene behandelt wird.
+
+Es kann aber auch zu unerwÅnschten Ergebnissen fÅhren, wenn nicht beachtet
+wird, da· innerhalb eines - mîglicherweise sehr komplexen -
+Exception-Handlers wiederum Fehler auftreten kînnen. In diesem Fall sollten
+Sie den kritischen Bereich innerhalb des Exception-Handlers wiederum in
+einen {try..except}-Block mit anschlie·endem {except..end}-Block
+einschlie·en. Exceptions, die innerhalb des inneren Exception-Handlers nicht
+bearbeitet werden, verdrÑngen die Exception des Ñu·eren Handlers und werden
+an die nÑchsthîhere Ebene verwiesen.
+
+.BOLD Zugriff auf die Exception-Instanz
+
+Es ist mîglich, innerhalb eines Exception-Handlers auf die Exception-Instanz
+zuzugreifen. Das ist sinnvoll, wenn die aufgetretene Exception zusÑtzliche
+Informationen enthÑlt, die vom Handler ausgewertet werden sollen.
+
+Zum Zugriff auf die Exception-Instanz kann einem durch {on..do}
+eingeleiteten Exception-Handler ein Bezeichner gefolgt von einem
+Doppelpunkt vorangestellt werden. Innerhalb dieses einen Exception-Handlers
+steht dann unter dem angegebenen Bezeichner die Instanz der aufgetretenen
+Exception zur VerfÅgung. Der Typ des Bezeichners entspricht der
+Exception-Klasse, die der Handler bearbeitet, ist also eine passende
+Objektreferenz.
+
+Das folgende Beispiel soll die Mîglichkeiten verdeutlichen. Die
+Exception-Klasse {EInOutError} und deren Nachfahren besitzen ein Feld
+{ErrorCode}, das den Fehlercode des aufgetretenen Fehlers enthÑlt. Diesen
+Fehlercode kînnte sich ein Exception-Handler zunutze machen.
+
+.xmp
+try
+  Assign(F, 'c:\userdata\report.txt');
+  Reset(F);
+  ...
+  Close(F);
+
+except
+  on E: EInOutError do
+    WriteLn('Ein-/Ausgabefehler ', E.ErrorCode, ' beim Lesen der Datei.');
+  else
+    WriteLn('Unbekannter Fehler beim Lesen der Datei.');
+end;
+.exmp
+
+Beachten Sie, da· es nicht nîtig ist, die Variable mittels {var} zu
+deklarieren. Der Bezeichner wird an der entsprechenden Stelle generiert
+und ist nur innerhalb des zugehîrigen Exception-Handlers gÅltig.
+
+Achtung: Sie haben Åber den Bezeichner auch Zugriff auf alle Methoden der
+Instanz. Gehen Sie sehr vorsichtig mit dieser Mîglichkeit um. Versuchen Sie
+insbesondere niemals, die Exception-Instanz mittels {Destroy} oder {Free}
+selbst zu lîschen. Das ist Aufgabe des Exception-Handlers. Der Versuch,
+dies 'von Hand' zu erledigen, wÅrde das Laufzeitsystem derart durcheinander
+bringen, da· das Programm mit hoher Wahrscheinlichkeit abstÅrzt.
+
+.BOLD SchÅtzen von Resourcen
+
+Wenn innerhalb einer fehleranfÑlligen Codesequenz Resourcen belegt werden,
+dann ist es notwendig, diese auch beim Auftreten einer Exception wieder
+freigeben zu kînnen. Anderenfalls gehen die Resourcen mîglicherweise
+dauerhaft verloren, da das Auftreten der Exception einen direkten Sprung zum
+Exception-Handler zufolge hat. Die Anweisungen, die die Benutzung der
+Resource abschlie·en und diese freigeben, werden im Fehlerfall gar nicht
+erreicht.
+
+Die {try..finally}-Anweisung dient dazu, die Freigabe von Resourcen auch im
+Fehlerfall zu garantieren.
+
+<Syntaxdiagramm: Try_Finally>
+
+Um zu garantieren, da· eine bestimmte Codesequenz auch beim Auftreten einer
+Exception ausgefÅhrt wird, gehen Sie wie folgt vor:
+.ULIST
+.LISTITEM Setzen Sie die Anweisungen, die die Resource allokieren, vor
+den {try..finally}-Block.
+.LISTITEM Schlie·en Sie die Arbeit mit der Resource in den
+{try..finally}-Block ein.
+.LISTITEM Schlie·en Sie die Anweisungen zum Freigeben der Resource in
+den {finally..end}-Block ein.
+.EULIST
+
+.xmp
+/*Zuerst wird die Resource allokiert. In diesem Fall wird
+  versucht, eine Datei zu îffnen. */
+
+Assign(F, 'c:\userdata\report.txt');
+Reset(F);
+
+try
+  // Lesen der Datei. Mîglicherweise treten hier Fehler auf.
+  ...
+finally
+  // Die Datei soll in jedem Fall geschlossen werden.
+
+  Close(F);
+end;
+.exmp
+
+Wird innerhalb des {try..finally}-Blocks eines Exception ausgelîst,
+verzweigt das Programm zuerst zum {finally..end}-Block. Wenn dieser beendet
+ist, wird die Exception an den zustÑndigen Exception-Handler weitergereicht,
+falls ein solcher existiert.
+
+Beachten Sie, da· die Exception innerhalb eines {finally..end}-Abschnittes
+nicht behandelt wird. Dieser Bereich ist kein Exception-Handler, er
+garantiert nur die AusfÅhrung einer Reihe von Anweisungen unabhÑngig davon,
+ob ein Fehler auftritt oder nicht. Um auf den Fehler zu reagieren, mu· der
+gesamte Abschnitt geschÅtzt und mit einem Exception-Handler versehen werden.
+Es ist nicht mîglich, {finally} und {except} zu kombinieren, etwa derart,
+da· der {except}-Block auf den {finally}-Block folgt.
+
+.xmp
+try
+
+  /*Zuerst wird die Resource allokiert. In diesem Fall wird
+    versucht, eine Datei zu îffnen. */
+
+  Assign(F, 'c:\userdata\report.txt');
+  Reset(F);
+
+  try
+    // Lesen der Datei. Mîglicherweise treten hier Fehler auf.
+    ...
+  finally
+    // Die Datei soll in jedem Fall geschlossen werden.
+
+    Close(F);
+  end;
+
+except
+  WriteLn('Es trat ein Fehler beim Lesen der Datei auf.');
+end;
+.exmp
+
+Es ist mîglich, {try..finally}-Blîcke ineinander zu schachteln. Es ist dann
+auf jeder Ebene sichergestellt, da· die Anweisungen zwischen {finally..end}
+ausgefÅhrt werden, bevor zur nÑchsthîheren Ebene verzweigt wird.
+
+Achtung: Falls innerhalb eines {finally..end}-Blockes eine Exception
+ausgelîst wird, die dort nicht lokal behandelt wird, verdrÑngt sie die
+ursprÅngliche Exception und verzeigt zum nÑchsten zustÑndigen
+Exception-Handler. Das Verhalten ist zwar definiert, aber es ist nicht
+empfehlenswert, da· Sie davon Gebrauch machen. Stellen Sie stattdessen
+sicher, da· Exceptions, die in {finally..end}-Blîcken auftreten, auch dort
+behandelt werden.
+
+.BOLD Exceptions und Objekte
+
+Exceptions kînnen ohne EinschrÑnkung innerhalb von Objektmethoden verwendet
+werden. Es gibt jedoch eine Besonderheit zu beachten. Wenn innerhalb eines
+Konstruktor-Aufrufes eine Exception auftritt, die dort nicht behandelt wird,
+dann wird zuerst der Destruktor aufgerufen, bevor zum mîglicherweise
+vorhandenen Exception-Handler verzweigt wird.
+
+Damit verhalten sich Konstruktoren exakt so, als wÑren sie auf die folgende
+Weise implementiert:
+
+.xmp
+constructor TMyClass.Create;
+begin
+  try
+    // GewÅnschte Anweisungen zwischen BEGIN und END
+  except
+    Destroy;
+    raise;
+  end;
+end;
+.exmp
+
+Aufgrund dieses Verhaltens ist es wichtig, da· ein Destruktor auch mit nicht
+vollstÑndig initialisierten Objekten umzugehen wei·, denn er kann
+theoretisch von jeder beliebigen Stelle des Konstruktors aus aufgerufen
+werden.
+
+.TOPIC 2 Vordefinierte Exceptions
+.INDEX 2 Vordefinierte Exceptions
+.HIGH Vordefinierte Exceptions
+
+.BOLD Basisklasse Exception
+
+SÑmtliche Laufzeitfehler von WDSibyl werden Åber Exceptions
+abgewickelt. Dazu sind in der {Unit SYSTEM} bereits eine Reihe von
+Exceptions vordefiniert.
+
+.xmp
+Exception = class(TObject)
+public
+  constructor Create(const Msg: String);
+  destructor Destroy; override;
+
+  property Message: string;     // lesen / schreiben
+  property MessagePtr: PString; // nur lesen
+end;
+
+ExceptClass = class of Exception.
+.exmp
+
+{Exception} ist die Basisklasse fÅr Ausnahmebedingungen. Von ihr sollten
+alle weiteren Exception-Klassen abgeleitet werden. {Exception} selbst wird
+selten ausgelîst, meist werden es spezialisierte Nachkommen sein, die auf
+bestimmte Fehler hinweisen. Alle Exception-Klassen erben von {Exception}
+Konstruktor, Destruktor sowie die Eigenschaft {Message}, die die
+Fehlermeldung enthÑlt, die beim Auslîsen der Exception an den Konstruktor
+Åbergeben wird.
+
+.BOLD Software-generierte Exceptions
+
+.ULIST
+.LISTITEM EProcessTerm = class(Exception);
+
+{EProcessTerm} wird vom Betriebssystem ausgelîst, wenn der Proze· beendet
+werden soll.
+.EULIST
+
+.BOLD Hardware-generierte Exceptions
+
+.ULIST
+.LISTITEM EProcessorException = class(Exception);
+
+{EProcessorException} ist der Vorfahr fÅr weitere vom Prozessor ausgelîste
+Exceptions. Es wird niemals {EProcessorException} selbst ausgelîst, sondern
+stets ein Nachkomme, der auf eine bestimmte Ausnahmebedingung hinweist.
+
+Im Unterschied zu {EFault} weist {EProcessorException} nicht unbedingt auf
+einen Fehler hin, denn die Nachfahren {EBreakpint} und {ESingleStep} dienen
+zum Debuggen eines Programms.
+.LISTITEM EFault = class(EProcessorException);
+
+{EFault} ist der Vorfahr fÅr alle vom Prozessor ausgelîsten Exceptions, die
+auf einen Fehler hinweisen. Es wird niemals {EFault} ausgelîst, sondern
+stets ein Nachkomme, der auf eine bestimmte Fehlerbedingung hinweist.
+
+Im Gegensatz zu {EProcessorException} weist {EFault} immer auf einen Fehler
+hin.
+.LISTITEM EGPFault = class(EFault);
+
+{EGPFault} wird ausgelîst, wenn eine allgemeine Schutzverletzung auftritt.
+Eine Schutzverletzung liegt vor, wenn ein Proze· auf Speicherbereiche
+zugreift, die nicht innerhalb seines Adre·raums liegen.
+
+Meist deutet dieser Fehler darauf hin, da· eine illegale Zeigeroperation
+durchgefÅhrt wurde oder da· mit einem nicht korrekt initialisierten Objekt
+gearbeitet wurde.
+.LISTITEM EStackFault = class(EFault);
+
+{EStackFault} wird ausgelîst, wenn nicht genÅgend Stackspeicher vorhanden
+ist, um die aktuelle Operation durchzufÅhren. Prozeduren und Funktionen
+reservieren beim Aufruf den Speicher fÅr ihre lokalen Variablen auf dem
+Stack.
+
+Wenn dieser Fehler auftritt, dann teilen Sie dem Programm mehr Stackspeicher
+zu oder vermeiden Sie die Benutzung zu vieler lokaler Variablen,
+insbesondere bei Rekursion.
+
+Diese Exception kann nur auftreten, wenn die StackprÅfung aktiviert ist,
+die Operation also im Modus {$S+} compiliert wird.
+.LISTITEM EPageFault = class(EFault);
+
+{EPageFault} wird vom Prozessor ausgelîst, wenn ein Seitenfehler auftritt.
+Ein Seitenfehler liegt vor, wenn der Proze· auf eine Speicherseite zugreifen
+will, die momentan ausgelagert ist.
+
+Dieser Fehler sollte normalerweise nicht auftreten, da sich das
+Betriebssystem um die Verwaltung des physikalischen und virtuellen Speichers
+kÅmmert und die entsprechende Seite automatisch wieder einlagert.
+.LISTITEM EInvalidOpCode = class(EFault);
+
+{EInvalidOpCode} wird vom Prozessor ausgelîst, wenn dieser auf eine illegale
+Maschineninstruktion trifft.
+.LISTITEM EBreakpoint = class(EProcessorException);
+
+{EBreakpoint} wird vom Prozessor ausgelîst, wenn dieser auf einen Breakpoint
+trifft.
+.LISTITEM ESingleStep = class(EProcessorException);
+
+{ESingleStep} wird vom Prozessor nach jedem durchgefÅhrten Befehl ausgelîst,
+wenn das Programm im Einzelschrittmodus abgearbeitet wird.
+.EULIST
+
+.BOLD Exceptions bei Speicher-Operationen
+
+.ULIST
+.LISTITEM EOutOfMemory = class(Exception);
+
+{EOutOfMemory} wird ausgelîst, wenn eine angeforderte Menge Speicher nicht
+mehr auf dem Heap zur VerfÅgung steht.
+.LISTITEM EInvalidPointer = class(Exception);
+
+{EInvalidPointer} wird ausgelîst, wenn ein Programm versucht, einen
+Speicherbereich zu deallokieren, der nicht zuvor allokiert wurde oder
+bereits freigegeben ist.
+.LISTITEM EInvalidHeap = class(Exception);
+
+{EInvalidHeap} wird ausgelîst, wenn der Heapbereich der Applikation
+beschÑdigt ist. Dies kann vorkommen, wenn die Applikation durch fehlerhafte
+Zeigeroperationen Speicherbereiche Åberschreibt, die fÅr die Heapverwaltung
+wichtig sind.
+.EULIST
+
+.BOLD Exceptions bei Ein- / Ausgabeoperationen
+
+.ULIST
+.LISTITEM
+.xmp
+EInOutError = class(Exception)
+public
+  ErrorCode: Integer;
+end;
+.exmp
+
+{EInOutError} ist der Vorfahr fÅr eine Reihe von Exceptions, die auf
+Ein- / Ausgabe-Fehler hinweisen. Alle Exceptions dieser Art besitzen ein
+zusÑtzliches Feld, das den Fehlercode aufnehmen kann, der bei der
+Operation aufgetreten ist.
+
+Damit diese Exception und ihre Nachfahren auftreten kînnen, mu· die
+Ein- / Ausgabe-öberprÅfung aktiviert sein, die entsprechende Operation mu·
+also im Modus {$I+} compiliert werden.
+.LISTITEM EAccessDenied = class(EInOutError);
+
+{EAccessDenied} wird ausgelîst, wenn das ôffnen einer Datei
+fehlschlÑgt, weil entweder die Attribute der Datei ein ôffnen zum Schreiben
+nicht erlauben, oder weil die Datei bereits von einem anderen Proze·
+exklusiv geîffnet wurde.
+.LISTITEM EDiskFull = class(EInOutError);
+
+{EDiskFull} wird ausgelîst, wenn die Diskette oder Festplatte, auf die der
+Proze· schreiben will, voll ist.
+.LISTITEM EEndOfFile = class(EInOutError);
+
+{EEndOfFile} wird ausgelîst, wenn der Proze· versucht, Åber das Ende einer
+Datei hinaus zu lesen.
+.LISTITEM EFileNotFound = class(EInOutError);
+
+{EFileNotFound} wird ausgelîst, wenn der Proze· versucht, eine Datei zu
+îffnen, die nicht existiert.
+.LISTITEM EInvalidFileName = class(EInOutError);
+
+{EInvalidFileName} wird ausgelîst, wenn ein illegaler Dateiname benutzt
+wird, der zum Beispiel zu lang ist oder Sonderzeichen enthÑlt, die nicht
+Teil  eines Dateinamens sein dÅrfen.
+.LISTITEM EInvalidInput = class(EInOutError);
+
+{EInvalidInput} wird ausgelîst, wenn der Benutzer des Programms eine
+ungÅltige Eingabe macht.
+.LISTITEM ETooManyOpenFiles = class(EInOutError);
+
+{ETooManyOpenFiles} wird ausgelîst, wenn zu viele Dateien gleichzeitig
+geîffnet sind. Wenn der Fehler auftritt, erhîhen Sie die entsprechende
+Einstellung des Betriebssystems, um mehr gleichzeitig geîffnete Dateien zu
+erlauben.
+.EULIST
+
+.BOLD Mathematische Exceptions bei Integer-Operationen
+
+.ULIST
+.LISTITEM EIntError = class(Exception);
+
+{EIntError} ist der gemeinsame Vorfahr einer Reihe von Exceptions, die auf
+Fehler bei mathematischen Operationen mit {Integer}-Werten hinweisen.
+.LISTITEM EDivByZero = class(EIntError);
+
+{EDivByZero} wird ausgelîst, wenn eine Division durch Null versucht wird.
+.LISTITEM ERangeError = class(EIntError);
+
+{ERangeError} wird ausgelîst, wenn fÅr das Ergebnis einer mathematischen
+Operation eine BereichsprÅfung fehlschlÑgt. Damit diese Exception auftreten
+kann, mu· die Operation im Modus {$R+} compiliert werden.
+.LISTITEM EIntOverflow = class(EIntError);
+
+{EIntOverflow} wird ausgelîst, wenn das Ergebnis einer mathematischen
+Operation einen öberlauf produziert hat. Damit dieser Fehler auftreten
+kann, mu· die Operation im Modus {$Q+} compiliert werden.
+.EULIST
+
+.BOLD Mathematische Exceptions bei Flie·komma-Operationen
+
+.ULIST
+.LISTITEM EMathError = class(Exception);
+
+{EIntError} ist der gemeinsame Vorfahr einer Reihe von Exceptions, die auf
+Fehler bei mathematischen Operationen mit Integer-Werten hinweisen.
+.LISTITEM EInvalidOp = class(EMathError);
+
+{EInvalidOp} wird ausgelîst, wenn eine ungÅltige mathematisch Operation
+versucht wird, z.B. das Ziehen der Wurzel aus einer negativen Zahl.
+.LISTITEM EZeroDivide = class(EMathError);
+
+{EZeroDivide} wird ausgelîst, wenn eine Division durch Null versucht wird.
+.LISTITEM EOverflow = class(EMathError);
+
+{EOverflow} wird ausgelîst, wenn das Ergebnis einer mathematischen Operation einen
+öberlauf produziert hat.
+.LISTITEM
+EUnderflow = class(EMathError);
+
+{EUnderflow} wird ausgelîst, wenn das Ergebnis einer mathematischen Operation
+so klein ist, da· es mit der PrÑzision der Ergebnisvariablen nicht mehr
+dargestellt werden kann.
+
+Dieser Fehler tritt normalerweise nicht auf. Stattdessen liefert
+WDSibyl den Wert Null als Ergebnis zurÅck. Durch éndern des
+Kontrollwortes des mathematischen Koprozessors kann das Auslîsen dieser
+Exception jedoch ermîglicht werden.
+.EULIST
+
+.BOLD Exceptions bei Typwandlungen
+
+.ULIST
+.LISTITEM EInvalidCast = class(Exception);
+
+{EInvalidCast} wird ausgelîst, wenn eine Typwandlung mit Hilfe des
+Operators {as} fehlschlÑgt.
+.LISTITEM EConvertError = class(Exception);
+
+{EConvertError} wird bei einer Reihe von Konvertierungsfunktionen ausgelîst,
+wenn der Quellwert ungÅltig ist.
