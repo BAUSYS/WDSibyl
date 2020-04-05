@@ -6037,11 +6037,12 @@ BEGIN
      LineEdit := InsertEdit(SELF,180,80,100,22,tostr(al),'');
      LineEdit.AutoSize := TRUE;
      LineEdit.Alignment := taRightJustify;
-     LineEdit.Focus;
+     //LineEdit.Focus; //RG 06.07.2017
 
      InsertBitBtnNLS(SELF,20,20,100,30,bkOk,SOkButton,SClickHereToAccept);
      InsertBitBtnNLS(SELF,140,20,100,30,bkCancel,SCancelButton,SClickHereToCancel);
      InsertBitBtnNLS(SELF,260,20,100,30,bkHelp,SHelpButton,SClickHereToGetHelp);
+     LineEdit.Focus; //RG 06.07.2017
 END;
 
 
@@ -8825,4 +8826,6 @@ END.
   23-Dez-05  WD         Sprache: NiederlÑndisch hinzugefÅgt
   24-Jan-05  WD         Umbau auf die neue Struktur von FindFirst
   26-Dec-07  WD         Tools: $ININAME eingebaut
+  06-Jul-17  RG         TGotoLineDialog.SetupComponent: LineEdit.Focus nach unten verschoben,
+                                                        sonst hat BitBtn OK den Focus
 }
