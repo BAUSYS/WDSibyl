@@ -136,6 +136,7 @@ Type
                                    VAR lpFileSystemNameBuffer:CSTRING;  // FileSystem
                                    nFileSystemNameSize:ULONG):LongWord; APIENTRY; {BOOL;}
     GetDriveType        : Function(CONST lpRootPathName:CSTRING):ULONG; APIENTRY;
+    GetTickCount        : Function : LongWord; APIENTRY;
   End;
 
   tcPMWinx = Class(tcDLL)
@@ -182,11 +183,14 @@ Begin
         fPMWinxFunc.GetLocaleInfo:=pointer(GetProcAddress('GetLocaleInfo'));
         fPMWinxFunc.GetVolumeInformation:=pointer(GetProcAddress('GETVOLUMEINFORMATION'));
         fPMWinxFunc.GetDriveType:=pointer(GetProcAddress('GETDRIVETYPE'));
+        fPMWinxFunc.GetTickCount:=pointer(GetProcAddress('GETTICKCOUNT'));
+
 {$ENDIF}
 {$IFDEF Win32}
         fPMWinxFunc.GetLocaleInfo:=pointer(GetProcAddress('GetLocaleInfoA'));
         fPMWinxFunc.GetVolumeInformation:=pointer(GetProcAddress('GetVolumeInformationA'));
         fPMWinxFunc.GetDriveType:=pointer(GetProcAddress('GetDriveTypeA'));
+        fPMWinxFunc.GetTickCount:=pointer(GetProcAddress('GetTickCount'));
 {$ENDIF}
       except
       end;
@@ -207,4 +211,5 @@ End.
   19-Jan-03  WD         Umbau in eine Klasse.
   26-Oct-06  RG, WD     Einbau von GetVolumeInformation und GetDriveType
   14-Mar-07  WD         Einbau von tcPMWinx.GetUserDefaultLCID.
+  20-Mar-09  RG         GetTickCount
 }
