@@ -1,0 +1,1729 @@
+WDSibyl-Aenderungen:
+      zum Stand: 05.04.2020  15:21:19
+
+
+
+Datei:  P:\WDSibyl\Compiler\Source\HLP\WDHLPC10\WDHLPC10.PAS
+{ -- date --- --from-- -- changes ----------------------------------------------
+  27-Feb-2005 WD       Help-Compiler in das WDSibyl-Projekt eingefuegt.
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\HLP\WDHLPD10\uHLPComp.pas
+{ -- date --- --from-- -- changes ----------------------------------------------
+  11-Apr-2005 WD       Design-Aufbereitung der Include-Datei
+  23-Dez-2005 WD       Sprache: NiederlÑndisch hinzugefÅgt
+  28-Feb-2008 WD       Topic UNDERLINE und BOLD_UNDERLINE eingebaut
+  28-Apr-2018 RG       Fehler bei der Umsetzung von .DLIST behoben
+                       LEFTMARGIN und RIGHTMARGIN eingebaut
+                       TITLE funktioniert wieder
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\HLP\WDHLPD10\WDHLPD10.PAS
+{ -- date --- --from-- -- changes ----------------------------------------------
+  27-Feb-2005 WD       Help-Compiler in das WDSibyl-Projekt eingefuegt.
+
+
+Datei:  P:\WDSibyl\Compiler\Source\PAS\WDSPC10\WDSPC10.PAS
+{ -- date --- --from-- -- changes ----------------------------------------------
+  02-Sep-2004 WD       Von dem IDE-Projekt in das SPC25-Projekt verschoben
+  19-Dez-2005 WD       Umbau der Datei fuer die Windows-Schiene
+  18-Jan-2006 WD       Einbau der Linux-Schiene
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\PAS\WDSPD10\WDSPD10.pas
+{ -- date --- --from-- -- changes ----------------------------------------------
+  25-Nov-04   WD       Erstellung des Projektes
+  23-Nov-05   WD       Ausgabe der Compiler-Definitionen
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\RC\WDRCC10\WDRCC10.pas
+{ -- date --- --from-- -- changes ----------------------------------------------
+  24-Jul-2004 WD       Erstellung des Projektes
+  25-Sep-2004 WD       Aufteilung des Compilers in die WDRCD10.SPR und in die WDRCC10.SPR
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\RC\WDRCD10\uResDef.pas
+{ -- date --- --from-- -- changes ----------------------------------------------
+  24-Jul-2004 WD       Erstellung der Unit
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\RC\WDRCD10\uResDll.pas
+{ -- date --- --from-- -- changes ----------------------------------------------
+  24-Jul-2004 WD       Erstellung der Unit
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\RC\WDRCD10\uResScan.pas
+{ -- date --- --from-- -- changes ----------------------------------------------
+  24-Jul-2004 WD       Erstellung der Unit
+  02-Mai-2006 WD       ScanData, ScanVideo, ScanSound eingebaut.
+  03.Mai-2006 WD       Bitmap-Resource-ID auf Name-Resource umgebaut.
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\RC\WDRCD10\WDRCD10.pas
+{ -- date --- --from-- -- changes ----------------------------------------------
+  25-Nov-2004 WD       Erstellung des Projektes
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\Share\CONSTS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  09-Dec-02  WD         Einbau vom Logging
+  01-Aug-03  WD         Entfernen von div. CM-Konstanten (wird schon in Message.pas verw.)
+  01-Aug-03  WD         Menue: CreateLngFile eingebaut
+  03-Aug-03  WD         Entfernen des TipOfTheDay-Dialog
+  08-Aug-03  WD         Ausbau der Variable ShowSibylFormProc
+  13-Jan-05  WD         Konstante "NormalChars" von Editors.pas eingebaut
+  11-Mar-05  WD         WDSibyl-Help-Bitmap eingebaut
+  25-Mar-05  WD         Resource-Bitmap eingebaut
+  15-Okt-05  WD         Umbau fuer Win32-IDE
+  22-Dez-05  WD         Uebernehmen der Init-Variablen (fuer die Adresse der Funktionen
+  10-Jan-06  WD         Diverse Funktionen in die WDSibyl-DLL Åbertragen
+  24-Feb-06  WD         Im Menue Projekt/Anhalten "Ctrl Break" eingebaut.
+  11-Apt-08  WD         Menue: von "Alt+BkSp" auf "Ctrl+BkSp" und von "Shift+Ctrl+BkSp" auf
+                        "Shift+Ctrl+BkSp" geaendert
+  12-Mar-09  WD         Verwendung der neuen tcNamedPipeServer-Klasse
+  30-Jul-17  RG		WDSibyl_SubVersion von 13 auf 14
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\Share\PROJECTS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  05-Dec-02  WD         Ausbau des Standard-Teil
+  04-Jan-03  WD         Laden der Directory korrigiert
+  05-Jan-03  WD         Lesen der Projekt-Dateien (fertiggestellt)
+  09-Dec-04  WD         Korrektur des Application-Icons
+  12-Oct-05  WD         Debugger-Parameter auch fuer die Windows-Welt
+  23-Nov-05  WD         GetCompilerDefines: Definition ($IFDEF) von DEBUG eingebaut
+  22-Dez-05  WD         Alle Init-Variablen in die Unit Consts.pas uebertragen.
+  10-Jan-06  WD         Diverse Funktionen in die WDSibyl-DLL Åbertragen
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\Share\SPC_DATA.PAS
+{ -- date --- --from-- -- changes ----------------------------------------------
+  23-Sep-2002 WD       Statt SPDLL20 wird nun SPDLL25 verwendet
+  21-Dec-2002 WD       Import fuer die Resourcen eingebaut
+  12-Jun-2005 WD       Klasse tcSPDLL eingebaut. Damit funktioniert das Umschalten zwischen OS/2 und Windows.
+  27-Mai-2006 WD       tcCompiler.Create: Parametererweiterung
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\Share\uConst.pas
+{ -- date --- --from-- -- changes ----------------------------------------------
+  24-Jul-2004 WD       Erstellung der Unit
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\Share\uHlpTopics.PAS
+{ -- date --- --from-- -- changes ----------------------------------------------
+  28-Feb-2008 WD       Topic UNDERLINE und BOLD_UNDERLINE eingebaut
+  28-Apr-2018 RG       LEFTMARGIN und RIGHTMARGIN eingebaut
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\Share\uSourceFile.PAS
+{ -- date --- --from-- -- changes ----------------------------------------------
+  24-Jul-2004 WD       Erstellung der Unit
+  16-Jul-2006 WD       Diverse Aenderungen fuer GenHelp ein- bzw. umgebaut.
+  18-Sep-2006 WD       Den Punkt (ausser Zahlen) auch als Trennzeichen verwenden.
+  30-Jul-2017 RG       OS2 durch SysOS2 und Unknown durch SysUnknown ersetzt       
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\WDSPDB10\DBGHELP.PAS
+{ -- date -- --from-- -- changes ----------------------------------------------
+  28-Aug-05  WD       Variablen die nicht verwendet werden entfernt.
+}
+
+
+Datei:  P:\WDSibyl\Compiler\Source\WDSPDB10\WDSPDB10.PAS
+{ -- date -- --from-- -- changes ----------------------------------------------
+  02-Sep-04  WD       Erstellung des Projektes
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\BASEEDIT.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  18-Okt-04  MV/WD      Bei DoubleClick wird nun das Wort makiert.
+  13-Jan-05  MV/WD      Die Funktion "CheckWordsOnly" von Editors.pas eingebaut
+  26-Sep-05  MV/WD      Die Funktion "CalcLineColor" mit dem Parameter "LineAtt" erweitert
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\BASEFORM.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  08-Aug-03  WD         Ausbau der Variable ShowSibylFormProc
+  21-Jul-07  WD         Ausbau der Funktion Resize und Move
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\BROWSER.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  05-Dec-02  WD         Unit-Header-Check: Statt SPU31 wird SPU40 verwendet
+  09-Dec-02  WD         Einbau der Unit: uExtension
+  26-Sep-04  WD         Die Komponente TreeList in diese Unit eingebaut.
+
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\COMPILER.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  05-Dec-02  WD         Ausbau des Standard-Teil
+  09-Dec-02  WD         Einbau der Unit: uExtension
+  09-Dec-02  WD         Einbau vom Logging
+  01-Mai-04  WD         Verarbeiten von mehreren Verz. in der Eigenschaft: Output-Verz.
+  26-Feb-05  WD         Statt "default.ico" bzw. "wdefault.ico" "default_os2" bzw "default_win32" verwenden
+  11-Mar-05  WD         Den Help-Compiler (.SHS) eingebaut
+  16-Jun-05  WD         Umbauen des Compiler-Systems, damit das umschalten zwischen den OS funktioniert
+  15-Aug-05  WD         Beim Starten des Programmes den Parameter "-WDSibylIDE" mitgeben.
+                        Damit weiss das Programm, dass es von der IDE aufgerufen worden ist.
+  14-Okt-05  WD         Den Parameter nur mitgeben wenn es sich um ein GUI-Programm handelt
+  22-Mar-06  WD         Programme die unter OS/2 geschrieben worden sind und fuer Windows kompiliert,
+                        dann soll das Programm Åber Odin gestartet werden
+  18-Mai-06  WD         Umbauten fuer die Windows-Version
+  09-Mar-06  WD         Auslagern von diversen Logs in die DLL.
+  30-Jul-17  RG         goSysInfo.OS.System=SysOS2 anstatt =OS2
+			'pt' is declared but never used in StopCompiler ()
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\DEBUGHLP.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  08-Aug-03  WD         Ausbau der MyExit-Funktion
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\DFM.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  10-Nov-06  RG      Problem Borderstyle=bs..... behoben
+                     TValueTyp um vaSingle,vaCurrency,vaDate,vaWString,
+                       vaInt64,vaUTF8String erweitert.
+                     Einlesen von UTF8String, neue Funktion UTF8ToAnsi(Result),
+                     SkipPropValue ergÑnzt: TPanel.Caption - Vorgabe = leer
+
+  offen: Umsetzung von Font.Color nach PenColor funktioniert nicht
+         TBitBtn.Glyph.Data -> Grafik anpassen: 'unsichtbarer' Hintergrund
+         vaWString
+         vaInt64
+         TImage.Bitmap      -> Grafik konvertieren (TBitmap)
+
+  wird noch nicht unterstÅtzt: FormStyle=fsStayOnTop (TForm)
+                               TLabel.Font.Color
+                               TGauge (Beispiele), Ñhnlich TProgressBar
+
+  wird schlecht unterstÅtzt: TScrollBox
+  22-Apr-07  RG, WD  Funktion "UTF8ToAnsi" in die Unit uString verschoben.
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\FORMEDIT.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  19-Jul-06  WD         Korrektur des laden von den Cursors
+  08-Dec-07  MV         TFormEditor.SetCursorIntern: Cursor korrigiert.
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\IDETOOLS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  11-Mar-05  WD         TNewObjDlg: Objekt "WDSibylHelp" eingebaut
+  25-Mar-05  WD         TNewObjDlg: Objekt "Resource" eingebaut
+
+
+
+
+Datei:  P:\WDSibyl\IDE\Source\INSPECT.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  05-Jul-04  WD         Umbau der MultiMedia-Komponenten
+  17-Mar-09  WD         Einbau der Komponente "tCheckGroup"
+  04-Aug-17  RG
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\NAVIGATE.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  13-Jul-03  WD         Einbau der Komponente "tEditDate"
+  08-Dec-03  WD         Einbau der Komponente "tJoystickComp"
+  03-Feb-04  WD         Einbau der Komponente "tPOP3Client"
+  05-Mar-04  WD         Einbau der Komponente "tOKCancelButton"
+  05-Jun-04  WD         Einbau der Komponente "tSerial"
+  10-Jun-04  WD         Einbau der Komponente "tColorWheel" und "tValueBar"
+  05-Jul-04  WD         Umbau der MultiMedia-Komponenten
+  26-Sep-04  WD         Umbau von tJoystickComp auf tJoystickPort
+  26-Sep-04  WD         Einbau der Datenabanken Komponenten
+  31-Mar-05  WD         Einabu der Komponente "tEditFileName"
+  01-Apr-05  WD         TConfigurePaletteDlg: Sortieren der Komponenten auf der "[Library]"-Seite
+  28-Aug-05  WD         Unit "uOKCancelButton" ausgebaut. Komponente "tOKCancelButton" ist nun in ExtCtrls.
+  29-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  20-Sep-05  WD         Dialog tUserPasswordDialog eingebaut.
+  22-Apr-07  WD         Einbau der Komponente "TGauge"
+  17-Mar-09  WD         Einbau der Komponente "tCheckGroup"
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\PROPEDIT.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  05-Jul-04  WD         Umbau der MultiMedia-Komponenten
+  24-Mar-06  WD         TStringsPropertyEditor: Dialog vergroessert
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\SIB_COMP.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  05-Dec-02  WD         Unit-Header-Check: Statt SPU31 wird SPU40 verwendet
+  09-Dec-02  WD         Einbau der Unit: uExtension
+  05-Jul-03  WD         Umbau von SIB_DLL auf uSysClass.pas
+  21-Apr-07  WD         Neue Heap-Verwaltung eingebaut.
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\SIB_DLG.PAS
+{ -- date -- -- from -- -- changes ------------------------------------------------------------------
+  05-Dec-02  WD         Ausbau des Standard-Teil
+  05-Dec-02  WD         TProjectDialog: Ausgabe einer normalen Fehlermeldung, wenn das Default.ico
+                                        nicht gefunden wird.
+  03-Aug-03  WD         Entfernen des TipOfTheDay-Dialog.
+  11-Okt-03  WD         Umbau des About-Dialogs.
+  23-Okt-04  WD         Compiler-Page in den Dialog "TGeneralDialog" eingebaut.
+  21-Mar-05  WD         Ausgabe des CompLib-Filenamens (inkl. Pfad).
+  08-Apr-05  WD         TGeneralDialog: Seite "Verzeichnisse" eingebaut.
+  18-Mai-05  WD         Parameter-Dialog vergroessert.
+  11-Dez-05  WD         AboutDialog: Umstellen auf eine Klasse; Bei Click->Homepage von WDSibyl aufrufen.
+  23-Dez-05  WD         Sprache: NiederlÑndisch hinzugefÅgt
+  24-Jan-05  WD         Umbau auf die neue Struktur von FindFirst
+  26-Dec-07  WD         Tools: $ININAME eingebaut
+  06-Jul-17  RG         TGotoLineDialog.SetupComponent: LineEdit.Focus nach unten verschoben,
+                                                        sonst hat BitBtn OK den Focus
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\sib_edit.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  05-Dec-02  WD         Ausbau des Standard-Teil
+  18-Okt-04  MV, WD     Einbau der Funktion CBCommentBlock
+  23-Okt-04  WD         Sortieren des Code-Completion-Listbox
+  25-Okt-04  WD         Copy, Cut, Paste und Delete in das Popup-Editor eingebaut
+  11-Jan-05  WD         Umbau der Code-Completion-Listbox (Listbox kann Spalten anzeigen)
+  29-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  26-Sep-05  MV/WD      Die Funktion "CalcLineColor" mit dem Parameter "LineAtt" erweitert
+  12-Aug-06  WD         Bei Thread die Unit "uSysClass" mit einbinden
+  09-Nov-06  WD         TSibEditor.SetWindowPos: Das Verschieben der Editoren im "Tableisten"-Modus
+                        deaktiviert.
+  19-Nov-06  WD         ReOpenFile in das Popup-Menue eingebaut.
+  28-Apr-08  WD         TSibEditor.GenerateProgramFrame: ApplicationName usw. eingebaut.
+     Aug-17  RG
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\SIB_LANG.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  29-Aug-05  WD         Erstellung der Datei
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\SIB_PRJ.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  05-Dec-02  WD         Ausbau des Standard-Teil
+  02-Aug-03  WD         Einbau der CreateLngFile;
+  30-Apr-04  WD         Umbau der Funktion GetOutDir auf mehrere Verszeichnisse
+  25-Aug-04  WD         Erst-Start: Korrektur der Verzeichnisse (+Erstellung der Verz. im Filesystem)
+  24-Sep-04  WD         Keine Fehlermeldung wenn die SCU-Datei leer ist.
+  23-Okt-04  WD         Daten von der Compiler-Page speichern und laden.
+  09-Apr-05  WD         Einbau der Verwaltung von Templates in Projekt/Neu und Optionen/Allgemein
+  20-Mai-05  WD         Einbau von HelpCompilerFileName und HelpCompilerLanguage.
+  29-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  22-Nov-05  WD         Autosave (Init): Alles automatisch Speichern
+  10-Jan-06  WD         Diverse Funktionen in die WDSibyl-DLL Åbertragen
+  30-Mar-06  WD         Erstellung der Output-Verzeichnisse ausgebaut (--> Installer)
+  30-Mar-06  WD         INI-Datei als Parameter ausgebaut
+  26-Dec-07  WD         Tools: $ININAME eingebaut
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\uWDSibylThrd.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  19-Nov-06  WD         Unit und Thread programmiert
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\WDSibyl.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  09-Dez-02  WD         Einbau vom Logging
+  01-Aug-03  WD         Menue: CreateLngFile eingebaut
+  03-Aug-03  WD         Entfernen des TipOfTheDay-Dialog
+  16-Sep-03  WD         Umbau ders Logging.
+  25-Sep-03  WD         Ausbau der Datenbank-Componenten
+  08-Dec-03  WD         Komponente "tJoystickComp" eingefuegt
+  02-Feb-04  WD         Komponente "tPOP3Client" eingefuegt
+  05-Mar-04  WD         Einbau der Komponente "tOKCancelButton"
+  05-Jun-04  WD         Einbau der Komponente "tSerial"
+  10-Jun-04  WD         Einbau der Komponenten "tColorWheel" und "tValueBar"
+  05-Jul-04  WD         Umbau der MultiMedia-Komponenten
+  08-Sep-04  WD         Einbau der Komponenten "TPieChart" und "TBarChart"
+  26-Sep-04  WD         Einbau der Datenbank-Komponenten
+  17-Nov-04  WD         Korrektur der Spracheeinstellungen
+  31-Mar-05  WD         Einbau der Komponente "tEditFilename"
+  05-Apr-05  WD         Help-Aufruf ist nun sprachabhÑngig (WDSibyl_EN, WDSibyl_DE
+  13-Jun-06  WD         Korrektur der Wechsel zwischen OS/2 und Windows.
+  13-Aug-·5  WD         Einbau der Komponenten "tMultiColumnList".
+  28-Aug-05  WD         Unit "uOKCancelButton" ausgebaut. Komponente "tOKCancelButton" ist nun in ExtCtrls.
+  20-Sep-05  WD         Dialog tuserpassworddialog eingebaut.
+  07-Dec-05  WD         Korrektur: Dialoge werden jetzt in der richtigen Sprache ausgegeben
+  10-Jan-06  WD         Diverse Funktionen in die WDSibyl-DLL Åbertragen.
+  19-Mar-06  WD         Durch Aenderung von Application.SetHelpFile, den Helpfileaufruf geaendert.
+  03-Sep-06  WD         Die Icons werden nun ueber die DLL WDSIBD.DLL geladen.
+  19-Nov-06  WD         Unit uWDSibylThrd eingebaut.
+  19-Nov-06  WD         Die RC-Dateien in ein eigenes Projekt uebertragen
+  24-Feb-07  WD         TMyForm.GetCommandState: Case-Schleife zusammengefasst.
+  21-Mar-07  WD         Korrektur: Kein Absturz wenn kein Projekt offen ist und das Menue "Edit" angeclickt wird.
+  22-Apr-07  WD         Einbau der Komponente "tGauge".
+  05-Dec-07  WD         Einbau des PipeServers
+  08-Jan-08  WD         Parameter: NOPIPE eingebaut.
+  12-Jun-08  WD         Souuce-Optimierung.
+  17-Mar-09  WD         Einbau der Komponente "tCheckGroup"
+  17-Jan-10  WD         Auch die OS2API-Hilfe sprachabhÑngig aufrufen.
+
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\WDSibD\uWDSibDlg.PAS
+{ -- date --- --from-- -- changes ----------------------------------------------
+  19-Apr-2006 WD       AboutDialog: PoweredBy-Listbox erstellt
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\WDSibD\uWDSIBFun.PAS
+{ -- date --- --from-- -- changes ----------------------------------------------
+  03-Sep-2006 WD       Funktion: GetRCIcon
+}
+
+
+Datei:  P:\WDSibyl\IDE\Source\WDSibD\WDSIBD.PAS
+{ -- date --- --from-- -- changes ----------------------------------------------
+  10-Aug-2005 WD       Projekt erstellt.
+  06-Jun-2006 WD       RC-Bilder so geaendert, dass diese auch unter Windows funktionieren
+  03-Sep-2006 WD       Funktion: GetRCIcon
+  08-Nov-2006 WD       Die Icons fuer die einzelnen Fenster geaendert.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\MakeCompnt.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  08-Sep-04  WD         Einbau der Unit "Chart" in das Projekt
+  08-Sep-04  WD         Die Klasse "tEditDate" in Calendar uebernommen
+  26-Sep-04  WD         Die Unit uSerialPort umbenannt auf uPorts
+  26-Sep-04  WD         Die Komponente uJoystickPort in uPorts eingebaut
+  27-Aug-05  WD         Die Unit uOkCancelButton ausgebaut --> ExtCntrls
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\MakeDialog.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  12-Jun-04  WD         Erstellung des Projektes.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\MakeMultiMedia.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  05-Jul-04  WD         Erstellung des Projektes.
+  11-Nov-05  WD         Die Unit uDart ins Projekt aufgenommen
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\MakeRC.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  16-Sep-04  WD         Die RC-Dateien English.RC und German.RC durch Language.RC ersetzt.
+  05-Jul-17  RG		Curs_OS und Curs_W32 durch Cursors ersetzt, WDSibyl eingefÅgt
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\MakeRTL.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  08-Sep-04  WD         Die Unit PORT-IO aus dem Projekt ausgebaut. (Es gibt COMPNT/uSerialPort)
+  26-Sep-04  WD         Verschieben von der Komponente tcJoystick von uJoystick in uSysClass
+  16-Nov-04  WD         Die Unit LANGUAGE aus dem Projekt ausgebaut.
+  11-Jun-05  WD         Rexx bzw. Regina UnterstÅtzung
+  22-Apr-05  WD         Unit uOSFunc eingebaut.
+  05-Mai-05  WD         Unit uExtension ausgebaut. (Konstanten sind nach uSysInfo gewandert)
+  06-Mai-05  WD         Unit uLog ausgebaut. (tcLog ist jetzt in uSysClass)
+  15-Mai-06  WD         Unit WinShell eingebaut
+  10-Sep-06  WD         Unit WinNetAPI eingebaut
+  25-Sep-06  WD/TB      Unit uUnInstall eingebaut
+  12-Jun-07  WD         Unit SerialIO ausgebaut. (Es gibt uPorts im Verzeichnis Compnt)
+  11-Feb-09  WD         Unit uOSFunc auf uSysFunc umbenannt.
+
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\MakeSPCC.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  12-Jun-04  WD         Unit "Dialogs" in eine eigenes Projekt "MakeDialog" verschoben
+  05-Jul-04  WD         Unit "MMedia" in eine eigenes Projekt "MakeMultiMedia" verschoben
+  14-Aug-04  WD         Unit "Color" in das Projekt "MakeRTL" verschoben
+  16-Sep-04  WD         Die Unit "Language" aus dem Projekt entfernt.
+  01-Jan-05  WD         Einbau der Unit "uConvert"
+  16-Jun-05  MV/WD      WRAPED war auch in den Compnt-Projekt
+  11-Aug-05  TB/WD      Komponente in das Projekt hinzugefuegt.
+  27-Aug-05  WD         Komponete "tOKCancelButton" in ExtCtrls eingebaut
+  26-Dez-05  WD         Datei "Synchobjs" entfernt. (-->RTL uebernommen uSysClass)
+  17-Feb-06  WD         Langauge-Support eingebaut
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\Calendar.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  08-Sep-04  WD         Von uEditDate die Klasse "tEditDate" uebernommen
+  02-Apr-05  WD         Diverse Korrektueren von der Klasse "tEditDate"
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  10-Jun-17  RG         tEditDate: Properties mit Year, Month und Day erweitert.
+                                   Property ReadOnly definiert
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\Chart.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+     Jun-05  MV        a lot of stuff repaired and improved, especially in the Windows section
+  28-Aug-05  WD        Variablen die nicht verwendet werden entfernt.
+  17-Jul-06  MV        two bugs in Windows section removed, see Martin0706
+     
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\CheckLB.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  24-Sep-06     MV                 TCheckListBox.DrawItem: Statt +7 gehoehrt hier -7
+  15-Mai-07     MV                 TCheckListBox.DrawItem: Statt -7 gehoehrt hier 5
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\COOLBAR.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  28-Aug-05  WD        Variablen die nicht verwendet werden entfernt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\DUALLIST.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  17-Aug-05  WD         Umbau und Hinzufuegen von Funktionen in der Komponenten
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\EDITLIST.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  09-Aug-04  MV       EditListbox.Listbox moved to public
+                              stupid button hints deactivated, because Editlist.Hint gets overlayed
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\Hints.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  08/2006    MV         tCustomHelp Formatting of last line was incorrect
+  08/2006    MV         tCustomHelp Shadow did not work in Windows
+                           To get shadow effect, the Shadowcolor must not be clBlack. Instead clGray is a good choice.
+                           The more dark the selected color, the more bright the shadow will be.
+                           The pixel colors are calculated now via AND instead of OR. And Black (=0) always stays black
+                           when mixing with another color.
+  27-Mar-07  MV         TCustomHintWindow.ActivateHint: verhindert, da· man beim Klick auf einen Button in das
+                           Bubblefenster klickt und so der Klick nicht beim Button ankommt. Jetzt liegt der linke Rand
+                           des Bubblefenster Fensters 10 Pixel rechts vom Mauszeiger
+  16-Feb-08  MV         Vista redraw problem gefixt. CreateSubClass(ClassData,'BUTTON') darf bei tCustomHintWindow
+                           nicht ausgefÅhrt werden.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\SCKTCOMP.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  13-Feb-04  WD         Umbau von "TCustomWinSocket.LookupName" fuer Windows
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\SPIN.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  28-Aug-05  WD        Variablen die nicht verwendet werden entfernt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\SyncComp.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  28-Aug-05  WD        Variablen die nicht verwendet werden entfernt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\uColorWheel.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  18-Jul-99  AL         Original Komponente ColorWheel.pas/tColorWheel von Hr. Aaron Lawrence
+  10-Jun-04  WD         Einbau der Komponente in WDSibyl; Umbenennen der Datei auf uColorWheel.
+  12-Jun-04  WD         Einbau der Insert-Befehle
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\uPorts.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  29-Mar-00  WC         Original Komponente Serial.pas/tSerialPort von Hr. Willem Clements
+  05-Jun-03  WD         Einbau der Komponente in WDSibyl; Umbenennen der Datei auf uSerialPort.
+  26-Sep-04  WD         Umbennen der Unit von uSerialPort auf uPorts.
+  26-Sep-04  WD         Einabu der Komponente JoystickPort aus uJoystickPort
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\uProgressText.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  09-Aug-04    MV       OEM to ANSI conversion for Windows added
+     Nov-11?   WD?      geÑndert auf: goSysInfo.OS.System = SysOS2
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\XplorBtn.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  04-Sep-06     TB         published inherited properties putted in declaration
+                           (copied from TGlyphButton)
+
+
+
+Datei:  P:\WDSibyl\Library\Source\DB\DBBASE.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  25-Sep-04  WD         In das Projekt wieder aufgenommen
+  27-Mai-05  WD         TTable.UpdateFieldSelect: Der Cursor stand beim Update auf dem falschen Satz
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\DB\DBCTRLS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  25-Sep-04  WD         In das Projekt wieder aufgenommen
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\DB\DBLAYER.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  25-Sep-04  WD         In das Projekt wieder aufgenommen
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\DB\uTable.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  29-Aug-04  WD         Neue Funktionen: getInMemorySteam und getInStringList
+  17-Jan-04  WD         Einabu der Funktionen "getListStr" und "getListID"
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  04-Jan-09  PE         tcTable.WriteCSV: korrigiert.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\DB\mySQL\uDBMySQL.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  11-Aug-04   WD        Umbennen von tcDatenbank auf tcDatabase
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\DB\mySQL\umySQLDlg.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  04-Sep-05  WD         Erweiterung des Dialoges
+  25-Sep-05  WD         toBoolean: Typ=String verarbeiten
+  20-Dez-06  WD         Create und Check auf OnInstall eingebaut.
+  22-Dez-06  WD         Info-Dialog eingebaut
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\DB\mySQL\umySQLDll.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  30-Aug-04   WD        trMYSQL_FIELD: unters. zw. Windows (mySQL Ver. 4) und OS/2 (mySQL Ver.3)
+  28-Aug-05   WD        Variablen die nicht verwendet werden entfernt.
+  01-Apr-09   PE        Suchen nach der mySQL Verison 4.0 eingebaut.
+  06-Dec-10   RG        aktuelle MySQL-Version (OS/2) ist v5.1
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Internet\INET.PAS
+{ -- date --  -- from -- -- changes ----------------------------------------------
+  16-Aug-97   Jîrg       Fehler in WebExWin-Records gefixt. Alle Strukturen mit
+                         CSTRING[...STRING] waren falsch Åbersetzt. Jeweils -1
+                         eingefÅgt.
+  01-Feb-07   WD         Umbau von der Funktion tFTP.GetRemoteDir
+  29-Mar-10   WD         Einbau von tLabelLink
+
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Multimedia\MMEDIA.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  01-Jul-04   WD        CDDevice: Einbau von GetMediumID bzw. MediumID
+  05-Jul-04   WD        Eigener MultiMedia-Projekt erstellt.
+  15-Jul-04   WD        SetVolume, GetVolume auf Byte umgestellt.
+  28-Aug-05   WD        Variablen die nicht verwendet werden entfernt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Multimedia\uDart.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  11-Nov-05  WD         Erstellung der Unit nur fuer OS/2. Original Datei von
+                        Hr. Michael L. Gorodetsky fuer Virtual-Pascal programmiert
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Multimedia\uMediaPlayer.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  09-Jul-04  WD         Erstellung der Unit.
+  15-Jul-04  WD         VolumeControl: Wenn ein MCI-GerÑt angegeben ist wird das
+                        Volume (abhaengig vom Channel) vom Device gesetzt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Multimedia\uMMDevices.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  19-Nov-04  WD         Erstellung der Unit. Dateien von uVideoDevuce, uCDDevice und
+                        uAudioDevice zusammen gefuehrt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\COLOR.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  10-Jun-04  AL/WD         Die Funktionen von Aaron Lawrence RGBToHSV und HSVtoRGB eingebaut
+
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\INIFILES.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  27-Dez-02  WD         Ausbau der Funktion GetDefaultINI
+  31-Dez-02  WD         Die Funktion "TRIMSTR" ausgebaut und stattdessen SYSUTILS.TRIM verwendet
+  22-Okt-03  WD         Fuer Windos die Registry-Zugriffprogrammiert
+  13-Feb-05  WD         Eine leere IniFile-Datei (also DateiLen=0) wird bei Destroy gelîscht.
+  28-Feb-06  WD         tcRegistry; Div. Fehler korrigiert.
+  09-Jul-06  WD         TIniFile: Korrekte verarbeitung wenn FFileName=nil ist
+  17-Sep-06  TB         Neue Funktion TIniFile.WriteStringRaw (nur OS/2, Win32 identisch mit WriteString)
+  19-Oct-06  RG         TIniFile.ReadStrings: Erweitert.
+  27-Oct-06  WD         Methoden ReadData und ReadLongWord eingebaut.
+  29-Feb-08  MV         tIniFile renamed to tBaseIniFile
+                        new useful functionality in tIniFile. See tIniFile declaration
+  17-Mar-08  MV         tAsciiIniFile.CreateCP: new parameter AnsiCodepage (false = IBM Codepage
+                        which was the only behaviour before and is still the tAsciiIniFileCreate behaviour)
+   7-May-08  MV         rwWriteDefaults = false malfunction fixed
+  03-Jun-10  RG         neu (OS2):      tcRegistry.GetValueNames
+                                        tcRegistry.GetKeyNames
+                                        tcRegistry.WriteLongWord
+                        Code OS2/Win32: tcRegistry.ReadBool
+                                        tcRegistry.WriteInteger
+                                        tcRegistry.WriteBool
+                        Code OS2:       tcRegistry.ReadLongWord
+                                        tcRegistry.ReadInteger
+                                        tcRegistry.ReadSections
+                                        tcRegistry.ReadSectionValues
+                        Fehler in tcRegistry.EraseSection unter OS2 behoben
+  07-Jun-10  RG         Fehler in tcRegistry.Create behoben
+  16-Jan-14  RG         Fehlermedung 'Ini-File kann nicht geîffnet werden' ergÑnzt mit FileName
+  02-Nov-16  RG         Fehlermedung 'Ini-File kann nicht geîffnet werden' ergÑnzt mit FileName
+
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\PMWinX.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  17-Nov-03  WD         Unit erstellt
+  19-Jan-03  WD         Umbau in eine Klasse.
+  26-Oct-06  RG, WD     Einbau von GetVolumeInformation und GetDriveType
+  14-Mar-07  WD         Einbau von tcPMWinx.GetUserDefaultLCID.
+  20-Mar-09  RG         GetTickCount
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\REXXSAA.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  11-Jun-05  WD         Fuer die Windows-Schiene ein- bzw. umbauen.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\system.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  27-Sep-02  WD         Ausbau der LINUX-Teile
+  01-Aug-03  WD         Einige Aenderungen von von AaronL. uebnommen.
+  03-Okt-03  WD         Konstanten DirectVideo, CheckSnow eintfernt (in CRT gewandert)
+  04-Okt-03  WD         Random-Funktionen nach SYSUTILS ausgelagert.
+  18-Jun-04  WD         Umbau von KBDVIO32.DLL auf die DLLs von EMX
+  06-Aug-04  MV         Compiler-Prob korr.: Der Compiler rechnet mit dem Variablentyp weiter, mit dem er einmal angefangen hat.
+  08-Sep-04  WD         Die Definitionen von uDef uebernommen. uDef aus dem Projekt entfernt.
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  23-Sep-05  WD         Cleanup: Checken ob der HeapMutex nicht schon geschlossen wurde.
+  23-Sep-05  MV         Korrektur von Paramstr(0)
+  30-Sep-05  WD         Die Sourceaenderungen fuer den WDSibyl-Compiler eingebaut.
+  04-Nov-05  WD         Umbau der Datei fuer den WDSibyl-Compiler
+  09-Mar-06  WD         ParamStr: Logik fuer Item=0 herausgenommen, bessere Logik in uSysInfo
+  03-Mai-06  WD         Funktion GenUniqueResName eingebaut.
+  26-Apr-06  WD         Resource-Pointer-Name eingebaut
+  10-Sep-06  WD         Type: tWideChar, tWideString, tUniCodeString usw.
+  31-Mar-07  MV         MkDir; Korrigiert
+  13-Apr-07  MV         Neue Heap-Verwaltung
+  04-Jul-07  MV         FreeMem: Diverse Korrekturen
+  17-Jul-07  WD         UniCode einbauen
+  01-Jan-08  WD         Typ: TFileName eingebaut
+  16-Jun-08  WD         Function: GetProcessId eingebaut.
+  12-Sep-08  WD         Konstante Inch2mm eingebaut (Inch in mm)
+  06-Nov-08  KF         AnsiInsertStr: Korrekter aufruf von AnsiInsert
+  05-Feb-09  WD         Shared-Memory-Name "SIBYL_MAINFORM_HANDLE" auf "WDSIBYL_MAINFORM_HANDLE" umbenannt.
+  24-Feb-09  PE         Floating-Point-Routinen vereinfacht und korrigiert (sinh und tanh),
+                        Exception-Handling fÅr OS/2 aktiviert.
+  22-Mar-09  PE         Controlword les- und setzbar, lokale Speicherung des CW
+  03-Mai-10  WD         NewExceptionFilter: Den Befehl "Exit" entfernt (gleich am Anfang).
+  08-Dez-10  RG         ChDir verbessert; z.B. ChDir('C:\var\') funktioniert auch
+  15-Mai-19  RG         TextRead: RÅckgabestring leer fals Lesen nicht mîglich
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\SysUtils.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  28-Feb-96             assume fmShareDenyNone, If no sharing Mode Is specified.
+                        added support For File locking.
+  08-Mar-96             added lots Of comments. added resources And loading Of
+                        Error Messages And Month / Day Names.
+                        FIXED A bug In FormatStr.
+  14-Apr-96             removed Some forgotten debugging Code.
+  18-Apr-96             added windows-only AnsiLowerCase And AnsiCompareStr.
+                        FIXED A bug In DayOfWeek.
+                        Faster EncodeDate / DecodeDate.
+  12-may-96             Error codes returned by File Open functions were always -1.
+  24-may-96             added Trim, TrimLeft, TrimRight, And QuotedStr functions As
+                        In Delphi 2.0.
+  11-Jun-96             bug In FloatToStrF, ffGeneral With values < 0.001 always used
+                        FIXED Point.
+  27-Jul-96             removed SetLength, already declared In System Unit.
+  27-Aug-96             added SysErrorMessage.
+  26-Dec-96             FIXED Error In date encoding. changed numerous Parameters In
+                        API calls from LongInt To LongWord where ULONG was expected.
+  27-Dec-96             added support For AnsiStrings As Open Array Parameters In
+                        String formatting functions.
+  02-Feb-97             FIXED Some bugs:
+                        - FileWrite returned -1 ON Success instead Of ON failure.
+                        - DateTimeToFileDate didn't work With New Compiler.
+                        changed File access Mode For FileCreate To RD/WR/exclusive.
+  02-Aug-99             - Adapted to Linux (RN)
+  26-Sep-02   WD        Ausbau der LINUX-Teile
+  24-Jul-03   WD        Ausbau von GUI
+  04-Okt-03   WD        Einbau der Random-Funktionen aus SYSTEM.PAS
+  25-Nov-03   WD        Einbau der SysSleep-Funktion (aus DOS.PAS)
+  30-Dez-03   WD        Ausbau der Funktion von "GetFormatSettings". Diese Funktion wird
+                        durch uSysInfo ersetzt.
+  22-Mar-04   WD        Einbau der Funktion "StrMatch".
+  12-Apr-04   WD        Einbau der Funktion "NowStr".
+  07-Jun-04   MV        Korrektur von der Funktion "StrMatch". Die Funktion hat fehlgeschlagen
+                        bei ('*.pasx', 'text.pas') und beim umgekehrten Fall ('*.pas', 'text.pasx').
+                        In beiden FÑllen wird fÑlschlicherweise TRUE ausgegeben.
+  06-Aug-04   MV        Compiler-Prob korr.: Der Compiler rechnet mit dem Variablentyp weiter,
+                        mit dem er einmal angefangen hat.
+  06-Aug-04   MV        Umbau der Funktionen "DiskFree" und "Disksize"
+  08-Aug-04   MV        StrOEMtoAnsi, StrAnsiToOEM moved to FORMS.PAS
+  15-Sep-04   CW        The FindFirst function in Windows 2000 doesn't locate files with the archive bit turned off.
+  16-Nov-04   WD        Umbau des Sprachsystems.
+                        Sibyl_NLS_* auf WDSibyl_NLS_* umbenannt.
+  16-Mar-05   WD        Einbau vom der Definition tLongWordArray
+  14-Mai-05   MV        Ich habe bei einer Handvoll Stellen Range Check Errors eliminiert,
+                        indem ich integer() bzw. longint() eingefÅgt habe.
+  28-Aug-05   WD        Variablen die nicht verwendet werden entfernt.
+  15-Feb-06   WD        Die niederlaendische Sprache eingebaut
+  21-Jan-06   WD        Korrektur von ParseDate (Verwendet jetzt den DateSeparator)
+  22-Jan-06   MV        Long file support > 2GB for findfirst, findnext, findclose. Changes marked with "Martin lf"
+                             simply use searchrec.floatsize (: extended) instead of searchrec.size !!!
+  22-Jan-06   MV        Bug in sysutils.FindFirst, Sysutils.FindNext fixed: os2searchrec in findfirst, findnext was local
+  08-Feb-06   Vova/WD   Die russische Sprache eingebaut
+  17-Mar-06   MV        Funktion OS/Time; dt.Hundredths auf Integer
+  01-Apr-06   MS/WD     Die italienische Sprache eingebaut.
+  06-Apr-06   WD        Funktion: PathExists und DelTree eingebaut
+  17-Apr-06   WD        Funktion: SysShutDown eingebaut
+  13-Jul-06   WD        Funktion: DeleteLastPathSeparator eingebaut
+  21-Aug-06   RG        Format: Korrektur Ausgabe von Format('%0.0n MB',[dSize])
+  30-Aug-06   MV        DecodeDate: Range-Error korrigiert.
+  12-Sep-06   WD        Funktion: HexToInt eingebaut.
+  24-Sep-06   TB        Funktion: FileGetSize eingebaut.
+  20-Oct-06   MV        Funktion: tStrMatch umgebaunt.
+  14-Dec-06   RG        Format: Korrektur Ausgabe von zB Format('%D%%',[PercentDone])
+  16-May-07   RG        FormatBuf: Integer-Uebergabe bei %N,%E,%F... erlaubt
+  22-Aug-07   WD        FileSearch: Umbau der Liste auf AnsiString
+  01-Jan-08   WD        GetTempFileName: Kopiert aus Classes.pas
+  01-Jan-08   WD        GetEnv und GetEnvCount aus uSysInfo kopiert.
+  09-Mar-08   MV        StrOEMtoAnsi, StrAnsiToOEM moved from FORMS.PAS
+  01-Jun-08   MV        Korrekturen bei FileAge und FileCopy
+  12-Aug-08   WD        Funktion: ExtractFileDrive eingebaut.
+  17-Jan-09   WD        Funktion: StrACopy, StrALCopy eingebaut.
+  20-Apr-09   PE        Konstante fanormal von $0080 auf $0000 geaendert.
+  05-Jan-11   RG        DelTree korrigiert, frÅher wurden lediglich leere Verzeichnisse gelîscht
+  07-Jan-11   RG        PathExists korrigiert, SubDir kann in OS2 auch Attribut faArchive besitzen
+  22-Dez-18   RG        Fehler in StrALCopy behoben
+  09-May-19   RG        StrComp ersetzt, funktionierte nicht richtig
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\uDateTime.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  18-Apr-06  WD         Funktion DateToWeek eingebaut
+  24-Sep-06  TB         Funktion DateTimeToUnix, UnixToDateTime eingebaut.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\uList.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  02-Jan-04  WD         Unit erstellt
+  17-Feb-04  WD         Klasse "tcLongWordList" eingebaut
+  25-Apr-04  WD         Klasse "tcLongIntList" eingebaut
+  16-Mar-05  WD         Klasse "tcArray2DFix" eingebaut
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  04-Jul-07  MV         TList.Grow: Reduzieren von Getmem/Freemem
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\uOSFunc.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  22-Apr-06  WD         Unit in das Projekt eingebaut
+  09-Apr-07  MV/WD      Funktion OpenObject eingebaut
+
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\uStream.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  29-Aug-03  WD         TStream.ReadLn: Berr. der neuen Position
+  07-Sep-04  WD         TMemoryStream: Einbau von InsertStream
+  15-Jan-08  WD         Klasse tTempFileStream und TStream.Clear eingebaut und 
+                        div. Korrekturen und Verbesserungen.
+  29-Jan-08  WD         TMemoryStream: Einbau von LoadFromStreamLen
+  12-Feb-08  WD         TStream: Einbau der Funktion AnsiWriteLn
+  19-Dec-08  WD         Klasse TStdInStream, tStdOutStream, tStdErrStream eingebaut.
+  12-Feb-09  WD         Klasse tSharedMemoryStream
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\uString.Pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  01-Jan-03  WD         Von RTL ins SPCC-Projekt uebernommen.
+  13-May-03  WD         Die Strings-Objekte in diese Unit uebertragen.
+  04-Jun-03  WD         Einbau von Compare in tStringList.
+  14-Sep-03  WD         Funktion "iif" eingebaut.
+  08-Feb-04  WD         Funktion "SplitAll" eingebaut.
+  11-Aug-04  WD         In tStrings und tStringList die Funktionen GetID, PutID und InsertID eingebaut
+  14-Jan-05  WD         In tStrings TabSeperator und StringsTab eingebaut.
+  15-Jul-05  WD         Die Schnittstelle von "SplitAll" geaendert.
+  24-Feb-06  WD         Einbau der Funktion LastPos.
+  04-Mar-06  WD         Klasse tStringValue eingebaut.
+  16-Sep-06  WD         Funktion Split: Den Separator von Typ Char auf String geaendert
+  17-Oct-06  RG         Funktion ExtractStrings: eingebaut
+  26-Mar-07  WD         Klasse: tDirList eingebaut
+  27-Jul-07  WD         Funktion TStrings.GetMaxLength und TString.GetMinLength eingebaut.
+  23-Nov-07  WD         Typ tStr9 eingebau.
+  09-Dez-07  WD         Funktion rx_word eingebaut und PosItem auf PosN umbenannt-
+  01-Jan-08  WD         Typ tStr1 eingebaut.
+  13-Feb-08  WD         TStringList: Variable FList und Funktion BottomUpHeapSort von Private auf Protected
+  16-Feb-08  WD         Die Klassen TAnsiStringList, TAnsiStringValue erstellt.
+  10-Apr-08  WD         Typ: pAnsiStringValue und pStringValue
+  09-Okt-08  WD         Funktion AnsiTrimLeft, AnsiTrimRight und AnsiTrim eingebaut.
+  21-Jul-09  RG         Tippfehler: TabSeperato auf TabSeperatoe geÑndert.
+  24-Apr-18  RG         Fehler in PosN() bereinigt
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\uSysClass.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Sep-04  WD         Einbau von tcJoystick (vorher in uJoystick)
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  25-Dez-05  WD         Umbau von dem Objekt tcMutex, tcCriticalSection, tcEvent usw
+  08-Jan-05  WD         Einbau der Klasse tcUSBCalls.
+  05-Mai-06  WD         Klasse tcLog von uLog eingebaut.
+  27-Mai-06  WD         Klasse tcFunc eingebaut.
+  10-Jul-07  WD         Klasse tcFileSearch eingebaut.
+  04-Jan-09  WD         Klasse tcExec eingebaut.
+  02-Feb-09  WD         Klasse tcMuxWaitSemaphor eingebaut.
+  04-Feb-09  WD         Klasse tEvent, tEventtMutex, tCriticalSection geloescht.
+  11-Feb-09  WD         Funktion DLLExists in die Unit uSysFunc verschoben.
+  25-Feb-09  WD         Umbau der Klasse tcPipeServer, tcPipeClient, tcCriticalSection usw.
+  31-Mar-09  WD         tcExec: Einbau der Pipe
+  06-Apr-09  WD         tcPort: Klasse eingebaut
+  10-Feb-10  WD         tcNamedPipeServer: fÅr Windows eingebaut.
+  11-Feb-10  WD         tcNamedPipeServer: OS/2: neuen Properties und Procedure
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\uSysFunc.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  22-Apr-06  WD         Unit in das Projekt eingebaut
+  09-Apr-07  MV/WD      Funktion OpenObject eingebaut
+  02-Feb-09  WD         Unit uSysFunc erzeugt und die Funktionen aus uOSFunc uebernommen
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\uSysInfo.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  17-Nov-03  WD         Unit erstellt
+  31-Jul-04  WD         Neue globale Variable "goSysInfo".
+  31-Jul-04  WD         Befuellen der Variablen von SYSUtils im Unit-Begin-Teil
+  18-Okt-04  WD         Umbau des Initialization/Finalization-Teil
+  30-Okt-04  WD         Einbau der Druckerinformationen
+  10-Mar-05  WD         Einbau von ProgramPath und ProgramName
+  21-Mai-05  WD         Einbau von tros.os2cmd
+  04-Dez-05  WD         Klasse tcSysAppInfo (Div. Info zu Applikationen) eingebaut.
+  27-Feb-06  WD         tcSysAppInfo: Odin-PE.EXE eingebaut
+  07-Mar-06  MV/WD      Bessere Ermittlung von fProgramName und fProgramPath und
+                        Verschiebung der Variable in das Objekt ProgramInfo.
+  09-Mar-06  MV/WD      Win32: Bessere Ermittlung von fOS.OSCmd
+  17-Apr.06  WD         tcSysAppInfo: getSysInfo eingebaut.
+  24-Apr-06  WD         tcSysInfo.getWinInfo: Ermittlung des LongTimeFormat korrigiert
+  23-Aug-06  RG/WD      ThousandSeparator, DecimalSeparator, CurrencyDecimals und
+                        ListSeparator in das Record tcCountry eingebaut.
+  22-Sep-06  WD         Umbau der Verzeichnisse in die Klasse tcFolders.
+  26-Oct-06  WD         Klasse: tcDisc eingebaut.
+  14-Nov-06  UJ, WD     Systemabsturz, wenn das Programm "CONTROL PANEL\INTERNATIONAL" nicht einlsen kann
+  23-Mar-07  WD         Bessere Ermittlung von tcFolders.OSPath.
+  10-Apr-07  WD         Variable RunUnder eingebaut. Zeigt an ob das Win-Programm unter ODIN lÑuft
+  04-Mai-07  WD         Einbau von der Windows-Vesion Vista.
+  10-Mai-07  MV, WD     Definition vom OS-Name verlaengert.
+  31-Mai-07  MV, WD     tcSysAppInfo.getOdinPEExe: Falls WinDir nicht existiert dann SysDir verwenden
+  21-Aug-07  WD         tcSysInfo.getEnv: Das Ergebnis wird statt String mit AnsiString uebergeben.
+  25-Sep-07  WD         tcSysInfi.WDSibylInfo: Neue Funktionen eingebaut.
+  26-Feb-08  MV         Query Windows Desktop Directory moved from initialization to first usage (vista bug problem)
+  07-Mar-08  WD         Konstante EXT_CSV, EXT_XML und EXT_DBF eingebaut.
+  06-Jun-08  WD         Umbau vom Record trDateTime auf die Klasse tcDateTime.
+  11-Jun-08  WD         Die Extension von Grossbuchstaben auf Kleinbuchstaben
+  09-Sep-08  WD         Extension: SQL eingebaut.
+  31-Mar-09  RG         Funktion: TickCount
+  01-Mai-10  WD         Konstanten: EXT_LC_MDX, EXT_UC_MDX, ALL_FILES_LC_MDX, ALL_FILES_UC_MDX
+  03-Mai-10  WD         Einbau von der Windows-Vesion 7.
+  09-Mai-10  WD         tcWDSibylInfo: GetDirBMP (inkl. Property);
+     Nov-11? WD?        Typen trSystem umbenannt (alt zB OS2 neu SysOS2...)
+                        Typen trPlatform umbenannt (alt zB OS2Ver20 neu pfOS2Ver20...)
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\BSEDEV.PAS
+{ -- date ---  -- from -- -- changes ----------------------------------------------
+  18-Jun-2010  RG         diverse zusÑtzliche Definitionen
+                          (IOCTL_,ASYNC_,VID_,SCR_,KBD_,PRT_,MOU_,DSK_,DEV_,POWER_, ...
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\BSEDOS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  03-Nov-06  WD, RB     Funktion DosQuerySysState eingebaut
+  19-Nov-07  WD         Flag OBJ_ANY eingebaut.
+  22-Aug-07  WD         DosSearchPath: Umbau auf AnsiString
+  15-Jun-08  WD         Funktion DosQueryExtLIBPATH und DosSetExtLIBPATH eingebaut.
+  27-Aug-10  RG         indices for DosQuerySysInfo erweitert
+  29-Nov-10  RG         Funktion Dos32QueryHeaderInfo inkl. Definitionen eingebaut
+  08-Nov-18  RG         Funktion DosReplaceModule eingebaut
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\BSEERR.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  01-Jan-09  WD         Fehlermeldungen von CAP.DLL eingebaut
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\BSEKBD.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  18-Jun-04  WD         Erstellung der Datei
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\BSEKBDVIO32.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  18-Jun-04  WD         Erstellung der Datei
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\BSEMOU.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  18-Jun-04  WD         Erstellung der Datei
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\BSEREGISTRY.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  16-Apr-06  WD         Schreibe- und Loeschfunktionen eingebaut
+  14-Mar-07  WD         Die Unit in eine Klasse konvertiert.
+  08-Jun-10  RG         RegEnumValue eingebaut
+                        RegQueryValueEx: "var iDat;" anstatt "var iDat:cString;"
+                                         "var iType:LongWord" anstatt "iType:LongWord" (RÅckgabe)
+                        RegSetValueEx:   "var iDat;" anstatt "var iDat:cString;"
+
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\BSEVIO.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  18-Jun-04  WD         Erstellung der Datei
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\DIVE.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  28-Mai-07  WD         Unit Åberarbeitet.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\MMIO.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  01-Jan-09  WD         Die Funktionen von der CAP.DLL eingebunden
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\OS2DEF.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  06-Aug-04   MV        Compiler-Prob korr.: Der Compiler rechnet mit dem Variablentyp weiter,
+                        mit dem er einmal angefangen hat.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\PMSHL.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  05-Sep-06  WD         Korrektur des Typens SWBLOCK
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\PMWP.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  12-Jun-05  WD         Diverse Funktionen eingebaut.
+  20-Mai-06  WD         Funcktion WinQueryObjectPath eingebaut
+  06-Nov_06  RG         Funktionen WinRestartWPDServer, WinIsWPDServerReady, WinRestartSOMDD,
+                        WinIsSOMDDReady, WinNotebookButtonFromID, WinWaitForShell eingebaut.
+  06-Nov-06  RG         zusÑtzliche Konstanten: OPEN_TREE,OPEN_DETAILS,CLOSED_ICON
+                        zusÑtzliche Konstanten betreffend WinWaitForShell
+  04-Dez-08  WD         Funktion WinRestartWorkplace aktiviert.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\PROCESS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  03-Nov-06  WD, RB     Funktion GetProcesslist eingebaut.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\SOM.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  19-Apr-07  WD         Umbau der Unit fuer WDSibyl.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\Win32\WinADVAPI.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  16-Apr-06  WD         Schreibe- und Loeschfunktionen eingebaut
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\Win32\WINBASE.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  06-Aug-04   MV        Funktion GetDiskFreeSpaceEx eingebaut.
+  29-Jul-06   WD        Neue Konstanten eingebaut.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\Win32\WINCON.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  18-Sep-10  WD         Typ INPUT_RECORD: Variable "reserved" eingebaut.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\Win32\WINDEF.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  06-Aug-04   MV        Ein- bzw. Umbau von den Typen: LARGE_INTEGER, ULARGE_INTEGER
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\Win32\WINERR.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Dez-05  WD         Datei ins Projekt mit aufgenommen
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\Win32\WINGDI.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  01-Nov-04  WD        API-Call "GetDefaultPrinter" eingebaut
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\Win32\WinNetAPI.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  13-Aug-06  WD         Unit erstellt
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\Win32\WINSHELL.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  15-Mai-06  WD         Unit erstellt
+  16-Apr-07  WD         Funktion ShellExecute eingebaut
+
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\Win32\WINSPOOL.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  09-Feb-06  MV/ZE      Verbesserung der Printer-Funktionalitaet (fuer Windows)
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\Win32\WINUSER.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  06-Aug-04   MV        Def. und Funktionen fuer HTMLHelp eingebaut.
+  21-Aug-04   WD        Erweiterung der IDC-Variablen
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\BUTTONS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  27-Sep-02  WD         Ausbau der LINUX-Teile.
+  10-Okt-03  WD         Diverse Insert-Funktionen eingebaut.
+  08-Aug-04  MV         "1 shl" gegen "longword(1) shl" ausgetauscht.
+  29-Aug-04  WD         tRadioButton.SetChecked: Korrekte Verarbeitung unter Windows.
+  26-Mar-04  WD         Den Typ TBitBtnKind "bkPrev" und "bkNext" hinzugefÅgt.
+  31-Jul-05  WD         Den Typ TBitBtnKind "bkFind" hinzugefÅgt.
+  17-Sep-05  WD         Den Typ TBitBtnKind "bkPrinter" hinzugefÅgt.
+  27-Okt-05  WD         Den Typ TBitBtnKind "bkNew" hinzugefÅgt.
+  05-Mai-08  WD         Den Typ TBitBtnKind "bkEdit" hinzugefÅgt.
+  17-Sep-08  WD         TBitBtn.DrawBitmap: Die Transparentfarbe auf die Farbe des Buttons umstellen.
+  11-Nov-08  KF         StdBtnCmds: Korrigiert in die richtige Reihenfolge
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\CACHE.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\CLASSES.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  27-Sep-02  WD         Ausbau der LINUX-Teile
+  01-Jan-03  WD         Funktion tStringList.AddSplit eingebaut
+  26-Nov-03  WD         Delay-Funktion mit SysSleep ausgetauscht
+  10-Jun-04  WD         Ausbau von tThread. Diese Klasse ist zu uSysClass gewandert
+  08-Aug-04  MV         1 Shl --> longword(1) Shl, AND 255  -->  AND longword(255)
+  07-Jul-05  WD         TComponent.UniqueName: Ermittelt einen eindeutigen Namen
+  20-Jul-05  WD         Abspeichern div Infos in die Application-INI-Datei
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  05-Sep-05  WD         Umbau der Datei auf den WDSibyl-Compiler
+  09-Mar-06  WD         Paramstr(0) durch goSysInfo ersetzt.
+  02-Dez-06  WD         Entfernen der Variable "InsideLanguageDesigner"
+  01-Jan-08  WD         GetTempFileName ist jetzt in SysUtil gewandert.
+  15-Mar-08  MV         Const-Teil: kbCtrlBkSp: OS/2 liefert hier immer eine gedrckte Alt Taste
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\CLIPBRD.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Sep-02   WD        Ausbau der LINUX-Teile
+
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\COMCTRLS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Nov-03  WD         Delay-Funktion mit SysSleep ausgetauscht
+  03-Jul-05  TB         TUpDown.SetAssociate: because FPosition may be <> FMin set
+  08-Aug-05  MV/WD      TUpDownBtn.Redraw: Wurden keine Dreiecke angezeigt.
+  11-Aug-05  TB/WD      Komponente in das Projekt hinzugefuegt.
+  18-Aug-05  WD         Horizontaler-Scrollbalken eingebaut.
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  13-Nov-05  WD         tMultiColumnList/Win32: Korrekte Verarbeitung von DblClick.
+  10-Jul-06  WD         TMultiColumnListBox.AddObject: Korrekter Verarbeitung bei Bitmaps
+  12-Nov-06  WD         THeaderControl.WriteInfoToINI: Ueberpruefen ob fSection<>nil ist.
+  16-Jan-07  MV         TMultiColumnListBox.DrawItem: Kleiner Fix bei dem Bitmaps
+  22-Apr-07  RG, WD     Komponente tGauge eingebaut.
+  12-Mai-09  PE         TGauge.PaintAsText: Positionsangabe fÅr Windows korregiert.
+  19-Nov-10  RG         TMultiColumnListBox.DrawItem : optische Verbesserungen
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\DDEMAN.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  09-Mar-06  WD         Paramstr(0) durch uSysInfo ersetzt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\DIALOGS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  27-Sep-02   WD        Ausbau der LINUX-Teile
+  20-Mar-03   WD        Einbau der tInfoDialog
+  08-Aug-04   MV        fHelpButton moved from private to public HelpButton
+                            (to enable HelpButton.Visible := false)
+                        bei A:TEXT.TXT in OpenDialog nicht Verzeichnis anfÅgen
+                        Bei OpenDialog.Execute war als Default bei Windows nicht das aktuelle Verzeichnis
+                        Bei ChangeDirDialog DirectoryList und FilenameEdit von Private nach Public
+  17-Apr-05   WD        TPrintDialog: Buttons "Print" und "Properties" deaktivieren,
+                            wenn es kein Drucker im System existiert.
+  11-Jul-05   TB        Diverse korrketuren an TSystemOpenDialog, TSystemSaveDialog usw.
+  26-Jul-05   WD        Dialogs: SaveLoadInfo als Default auf False setzen.
+  26-Jul-05   MV        tOpenDialog: if another file type is selected, the file extension
+                        gets changed automatically
+  18-Sep-05   WD        Dialog: User-Password eingebaut
+  19-Feb-06   MV        tOpenDialog: resizable window
+  09-Mar-06   WD        Paramstr(0) durch uSysInfo ersetzt.
+  29-Jul-06   MV/WD     tOpenSystemDialog.Execute und tSaveSystemDialog.Execute: Entfernen des letzten PathSeparators.
+  06-Okt-06   WD        tInputQueryDialog: Klasse neu programmiert und Funktion InputQuery angepasst
+  27-Feb-08   MV        TSystemSaveDialog.Execute:Boolean: oFlag fÅr Vista umgebaut.
+  15-Mar-08   MV        TSystemOpenSaveDialog.SetupComponent: Korrekte BefÅllung von FInitialDir
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\DOCKTOOL.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  09-Mar-06   WD        Paramstr(0) durch uSysInfo ersetzt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\Editors.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Sep-02   WD        Ausbau der LINUX-Teile
+  07-Aug-04   MV        massive changes, colleced over years by MV
+  06-Jan-04   MV        "NormalChar" redefined
+  Mai/Juni 05 MV        Drag and Drop Changes, Fixes, adaption to Wraped.pas, (but with WPS crash bug)
+  Juli 05     MV        1. LoadSaveAsAnsi dependent AnsitoOEM/OEMtoAnsi conversion moved
+                           from different (not really correct) places to
+                           _GetFileText and _WriteFileText
+                        2. new: EditorposInICB
+                        3. dropping file icons into the text and press SHIFT
+                           --> filename instead of file content is copied
+                        4. slowing down scrolling while marking text and mouse outside the window
+                        5. drag and drop WPS crash bug (Mai/Juni 05) fixed, minor improvements
+  Aug  05     MV        Compiler warnings removed
+  Sept 05     MV        Editor Font Attributes added (Type TAttributeArray)
+                        -> bold, underlined and italic fonts possible now
+                        Set FontAttributesEnabled to TRUE in SetupComponent and redefine DefineLineColors !
+  Sept 05     MV        bug in Move Column Block fixed (procedure cmICBMoveBlock)
+  Jan  06     MV        Win32 bugfix: malfunction when pressing right mouse button while block has been marked;
+                                      when dropping, the text selection got lost.
+              MV        when creating a backup while saving, FileExists instead of test-reset (omits casually error message)
+  Feb  06     MV        italic background drawing rewritten
+                        distinguish between FFind and FFindReplace property, FindHistory/ReplaceHistory gets now remembered
+  Mar  06     MV        Ctrl-KN upcaseblock moved to Ctrl-KM;
+                        Ctrl-KN: ToggleBlockMode (Wordstar default)
+  Oct  06     MV        new function FileCloseQuery: can be used within the program; use CloseQuery only on exit
+  Feb  07     MV        Bugfix: saving an empty editor window now rewrites an empty file
+  Feb  07     MV        new EditorOption: eoJumpWordSpace. If set, the Cursor word right/left buttons do orientate to spaces
+                        instead of characters. Differences are with non-letter characters like comma or parenthesis
+              MV        new heap memory functions; all "new (p)" changed to "getmem (p, sizeof(p^));
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\ExtCtrls.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  08-Aug-04  MV         minor adaption to tMetafile
+                               fixed: Radiogroup button sometimes not set
+  27-Aug-05  WD         Komponete "tOKCancelButton" eingebaut
+  13-Nov-06  RG         TImage.SetPicture eingebaut
+  28-Jan-07  WD         tShape.Set/GetColor: Property eingebaut.
+  17-Sep-08  WD         tImage: Property "SetTransparentColor" eingebaut.
+  20-Sep-08  WD         tOKCancelButton: Property "OkModalResult" eingebaut.
+  17-Mar-09  WD         TCheckGroup: Eingebaut.
+  04-Apr-10  WD         Neue Funktion: InsertApplicationIcon
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\FILECTRL.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Sep-02  WD         Ausbau der LINUX-Teile
+  08-Aug-04  MV         Verhinderung von gelegentlichem Absturz bei OpenDialog
+  02-Jan-05  MV         Verhinderung von gelegentlichem Absturz bei OpenDialog
+  30-Mar-05  WD         Komponente "tEditFileName" eingebaut.
+  10-Aug-05  TB         TDriveComboBox.SetDrive Fehler Laufwerksliste gefixt
+  19-Aug-05  TB         TEditFileName erweitert fÅr den Typ des Dateidialogs
+                        (TDialogType), published OnChange eingebaut, intern den
+                        Hint fÅr Vorhandensein der Datei in evChange eingebaut
+                        (Åberschreibar mit Property Hint. ZusÑtzlich Property
+                        ButtonHint eingebaut
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  24-Feb-06  WD         Einbau der Funktion TDirectoryListBox.CharEvent
+  27-Jul-06  TB         Refresh fFilename eingebaut in tEditFileName.evChange
+  24-Aug-06  RB/WD      FileCTRL: Property "mask" von Protected nach Published verschoben.
+  02-Feb-07  WD         TFileListBox.Refresh/TDirectoryListBox.Refresh: Funktion eingebaut
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\FORMS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Sep-02  WD         Ausbau der LINUX-Teile
+                        Propertys Parameter, Log, ProgramPath, ProgramName,
+                        ProgramVersion, ProgramSubVersion, ProgramDate,
+                        ProgramIniFile, FormPos[Const FormName: String]
+                        in tApplication eingebaut.
+  03-Aug-03  WD         tControl.Caption von "Protected" auf "Published"
+  12-Aug-03  WD         Das Help-Programm nach dem Beenden der Applikation schliessen
+  14-Sep-03  WD         Einbau des Property "Parameter" in tApplication
+  16-Sep-03  WD         Einbau des Property "Log" in tApplication
+  06-Okt-03  WD         ResetComponent und tForm.ResetComponents eingebaut
+  21-Okt-03  WD         Funktionen tControl.SetEnabled und tControl.GetEnabled von Private auf Protected umgestellt
+  26-Dez-03  WD         Korrektur von der Funktion "DrawSystemBorder"
+  08-Aug-04  MV         Microsoft HTML-Help
+                        Unterdrcken der OS/2-Fehlermeldung "Laufwerk nicht bereit"
+                        und eine Menge kleine Dinge, die sich ber Jahre angesammelt haben
+  21-Aug-04  WD         Drag&Drop und CreateCursor korrigiert.
+  31-Aug-04  WD         TScreen.GetFontFromPointSize: Bessere Ermittlung von lfHeight und lfWidth unter Windows
+  15-Sep-04  CW         TframeControl.CreateWnd: Korrekte Anzeige der Form-Caption bei Sonderzeichen
+                        Tapplication.DeleteMenuItem: The TApplication component doesn't reduce the Tlist of active TMenuItems when the newest ones are deleted
+  29-Sep-04  WD         Umbau der Drag&Drop unter Windows
+  01-Okt-04  MV         Korrketur von tScreen.GetFontFromPointSize: Umrechnung von Pitch --> Pixel
+  04-Okt-04  MV         Einbau der Property tScreen.SystemFontCount
+  08-Nov-04  WD         Einbau der Funktion tForm.PrintForm;
+  14-Nov-04  WD         Umbau der Logik fuer die Positionspeichern dem Forms. Jetzt auch
+                        abhngig von Application.FormPositionINI. default: fpSaveLoadINI
+  05-Dez-04  WD         Durch den neuen RC-Compiler: Rueckbau von Curs_OS2.RC und Curs_W32.RC auf Cursors.RC
+  07-Feb-05  WD         Aendern der Applikations-INI-Datei: FormPosition -> FormInfo. Dadurch knnen
+                        mehrere Attribute gespeichert werden. (z.b. FormPosition, Schriftart usw.)
+  23-Mai-05  MV/WD      BeginDrag ab nun als "virtual" definiert
+  22-Jun-05  WD         Wenn keine INI-Datei existiert, dann soll die Fonts von der IDE verwendet werden.
+  30-Jun-05  WD         Set-/GetFormInfo: Abspeichern und Laden von Color
+  07-Jul-05  WD         Speichern der Schrift und die Farbe der einzelen Komponenten
+  20-Jul-05  WD         Abspeichern div Infos (tControl, tForm) in die Application-INI-Datei
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  18-Okt-05  MV/WD      Ausbau der If-Statements aus der Funktion TApplication.SetHelpFile
+  25-Okt-05  WD         Abspeichern des WindowsStates (Normal, Minimize und Maxmize) in der INI.
+  12-Nov-05  WD         Windows/Showmodal: Wenn die Form beendet wird, dann bekommt der Owner den Focus
+  12-Dez-05  WD         In der INI wird nun auch der Drucker gespeichert.
+  26-Dez-05  WD         Neue Funktion TApplication.GetProgramAlreadyRunning; Lauft schon das Programm?
+  20-Jan-06  MV/WD      tControl.SetCursor: von Private nach protected verschieben und mit virtual versehen
+  28-Jan-06  WD         Korrektur: Programmabsturz wenn kein Durcker im System vorhanden ist
+  17-Feb-06  WD         Einbau der Klasse tLanguageFile (Sprache)
+  17-Mar-06  WD         Application.Run/SetHelp: Hilfelogik verschoben.
+  16-Jul-06  MV         Statt #0 in der AnsiToOemTable auf #32 geaendert.
+  16-Jul-06  MV         Korrektur der schrumpfenden Controls.
+  10-Aug-06  MV         Control.ShowHint von Protected auf Public umgestellt.
+  10-Aug-06  WD         TApplication.ProcessMessage: If Anweisung geaendert und FTerminate:=True herausgenommen, da
+                        diese Variable schon in der Close-Funktion eventuell gesetzt wird.
+  19-Aug-06  MV         tForm.SetHelpWindowTitle: Ausbau von den beiden IFs
+  30-Aug-06  MV         GeneralGetFontFromPointSize: bei Windows darf nur dann auf Kopien von Screen-Fonts zugegriffen werden,
+                                 wenn der Font auch wirklich fuer Screen benoetigt wird,
+                                 andernfalls wird die Schrift viel zu klein, weil die Groesse in Pixel nicht
+                                 angepasst wird
+  30-Aug-06  WD         Finalization (inkl. Aufruf von Screen.Destroy; DosCloseMutexSem) eingebaut.
+  04-Sep-06  MV/TB      TApplication.HintTimerExpired: Ausbau vom Check ob das Control enabled ist oder nicht.
+  03-Okt-06  KF         Einbau von der Variable: MakeIniFile
+  06-Nov-06  WD         TApplication.DeleteMenuItem: Check auf FMenuItemList=nil
+  21-Mar-07  MV         TSystemOpenDialog.Execute:Boolean: OFN_FILEMUSTEXIST ausgebaut
+  21-Apr-07  WD, MV     Die neue Heap-Verwaltung von Martin V fr die IDE eingebaut.
+  23-Apr-07  WD         TApplication.Create: So umgebaut, dass es auch den Parameter "-LOG=" versteht
+  16-Jul-07  WD         THintWindow.Redraw: Umbau der Hints, damit mehrer Zeile ausgegeben werden kann.
+  01-Sep-07  WD         tSizeBorder: BorderAlign "baVerticalSizing" eingebaut.
+  09-Mar-08  MV         StrOEMtoAnsi, StrAnsiToOEM moved to SYSUTILS.PAS
+  15-Mar-08  MV         ReadInfoFromINI: Kl. korrektur bzgl. bsDialog;
+  15-Mar-08  MV         TControl.WMChar: umgebaut
+  15-Mar-08  MV         Initialization: Auskommentieren von OemToAnsiTable[#21] := #167;
+  15-Mar-08  MV         TScreen.MapPoints und TControl.MapPoints: Umrechnung fr Windows eingebaut.
+  03-Jun-08  WD         Property Locked und IsModal eingebaut bzw. erweitert.
+  23-Mar-10  WD         tApplication: Einbau von fProgramDemo, fProgramRegCode
+  31-Mar-10  WD         Cursor: Neue Hand-Cursor.
+  30-Apr-10  WD         tApplication: Neue Variable fProgramLongName
+  03-Mai-10  WD         TControl.DestroyWnd: Ueberpruefen ob das Control in Windows noch existiert.
+  26-Oct-10  RG         Lage und Grîsse von Hint bereinigt (THintWindow.ActivateHint)
+  Nov 2011?  WD?        geÑndert auf: pfOS2Ver20, pfOS2Ver30, pfOS2Ver40, pfOS2Ver45
+                        erweitert: pfEComStation
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\Graphics.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Sep-02  WD         Ausbau der LINUX-Teile
+  25-Dez-03  WD         Unter Win32 die Funktion "Canvas.Rectangle" korrigiert.
+
+  08-Aug-04  AL (Aaron Lawrence, copied by MV) tBitmap.Update rewritten
+  08-Aug-04  MV         tMetafile OS/2 implemented, works fine in WSformat (visit www.WriteAndSet.com)
+                        and a lot of minor stuff fixed
+  15-Sep-04  CW         Korrektur von Tfont.GetWidth.
+  03-Okt-04  MV         Einbau von der tFont.CodePage
+  03-Nov-04  WD         Ergnzung von tCanvas.Create, damit nicht nur tComponent-Klassen
+                        als Owner verwendet werden knnen. z.b. tPrinter
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  27-Nov-05  WD         Ermoeglichen, dass ein Icon auch in ein Bitmap geladen werden kann.
+  18-Jan-06  WD         Procedure tCanvas.ChangeColor implemented
+  08-Feb-06  MD         tFont.Codepage -> tFont.WinCodepage
+                        tFont.OS2Codepage sets codepage for OS/2 (z.B.850,1004). Gets active within SetFont
+                          default of OS2Codepage is 0
+                          Sample:  NewFont := Screen.GetFontFromPointSize(...);
+                                   NewFont.OS2Codepage := 1004; //Windows ANSI Codepage
+                                   Control.Font := NewFont;
+  03-Mai-06  WD         Funktion tBitmap.LoadFromResourceId auf Name-Resourcen umgebaut.
+  18-Jul-06  WD         TCanvas.ExcludeClipRect: von RGN_XOR auf RGN_DIFF
+     Sep-06  MV         tMetafile.CalculateWidthHeight improved
+     Sep-06  MV         ReadSCUFont improved; now in Windows the fonts equal to the ressources for the OS/2 program are chosen
+  23-Jun-07  MV         Changes in TCanvas.Arc
+  24-Jun-07  WD         TBitmap: Property BitmapMem und BitmapMemLength eingebaut.
+  19-Jam-08  MV         Umbau von TBitmap.Draw
+  09-Mai-10  WD         TBitmap.ReadStream: Wegen der IDE check von der Variable "Application"
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\GRIDS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  27-Sep-02   WD        Ausbau der LINUX-Teile
+  22-Aug-03   WD        Einabau von IndexOf in die Klasse "TStringGrid"
+  15-Sep-04   CW        TStringGrid.DrawCell: statt dec den Befehl "Pred" verwenden
+  03-Mar-05   WD        TGrid.Redraw: Korrektur der Umrandung unter Windows
+  23-Dez-06   WD        Funktion InsertStringGrid eingebaut.
+  25-Dez-06   WD        tGrid und tStringGrid: Groessen Anpassung bei Doubleclick.
+  02-Feb-09   PE        tStringGrid: Diverse korrekturen (Scrollbar usw.)
+  01-Apr-09   PE        tStringGrid: Einbau von DrawCellEvent
+  19-Apr-11   RG        TDrawGrid: Einbau von OnExit, OnKeyPress
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\LISTVIEW.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  27-Sep-02  WD         Ausbau der LINUX-Teile
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  03-Okt-06  KF         TListView.Add: Statt Bitmap.Height Width verwenden
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\MASK.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\MENUS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Sep-02  WD         Ausbau der LINUX-Teile
+  08-Aug-05  MV/AL      Definition of a Menu default font
+  18-Jul-05  WD         Einbau des Property ForeGroundColor, BackGroundColor
+  20-Jul-05  WD         Abspeichern div Infos (tMenu) in die Application-INI-Datei
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  11-Sep-06  HO         GetKeyRepeat: Check auf m.param2lobytehi (DBCS-Handling)
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\MESSAGES.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Sep-02   WD        Ausbau der LINUX-Teile
+  01-Mar-03   WD        Message "cmOption" eingebaut
+  05-Mai-08   WD        Message "cmEdit" eingebaut.
+
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\newGrids.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  27-Sep-02   WD        Ausbau der LINUX-Teile
+  22-Aug-03   WD        Einabau von IndexOf in die Klasse "TStringGrid"
+  15-Sep-04   CW        TStringGrid.DrawCell: statt dec den Befehl "Pred" verwenden
+  03-Mar-05   WD        TGrid.Redraw: Korrektur der Umrandung unter Windows
+  23-Dez-06   WD        Funktion InsertStringGrid eingebaut.
+  25-Dez-06   WD        tGrid und tStringGrid: Groessen Anpassung bei Doubleclick.
+  02-Feb-09   PE        tStringGrid: Diverse korrekturen (Scrollbar usw.)
+  01-Apr-09   PE        tStringGrid: Einbau von DrawCellEvent
+  19-Apr-11   RG        TDrawGrid: Einbau von OnExit, OnKeyPress
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\OUTLINE.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  27-Sep-02  WD         Ausbau der LINUX-Teile
+  18-Nov-04  MV         Umbau von TOutlineNode.Destroy
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  26-Sep-05  MV         Kontrollvariable "ProcessDestroyWnd" eingebaut, die verhindert,
+                        da· wenn das Outline beim Destroy ist, noch einmal EintrÑge sortiert
+                        werden, was zu dem Fehler fÅhrte und jetzt auch schneller sein sollte.
+  28-Jul-06  MV         FullExpand, FullCollapse now encapsulated with BeginUpdate...EndUpdate
+  31-Jul-06  MV         New procedure tOutline.ShowItem (index) expands the parents and moves the scrollbar
+                        to get the item really visible. The item does not get selected.
+  03-Okt-06  KF         TOutline.NodeFromPoint: Outlineitem fangen bei 1 und nicht bei 0
+
+  27-Sep-07  MV         TOutline.SetSelectedNode (for the command "Outline.SelectedItem := X") changed
+                        (Win32 only)
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\PRINTERS.PAS
+{ -- date -- - changes ------------------------------------------
+  22-Dec-97   Initial Release.
+  28-Jan-97   printing To File didn't work when FileName was
+              specified With PrintToFile already being True.
+  08-Feb-97   Device Name now 32 characters. Problems With
+              systems where several Printer Objects Use the same
+              Device. results In 'No queue for device'. don't
+              know how To fix This.
+  27-Feb-97   removed Some debugging stuff.
+  05-Mar-97   FIXED bug that resulted In 'No queue for device'.
+              moved Error Messages To Resource Id 65300.
+  13-Mar-97   Some changes by RN
+  04-Apr-97   GetPrinterInfo now replaces #13#10 by A space
+              If the Printer Name Is Multi-Line.
+  15-Apr-97   additional diagnostic information when DevOpenDC
+              Or GpiCreatePS Fail. New Error Handling For
+              startup sequence. Existence Of Printer Instance
+              guaranteed.
+  16-Apr-97   RN: Saved Initialization part With Try..Except.
+              This Is only For safety If For Instance A GPF
+              occurs within the Constructor.
+  05-Aug-97   JP: Fixed bug reported by Alex Vermeulen.
+              Printer had no palette, which resulted in
+              empty pages when trying to use RGB colors.
+              Some other initialization also done on
+              every BeginDoc: Pen, Brush and Font set to
+              default values.
+  06-Aug-97   JP: Default printer font is now either
+              "Courier New" or "Courier", depending on
+              which one is available. Changes to BeginDoc
+              and SetPrinterState.
+  16-Aug-97   JP: Added methods PrintBitmap and PrintForm.
+
+  ??-???-??:  ??: crash with network printing fixed
+
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  12-Oct-04  MV         NETAPI Network printing crash fixed
+  14-Oct-04  WD         Unit TPrinter fuer Windows umgebaut
+  17-Apr-04  WD         Korrektur, wenn es keinen Drucker im System installiert ist
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  09-Feb-06  MV/ZE      Verbesserung der Printer-Funktionalitaet (fuer Windows)
+  18-Mar-08  MV         Printer.ExceptionsAllowed to omit error messages
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\StdCtrls.PAS
+{ -- date --  -- from -- -- changes ----------------------------------------------
+  27-Sep-02   WD         Ausbau der LINUX-Teile
+  30-Jun-03   WD         Einbau vom Numberonly in Combobox
+  10-Okt-03   WD         Diverse Insert-Funktionen eingebaut.
+  01-Jun-04   WD         Einbau von MaxLength in tMemo
+  08-Aug-04   MV         Kleinkram
+  16-Aug-04   WD         Unter Windows hat die Funktion tCombobox.SetFocus nicht korrekt funktioniert.
+  15-Sep-04   WD         TComboBox.SetStyle: The TComboBox control doesn't cleanup, provoking system hangs.
+  27-Dec-04   WD         tListbox: Einbau von mehrer Spalten; nur bei Style = lbOwnerdrawFixed
+  07-Jan-05   WD         tCombobox: Property Listbox eingebaut
+  28-Aug-05   WD         tCombobox.EvKeyPress: Wenn Style="csDropDownList" und eine Taste gedrÅckt wird,
+                         dann die erste Auswahl mit den der Buchstaben anfaengt selektieren.
+  03-Sep-06   WD         TValueSet: DrawInterior; Bitmap-Stretching verbessert
+  10-Mar-08   MV         TComboListShowButton.MouseDown: Funktion ueberarbeitet.
+  08-Mar-09   PE         TListBox: AutoSroll implementiert, Zeichenkonvertierung unter Win32 abgeschaltet
+  04-Mai-09   PE         TEdit.ScanEvent: Weiterreichen, der Keycodes nach oben.
+  07-Dec-10   RG         Korrektur in TListBox.Destroy
+  04-Jan-11   RG         TEdit.ScanEvent: bei kbCR wird wieder nach oben weitergeben 
+                         (nicht mehr KeyCode:=kbNull)
+     Nov-11?  WD?        pfOS2Ver40, pfOS2Ver45, pfWin95, pfWin98, pfWinME, 
+                         pfWinNT3, pfWinNT4, pfWin2000, pfWinXP, pfeComstation... neu: pfWin7
+     Nov-11?  WD?        TComboBox neu: Procedure ScanEvent 
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\TABCTRLS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Sep-2002  WD         Ausbau der LINUX-Teile
+  21-Okt-2003  WD         Korrektur bei dem Property "Enabled". Falsche Darstellung unter Windows
+  15-sep-2004  CW/WD      TTabbedNotebook.Resize: Aufruf aller Seiten-Resizes-Funktionen
+  28-Aug-2005  WD         Variablen die nicht verwendet werden entfernt.
+  30-Apr-2007  MV         make sure that the TabbedNotebook tab is shown if a page is selected by TabbedNotebook.PageIndex := X;
+  30-Aug-2010  RG         Fehlerhafte Berechnung fÅr die Anzeige des akt TabIndexes in SetPageIndex() bereinigt
+  07-Dec-2018  RG         TabbedNotebook.PageText eingefÅhrt um auch das öbersetzen zu ermîglichen
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\uConvert.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  01-Dec-05  WD         Einbau der Unit
+  27-Dec-06  WD         Einbau vom dem PCX, GIF-Format und Strukturaenderung.
+  10-Jun-07  WD         Weiter Strukturaenderungen
+
+  22.04.2015 RG         offen: Problem bei ReadPlanes
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\uLanguage.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  03-Mar-06  WD         Datei erstellt und ins Projekt eingebaut
+
+
+Datei:  P:\WDSibyl\Library\Source\SPCC\_MENUS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Sep-02  WD         Ausbau der LINUX-Teile
+  08-Aug-05  MV/AL      Definition of a Menu default font
+  18-Jul-05  WD         Einbau des Property ForeGroundColor, BackGroundColor
+  20-Jul-05  WD         Abspeichern div Infos (tMenu) in die Application-INI-Datei
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  11-Sep-06  HO         GetKeyRepeat: Check auf m.param2lobytehi (DBCS-Handling)
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\TP70\CRT.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  03-Okt-03  WD         Konstanten DirectVideo, CheckSnow eingefuegt
+  26-Nov-03  WD         Delay umgebaut
+  19-Jun-04  WD         Ausbau von KBDVIO32.DLL
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\TP70\DOS.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  27-Sep-02  WD         Ausbau der LINUX-Teile
+  06-Okt-04  MV         Einbau der Konstante "Exec_Visible"
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  11-Dez-05  WD         Exec: Konstante "LinkSupport" eingebaut. Interpretieren von HTTP, FTP
+  23-Dez-05  WD         Exec: AsynchEXEC auch fuer die Windows (Source von Toolbox).
+  22-Jan-06  MV         Long file support > 2GB for findfirst, findnext, findclose. Changes marked with "Martin lf"
+                             simply use searchrec.floatsize (: extended) instead of searchrec.size !!!
+  26-May-06  MV         fexpand: does not touch network filenames anymore
+  06-Jun-06  WD         Exec; Variable "Exec_Visible" wird auch in Windows beruecksichtigt.
+  23-Jun-06  WD         OS/2, DosExitCode: Bei ExecViaSession=true und das System wartet auf Prozess-
+                        Ende eine kleine Pause eingebaut, damit das System nich komplett steht.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\TP70\fastcrt.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  07-Aug-04  MV/WD      Die Unit zu WDSibyl/TP70 hinzugefÅgt
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\TP70\WINCRT.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+  09-Mar-06  WD         Paramstr(0) durch goSysInfo ersetzt.
+  15-Mar-09  PE         Einbau von StrOemToAnsi usw.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\TP70\WinGraph.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
+}
+
+
+Datei:  P:\WDSibyl\Samples\dive\divedemo.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Apr-07  WD         Programm Åberarbeitet.
+}
+
+
+Datei:  P:\WDSibyl\Samples\Games\chess\os2chess\chess.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  24-Feb-09  WD         Die Konstante "WHITE" bzw. "BLACK" auf "PLAYER_WHITE"
+                        bzw. "PLAYER_BLACK" geaendert.
+}
+
+
+Datei:  P:\WDSibyl\Samples\Games\chess\os2chess\chessu1.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  24-Feb-09  WD         Die Konstante "WHITE" bzw. "BLACK" auf "PLAYER_WHITE"
+                        bzw. "PLAYER_BLACK" geaendert.
+}
+
+
+Datei:  P:\WDSibyl\Samples\mmedia\dive\divedemo.pas
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Apr-07  WD         Programm Åberarbeitet.
+}
+
+
+Datei:  P:\WDSibyl\Tools\Source\CompileAll\CompileAllPAS.PAS
+{ -- date -- --from-- -- changes ----------------------------------------------
+  21-Aug-06  WD       Fuer jedes Betriebsystem eine eigene LOG-Datei
+  19-Mar-07  WD       Den EventSemaphor und den Parameter "-INSTALL" eingenbaut
+  08-Feb-09  WD       Umbau auf die neuen Semaphor-Klasse.
+}
+
+
+Datei:  P:\WDSibyl\Tools\Source\CompileAll\CompileAllRC.PAS
+{ -- date -- --from-- -- changes ----------------------------------------------
+  21-Aug-06  WD       Fuer jedes Betriebsystem eine eigene LOG-Datei
+  19-Mar-07  WD       Den EventSemaphor und den Parameter "-INSTALL" eingenbaut
+  08-Feb-09  WD       Umbau auf die neuen Semaphor-Klasse.
+}
+
+
