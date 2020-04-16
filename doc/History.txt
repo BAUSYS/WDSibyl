@@ -1,5 +1,5 @@
 WDSibyl-Aenderungen:
-      zum Stand: 05.04.2020  15:21:19
+      zum Stand: 16.04.2020  10:43:34
 
 
 
@@ -728,13 +728,20 @@ Datei:  P:\WDSibyl\Library\Source\RTL\PMWinX.pas
   19-Jan-03  WD         Umbau in eine Klasse.
   26-Oct-06  RG, WD     Einbau von GetVolumeInformation und GetDriveType
   14-Mar-07  WD         Einbau von tcPMWinx.GetUserDefaultLCID.
-  20-Mar-09  RG         GetTickCount
 }
 
 
 Datei:  P:\WDSibyl\Library\Source\RTL\REXXSAA.PAS
 { -- date -- -- from -- -- changes ----------------------------------------------
   11-Jun-05  WD         Fuer die Windows-Schiene ein- bzw. umbauen.
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\StrUtils.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  14-Apr-20  RG         Erstellung der Unit
+  14-Apr-20  RG         PosEx()
+
 }
 
 
@@ -853,6 +860,8 @@ Datei:  P:\WDSibyl\Library\Source\RTL\SysUtils.pas
   07-Jan-11   RG        PathExists korrigiert, SubDir kann in OS2 auch Attribut faArchive besitzen
   22-Dez-18   RG        Fehler in StrALCopy behoben
   09-May-19   RG        StrComp ersetzt, funktionierte nicht richtig
+  16-Apr-20   RG        procedure: FreeAndNil eingebaut
+
 }
 
 
@@ -941,6 +950,11 @@ Datei:  P:\WDSibyl\Library\Source\RTL\uSysClass.pas
   06-Apr-09  WD         tcPort: Klasse eingebaut
   10-Feb-10  WD         tcNamedPipeServer: fÅr Windows eingebaut.
   11-Feb-10  WD         tcNamedPipeServer: OS/2: neuen Properties und Procedure
+  -------------------------------------------------------------------------------
+  14-Apr-20  RG         Code von getProgramFromUrl befindet sich nun in Unit uWebBrowser.
+                        Derselbe Code war mehrfach vorhanden (Unit DOS,uSysClass). Auch
+                        konnte dadurch gegenseitige AbhÑngikeit uSysClass <> uSysInfo
+                        aufgelîst werden.
 }
 
 
@@ -991,6 +1005,15 @@ Datei:  P:\WDSibyl\Library\Source\RTL\uSysInfo.PAS
   09-Mai-10  WD         tcWDSibylInfo: GetDirBMP (inkl. Property);
      Nov-11? WD?        Typen trSystem umbenannt (alt zB OS2 neu SysOS2...)
                         Typen trPlatform umbenannt (alt zB OS2Ver20 neu pfOS2Ver20...)
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\uWebBrowser.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  14-Apr-20  RG         Erstellung der Unit
+  14-Apr-20  RG         getProgramFromUrl von Unit DOS hierher verschoben.
+                        Derselbe Code war mehrfach vorhanden (Unit uSysClass). 
+                        Gegenseitige AbhÑngikeit uSysClass <> uSysInfo aufgelîst.
 }
 
 
@@ -1318,7 +1341,7 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\ExtCtrls.PAS
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\SPCC\FILECTRL.PAS
+Datei:  P:\WDSibyl\Library\Source\SPCC\FileCtrl.PAS
 { -- date -- -- from -- -- changes ----------------------------------------------
   26-Sep-02  WD         Ausbau der LINUX-Teile
   08-Aug-04  MV         Verhinderung von gelegentlichem Absturz bei OpenDialog
@@ -1335,6 +1358,15 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\FILECTRL.PAS
   27-Jul-06  TB         Refresh fFilename eingebaut in tEditFileName.evChange
   24-Aug-06  RB/WD      FileCTRL: Property "mask" von Protected nach Published verschoben.
   02-Feb-07  WD         TFileListBox.Refresh/TDirectoryListBox.Refresh: Funktion eingebaut
+  15-Dec-18  RG         DirectoryListBox nun auch mit hidden- und Sys-Files
+                        neu: property ShowAllFolders: Boolean; (default ist false)
+                             SetShowAllFolders()
+  17-Dec-18  RG         TDirectoryListBox.MeasureItem.Height meist zu klein,
+                        Buchstaben 'gyj..' werden unten abgeschnitten.
+                        Daher: Property ItemHeight von Protected nach Public verschoben
+                        Kann manuell zB auf 18 gesetzt werden
+                        Destructor DirectoryListBox.Destroy definiert
+  
 }
 
 
@@ -1498,20 +1530,6 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\MESSAGES.PAS
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\SPCC\newGrids.PAS
-{ -- date -- -- from -- -- changes ----------------------------------------------
-  27-Sep-02   WD        Ausbau der LINUX-Teile
-  22-Aug-03   WD        Einabau von IndexOf in die Klasse "TStringGrid"
-  15-Sep-04   CW        TStringGrid.DrawCell: statt dec den Befehl "Pred" verwenden
-  03-Mar-05   WD        TGrid.Redraw: Korrektur der Umrandung unter Windows
-  23-Dez-06   WD        Funktion InsertStringGrid eingebaut.
-  25-Dez-06   WD        tGrid und tStringGrid: Groessen Anpassung bei Doubleclick.
-  02-Feb-09   PE        tStringGrid: Diverse korrekturen (Scrollbar usw.)
-  01-Apr-09   PE        tStringGrid: Einbau von DrawCellEvent
-  19-Apr-11   RG        TDrawGrid: Einbau von OnExit, OnKeyPress
-}
-
-
 Datei:  P:\WDSibyl\Library\Source\SPCC\OUTLINE.PAS
 { -- date -- -- from -- -- changes ----------------------------------------------
   27-Sep-02  WD         Ausbau der LINUX-Teile
@@ -1662,6 +1680,8 @@ Datei:  P:\WDSibyl\Library\Source\TP70\DOS.PAS
   06-Jun-06  WD         Exec; Variable "Exec_Visible" wird auch in Windows beruecksichtigt.
   23-Jun-06  WD         OS/2, DosExitCode: Bei ExecViaSession=true und das System wartet auf Prozess-
                         Ende eine kleine Pause eingebaut, damit das System nich komplett steht.
+  -------------------------------------------------------------------------------
+  14-Apr-20  RG         getProgramFromUrl von hier nach Unit uWebBrowser verschoben
 }
 
 

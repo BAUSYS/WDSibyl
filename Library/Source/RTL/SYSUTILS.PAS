@@ -501,6 +501,12 @@ Function AllocMem(Size: Cardinal): Pointer;
 
 Function ReAllocMem(P: Pointer; CurSize, NewSize: Cardinal): Pointer;
 
+{ FreeAndNil frees the given TObject instance and sets the variable reference
+  to nil.  Be careful to only pass TObjects to this routine. }
+
+procedure FreeAndNil(var Obj); {RG 16-Apr-20}
+
+
 { --- Exit Procedure Handling --- }
 { **************************************************************************** }
 
@@ -2223,6 +2229,14 @@ Begin
   If CurSize <> 0 Then FreeMem(P, CurSize);
   Result := Q;
 End;
+
+procedure FreeAndNil(var Obj); {RG 16-Apr-20}
+var Temp: TObject;
+begin
+  Temp := TObject(Obj);
+  TObject(Obj) := nil;  // oder Pointer(Obj) := nil;
+  Temp.Free;
+end;
 
 { Exit Procedure Handling }
 
@@ -6353,4 +6367,6 @@ End.
   07-Jan-11   RG        PathExists korrigiert, SubDir kann in OS2 auch Attribut faArchive besitzen
   22-Dez-18   RG        Fehler in StrALCopy behoben
   09-May-19   RG        StrComp ersetzt, funktionierte nicht richtig
+  16-Apr-20   RG        procedure: FreeAndNil eingebaut
+
 }

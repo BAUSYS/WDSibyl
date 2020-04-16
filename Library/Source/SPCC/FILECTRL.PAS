@@ -13,8 +13,7 @@ Unit FileCtrl;
 
 Interface
 
-Uses Dos,SysUtils,Color,Classes,Forms,StdCtrls,
-     Buttons;
+Uses Dos,SysUtils,StdCtrls,Classes,Buttons,Color;
 
 Type
     TDirectoryListBox=Class;
@@ -126,6 +125,8 @@ Type
          FFileList:TFileListBox;
          FDriveCombo:TDriveComboBox;
          FOnChange:TNotifyEvent;
+         FShowAllFolders: Boolean; {RG 15.12.2018}
+
          Procedure SetDirectory(NewDir:String);
          Function GetDrive:Char;
          Procedure SetDrive(NewDrive:Char);
@@ -144,22 +145,25 @@ Type
          Procedure DrawItem(Index:LongInt;rec:TRect;State:TOwnerDrawState);Override;
          Procedure SetupShow;Override;
          Procedure CharEvent(Var key:Char;RepeatCount:Byte);Override;
+         procedure SetShowAllFolders(const Value: Boolean); {RG 15.12.2018}
 
          Property Duplicates;
          Property ExtendedSelect;
-         Property ItemHeight;
+         //Property ItemHeight; {RG 17.12.2018 nach Public verschoben}
          Property MultiSelect;
          Property Sorted;
          Property Style;
          Property OnDrawItem;
          Property OnMeasureItem;
       Public
+         Destructor Destroy;Override; {RG 17.12.2018}
          Function WriteSCUResource(Stream:TResourceStream):Boolean;Override;
          Procedure Refresh;
 
          Property Directory:String Read FDirectory Write SetDirectory;
          Property Drive:Char Read GetDrive Write SetDrive;
          Property Items;
+         Property ItemHeight; {RG 17.12.2018 von Protected hierher verschoben}
          Property XAlign;
          Property XStretch;
          Property YAlign;
@@ -180,6 +184,7 @@ Type
          Property ParentPenColor;
          Property ParentFont;
          Property ParentShowHint;
+         property ShowAllFolders: Boolean read FShowAllFolders write SetShowAllFolders default False; {RG 15.12.2018}
          Property ShowDragRects;
          Property ShowHint;
          Property TabOrder;
@@ -920,10 +925,16 @@ Begin
      Style:=lbOwnerDrawFixed;
 End;
 
+destructor TDirectoryListBox.Destroy; {neu: 17.12.2018}
+begin
+  inherited Destroy;
+end;
+
 Procedure TDirectoryListBox.MeasureItem(Index:LongInt;Var Width,Height:LongInt);
 Begin
    Inherited MeasureItem(Index,Width,Height);
    If Height<15 Then Height:=15;
+   {15 oft zu klein, besser 18, man kann auch ItemHeight auf 18 setzen}
 End;
 
 Procedure TDirectoryListBox.DrawItem(Index:LongInt;rec:TRect;State:TOwnerDrawState);
@@ -1129,7 +1140,9 @@ Begin
        Dir:=Directory;
     
        If Dir[Length(Dir)] In ['\','/'] Then Dec(Dir[0]);
-       Status := FindFirst(Dir+'\*.*',faDirectory,Search);
+       if not ShowAllFolders {RG 15.12.2018}
+       then Status := FindFirst(Dir+'\*.*',faDirectory,Search)
+       else Status := FindFirst(Dir+'\*.*',faDirectory or faHidden or faSysFile,Search); {RG 15.12.2018}
        While Status = 0 Do
        Begin
           S := Search.Name;
@@ -1298,6 +1311,14 @@ Begin
   inherited CharEvent(Key, RepeatCount);
 End;
 
+procedure tDirectoryListBox.SetShowAllFolders(const Value: Boolean); {RG 15.12.2018}
+begin
+  if FShowAllFolders <> Value
+  then begin
+         FShowAllFolders := Value;
+         BuildList;
+       end;
+end;
 
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
@@ -1624,4 +1645,13 @@ End.
   27-Jul-06  TB         Refresh fFilename eingebaut in tEditFileName.evChange
   24-Aug-06  RB/WD      FileCTRL: Property "mask" von Protected nach Published verschoben.
   02-Feb-07  WD         TFileListBox.Refresh/TDirectoryListBox.Refresh: Funktion eingebaut
+  15-Dec-18  RG         DirectoryListBox nun auch mit hidden- und Sys-Files
+                        neu: property ShowAllFolders: Boolean; (default ist false)
+                             SetShowAllFolders()
+  17-Dec-18  RG         TDirectoryListBox.MeasureItem.Height meist zu klein,
+                        Buchstaben 'gyj..' werden unten abgeschnitten.
+                        Daher: Property ItemHeight von Protected nach Public verschoben
+                        Kann manuell zB auf 18 gesetzt werden
+                        Destructor DirectoryListBox.Destroy definiert
+  
 }
