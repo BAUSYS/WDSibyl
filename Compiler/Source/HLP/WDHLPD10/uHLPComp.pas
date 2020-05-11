@@ -1036,9 +1036,9 @@ Begin
           Begin
             Parameter:=Copy(Parameter,2,255);
             if (Parameter='W32') or (Parameter='WIN32')
-              then Settings.CompSystem:=Win32
+              then Settings.CompSystem:=SysWin32 //RG 27-Apr-2020
             else if Parameter = 'OS2'
-              then Settings.CompSystem:=OS2
+              then Settings.CompSystem:=SysOS2 //RG 27-Apr-2020
             else if Parameter='P'                 // Pause nach der Compilierung
               then Settings.WaitAfterPrg:=true
             else if Parameter[1] = 'L'            // Sprache definieren
@@ -1170,4 +1170,5 @@ end.
   28-Apr-2018 RG       Fehler bei der Umsetzung von .DLIST behoben
                        LEFTMARGIN und RIGHTMARGIN eingebaut
                        TITLE funktioniert wieder
+  27-Apr-2020 RG       SysOS2 anstatt OS2, SysWin32 anstatt Win32
 }

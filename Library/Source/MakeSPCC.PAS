@@ -1,4 +1,18 @@
-PROGRAM makeSPCC;   
+Program makeSPCC;   
+
+{ Compilier-Reihenfolge
+  MakeRTL		(Src_RTL+Src_RTL_OS+Src_RC)
+  MakeTP70		(Src_RTL+Src_TP70)
+  MakeSPCC		(Src_SPCC)
+  MakeDB		(Src_DB)
+  MakeCompnt		(Src_Compnt)
+  MakeDialog		(Src_Dialog)
+  MakeInternet		(Src_Inter)
+  MakeMultiMedia	(Src_MM)
+  MakeRest		(Src_TP70)
+
+  MakeIDE		(?)
+}
                          
 uses BUTTONS, CACHE, CLASSES, CLIPBRD, COMCTRLS, DIALOGS,
      DDEMAN, DOCKTOOL, EDITORS, EXTCTRLS, FILECTRL, FORMS,
@@ -9,8 +23,9 @@ uses BUTTONS, CACHE, CLASSES, CLIPBRD, COMCTRLS, DIALOGS,
 Uses uLanguage,
      uConvert;   { Diverse Konvertierungsfunktionen }
            
-BEGIN      
-END.              
+begin
+end.
+           
 
 { -- date -- -- from -- -- changes ----------------------------------------------
   12-Jun-04  WD         Unit "Dialogs" in eine eigenes Projekt "MakeDialog" verschoben
@@ -23,4 +38,7 @@ END.
   27-Aug-05  WD         Komponete "tOKCancelButton" in ExtCtrls eingebaut
   26-Dez-05  WD         Datei "Synchobjs" entfernt. (-->RTL uebernommen uSysClass)
   17-Feb-06  WD         Langauge-Support eingebaut
+  26-Apr-20  RG         optisch
+
 }
+

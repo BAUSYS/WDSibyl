@@ -1,4 +1,4 @@
-{$I P:\WDSibyl\WDSibyl\Compiler\Source\Share\WDSibyl.inc}  /* constants file */
+{$I P:\WDSibyl\Compiler\Source\Share\WDSibyl.inc}  /* constants file */
 
 STRINGTABLE WDSIBYL_NLS_Default
 BEGIN
