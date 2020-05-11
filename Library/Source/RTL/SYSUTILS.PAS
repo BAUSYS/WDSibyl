@@ -3052,6 +3052,7 @@ Begin
    FileTimeToDosDateTime(Actual,date,time);
    {Martin}F.Time:=(longword(date) Shl 16) Or Time;
    F.Size:=F.SearchRecIntern.nFileSizeLow;
+
    {longlong: low : longword; high : longint;}
    f.floatSize := extended(65536.0) * 65536.0 * F.SearchRecIntern.nFileSizeHigh
                 + ExtendedOfLongword (F.SearchRecIntern.nFileSizeLow);
@@ -3163,7 +3164,7 @@ Var
 Begin
   {$IFDEF OS2}
   If DosQueryFileInfo(Handle, FIL_STANDARD, Buffer, SizeOf(Buffer)) = NO_ERROR Then
-    FileGetDate := (Buffer.fdateLastWrite Shl 16) Or Buffer.ftimeLastWrite
+    FileGetDate := (longword(Buffer.fdateLastWrite) Shl 16) Or Buffer.ftimeLastWrite {Martin0520}
   Else FileGetDate := -1;
   {$ENDIF}
   {$IFDEF Win32}
@@ -5416,7 +5417,7 @@ End;
 
 Function DayOfWeek(date: TDateTime): Integer;
 Begin
-  Result := (1 + Trunc(date)) Mod 7;
+  Result := (longint(1) + Trunc(date)) Mod 7;{Martin}
   If Result = 0 Then Result := 7;
 End;
 
@@ -6368,5 +6369,6 @@ End.
   22-Dez-18   RG        Fehler in StrALCopy behoben
   09-May-19   RG        StrComp ersetzt, funktionierte nicht richtig
   16-Apr-20   RG        procedure: FreeAndNil eingebaut
+  08-May-20   MV        LongWord()... 
 
 }

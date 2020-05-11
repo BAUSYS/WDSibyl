@@ -321,6 +321,7 @@ type
          FOnChange:TNotifyEvent;
          FTicks:TList;
          FUpdating:Boolean;
+         FImmediateChange:Boolean;{Martin0320}
          FShowFocusRect:Boolean;
          FSliderSize:TTrackSliderSize;
          Procedure SetMax(NewValue:LongInt);
@@ -393,6 +394,8 @@ type
          Property TickStyle:TTickStyle Read FTickStyle Write SetTickStyle;
          Property Visible;
          Property ZOrder;
+         property ImmediateChange : boolean read FImmediateChange write FImmediateChange;{Martin0320}
+           {default is TRUE. Turn off when trackbar creates loops because of OnChange events}
 
          Property OnCanDrag;
          Property OnChange:TNotifyEvent Read FOnChange Write FOnChange;
@@ -1784,6 +1787,7 @@ Begin
      If NewControl=Self Then Exit;
 
      If FAssociate<>Nil Then FAssociate.Notification(Self,opRemove);
+
      FAssociate := NewControl;
      If FAssociate <> Nil Then FAssociate.FreeNotification(Self);
      AlignButton := FAlignButton;
@@ -2042,7 +2046,7 @@ Begin
           FSelEnd:=FPosition;
      End;
      UpdateSlider;
-     Change;
+     if FImmediateChange then Change;{Martin0320}
 End;
 
 Procedure TTrackBar.Change;
@@ -2128,6 +2132,7 @@ Begin
      FTrackTimer.Interval:=400;
      FTrackTimer.OnTimer:=EvTimer;
      FSliderSize:=tssAuto;
+     FImmediateChange := true; {Martin0320}
 End;
 
 Destructor TTrackBar.Destroy;
@@ -5167,4 +5172,5 @@ End.
   22-Apr-07  RG, WD     Komponente tGauge eingebaut.
   12-Mai-09  PE         TGauge.PaintAsText: Positionsangabe fÅr Windows korregiert.
   19-Nov-10  RG         TMultiColumnListBox.DrawItem : optische Verbesserungen
+  08-May-20  MV         tTrackbar.ImmediateChange added
 }

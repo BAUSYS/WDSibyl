@@ -6667,16 +6667,26 @@ End;
 {Handle an Error Message}
 Procedure TEditor.SetErrorMessage(Const S:String);
 Begin
-     MessageBox(S,mtError,[mbOk]);
-     Focus;
+  {$IFDEF OS2}
+    MessageBox2(S,mtError,[mbOk]); //RG 30-Apr-20
+  {$ENDIF}
+  {$IFDEF Win32}
+    MessageBox(S,mtError,[mbOk]);
+  {$ENDIF}
+  Focus;
 End;
 
 
 {Handle A Query from the Editor}
 Function TEditor.SetQueryMessage(Const S:String;Typ:TMsgDlgType;Buttons:TMsgDlgButtons):TMsgDlgReturn;
 Begin
-     Result := MessageBox(S,Typ,Buttons);
-     Focus;
+  {$IFDEF OS2}
+    Result := MessageBox2(S,Typ,Buttons); //RG 30-Apr-20
+  {$ENDIF}
+  {$IFDEF Win32}
+    Result := MessageBox(S,Typ,Buttons);
+  {$ENDIF}
+  Focus;
 End;
 
 
@@ -9481,4 +9491,6 @@ End.
   Feb  07     MV        new EditorOption: eoJumpWordSpace. If set, the Cursor word right/left buttons do orientate to spaces
                         instead of characters. Differences are with non-letter characters like comma or parenthesis
               MV        new heap memory functions; all "new (p)" changed to "getmem (p, sizeof(p^));
+  30-Apr-20   RG        unter OS2 MessageBox2 anstatt MessageBox
+
 }

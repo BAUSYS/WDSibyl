@@ -64,8 +64,10 @@ Type
          Procedure SetCaption(NewCaption:String);
          Procedure SetStyles(NewStyles:TMenuItemStyles);
          Procedure SetFlags(NewFlags:TMenuItemFlags);
+      public   //Martin
          Function GetULongFromStyle:LongWord;
          Function GetULongFromFlags:LongWord;
+      private  //Martin
          Procedure SetGlyph(NewGlyph:TGraphic);
          Procedure SetHint(Const NewText:String);
          Function GetHint:String;
@@ -101,6 +103,7 @@ Type
          Function IndexOf(Item:TMenuItem):LongInt;
          Procedure RefreshLanguage; Virtual;
          Procedure Click;Virtual;
+         procedure AddSeparator;{Martin0520}
          Property IsEditMenuItem:Boolean Read GetIsEditMenuItem; {raus}
          Property Handle:HWindow Read FHandle;
          Property Count:LongInt Read GetCount;
@@ -199,6 +202,17 @@ Type
          Property Height;
     End;
     TMainMenuClass=Class Of TMainMenu;
+
+    {SysMenu Class Martin 05/20}
+    TSysMenu=Class(TMenu)
+      Protected
+         Procedure SetupComponent;Override;
+         Procedure Show;Override;{empty}
+      Public
+         Property Height;
+         procedure Create2;{initialization while Form First Show, window handles have to exist already}
+    End;
+    TSysMenuClass=Class Of TSysMenu;
 
 
     {$M+}
@@ -306,6 +320,7 @@ Const
 
 
 Function AccelToString(kbValue:TKeyCode):String;
+
 Var  Mask:TKeyCode;
 Begin
      Result := '';
@@ -1114,6 +1129,8 @@ Begin
 End;
 
 Procedure TMenuItem.Insert(Index:LongInt;Item:TMenuItem);
+  var
+    idx : longint;
 Begin
      If Item = Nil Then Exit;
      Item.FParent := Self;
@@ -1125,7 +1142,9 @@ Begin
 
      Styles := Styles + [misSubmenu];
 
-     If FCreated Then InsertMenuEntry(Self,Item,Index)
+     if FMenu is tSysMenu then Idx := MIT_END    //Martin
+     else Idx := Index;
+     If FCreated Then InsertMenuEntry(Self,Item,Idx)
      Else FInitItems := FItems;
 End;
 
@@ -1425,6 +1444,13 @@ Begin
 End;
 
 
+Procedure TMenuItem.AddSeparator; {Martin0520 lcl compatible}
+  var
+    Item : tMenuItem;
+  begin
+    Item := tMenuItem.Create (self); Add (Item); Item.Break := mbSeparator;
+  end;
+
 {
 ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 บ                                                                           บ
@@ -1566,6 +1592,7 @@ Begin
           Else
           Begin
                aFontInfo:=TPublicFont(FFont).FontInfo;
+
                aFontInfo.lfHeight:=TPublicFont(FFont).FontInfo.lfHeight;
                aFontInfo.lfWidth:=TPublicFont(FFont).FontInfo.lfWidth;
                aFontInfo.lfQuality:=DRAFT_QUALITY;
@@ -2226,6 +2253,94 @@ Begin
 End;
 
 
+{
+ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+บ Martin 05/20                                                              บ
+บ Sibyl Portable Component Classes (SPCC)                                   บ
+บ                                                                           บ
+บ This section: TSysMenu Class Implementation (only implemented for OS/2)   บ
+บ                                                                           บ
+บ Usage: like TMenu, but when creating, Window handles have to exist        บ
+บ        PLACE CREATE IN SETUPSHOW, NOT IN SETUPCOMPONENT                   บ
+บ                                                                           บ
+บ Limitation: only adding new items is programmed, not manipulating         บ
+บ             existing values.                                              บ
+บ             In comparison to TMenu, a System menu                         บ
+บ             is created by the Operating System and already exists         บ
+บ             when creating the form.                                       บ
+บ                                                                           บ
+ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+}
+
+Procedure TSysMenu.SetupComponent;
+Begin
+     Inherited SetupComponent;
+
+     Include(ComponentState, csHandleLinks);
+
+     {Martin, idea from Aaron Lawrence}
+     Font := Screen.MenuFont;
+
+     Create2; {window handles have to exist !}
+End;
+
+Procedure TSysMenu.Show;
+begin
+  {nothing}
+end;
+
+procedure tSysMenu.Create2;
+  {$IFDEF OS2}
+  Var
+    ulStyle:LongWord;
+    hwndSysmenuButton : HWND;
+    MI, miSysMenu : MENUITEM;
+    idSysMenu : longint;
+  {$ENDIF}
+Begin
+     If FParent Is TForm Then
+       If TForm(FParent).Frame <> Nil
+       Then FParent := TForm(FParent).Frame;
+
+     {$IFDEF OS2}
+
+     {in comparison to the MainMenu, the System Menu already exists ! A lot of stuff is obsolete}
+
+     hwndSysmenuButton := WinWindowFromID (TControl(FParent).Handle, FID_SYSMENU);
+     //test if hwndSysmenuButton value is OK: Delting the CLOSE functionality of the form
+     //WinSendMsg (hwndSysmenuButton, MM_DELETEITEM, MPFROM2SHORT(SC_CLOSE, 1), 0);
+     idSysMenu := SHORT1FROMMR (WinSendMsg (hwndSysMenuButton, MM_ITEMIDFROMPOSITION, 0, 0));
+     WinSendMsg (hwndSysMenuButton, MM_QUERYITEM, MPFROM2SHORT (idSysMenu, 0), LONGWORD(@miSysMenu));
+     FHandle{Handle of System Menu} := miSysMenu.hwndSubMenu;
+
+     if FHandle = 0 then exit;
+
+     {from tMenu.CreateMenu}
+     WinSetWindowULong(FHandle,QWL_USER,LongWord(Self));    {VMT Pointer}
+     FDefWndProc:=Pointer(WinSubClassWindow(FHandle,@SubclassedMenuWndProc));
+
+     {FItems has been created in tMenu.SetupComponent}
+     FItems.FHandle := FHandle;
+     FItems.FCreated := True;
+     {$ENDIF}
+End;
+
+{
+   todo tSysMenu: manipulating existing entries, porting to Windows
+
+   http://www.edm2.com/0704/flyout/flyout.html
+   To find the rectangles of the menu items, we first send the menu a MM_QUERYITEMCOUNT message
+   to determine how many menu items exist for this menu. Then we loop through the menu items sending
+   MM_ITEMFROMPOSITION to obtain the ID of each menu item. When a valid ID is returned MM_QUERYITEMRECT
+   is sent to the menu for that ID to find its rectangle.
+
+   Windows:
+   https://stackoverflow.com/questions/4615940/how-can-i-customize-the-system-menu-of-a-windows-form
+}
+
+
+
+
 //   Function GetColor(iPPid : LongWord) : tStr10;
 //
 //   Var NewColor : LongInt;
@@ -2272,5 +2387,7 @@ end.
   20-Jul-05  WD         Abspeichern div Infos (tMenu) in die Application-INI-Datei
   28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
   11-Sep-06  HO         GetKeyRepeat: Check auf m.param2lobytehi (DBCS-Handling)
+  06-May-20  MV         tSysMenu added
+  08-May-20  MV         tMenuItem.AddSeparator added (lcl compatible)
 }
 
