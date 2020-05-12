@@ -1,5 +1,5 @@
 WDSibyl-Aenderungen:
-      zum Stand: 16.04.2020  10:43:34
+      zum Stand: 12.05.2020  14:34:49
 
 
 
@@ -17,6 +17,7 @@ Datei:  P:\WDSibyl\Compiler\Source\HLP\WDHLPD10\uHLPComp.pas
   28-Apr-2018 RG       Fehler bei der Umsetzung von .DLIST behoben
                        LEFTMARGIN und RIGHTMARGIN eingebaut
                        TITLE funktioniert wieder
+  27-Apr-2020 RG       SysOS2 anstatt OS2, SysWin32 anstatt Win32
 }
 
 
@@ -421,12 +422,30 @@ Datei:  P:\WDSibyl\Library\Source\MakeCompnt.PAS
   26-Sep-04  WD         Die Unit uSerialPort umbenannt auf uPorts
   26-Sep-04  WD         Die Komponente uJoystickPort in uPorts eingebaut
   27-Aug-05  WD         Die Unit uOkCancelButton ausgebaut --> ExtCntrls
+  26-Apr-20  RG         optisch
+  
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\MakeDB.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Apr-20  RG         optisch
+  
 }
 
 
 Datei:  P:\WDSibyl\Library\Source\MakeDialog.PAS
 { -- date -- -- from -- -- changes ----------------------------------------------
   12-Jun-04  WD         Erstellung des Projektes.
+  26-Apr-20  RG         optisch
+  
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\MakeInternet.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Apr-20  RG         optisch
+  
 }
 
 
@@ -434,6 +453,8 @@ Datei:  P:\WDSibyl\Library\Source\MakeMultiMedia.PAS
 { -- date -- -- from -- -- changes ----------------------------------------------
   05-Jul-04  WD         Erstellung des Projektes.
   11-Nov-05  WD         Die Unit uDart ins Projekt aufgenommen
+  26-Apr-20  RG         optisch
+  
 }
 
 
@@ -441,6 +462,13 @@ Datei:  P:\WDSibyl\Library\Source\MakeRC.PAS
 { -- date -- -- from -- -- changes ----------------------------------------------
   16-Sep-04  WD         Die RC-Dateien English.RC und German.RC durch Language.RC ersetzt.
   05-Jul-17  RG		Curs_OS und Curs_W32 durch Cursors ersetzt, WDSibyl eingefÅgt
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\MakeRest.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Apr-20  RG         optisch
+  
 }
 
 
@@ -458,7 +486,8 @@ Datei:  P:\WDSibyl\Library\Source\MakeRTL.PAS
   25-Sep-06  WD/TB      Unit uUnInstall eingebaut
   12-Jun-07  WD         Unit SerialIO ausgebaut. (Es gibt uPorts im Verzeichnis Compnt)
   11-Feb-09  WD         Unit uOSFunc auf uSysFunc umbenannt.
-
+  23-Apr-20  RG         Unit StrUtils und uWebBrowser eingebaut
+  26-Apr-20  RG         optisch
 }
 
 
@@ -474,6 +503,15 @@ Datei:  P:\WDSibyl\Library\Source\MakeSPCC.PAS
   27-Aug-05  WD         Komponete "tOKCancelButton" in ExtCtrls eingebaut
   26-Dez-05  WD         Datei "Synchobjs" entfernt. (-->RTL uebernommen uSysClass)
   17-Feb-06  WD         Langauge-Support eingebaut
+  26-Apr-20  RG         optisch
+
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\MakeTP70.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  26-Apr-20  RG         optisch
+  
 }
 
 
@@ -861,6 +899,7 @@ Datei:  P:\WDSibyl\Library\Source\RTL\SysUtils.pas
   22-Dez-18   RG        Fehler in StrALCopy behoben
   09-May-19   RG        StrComp ersetzt, funktionierte nicht richtig
   16-Apr-20   RG        procedure: FreeAndNil eingebaut
+  08-May-20   MV        LongWord()... 
 
 }
 
@@ -950,11 +989,6 @@ Datei:  P:\WDSibyl\Library\Source\RTL\uSysClass.pas
   06-Apr-09  WD         tcPort: Klasse eingebaut
   10-Feb-10  WD         tcNamedPipeServer: fÅr Windows eingebaut.
   11-Feb-10  WD         tcNamedPipeServer: OS/2: neuen Properties und Procedure
-  -------------------------------------------------------------------------------
-  14-Apr-20  RG         Code von getProgramFromUrl befindet sich nun in Unit uWebBrowser.
-                        Derselbe Code war mehrfach vorhanden (Unit DOS,uSysClass). Auch
-                        konnte dadurch gegenseitige AbhÑngikeit uSysClass <> uSysInfo
-                        aufgelîst werden.
 }
 
 
@@ -1005,15 +1039,6 @@ Datei:  P:\WDSibyl\Library\Source\RTL\uSysInfo.PAS
   09-Mai-10  WD         tcWDSibylInfo: GetDirBMP (inkl. Property);
      Nov-11? WD?        Typen trSystem umbenannt (alt zB OS2 neu SysOS2...)
                         Typen trPlatform umbenannt (alt zB OS2Ver20 neu pfOS2Ver20...)
-}
-
-
-Datei:  P:\WDSibyl\Library\Source\RTL\uWebBrowser.PAS
-{ -- date -- -- from -- -- changes ----------------------------------------------
-  14-Apr-20  RG         Erstellung der Unit
-  14-Apr-20  RG         getProgramFromUrl von Unit DOS hierher verschoben.
-                        Derselbe Code war mehrfach vorhanden (Unit uSysClass). 
-                        Gegenseitige AbhÑngikeit uSysClass <> uSysInfo aufgelîst.
 }
 
 
@@ -1237,7 +1262,7 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\CLIPBRD.PAS
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\SPCC\COMCTRLS.PAS
+Datei:  P:\WDSibyl\Library\Source\SPCC\ComCtrls.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   26-Nov-03  WD         Delay-Funktion mit SysSleep ausgetauscht
   03-Jul-05  TB         TUpDown.SetAssociate: because FPosition may be <> FMin set
@@ -1252,6 +1277,7 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\COMCTRLS.PAS
   22-Apr-07  RG, WD     Komponente tGauge eingebaut.
   12-Mai-09  PE         TGauge.PaintAsText: Positionsangabe fÅr Windows korregiert.
   19-Nov-10  RG         TMultiColumnListBox.DrawItem : optische Verbesserungen
+  08-May-20  MV         tTrackbar.ImmediateChange added
 }
 
 
@@ -1324,6 +1350,8 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\Editors.PAS
   Feb  07     MV        new EditorOption: eoJumpWordSpace. If set, the Cursor word right/left buttons do orientate to spaces
                         instead of characters. Differences are with non-letter characters like comma or parenthesis
               MV        new heap memory functions; all "new (p)" changed to "getmem (p, sizeof(p^));
+  30-Apr-20   RG        unter OS2 MessageBox2 anstatt MessageBox
+
 }
 
 
@@ -1510,7 +1538,7 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\MASK.PAS
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\SPCC\MENUS.PAS
+Datei:  P:\WDSibyl\Library\Source\SPCC\Menus.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   26-Sep-02  WD         Ausbau der LINUX-Teile
   08-Aug-05  MV/AL      Definition of a Menu default font
@@ -1518,6 +1546,8 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\MENUS.PAS
   20-Jul-05  WD         Abspeichern div Infos (tMenu) in die Application-INI-Datei
   28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
   11-Sep-06  HO         GetKeyRepeat: Check auf m.param2lobytehi (DBCS-Handling)
+  06-May-20  MV         tSysMenu added
+  08-May-20  MV         tMenuItem.AddSeparator added (lcl compatible)
 }
 
 
@@ -1647,17 +1677,6 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\uLanguage.pas
   03-Mar-06  WD         Datei erstellt und ins Projekt eingebaut
 
 
-Datei:  P:\WDSibyl\Library\Source\SPCC\_MENUS.PAS
-{ -- date -- -- from -- -- changes ----------------------------------------------
-  26-Sep-02  WD         Ausbau der LINUX-Teile
-  08-Aug-05  MV/AL      Definition of a Menu default font
-  18-Jul-05  WD         Einbau des Property ForeGroundColor, BackGroundColor
-  20-Jul-05  WD         Abspeichern div Infos (tMenu) in die Application-INI-Datei
-  28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
-  11-Sep-06  HO         GetKeyRepeat: Check auf m.param2lobytehi (DBCS-Handling)
-}
-
-
 Datei:  P:\WDSibyl\Library\Source\TP70\CRT.PAS
 { -- date -- -- from -- -- changes ----------------------------------------------
   03-Okt-03  WD         Konstanten DirectVideo, CheckSnow eingefuegt
@@ -1680,8 +1699,6 @@ Datei:  P:\WDSibyl\Library\Source\TP70\DOS.PAS
   06-Jun-06  WD         Exec; Variable "Exec_Visible" wird auch in Windows beruecksichtigt.
   23-Jun-06  WD         OS/2, DosExitCode: Bei ExecViaSession=true und das System wartet auf Prozess-
                         Ende eine kleine Pause eingebaut, damit das System nich komplett steht.
-  -------------------------------------------------------------------------------
-  14-Apr-20  RG         getProgramFromUrl von hier nach Unit uWebBrowser verschoben
 }
 
 
