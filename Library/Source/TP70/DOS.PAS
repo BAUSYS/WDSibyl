@@ -209,8 +209,7 @@ PROCEDURE Delay(ms:LONGWORD);
 
 IMPLEMENTATION
 
-Uses uSysInfo,
-     uWebBrowser;  //RG 14-Apr-20
+Uses uSysInfo;
 
 VAR
    TempCmdLine:STRING;
@@ -897,6 +896,39 @@ BEGIN
   {$ENDIF}
 END;
 
+Function getProgramFromUrl(Const url : String; Var urlProgram : tFilename) : Boolean;
+
+Var pdb   : Byte;
+    UrlTyp: String;
+    Path  : tFilename;
+
+Begin
+  UrlProgram:='';
+  pdb:=pos(':',url);
+  if pdb=2 then
+    Begin
+      UrlProgram:=url;
+      result:=false;
+      exit;
+    end;
+
+  result:=true;
+  UrlTyp:=UpperCase(Copy(url, 1, pdb-1));
+  if UrlTyp='HTTP' then
+    urlProgram:=goSysInfo.SysAppInfo.DefaultBrowser
+  else if UrlTyp='FTP' then
+    urlProgram:=goSysInfo.SysAppInfo.DefaultBrowser
+  else
+    Begin
+      urlProgram:=url;
+      exit;    // Damit der Pfad nicht ge„ndert wird
+    end;
+  path:=ExtractFilePath(urlProgram);
+  path[0]:=chr(ord(path[0])-1);
+  chdir(path);
+End;
+
+
 FUNCTION Exec(CONST Path: PathStr; CmdLine: STRING):LONGWORD;
 type tdata = record
              d1: word;
@@ -1097,7 +1129,13 @@ BEGIN
       aStartData.dwFlags:=STARTF_USESHOWWINDOW;
       aStartData.wShowWindow:=SW_HIDE;
     End;
-  C1:=C+' '+C1;
+  {Martin0410}
+  if (pos ('"', Path) = 0) and (pos (' ', Path) > 0) then begin
+    C1:='"'+C+'" '+C1;
+  end
+  else begin
+    C1:=C+' '+C1;
+  end;
   IF not CreateProcess(C,C1,NIL,NIL,FALSE,CREATE_NEW_CONSOLE OR
                        NORMAL_PRIORITY_CLASS,NIL,NIL,
                        aStartData,aProcessInfo) THEN
@@ -1864,6 +1902,5 @@ END.
   06-Jun-06  WD         Exec; Variable "Exec_Visible" wird auch in Windows beruecksichtigt.
   23-Jun-06  WD         OS/2, DosExitCode: Bei ExecViaSession=true und das System wartet auf Prozess-
                         Ende eine kleine Pause eingebaut, damit das System nich komplett steht.
-  -------------------------------------------------------------------------------
-  14-Apr-20  RG         getProgramFromUrl von hier nach Unit uWebBrowser verschoben
+  15-Mai-20  MV,RG      alte Žnderung 0410 von Martin eingebaut
 }

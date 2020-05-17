@@ -383,6 +383,10 @@ type
 VAR
    Input,Output:TEXT;
 
+   {Martin0520}
+   Stderr:TEXT;
+   Stdout:TEXT absolute Output;
+
 CONST
      { CRT modes }
      BW40          = 0;            { 40x25 B/W on Color Adapter   }
@@ -16914,6 +16918,28 @@ BEGIN
   ff^.Reserved1:=0;
   ff^.BufferBytes:=0;
 
+  {Martin0520}
+  ff:=@Stderr;
+  {$IFDEF OS2}
+  ff^.Handle:=2; {Handle to standard error output}
+  {$ENDIF}
+  {$IFDEF Win32}
+  ff^.Handle:=GetStdHandle(-12); {Handle to standard error output}
+  {$ENDIF}
+  ff^.RecSize:=1;
+  ff^.Name:='';
+  ff^.EAS:=NIL;
+  ff^.Flags:=$6666;
+  ff^.Mode:=0;
+  ff^.Buffer:=NIL;
+  ff^.MaxCacheMem:=0;
+  ff^.Offset:=0;
+  ff^.LOffset:=0;
+  ff^.Block:=0;
+  ff^.LBlock:=0;
+  ff^.Reserved1:=0;
+  ff^.BufferBytes:=0;
+
   HeapError:=StdHeapError;
 
   {Initialize system variables}
@@ -17731,5 +17757,6 @@ END.
   03-Mai-10  WD         NewExceptionFilter: Den Befehl "Exit" entfernt (gleich am Anfang).
   08-Dez-10  RG         ChDir verbessert; z.B. ChDir('C:\var\') funktioniert auch
   15-Mai-19  RG         TextRead: RÅckgabestring leer fals Lesen nicht mîglich
-}
+  14-Mai-20  MV         Stderr und Stdout definiert
 
+}

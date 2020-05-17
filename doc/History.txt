@@ -1,5 +1,5 @@
 WDSibyl-Aenderungen:
-      zum Stand: 12.05.2020  14:34:49
+      zum Stand: 14.05.2020  10:26:12
 
 
 
@@ -783,7 +783,7 @@ Datei:  P:\WDSibyl\Library\Source\RTL\StrUtils.PAS
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\RTL\system.pas
+Datei:  P:\WDSibyl\Library\Source\RTL\System.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   27-Sep-02  WD         Ausbau der LINUX-Teile
   01-Aug-03  WD         Einige Aenderungen von von AaronL. uebnommen.
@@ -816,6 +816,8 @@ Datei:  P:\WDSibyl\Library\Source\RTL\system.pas
   03-Mai-10  WD         NewExceptionFilter: Den Befehl "Exit" entfernt (gleich am Anfang).
   08-Dez-10  RG         ChDir verbessert; z.B. ChDir('C:\var\') funktioniert auch
   15-Mai-19  RG         TextRead: RÅckgabestring leer fals Lesen nicht mîglich
+  14-Mai-20  MV         Stderr und Stdout definiert
+
 }
 
 
