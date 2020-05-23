@@ -66,6 +66,9 @@ Type
        Property YAlign;
        Property YStretch;
        Property OnFontChange;
+    public
+       FGstring, BGstring, FBstring : string[2]; {Martin}
+
     Published
        Property Align;
        Property BackgroundEnabled:Boolean Read FBackgroundEnabled Write EnableBackground;
@@ -136,6 +139,7 @@ End;
 Procedure TColorGrid.SetBackgroundColor(NewValue:TColor);
 Var t:LongInt;
 Begin
+   BackgroundIndex := -1; {Martin}
    For t:=0 To 15 Do
      If BasicColors[t]=NewValue Then
        BackgroundIndex:=t;
@@ -149,6 +153,7 @@ End;
 Procedure TColorGrid.SetForegroundColor(NewValue:TColor);
 Var t:LongInt;
 Begin
+   ForegroundIndex := -1; {Martin}
    For t:=0 To 15 Do
      If BasicColors[t]=NewValue Then
        ForegroundIndex:=t;
@@ -174,6 +179,9 @@ Begin
   FBackgroundIndex := 0;
   FForegroundEnabled := True;
   FBackgroundEnabled := True;
+  FGstring := 'FG';  {Martin}
+  BGstring := 'BG';  {Martin}
+  FBstring := 'FB';  {Martin}
   Exclude(ComponentState, csAcceptsControls);
 End;
 
@@ -195,11 +203,11 @@ Begin
   S := '';
   If (FForegroundIndex = Index) And FForegroundEnabled Then
   Begin
-    If (FBackgroundIndex = Index) And FBackgroundEnabled Then S := 'FB'
-    Else S := 'FG';
+    If (FBackgroundIndex = Index) And FBackgroundEnabled Then S := FBstring  {Martin}
+    Else S := FGstring;  {Martin}
   End
   Else
-  If (FBackgroundIndex = Index) And FBackgroundEnabled Then S := 'BG';
+  If (FBackgroundIndex = Index) And FBackgroundEnabled Then S := BGstring;
 
   If S <> '' Then
   Begin
@@ -262,7 +270,7 @@ Var
   Linear:LongInt;
 Begin
   Case key Of
-    'f','F':
+    'f','F','v','V': {Martin}{engl. foreground, german Vordergrund}
     Begin
       Linear := Selection;
       If Not FForegroundEnabled And FClickEnablesColor Then
@@ -273,7 +281,7 @@ Begin
       ForegroundIndex := Linear;
       {Click}
     End;
-    'b','B':
+    'b','B','h','H': {Martin}{engl. background, german Hintergrund}
     Begin
       Linear := Selection;
       If Not FBackgroundEnabled And FClickEnablesColor Then
@@ -349,3 +357,9 @@ Begin
 End.
 
 
+{ -- date --- --from-- -- changes ----------------------------------------------
+  06-Dec-2007 MV       new variables tColorGrid.FGstring and BGstring 
+                       can be changed for language localization if an invalid 
+                       color has been assigned by "Foregroundcolor :=", 
+                       item -1 (no item) gets selected
+}

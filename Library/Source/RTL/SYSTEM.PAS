@@ -109,8 +109,6 @@ TYPE HeapFunc=FUNCTION(size:LONGWORD):Integer;
 VAR HeapError:HeapFunc;        {Heap Error Function}
 FUNCTION  MaxAvail:LongWord;
 FUNCTION  MemAvail:LongWord;
-Procedure Heap_Change(iHeapGroup : Pointer; iHeapFinal : Boolean);
-Function Heapgroup_BlocksCurrentlyUsed (ID : integer) : longint;
 PROCEDURE GetMem(VAR p:Pointer;size:LongWord);
 PROCEDURE FreeMem(p:POINTER;size:LongWord);
 PROCEDURE GetMemG(ID : integer; VAR p:POINTER;size :LONGWORD);
@@ -119,6 +117,17 @@ function GetNewHeapGroupID : integer;
     {gibt eine noch unbenutzte Group-ID aus}
 procedure ReleaseHeapGroup (ID : integer);
     {freet eine Gruppe auf einen Schlag}
+procedure SetHeapGroupProperties (ID : integer; EmptyManagement, FillZeros : boolean; BlockShift : byte);
+    {setzt die Eigenschaften einer Heapgroup  default settings: true, true, 2}
+function Heapgroup_BlocksCurrentlyUsed (ID : integer) : longint;
+    {gibt die Anzahl der Speicherblîcke aus, die momentan von einer Gruppe genutzt wird}
+//function Heapgroup_BlockShift (ID : integer) : longint;
+//    {gibt den fÅr eine Gruppe eingestellten BlockShift an, default ist 2. 0=16kB Speicherblockgrî·e, 1=32kB, 2=64kB usw.}
+procedure heap_WriteInfo;
+    {kann am Ende des Programms in einem finalization Block ausgefÅhrt werden. Gibt eine Datei Heapinfo.txt aus
+     mit statistischen Angaben Åber Speicherbedarf, Anzahl Gruppen, Blîcke usw.} 
+Procedure Heap_Change(iHeapGroup : Pointer; iHeapFinal : Boolean);
+    {fÅr DLLs, setzt die Heapgroup auf den vom Hauptprogramm vorgegebenen Wert, damit auf dieelben Speichervariablen zugegriffen werden kann}
 
 //PROCEDURE GetMem(VAR p:Pointer;size:LongWord);
 PROCEDURE GetSharedMem(VAR p:Pointer;size:LongWord);
@@ -13190,6 +13199,13 @@ const HeapGroup : pHeapGroup = NIL;
 
 const DefaultHeapGroup : integer = 0; {gets only changed for final error message in NewSystemHeap}
 
+procedure SetHeapGroupProperties (ID : integer; EmptyManagement, FillZeros : boolean; BlockShift : byte);
+  begin
+    HeapGroup^[ID].BlockShift := BlockShift;
+    HeapGroup^[ID].EmptyManagement := EmptyManagement;
+    HeapGroup^[ID].FillZeros := FillZeros;
+  end;
+
 procedure NewSystemHeap (ID : integer);
   begin
     if ID <> DefaultHeapGroup then exit; {die Fehlerroutine lÑuft in Group 0, und wenn die nicht betroffen ist, ist es eh OK}
@@ -13630,16 +13646,13 @@ END;
       end;
     end;
 
-  procedure heap_final;
+  procedure heap_WriteInfo;
     var
       ID : integer;
       SumRemainingBlocks : longint;
       heapinfodat : text;
     begin
-      if HeapGroup = nil then exit;
-
-      //info stuff
-/*      assign (heapinfodat, 'heapinfo.txt'); rewrite (heapinfodat);
+      assign (heapinfodat, 'heapinfo.txt'); rewrite (heapinfodat);
       SumRemainingBlocks := 0;
       writeln (heapinfodat, '$M Heap size: '+tostr(MainHeapSize div 1024 div 1024)+' MB');
       for ID := 0 to HeapGroupCount-1 do if HeapGroup^[ID].EverUsed then begin
@@ -13661,8 +13674,13 @@ END;
       writeln (heapinfodat, 'Total Number of ApiMem requests:  '+tostr(Sys_GetApiCount));
       writeln (heapinfodat, 'Total Number of ApiFree:          '+tostr(Sys_FreeApiCount));
       close (heapinfodat);
-      // end of info stuff */
+    end;
 
+  procedure heap_final;
+    var
+      ID : integer;
+    begin
+      if HeapGroup = nil then exit;
       for ID := 0 to HeapGroupCount-1 do
         ReleaseHeapGroup (ID);
       SysFreeMem (HeapGroup, sizeof (tHeapGroup));
@@ -13686,6 +13704,11 @@ Function Heapgroup_BlocksCurrentlyUsed (ID : integer) : longint;
 
 Begin
   result := HeapGroup^[ID].BlockRequests-HeapGroup^[ID].BlockFreed;
+End;
+
+function Heapgroup_BlockShift (ID : integer) : longint;
+Begin
+  result := HeapGroup^[ID].Blockshift;
 End;
 
 FUNCTION  MaxAvail:LongWord;
@@ -17731,7 +17754,8 @@ END.
   03-Okt-03  WD         Konstanten DirectVideo, CheckSnow eintfernt (in CRT gewandert)
   04-Okt-03  WD         Random-Funktionen nach SYSUTILS ausgelagert.
   18-Jun-04  WD         Umbau von KBDVIO32.DLL auf die DLLs von EMX
-  06-Aug-04  MV         Compiler-Prob korr.: Der Compiler rechnet mit dem Variablentyp weiter, mit dem er einmal angefangen hat.
+  06-Aug-04  MV         Compiler-Prob korr.: Der Compiler rechnet mit dem 
+                        Variablentyp weiter, mit dem er einmal angefangen hat.
   08-Sep-04  WD         Die Definitionen von uDef uebernommen. uDef aus dem Projekt entfernt.
   28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
   23-Sep-05  WD         Cleanup: Checken ob der HeapMutex nicht schon geschlossen wurde.
@@ -17750,7 +17774,8 @@ END.
   16-Jun-08  WD         Function: GetProcessId eingebaut.
   12-Sep-08  WD         Konstante Inch2mm eingebaut (Inch in mm)
   06-Nov-08  KF         AnsiInsertStr: Korrekter aufruf von AnsiInsert
-  05-Feb-09  WD         Shared-Memory-Name "SIBYL_MAINFORM_HANDLE" auf "WDSIBYL_MAINFORM_HANDLE" umbenannt.
+  05-Feb-09  WD         Shared-Memory-Name "SIBYL_MAINFORM_HANDLE" auf 
+                        "WDSIBYL_MAINFORM_HANDLE" umbenannt.
   24-Feb-09  PE         Floating-Point-Routinen vereinfacht und korrigiert (sinh und tanh),
                         Exception-Handling fÅr OS/2 aktiviert.
   22-Mar-09  PE         Controlword les- und setzbar, lokale Speicherung des CW

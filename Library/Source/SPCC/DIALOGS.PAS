@@ -111,7 +111,7 @@ Type
          FMaskList         : TStringList;
          FHelpContext      : THelpContext;
          FHelpContextString: string;
-         FInitialDir       : tFileName;
+         FInitialDir       : tFileName;{Martin0108}
          {$ifdef win32}
          //procedure OFNHookProc(Win:HWND;Msg:ULONG;para1:WParam;para2:longint);
          {$endif}
@@ -375,6 +375,8 @@ Type
       Private
          FNameCombo:TComboBox;
          FSizeCombo:TComboBox;
+         FStyleGroup : TGroupBox;{Martin}
+         FOptionsGroup : TGroupBox;{Martin}
          FExampleText:TButton;
          FItalicCheck:TCheckBox;
          FBoldCheck:TCheckBox;
@@ -400,6 +402,7 @@ Type
       Protected
          Procedure SetupComponent;Override;
          Procedure SetupShow;Override;
+         function ValidFont (Fnt : tFont) : boolean; virtual; {Martin}
       Public
          Property FaceName:String Read GetFaceName Write SetFaceName;
          Property PointSize:LongInt Read GetPointSize Write SetPointSize;
@@ -407,6 +410,8 @@ Type
          Property FontName:String Read GetFontName Write SetFontName;
          Property EditFont:TFont Read GetEditFont Write SetEditFont;
          Property Attributes:TFontAttributes Read GetAttributes Write SetAttributes;
+         property StyleGroup : TGroupBox read FStyleGroup; {Martin}
+         property OptionsGroup : TGroupBox read FOptionsGroup; {Martin}
     End;
 
 
@@ -984,6 +989,7 @@ Var  cTitle,cOKName:cstring;
      cDefExt:cstring;
      cres:cstring;
      cfil:cstring;
+     cInitialDir : cstring;{Martin0108}
      i,len:Integer;
      {$ENDIF}
 Begin
@@ -1060,6 +1066,7 @@ Begin
      fFileName:=DeleteLastPathSeparator(fFileName);
      cres := FFileName;
      O.lpStrFile := @cres;
+     cInitialDir := FInitialDir; O.lpStrInitialDir := @cInitialDir;{Martin0108}
      O.nMaxFile := 254;
      O.hInstance := AppHandle;
      O.lpfnHook := nil;{Martin}
@@ -1128,6 +1135,7 @@ Var  cTitle,cOKName:cstring;
      cDefExt:cstring;
      cres:cstring;
      cfil:cstring;
+     cInitialDir : cstring;{Martin0108}
      i,len:Integer;
      {$ENDIF}
 Begin
@@ -1195,6 +1203,7 @@ Begin
      O.lpstrDefExt := @cDefExt;
      O.Flags := {Martin0607}OFN_HIDEREADONLY{checkbox} or OFN_NOCHANGEDIR{Martin0208};
      O.lpfnHook := nil;
+     cInitialDir := FInitialDir; O.LpStrInitialDir := @cInitialDir;{Martin0108}
      (*
      if (FHelpContext <> 0) or (FHelpContextString <> '') then begin
        O.Flags := O.Flags or OFN_SHOWHELP or OFN_ENABLEHOOK;
@@ -2363,20 +2372,22 @@ Begin
      FSizeCombo.OnItemSelect:=EvComboSizeSelect;
      FSizeCombo.Duplicates:=False;
 
-     group:=InsertGroupBox(Self,12,150,110,90,LoadNLSStr(SStyle));
-     group.ZOrder:=zoTop;
-     FItalicCheck:=InsertCheckBox(Self,20,200,95,20,LoadNLSStr(SItalic),'');
+     {Martin}
+     FStylegroup:=InsertGroupBox(Self,12,150,110,90,LoadNLSStr(SStyle));
+     FStylegroup.ZOrder:=zoTop;
+     FItalicCheck:=InsertCheckBox(FStylegroup,20,200,95,20,LoadNLSStr(SItalic),'');
      FItalicCheck.OnClick:=StyleChanged;
-     FBoldCheck:=InsertCheckBox(Self,20,180,95,20,LoadNLSStr(SBold),'');
+     FBoldCheck:=InsertCheckBox(FStylegroup,20,180,95,20,LoadNLSStr(SBold),'');
      FBoldCheck.OnClick:=StyleChanged;
 
-     group:=InsertGroupBox(Self,127,150,150,90,LoadNLSStr(SEmphasis));
-     group.ZOrder:=zoTop;
-     FOutlineCheck:=InsertCheckBox(Self,135,200,135,20,LoadNLSStr(SOutline),'');
+     {Martin}
+     FOptionsGroup:=InsertGroupBox(Self,127,150,150,90,LoadNLSStr(SEmphasis));
+     FOptionsGroup.ZOrder:=zoTop;
+     FOutlineCheck:=InsertCheckBox(FOptionsGroup,135,200,135,20,LoadNLSStr(SOutline),'');
      FOutlineCheck.OnClick:=StyleChanged;
-     FStrikeOutCheck:=InsertCheckBox(Self,135,180,135,20,LoadNLSStr(SStrikeout),'');
+     FStrikeOutCheck:=InsertCheckBox(FOptionsGroup,135,180,135,20,LoadNLSStr(SStrikeout),'');
      FStrikeOutCheck.OnClick:=StyleChanged;
-     FUnderscoreCheck:=InsertCheckBox(Self,135,160,135,20,LoadNLSStr(SUnderscore),'');
+     FUnderscoreCheck:=InsertCheckBox(FOptionsGroup,135,160,135,20,LoadNLSStr(SUnderscore),'');
      FUnderscoreCheck.OnClick:=StyleChanged;
 
      FExampleText:=InsertButton(Self,10,20,270,120,LoadNLSStr(SExampleText),'');
@@ -2386,9 +2397,11 @@ Begin
      For T:=0 To Screen.FontCount-1 Do
        Begin
          aFont:=Screen.Fonts[T];
-         FNameCombo.Items.Add(aFont.FaceName);
+         {Martin}if ValidFont (aFont) then
+           FNameCombo.Items.Add(aFont.FaceName);
        End;
-     FNameCombo.Items.Add('System Default Font');
+     {Martin}if ValidFont (Screen.DefaultFont) then
+       FNameCombo.Items.Add('System Default Font');
 
      FOkBtn := InsertBitBtn(Self,290,240,90,30,bkOk,LoadNLSStr(SOkButton),LoadNLSStr(SClickHereToAccept));
      InsertBitBtn(Self,290,200,90,30,bkCancel,LoadNLSStr(SCancelButton),LoadNLSStr(SClickHereToCancel));
@@ -2529,6 +2542,11 @@ Begin
   Result := tostr(PointSize) + '.' + FaceName;
 End;
 
+{Martin}
+function tFontDialog.ValidFont (Fnt : tFont) : boolean; {Martin}
+  begin
+    result := true;
+  end;
 
 Procedure TFontDialog.SetFontName(Value:String);
 Var  S,s1:String;
@@ -3573,7 +3591,8 @@ End.
   18-Sep-05   WD        Dialog: User-Password eingebaut
   19-Feb-06   MV        tOpenDialog: resizable window
   09-Mar-06   WD        Paramstr(0) durch uSysInfo ersetzt.
-  29-Jul-06   MV/WD     tOpenSystemDialog.Execute und tSaveSystemDialog.Execute: Entfernen des letzten PathSeparators.
+  29-Jul-06   MV/WD     tOpenSystemDialog.Execute und tSaveSystemDialog.Execute: 
+                        Entfernen des letzten PathSeparators.
   06-Okt-06   WD        tInputQueryDialog: Klasse neu programmiert und Funktion InputQuery angepasst
   27-Feb-08   MV        TSystemSaveDialog.Execute:Boolean: oFlag fÅr Vista umgebaut.
   15-Mar-08   MV        TSystemOpenSaveDialog.SetupComponent: Korrekte BefÅllung von FInitialDir

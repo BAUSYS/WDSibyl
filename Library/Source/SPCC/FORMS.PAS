@@ -73,8 +73,13 @@ Const crDefault     = TCursor(0);
       crHourGlass   = TCursor(-11);
       crDrag        = TCursor(-12);
       crNoDrop      = TCursor(-13);
+      {$ifdef os2}
       crHSplit      = TCursor(-14);
       crVSplit      = TCursor(-15);
+      {$else}
+      crHSplit      = TCursor(-9);
+      crVSplit      = TCursor(-7);
+      {$endif}
       crMultiDrag   = TCursor(-16);
       crSQLWait     = TCursor(-17);
       crNo          = TCursor(-18);
@@ -457,6 +462,7 @@ Type
          FStandardControl:Boolean;
          FPopupMenu:TPopupMenu;
          FConstraints:TSizeConstraints;
+         FInHasTopZOrder : boolean;{Martin0520}
 
 // Event-Variable
          FOnEnter:TNotifyEvent;
@@ -698,6 +704,7 @@ Type
          Procedure GetChildren(Proc:TGetChildProc);Override;
          Function HasParent:Boolean;Override;
          Function CanFocus:Boolean;Virtual;
+         procedure HasTopZOrder; virtual;{Martin0520}
          Property FontChangeEnabled:Boolean read FFontChangeEnabled write FFontChangeEnabled;
       Public
          {$IFDEF OS2}
@@ -748,7 +755,7 @@ Type
          Procedure WriteInfoToINI(InfoLine : String); Override;
          Function ReadInfoFromINI : String; Override;
          Procedure RefreshLanguage; Virtual;
-      Protected
+      //Protected {Martin all public}
          Property DragState:TDragState read FDragState write FDragState;
          Property CursorTabStop:Boolean Read FCursorTabStop Write FCursorTabStop;
          Property DefWndProc:TWndProc Read FDefWndProc Write FDefWndProc;
@@ -1127,6 +1134,9 @@ Type
          Property AutoScroll:Boolean read FAutoScroll write SetAutoScroll;
          Property HorzScrollBar:TControlScrollBar Read FHorzScrollBar;
          Property VertScrollBar:TControlScrollBar Read FVertScrollBar;
+         {Martin alternative property names Bo0ttom- and RightScrollbar}
+         Property BottomScrollBar:TControlScrollBar Read FHorzScrollBar;
+         Property RightScrollBar:TControlScrollBar Read FVertScrollBar;
          Property ScrollBars:TScrollStyle Read FScrollBars Write SetScrollBars;
     End;
 
@@ -1194,7 +1204,15 @@ Type
     TBorderIcon=(biSystemMenu,biMinimize,biMaximize,biHelp,biClose);
     TBorderIcons=Set Of TBorderIcon;
 
-    TFormStyle=(fsNormal,fsMDIChild,fsMDIForm);
+    TFormStyle=(fsNormal,fsMDIChild,fsMDIForm,fsStayOnTop,fsSystemStayOnTop);
+    {Martin0520 *Stay* styles added, but implemented only for OS/2}
+    {lcl FormStyle values:
+      fsNormal - usual style.
+      fsStayOnTop - form is positioned above all application's forms, except those which have fsStayOnTop style.
+      fsSystemStayOnTop - form is positioned above all OS windows, except other OS top-level windows.
+      fsSplash - form is border-less.
+      fsMDIForm - MDI parent form.
+      fsMDIChild - MDI child form.}
 
     TTileMode=(tbHorizontal,tbVertical,tbNormal);
 
@@ -1211,6 +1229,7 @@ Type
 
     TForm=Class(TScrollingWinControl)
       Private
+         FCloseAction : tCloseAction;{Martin0108}
          FLanguageSupport : Boolean;
          FMainMenu:TMainMenu;
          FLastMenu:TMenu;
@@ -1256,6 +1275,7 @@ Type
          FOnCreate:TNotifyEvent;
          FOnDestroy:TNotifyEvent;
          FMenuBar:TToolBar;
+         FLinearTabOrder : boolean;{Martin}
          Procedure CMRelease(Var Msg:TMessage); Message CM_RELEASE;
          Procedure CMEndModalState(Var Msg:TMessage); Message CM_ENDMODALSTATE;
          Procedure CMUpdateButtons(Var Msg:TMessage); Message CM_UPDATEBUTTONS;
@@ -1330,7 +1350,13 @@ Type
          Procedure LoadedFromSCU(SCUParent:TComponent);Override;
          Procedure DestroyWnd;Override;
          Procedure DestroyHandle;Override;
+
+         {Martin0520}
+         procedure HasTopZOrder; override;
+         Procedure Move; override;
+
       Public
+         function ValidIcon : boolean;{Martin0420}
          Constructor Create(AOwner:TComponent);Override;
          Constructor CreateNew(AOwner:TComponent);
          Procedure ReadSCUResource(Const ResName:TResourceName;Var Data;DataLen:LongInT);Override;
@@ -1350,6 +1376,7 @@ Type
          Procedure SetWindowPos(NewLeft,NewBottom,NewWidth,NewHeight:LongInt);Override;
          Procedure Focus;Override;
          Procedure BringToFront;Override;
+         Procedure BringToFrontNoFocus;Virtual; {only on Top, not Focus Martin0520}
          Procedure SendToBack;Override;
          Procedure Tile;Virtual;
          Procedure Cascade;Virtual;
@@ -1379,6 +1406,8 @@ Type
          Property XStretch;
          Property YAlign;
          Property YStretch;
+         Property CloseAction : tCloseAction read FCloseAction write FCloseAction; {Martin0108}
+         property LinearTabOrder : boolean read FLinearTabOrder write FLinearTabOrder;
       Published
          Property Align;
          Property AutoScroll;
@@ -1564,11 +1593,14 @@ type
       Protected
          Procedure SetupComponent;Override;
          {$IFDEF WIN32}
+         Procedure Inherited_GetClassData(Var ClassData:TClassData);{Martin0208}
          Procedure GetClassData(Var ClassData:TClassData);Override;
          Procedure CreateParams(Var Params:TCreateParams);Override;
-         Procedure CreateWnd;Override;
          {$ENDIF}
       Public
+         {$IFDEF WIN32}
+         Procedure CreateWnd;Override;
+         {$ENDIF}
          Procedure Redraw(Const rec:TRect);Override;
          Procedure ActivateHint(Rect:TRect; Const AHint:String);Virtual;
          Procedure DeactivateHint;Virtual;
@@ -3538,7 +3570,6 @@ Begin
 end;
 
 
-
 Procedure TForm.Print(Canvas:TCanvas;Dest:TRect);
 Var FormImage:TGraphic;
 Begin
@@ -3659,11 +3690,13 @@ Procedure TForm.Resize;
 Begin
   Inherited Resize;
   {Make sure, that the Toolbars Do Not Draw over the Frame border}
+  {Martin: commented out: (?)}
   If IsWindowVisible Then
     Begin
       If ClientWidth < 1 Then  ClientWidth := 1;
       If ClientHeight < 1 Then ClientHeight := 1;
     End;
+  if Visible then HasTopZOrder;{Martin0520}
 End;
 
 Function TForm.GetFrameFlags:LongWord;
@@ -3764,7 +3797,7 @@ Begin
      Placement.ShowCmd := WinStyle;        {alten lîschen?}
      SetWindowPlacement(Win,Placement);
      {$ENDIF}
-
+     if NewState <> wsMinimized then HasTopZOrder;{Martin0520}
 End;
 
 
@@ -4210,6 +4243,11 @@ Begin
 End;
 
 
+function tForm.ValidIcon : boolean;{Martin0420}
+  begin
+    result := FIcon <> nil;
+  end;
+
 Procedure TForm.CreateControls;
 Var  AForm:TForm;
      I:LongInt;
@@ -4230,7 +4268,12 @@ Begin
 End;
 
 
-Procedure TForm.SetFormStyle(Value:TFormStyle);
+  {$ifdef os2} {Martin0520}
+  const
+    WS_TOPMOST : ULONG = $00200000;
+  {$endif}
+
+Procedure TForm.SetFormStyle(Value:TFormStyle);{Martin0520 new values fsStayOnTop and fsSystemStayOnTop added}
 Var  OldStyle:TFormStyle;
      P:LongInt;
 Begin
@@ -4240,7 +4283,9 @@ Begin
           Case Value Of
             fsMDIForm: color := clAppWorkSpace;
             fsMDIChild: color := clWindow;
-            fsNormal: ;
+            {fsNormal: ;
+            fsStayOnTop: ;
+            fsSystemStayOnTop: ;}
           End;
 
           If (Value = fsMDIChild) And (Position = poDesigned)
@@ -4262,6 +4307,19 @@ Begin
                  End;
             End;
           FFormStyle := Value;
+
+
+          {$ifdef os2}
+          if Value = fsStayOnTop then begin
+            BringToFrontNoFocus;
+          end;
+          if Value = fsSystemStayOnTop then begin
+             WinSetWindowBits(Frame.Handle, QWL_STYLE, WS_TOPMOST, WS_TOPMOST);
+          end;
+          if (Value = fsNormal) and (OldStyle = fsSystemStayOnTop) then begin
+             WinSetWindowBits(Frame.Handle, QWL_STYLE, 0, WS_TOPMOST);
+          end;
+          {$endif}
      End;
 End;
 
@@ -4291,9 +4349,63 @@ Begin
           SetForeGroundWindow(Handle);
      End;
      {$ENDIF}
-     
+     HasTopZOrder;{Martin0520}
 End;
 
+Procedure TForm.BringToFrontNoFocus;{Martin0520}
+Var  Flags:LongWord;
+Begin
+     If FLocked Then Exit;
+
+     {$IFDEF OS2}
+     If Frame <> Nil Then
+     Begin
+          If {F}Visible Then Flags := SWP_SHOW
+          Else Flags := 0;
+          WinSetWindowPos(Frame.Handle,HWND_TOP,0,0,0,0,
+                          Flags Or SWP_ZORDER(* Or SWP_ACTIVATE*));
+     End;
+     {$ENDIF}
+
+     {$IFDEF Win32}
+     If Frame <> Nil Then
+     Begin
+          If {F}Visible Then Flags := SWP_SHOWWINDOW
+          Else Flags := 0;
+          WinUser.SetWindowPos(Frame.Handle,HWND_TOP,0,0,0,0,
+                               Flags Or SWP_NOMOVE Or SWP_NOSIZE);
+          (*SetForeGroundWindow(Handle);*)
+     End;
+     {$ENDIF}
+     HasTopZOrder;
+End;
+
+procedure tForm.HasTopZOrder;{Martin0520}
+  var
+    F : longint;
+    Form : tForm;
+  begin
+    if FInHasTopZOrder then exit;{omit recursive calls}
+    {if another form has got Formstyle.StayOnTop set, put it to front}
+    Application.Logwriteln ('Form '+Name+ ' has got TopZOrder');
+    FInHasTopZOrder := true;
+    for F := 0 to Screen.FormCount-1 do begin
+      Form := Screen.Forms[F];
+      Application.Logwriteln ('Checking Form '+Form.Name);
+      if (Form <> self) and Form.Visible and (Form.FormStyle = fsStayOnTop) then begin
+        Application.Logwriteln ('Found form '+Form.Name+' to stay on top');
+        Form.BringToFrontNoFocus; {calls HasTopZOrder again, omit with InHasTopZOrder}
+        Application.Logwriteln ('Form.BringToFrontNoFocus');
+      end;
+    end;
+    FInHasTopZOrder := false;
+  end;
+
+procedure tForm.Move;{Martin0520}
+  begin
+    inherited Move;
+    if Visible then HasTopZOrder;
+  end;
 
 Procedure TForm.SendToBack;
 Begin
@@ -4688,9 +4800,10 @@ Begin
           Else} Action := caFree; {!! caHide?}
 
           {Martin0707}
+          {???} {WD hat meine EinfÅgung wieder auskommentiert gehabt}
           {Alle sonstigen Forms der Applikation schlie·en; Mainform.CloseQuery wurde
            schon ÅberprÅft}
-/*WD         if self = Application.Mainform then begin
+          if self = Application.Mainform then begin
             {Problem: Wenn Close = Destroy, dann wird die Forms Liste hinten verkÅrzt,
              also rueckwÑrts abarbeiten}
             for T := Screen.FormCount-1 downto 0 do begin
@@ -4700,8 +4813,10 @@ Begin
                 end;
               end;
             end;
-          end; */
+          end; 
 
+          Action := (*caFree*)CloseAction;{Martin0108} {!! caHide?}
+          
           If dsAutoCreate In DesignerState Then Action := caFreeHandle;
 
           If FOnClose <> Nil Then FOnClose(Self, Action);
@@ -4808,6 +4923,9 @@ Begin
         end;
     end;
   Application.LogWriteln(LogFunc+'Exit');
+
+  result := true; {Martin}
+
 End;
 
 Procedure TForm.WriteInfoToINI(InfoLine : String);
@@ -4865,7 +4983,7 @@ Begin
     if (*not Sizeable*)BorderStyle in [bsDialog]
       then SetWindowPos(L, B, Width, Height)
       else SetWindowPos (L, B, W, H);
-    SetWindowPos(L, B, W, H);
+    //SetWindowPos(L, B, W, H);{Martin this line makes no sense}
     wsc:=TagInfoList.Strings[4][1];
     case wsc of
       'N' : ws:=wsNormal;
@@ -4975,6 +5093,7 @@ Begin
   FShortCutsEnabled     := True;
   FPosition             := poDesigned;
   FInternalWindowIdCount:= cmInternalControlBase;
+  FInHasTopZOrder := false;{Martin0520}
 End;
 
 Procedure TForm.ResetComponents;
@@ -4994,7 +5113,8 @@ Begin
   If Application <> Nil Then
     If Application.FMainForm = Nil Then Application.FMainForm := Self;
 
-  TForm.Create(AOwner);
+  (*TForm.Create(AOwner);*)
+  Create(AOwner); {Martin 10/2009}
 End;
 
 
@@ -5022,6 +5142,9 @@ Begin
   if (Application<>nil) and (Application.ProgramIniFile<>nil) and
      (Application.FormInfoINI in [fiLoadFormINI, fiSaveLoadINI])
     then ReadInfoFromINI;
+
+  {Martin0108}
+  FCloseAction := caFree;
 End;
 
 
@@ -9075,7 +9198,6 @@ Begin
                                WM_ADJUSTWINDOWPOS,
                                LongWord(@aMsg.structure^[aMsg.Count]),
                                0);
-
                     Inc(aMsg.Count);
 
                     {Actualize client SWP}
@@ -9277,7 +9399,7 @@ Begin
 End;
 
 
-Procedure TFrameControl.CreateParams(Var Params:TCreateParams);
+Procedure TFrameControl.CreateParams(Var Params:TCreateParams); {Martin0520 fsSystemStayOnTop added}
 Begin
      Inherited CreateParams(Params);
 
@@ -9296,6 +9418,10 @@ Begin
           End;
           {$ENDIF}
           Params.FrameStyle := FChild.GetFrameFlags;
+          {$ifdef os2}
+          if FChild.FormStyle = fsSystemStayOnTop then
+            Params.Style := Params.Style OR WS_TOPMOST;
+          {$endif}
      End;
 End;
 
@@ -9394,8 +9520,15 @@ Begin
      End
      Else ParentWin:=HWND_DESKTOP;
 
+     (*If FModalParent<>Nil Then OwnerWin:=FModalParent.Handle
+     Else OwnerWin:=ParentWin;*)
      If FModalParent<>Nil Then OwnerWin:=FModalParent.Handle
-     Else OwnerWin:=ParentWin;
+     Else
+     {$ifdef os2}
+       OwnerWin:=0; {Martin0707}
+     {$else}
+       OwnerWin:=ParentWin;
+     {$endif}
 
      CreateParams(Params);
 
@@ -9790,6 +9923,16 @@ End;
 Procedure TSizeBorder.MouseMove(ShiftState:TShiftState;X,Y:LongInt);
 Begin
      Inherited MouseMove(ShiftState,X,Y);
+
+     {$ifdef win32}
+     {Martin}
+     if (FCursor <> crSizeNS) and (FCursor <> crSizeWE) then begin
+       if (FBorderAlign = baLeft) or (FBorderAlign = baRight) then
+         Cursor := crSizeWE
+       else if (FBorderAlign = baTop) or (FBorderAlign = baBottom) then
+         Cursor := crSizeNS;
+     end;
+     {$endif}
 
      If FSizing Then
      Begin
@@ -12077,7 +12220,6 @@ Begin
 End;
 
 
-
 Function TControl.GetClientRect:TRect;
 Begin
      {OS2: Window With 0 created; Linux: Frame doesn't work}
@@ -12906,6 +13048,7 @@ Begin
                              NewLeft,NewTop,NewWidth,NewHeight, Flags);
      End;
   {$ENDIF}
+  if zOrder = zoTop then HasTopZOrder;{Martin0520}
 End;
 
 Procedure TControl.SetupShow;
@@ -13296,7 +13439,6 @@ Begin
      If Control.FOnMouseMove <> Nil
      Then Control.FOnMouseMove(Control,ShiftState,X,Y);
 End;
-
 
 
 Procedure TControl.MouseClick(Button:TMouseButton;ShiftState:TShiftState;X,Y:LonGInt);
@@ -14736,11 +14878,68 @@ End;
 {$ENDIF}
 
 
+{Martin1208}
+function RelatedTablist (Control : tControl) : tList;
+  var
+    AParent : tControl;
+  begin
+    if Control = nil then result := nil
+    else begin
+      AParent := Control.FParent;
+      while not ((AParent = nil) or (AParent is tForm)) do AParent := AParent.Parent;
+      result := nil;
+      if AParent <> nil then result := AParent.FTabList;
+    end;
+  end;
+
+{Martin1208}
+function LinearTabNext (Control : tControl; Next : boolean) : tControl;
+  var
+    found : boolean;
+    Tablist : tList;
+    AParent:TControl;
+    I : longint;
+  begin
+     result := nil;
+     if Control <> nil then begin
+       if Control.Name = 'ComboEdit' then Control := Control.FParent;
+       AParent := Control.FParent;
+       while not ((AParent = nil) or (AParent is tForm)) do AParent := AParent.Parent;
+     end;
+     if (AParent <> nil) and {AParent ist sicher eine Form}tForm(AParent).LinearTabOrder then begin
+       TabList := RelatedTablist (Control);
+       result := nil; found := false;
+       If TabList = Nil Then exit;
+       I := TabList.IndexOf (Control);
+       if I = -1 then exit;
+       repeat
+         if Next then begin
+           if I = TabList.Count-1 then I := 0{begin again with first occurence}
+           else inc (I);
+         end
+         else begin {Prev}
+           if I = 0 then I := TabList.Count-1
+           else dec (I);
+         end;
+         Result := TControl(TabList.Items[I]);
+         if result = Control then break;
+         If IsControl(Result) and Result.Enabled and Result.CanFocus and Result.Visible Then begin
+           found := true; break;
+         end;
+       until found;
+     end;
+  end;
+
 Function TControl.GetNextTabControl:TControl;
 Var  I,idx:LongInt;
+     Control : tControl;
      AChild:TControl;
      AParent:TControl;
 Begin
+     {Martin1208}
+     result := LinearTabNext (self, true);
+     if result <> nil then exit;
+
      {Try First Child}
      If FTabList <> Nil Then
      For I := 0 To FTabList.Count-1 Do
@@ -14793,6 +14992,11 @@ Var  I,idx:LongInt;
      AChild:TControl;
      AParent:TControl;
 Begin
+
+     {Martin1208}
+     result := LinearTabNext (self, false);
+     if result <> nil then exit;
+
      {Try Last Child}
      If FTabList <> Nil Then
      For I := FTabList.Count-1 Downto 0 Do
@@ -15394,8 +15598,6 @@ lsc:
 End;
 
 
-
-
 {$IFDEF OS2}
 Procedure TControl.WMQueryConvertPos(Var Msg:TMessage);
 Var  prec:PRect;
@@ -15801,6 +16003,12 @@ End;
 Function TControl.CanFocus:Boolean;
 Begin
   Result:=True;
+End;
+
+
+procedure tControl.HasTopZOrder;{Martin0520}
+Begin
+  {empty - used only in tForm}
 End;
 
 
@@ -17924,116 +18132,6 @@ Var Ch:Char;
     rv: LongWord;
 
 Initialization
-     {Martin}ConvertGetText := true;
-     {Martin}For Ch := #0 to #255 Do OemToAnsiTable[Ch] := Ch;
-     OemToAnsiTable['Ä'] := #199;
-     OemToAnsiTable['Å'] := #252;
-     OemToAnsiTable['Ç'] := #233;
-     OemToAnsiTable['É'] := #226;
-     OemToAnsiTable['Ñ'] := #228;
-     OemToAnsiTable['Ö'] := #224;
-     OemToAnsiTable['Ü'] := #229;
-     OemToAnsiTable['á'] := #231;
-     OemToAnsiTable['à'] := #234;
-     OemToAnsiTable['â'] := #235;
-     OemToAnsiTable['ä'] := #232;
-     OemToAnsiTable['ã'] := #239;
-     OemToAnsiTable['å'] := #238;
-     OemToAnsiTable['ç'] := #236;
-     OemToAnsiTable['é'] := #196;
-     OemToAnsiTable['è'] := #197;
-     OemToAnsiTable['ê'] := #201;
-     OemToAnsiTable['ë'] := #230;
-     OemToAnsiTable['í'] := #198;
-     OemToAnsiTable['ì'] := #244;
-     OemToAnsiTable['î'] := #246;
-     OemToAnsiTable['ï'] := #242;
-     OemToAnsiTable['ñ'] := #251;
-     OemToAnsiTable['ó'] := #249;
-     OemToAnsiTable['ò'] := #255;
-     OemToAnsiTable['ô'] := #214;
-     OemToAnsiTable['ö'] := #220;
-     OemToAnsiTable['õ'] := #248;
-     OemToAnsiTable['ú'] := #163;
-     OemToAnsiTable['ù'] := #216;
-     OemToAnsiTable['û'] := #215;
-     OemToAnsiTable['†'] := #225;
-     OemToAnsiTable['°'] := #237;
-     OemToAnsiTable['¢'] := #243;
-     OemToAnsiTable['£'] := #250;
-     OemToAnsiTable['§'] := #241;
-     OemToAnsiTable['•'] := #209;
-     OemToAnsiTable['¶'] := #170;
-     OemToAnsiTable['ß'] := #186;
-     OemToAnsiTable['®'] := #191;
-     OemToAnsiTable['©'] := #174;
-     OemToAnsiTable['™'] := #172;
-     OemToAnsiTable['´'] := #189;
-     OemToAnsiTable['¨'] := #188;
-     OemToAnsiTable['≠'] := #161;
-     OemToAnsiTable['Æ'] := #171;
-     OemToAnsiTable['Ø'] := #187;
-     OemToAnsiTable['µ'] := #193;
-     OemToAnsiTable['∂'] := #194;
-     OemToAnsiTable['∑'] := #192;
-     OemToAnsiTable['∏'] := #169;
-     OemToAnsiTable['æ'] := #165;
-     OemToAnsiTable['ø'] := #172;
-     OemToAnsiTable['∆'] := #227;
-     OemToAnsiTable['«'] := #195;
-     OemToAnsiTable['›'] := #166;
-     OemToAnsiTable['œ'] := #164;
-     OemToAnsiTable['–'] := #240;
-     OemToAnsiTable['—'] := #208;
-     OemToAnsiTable['“'] := #202;
-     OemToAnsiTable['”'] := #203;
-     OemToAnsiTable['‘'] := #200;
-     OemToAnsiTable['÷'] := #205;
-     OemToAnsiTable['◊'] := #206;
-     OemToAnsiTable['ÿ'] := #207;
-     OemToAnsiTable['ﬁ'] := #204;
-     OemToAnsiTable['‡'] := #211;
-     OemToAnsiTable['·'] := #223;
-     OemToAnsiTable['‚'] := #212;
-     OemToAnsiTable['„'] := #210;
-     OemToAnsiTable['‰'] := #245;
-     OemToAnsiTable['Â'] := #213;
-     OemToAnsiTable['Ê'] := #181;
-     OemToAnsiTable['Á'] := #254;
-     OemToAnsiTable['Ë'] := #222;
-     OemToAnsiTable['È'] := #218;
-     OemToAnsiTable['Í'] := #219;
-     OemToAnsiTable['Î'] := #217;
-     OemToAnsiTable['Ï'] := #253;
-     OemToAnsiTable['Ì'] := #221;
-     OemToAnsiTable['Ó'] := #175;
-     OemToAnsiTable['Ô'] := #180;
-     OemToAnsiTable[''] := #173;
-     OemToAnsiTable['Ò'] := #177;
-     OemToAnsiTable['Û'] := #190;
-     OemToAnsiTable['Ù'] := #182;
-     OemToAnsiTable['ı'] := #167;
-//     OemToAnsiTable[#21] := #167;
-     OemToAnsiTable['ˆ'] := #247;
-     OemToAnsiTable['˜'] := #184;
-     OemToAnsiTable['¯'] := #176;
-     OemToAnsiTable['˘'] := #168;
-     OemToAnsiTable['˙'] := #183;
-     OemToAnsiTable['˚'] := #185;
-     OemToAnsiTable['¸'] := #179;
-     OemToAnsiTable['˝'] := #178;
-     OemToAnsiTable['’'] := #128;
-     {Martin}OemToAnsiTable['˛'] := #149;
-     FillChar (AnsiToOemTable, sizeof(AnsiToOemTable), #32);
-     {fill reveserse table}
-     For Ch := #0 To #255 Do
-       Begin
-         If (AnsiToOemTable[OemToAnsiTable[Ch]] = #32) Or
-            (AnsiToOemTable[OemToAnsiTable[Ch]] = OemToAnsiTable[Ch])
-           Then AnsiToOemTable[OemToAnsiTable[Ch]] := Ch;
-       End;
-     AnsiToOemTable[#130] := #39; AnsiToOemTable[#146] := #39;
-
      {$IFDEF OS2}
      NewStyleControls:=False;
      {$ENDIF}
@@ -18164,4 +18262,5 @@ End.
   26-Oct-10  RG         Lage und Grîsse von Hint bereinigt (THintWindow.ActivateHint)
   Nov 2011?  WD?        geÑndert auf: pfOS2Ver20, pfOS2Ver30, pfOS2Ver40, pfOS2Ver45
                         erweitert: pfEComStation
+  10-Mai-20  MV         Abgleich aller énderungen MV-WD-RG, bei MV seit 2010 kein Abgleich mehr 
 }

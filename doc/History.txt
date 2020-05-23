@@ -1,5 +1,5 @@
 WDSibyl-Aenderungen:
-      zum Stand: 14.05.2020  10:26:12
+      zum Stand: 23.05.2020  11:57:19
 
 
 
@@ -541,19 +541,28 @@ Datei:  P:\WDSibyl\Library\Source\Compnt\CheckLB.PAS
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\Compnt\COOLBAR.PAS
+Datei:  P:\WDSibyl\Library\Source\Compnt\ColorGrd.pas
+{ -- date --- --from-- -- changes ----------------------------------------------
+  06-Dec-2007 MV       new variables tColorGrid.FGstring and BGstring 
+                       can be changed for language localization if an invalid 
+                       color has been assigned by "Foregroundcolor :=", 
+                       item -1 (no item) gets selected
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\Compnt\CoolBar.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   28-Aug-05  WD        Variablen die nicht verwendet werden entfernt.
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\Compnt\DUALLIST.PAS
+Datei:  P:\WDSibyl\Library\Source\Compnt\DualList.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   17-Aug-05  WD         Umbau und Hinzufuegen von Funktionen in der Komponenten
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\Compnt\EDITLIST.PAS
+Datei:  P:\WDSibyl\Library\Source\Compnt\EditList.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   09-Aug-04  MV       EditListbox.Listbox moved to public
                               stupid button hints deactivated, because Editlist.Hint gets overlayed
@@ -576,12 +585,12 @@ Datei:  P:\WDSibyl\Library\Source\Compnt\Hints.PAS
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\Compnt\SCKTCOMP.PAS
+Datei:  P:\WDSibyl\Library\Source\Compnt\ScktComp.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   13-Feb-04  WD         Umbau von "TCustomWinSocket.LookupName" fuer Windows
 
 
-Datei:  P:\WDSibyl\Library\Source\Compnt\SPIN.PAS
+Datei:  P:\WDSibyl\Library\Source\Compnt\Spin.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   28-Aug-05  WD        Variablen die nicht verwendet werden entfernt.
 }
@@ -678,7 +687,7 @@ Datei:  P:\WDSibyl\Library\Source\DB\mySQL\umySQLDll.pas
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\Internet\INET.PAS
+Datei:  P:\WDSibyl\Library\Source\Internet\INet.pas
 { -- date --  -- from -- -- changes ----------------------------------------------
   16-Aug-97   Jîrg       Fehler in WebExWin-Records gefixt. Alle Strukturen mit
                          CSTRING[...STRING] waren falsch Åbersetzt. Jeweils -1
@@ -790,7 +799,8 @@ Datei:  P:\WDSibyl\Library\Source\RTL\System.pas
   03-Okt-03  WD         Konstanten DirectVideo, CheckSnow eintfernt (in CRT gewandert)
   04-Okt-03  WD         Random-Funktionen nach SYSUTILS ausgelagert.
   18-Jun-04  WD         Umbau von KBDVIO32.DLL auf die DLLs von EMX
-  06-Aug-04  MV         Compiler-Prob korr.: Der Compiler rechnet mit dem Variablentyp weiter, mit dem er einmal angefangen hat.
+  06-Aug-04  MV         Compiler-Prob korr.: Der Compiler rechnet mit dem 
+                        Variablentyp weiter, mit dem er einmal angefangen hat.
   08-Sep-04  WD         Die Definitionen von uDef uebernommen. uDef aus dem Projekt entfernt.
   28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
   23-Sep-05  WD         Cleanup: Checken ob der HeapMutex nicht schon geschlossen wurde.
@@ -809,7 +819,8 @@ Datei:  P:\WDSibyl\Library\Source\RTL\System.pas
   16-Jun-08  WD         Function: GetProcessId eingebaut.
   12-Sep-08  WD         Konstante Inch2mm eingebaut (Inch in mm)
   06-Nov-08  KF         AnsiInsertStr: Korrekter aufruf von AnsiInsert
-  05-Feb-09  WD         Shared-Memory-Name "SIBYL_MAINFORM_HANDLE" auf "WDSIBYL_MAINFORM_HANDLE" umbenannt.
+  05-Feb-09  WD         Shared-Memory-Name "SIBYL_MAINFORM_HANDLE" auf 
+                        "WDSIBYL_MAINFORM_HANDLE" umbenannt.
   24-Feb-09  PE         Floating-Point-Routinen vereinfacht und korrigiert (sinh und tanh),
                         Exception-Handling fÅr OS/2 aktiviert.
   22-Mar-09  PE         Controlword les- und setzbar, lokale Speicherung des CW
@@ -1290,7 +1301,7 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\DDEMAN.PAS
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\SPCC\DIALOGS.PAS
+Datei:  P:\WDSibyl\Library\Source\SPCC\Dialogs.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   27-Sep-02   WD        Ausbau der LINUX-Teile
   20-Mar-03   WD        Einbau der tInfoDialog
@@ -1308,7 +1319,8 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\DIALOGS.PAS
   18-Sep-05   WD        Dialog: User-Password eingebaut
   19-Feb-06   MV        tOpenDialog: resizable window
   09-Mar-06   WD        Paramstr(0) durch uSysInfo ersetzt.
-  29-Jul-06   MV/WD     tOpenSystemDialog.Execute und tSaveSystemDialog.Execute: Entfernen des letzten PathSeparators.
+  29-Jul-06   MV/WD     tOpenSystemDialog.Execute und tSaveSystemDialog.Execute: 
+                        Entfernen des letzten PathSeparators.
   06-Okt-06   WD        tInputQueryDialog: Klasse neu programmiert und Funktion InputQuery angepasst
   27-Feb-08   MV        TSystemSaveDialog.Execute:Boolean: oFlag fÅr Vista umgebaut.
   15-Mar-08   MV        TSystemOpenSaveDialog.SetupComponent: Korrekte BefÅllung von FInitialDir
@@ -1400,7 +1412,7 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\FileCtrl.PAS
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\SPCC\FORMS.PAS
+Datei:  P:\WDSibyl\Library\Source\SPCC\Forms.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   26-Sep-02  WD         Ausbau der LINUX-Teile
                         Propertys Parameter, Log, ProgramPath, ProgramName,
@@ -1477,6 +1489,7 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\FORMS.PAS
   26-Oct-10  RG         Lage und Grîsse von Hint bereinigt (THintWindow.ActivateHint)
   Nov 2011?  WD?        geÑndert auf: pfOS2Ver20, pfOS2Ver30, pfOS2Ver40, pfOS2Ver45
                         erweitert: pfEComStation
+  10-Mai-20  MV         Abgleich aller énderungen MV-WD-RG, bei MV seit 2010 kein Abgleich mehr 
 }
 
 
@@ -1679,7 +1692,7 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\uLanguage.pas
   03-Mar-06  WD         Datei erstellt und ins Projekt eingebaut
 
 
-Datei:  P:\WDSibyl\Library\Source\TP70\CRT.PAS
+Datei:  P:\WDSibyl\Library\Source\TP70\Crt.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   03-Okt-03  WD         Konstanten DirectVideo, CheckSnow eingefuegt
   26-Nov-03  WD         Delay umgebaut
@@ -1688,7 +1701,7 @@ Datei:  P:\WDSibyl\Library\Source\TP70\CRT.PAS
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\TP70\DOS.PAS
+Datei:  P:\WDSibyl\Library\Source\TP70\Dos.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   27-Sep-02  WD         Ausbau der LINUX-Teile
   06-Okt-04  MV         Einbau der Konstante "Exec_Visible"
@@ -1701,6 +1714,7 @@ Datei:  P:\WDSibyl\Library\Source\TP70\DOS.PAS
   06-Jun-06  WD         Exec; Variable "Exec_Visible" wird auch in Windows beruecksichtigt.
   23-Jun-06  WD         OS/2, DosExitCode: Bei ExecViaSession=true und das System wartet auf Prozess-
                         Ende eine kleine Pause eingebaut, damit das System nich komplett steht.
+  15-Mai-20  MV,RG      alte énderung 0410 von Martin eingebaut
 }
 
 
@@ -1710,7 +1724,7 @@ Datei:  P:\WDSibyl\Library\Source\TP70\fastcrt.pas
 }
 
 
-Datei:  P:\WDSibyl\Library\Source\TP70\WINCRT.PAS
+Datei:  P:\WDSibyl\Library\Source\TP70\WinCrt.pas
 { -- date -- -- from -- -- changes ----------------------------------------------
   28-Aug-05  WD         Variablen die nicht verwendet werden entfernt.
   09-Mar-06  WD         Paramstr(0) durch goSysInfo ersetzt.
