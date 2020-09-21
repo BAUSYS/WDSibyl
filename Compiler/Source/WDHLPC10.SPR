@@ -92,7 +92,7 @@ LastDir=P:\WDSIBYL\COMPILER\SOURCE\SHARE
 OutDir=P:\WDSIBYL\OS\OS2\Output
 LibDir=P:\WDSIBYL\OS\OS2\Lib
 LibSrcDir=
-IncSrcDir=
+IncSrcDir=P:\WDSibyl\Library\Source\TP70;P:\WDSibyl\Library\Source\RTL;P:\WDSibyl\Library\Source\RTL\OS2;P:\WDSibyl\Library\Source\RC;P:\WDSibyl\Library\Source\SPCC
 CompInstallDir=P:\WDSIBYL\OS\OS2\Compnt
 
 [Directories Win32]
@@ -106,22 +106,22 @@ CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
-Find0=:fn
-Find1=.FN
+Find0=21-Sep
+Find1=RG
 Find2=//RG
-Find3=Paramlist
-Find4=TITLE
-Find5=CompStatusMsg
-Find6=Message
-Find7=.DLIST
-Find8=DLIST
-Find9=HC_LEFTMARGIN
-Find10=HC_DDESC
-Find11=:dl
-Find12=8-Apr-2018
-Find13=8-Apr_2018
-Find14=HC_DLIST
-Find15=break=
+Find3=:docprof.
+Find4=HC_HCTX
+Find5=:fn
+Find6=.FN
+Find7=Paramlist
+Find8=TITLE
+Find9=CompStatusMsg
+Find10=Message
+Find11=.DLIST
+Find12=DLIST
+Find13=HC_LEFTMARGIN
+Find14=HC_DDESC
+Find15=:dl
 
 [General]
 
@@ -135,43 +135,43 @@ Platform=OS/2
 
 [Last Closed Files]
 
-File0=..\..\..\.\PROJEKTE\BS_TXT2SHS\SHS\os2api_DE.shs
-File1=..\..\..\.\PROJEKTE\BS_TXT2SHS\IPFC\OS2API_DE.IPF
-File2=..\..\.\Library\Source\RTL\system.pas
-File3=..\..\..\.\PROJEKTE\BS_TXT2SHS\SHS\OS2API_DE.IPF
-File4=..\..\.\Library\Source\RTL\uString.Pas
-File5=.\Share\uFunc.pas
+File0=..\..\.\LIBRARY\SOURCE\RTL\SysUtils.pas
+File1=..\..\.\LIBRARY\SOURCE\TP70\Dos.pas
+File2=..\..\..\.\PROJEKTE\BS_TXT2SHS\SHS\os2api_DE.shs
+File3=..\..\..\.\PROJEKTE\BS_TXT2SHS\IPFC\OS2API_DE.IPF
+File4=..\..\.\Library\Source\RTL\system.pas
+File5=..\..\..\.\PROJEKTE\BS_TXT2SHS\SHS\OS2API_DE.IPF
 
 [Last Open Files]
 
 File0=.\HLP\WDHLPC10\WDHLPC10.PAS
 File0.Left=-1
 File0.Bottom=-1
-File0.Width=844
-File0.Height=608
-File0.Column=1
-File0.Line=1
+File0.Width=921
+File0.Height=814
+File0.Column=14
+File0.Line=3
 File1=.\HLP\WDHLPD10\uHLPComp.pas
 File1.Left=-1
 File1.Bottom=-1
-File1.Width=844
-File1.Height=608
-File1.Column=1
-File1.Line=123
+File1.Width=921
+File1.Height=814
+File1.Column=32
+File1.Line=578
 File2=.\HLP\WDHLPD10\uHlpDef.pas
 File2.Left=-1
 File2.Bottom=-1
-File2.Width=844
-File2.Height=608
+File2.Width=921
+File2.Height=814
 File2.Column=1
 File2.Line=1
 File3=.\Share\uHlpTopics.PAS
 File3.Left=-1
 File3.Bottom=-1
-File3.Width=844
-File3.Height=608
-File3.Column=61
-File3.Line=59
+File3.Width=921
+File3.Height=814
+File3.Column=13
+File3.Line=34
 
 [Linker Options]
 
@@ -200,11 +200,37 @@ MainFile0.File2=.\HLP\WDHLPD10\uHLPComp.pas
 MainFile0.File3=.\HLP\WDHLPD10\uHlpDef.pas
 MainFile0.File4=.\Share\uHlpTopics.PAS
 MainFile0.File5=[Dependencies]
-MainFile0.Dependency0=.\SHARE\SPC_DATA.PAS
-MainFile0.Dependency1=.\SHARE\UFUNC.PAS
-MainFile0.Dependency2=.\HLP\WDHLPD10\uHlpDef.pas
-MainFile0.Dependency3=.\SHARE\UHLPTOPICS.PAS
-MainFile0.Dependency4=.\HLP\WDHLPD10\uHLPComp.pas
+MainFile0.Dependency0=..\..\.\Library\Source\RTL\SYSTEM.PAS
+MainFile0.Dependency1=..\..\.\Library\Source\RTL\OS2\OS2DEF.PAS
+MainFile0.Dependency2=..\..\.\Library\Source\RTL\OS2\BSETIB.PAS
+MainFile0.Dependency3=..\..\.\Library\Source\RTL\OS2\BSEEXCPT.PAS
+MainFile0.Dependency4=..\..\.\Library\Source\RTL\OS2\BSEDOS.PAS
+MainFile0.Dependency5=..\..\.\Library\Source\RTL\OS2\BSEERR.PAS
+MainFile0.Dependency6=..\..\.\Library\Source\RTL\OS2\PMWIN.PAS
+MainFile0.Dependency7=..\..\.\Library\Source\RTL\OS2\PMWP.PAS
+MainFile0.Dependency8=..\..\.\Library\Source\RTL\OS2\PMSHL.PAS
+MainFile0.Dependency9=..\..\.\Library\Source\RTL\SYSUTILS.PAS
+MainFile0.Dependency10=..\..\.\Library\Source\RTL\USTREAM.PAS
+MainFile0.Dependency11=..\..\.\Library\Source\RTL\ULIST.PAS
+MainFile0.Dependency12=..\..\.\Library\Source\RTL\USTRING.PAS
+MainFile0.Dependency13=..\..\.\Library\Source\RTL\OS2\BSEREGISTRY.PAS
+MainFile0.Dependency14=..\..\.\Library\Source\RTL\INIFILES.PAS
+MainFile0.Dependency15=..\..\.\Library\Source\RTL\USYSCLASS.PAS
+MainFile0.Dependency16=..\..\.\Library\Source\RTL\OS2\PMSPL.PAS
+MainFile0.Dependency17=..\..\.\Library\Source\RTL\PMWINX.PAS
+MainFile0.Dependency18=..\..\.\Library\Source\RTL\USYSINFO.PAS
+MainFile0.Dependency19=..\..\.\Library\Source\TP70\DOS.PAS
+MainFile0.Dependency20=..\..\.\Library\Source\RTL\OS2\BSESUB.PAS
+MainFile0.Dependency21=..\..\.\Library\Source\RTL\OS2\BSEVIO.PAS
+MainFile0.Dependency22=..\..\.\Library\Source\RTL\OS2\BSEKBD.PAS
+MainFile0.Dependency23=..\..\.\Library\Source\TP70\CRT.PAS
+MainFile0.Dependency24=..\..\.\Library\Source\RTL\COLOR.PAS
+MainFile0.Dependency25=..\..\.\Library\Source\SPCC\CLASSES.PAS
+MainFile0.Dependency26=.\SHARE\SPC_DATA.PAS
+MainFile0.Dependency27=.\SHARE\UFUNC.PAS
+MainFile0.Dependency28=.\HLP\WDHLPD10\uHlpDef.pas
+MainFile0.Dependency29=.\SHARE\UHLPTOPICS.PAS
+MainFile0.Dependency30=.\HLP\WDHLPD10\uHLPComp.pas
 
 [Repository]
 

@@ -574,7 +574,8 @@ BEGIN
   KonstantenMaxStr:=0;
 
   WriteLine(':userdoc.');
-  WriteLine(':docprof.');
+  //WriteLine(':docprof.'); // entspricht ":docprof toc=123." also nur bis TOPIC 3
+  WriteLine(':docprof toc=1234.'); //RG 21-Sep-2020 bis TOPIC 4
   InInclude:=FALSE;
   Done:=FALSE;
   WHILE not Done DO
@@ -1171,4 +1172,5 @@ end.
                        LEFTMARGIN und RIGHTMARGIN eingebaut
                        TITLE funktioniert wieder
   27-Apr-2020 RG       SysOS2 anstatt OS2, SysWin32 anstatt Win32
+  21-Sep-2020 RG       bis TOPIC 4 m”glich
 }

@@ -1,5 +1,5 @@
 WDSibyl-Aenderungen:
-      zum Stand: 23.05.2020  11:57:19
+      zum Stand: 21.09.2020  17:26:02
 
 
 
@@ -18,6 +18,7 @@ Datei:  P:\WDSibyl\Compiler\Source\HLP\WDHLPD10\uHLPComp.pas
                        LEFTMARGIN und RIGHTMARGIN eingebaut
                        TITLE funktioniert wieder
   27-Apr-2020 RG       SysOS2 anstatt OS2, SysWin32 anstatt Win32
+  21-Sep-2020 RG       bis TOPIC 4 m”glich
 }
 
 
@@ -1780,3 +1781,15 @@ Datei:  P:\WDSibyl\Tools\Source\CompileAll\CompileAllRC.PAS
 }
 
 
+
+-------------------------------------------------------
+HO      Hitosi-Okubo                                   
+IV      Igor Vaskov       igor-vaskov@mtu-net.ru       
+KF      Kim Foder                                      
+MV      Martin Vieregg                                 
+PE      Peter Engels                                   
+RG      Rolf Gachnang                                  
+TB      Thomas Bohn                                    
+UJ      Uw Jacobs                                      
+WD      Wolfgang Draxler  wdsibyl@chello.at            
+-------------------------------------------------------
