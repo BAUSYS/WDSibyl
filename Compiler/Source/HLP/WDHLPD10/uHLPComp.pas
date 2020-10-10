@@ -288,17 +288,28 @@ BEGIN
          goto found;
        End;
 
-     if s='.LEFTMARGIN' then
+     if s='.LEFTMARGIN' then  //RG 28-Apr-2018
        Begin
          command:=HC_LEFTMARGIN;
          goto found;
        End;
 
-     if s='.RIGHTMARGIN' then
+     if s='.RIGHTMARGIN' then //RG 28-Apr-2018
        Begin
          command:=HC_RIGHTMARGIN;
          goto found;
        End;
+
+     if s='.TOC' then  //RG 07-Okt-2020
+       begin
+         delete(Line,1,5); {delete .TOC}
+         if (Length(Line) < 1) or (Length(Line) > 6)
+         then para1 := '123' //Vorgabe
+         else para1 := Line;
+         para2:='';
+         command:=HC_TOC;
+         exit;
+       end;
 
      exit;
 found:
@@ -575,7 +586,9 @@ BEGIN
 
   WriteLine(':userdoc.');
   //WriteLine(':docprof.'); // entspricht ":docprof toc=123." also nur bis TOPIC 3
-  WriteLine(':docprof toc=1234.'); //RG 21-Sep-2020 bis TOPIC 4
+  //RG 07-Okt-2020 Wird :docprof toc= nicht definiert ist :docprof toc=123 standard
+  //Fixe Definition wird vermieden.
+  //Man kann neu via .TOC eine eigene Definition Åbergeben, zum Beispiel .TOC 12345
   InInclude:=FALSE;
   Done:=FALSE;
   WHILE not Done DO
@@ -594,6 +607,11 @@ BEGIN
         BEGIN
           GetCommand(Line,command,para1,para2);
           CASE command OF
+            HC_TOC:
+              BEGIN
+                WriteLine(':docprof toc='+Para1+'.'); //RG 07-Okt-2020
+              END;
+
             HC_INCLUDE:
               BEGIN
                 IF InInclude THEN
@@ -1173,4 +1191,7 @@ end.
                        TITLE funktioniert wieder
   27-Apr-2020 RG       SysOS2 anstatt OS2, SysWin32 anstatt Win32
   21-Sep-2020 RG       bis TOPIC 4 mîglich
+  03-Okt-2020 RG       bis TOPIC 5 mîglich
+  07-Okt-2020 RG       TOPIC: .TOC - Befehl eingebaut sodass nicht mehr fixe Definition
+
 }

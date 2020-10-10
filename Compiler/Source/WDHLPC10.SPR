@@ -106,22 +106,22 @@ CompInstallDir=P:\WDSIBYL\OS\Win32\Compnt
 
 [Find History]
 
-Find0=21-Sep
-Find1=RG
-Find2=//RG
-Find3=:docprof.
-Find4=HC_HCTX
-Find5=:fn
-Find6=.FN
-Find7=Paramlist
-Find8=TITLE
-Find9=CompStatusMsg
-Find10=Message
-Find11=.DLIST
-Find12=DLIST
-Find13=HC_LEFTMARGIN
-Find14=HC_DDESC
-Find15=:dl
+Find0=TOC
+Find1=Debugg
+Find2=CompStatusMsg
+Find3=Error
+Find4=HC_TOC
+Find5=GetNumber
+Find6=.TOC
+Find7=HC_TOPIC
+Find8=REFBASE
+Find9=ScanLink
+Find10=07-Oct-2020
+Find11=:docprof
+Find12=HC_INCLUDE
+Find13=HlpTopics
+Find14=HC_RIGHTMARGIN
+Find15=21-Sep
 
 [General]
 
@@ -147,31 +147,31 @@ File5=..\..\..\.\PROJEKTE\BS_TXT2SHS\SHS\OS2API_DE.IPF
 File0=.\HLP\WDHLPC10\WDHLPC10.PAS
 File0.Left=-1
 File0.Bottom=-1
-File0.Width=921
-File0.Height=814
-File0.Column=14
-File0.Line=3
+File0.Width=933
+File0.Height=745
+File0.Column=1
+File0.Line=64
 File1=.\HLP\WDHLPD10\uHLPComp.pas
 File1.Left=-1
 File1.Bottom=-1
-File1.Width=921
-File1.Height=814
-File1.Column=32
-File1.Line=578
+File1.Width=933
+File1.Height=745
+File1.Column=88
+File1.Line=1195
 File2=.\HLP\WDHLPD10\uHlpDef.pas
 File2.Left=-1
 File2.Bottom=-1
-File2.Width=921
-File2.Height=814
-File2.Column=1
-File2.Line=1
+File2.Width=933
+File2.Height=745
+File2.Column=43
+File2.Line=62
 File3=.\Share\uHlpTopics.PAS
 File3.Left=-1
 File3.Bottom=-1
-File3.Width=921
-File3.Height=814
-File3.Column=13
-File3.Line=34
+File3.Width=933
+File3.Height=745
+File3.Column=15
+File3.Line=21
 
 [Linker Options]
 

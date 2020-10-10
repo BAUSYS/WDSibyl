@@ -4,7 +4,7 @@ Interface
 
 Uses uString;
 
-Const MaxHlpTopics=34;           // Maximale Anzahl der Topics
+Const MaxHlpTopics=35;        // Maximale Anzahl der Topics
 
       HC_TOPIC=1;             {Topic}
       HC_INDEX=2;             {Index entry}
@@ -40,6 +40,7 @@ Const MaxHlpTopics=34;           // Maximale Anzahl der Topics
       HC_BOLD_UNDERLINE=32;   {Zeile Fett und Unterstrichen ausgeben}
       HC_LEFTMARGIN=33;       {linke EinrÅckung des Textes}    //RG 28-Apr-2018
       HC_RIGHTMARGIN=34;      {rechte EinrÅckung des Textes}   //RG 28-Apr-2018
+      HC_TOC=35;              {öberschriftenebenen im Inhaltsverzeichnis} //RG 07-Okt-2020
 
       HlpTopics:ARRAY[1..MaxHlpTopics] OF tStr10 =
         ('.TOPIC','.INDEX','.MASTERINDEX','.FIG','.EFIG','.IPFC','.HIGH',
@@ -47,7 +48,7 @@ Const MaxHlpTopics=34;           // Maximale Anzahl der Topics
          '.LISTITEM','.SLIST','.ESLIST','.OLIST','.EOLIST','.BITMAP',
          '.DLIST','.EDLIST','.DTERM','.DDESC','.HIDDEN','.HCTX','.REFBASE',
          '.SET_INCFILENAME','.SET_LANG','.BOLD','.UNDERLINE','.BOLD_UNDERLINE',
-         '.LEFTMARGIN','.RIGHTMARGIN');
+         '.LEFTMARGIN','.RIGHTMARGIN','.TOC');
 
 Implementation
 
@@ -57,4 +58,5 @@ End.
 { -- date --- --from-- -- changes ----------------------------------------------
   28-Feb-2008 WD       Topic UNDERLINE und BOLD_UNDERLINE eingebaut
   28-Apr-2018 RG       LEFTMARGIN und RIGHTMARGIN eingebaut
+  07-Okt-2020 RG       TOC eingebaut / öberschriftenebenen im Inhaltsverzeichnis
 }

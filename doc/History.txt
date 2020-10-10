@@ -1,5 +1,5 @@
 WDSibyl-Aenderungen:
-      zum Stand: 21.09.2020  17:26:02
+      zum Stand: 09.10.2020  09:41:25
 
 
 
@@ -19,6 +19,9 @@ Datei:  P:\WDSibyl\Compiler\Source\HLP\WDHLPD10\uHLPComp.pas
                        TITLE funktioniert wieder
   27-Apr-2020 RG       SysOS2 anstatt OS2, SysWin32 anstatt Win32
   21-Sep-2020 RG       bis TOPIC 4 m”glich
+  03-Okt-2020 RG       bis TOPIC 5 m”glich
+  07-Okt-2020 RG       TOPIC: .TOC - Befehl eingebaut sodass nicht mehr fixe Definition
+
 }
 
 
@@ -128,6 +131,7 @@ Datei:  P:\WDSibyl\Compiler\Source\Share\uHlpTopics.PAS
 { -- date --- --from-- -- changes ----------------------------------------------
   28-Feb-2008 WD       Topic UNDERLINE und BOLD_UNDERLINE eingebaut
   28-Apr-2018 RG       LEFTMARGIN und RIGHTMARGIN eingebaut
+  07-Okt-2020 RG       TOC eingebaut / šberschriftenebenen im Inhaltsverzeichnis
 }
 
 
