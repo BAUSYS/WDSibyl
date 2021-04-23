@@ -283,10 +283,12 @@ Type
   tcSysAppInfo = Class(tObject)
     Private
       Function getDefaultBrowser: tFileName;
+      function getDefaultFtp    : tFileName; //RG 22-Apr-21
       Function getOdinPEExe     : tFileName;
       Function getSysInfo       : tFileName;
     Public
       Property DefaultBrowser: tFileName Read getDefaultBrowser; // Default Browser
+      Property DefaultFtp    : tFileName Read getDefaultFtp;     // RG 22-Apr-21
       Property OdinPEExe     : tFileName Read getOdinPEExe;      // Odin: Pfad von PE.exe
       Property SysInfo       : tFileName Read getSysInfo;        // SystemInfo (Win: MSInfo32.exe)
   end;
@@ -1285,7 +1287,6 @@ end;
 // -------------------------------------------------------------------------------------------
 
 Function tcSysAppInfo.getDefaultBrowser : tFileName;
-
 {$IFDEF OS2}
 Var OutBuf: cstring;
 {$ENDIF}
@@ -1299,16 +1300,28 @@ Begin
 {$IFDEF Win32}
   Result:=goSysInfo.Folders.OSPath+'EXPLORER.EXE';
 {$ENDIF}
-
 End;
 
-Function tcSysAppInfo.getOdinPEExe : tFilename;
+function tcSysAppInfo.getDefaultFtp : tFileName; //RG 22-Apr-21
+{$IFDEF OS2}
+var OutBuf : cstring;
+{$ENDIF}
+begin
+{$IFDEF OS2}
+  Fillchar(OutBuf,255,0);
+  PrfQueryProfileString(HINI_USERPROFILE,'WPURLDEFAULTSETTINGS','DefaultFTPExe','',OutBuf,255);
+  Result := OutBuf;
+{$ENDIF}
+{$IFDEF Win32}
+  Result:=goSysInfo.Folders.OSPath+'EXPLORER.EXE'; //RG 22-Apr-21 provisorisch
+{$ENDIF}
+end;
 
+Function tcSysAppInfo.getOdinPEExe : tFilename;
 {$IFDEF OS2}
 var Registry : tcRegistry;
     Path     : tFileName;
 {$ENDIF}
-
 Begin
 {$IFDEF OS2}
   try
@@ -1339,11 +1352,9 @@ Begin
 End;
 
 Function tcSysAppInfo.getSysInfo : tFileName;
-
 {$IFDEF Win32}
 var Registry : tcRegistry;
 {$ENDIF}
-
 Begin
 {$IFDEF OS2}
   Result:='';   // Unter OS/2 gibt es momentan kein SysInfo-Programm
@@ -1862,4 +1873,5 @@ End.
   09-Mai-10  WD         tcWDSibylInfo: GetDirBMP (inkl. Property);
      Nov-11? WD?        Typen trSystem umbenannt (alt zB OS2 neu SysOS2...)
                         Typen trPlatform umbenannt (alt zB OS2Ver20 neu pfOS2Ver20...)
+  22-Apr-21 RG          Erweiterung: tcSysAppInfo.getDefaultFtp
 }

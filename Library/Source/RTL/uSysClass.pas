@@ -24,7 +24,7 @@ Unit uSysClass;
 Interface
 
 {$IFDEF OS2}
-Uses OS2Def, BseDos;
+Uses OS2Def, BseDos, BseErr, PmWin;
 {$ENDIF}
 
 {$IFDEF WIN32}
@@ -32,6 +32,7 @@ Uses WINDef, WINBase, WinUser, WinNT, WinErr;
 {$ENDIF}
 
 Uses SysUtils, uString, uStream, uList;
+
 
 { ----------------------------------------------------------------------------- }
 
@@ -872,11 +873,10 @@ Const ERR_EXEC_CANNOT_RETRIEVE_PID     = 1; // 'Can''t retrieve process-id';
 
 Implementation
 
-Uses uWebBrowser, //RG
-     IniFiles;
+Uses uSysInfo, IniFiles;
 
 {$IFDEF OS2}
-Uses bseTib, BseErr, PMWin;
+Uses bseTib;
 {$ENDIF}
 
 Const PathSem = '\SEM32\';
@@ -3346,8 +3346,39 @@ End;
 
 Function tcExec.getProgramFromUrl(Const url : String; Var urlProgram : tFilename) : Boolean;
 
+Var pdb   : Byte;
+    UrlTyp: String;
+    Path  : tFilename;
+
 Begin
-  Result := uWebBrowser.getProgramFromUrl(url,urlProgram); //RG
+  result := false;
+  if Length(url) = 0 then exit;
+
+  UrlProgram := '';
+  pdb := pos(':',url);
+  if pdb = 2 then begin
+                    UrlProgram := url;
+                    exit;
+                  end;
+
+  result := true;
+  UrlTyp := UpperCase(Copy(url,1,pdb-1));
+
+  if (UrlTyp='HTTP') or (UrlTyp='HTTPS')  //RG 22-Apr-21
+  then urlProgram := goSysInfo.SysAppInfo.DefaultBrowser
+  else if (UrlTyp ='FTP') or (UrlTyp ='FTPS') //RG 22-Apr-21
+       then begin
+              urlProgram := goSysInfo.SysAppInfo.DefaultFtp;
+              if Length(urlProgram) = 0
+              then urlProgram := goSysInfo.SysAppInfo.DefaultBrowser;
+            end
+       else begin
+              urlProgram := url;
+              exit;    // Damit der Pfad nicht geÑndert wird
+            end;
+  path := ExtractFilePath(urlProgram);
+  path[0] := chr(ord(path[0])-1);
+  chdir(path);
 End;
 
 {$IFDEF OS2}
@@ -4068,9 +4099,5 @@ End.
   06-Apr-09  WD         tcPort: Klasse eingebaut
   10-Feb-10  WD         tcNamedPipeServer: fÅr Windows eingebaut.
   11-Feb-10  WD         tcNamedPipeServer: OS/2: neuen Properties und Procedure
-  -------------------------------------------------------------------------------
-  14-Apr-20  RG         Code von getProgramFromUrl befindet sich nun in Unit uWebBrowser.
-                        Derselbe Code war mehrfach vorhanden (Unit DOS,uSysClass). Auch
-                        konnte dadurch gegenseitige AbhÑngikeit uSysClass <> uSysInfo
-                        aufgelîst werden.
+  22-Apr-21  RG         getProgramFromUrl erweitert mit HTTPS und FTPS 
 }

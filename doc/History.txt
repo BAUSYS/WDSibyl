@@ -1,5 +1,5 @@
 WDSibyl-Aenderungen:
-      zum Stand: 09.10.2020  09:41:25
+      zum Stand: 23.04.2021  09:31:05
 
 
 
@@ -1007,6 +1007,7 @@ Datei:  P:\WDSibyl\Library\Source\RTL\uSysClass.pas
   06-Apr-09  WD         tcPort: Klasse eingebaut
   10-Feb-10  WD         tcNamedPipeServer: fÅr Windows eingebaut.
   11-Feb-10  WD         tcNamedPipeServer: OS/2: neuen Properties und Procedure
+  22-Apr-21  RG         getProgramFromUrl erweitert mit HTTPS und FTPS 
 }
 
 
@@ -1057,6 +1058,7 @@ Datei:  P:\WDSibyl\Library\Source\RTL\uSysInfo.PAS
   09-Mai-10  WD         tcWDSibylInfo: GetDirBMP (inkl. Property);
      Nov-11? WD?        Typen trSystem umbenannt (alt zB OS2 neu SysOS2...)
                         Typen trPlatform umbenannt (alt zB OS2Ver20 neu pfOS2Ver20...)
+  22-Apr-21 RG          Erweiterung: tcSysAppInfo.getDefaultFtp
 }
 
 
@@ -1720,6 +1722,7 @@ Datei:  P:\WDSibyl\Library\Source\TP70\Dos.pas
   23-Jun-06  WD         OS/2, DosExitCode: Bei ExecViaSession=true und das System wartet auf Prozess-
                         Ende eine kleine Pause eingebaut, damit das System nich komplett steht.
   15-Mai-20  MV,RG      alte énderung 0410 von Martin eingebaut
+  22-Apr-21  RG         getProgramFromUrl erweitert mit HTTPS und FTPS
 }
 
 

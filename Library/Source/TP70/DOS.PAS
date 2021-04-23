@@ -903,28 +903,33 @@ Var pdb   : Byte;
     Path  : tFilename;
 
 Begin
-  UrlProgram:='';
-  pdb:=pos(':',url);
-  if pdb=2 then
-    Begin
-      UrlProgram:=url;
-      result:=false;
-      exit;
-    end;
+  result := false;
+  if Length(url) = 0 then exit;
 
-  result:=true;
-  UrlTyp:=UpperCase(Copy(url, 1, pdb-1));
-  if UrlTyp='HTTP' then
-    urlProgram:=goSysInfo.SysAppInfo.DefaultBrowser
-  else if UrlTyp='FTP' then
-    urlProgram:=goSysInfo.SysAppInfo.DefaultBrowser
-  else
-    Begin
-      urlProgram:=url;
-      exit;    // Damit der Pfad nicht ge„ndert wird
-    end;
-  path:=ExtractFilePath(urlProgram);
-  path[0]:=chr(ord(path[0])-1);
+  UrlProgram := '';
+  pdb := pos(':',url);
+  if pdb = 2 then begin
+                    UrlProgram := url;
+                    exit;
+                  end;
+
+  result := true;
+  UrlTyp := UpperCase(Copy(url,1,pdb-1));
+
+  if (UrlTyp='HTTP') or (UrlTyp='HTTPS')  //RG 22-Apr-21
+  then urlProgram := goSysInfo.SysAppInfo.DefaultBrowser
+  else if (UrlTyp ='FTP') or (UrlTyp ='FTPS') //RG 22-Apr-21
+       then begin
+              urlProgram := goSysInfo.SysAppInfo.DefaultFtp;
+              if Length(urlProgram) = 0
+              then urlProgram := goSysInfo.SysAppInfo.DefaultBrowser;
+            end
+       else begin
+              urlProgram := url;
+              exit;    // Damit der Pfad nicht ge„ndert wird
+            end;
+  path := ExtractFilePath(urlProgram);
+  path[0] := chr(ord(path[0])-1);
   chdir(path);
 End;
 
@@ -1903,4 +1908,5 @@ END.
   23-Jun-06  WD         OS/2, DosExitCode: Bei ExecViaSession=true und das System wartet auf Prozess-
                         Ende eine kleine Pause eingebaut, damit das System nich komplett steht.
   15-Mai-20  MV,RG      alte Žnderung 0410 von Martin eingebaut
+  22-Apr-21  RG         getProgramFromUrl erweitert mit HTTPS und FTPS
 }
