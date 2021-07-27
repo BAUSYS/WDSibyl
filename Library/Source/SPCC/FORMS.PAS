@@ -5789,10 +5789,11 @@ Begin
   LogWriteln('Application-Name:' + GetExeName);
 
 { Ini-Datei }
+  FNExe:=FProgramPath+fProgramName;     //RG
   if MakeIniFile then
     Begin
       try
-        FNExe:=FProgramPath+fProgramName;     // 
+        //FNExe:=FProgramPath+fProgramName;     //RG muss vor "if MakeIniFile" stehen
         FProgramIniFile.Create(FNExe+EXT_UC_INI);
         AppIniFile:=fProgramIniFile;  // Definiert in Classes
         LogWriteln('ProgramIniFile: ' + fProgramIniFile.Filename);
@@ -6005,10 +6006,12 @@ Begin
 
 { Font aus der INI-Datei lesen }
 {$IFDEF OS2}
+     FontName := 'WarpSans,9';  //RG
      if FProgramIniFile <> nil then
        FontName:=FProgramIniFile.ReadString(INI_Sec_Program,'Font','WarpSans,9');
 {$ENDIF}
 {$IFDEF Win32}
+     FontName := 'MS Sans Serif,8';  //RG
      if FProgramIniFile <> nil then
        FontName:=FProgramIniFile.ReadString(INI_Sec_Program,'Font','MS Sans Serif,8');
 {$ENDIF}
@@ -18262,5 +18265,7 @@ End.
   26-Oct-10  RG         Lage und Gr”sse von Hint bereinigt (THintWindow.ActivateHint)
   Nov 2011?  WD?        ge„ndert auf: pfOS2Ver20, pfOS2Ver30, pfOS2Ver40, pfOS2Ver45
                         erweitert: pfEComStation
-  10-Mai-20  MV         Abgleich aller Žnderungen MV-WD-RG, bei MV seit 2010 kein Abgleich mehr 
+  10-Mai-20  MV         Abgleich aller Žnderungen MV-WD-RG, bei MV seit 2010 kein Abgleich mehr
+  27-Jul-21  RG         FNExe wurde nicht definiert bei MakeIniFile=false
+  27-Jul-21  RG         Vorgabe FontName setzen
 }

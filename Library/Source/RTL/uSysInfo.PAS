@@ -1598,13 +1598,24 @@ Procedure tcSysInfo.getOS2Info;
 Var Ini    : tIniFile;
     Device : BYTE;
     Reg    : tcRegistry;
+    BootDrive : Char;  //RG
 
 label ReadINI;
 
 Begin
 { OS/2-Versionen herausfinden }
+  //RG zuerst mal Vorgaben setzten, denn wenn bei GetEnv()
+  //ein Leerstring zurÅckkommt gibts spÑter auf alle FÑlle Probleme
+  if GetBootDisk = 0
+  then BootDrive := 'C'
+  else BootDrive := chr(64+GetBootDisk);
+
   fSystemIni:= GetEnv('SYSTEM_INI');
+  if Length(fSystemIni) = 0  //RG
+  then fSystemIni := BootDrive + ':\OS2\OS2SYS.INI'; //RG
   fUserIni  := GetEnv('USER_INI');
+  if Length(fUserIni) = 0   //RG
+  then fUserIni := BootDrive + ':\OS2\OS2.INI'; //RG
   Ini.Create(fUserIni);
 
 { CID herausfinden }
@@ -1873,5 +1884,6 @@ End.
   09-Mai-10  WD         tcWDSibylInfo: GetDirBMP (inkl. Property);
      Nov-11? WD?        Typen trSystem umbenannt (alt zB OS2 neu SysOS2...)
                         Typen trPlatform umbenannt (alt zB OS2Ver20 neu pfOS2Ver20...)
-  22-Apr-21 RG          Erweiterung: tcSysAppInfo.getDefaultFtp
+  22-Apr-21  RG         Erweiterung: tcSysAppInfo.getDefaultFtp
+  27-Jul-21  RG         dafÅr sorgen dass fSystemIni und fSystemIni nicht leer sind
 }

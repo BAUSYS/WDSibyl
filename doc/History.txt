@@ -1,5 +1,5 @@
 WDSibyl-Aenderungen:
-      zum Stand: 23.04.2021  09:31:05
+      zum Stand: 27.07.2021  12:38:06
 
 
 
@@ -1058,7 +1058,8 @@ Datei:  P:\WDSibyl\Library\Source\RTL\uSysInfo.PAS
   09-Mai-10  WD         tcWDSibylInfo: GetDirBMP (inkl. Property);
      Nov-11? WD?        Typen trSystem umbenannt (alt zB OS2 neu SysOS2...)
                         Typen trPlatform umbenannt (alt zB OS2Ver20 neu pfOS2Ver20...)
-  22-Apr-21 RG          Erweiterung: tcSysAppInfo.getDefaultFtp
+  22-Apr-21  RG         Erweiterung: tcSysAppInfo.getDefaultFtp
+  27-Jul-21  RG         dafÅr sorgen dass fSystemIni und fSystemIni nicht leer sind
 }
 
 
@@ -1496,7 +1497,9 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\Forms.pas
   26-Oct-10  RG         Lage und Grîsse von Hint bereinigt (THintWindow.ActivateHint)
   Nov 2011?  WD?        geÑndert auf: pfOS2Ver20, pfOS2Ver30, pfOS2Ver40, pfOS2Ver45
                         erweitert: pfEComStation
-  10-Mai-20  MV         Abgleich aller énderungen MV-WD-RG, bei MV seit 2010 kein Abgleich mehr 
+  10-Mai-20  MV         Abgleich aller énderungen MV-WD-RG, bei MV seit 2010 kein Abgleich mehr
+  27-Jul-21  RG         FNExe wurde nicht definiert bei MakeIniFile=false
+  27-Jul-21  RG         Vorgabe FontName setzen
 }
 
 
