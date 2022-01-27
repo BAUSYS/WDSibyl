@@ -4,7 +4,8 @@
  บ    WDSibyl Portable Component Classes                                    บ
  บ                                                                          บ
  บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
- บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ    Copyright (C) 2002..2011 Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ    GPL           2012..     Rolf Gachnang                                บ
  บ                                                                          บ
  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
  
@@ -716,6 +717,7 @@ Const
     mrBase    = $8000;      //cmBase
     mrOk      = mrBase+50;  //cmOk
     mrCancel  = mrBase+51;  //cmCancel
+    mrHelp    = mrBase+52;  //cmHelp   //RG
     mrYes     = mrBase+53;  //cmYes
     mrNo      = mrBase+54;  //cmNo
     mrIgnore  = mrBase+58;  //cmIgnore
@@ -5471,6 +5473,7 @@ End.
   09-Mar-06  WD         Paramstr(0) durch goSysInfo ersetzt.
   02-Dez-06  WD         Entfernen der Variable "InsideLanguageDesigner"
   01-Jan-08  WD         GetTempFileName ist jetzt in SysUtil gewandert.
-  15-Mar-08  MV         Const-Teil: kbCtrlBkSp: OS/2 liefert hier immer eine gedrckte Alt Taste
+  15-Mar-08  MV         Const-Teil: kbCtrlBkSp: OS/2 liefert hier immer eine gedrueckte Alt Taste
+  21-Jan-22  RG         const mrHelp definiert
 }
 

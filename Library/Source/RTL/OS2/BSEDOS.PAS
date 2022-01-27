@@ -4,7 +4,8 @@
  บ    WDSibyl Runtime Library for OS/2                                      บ
  บ                                                                          บ
  บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
- บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ    Copyright (C) 2002..2011 Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ    GPL           2012..     Rolf Gachnang                                บ
  บ                                                                          บ
  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
 
@@ -82,6 +83,22 @@ CONST
      PAG_FREE          =$00004000; { pages are free                   }
      PAG_BASE          =$00010000; { first page in object             }
 
+{ DosQueryMemState flags } //RG
+     PAG_NPOUT         = $00000000; { Page is not present, not in core. }
+     PAG_PRESENT       = $00000001; { Page is present.                  }
+     PAG_NPIN          = $00000002; { Page is not present, but in core. }
+     PAG_PRESMASK      = $00000003; { Present state mask.               }
+     PAG_RESIDENT      = $00000010; { Page is resident (non-swappable). }
+     PAG_SWAPPABLE     = $00000020; { Page is swappable.                }
+     PAG_DISCARDABLE   = $00000030; { Page is discardable.              }
+
+{ DosQuerySysState } //RG
+     QS_PROCESS        = $00000001; { Requests process information        }
+     QS_SEMAPHORE      = $00000002; { Requests semaphore information      }
+     QS_MTE            = $00000004; { Requests module information         }
+     QS_FILESYS        = $00000008; { Requests file system information    }
+     QS_SHMEMORY       = $00000010; { Requests shared memory information  }
+     QS_MODVER         = $00000200; { Requests module version information }
 
 { DosExit codes }
 CONST
@@ -840,8 +857,15 @@ CONST
       DCMW_WAIT_ALL   =$04;   { DosCreateMuxWait option for wait on all }
                               {   events/mutexs to occur                }
 
-      SEM_INDEFINITE_WAIT     =-1;
-      SEM_IMMEDIATE_RETURN    = 0;
+      SEM_INDEFINITE_WAIT  = -1; { DosRequestMutExSem blocks the calling  }
+                                 { thread indefinitely.                   }
+      SEM_IMMEDIATE_RETURN =  0; { DosRequestMutExSem returns immediately }
+                                 { without blocking the calling thread.   }
+
+      { DosCreateEventSem,DosWaitEventSem,DosPostEventSem } //RG
+
+      DCE_AUTORESET = $1000; { Auto-reset event semaphore }
+      DCE_POSTONE   = $0800; { Post one flag              }
 
 
 TYPE
@@ -1301,6 +1325,17 @@ type tProcStat = Record
        PROCSTAT_Unknown3 : ULong;
      End;
 
+   { Constants for DosDumpProcess } //RG
+CONST
+      DDP_DisableProcDump = $00000000; { Disable process dumps. }
+      DDP_EnableProcDump  = $00000001; { Enable process dumps.  }
+      DDP_PerformProcDump = $00000002; { Perform process dump.  }
+
+   { Flags for DosSuppressPopUps }  //RG
+
+      SPU_DisableSuppression = 0; { Disable pop-up suppression. }
+      SPU_EnableSuppression  = 1; { Enable pop-up suppression.  }
+
 IMPORTS
 
 {
@@ -1318,8 +1353,10 @@ FUNCTION DosKillThread(atid:TID):APIRET;
                     APIENTRY;             'DOSCALLS' index 111;
 FUNCTION DosQueryRASInfo(index:ULONG;VAR Addr:POINTER):APIRET;
                     APIENTRY;             'DOSCALLS' index 112;
-// 113     DosDumpProcess
-// 114     DosSuppressPopUps
+FUNCTION DosDumpProcess(Flag:ULONG;Drive:ULONG;Pid:ULONG):APIRET; //RG
+                    APIENTRY;             'DOSCALLS' index 113;
+FUNCTION DosSuppressPopUps(Flag:ULONG;Drive:Char):APIRET;         //RG
+                    APIENTRY;             'DOSCALLS' index 114;
 // 115     THK32ALLOCMEM
 // 116     THK32FREEMEM
 // 117     THK32ALLOCSTACK
@@ -1635,7 +1672,8 @@ FUNCTION DosSetMem(pb:POINTER;cb,flag:ULONG):APIRET;
                     APIENTRY;             'DOSCALLS' index 305;
 FUNCTION DosQueryMem(pb:POINTER;VAR pcb,pFlag:ULONG):APIRET;
                     APIENTRY;             'DOSCALLS' index 306;
-// 307     Dos32QueryMemState
+FUNCTION DosQueryMemState(pMem:Pointer;VAR pSize,pFlags:ULONG):APIRET; //RG
+                    APIENTRY;             'DOSCALLS' index 307;
 FUNCTION DosOpenVDD(VAR pszVDD:CSTRING;VAR aphvdd:HVDD):APIRET;
                     APIENTRY;             'DOSCALLS' index 308;
 FUNCTION DosRequestVDD(ahvdd:HVDD;asgid:SGID;cmd,cbInput:ULONG;VAR pInput;
@@ -1864,6 +1902,8 @@ FUNCTION DosCancelLockRequest(ahFile:HFILE;VAR pflLock:FILELOCK):APIRET;
 // 441     Dos32ResetChangeNotify
 // 442     Dos32CloseChangeNotify
 // 443     Dos16QueryABIOSSupport
+FUNCTION DosForceSystemDump(reserved:ULONG):APIRET;
+                    APIENTRY;             'DOSCALLS' index 444;
 // 444     Dos32ForceSystemDump
 // 447     Dos32GetProcessorStatus
 // 448     Dos32SetProcessorStatus
@@ -2617,4 +2657,10 @@ END.
   27-Aug-10  RG         indices for DosQuerySysInfo erweitert
   29-Nov-10  RG         Funktion Dos32QueryHeaderInfo inkl. Definitionen eingebaut
   08-Nov-18  RG         Funktion DosReplaceModule eingebaut
+  19-Jan-22  RG         DosDumpProcess and Constants DDP_
+                        DosForceSystemDump
+                        DosQueryMemState and flags PAG_
+                        DosQuerySysState and constants QS_
+                        DosSuppressPopUps and flags SPU_
+                        Event Semaphores flags DCE_
 }
