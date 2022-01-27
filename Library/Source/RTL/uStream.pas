@@ -3,12 +3,14 @@
  บ                                                                          บ
  บ    WDSibyl Runtime Library                                               บ
  บ                                                                          บ
- บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ    Copyright (C) 2002..2011 Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ    GPL           2012..     Rolf Gachnang                                บ
  บ                                                                          บ
  บ    Klassen: tStream, THandleStream, TFileStream, TMemoryStream           บ
  บ             tStdInStream, tStdOutStream, tStdErrStream                   บ
  บ                                                                          บ
  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
+
 
 Unit uStream;
 
@@ -127,7 +129,7 @@ Type TTempFileStream=Class(TFileStream)
      pMemoryStream = ^tMemoryStream;
      TMemoryStream=Class(TStream)
        Private
-         FBuffer: PByteArray;
+         FBuffer: PByteArray;  {max 2048 MB}
          FSize, FCapacity, FPosition: LongInt;
          Procedure SetCapacity(NewCapacity: LongInt);
        Protected
@@ -170,7 +172,7 @@ Type
 
   tSharedMemoryStream = class(tStream)
     Private
-      fMemory    : PByteArray;;
+      fMemory    : PByteArray; {max 2048 MB}
       fName      : String;
       fTyp       : tSharedMemoryStreamTyp;
       fSize      : LongWord;
@@ -299,9 +301,7 @@ Begin
 End;
 
 Function TStream.GetSize:LongInt;
-
 Var OldPos:LongInt;
-
 Begin
    OldPos:=GetPosition;
    Result:=Seek(0,Seek_End);
@@ -325,8 +325,11 @@ End;
 
 Procedure TStream.ReadBuffer(Var Buffer;Count:LongInt);
 Begin
-     If Count=0 Then Exit;  {Nothing To Read}
-     If Read(Buffer,Count)<>Count Then Error(SStreamReadErrorText);
+  If Count=0 Then Exit;  {Nothing To Read}
+  If Read(Buffer,Count)<>Count
+  //Then Error(SStreamReadErrorText); //RG
+  Then Raise EStreamError.Create('TStream.ReadBuffer'
+       +#13#10+LoadNLSStr(SStreamReadErrorText));
 End;
 
 Procedure TStream.WriteBuffer(Const Buffer;Count:LongInt);
@@ -367,9 +370,7 @@ Begin
 End;
 
 Procedure TStream.WriteLn(Const S: String);
-
 var CRLF : Word;
-
 Begin
   CRLF:=$0A0D;
   WriteBuffer(S[1], Length(S));
@@ -377,9 +378,7 @@ Begin
 End;
 
 Function TStream.AnsiReadLn: AnsiString; 
-
 var Ch : Char;
-
 Begin
   Result:='';
   Read(Ch, 1);
@@ -392,12 +391,9 @@ Begin
     Read(Ch, 1);
 End;
 
-
 Procedure TStream.AnsiWriteLn(Const S: AnsiString);
-
 var Len : LongWord;
     CRLF : Word;
-
 Begin
   CRLF:=$0A0D;
   Len:=Length(S);
@@ -437,7 +433,12 @@ End;
 Function THandleStream.Seek(Offset: LongInt; Origin: Word): LongInt;
 Begin
   Result := FileSeek(Handle, Offset, Origin);
-  If Result < 0 Then Error(SStreamSeekErrorText);
+  If Result < 0
+  Then begin
+         //Error(SStreamSeekErrorText);   //RG
+         Raise EStreamError.Create('THandleStream.Seek , Result='+
+               IntToStr(Result)+#13#10+LoadNLSStr(SStreamSeekErrorText));
+       end;
 End;
 
 Procedure THandleStream.Clear;
@@ -532,14 +533,22 @@ Begin
 End;
 
 Function TFileStream.Read(Var Buffer;Count:LongInt):LongInt;
-
 Var BlRes :LongWord;
-
 Begin
   {$I-}
   BlockRead(PStreamFile,Buffer,Count,BlRes);
   {$I+}
-  If InOutRes<>0 Then Error(SStreamReadErrorText);
+  If InOutRes<>0
+  //Then Error(SStreamReadErrorText);  //RG
+  then begin
+         {nochmals versuchen; Thread-Problem?}
+         {$I-}
+         BlockRead(PStreamFile,Buffer,Count,BlRes);
+         {$I+}
+         If InOutRes<>0
+         Then Raise EStreamError.Create('TFileStream.Read'+#13#10+
+                    Filename+#13#10+LoadNLSStr(SStreamReadErrorText));
+       end;
   Result:=BlRes;
 End;
 
@@ -558,21 +567,31 @@ Begin
 End;
 
 Function TFileStream.Seek(Offset:LongInt;Origin:Word):LongInt;
-
 Var  SaveSeekMode:LongWord;
-
 Begin
   SaveSeekMode:=SeekMode;
   SeekMode:=Origin;
   {$I-}
   System.Seek(PStreamFile,Offset);
   {$I+}
-  If InOutRes<>0 Then Error(SStreamSeekErrorText);
+  If InOutRes <> 0
+  Then begin
+         //Error(SStreamSeekErrorText);  //RG
+         Raise EStreamError.Create('TFileStream.Seek (System.Seek) , Ret='+
+               IntToStr(InOutRes)+#13#10+Filename+#13#10+
+               LoadNLSStr(SStreamSeekErrorText));
+       end;
   SeekMode:=SaveSeekMode;
   {$I-}
   Seek:=FilePos(PStreamFile);
   {$I+}
-  If InOutRes<>0 Then Error(SStreamSeekErrorText);
+  if InOutRes <> 0
+  Then begin
+         //Error(SStreamSeekErrorText); //RG
+         Raise EStreamError.Create('TFileStream.Seek (FilePos) , Ret='+
+               IntToStr(InOutRes)+#13#10+Filename+#13#10+
+               LoadNLSStr(SStreamSeekErrorText));
+       end;
 End;
 
 Procedure TFileStream.Clear;
@@ -635,7 +654,7 @@ Destructor TTempFileStream.Destroy;
 
 Begin
   inherited Destroy;
-//WD  DeleteFile(FileName);  // Temp-Dateien wieder l๖schen
+//WD  DeleteFile(FileName);  // Temp-Dateien wieder loeschen
 End;
 
 {
@@ -695,10 +714,17 @@ Begin
   Case Origin Of
     soFromBeginning: Result := Offset;
     soFromCurrent:   Result := FPosition + Offset;
-    soFromEnd:       Result := FSize - Offset;
+    //soFromEnd:     Result := FSize - Offset; {wrong}
+    { Offset should be negative when the origin is SoFromEnd: }
+    soFromEnd:       Result := FSize + Offset; //RG
   End;
-  If (Result < 0) Or (Result > FSize) Then Error(SStreamSeekErrorText)
-  Else FPosition := Result;
+  If (Result < 0) Or (Result > FSize)
+    Then begin
+           //Error(SStreamSeekErrorText);   //RG
+           Raise EStreamError.Create('TMemoryStream.Seek , Result='+
+                 IntToStr(Result)+#13#10+LoadNLSStr(SStreamSeekErrorText));
+         end
+    Else FPosition := Result;
 End;
 
 Procedure TMemoryStream.LoadFromStream(Stream: TStream);
@@ -922,15 +948,20 @@ Begin
 End;
 
 Function tSharedMemoryStream.Seek(Offset: LongInt; Origin: Word):LongInt;
-
 Begin
   Case Origin Of
     soFromBeginning: Result := Offset;
     soFromCurrent:   Result := FPosition + Offset;
-    soFromEnd:       Result := FSize - Offset;
+    //soFromEnd:     Result := FSize - Offset;  {wrong}
+    { Offset should be negative when the origin is SoFromEnd: }
+    soFromEnd:       Result := FSize + Offset;  //RG
   End;
   If (Result < 0) Or (Result > FSize)
-    Then Error(SStreamSeekErrorText)
+    Then begin
+           //Error(SStreamSeekErrorText)  //RG
+           Raise EStreamError.Create('tSharedMemoryStream.Seek , Result='+
+                 IntToStr(Result)+#13#10+LoadNLSStr(SStreamSeekErrorText));
+         end
     Else FPosition := Result;
 End;
 
@@ -1247,4 +1278,10 @@ End.
   12-Feb-08  WD         TStream: Einbau der Funktion AnsiWriteLn
   19-Dec-08  WD         Klasse TStdInStream, tStdOutStream, tStdErrStream eingebaut.
   12-Feb-09  WD         Klasse tSharedMemoryStream
+  07-Jan-22  RG         Bei StreamSeekError und StreamReadError wird zustzlich
+                        der genaue Ort ausgegeben.
+                        (k”nnte man definitiv noch eleganter in Error() einbauen)
+                        TFileStream.Read: bei einem Fehler nochmals versuchen.
+  25-Jan-22  RG         TMemoryStream.Seek und tSharedMemoryStream.Seek:
+                        Fehler (soFromEnd) behoben.
 }
