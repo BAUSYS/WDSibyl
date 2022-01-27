@@ -1,5 +1,5 @@
 WDSibyl-Aenderungen:
-      zum Stand: 27.07.2021  12:38:06
+      zum Stand: 27.01.2022  14:40:27
 
 
 
@@ -958,6 +958,12 @@ Datei:  P:\WDSibyl\Library\Source\RTL\uStream.pas
   12-Feb-08  WD         TStream: Einbau der Funktion AnsiWriteLn
   19-Dec-08  WD         Klasse TStdInStream, tStdOutStream, tStdErrStream eingebaut.
   12-Feb-09  WD         Klasse tSharedMemoryStream
+  07-Jan-22  RG         Bei StreamSeekError und StreamReadError wird zus„tzlich
+                        der genaue Ort ausgegeben.
+                        (k”nnte man definitiv noch eleganter in Error() einbauen)
+                        TFileStream.Read: bei einem Fehler nochmals versuchen.
+  25-Jan-22  RG         TMemoryStream.Seek und tSharedMemoryStream.Seek:
+                        Fehler (soFromEnd) behoben.
 }
 
 
@@ -1079,6 +1085,12 @@ Datei:  P:\WDSibyl\Library\Source\RTL\OS2\BSEDOS.PAS
   27-Aug-10  RG         indices for DosQuerySysInfo erweitert
   29-Nov-10  RG         Funktion Dos32QueryHeaderInfo inkl. Definitionen eingebaut
   08-Nov-18  RG         Funktion DosReplaceModule eingebaut
+  19-Jan-22  RG         DosDumpProcess and Constants DDP_
+                        DosForceSystemDump
+                        DosQueryMemState and flags PAG_
+                        DosQuerySysState and constants QS_
+                        DosSuppressPopUps and flags SPU_
+                        Event Semaphores flags DCE_
 }
 
 
@@ -1146,6 +1158,13 @@ Datei:  P:\WDSibyl\Library\Source\RTL\OS2\OS2DEF.PAS
 Datei:  P:\WDSibyl\Library\Source\RTL\OS2\PMSHL.PAS
 { -- date -- -- from -- -- changes ----------------------------------------------
   05-Sep-06  WD         Korrektur des Typens SWBLOCK
+}
+
+
+Datei:  P:\WDSibyl\Library\Source\RTL\OS2\PMWIN.PAS
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  20-Jan-22  RG         new Extensions to WinQuerySysValue and WinSetSysValue SV_
+
 }
 
 
@@ -1272,7 +1291,8 @@ Datei:  P:\WDSibyl\Library\Source\SPCC\CLASSES.PAS
   09-Mar-06  WD         Paramstr(0) durch goSysInfo ersetzt.
   02-Dez-06  WD         Entfernen der Variable "InsideLanguageDesigner"
   01-Jan-08  WD         GetTempFileName ist jetzt in SysUtil gewandert.
-  15-Mar-08  MV         Const-Teil: kbCtrlBkSp: OS/2 liefert hier immer eine gedrckte Alt Taste
+  15-Mar-08  MV         Const-Teil: kbCtrlBkSp: OS/2 liefert hier immer eine gedrueckte Alt Taste
+  21-Jan-22  RG         const mrHelp definiert
 }
 
 
