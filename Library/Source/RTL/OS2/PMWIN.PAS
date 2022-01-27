@@ -4,6 +4,7 @@
  บ    WDSibyl Runtime Library for OS/2                                      บ
  บ                                                                          บ
  บ    Copyright (C) 1995..2000 SpeedSoft Germany,   All rights reserved.    บ
+ บ    GPL           2012..     Rolf Gachnang                                บ
  บ                                                                          บ
  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
 
@@ -1607,12 +1608,18 @@ CONST
     SV_ANIMATIONSPEED          =94;
 
     SV_MONOICONS               =95;
-
     SV_KBDALTERED              =96;
-
     SV_PRINTSCREEN             =97;
-
     SV_CSYSVALUES              =98;
+
+    { Extensions to WinQuerySysValue and WinSetSysValue }
+    { Several new system values have been defined in the Warp 4.0 }  //RG
+
+    SV_FULLWINDOWDRAG          =99;    { FullWindowDrag            }
+    SV_ALTTABSWITCHWIN         =100;   { Alt-Tab Switching windows }
+    SV_VIOMOUSEACTIONS         =101;   { VIO mouse actions         }
+    SV_ASYNCFOCUSCHANGE        =102;   { Asynchronous focus change }
+    SV_FOCUSCHANGESENS         =103;   { Focus Change sensitivity  }
 
 { Presentation parameter structures. }
 
@@ -3717,3 +3724,7 @@ END;
 BEGIN
 END.
 
+{ -- date -- -- from -- -- changes ----------------------------------------------
+  20-Jan-22  RG         new Extensions to WinQuerySysValue and WinSetSysValue SV_
+
+}
