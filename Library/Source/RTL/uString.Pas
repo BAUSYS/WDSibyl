@@ -2,7 +2,8 @@
  บ                                                                          บ
  บ    WDSibyl Runtime Library                                               บ
  บ                                                                          บ
- บ    Copyright (C) 2002..     Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ    Copyright (C) 2002..2011 Ing. Wolfgang Draxler,   All rights reserved.บ
+ บ    GPL           2012..     Rolf Gachnang                                บ
  บ                                                                          บ
  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ}
 
@@ -340,7 +341,8 @@ Type
       Procedure AddStrings(AStrings: TStrings); Override;
       Procedure AnsiAddSplit(Const iText: AnsiString; Const iTrenn: Char); Override;
       Procedure Append(Const S: AnsiString); Virtual;
-      Function Equals(AStrings: TStrings): Boolean; 
+      Procedure Delete(Index: LongInt); Virtual; //RG
+      Function Equals(AStrings: TStrings): Boolean;
       Function Find(Const S: AnsiString; Var Index: LongInt): Boolean; Virtual;
       Procedure Insert(Index: LongInt; Const S: AnsiString); Virtual;
       Procedure InsertObject(Index: LongInt; Const S: AnsiString; AObject: TObject); Virtual;
@@ -815,7 +817,10 @@ End;
 
 Procedure DisposeAnsiStrItem(P: PAnsiStrItem);
 Begin
-  FreeMem(P, Sizeof(LongInt) + SizeOf(TObject) + Length(P^.FString) + 1);
+  //FreeMem(P, Sizeof(LongInt) + SizeOf(TObject) + Length(P^.FString) + 1);  //RG
+  //RG Speicherleichen verhindern , Prevent memory corruption 
+  P^.FString := ''; //RG 
+  FreeMem(P); //RG
 End;
 
 function ExtractStrings(Separators, WhiteSpace: TSysCharSet; Content: PChar; VAR Strings: TStrings): LongInt;
@@ -1795,6 +1800,22 @@ Begin
     End;
 End;
 
+Procedure TAnsiStringList.Delete(Index: LongInt);  //RG
+begin
+  if FLockChange
+  then begin
+         FreeItem(GetObject(Index));
+         DisposeAnsiStrItem(FList.Items[Index]);
+         FList.Delete(Index);
+       end
+  else begin
+         Changing;
+         If Not FPreventFree Then FreeItem(GetObject(Index));
+         DisposeAnsiStrItem(FList.Items[Index]);
+         FList.Delete(Index);
+         changed;
+       end;
+end;
 
 Function TAnsiStringList.Equals(AStrings: TStrings): Boolean;
 
@@ -2098,6 +2119,8 @@ End.
   16-Feb-08  WD         Die Klassen TAnsiStringList, TAnsiStringValue erstellt.
   10-Apr-08  WD         Typ: pAnsiStringValue und pStringValue
   09-Okt-08  WD         Funktion AnsiTrimLeft, AnsiTrimRight und AnsiTrim eingebaut.
-  21-Jul-09  RG         Tippfehler: TabSeperato auf TabSeperatoe gendert.
+  21-Jul-09  RG         Tippfehler: TabSeperato auf TabSeperator gendert.
   24-Apr-18  RG         Fehler in PosN() bereinigt
+  07_Feb-21  RG         Problem Speicherfreigabe in TAnsiStringList behoben (Delete,DisposeAnsiStrItem)
+                        Fixed memory sharing issue in TAnsiStringList (Delete,DisposeAnsiStrItem)
 }
